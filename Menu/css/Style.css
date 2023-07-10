@@ -1,0 +1,118 @@
+﻿body {
+}
+.highlight {
+    background-color: yellow;
+}
+.input-group > .input-group-prepend {
+    flex: 0 0 20%;
+}
+
+.input-group .input-group-text {
+    width: 100%;
+}
+.nav-link[data-toggle].collapsed:after {
+    content: " ▾";
+    color: #265C4F;
+}
+composer create-project --prefer-dist laravel/laravel Backendcomposer create-project --prefer-dist laravel/laravel Backendcomposer create-project --prefer-dist laravel/laravel Backend
+
+.nav-link[data-toggle]:not(.collapsed):after {
+    content: " ▴";
+    color: #265C4F;
+}
+nav .navbar-nav li a {
+    color: #265C4F;
+}
+
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 98%;
+    border-left: none;
+}
+
+.banner {
+    background-color: #265C4F;
+}
+
+#MDB-logo {
+    height:80px;
+    padding:5px;
+}
+#login {
+    padding: 5px;
+    position: fixed;
+    right: 10px;
+    top:20px;
+    float: right;
+
+}
+#Titulo {
+    color:white;
+    font-size:20px;
+    font-family:Bahnschrift;
+    font-stretch:expanded;
+    font-weight:600;
+    top: 20px;
+    padding: 5px;
+    position: absolute;
+    left: 10px;
+    float: left;
+}
+
+/*Estilos para Wizard*/
+
+
+.stepwizard-step p {
+    margin-top: 10px;
+}
+
+.stepwizard-row {
+    display: table-row;
+}
+
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+}
+
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+$('.custom-file-input').on('change', function(event) {
+    var inputFile = event.currentTarget;
+    $(inputFile).parent()
+        .find('.custom-file-label')
+        .html(inputFile.files[0].name);
+}); 

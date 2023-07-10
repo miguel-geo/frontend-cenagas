@@ -1,0 +1,846 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0c0e49e11e.js" crossorigin="anonymous"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <link href="css/Style.css" rel="stylesheet" />
+    <script src="js/main.js"></script>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12 d-flex justify-content-center mb-3 banner">
+                <img id="MDB-logo"
+                     src="images/cenagas-logo.png"
+                     alt="CENAGAS"
+                     draggable="false"  style="box-shadow: 0px 0px 8px white; "/>
+            </div>
+            <div id="login" class="button-container">
+                <button id="logoutBtn" class="btn btn-md btn-light btn-round">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </button>
+            </div>
+            
+            <div id="Titulo">
+                <img id="MDB-logo"
+                     src="images/ltm-logo.png"
+                     alt="LMT-net"
+                     draggable="false" style="margin-top:-25px;"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 collapse show d-md-flex bg-light pt-2 pl-0 min-vh-100" id="sidebar">
+                <ul class="nav flex-column flex-nowrap overflow-hidden">
+                    <li class="nav-item">
+                        <a onclick="selectTab(event, 'Principal')" class="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#submenu1"><i class="fa fa-pencil-alt" style="color: #265C4F;font-weight:bold;"></i> <span class="d-none d-sm-inline" style="color: #265C4F;font-weight:bold;">Registro</span></a>
+                        <div class="collapse" id="submenu1" aria-expanded="false">
+                            <ul class="flex-column pl-2 nav">
+                                <li onclick="selectTab(event, 'Opcion1')" class="nav-item"><a class="nav-link py-0" href="#"><span style="color: #265C4F;">SNG</span></a></li>
+                                <li onclick="selectTab(event, 'Opcion2')" class="nav-item"><a class="nav-link py-0" href="#"><span style="color: #265C4F;">SNH</span></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a onclick="selectTab(event, 'Principal')" class="nav-link collapsed text-truncate" href="#submenu2" data-toggle="collapse" data-target="#submenu2"><i class="fa fa-table" style="color: #265C4F;font-weight:bold;"></i> <span class="d-none d-sm-inline" style="color: #265C4F;font-weight:bold;">Consultas</span></a>
+                        <div class="collapse" id="submenu2" aria-expanded="false">
+                            <ul class="flex-column pl-2 nav">
+                                <li onclick="selectTab(event, 'Principal')" class="nav-item"><a class="nav-link py-0" href="#"><span style="color: #265C4F;">Opcion 1</span></a></li>
+                                <li onclick="selectTab(event, 'Principal')" class="nav-item"><a class="nav-link py-0" href="#"><span style="color: #265C4F;">Opcion 2</span></a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div id="Contenido" style="display:none" class="col pt-2">
+                <div id="Opcion1" class="tabcontent">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="resumen-tab" data-toggle="tab" data-target="#resumen" type="button" role="tab" aria-controls="resumen" aria-selected="true">Resumen</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="registro-tab" data-toggle="tab" data-target="#registro" type="button" role="tab" aria-controls="registro" aria-selected="false">Registro</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="resumen" role="tabpanel" aria-labelledby="resumen-tab">
+                            <!-- Table with panel -->
+                            
+                                <!--Card image-->
+                                <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+
+                                    <div>
+                                        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                            <i class="fas fa-th-large mt-0"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                            <i class="fas fa-columns mt-0"></i>
+                                        </button>
+                                    </div>
+
+                                    <a href="" class="white-text mx-3" style="color:#265C4F;">Información registrada</a>
+
+                                    <div>
+                                        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                            <i class="fas fa-pencil-alt mt-0"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                            <i class="far fa-trash-alt mt-0"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                            <i class="fas fa-info-circle mt-0"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <!--/Card image-->
+
+                                <div class="table-responsive">
+
+                                   
+                                        <!--Table-->
+                                        <table id="tablaPersonas" class="table table-fixed table-condensed">
+
+                                            <!--Table head-->
+                                            <thead>
+                                                <tr>
+                                                    <th class="th-lg">
+                                                        <a style="color: #265C4F;">
+                                                            Área unitaria
+                                                        </a>
+                                                    </th>
+                                                    <th class="th-lg">
+                                                        <a style="color: #265C4F;">
+                                                            Longitud
+                                                        </a>
+                                                    </th>
+                                                    <th class="th-lg">
+                                                        <a style="color: #265C4F;">
+                                                            Diametro nominal mm
+                                                        </a>
+                                                    </th>
+                                                    <th class="th-lg">
+                                                        <a style="color: #265C4F;">
+                                                            Tipo material
+                                                        </a>
+                                                    </th>
+                                                    <th class="th-lg">
+                                                        <a style="color: #265C4F;">
+                                                            Tipo costura
+                                                        </a>
+                                                    </th>                                                  
+                                                </tr>
+                                            </thead>
+                                            <!--Table head-->
+                                            <!--Table body-->
+                                            <tbody>
+                                            </tbody>
+                                            <!--Table body-->
+                                        </table>
+                                        <!--Table-->
+                                
+
+                                </div>
+                            <!-- Table with panel -->
+                        </div>
+                        <div class="tab-pane fade" id="registro" role="tabpanel" aria-labelledby="registro-tab">
+                            <div class="stepwizard">
+                                <div class="stepwizard-row setup-panel">
+                                    <div class="stepwizard-step">
+                                        <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                                        <p>Selecciona el ducto</p>
+                                    </div>
+                                    <div class="stepwizard-step">
+                                        <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                                        <p>Selecciona el tramo</p>
+                                    </div>
+                                    <div class="stepwizard-step">
+                                        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                                        <p>Selecciona el área unitaria</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <form role="form">
+                                <div class="row setup-content" id="step-1">
+                                    <div>
+                                        <div>
+                                            <h3> Ducto</h3>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Ducto</label>
+                                                <select class="selectpicker form-control" id="cmbDucto">
+                                                    <option>Selecciona...</option>
+                                                </select>
+                                            </div>
+                                            <button class="btn btn-secondary nextBtn btn-lg pull-right" type="button">Siguiente</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row setup-content" id="step-2">
+                                    <div class="col-xs-12">
+                                        <div class="col-md-12">
+                                            <h3> Tramo</h3>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Tramo</label>
+                                                <select class="selectpicker form-control" id="cmbTramo">
+                                                    <option>Selecciona...</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <button class="btn btn-secondary nextBtn btn-lg pull-right" type="button">Siguiente</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row setup-content" id="step-3">
+                                    <div class="col-xs-12">
+                                        <div class="col-md-12">
+                                            <h3> Área unitaria</h3>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Área Unitaria</label>
+                                                <select class="selectpicker form-control" id="cmbAreas">
+                                                    <option>Selecciona...</option>
+
+                                                </select>
+                                            </div>
+                                            <div class="card-group">
+                                                <div class="card ">
+                                                    <img src="" id= "myImage" style="cursor: pointer;height:70%" onclick="fnshowIndentificacion()" class="card-img-top" alt="...">
+
+                                                    <div class="card-footer">
+                                                        <small class="text-muted">Esquema</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="km_inicial">KM Inicial</span>
+                                                </div>
+                                                <input type="text" id="txtkminicial" class="form-control" placeholder="" aria-describedby="basic-addon1" readonly>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="km_final">KM Final</span>
+                                                </div>
+                                                <input type="text" id="txtkmfinal" class="form-control" placeholder=""  aria-describedby="basic-addon1" readonly>
+
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="km_origen">KM Origen</span>
+                                                </div>
+                                                <input type="text" id="txtkmOrigen" class="form-control" placeholder="" aria-describedby="basic-addon1" readonly>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="km_destino">KM Destino</span>
+                                                </div>
+                                                <input type="text" id="txtkmDestino" class="form-control" placeholder="" aria-describedby="basic-addon1" readonly>
+                                            </div>
+
+                                            <button class="btn btn-success btn-lg pull-right" id="btnfinalizar" onclick="fnFinalizar()">Finalizar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                        <div id="forms" style="display:none;margin-top:15px;">
+                            <div class="card-group">
+                                <div class="card ">
+                                    <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowdisenioforms()" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Diseño</h6>
+                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">CENAGAS</small>
+                                    </div>
+                                </div>
+                                <div class="card ml-1">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowServicio()" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Construcción</h6>
+                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">CENAGAS</small>
+                                    </div>
+                                </div>
+                                <div class="card ml-1">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowPresion()" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Operación y mantenimiento</h6>
+                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">CENAGAS</small>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary"><i class="fa fa-arrow-left"></i> | Registrar nueva área unitaria</button>
+                            </div>
+
+                        </div>
+                        <div id="disenioforms" style="display:none;margin-top:15px;">
+                            <div class="card-group">
+                                <div class="card ">
+                                    <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowIndentificacion()" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Identificación</h6>
+                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">Diseño</small>
+                                    </div>
+                                </div>
+                                <div class="card ml-1">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowServicio()" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Servicio</h6>
+                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">Diseño</small>
+                                    </div>
+                                </div>
+                                <div class="card ml-1">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowPresion()" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Presión</h6>
+                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">Diseño</small>
+                                    </div>
+                                </div>
+                                <div class="card ml-1">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="fnshowProteccion()">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Protección</h6>
+                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">Diseño</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary"><i class="fa fa-arrow-left"></i> | Registrar nueva área unitaria</button>
+                            </div>
+                        </div>
+                        <div id="identificacionfrm" style="display:none;margin-top:15px;">
+                            <form role="form" id="identi-form">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductogeneral" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">                                    
+                                </div>
+                                <div class="input-group mb-3">                               
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramogeneral" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">                                    
+                                </div>
+                                <div class="input-group mb-3">                                   
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareageneral" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Longitud</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="longitud" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Diametro nominal(mm)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="diam_mm" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Diametro nominal(in)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="diam_in" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Espesor pared(mm)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="esp_mm" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Espesor pared(in)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="esp_in" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Especificación de material</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmbTipoMaterial">
+                                        <option value=0>Selecciona...</option>
+                                        <option value=1>ASTM A106</option>
+                                        <optin value=2>ASTM A135</option>
+                                        <option value=3>ASTM A139</option>
+                                        <option value=4>ASTM A333</option>
+                                        <option value=5>ASTM A381</option>
+                                        <option value=6>ASTM A671</option>
+                                        <option value=7>ASTM A672</option>
+                                        <option value=8>API-5L-X65</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Temperatura(°C)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="temp_c" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Temperatura(°F)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="temp_f" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo costura</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmbTipoCostura">
+                                        <option value="">Selecciona...</option>
+                                        <option  value="1">Costura longitudinal</option>
+                                        <option value="2">Costura heicoidal</option>
+
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de fabricación</span>
+                                    </div>
+                                    <input type="date" class="form-control" placeholder="" aria-label="" id="fec_fab" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Porcentajes(%) de Carbono</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="porc_carbono" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Resistencia a la tracción(PSI)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="res_trac" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Límite elástico(PSI)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="lim_elas" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelDisenioGeneral()">Cancelar</button>
+                                    <button type="button" id="btn_saveidentificacion" onclick="saveDisenioGral()" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="serviciofrm" style="display:none;margin-top:15px;">
+                            <form role="form">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductoservicio" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramoservicio" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareaservicio" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Diagrama de flujo</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                               aria-describedby="inputGroupFileAddon01" accept=".pdf">
+                                        <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Planos del proyecto</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile02"
+                                               aria-describedby="inputGroupFileAddon01" accept=".pdf">
+                                        <label class="custom-file-label" for="inputGroupFile02">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Normas y especificaciones</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile03"
+                                               aria-describedby="inputGroupFileAddon01" accept=".pdf">
+                                        <label class="custom-file-label" for="inputGroupFile03">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Memoria de cálculo</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile04"
+                                               aria-describedby="inputGroupFileAddon01" accept=".pdf">
+                                        <label class="custom-file-label" for="inputGroupFile04">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Otros datos</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile05"
+                                               aria-describedby="inputGroupFileAddon01">
+                                        <label class="custom-file-label" for="inputGroupFile05">Escoje el archivo</label>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="">Cancelar</button>
+                                    <button type="button" id="btn_saveidentificacion" onclick="saveDisenioServicio()" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="presionfrm" style="display:none;margin-top:15px;">
+                            <form role="form">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductopresion" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramopresion" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareapresion" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Entidad</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmbEntidad">
+                                        <option value=0>Selecciona...</option>
+                                        <option value=1>Aguascalientes</option>
+                                        <option value=2>Baja California</option>
+                                        <option value=3>Baja California Sur</option>
+                                        <option value=4>Campeche</option>
+                                        <option value=5>Coahuila de Zaragoza</option>
+                                        <option value=6>Colima</option>
+                                        <option value=7>Chiapas</option>
+                                        <option value=8>Chihuahua</option>
+                                        <option value=9>Ciudad de México</option>
+                                        <option value=10>Durango</option>
+                                        <option value=11>Guanajuato</option>
+                                        <option value=12>Guerrero</option>
+                                        <option value=13>Hidalgo</option>
+                                        <option value=14>Jalisco</option>
+                                        <option value=15>Edo. de México</option>
+                                        <option value=16>Michoacán de Ocampo</option>
+                                        <option value=17>Morelos</option>
+                                        <option value=18>Nayarit</option>
+                                        <option value=19>Nuevo León</option>
+                                        <option value=20>Oaxaca</option>
+                                        <option value=21>Puebla</option>
+                                        <option value=22>Querétaro</option>
+                                        <option value=23>Quintana Roo</option>
+                                        <option value=24>San Luis Potosí</option>
+                                        <option value=25>Sinaloa</option>
+                                        <option value=26>Sonora</option>
+                                        <option value=27>Tabasco</option>
+                                        <option value=28>Tamaulipas</option>
+                                        <option value=29>Tlaxcala</option>
+                                        <option value=30>Veracruz de Ignacio de la Llave</option>
+                                        <option value=31>Yucatán</option>
+                                        <option value=32>Zacatecas</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de cálculo</span>
+                                    </div>
+                                    <input type="date" class="form-control" placeholder="" id="txtfechacalculo" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Método de cálculo</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtMetodoCalculo" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Presión nominal (PSI)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtPresNomPSI" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Presión nominal (kg/m)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtPresNomKG" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Presión de diseño (PSI)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtPresDisenio" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Presión Máxima de Operación Permitida (PSI)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtPresMaxPSI" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Presión Máxima de Operación Permitida (kg/m)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtPresMaxKG" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Presión de Red o Presión de Segmento (PSI)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtPresRedPSI" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Presión de Red o Presión de Segmento (kg/m)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtPresRedKG" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="btnCancelarPresion" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" id="btnGuardarPresion" onclick="saveDisenioPresion()" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="proteccionfrm" style="display:none;margin-top:15px;">
+                            <form role="form">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductoproteccion" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramoproteccion" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareaproteccion" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de recubrimiento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtiporecubrimiento" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Otro Tipo de recubrimiento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtiporecubrimiento_2" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilometraje inicial del recubrimiento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtkminicialrecubrimiento" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilometraje final del recubrimiento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtkmfinalrecubrimiento" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Longitud total del recubrimiento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtlongtotalrecubrimiento" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Empresa que aplico el recubrimiento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtempresaaplicoservicio" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha inicio de servicio</span>
+                                    </div>
+                                    <input type="date" class="form-control" placeholder="" id="txtfecinicioservicio" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha en que se fabrico</span>
+                                    </div>
+                                    <input type="date" class="form-control" placeholder="" id="txtfecfabrico" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de instalación </span>
+                                    </div>
+                                    <input type="date" class="form-control" placeholder="" id="txtfecinstalacion" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Otra Fecha de instalación</span>
+                                    </div>
+                                    <input type="date" class="form-control" placeholder="" id="txtfecinstalacion_2" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de aplicación  </span>
+                                    </div>
+                                    <input type="date" class="form-control" placeholder="" id="txtfecaplicacion" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ubicación en que se aplico la protección al ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtubicacionproteccion" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Orden de aplicación (interno -1,-2 externo 1, 2)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtordenaplicacion" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Localización (interno/externo)</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtlocalizacion" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Temperatura máxima de funcionamiento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtTempMaxFuncionamiento" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Motivo de instalación</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtmotivoinstalacion" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Material de fabricación </span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtmaterialfabricacion" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Espesor del recubrimiento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtespesorrecubrimiento" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Aislamiento eléctrico</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtaislamientoelec" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Control de la corrosión</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtcontrolcorrosion" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" onclick="cancelDisenioProteccion()" id="btncancelproteccion" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" id="btnsaveproteccion" onclick="saveDisenioProteccion()" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Opcion2" class="tabcontent">
+                    <h3>MENU 2</h3>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="background-color: #265C4F;">
+            
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="col-7 d-flex justify-content-center mx-auto">
+                    <img id="MDB-logo"
+                         src="images/ltm-logo.png"
+                         alt="LMT-net"
+                         draggable="false" style="margin-top:-25px;" />
+                </div>
+                <div class="modal-content" id="modal-login">
+
+
+                    <div class="modal-body">
+                        <div class="col-12 d-flex justify-content-center mb-3">
+                            <img id="MDB-logo"
+                                 src="images/cenagas-logo.png"
+                                 alt="CENAGAS"
+                                 draggable="false" style="box-shadow: 0px 0px 8px white; " />
+                        </div>
+                        <div class="form-title text-center">
+                            <h4>Acceso</h4>
+                        </div>
+                        <div class="d-flex flex-column text-center">
+                            <form id="loginForm">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="username" placeholder="Usuario...">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" id="password" placeholder="Contraseña...">
+                                </div>
+                                <button type="button" id="loginBtn" class="btn btn-success btn-block btn-round">Ingresar</button>
+                            </form>
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <div class="signup-section">Plataforma CENAGAS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
