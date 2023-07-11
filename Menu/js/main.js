@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://201.137.221.231/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://127.0.0.1:8000/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -17,7 +17,21 @@ const headers = new Headers({
     'Content-Type': 'application/json'
 });
 
+const token = localStorage.getItem('token');
+function logoutFunction() {
+    localStorage.removeItem('token');
+    $('#loginModal').modal('show');
+    // ... rest of the logic
+}
 
+
+$(document).ready(function() {
+    if (!token ) {
+        // Redirect to another page if the token is null
+        $('#loginModal').modal('show');
+      } 
+      
+});
 
 $(document).ready(function () {
 
@@ -47,7 +61,40 @@ $(document).ready(function () {
         }
     });
 
+    async function login() {
 
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const webMethod='auth/login';
+        url=apiUrl+webMethod;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+    
+        const data = await response.json();
+        console.log(data)
+        if (response.ok) {
+    
+            if (typeof data.token === 'undefined') {
+                alert("Usuario y/o contraseña incorrecta")
+            }else{
+            localStorage.setItem('token', data.token);
+            $('#loginModal').modal('hide');
+            //window.location.href = "index.html";
+
+            }
+        } else {
+            alert(data.error);
+        }
+        
+    }
+    
+    var loginButton = document.getElementById("loginBtn");
+    loginButton.addEventListener("click", login);
 
     
     var navListItems = $('div.setup-panel div a'),
