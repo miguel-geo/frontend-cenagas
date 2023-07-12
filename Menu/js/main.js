@@ -12,15 +12,20 @@ var kmdestino;
 var ductocon;
 var tramocon;
 var areacon;
+
+
+const token = localStorage.getItem('token');
+
+
 const headers = new Headers({
+    'Authorization': `Bearer ${token}`,
     'Accept': 'application/json',
     'Content-Type': 'application/json'
 });
-
-const token = localStorage.getItem('token');
 function logoutFunction() {
     localStorage.removeItem('token');
     $('#loginModal').modal('show');
+    window.location.href = "index.html";
     // ... rest of the logic
 }
 
@@ -51,7 +56,7 @@ $(document).ready(function () {
 
     document.getElementById("cmbTramo").addEventListener("change", function() {
         var imageElement = document.getElementById("myImage");
-        console.log(this.value)
+
         if (this.value == "1") {
             // Change to the first image
             imageElement.src = "images/tramo1.jpg";
@@ -83,7 +88,8 @@ $(document).ready(function () {
                 alert("Usuario y/o contraseña incorrecta")
             }else{
             localStorage.setItem('token', data.token);
-            $('#loginModal').modal('hide');
+            //$('#loginModal').modal('hide');
+            window.location.href = "index.html";
             //window.location.href = "index.html";
 
             }
@@ -176,7 +182,7 @@ $(document).ready(function () {
           })
               .then(response => response.json())
               .then(data => {
-                console.log(data)
+
                 document.getElementById('txtkminicial').value = data[0].km_inicial;
                 document.getElementById('txtkmfinal').value = data[0].km_final;
                 document.getElementById('txtkmOrigen').value = data[0].km_origen;
@@ -538,6 +544,10 @@ function loadDuctos() {
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
+        headers:{
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json',
+        },
         data: params,
         success: function (data) {
             if (data.length > 0 && data !== undefined) {
@@ -799,6 +809,7 @@ function saveDisenioServicio() {
     fetch(apiUrl + webMethod, {
         method: 'POST',
         headers: {
+            'Authorization': `Bearer ${token}`,
             'Accept': 'application/json'
         },
         body: formData
@@ -941,6 +952,10 @@ function loadidentificacion() {
     $.ajax({
         type: "GET",
         url: apiUrl + webMethod,
+        headers:{
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
+        },
         success: function (data) {
             if (data.success) {
                 for (i = 0; i < data.data.length; i++) {
@@ -963,13 +978,19 @@ function consulta() {
     var params = {
         area_unitaria_id: $("#cmbAreas_con").val()
     };
+    console.log(params)
     var webMethod = "get_diseniogeneral";
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
+        headers:{
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
+        },
         data: params,
         success: function (data) {
             if (data.success) {
+                console.log(data)
                 for (i = 0; i < data.data.length; i++) {
                     var persona = [data.data[i].nombre, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0204_0011,
                     data.data[i].C_0208_0029,];
@@ -1057,6 +1078,7 @@ $('#cmbDucto').change(function() {
       fetch(url, {
         method: 'POST', // or 'POST', 'PUT', etc.
         headers: {
+            'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({'property': property})
