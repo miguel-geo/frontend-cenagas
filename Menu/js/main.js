@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://201.137.221.231/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://201.137.227.60/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
