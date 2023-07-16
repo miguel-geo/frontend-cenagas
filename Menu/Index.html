@@ -11,8 +11,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/0c0e49e11e.js" crossorigin="anonymous"></script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
 
     <link href="css/Style.css" rel="stylesheet" />
     <script src="js/main.js"></script>
@@ -185,7 +187,7 @@
                                     </div>
                                 </div>
                                 <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowServicio()" alt="...">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="alert('Formulario en construcción')" alt="...">
                                     <div class="card-body">
                                         <h6 class="card-title">Construcción</h6>
                                         <p class="card-text">En éste formulario contendrá información relacionada a...</p>
@@ -195,7 +197,7 @@
                                     </div>
                                 </div>
                                 <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowPresion()" alt="...">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="alert('Formulario en construcción')" alt="...">
                                     <div class="card-body">
                                         <h6 class="card-title">Operación y mantenimiento</h6>
                                         <p class="card-text">En éste formulario contendrá información relacionada a...</p>
@@ -335,7 +337,7 @@
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
-                                <div class="input-group mb-3" ´id="espMaterial" style="display:none;">
+                                <div class="input-group mb-3" id="espMaterial" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo</span>
                                     </div>
@@ -344,9 +346,9 @@
                                         <span class="input-group-text" id="basic-addon1">Descripción</span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="" aria-label="" id="newDescMaterial" aria-describedby="basic-addon1">
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelDisenioServicio()">Cancelar</button>
-                                        <button type="button" id="btn_saveMaterial" onclick="saveDisenioServicio()" class="btn btn-success">Guardar</button>
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroMaterialDisenio()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroMaterialDisenio()" class="btn btn-success">Guardar</button>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -370,6 +372,23 @@
                                         <option value="3">Soldadura DSAW o SAW SJ</option>
 
                                     </select>
+                                    <button type="button" onclick="espCostura()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="espCostura" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo Costura</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipocostura" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescCostura" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroCostura()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroCostura()" class="btn btn-success">Guardar</button>
+                                    </div>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -423,8 +442,8 @@
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                               aria-describedby="inputGroupFileAddon01" accept=".pdf">
-                                        <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
+                                               aria-describedby="inputGroupFileAddon01" accept=".pdf" lang="es">
+                                        <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo PDF</label>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -433,8 +452,8 @@
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile02"
-                                               aria-describedby="inputGroupFileAddon01" accept=".pdf">
-                                        <label class="custom-file-label" for="inputGroupFile02">Escoje el archivo</label>
+                                               aria-describedby="inputGroupFileAddon01" accept=".pdf" lang="es">
+                                        <label class="custom-file-label" for="inputGroupFile02">Escoje el archivo PDF</label>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -443,8 +462,8 @@
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile03"
-                                               aria-describedby="inputGroupFileAddon01" accept=".pdf">
-                                        <label class="custom-file-label" for="inputGroupFile03">Escoje el archivo</label>
+                                               aria-describedby="inputGroupFileAddon01" accept=".pdf" lang="es">
+                                        <label class="custom-file-label" for="inputGroupFile03">Escoje el archivo PDF</label>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -453,8 +472,8 @@
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile04"
-                                               aria-describedby="inputGroupFileAddon01" accept=".pdf">
-                                        <label class="custom-file-label" for="inputGroupFile04">Escoje el archivo</label>
+                                               aria-describedby="inputGroupFileAddon01" accept=".pdf" lang="es">
+                                        <label class="custom-file-label" for="inputGroupFile04">Escoje el archivo PDF</label>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -463,8 +482,8 @@
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile05"
-                                               aria-describedby="inputGroupFileAddon01">
-                                        <label class="custom-file-label" for="inputGroupFile05">Escoje el archivo</label>
+                                               aria-describedby="inputGroupFileAddon01" lang="es">
+                                        <label class="custom-file-label" for="inputGroupFile05">Escoje el archivo PDF</label>
                                     </div>
                                 </div>
 
@@ -716,13 +735,21 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Aislamiento eléctrico</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" id="txtaislamientoelec" aria-label="" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control" id="cmbdecisionAislamiento">
+                                        <option value="0">Selecciona...</option>
+                                        <option value="Sí">Sí</option>
+                                        <option value="No">No</option>
+                                    </select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Control de la corrosión</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" id="txtcontrolcorrosion" aria-label="" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control" id="cmbdecisionCorrosion">
+                                        <option value="0">Selecciona...</option>
+                                        <option value="Sí">Sí</option>
+                                        <option value="No">No</option>
+                                    </select>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" onclick="cancelDisenioProteccion()" id="btncancelproteccion" data-dismiss="modal">Cancelar</button>
@@ -792,7 +819,7 @@
 
 
                             <!--Table-->
-                            <table id="tablaPersonas" class="table table-fixed table-condensed">
+                            <table id="tablaPersonas" class="table table-striped table-bordered table-sm">
 
                                 <!--Table head-->
                                 <thead>

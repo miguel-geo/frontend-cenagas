@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://201.137.227.60/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -33,7 +33,8 @@ $(document).ready(function () {
     $('#logoutBtn').click(function() {
         logoutFunction()
     });
-
+    //$('#tablaPersonas').DataTable();
+    //$('.dataTables_length').addClass('bs-select');
 
     document.getElementById("cmbTramo").addEventListener("change", function() {
         var imageElement = document.getElementById("myImage");
@@ -147,6 +148,9 @@ $(document).ready(function () {
 function showotroMaterial() {
     $('#espMaterial').show();
 }
+function espCostura() {
+    $('#espCostura').show();
+}
 function loadAreas() {
     $("#cmbAreas option:not(:first)").remove();
     var property = $("#cmbTramo").val();
@@ -165,7 +169,7 @@ function loadAreas() {
                 $("#cmbAreas").empty();
                 $('#cmbAreas').append($('<option>', {
                     value: 0,
-                    text: 'Selecciona!...'
+                    text: 'Selecciona...'
                 }));
                 for (var i = 0; i < data.length; i++) {
                     $('#cmbAreas').append($('<option>', {
@@ -195,7 +199,7 @@ function loadSegmentosCon() {
                 $("#cmbSegmento_con").empty();
                 $('#cmbSegmento_con').append($('<option>', {
                     value: 0,
-                    text: 'Selecciona!...'
+                    text: 'Selecciona...'
                 }));
                 for (var i = 0; i < data.length; i++) {
                     $('#cmbSegmento_con').append($('<option>', {
@@ -225,7 +229,7 @@ function loadAreasCon() {
                 $("#cmbAreas_con").empty();
                 $('#cmbAreas_con').append($('<option>', {
                     value: 0,
-                    text: 'Selecciona!...'
+                    text: 'Selecciona...'
                 }));
                 for (var i = 0; i < data.length; i++) {
                     $('#cmbAreas_con').append($('<option>', {
@@ -254,7 +258,7 @@ function loadTramos() {
                 $("#cmbTramo").empty();
                 $('#cmbTramo').append($('<option>', {
                     value: 0,
-                    text: 'Selecciona!...'
+                    text: 'Selecciona...'
                 }));
                 for (var i = 0; i < data.length; i++) {
                     $('#cmbTramo').append($('<option>', {
@@ -284,7 +288,7 @@ function loadTramosCon() {
                 $("#cmbTramo_con").empty();
                 $('#cmbTramo_con').append($('<option>', {
                     value: 0,
-                    text: 'Selecciona!...'
+                    text: 'Selecciona...'
                 }));
                 for (var i = 0; i < data.length; i++) {
                     $('#cmbTramo_con').append($('<option>', {
@@ -442,7 +446,7 @@ function loadtipocostura() {
                 $("#cmbTipoCostura").empty();
                 $('#cmbTipoCostura').append($('<option>', {
                     value: 0,
-                    text: 'Selecciona!...'
+                    text: 'Selecciona...'
                 }));
                 for (var i = 0; i < data.data.length; i++) {
                     $('#cmbTipoCostura').append($('<option>', {
@@ -468,12 +472,12 @@ function loadtipomaterialdisenio() {
                 $("#cmbTipoMaterial").empty();
                 $('#cmbTipoMaterial').append($('<option>', {
                     value: 0,
-                    text: 'Selecciona!...'
+                    text: 'Selecciona...'
                 }));
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i < data.data.length; i++) {
                     $('#cmbTipoMaterial').append($('<option>', {
-                        value: data[i].id,
-                        text: data[i].C_0204_0011
+                        value: data.data[i].id,
+                        text: data.data[i].C_0204_0011
                     }));
                 }
             }
@@ -498,7 +502,7 @@ function loadDuctos() {
                 $("#cmbDucto").empty();
                 $('#cmbDucto').append($('<option>', {
                     value: 0,
-                    text: 'Selecciona!...'
+                    text: 'Selecciona...'
                 }));
                 for (var i = 0; i < data.length; i++) {                  
                     $('#cmbDucto').append($('<option>', {
@@ -527,12 +531,12 @@ function reiniciarForms() {
     $("#cmbTramo").empty();
     $('#cmbTramo').append($('<option>', {
         value: 0,
-        text: 'Selecciona!...'
+        text: 'Selecciona...'
     }));
     $("#cmbAreas").empty();
     $('#cmbAreas').append($('<option>', {
         value: 0,
-        text: 'Selecciona!...'
+        text: 'Selecciona...'
     }));
 }
 function atras_pasodos() {
@@ -547,61 +551,140 @@ function saveDisenioGral() {
     var miCadena = $("#fec_fab").val();
     miCadena= miCadena.replace(/["']/g, "");
     var webMethod = "saveIdentificacion";
+    if ($("#diam_in").val() != "") {
+        var params = {
+            area_unitaria_id: area,
+            longitud: $("#longitud").val(),
+            diametro_mm: $("#diam_mm").val(),
+            diametro_in: $("#diam_in").val(),
+            espesor_mm: $("#esp_mm").val(),
+            espesor_in: $("#esp_in").val(),
+            tipo_material_disenio: $("#cmbTipoMaterial").val(),
+            temp_c: $("#temp_c").val(),
+            temp_f: $("#temp_f").val(),
+            tipo_costura: $("#cmbTipoCostura").val(),
+            fecha_fab: $("#fec_fab").val(),
+            porcentaje_carbono: $("#porc_carbono").val(),
+            resistencia_traccion: $("#res_trac").val(),
+            resistencia_elastico: $("#lim_elas").val(),
+            coordenada_especifica: $("#coord_esp_iden").val(),
+            kilometro_especifico: $("#km_esp_iden").val(),
+            fec_fab_fin: $("#fec_fab_fin").val()
+        };
+
+
+        console.log(JSON.stringify(params))
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(params)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    console.log(data.data);
+                    alert("Información almacenada correctamente");
+                    $('#disenioforms').show();
+                    $('#identificacionfrm').hide();
+                    loadidentificacion();
+
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+    else {
+        alert("Es necesario ingresar el diámetro en pulgadas para realizar el registro");
+    }
+}
+
+
+function saveotroMaterialDisenio() {
+    var webMethod = "saveTypeMaterial";
     var params = {
-        area_unitaria_id: area,
-        longitud: $("#longitud").val(),
-        diametro_mm: $("#diam_in").val(),
-        diametro_in: $("#diam_in").val(),
-        espesor_mm: $("#esp_mm").val(),
-        espesor_in: $("#esp_in").val(),
-        tipo_material_disenio: $("#cmbTipoMaterial").val(),
-        temp_c: $("#temp_c").val(),
-        temp_f: $("#temp_f").val(),
-        tipo_costura: $("#cmbTipoCostura").val(),
-        fecha_fab: $("#fec_fab").val(),
-        porcentaje_carbono: $("#porc_carbono").val(),
-        resistencia_traccion: $("#res_trac").val(),
-        resistencia_elastico: $("#lim_elas").val(),
-        coordenada_especifica: $("#coord_esp_iden").val(),
-        kilometro_especifico: $("#km_esp_iden").val(),
-        fec_fab_fin: $("#fec_fab_fin").val()
+        C_0204_0011: $("#newTipoMaterial").val(),
+        descripcion: $("#newDescMaterial").val()
     };
-    
- 
+
+
     console.log(JSON.stringify(params))
     fetch(apiUrl + webMethod, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(params)
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        console.log(response)
-        return response.json();
-        
-    })
-    .then(data => {
-        if (data.success) {
-            console.log(data.data);
-            alert("Información almacenada correctamente");
-            $('#disenioforms').show();
-            $('#identificacionfrm').hide();
-            loadidentificacion();
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
 
-        }
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipomaterialdisenio();
+                $("#espMaterial").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+
+function saveotroCostura() {
+    var webMethod = "saveTypeCostura";
+    var params = {
+        C_0208_0029: $("#newTipocostura").val(),
+        descripcion: $("#newDescCostura").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
     })
-    .catch(error => {
-        alert("Error: " + error);
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipocostura();
+                $("#espCostura").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
 }
 
 
+function cancelotroMaterialDisenio() {
+    $("#espMaterial").hide();
+}
 
-
-
-
+function cancelotroCostura() {
+    $("#espCostura").hide();
+}
 
 function saveDisenioPresion()  {
     var webMethod = "savePresion";
@@ -677,8 +760,8 @@ function saveDisenioProteccion() {
         motivo_instalacion: $("#txtmotivoinstalacion").val(),
         material_fabricacion: $("#txtmaterialfabricacion").val(),
         espesor_recubrimiento: $("#txtespesorrecubrimiento").val(),
-        aislamiento_electrico: $("#txtaislamientoelec").val(),
-        control_corrosion: $("#txtcontrolcorrosion").val(),
+        aislamiento_electrico: $("#cmbdecisionAislamiento").val(),
+        control_corrosion: $("#cmbdecisionCorrosion").val(),
         coordenada_especifica: $("#coord_esp_iden_prot").val(),
         kilometro_especifico: $("#km_esp_iden_prot").val()
 
@@ -910,32 +993,110 @@ function loadidentificacion() {
 }
 
 function consulta() {
-
-
-    $('#tablaPersonas tbody')[0].innerHTML = "";
-    var params = {
-        area_unitaria_id: $("#cmbAreas_con").val()
-    };
-    var webMethod = "get_diseniogeneral";
-    $.ajax({
-        type: "POST",
-        url: apiUrl + webMethod,
-        data: params,
-        success: function (data) {
-            if (data.success) {
-                for (i = 0; i < data.data.length; i++) {
-                    var persona = [data.data[i].nombre, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0204_0011,
-                    data.data[i].C_0208_0029,];
-                    llenarTablas(persona, "tablaPersonas");
-                }
-            }
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-
+    var params;
+    if (
+        $("#cmbDucto_con option:selected").text() !== "Selecciona..." ||
+        $("#cmbTramo_con option:selected").text() !== "Selecciona..." ||
+        $("#cmbSegmento_con option:selected").text() !== "Selecciona..." ||
+        $("#cmbAreas_con option:selected").text() !== "Selecciona..."
+    ) {
+        if (
+            $("#cmbDucto_con option:selected").text() !== "Selecciona..." &&
+            $("#cmbTramo_con option:selected").text() == "Selecciona..." &&
+            $("#cmbSegmento_con option:selected").text() == "Selecciona..." &&
+            $("#cmbAreas_con option:selected").text() == "Selecciona..."
+        ) {
+            params = {
+                id: $("#cmbDucto_con option:selected").val(),
+                op:4
+            };
         }
-    });
-}
+        else if (
+            $("#cmbDucto_con option:selected").text() !== "Selecciona..." &&
+            $("#cmbTramo_con option:selected").text() != "Selecciona..." &&
+            $("#cmbSegmento_con option:selected").text() == "Selecciona..." &&
+            $("#cmbAreas_con option:selected").text() == "Selecciona..."
+        ) {
+            params = {
+                id: $("#cmbTramo_con option:selected").val(),
+                op: 3
+            };
+        }
+        else if (
+            $("#cmbDucto_con option:selected").text() !== "Selecciona..." &&
+            $("#cmbTramo_con option:selected").text() != "Selecciona..." &&
+            $("#cmbSegmento_con option:selected").text() != "Selecciona..." &&
+            $("#cmbAreas_con option:selected").text() == "Selecciona..."
+        ) {
+            params = {
+                id: $("#cmbSegmento_con option:selected").val(),
+                op: 2
+            };
+        }
+        else if (
+            $("#cmbDucto_con option:selected").text() !== "Selecciona..." &&
+            $("#cmbTramo_con option:selected").text() != "Selecciona..." &&
+            $("#cmbSegmento_con option:selected").text() != "Selecciona..." &&
+            $("#cmbAreas_con option:selected").text() != "Selecciona..."
+        ) {
+            params = {
+                id: $("#cmbAreas_con option:selected").val(),
+                op: 1
+            };
+        }
 
+
+        $('#tablaPersonas tbody')[0].innerHTML = "";
+        var webMethod = "get_diseniogeneral";
+        $.ajax({
+            type: "POST",
+            url: apiUrl + webMethod,
+            data: params,
+            success: function (data) {
+                if (data.success) {
+                    for (i = 0; i < data.data.length; i++) {
+                        var persona = [data.data[i].areaunitaria, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0204_0011,
+                        data.data[i].C_0208_0029];
+                        llenarTablas(persona, "tablaPersonas");
+                    }
+                    if (data.data.length > 0) {
+                       // ExportarDatos(data.data);
+                    }
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+            }
+        });
+    }
+    else {
+        alert("Es necesario seleccionar al menos un tipo para realizar la búsqueda");
+    }
+   
+}
+function ExportarDatos(registros) {
+
+
+    var encabezados = Object.keys(registros[0]);
+
+
+    var datos = [encabezados];
+    registros.forEach(function (registro) {
+        var fila = encabezados.map(function (encabezado) {
+            return registro[encabezado];
+        });
+        datos.push(fila);
+    });
+
+    // Creamos una hoja de cálculo
+    const hoja = XLSX.utils.aoa_to_sheet(datos);
+    const libro = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(libro, hoja, "Datos");
+    const nombreArchivo = "dtp.xlsx";
+    const libroBuffer = XLSX.write(libro, { bookType: "xlsx", type: "array" });
+    const archivoExcel = new Blob([libroBuffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+    saveAs(archivoExcel, nombreArchivo);
+}
 
 
 function loadDisenioGral() {
@@ -963,7 +1124,7 @@ function loadDisenioGral() {
 }
 
 function llenarTablas(obj, nameTabla) {
-
+   // $('#tablaPersonas tbody')[0].innerHTML = "";
     var row = '<tr>';
     for (j = 0; j < obj.length; j++) {
         row = row + '<td>' + obj[j] + '</td>';
