@@ -385,8 +385,8 @@ C:\laragon\www\frontend-cenagas_\Menu\bin\roslyn\VBCSCompiler.exe
 C:\laragon\www\frontend-cenagas_\Menu\bin\roslyn\VBCSCompiler.exe.config
 C:\laragon\www\frontend-cenagas_\Menu\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\laragon\www\frontend-cenagas_\Menu\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\laragon\www\frontend-cenagas_\Menu\obj\Debug\Menu.csproj.AssemblyReference.cache
 C:\laragon\www\frontend-cenagas_\Menu\obj\Debug\Menu.csproj.CoreCompileInputs.cache
 C:\laragon\www\frontend-cenagas_\Menu\obj\Debug\Menu.csproj.CopyComplete
 C:\laragon\www\frontend-cenagas_\Menu\obj\Debug\Menu.dll
 C:\laragon\www\frontend-cenagas_\Menu\obj\Debug\Menu.pdb
+C:\laragon\www\frontend-cenagas_\Menu\obj\Debug\Menu.csproj.AssemblyReference.cache

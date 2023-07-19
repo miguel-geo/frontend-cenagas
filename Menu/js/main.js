@@ -12,6 +12,7 @@ var kmdestino;
 var ductocon;
 var tramocon;
 var areacon;
+var temaconsulta="";
 const headers = new Headers({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
@@ -302,6 +303,142 @@ function loadTramosCon() {
 
 }
 function inicializarEventos() {
+    $(document).on("click", ".delete", function (e) {
+        var webMethod = "";
+        switch (temaconsulta) {
+            case "T1":
+                webMethod = "disenio_general/destroy";
+                break;
+            case "T2":
+                webMethod = "disenio_presion/destroy";
+                break;
+            case "T3":
+                webMethod = "disenio_proteccion/destroy";
+                break;
+            default:
+        }
+        var params = {
+            id: e.currentTarget.dataset["id"] ,
+        };
+        $.ajax({
+            type: "POST",
+            url: apiUrl + webMethod,
+            data: params,
+            success: function (data) {
+                alert("El registro fue eliminado correctamente");
+                consulta();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+            }
+        });     
+    });
+    $(document).on("click", ".edit", function (e) {
+        var c = 0;
+        $(this).parents("tr").find("td:not(:last-child)").each(function () {
+            if (c === 0) {
+                $(this).html('<input type="text" class="form-control" disabled value="' + $(this).text() + '">');
+            } else {
+                $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+            }
+            c++;
+        });
+        $("#ra" + e.currentTarget.dataset["id"]).show();
+        $("#re" + e.currentTarget.dataset["id"]).hide();
+    });
+    $(document).on("click", ".add", function (e) {
+        var empty = false;
+        
+        var valores=[];
+        var input = $(this).parents("tr").find('input[type="text"]');
+        valores.push(e.currentTarget.dataset["id"]);
+        input.each(function () {
+            valores.push($(this).val());
+           // alert($(this).val());
+            if (!$(this).val()) {
+                $(this).addClass("error");
+                empty = true;
+            } else {
+                $(this).removeClass("error");
+            }
+        });
+        $(this).parents("tr").find(".error").first().focus();
+        if (!empty) {
+            input.each(function () {
+                $(this).parent("td").html($(this).val());
+            });
+            var webMethod = "";
+            switch (temaconsulta) {
+                case "T1":
+                    webMethod = "disenio_general/update";
+                    break;
+                case "T2":
+                    webMethod = "disenio_presion/update";
+                    break;
+                case "T3":
+                    webMethod = "disenio_proteccion/update";
+                    break;
+                default:
+            }
+            var params = {               
+            };
+            switch (temaconsulta) {
+                case "T1":
+                    params = {
+                            id: valores[0],
+                            coordenada_especifica: valores[2],
+                            kilometro_especifico: valores[3],
+                            C_0201_0006: valores[4],
+                            C_0202_0007: valores[5],
+                            C_0207_0027: valores[6],
+                            C_0210_0031: valores[7]
+                    };
+                    break;
+                case "T2":
+                    params = {
+                        id: valores[0],
+                        coordenada_especifica: valores[2],
+                        kilometro_especifico: valores[3],
+                        C_0206_0017: valores[4],
+                        C_0206_0019: valores[5],
+                        C_0206_0023: valores[6],
+                        C_0206_0024: valores[7]
+                    };
+                    break;
+                case "T3":
+                    params = {
+                        id: valores[0],
+                        coordenada_especifica: valores[2],
+                        kilometro_especifico: valores[3],
+                        C_0211_0043: valores[4],
+                        C_0211_0044: valores[5],
+                        C_0211_0045: valores[6],
+                        C_0211_0046: valores[7]
+                    };
+                    break;
+                default:
+            }
+            $.ajax({
+                type: "POST",
+                url: apiUrl + webMethod,
+                data: params,
+                success: function (data) {
+                    alert("El registro fue actualizado correctamente");
+                    consulta();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+
+                }
+            });
+            $("#ra" + e.currentTarget.dataset["id"]).hide();
+            $("#re" + e.currentTarget.dataset["id"]).show();
+        }
+       
+       
+    });
+   
+
+
     //Combo Ductos
     const selectDucto = document.getElementById('cmbDucto');
     selectDucto.addEventListener('change', function handleChange(event) {
@@ -364,13 +501,178 @@ function inicializarEventos() {
     selectAreasCon.addEventListener('change', function handleChange(event) {
         areaCon = event.target.value;
     });
+    //Combo Temas
+    const selectTemas = document.getElementById('cmbTemas_con');
+    selectTemas.addEventListener('change', function handleChange(event) {
+        temaconsulta = event.target.value;
+        switch (event.target.value) {
+            case "T1":
+                limpiarTabas();
+                $("#tablaPersonas > tbody").empty();
+                $("#tablaPersonas").show();
+                $("#tablapresion").hide();
+                $("#tablaproteccion").hide();
+             break;
+            case "T2":
+                limpiarTabas();               
+                $("#tablaPersonas").hide();
+                $("#tablapresion").show();
+                $("#tablaproteccion").hide();
+            break;
+            case "T3":
+                limpiarTabas();
+                $("#tablaPersonas").hide();
+                $("#tablapresion").hide();
+                $("#tablaproteccion").show();
+            break;
+            default:
+        }
+        tramo = event.target.value;
+        txttramo = event.target[event.target.selectedIndex].text;
+        loadAreas(event.target.value);
+    });
+}
+function limpiarTabas() {
+    var table0 = document.getElementById('tablapresion');
+    var rowCount0 = table0.rows.length;
+    for (var i = rowCount0; i > 1; --i) {
+        table0.deleteRow(i - 1);
+    }
+    var table2 = document.getElementById('tablapresion');
+    var rowCount2 = table2.rows.length;
+    for (var c = rowCount2; c > 1; --c) {
+        table2.deleteRow(c - 1);
+    }
+    var table3 = document.getElementById('tablaPersonas');
+    var rowCount3 = table3.rows.length;
+    for (var h = rowCount3; h > 1; --h) {
+        table3.deleteRow(h - 1);
+    }
+}
+function ezBSAlert(options) {
+    var deferredObject = $.Deferred();
+    var defaults = {
+        type: "alert", //alert, prompt,confirm 
+        modalSize: 'modal-sm', //modal-sm, modal-lg
+        okButtonText: 'Ok',
+        cancelButtonText: 'Cancel',
+        yesButtonText: 'Yes',
+        noButtonText: 'No',
+        headerText: 'Attention',
+        messageText: 'Message',
+        alertType: 'default', //default, primary, success, info, warning, danger
+        inputFieldType: 'text', //could ask for number,email,etc
+    }
+    $.extend(defaults, options);
+
+    var _show = function () {
+        var headClass = "navbar-default";
+        switch (defaults.alertType) {
+            case "primary":
+                headClass = "alert-primary";
+                break;
+            case "success":
+                headClass = "alert-success";
+                break;
+            case "info":
+                headClass = "alert-info";
+                break;
+            case "warning":
+                headClass = "alert-warning";
+                break;
+            case "danger":
+                headClass = "alert-danger";
+                break;
+        }
+        $('BODY').append(
+            '<div id="ezAlerts" class="modal fade">' +
+            '<div class="modal-dialog" class="' + defaults.modalSize + '">' +
+            '<div class="modal-content">' +
+            '<div id="ezAlerts-header" class="modal-header ' + headClass + '">' +
+            '<button id="close-button" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>' +
+            '<h4 id="ezAlerts-title" class="modal-title">Modal title</h4>' +
+            '</div>' +
+            '<div id="ezAlerts-body" class="modal-body">' +
+            '<div id="ezAlerts-message" ></div>' +
+            '</div>' +
+            '<div id="ezAlerts-footer" class="modal-footer">' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
+        );
+
+        $('.modal-header').css({
+            'padding': '15px 15px',
+            '-webkit-border-top-left-radius': '5px',
+            '-webkit-border-top-right-radius': '5px',
+            '-moz-border-radius-topleft': '5px',
+            '-moz-border-radius-topright': '5px',
+            'border-top-left-radius': '5px',
+            'border-top-right-radius': '5px'
+        });
+
+        $('#ezAlerts-title').text(defaults.headerText);
+        $('#ezAlerts-message').html(defaults.messageText);
+
+        var keyb = "false", backd = "static";
+        var calbackParam = "";
+        switch (defaults.type) {
+            case 'alert':
+                keyb = "true";
+                backd = "true";
+                $('#ezAlerts-footer').html('<button class="btn btn-' + defaults.alertType + '">' + defaults.okButtonText + '</button>').on('click', ".btn", function () {
+                    calbackParam = true;
+                    $('#ezAlerts').modal('hide');
+                });
+                break;
+            case 'confirm':
+                var btnhtml = '<button id="ezok-btn" class="btn btn-primary">' + defaults.yesButtonText + '</button>';
+                if (defaults.noButtonText && defaults.noButtonText.length > 0) {
+                    btnhtml += '<button id="ezclose-btn" class="btn btn-default">' + defaults.noButtonText + '</button>';
+                }
+                $('#ezAlerts-footer').html(btnhtml).on('click', 'button', function (e) {
+                    if (e.target.id === 'ezok-btn') {
+                        calbackParam = true;
+                        $('#ezAlerts').modal('hide');
+                    } else if (e.target.id === 'ezclose-btn') {
+                        calbackParam = false;
+                        $('#ezAlerts').modal('hide');
+                    }
+                });
+                break;
+            case 'prompt':
+                $('#ezAlerts-message').html(defaults.messageText + '<br /><br /><div class="form-group"><input type="' + defaults.inputFieldType + '" class="form-control" id="prompt" /></div>');
+                $('#ezAlerts-footer').html('<button class="btn btn-primary">' + defaults.okButtonText + '</button>').on('click', ".btn", function () {
+                    calbackParam = $('#prompt').val();
+                    $('#ezAlerts').modal('hide');
+                });
+                break;
+        }
+
+        $('#ezAlerts').modal({
+            show: false,
+            backdrop: backd,
+            keyboard: keyb
+        }).on('hidden.bs.modal', function (e) {
+            $('#ezAlerts').remove();
+            deferredObject.resolve(calbackParam);
+        }).on('shown.bs.modal', function (e) {
+            if ($('#prompt').length > 0) {
+                $('#prompt').focus();
+            }
+        }).modal('show');
+    }
+
+    _show();
+    return deferredObject.promise();
 }
 function fnFinalizar() {
-    //document.getElementById('registro').style.display = 'none';
-    //document.getElementById('mnuForm').style.display = 'block';
-    $('#registro').hide();
-    $('#forms').show();
+    document.getElementById('registro').style.display = 'none';
+    document.getElementById('forms').style.display = 'block';
    
+    //$('#forms').show();
+    //$('#registro').hide();
    
 }
 function fnshowIndentificacion() {
@@ -1044,30 +1346,79 @@ function consulta() {
                 op: 1
             };
         }
+        switch (temaconsulta) {
+            case "T1":
+                $('#tablaPersonas tbody')[0].innerHTML = "";
+                var webMethod = "get_diseniogeneral";
+                $.ajax({
+                    type: "POST",
+                    url: apiUrl + webMethod,
+                    data: params,
+                    success: function (data) {
+                        if (data.success) {
+                            for (i = 0; i < data.data.length; i++) {
+                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0207_0027, data.data[i].C_0210_0031];
+                                llenarTablas(persona, "tablaPersonas");
+                            }
+                            if (data.data.length > 0) {
+                                // ExportarDatos(data.data);
+                            }
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
 
-
-        $('#tablaPersonas tbody')[0].innerHTML = "";
-        var webMethod = "get_diseniogeneral";
-        $.ajax({
-            type: "POST",
-            url: apiUrl + webMethod,
-            data: params,
-            success: function (data) {
-                if (data.success) {
-                    for (i = 0; i < data.data.length; i++) {
-                        var persona = [data.data[i].areaunitaria, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0204_0011,
-                        data.data[i].C_0208_0029];
-                        llenarTablas(persona, "tablaPersonas");
                     }
-                    if (data.data.length > 0) {
-                       // ExportarDatos(data.data);
-                    }
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
+                });
+                break;
+            case "T2":
+                $('#tablapresion tbody')[0].innerHTML = "";
+                var webMethodPresion = "get_Presion";
+                $.ajax({
+                    type: "POST",
+                    url: apiUrl + webMethodPresion,
+                    data: params,
+                    success: function (data) {
+                        if (data.success) {
+                            for (i = 0; i < data.data.length; i++) {
+                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0206_0017, data.data[i].C_0206_0019, data.data[i].C_0206_0023, data.data[i].C_0206_0024];
+                                llenarTablas(persona, "tablapresion");
+                            }
+                            if (data.data.length > 0) {
+                                // ExportarDatos(data.data);
+                            }
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
 
-            }
-        });
+                    }
+                });
+                break;
+            case "T3":
+                $('#tablaproteccion tbody')[0].innerHTML = "";
+                var webMethodProteccion = "get_Proteccion";
+                $.ajax({
+                    type: "POST",
+                    url: apiUrl + webMethodProteccion,
+                    data: params,
+                    success: function (data) {
+                        if (data.success) {
+                            for (i = 0; i < data.data.length; i++) {
+                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0211_0043, data.data[i].C_0211_0044, data.data[i].C_0211_0045, data.data[i].C_0211_0046];
+                                llenarTablas(persona, "tablaproteccion");
+                            }
+                            if (data.data.length > 0) {
+                                // ExportarDatos(data.data);
+                            }
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+
+                    }
+                });
+                break;
+            default:
+        }
+
     }
     else {
         alert("Es necesario seleccionar al menos un tipo para realizar la búsqueda");
@@ -1111,8 +1462,7 @@ function loadDisenioGral() {
         success: function (data) {
             if (data.success) {
                 for (i = 0; i < data.data.length; i++) {
-                    var persona = [data.data[i].nombre, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0204_0011,
-                        data.data[i].C_0208_0029, ];
+                    var persona = [data.data[i].id,data.data[i].nombre, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0204_0011,data.data[i].C_0208_0029,];
                     llenarTablas(persona, "tablaPersonas");
                 }
             }
@@ -1126,9 +1476,10 @@ function loadDisenioGral() {
 function llenarTablas(obj, nameTabla) {
    // $('#tablaPersonas tbody')[0].innerHTML = "";
     var row = '<tr>';
-    for (j = 0; j < obj.length; j++) {
+    for (j = 1; j < obj.length; j++) {
         row = row + '<td>' + obj[j] + '</td>';
-    } 
+    }
+    row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip"id="ra' + obj[0] + '" data-id="' + obj[0] +'"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] +'"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] +'"><i class="fa fa-trash"></i></a></td>';
     row = row + '</tr>';
     
    $('#' + nameTabla + ' tbody').append(row);
