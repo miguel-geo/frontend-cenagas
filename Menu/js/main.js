@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://192.168.1.83/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:8000/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -872,7 +872,8 @@ function saveDisenioGral() {
             porcentaje_carbono: $("#porc_carbono").val(),
             resistencia_traccion: $("#res_trac").val(),
             resistencia_elastico: $("#lim_elas").val(),
-            coordenada_especifica: $("#coord_esp_iden").val(),
+            coordenada_especifica_x: $("#coord_esp_iden_x").val(),
+            coordenada_especifica_y: $("#coord_esp_iden_y").val(),
             kilometro_especifico: $("#km_esp_iden").val(),
             fec_fab_fin: $("#fec_fab_fin").val()
         };
@@ -1005,7 +1006,8 @@ function saveDisenioPresion()  {
         presion_max_kg: $("#txtPresMaxKG").val(),
         presion_red_psi: $("#txtPresRedPSI").val(),
         presion_red_kg: $("#txtPresRedKG").val(),
-        coordenada_especifica: $("#coord_esp_iden_pres").val(),
+        coordenada_especifica_x: $("#coord_esp_iden_pres_x").val(),
+        coordenada_especifica_y: $("#coord_esp_iden_pres_y").val(),
         kilometro_especifico: $("#km_esp_iden_pres").val()
 
     };
@@ -1076,7 +1078,8 @@ function saveDisenioProteccion() {
         espesor_recubrimiento: $("#txtespesorrecubrimiento").val(),
         aislamiento_electrico: $("#cmbdecisionAislamiento").val(),
         control_corrosion: $("#cmbdecisionCorrosion").val(),
-        coordenada_especifica: $("#coord_esp_iden_prot").val(),
+        coordenada_especifica_y: $("#coord_esp_iden_prot_x").val(),
+        coordenada_especifica_y: $("#coord_esp_iden_prot_x").val(),
         kilometro_especifico: $("#km_esp_iden_prot").val()
 
     };
@@ -1372,7 +1375,7 @@ function consulta() {
                     success: function (data) {
                         if (data.success) {
                             for (i = 0; i < data.data.length; i++) {
-                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0207_0027, data.data[i].C_0210_0031];
+                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica_x, data.data[i].coordenada_especifica_y, data.data[i].kilometro_especifico, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0207_0027, data.data[i].C_0210_0031];
                                 llenarTablas(persona, "tablaPersonas");
                             }
                             if (data.data.length > 0) {
@@ -1395,7 +1398,7 @@ function consulta() {
                     success: function (data) {
                         if (data.success) {
                             for (i = 0; i < data.data.length; i++) {
-                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0206_0017, data.data[i].C_0206_0019, data.data[i].C_0206_0023, data.data[i].C_0206_0024];
+                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica_x, data.data[i].coordenada_especifica_y, data.data[i].kilometro_especifico, data.data[i].C_0206_0017, data.data[i].C_0206_0019, data.data[i].C_0206_0023, data.data[i].C_0206_0024];
                                 llenarTablas(persona, "tablapresion");
                             }
                             if (data.data.length > 0) {
@@ -1418,7 +1421,7 @@ function consulta() {
                     success: function (data) {
                         if (data.success) {
                             for (i = 0; i < data.data.length; i++) {
-                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0211_0043, data.data[i].C_0211_0044, data.data[i].C_0211_0045, data.data[i].C_0211_0046];
+                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica_x,data.data[i].coordenada_especifica_y, data.data[i].kilometro_especifico, data.data[i].C_0211_0043, data.data[i].C_0211_0044, data.data[i].C_0211_0045, data.data[i].C_0211_0046];
                                 llenarTablas(persona, "tablaproteccion");
                             }
                             if (data.data.length > 0) {
