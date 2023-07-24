@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://192.168.1.83/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -304,6 +304,8 @@ function loadTramosCon() {
 }
 function inicializarEventos() {
     $(document).on("click", ".delete", function (e) {
+        if(confirm("¿Seguro quiere borrar ese registro?")) {
+         
         var webMethod = "";
         switch (temaconsulta) {
             case "T1":
@@ -331,7 +333,8 @@ function inicializarEventos() {
             error: function (xhr, ajaxOptions, thrownError) {
 
             }
-        });     
+        });  
+    }   
     });
     $(document).on("click", ".edit", function (e) {
         var c = 0;
@@ -1008,6 +1011,9 @@ function saveDisenioPresion()  {
     };
     
 
+
+    if ($("#txtPresDisenio").val() != ""){
+
     console.log(JSON.stringify(params))
     fetch(apiUrl + webMethod, {
         method: 'POST',
@@ -1033,6 +1039,12 @@ function saveDisenioPresion()  {
     .catch(error => {
         alert("Error: " + error);
     });
+
+}
+
+else {
+    alert("Es necesario ingresar Presión de diseño (PSI)")
+}
 }
 
 
@@ -1069,8 +1081,7 @@ function saveDisenioProteccion() {
 
     };
     
-
-    console.log(JSON.stringify(params))
+    if ($("#txtiporecubrimiento").val() != ""){
     fetch(apiUrl + webMethod, {
         method: 'POST',
         headers: headers,
@@ -1095,6 +1106,10 @@ function saveDisenioProteccion() {
     .catch(error => {
         alert("Error: " + error);
     });
+}
+else {
+    alert("Es necesario ingresar Tipo de recubrimiento")
+}
 }
 
 
@@ -1541,3 +1556,47 @@ $('#cmbDucto').change(function() {
           .catch(error => console.error("Error fetching data: ", error));
     }
   });
+
+
+//Validation
+$(document).ready(function(){
+    $(".validate-pattern").on('input', function(e){
+        var pattern = new RegExp($(this).attr('pattern'));
+        if($(this).val() === ""){
+            // If input is empty, remove both classes
+            $(this).removeClass('is-valid is-invalid');
+        } else if(pattern.test($(this).val())){
+            // If input matches pattern, add 'is-valid' and remove 'is-invalid'
+            $(this).removeClass('is-invalid');
+            $(this).addClass('is-valid');
+        } else {
+            // If input does not match pattern, add 'is-invalid' and remove 'is-valid'
+            $(this).removeClass('is-valid');
+            $(this).addClass('is-invalid');
+        }
+    });
+});
+
+
+
+
+function validateForm(formId, saveFn) {
+    const form = document.getElementById(formId);
+    const inputs = form.querySelectorAll('.form-control');
+
+    let allInputsValidated = true;
+
+    inputs.forEach(input => {
+        if (input.classList.contains('is-invalid')) {
+            allInputsValidated = false;
+        }
+    });
+
+    if (allInputsValidated) {
+        saveFn();
+    } else {
+        alert('Verifique que todos los datos ingresados sean correctos');
+    }
+}
+
+
