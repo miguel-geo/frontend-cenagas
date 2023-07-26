@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://192.168.1.83/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -387,39 +387,30 @@ function inicializarEventos() {
             };
             switch (temaconsulta) {
                 case "T1":
-                    params = {
-                            id: valores[0],
-                            coordenada_especifica: valores[2],
-                            kilometro_especifico: valores[3],
-                            C_0201_0006: valores[4],
-                            C_0202_0007: valores[5],
-                            C_0207_0027: valores[6],
-                            C_0210_0031: valores[7]
-                    };
-                    break;
+                    limpiarTabas();
+                    $("#tablaPersonas > tbody").empty();
+                    $("#tablaPersonas").show();
+                    $("#tablapresion").hide();
+                    $("#datapresioncons").hide();
+                    $("#dataGeneral").show();
+                    $("#tablaproteccion").hide();
+                 break;
                 case "T2":
-                    params = {
-                        id: valores[0],
-                        coordenada_especifica: valores[2],
-                        kilometro_especifico: valores[3],
-                        C_0206_0017: valores[4],
-                        C_0206_0019: valores[5],
-                        C_0206_0023: valores[6],
-                        C_0206_0024: valores[7]
-                    };
-                    break;
+                    limpiarTabas();               
+                    $("#tablaPersonas").hide();
+                    $("#tablapresion").show();
+                    $("#datapresioncons").show();
+                    $("#dataGeneral").hide();
+                    $("#tablaproteccion").hide();
+                break;
                 case "T3":
-                    params = {
-                        id: valores[0],
-                        coordenada_especifica: valores[2],
-                        kilometro_especifico: valores[3],
-                        C_0211_0043: valores[4],
-                        C_0211_0044: valores[5],
-                        C_0211_0045: valores[6],
-                        C_0211_0046: valores[7]
-                    };
-                    break;
-                default:
+                    limpiarTabas();
+                    $("#datapresioncons").hide();
+                    $("#dataGeneral").hide();
+                    $("#tablaPersonas").hide();
+                    $("#tablapresion").hide();
+                    $("#tablaproteccion").show();
+                break;
             }
             $.ajax({
                 type: "POST",
@@ -509,26 +500,32 @@ function inicializarEventos() {
     selectTemas.addEventListener('change', function handleChange(event) {
         temaconsulta = event.target.value;
         switch (event.target.value) {
-            case "T1":
-                limpiarTabas();
-                $("#tablaPersonas > tbody").empty();
-                $("#tablaPersonas").show();
-                $("#tablapresion").hide();
-                $("#tablaproteccion").hide();
-             break;
-            case "T2":
-                limpiarTabas();               
-                $("#tablaPersonas").hide();
-                $("#tablapresion").show();
-                $("#tablaproteccion").hide();
-            break;
-            case "T3":
-                limpiarTabas();
-                $("#tablaPersonas").hide();
-                $("#tablapresion").hide();
-                $("#tablaproteccion").show();
-            break;
-            default:
+                case "T1":
+                    limpiarTabas();
+                    $("#tablaPersonas > tbody").empty();
+                    $("#tablaPersonas").show();
+                    $("#tablapresion").hide();
+                    $("#datapresioncons").hide();
+                    $("#dataGeneral").show();
+                    $("#tablaproteccion").hide();
+                 break;
+                case "T2":
+                    limpiarTabas();               
+                    $("#tablaPersonas").hide();
+                    $("#tablapresion").show();
+                    $("#datapresioncons").show();
+                    $("#dataGeneral").hide();
+                    $("#tablaproteccion").hide();
+                break;
+                case "T3":
+                    limpiarTabas();
+                    $("#datapresioncons").hide();
+                    $("#dataGeneral").hide();
+                    $("#tablaPersonas").hide();
+                    $("#tablapresion").hide();
+                    $("#tablaproteccion").show();
+                break;
+                default:
         }
         tramo = event.target.value;
         txttramo = event.target[event.target.selectedIndex].text;
@@ -1370,9 +1367,34 @@ function consulta() {
                     url: apiUrl + webMethod,
                     data: params,
                     success: function (data) {
+                        if (data.data.length > 0) {
+                            //Diametro mm
+                            $('#diammcons').text(data.data[0].C_0202_0007);
+                            //Diametro in
+                            $('#diaincons').text(data.data[0].C_0202_0008);
+                            //Espesor mm
+                            $('#diaincons').text(data.data[0].C_0203_0009);
+                            //Espesor in
+                            $('#espincons').text(data.data[0].C_0203_0010);
+                            //Especificación material
+                            $('#espincons').text(data.data[0].C_0204_0011);
+                            //Temperatura °C
+                            $('#espincons').text(data.data[0].C_0207_0027);
+                            //Temperatura °F
+                            $('#espincons').text(data.data[0].C_0207_0028);
+                            //Fecha fabricación
+                            $('#espincons').text(data.data[0].C_0209_0030);
+                            //% carbono
+                            $('#espincons').text(data.data[0].C_0210_0031);
+                            //% resistencia tracción
+                            $('#espincons').text(data.data[0].C_0210_0032);
+                            //% Límite elástico
+                            $('#espincons').text(data.data[0].C_0210_0033);
+                        }
+                        
                         if (data.success) {
                             for (i = 0; i < data.data.length; i++) {
-                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0207_0027, data.data[i].C_0210_0031];
+                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0201_0006, data.data[i].C_0208_0029];
                                 llenarTablas(persona, "tablaPersonas");
                             }
                             if (data.data.length > 0) {
@@ -1394,6 +1416,14 @@ function consulta() {
                     data: params,
                     success: function (data) {
                         if (data.success) {
+                            if (data.data.length > 0) {
+                                //Presión diseño
+                                $('#presdiscons').text(data.data[0].C_0206_0022);
+                                //Presion Max PSI
+                                $('#presmaxoppsicons').text(data.data[0].C_0206_0023);
+                                //Presion Max Kg
+                                $('#presmaxopecons').text(data.data[0].C_0206_0024);
+                            }
                             for (i = 0; i < data.data.length; i++) {
                                 var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0206_0017, data.data[i].C_0206_0019, data.data[i].C_0206_0023, data.data[i].C_0206_0024];
                                 llenarTablas(persona, "tablapresion");

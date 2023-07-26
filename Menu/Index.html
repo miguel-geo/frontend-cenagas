@@ -135,7 +135,7 @@
                                             </div>
                                             <div class="card-group">
                                                 <div class="card ">
-                                                    <img src="" id="myImage" style="cursor: pointer;height:70%" onclick="fnshowIndentificacion()" class="card-img-top" alt="...">
+                                                    <img src="" id="myImage" style="cursor: pointer;height:70%"  class="card-img-top" alt="...">
 
                                                     <div class="card-footer">
                                                         <small class="text-muted">Esquema</small>
@@ -407,7 +407,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Porcentajes(%) de Carbono</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="porc_carbono" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$" placeholder="" aria-label="" id="porc_carbono" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Resistencia a la tracción(PSI)</span>
                                     </div>
@@ -804,8 +804,142 @@
                         </div>
 
                         <div class="table-responsive">
+                            <div id="dataGeneral" style="display:none">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Resumen
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Diametro (mm)</h6>
+                                                        <p class="card-text" id="diammcons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Diametro (in)</h6>
+                                                        <p class="card-text" id="diaincons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Espesor de pared (mm)</h6>
+                                                        <p class="card-text" id="espmmcons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Espero de pared (in)</h6>
+                                                        <p class="card-text" id="espincons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Especificación de material</h6>
+                                                        <p class="card-text" id="espmatcons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Temperatura °C</h6>
+                                                        <p class="card-text" id="tempconsc"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Temperatura °F</h6>
+                                                        <p class="card-text" id="tempconsf"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Fache de fabricación</h6>
+                                                        <p class="card-text" id="fecfabcons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">% de carbono</h6>
+                                                        <p class="card-text" id="porcons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Resistencia a la tracción</h6>
+                                                        <p class="card-text" id="restraccons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Límite elástico</h6>
+                                                        <p class="card-text" id="limelacons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="datapresioncons" style="display:none">
+                                <div class="card-header">
+                                    Resumen
+                                </div>
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Presión de diseño (PSI)</h6>
+                                                    <p class="card-text" id="presdiscons"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Presión máxima de operación (PSI)</h6>
+                                                    <p class="card-text" id="presmaxoppsicons"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Presión máxima de operación (kg/cm2)</h6>
+                                                    <p class="card-text" id="presmaxopecons"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                             <!--Table-->
-                            <table id="tablaPersonas" class="table table-bordered" style="display:none">
+                            <table id="tablaPersonas" class="table table-bordered" style="display:none;margin-top:15px;">
 
                                 <!--Table head-->
                                 <thead>
@@ -832,17 +966,7 @@
                                         </th>
                                         <th class="th-lg">
                                             <a style="color: #265C4F;">
-                                                Diametro nominal mm
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Temperatura °C
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Porcentaje de carbono (%)
+                                                Tipo costura
                                             </a>
                                         </th>
                                         <th class="th-lg">
