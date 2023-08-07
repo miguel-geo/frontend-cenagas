@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -307,6 +307,8 @@ function inicializarEventos() {
 
     document.getElementById('filepruebabasecons').addEventListener('change', handleFileSelect, false);
     $(document).on("click", ".delete", function (e) {
+        if(confirm("¿Seguro quiere borrar ese registro?")) {
+         
         var webMethod = "";
         switch (temaconsulta) {
             case "T1":
@@ -334,7 +336,8 @@ function inicializarEventos() {
             error: function (xhr, ajaxOptions, thrownError) {
 
             }
-        });     
+        });  
+    }   
     });
     $(document).on("click", ".edit", function (e) {
         var c = 0;
@@ -387,39 +390,30 @@ function inicializarEventos() {
             };
             switch (temaconsulta) {
                 case "T1":
-                    params = {
-                            id: valores[0],
-                            coordenada_especifica: valores[2],
-                            kilometro_especifico: valores[3],
-                            C_0201_0006: valores[4],
-                            C_0202_0007: valores[5],
-                            C_0207_0027: valores[6],
-                            C_0210_0031: valores[7]
-                    };
-                    break;
+                    limpiarTabas();
+                    $("#tablaPersonas > tbody").empty();
+                    $("#tablaPersonas").show();
+                    $("#tablapresion").hide();
+                    $("#datapresioncons").hide();
+                    $("#dataGeneral").show();
+                    $("#tablaproteccion").hide();
+                 break;
                 case "T2":
-                    params = {
-                        id: valores[0],
-                        coordenada_especifica: valores[2],
-                        kilometro_especifico: valores[3],
-                        C_0206_0017: valores[4],
-                        C_0206_0019: valores[5],
-                        C_0206_0023: valores[6],
-                        C_0206_0024: valores[7]
-                    };
-                    break;
+                    limpiarTabas();               
+                    $("#tablaPersonas").hide();
+                    $("#tablapresion").show();
+                    $("#datapresioncons").show();
+                    $("#dataGeneral").hide();
+                    $("#tablaproteccion").hide();
+                break;
                 case "T3":
-                    params = {
-                        id: valores[0],
-                        coordenada_especifica: valores[2],
-                        kilometro_especifico: valores[3],
-                        C_0211_0043: valores[4],
-                        C_0211_0044: valores[5],
-                        C_0211_0045: valores[6],
-                        C_0211_0046: valores[7]
-                    };
-                    break;
-                default:
+                    limpiarTabas();
+                    $("#datapresioncons").hide();
+                    $("#dataGeneral").hide();
+                    $("#tablaPersonas").hide();
+                    $("#tablapresion").hide();
+                    $("#tablaproteccion").show();
+                break;
             }
             $.ajax({
                 type: "POST",
@@ -1017,7 +1011,7 @@ function saveDisenioGral() {
             porcentaje_carbono: $("#porc_carbono").val(),
             resistencia_traccion: $("#res_trac").val(),
             resistencia_elastico: $("#lim_elas").val(),
-            coordenada_especifica: $("#coord_esp_iden").val(),
+            coordenada_especifica: $("#coord_esp_iden_x").val()+' '+$("#coord_esp_iden_y").val(),
             kilometro_especifico: $("#km_esp_iden").val(),
             fec_fab_fin: $("#fec_fab_fin").val()
         };
@@ -1199,11 +1193,14 @@ function saveDisenioPresion()  {
         presion_max_kg: $("#txtPresMaxKG").val(),
         presion_red_psi: $("#txtPresRedPSI").val(),
         presion_red_kg: $("#txtPresRedKG").val(),
-        coordenada_especifica: $("#coord_esp_iden_pres").val(),
+        coordenada_especifica: $("#coord_esp_iden_pres_x").val()+' '+$("#coord_esp_iden_pres_y").val(),
         kilometro_especifico: $("#km_esp_iden_pres").val()
 
     };
     
+
+
+    if ($("#txtPresDisenio").val() != ""){
 
     console.log(JSON.stringify(params))
     fetch(apiUrl + webMethod, {
@@ -1230,6 +1227,12 @@ function saveDisenioPresion()  {
     .catch(error => {
         alert("Error: " + error);
     });
+
+}
+
+else {
+    alert("Es necesario ingresar Presión de diseño (PSI)")
+}
 }
 function saveDisenioProteccion() {
     var webMethod = "saveProteccion";
@@ -1255,13 +1258,12 @@ function saveDisenioProteccion() {
         espesor_recubrimiento: $("#txtespesorrecubrimiento").val(),
         aislamiento_electrico: $("#cmbdecisionAislamiento").val(),
         control_corrosion: $("#cmbdecisionCorrosion").val(),
-        coordenada_especifica: $("#coord_esp_iden_prot").val(),
+        coordenada_especifica: $("#coord_esp_iden_prot_x").val()+' '+$("#coord_esp_iden_prot_y").val(),
         kilometro_especifico: $("#km_esp_iden_prot").val()
 
     };
     
-
-    console.log(JSON.stringify(params))
+    if ($("#txtiporecubrimiento").val() != ""){
     fetch(apiUrl + webMethod, {
         method: 'POST',
         headers: headers,
@@ -1287,6 +1289,11 @@ function saveDisenioProteccion() {
         alert("Error: " + error);
     });
 }
+
+
+
+
+
 function saveDisenioServicio() {
 
     var webMethod = "disenio_servicio/store";
@@ -2245,3 +2252,47 @@ $('#cmbDucto').change(function() {
           .catch(error => console.error("Error fetching data: ", error));
     }
   });
+
+
+//Validation
+$(document).ready(function(){
+    $(".validate-pattern").on('input', function(e){
+        var pattern = new RegExp($(this).attr('pattern'));
+        if($(this).val() === ""){
+            // If input is empty, remove both classes
+            $(this).removeClass('is-valid is-invalid');
+        } else if(pattern.test($(this).val())){
+            // If input matches pattern, add 'is-valid' and remove 'is-invalid'
+            $(this).removeClass('is-invalid');
+            $(this).addClass('is-valid');
+        } else {
+            // If input does not match pattern, add 'is-invalid' and remove 'is-valid'
+            $(this).removeClass('is-valid');
+            $(this).addClass('is-invalid');
+        }
+    });
+});
+
+
+
+
+function validateForm(formId, saveFn) {
+    const form = document.getElementById(formId);
+    const inputs = form.querySelectorAll('.form-control');
+
+    let allInputsValidated = true;
+
+    inputs.forEach(input => {
+        if (input.classList.contains('is-invalid')) {
+            allInputsValidated = false;
+        }
+    });
+
+    if (allInputsValidated) {
+        saveFn();
+    } else {
+        alert('Verifique que todos los datos ingresados sean correctos');
+    }
+}
+
+
