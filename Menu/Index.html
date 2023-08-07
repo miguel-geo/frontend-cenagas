@@ -73,7 +73,7 @@
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                    
+
                         <div class="tab-pane fade show active" id="registro" role="tabpanel" aria-labelledby="registro-tab">
                             <div class="stepwizard">
                                 <div class="stepwizard-row setup-panel">
@@ -173,6 +173,8 @@
 
                         </div>
 
+
+                        <!--#region FORMULARIOS GENERAL  -->
                         <div id="forms" style="display:none;margin-top:15px;">
                             <div class="card-group">
                                 <div class="card ">
@@ -186,7 +188,7 @@
                                     </div>
                                 </div>
                                 <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="alert('Formulario en construcción')" alt="...">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnsshowconstruforms()" alt="...">
                                     <div class="card-body">
                                         <h6 class="card-title">Construcción</h6>
                                         <p class="card-text">En éste formulario contendrá información relacionada a...</p>
@@ -212,6 +214,8 @@
                             </div>
 
                         </div>
+                        <!--#endregion -->
+                        <!--#region FORMULARIOS DISEÑO  -->
                         <div id="disenioforms" style="display:none;margin-top:15px;">
                             <div class="card-group">
                                 <div class="card ">
@@ -628,7 +632,7 @@
                                     </div>
                                     <input type="text" class="form-control" placeholder="" id="txtiporecubrimiento" aria-label="" aria-describedby="basic-addon1">
                                 </div>
-                                <div class="input-group mb-3"style="display:none">
+                                <div class="input-group mb-3" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Otro Tipo de recubrimiento</span>
                                     </div>
@@ -756,6 +760,1040 @@
                                 </div>
                             </form>
                         </div>
+                        <!--#endregion -->
+                        <!--#region FORMULARIOS CONSTRUCCIÓN  -->
+                        <div id="construforms" style="display:none;margin-top:15px;">
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." onclick="fnshowbaseconst()">
+                                        <div class="card-body">
+                                            <h5 class="card-title">General</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." onclick="fnshowmetunion()">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Método de unión o acoplamiento</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." onclick="fnshowprofenterrado()">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Profundidad de enterrado</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." onclick="fnshowprotipocruces()">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Tipos de cruces</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." onclick="fnshowhermeti()">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Constancia de pruebas de hermeticidad </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." onclick="fnshowreporteinsp()">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Reportes de inspección a cargo de los regulados</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." onclick="fnshowprotecccato()">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Protección catódica</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." onclick="fnshowseguridadpre()">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Datos de seguridad pre-arranque</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" onclick="reiniciarFormsConstruccion()"><i class="fa fa-arrow-left"></i> | Registrar nueva área unitaria</button>
+                            </div>
+                        </div>
+                        <div id="constbasefrm" style="display:none;margin-top:15px;">
+                            <form role="form">
+                                <div class="input-group mb-3">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtductogeneralbasecons" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txttramogeneralbasecons" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtareageneralbasecons" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="coord_esp_idenbasecons" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="km_esp_idenbasecons" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Fecha de construcción </span>
+                                        </div>
+                                        <input type="date" class="form-control" id="fechaconstbase" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Método de recubrimiento</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="metrecubbase" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Tipo de suelo</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txttiposuelobaseconst" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Material de relleno</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtmatrellenobaseconst" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Prueba de hermeticidad (PSI)</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="presionhermebasecons" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Archivo hermeticidad</span>
+                                        </div>
+                                        <input type="file" class="form-control" placeholder="" aria-label="" id="filepruebabasecons" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de recubrimiento</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmtipotecnicaunion">
+                                        <option value=0>Selecciona...</option>
+                                        <option value="Esmalte de brea de alquitrán de hulla">Esmalte de brea de alquitrán de hulla</option>
+                                        <optin value="Ceras microcristalinas de petróleo">Ceras microcristalinas de petróleo</optin>
+                                        <option value="Cintas y mangas termo contraíble">Cintas y mangas termo contraíble</option>
+                                        <option value="Cintas de poliolefinas">Cintas de poliolefinas</option>
+                                        <option value="Epóxicos">Epóxicos</option>
+                                        <option value="Poliuretanos">Poliuretanos</option>
+                                        <option value="Sistema Tricapa">Sistema Tricapa</option>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelbasecons()" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" id="btnGuardarPresion" onclick="savebasecons()" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="metodounionfrm" style="display:none;margin-top:15px;">
+                            <form role="form">
+                                <div class="input-group mb-3">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtductogeneralunion" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txttramogeneralunion" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtareageneralunion" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="coord_esp_idenunion" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="km_esp_idenunion" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de técnica</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmtipotecnicaunion">
+                                        <option value=0>Selecciona...</option>
+                                        <option value=1>soldadura por resistencia eléctrica</option>
+                                        <optin value=2>soldadura a tope en horno</optin>
+                                        <option value=3>soldadura por fusión eléctrica</option>
+                                        <option value=4>soldadura helicoidal</option>
+                                        <option value=5>soldadura por arco sumergido y soldado por doble arco sumergido</option>
+                                        <option value=6>soldadura continua</option>
+                                        <option value=7>soldadura por flasheo eléctrico</option>
+                                    </select>
+                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Identificador</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtidentificadorunion" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Recubrimiento aplicado en la soldadura</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtrecaplsolunion" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de servicio</span>
+                                    </div>
+                                    <input type="date" class="form-control" id="fechaserunion" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de instalación</span>
+                                    </div>
+                                    <input type="date" class="form-control" placeholder="" aria-label="" id="fecinstunion" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Método para determinar la ubicación de la soldadura</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmbmetubicsoldunion">
+                                        <option value=0>Selecciona...</option>
+                                        <option value=1>Excavación</option>
+                                        <optin value=2>soldadura a tope en horno</optin>
+                                        <option value=3>inspección en línea</option>
+                                        <option value=4>inspección no destructiva</option>
+                                        <option value=5>Desconocido</option>
+                                    </select>
+                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de fabricación </span>
+                                    </div>
+                                    <input type="date" class="form-control" placeholder="" id="fecfabunion" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado actual</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtedoactunion" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado histórico</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtedohisunion" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelunion()" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" id="btnGuardarPresion" onclick="saveConstruccionUnion()" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="profenterradofrm" style="display:none;margin-top:15px;">
+                            <form role="form">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductogeneralprofent" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramogeneralprofent" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareageneralprofent" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="coord_esp_idenprofent" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="km_esp_idenpprofent" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Profundidad de cobertura</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtprofcob" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Medida profundidad bajo el agua</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtmedprofagu" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Elevación del fondo de la tubería</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtelefontub" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Elevación del centro de la tubería</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtelecentub" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Elevación del terreno</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txteleterr" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Elevación de la parte superior de la tubería</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txteleparsuotub" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Distancia del inicio de la ruta de red al punto</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtdistinicioruta" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de medida</span>
+                                    </div>
+                                    <input type="date" class="form-control" placeholder="" id="fechamedidaprof" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Perforación direccional horizontal para excavar</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtperdirhor" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Método de medición</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtmetmedprof" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado actual</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtedoactprof" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado histórico</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtedohisprof" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="fncancelprofenterrado()" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" id="btnGuardarPresion" onclick="saveConstruccionProfundidad()" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="tiposcrucesfrm" style="display:none;margin-top:15px;">
+                            <form role="form">
+                                <!-- Ducto -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductogeneraltipcruce" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!-- Tramo -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramogeneraltipocruce" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!-- Área unitaria -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareageneralptipocruce" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!--Coordenada Específica-->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="coord_esp_identipocruce" aria-describedby="basic-addon1">
+                                </div>
+                                <!--Kilometro específico-->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="km_esp_idenptipocruce" aria-describedby="basic-addon1">
+                                </div>
+                                <!--Tipo de cruce-->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de cruce</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmbTipcruce">
+                                        <option value=0>Selecciona...</option>
+                                        <option value=1>Tipo de cruce (Cuerpos de agua aéreo (A)</option>
+                                        <optin value=2>cuerpos de agua subfluvial (A)</optin>
+                                        <option value=3>infraestructura de comunicación (C)</option>
+                                        <option value=4>ductos extranjeros (E)</option>
+                                        <option value=5>servicios de comunicación(S)</option>
+                                    </select>
+                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <!-- Clase de localización -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Clase de localización</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtclaseloca" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!--Propietario -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Propietario</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtpropietario" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!--Distancia del cruce encima o debajo de la tubería   -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Distancia del cruce encima o debajo de la tubería</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtdictacruce" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!-- Distancia desde el punto de cruce influye en la dirección aguas abajo-->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Distancia desde el punto de cruce influye en la dirección aguas abajo</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtdistinf" aria-describedby="basic-addon1">
+                                </div>
+                                <!--Distancia desde el punto de cruce influye en la dirección aguas arriba-->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Distancia desde el punto de cruce influye en la dirección aguas arriba</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtdistptocruce" aria-describedby="basic-addon1">
+                                </div>
+                                <!--Localización del cruce respecto la tubería (arriba/abajo)  -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Localización del cruce respecto la tubería (arriba/abajo)</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtloccruresptub" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!--Estado actual  -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado actual </span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtedoactualcruce" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!-- Estado histórico -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado histórico</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtedohistcruce" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!--Tipo de llanura de inundación-->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de llanura de inundación</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txttipllanurainun" aria-describedby="basic-addon1">
+                                </div>
+                                <!-- Tipo de cruce hidrológico-->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de cruce hidrológico</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txttipcrucehidro" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!-- Indica si el camino es de transporte pesado  -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Indica si el camino es de transporte pesado</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmbtipcamtrans">
+                                        <option value=0>Selecciona...</option>
+                                        <option value=1>Sí</option>
+                                        <optin value=2>No</optin>
+                                        <option value=3>No aplica</option>
+                                        <option value=4>Desconocido</option>
+                                    </select>
+                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <!-- El gasoducto necesita ser patrullado-->
+                                <div class="input-groñup mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">El gasoducto necesita ser patrullado</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmbgasnecpat">
+                                        <option value=0>Selecciona...</option>
+                                        <option value=1>Sí</option>
+                                        <optin value=2>No</optin>
+                                        <option value=3>No aplica</option>
+                                        <option value=4>Desconocido</option>
+                                    </select>
+                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <!-- No. de Carrilles de la vialidad-->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">No. de Carrilles de la vialidad</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtNumCarrillesVialidad" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!-- Estado histórico -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado histórico</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtEdohistoricoCrucedos" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!-- Estado actual -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado actual</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtEdoActualCrucedos" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!-- Tipo de cruce de transporte -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de cruce de transporte</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmbetipocrucetrans">
+                                        <option value=0>Selecciona...</option>
+                                        <option value=1>Calle de la ciudad</option>
+                                        <optin value=2>Carretera del Condado</optin>
+                                        <option value=3>Autopista I</option>
+                                        <option value=4>Ferrocarril</option>
+                                        <option value=5>Camino</option>
+                                        <option value=6>Camino Estacional</option>
+                                        <option value=7>Carretera estatal</option>
+                                        <option value=8>No aplica</option>
+                                    </select>
+                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <!-- ¿Existe unión de cables? -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">¿Existe unión de cables?</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmbexiunicab">
+                                        <option value=0>Selecciona...</option>
+                                        <option value=1>Sí</option>
+                                        <optin value=2>No</optin>
+                                        <option value=3>No aplica</option>
+                                    </select>
+                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <!-- Último potencial de tubería a tierra medido (expresado en voltios) se apagó    -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Último potencial de tubería a tierra medido (expresado en voltios) se apagó</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtultpottubapago" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!--Último potencial de tubería a tierra medido (expresado en voltios) se encendió   -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Último potencial de tubería a tierra medido (expresado en voltios) se encendió</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtultpotencen" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!--Recubrimiento de tubería extranjera    -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Recubrimiento de tubería extranjera</span>
+                                    </div>
+                                    <input type="date" class="form-control" placeholder="" id="txtrectubext" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!-- Diámetro nominal tubería extranjera    -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Diámetro nominal tubería extranjera </span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtdiamnomtub" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <!--Tipo de tubería-->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de tubería</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmntiptub">
+                                        <option value=0>Selecciona...</option>
+                                        <option value=1>Gas</option>
+                                        <optin value=2>Petróleo</optin>
+                                        <option value=3>Drenaje</option>
+                                    </select>
+                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <!--¿Existe unión de cables entre el servicio de cruce y la tubería?    -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">¿Existe unión de cables entre el servicio de cruce y la tubería?</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmbexisunioncabcruceytub">
+                                        <option value=0>Selecciona...</option>
+                                        <option value=1>Sí</option>
+                                        <optin value=2>No</optin>
+                                        <option value=3>No aplica</option>
+                                    </select>
+                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <!--Tipo de cruce de servicio  -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de cruce de servicio</span>
+                                    </div>
+                                    <select class="selectpicker form-control" id="cmbtipcruceserv">
+                                        <option value=0>Selecciona...</option>
+                                        <option value=1>Comunicación</option>
+                                        <optin value=2>Servicio eléctrico</optin>
+                                        <option value=3>Telefonía</option>
+                                    </select>
+                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <!-- Voltaje transportado por el servicio publico -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Voltaje transportado por el servicio publico</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtvoltajecruce" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="fncanceltipocruces()" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" id="btnGuardarPresion" onclick="saveConstruccionCruces()" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="hermetisidadfrm" style="display:none;margin-top:15px;">
+                            <form role="form">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductogeneralherm" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramogeneralherm" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareageneralherm" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="coord_esp_idenherm" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="km_esp_idenpherm" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Nombre de la empresa </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtnombempher" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Fecha de prueba</span>
+                                        </div>
+                                        <input type="date" class="form-control" id="fecpruebher" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Duración de la prueba</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtdurpruebher" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Medio de prueba empleado </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="txtmedempher" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Longitud de los ductos probados</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="txtlongducprobados" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Presión de prueba</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="txtpresprueb" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Presión de diseño  </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="txtpresdisger" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Calibración</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="txtcalbher" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Presión de prueba mínima </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="txtvarher" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Variaciones de presión</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="txtvarpreher" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelherme()" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" id="btnGuardarPresion" onclick="saveConstruccionHermeticidad()" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="reportesInspeccionfrm" style="display:none;margin-top:15px;">
+                            <form role="form">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductogeneralrep" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramogeneralrep" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareageneralrep" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="coord_esp_idenrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="km_esp_idenprep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Auditorias y revisiones</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtaudrevrepor" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Propiedades físico-quimicas del producto </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtpropfisquim" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Servicio de operación</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtservoper" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">historial de condiciones </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="txthistcond" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelreporteinsp()" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" id="btnGuardarPresion" onclick="saveDisenioPresion()" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <div id="proteccatodicafrm" style="display:none;margin-top:15px;">
+                            <form role="form">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductogeneralprot" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramogeneralprot" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareageneralprot" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="coord_esp_idenprot" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="km_esp_idenpprot" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Tipo de protección catódica</span>
+                                        </div>
+                                        <select class="selectpicker form-control" id="cmbTipocato">
+                                            <option value=0>Selecciona...</option>
+                                            <option value=1>a)Ánodos galvánicos o de sacrificio</option>
+                                            <optin value=2>b) Corriente impresa</optin>
+                                        </select>
+                                        <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                            <i class="fas fa-square-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Tipo de instalación</span>
+                                        </div>
+                                        <select class="selectpicker form-control" id="cmbtipinstprot">
+                                            <option value=0>Selecciona...</option>
+                                            <option value=1>Rectificador</option>
+                                            <optin value=2>cama anódica</optin>
+                                        </select>
+                                        <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                            <i class="fas fa-square-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Id o no. De serie</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtnoserie" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Fabricante </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtfabricante" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Estado</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="extedoprote" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelprotcato()" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" id="btnGuardarPresion" onclick="saveConstruccioCatodica()" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+                        <div id="seguridadprearranquefrm" style="display:none;margin-top:15px;">
+                            <form role="form">
+                                <div class="input-group mb-3">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtductogeneralseg" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txttramogeneralseg" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtareageneralseg" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="coord_esp_idenseg" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="km_esp_idenpseg" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Revisión física</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtrevfis" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Revisión documental</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtrevdoc" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"> Identificación de hallazgos </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtidenthall" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"> Evaluación y clasificación de los hallazgos </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtevclasha" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Elaboración de los programas de atención de recomendaciones de los hallazgos</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtelabprogatenrecom" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Validación del cumplimiento de recomendaciones</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtvalidcumrec" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Autorización interna para el arranque</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtautintarr" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Cierre para la RSPA</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txtcierrrspa" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelseguridadpre()" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" id="btnGuardarPresion" onclick="saveDisenioPresion()" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!--#endregion -->
+
+
                     </div>
                 </div>
 
@@ -792,8 +1830,142 @@
                         </div>
 
                         <div class="table-responsive">
+                            <div id="dataGeneral" style="display:none">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Resumen
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Diametro (mm)</h6>
+                                                        <p class="card-text" id="diammcons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Diametro (in)</h6>
+                                                        <p class="card-text" id="diaincons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Espesor de pared (mm)</h6>
+                                                        <p class="card-text" id="espmmcons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Espero de pared (in)</h6>
+                                                        <p class="card-text" id="espincons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Especificación de material</h6>
+                                                        <p class="card-text" id="espmatcons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Temperatura °C</h6>
+                                                        <p class="card-text" id="tempconsc"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Temperatura °F</h6>
+                                                        <p class="card-text" id="tempconsf"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Fache de fabricación</h6>
+                                                        <p class="card-text" id="fecfabcons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">% de carbono</h6>
+                                                        <p class="card-text" id="porcons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Resistencia a la tracción</h6>
+                                                        <p class="card-text" id="restraccons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Límite elástico</h6>
+                                                        <p class="card-text" id="limelacons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="datapresioncons" style="display:none">
+                                <div class="card-header">
+                                    Resumen
+                                </div>
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Presión de diseño (PSI)</h6>
+                                                    <p class="card-text" id="presdiscons"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Presión máxima de operación (PSI)</h6>
+                                                    <p class="card-text" id="presmaxoppsicons"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Presión máxima de operación (kg/cm2)</h6>
+                                                    <p class="card-text" id="presmaxopecons"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                             <!--Table-->
-                            <table id="tablaPersonas" class="table table-bordered" style="display:none">
+                            <table id="tablaPersonas" class="table table-bordered" style="display:none;margin-top:15px;">
 
                                 <!--Table head-->
                                 <thead>
@@ -820,17 +1992,7 @@
                                         </th>
                                         <th class="th-lg">
                                             <a style="color: #265C4F;">
-                                                Diametro nominal mm
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Temperatura °C
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Porcentaje de carbono (%)
+                                                Tipo costura
                                             </a>
                                         </th>
                                         <th class="th-lg">
