@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:80/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -1253,6 +1253,7 @@ function saveConstruccioCatodica() {
         C_0101_0001_id: area,
         C_0310_116_id: $("#cmbTipocato").val(),
         C_0310_117_id: $("#cmbtipinstprot").val(),
+        nombre: $("#txtnombrecatodica").val(),
         C_0310_118: $("#txtnoserie").val(),
         C_0310_119: $("#txtfabricante").val(),
         C_0310_120: $("#extedoprote").val(),
@@ -2294,4 +2295,62 @@ function validateForm(formId, saveFn) {
     } else {
         alert('Verifique que todos los datos ingresados sean correctos');
     }
+}
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the dropdown element
+    const tipoCruceDropdown = document.getElementById("cmbTipcruce");
+
+    // Add event listener for change event
+    tipoCruceDropdown.addEventListener("change", function() {
+        // Hide all the classes first
+        hideAllClasses();
+
+        // Get the selected value
+        const selectedValue = this.value;
+
+        // Show the respective class based on the selected value
+        switch (selectedValue) {
+            case "1":
+                showClass("acuatico");
+                break;
+            case "2":
+                showClass("acuatico");
+                break;
+            case "3":
+                showClass("infraestructura");
+                break;
+            case "4":
+                showClass("extranjeros");
+                break;
+            case "5":
+                showClass("comunicacion");
+                break;
+        }
+    });
+});
+
+function hideAllClasses() {
+    hideClass("acuatico");
+    hideClass("infraestructura");
+    hideClass("extranjeros");
+    hideClass("comunicacion");
+}
+
+function hideClass(className) {
+    const elements = document.querySelectorAll("." + className);
+    elements.forEach(element => {
+        element.style.display = "none";
+    });
+}
+
+function showClass(className) {
+    const elements = document.querySelectorAll("." + className);
+    elements.forEach(element => {
+        element.style.display = "";
+    });
 }
