@@ -387,6 +387,42 @@ function inicializarEventos() {
             };
             switch (temaconsulta) {
                 case "T1":
+                    params = {
+                            id: valores[0],
+                            coordenada_especifica: valores[2],
+                            kilometro_especifico: valores[3],
+                            C_0201_0006: valores[4],
+                            C_0202_0007: valores[5],
+                            C_0207_0027: valores[6],
+                            C_0210_0031: valores[7]
+                    };
+                    break;
+                case "T2":
+                    params = {
+                        id: valores[0],
+                        coordenada_especifica: valores[2],
+                        kilometro_especifico: valores[3],
+                        C_0206_0017: valores[4],
+                        C_0206_0019: valores[5],
+                        C_0206_0023: valores[6],
+                        C_0206_0024: valores[7]
+                    };
+                    break;
+                case "T3":
+                    params = {
+                        id: valores[0],
+                        coordenada_especifica: valores[2],
+                        kilometro_especifico: valores[3],
+                        C_0211_0043: valores[4],
+                        C_0211_0044: valores[5],
+                        C_0211_0045: valores[6],
+                        C_0211_0046: valores[7]
+                    };
+                    break;
+                default:
+            }
+            switch (temaconsulta) {
+                case "T1":
                     limpiarTabas();
                     $("#tablaPersonas > tbody").empty();
                     $("#tablaPersonas").show();
@@ -415,7 +451,7 @@ function inicializarEventos() {
             $.ajax({
                 type: "POST",
                 url: apiUrl + webMethod,
-                data: params,
+                body: JSON.stringify(params),
                 success: function (data) {
                     alert("El registro fue actualizado correctamente");
                     consulta();
@@ -667,6 +703,7 @@ function ezBSAlert(options) {
     _show();
     return deferredObject.promise();
 }
+
 function fnFinalizar() {
     document.getElementById('registro').style.display = 'none';
     document.getElementById('forms').style.display = 'block';
@@ -675,6 +712,7 @@ function fnFinalizar() {
     //$('#registro').hide();
    
 }
+//#region FORMULARIOS DISEÑO
 function fnshowIndentificacion() {
     $('#identificacionfrm').show();
     $('#disenioforms').hide();
@@ -709,6 +747,614 @@ function fnshowdisenioforms() {
     $("#txttramoservicio").val(txttramo);
     $("#txtareaservicio").val(txtarea);
 }
+//#endregion 
+//#region FORMULARIOS NAGEVACIÓN CONSTRUCCIÓN
+function fnsshowconstruforms() {
+    $('#construforms').show();
+    $('#forms').hide();
+
+}
+function fnshowmetunion() {
+    $('#metodounionfrm').show();
+    $('#construforms').hide();
+    $("#txtductogeneralunion").val(txtducto);
+    $("#txttramogeneralunion").val(txttramo);
+    $("#txtareageneralunion ").val(txtarea);
+}
+function fnshowprofenterrado() {
+    $('#profenterradofrm').show();
+    $('#construforms').hide();
+    $("#txtductogeneralprofent").val(txtducto);
+    $("#txttramogeneralprofent").val(txttramo);
+    $("#txtareageneralprofent ").val(txtarea);
+}
+function fnshowprotipocruces() {
+    $('#tiposcrucesfrm').show();
+    $('#construforms').hide();
+    $("#txtductogeneraltipcruce").val(txtducto);
+    $("#txttramogeneraltipocruce").val(txttramo);
+    $("#txtareageneralptipocruce ").val(txtarea);
+}
+function fnshowhermeti() {
+    $('#hermetisidadfrm').show();
+    $('#construforms').hide();
+    $("#txtductogeneralherm").val(txtducto);
+    $("#txttramogeneralherm").val(txttramo);
+    $("#txtareageneralherm ").val(txtarea);
+}
+function fnshowreporteinsp() {
+    $('#reportesInspeccionfrm').show();
+    $('#construforms').hide();
+    $("#txtductogeneralrep").val(txtducto);
+    $("#txttramogeneralrep").val(txttramo);
+    $("#txtareageneralrep ").val(txtarea);
+}
+function fnshowprotecccato() {
+    $('#proteccatodicafrm').show();
+    $('#construforms').hide();
+    $("#txtductogeneralprot").val(txtducto);
+    $("#txttramogeneralprot").val(txttramo);
+    $("#txtareageneralprot ").val(txtarea);
+}
+function fnshowseguridadpre() {
+    $('#seguridadprearranquefrm').show();
+    $('#construforms').hide();
+    $("#txtductogeneralseg").val(txtducto);
+    $("#txttramogeneralseg").val(txttramo);
+    $("#txtareageneralseg ").val(txtarea);
+}
+function fnshowbaseconst() {
+    $('#constbasefrm').show();
+    $('#construforms').hide();
+    $("#txtductogeneralbasecons").val(txtducto);
+    $("#txttramogeneralbasecons").val(txttramo);
+    $("#txtareageneralbasecons").val(txtarea);
+}
+function cancelbasecons() {
+    $('#constbasefrm').hide();
+    $('#construforms').show();
+}
+function cancelunion() {
+    $('#metodounionfrm').hide();
+    $('#construforms').show();
+}
+function fncancelprofenterrado() {
+    $('#profenterradofrm').hide();
+    $('#construforms').show();
+}
+function fncanceltipocruces() {
+    $('#tiposcrucesfrm').hide();
+    $('#construforms').show();
+}
+function cancelherme() {
+    $('#hermetisidadfrm').hide();
+    $('#construforms').show();
+}
+function cancelreporteinsp() {
+    $('#reportesInspeccionfrm').hide();
+    $('#construforms').show();
+}
+function cancelprotcato() {
+    $('#proteccatodicafrm').hide();
+    $('#construforms').show();
+}
+function cancelseguridadpre() {
+    $('#seguridadprearranquefrm').hide();
+    $('#construforms').show();
+}
+function reiniciarFormsConstruccion() {
+    $('#registro').show();
+    $('#forms').hide();
+    $('#step-1').show();
+    $('#step-2').hide();
+    $('#step-3').hide();
+    $('#construforms').hide();
+    loadDuctos();
+    $("#cmbTramo").empty();
+    $('#cmbTramo').append($('<option>', {
+        value: 0,
+        text: 'Selecciona...'
+    }));
+    $("#cmbAreas").empty();
+    $('#cmbAreas').append($('<option>', {
+        value: 0,
+        text: 'Selecciona...'
+    }));
+}
+//#endregion
+//#region Construcción 
+
+//function savebasecons() {
+//    var webMethod = "saveConstruccionGeneral";
+//    if ($("#coord_esp_idenbasecons").val() !== "") {
+//        const formData = new FormData();
+
+//        formData.append("C_0101_0001_id", area)
+//        // Make sure files are being selected and appended properly
+//        if ($("#inputGroupFile01")[0].files[0]) {
+//            formData.append("C_0308_0111", $("#filepruebabasecons")[0].files[0]);
+//        }
+//        // Log formData to console for debugging (this will not display the content of the files)
+//        for (var pair of formData.entries()) {
+//            console.log(pair[0] + ', ' + pair[1]);
+//        }
+//        var params = {
+//            C_0101_0001_id: area,
+//            C_0301_0048: $("#fechaconstbase").val(),
+//            C_0306_0108: $("#metrecubbase").val(),
+//            C_0307_0109: $("#txttiposuelobaseconst").val(),
+//            C_0307_0110: $("#txtmatrellenobaseconst").val(),
+//            C_0308_0110: $("#presionhermebasecons").val(),
+//            file: formData,
+//            C_0308_0111: $("#cmtipotecnicaunion").val(),
+//            coordenada_especifica: $("#coord_esp_idenbasecons").val(),
+//            kilometro_especifico: $("#km_esp_idenbasecons").val()
+//        };
+//        console.log(JSON.stringify(params))
+//        fetch(apiUrl + webMethod, {
+//            method: 'POST',
+//            headers: headers,
+//            body: JSON.stringify(params)
+//        })
+//            .then(response => {
+//                if (!response.ok) {
+//                    throw new Error('Network response was not ok');
+//                }
+//                console.log(response)
+//                return response.json();
+
+//            })
+//            .then(data => {
+//                if (data.success) {
+//                    console.log(data.data);
+//                    alert("Información almacenada correctamente");
+//                    $('#construforms').show();
+//                    $('#constbasefrm').hide();
+//                }
+//            })
+//            .catch(error => {
+//                alert("Error: " + error);
+//            });
+//    }
+//    else {
+//        alert("Es necesario ingresar el diámetro en pulgadas para realizar el registro");
+//    }
+//}
+function saveConstruccionGeneral() {
+
+    var webMethod = "disenio_servicio/store";
+
+    const formData = new FormData();
+    formData.append("C_0101_0001_id", area)
+    // Make sure files are being selected and appended properly
+    if ($("#inputGroupFile01")[0].files[0]) {
+        formData.append("C_0205_0012", $("#inputGroupFile01")[0].files[0]);
+    }
+    if ($("#inputGroupFile02")[0].files[0]) {
+        formData.append("C_0205_0013", $("#inputGroupFile02")[0].files[0]);
+    }
+    if ($("#inputGroupFile03")[0].files[0]) {
+        formData.append("C_0205_0014", $("#inputGroupFile03")[0].files[0]);
+    }
+    if ($("#inputGroupFile04")[0].files[0]) {
+        formData.append("C_0205_0015", $("#inputGroupFile04")[0].files[0]);
+    }
+    if ($("#inputGroupFile05")[0].files[0]) {
+        formData.append("C_0205_0016", $("#inputGroupFile05")[0].files[0]);
+    }
+
+    // Log formData to console for debugging (this will not display the content of the files)
+    for (var pair of formData.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
+    }
+
+
+
+
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                console.log(data)
+                alert("Información almacenada correctamente");
+                $('#disenioforms').show();
+                $('#serviciofrm').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function saveConstruccionUnion() {
+   
+    var webMethod = "saveConstruccionUnion";
+
+    var params = {
+            C_0101_0001_id: area,
+            C_0302_0049_id: $("#cmtipotecnicaunion").val(),
+            C_0302_0050: $("#txtidentificadorunion").val(),
+            C_0302_0051: $("#txtrecaplsolunion").val(),
+            C_0302_0052: $("#fechaserunion").val(),
+            C_0302_0053: $("#fecinstunion").val(),
+            C_0302_0054_id: $("#cmbmetubicsoldunion").val(),
+            C_0302_0055: $("#fecfabunion").val(),
+            C_0302_0056: $("#txtedoactunion").val(),
+            C_0302_0057: $("#txtedohisunion").val(),
+            coordenada_especifica: $("#coord_esp_idenunion").val(),
+            kilometro_especifico: $("#km_esp_idenunion").val()
+        };
+
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                console.log(data)
+                alert("Información almacenada correctamente");
+                $('#construforms').show();
+                $('#metodounionfrm').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function saveConstruccionProfundidad() {
+
+    var webMethod = "saveConstruccionProfundidad";
+
+    var params = {
+        C_0101_0001_id: area,
+        C_0303_0058: $("#txtprofcob").val(),
+        C_0303_0059: $("#txtmedprofagu").val(),
+        C_0303_0060: $("#txtelefontub").val(),
+        C_0303_0061: $("#txtelecentub").val(),
+        C_0303_0062: $("#txteleterr").val(),
+        C_0303_0063: $("#txteleparsuotub").val(),
+        C_0303_0064: $("#txtdistinicioruta").val(),
+        C_0303_0065: $("#fechamedidaprof").val(),
+        C_0303_0066: $("#txtperdirhor").val(),
+        C_0303_0067: $("#txtmetmedprof").val(),
+        C_0303_0068: $("#txtedoactprof").val(),
+        C_0303_0069: $("#txtedohisprof").val(),
+        coordenada_especifica: $("#coord_esp_idenprofent").val(),
+        kilometro_especifico: $("#km_esp_idenpprofent").val()
+    };
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                console.log(data)
+                alert("Información almacenada correctamente");
+                $('#construforms').show();
+                $('#profenterradofrm').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function saveConstruccionCruces() {
+
+    var webMethod = "saveConstruccionCruces";
+
+    var params = {
+        C_0101_0001_id: area,
+        C_0304_0070_id: $("#cmbTipcruce").val(),//Tipod de cruce
+        C_0304_0071: $("#txtclaseloca").val(),//Clase de Localización
+
+        C_0304_0072: $("#txtpropietario").val(),//Propietario
+
+        C_0304_0073: $("#txtdictacruce").val(), //Distancia del cruce encima o debajo de la tubería
+
+        C_0304_0074: $("#txtdistinf").val(),// Distancia desde el punto de cruce influye en la dirección aguas abajo
+
+        C_0304_0075: $("#txtdistptocruce").val,//Distancia desde el punto de cruce influye en la dirección aguas arriba
+
+        C_0304_0076: $("#txtloccruresptub").val(),//Localización del cruce respecto la tubería (arriba/abajo)
+
+        C_0304_0077: $("#txtedoactualcruce").val(),//Estado Actual
+
+        C_0304_0078: $("#txtedohistcruce").val(),//Estado histórico
+
+        C_0304_0079: $("#txttipllanurainun").val(),//Tipo de llanura de inundación
+        C_0304_0080: $("#txttipcrucehidro").val(),//Tipo de cruce hidrológico
+        C_0304_0081: $("#cmbtipcamtrans").val(),//Indica si el camino es de transporte pesado
+
+        C_0304_0082: $("#cmbgasnecpat").val(),// El gasoducto necesita ser patrullado
+
+        C_0304_0083: $("#txtNumCarrillesVialidad").val(),//No. de Carrilles de la vialidad-
+
+        C_0304_0084: $("#txtEdohistoricoCrucedos").val(), //Estado histórico
+
+        C_0304_0085: $("#txtEdoActualCrucedos").val(),//Estado actual
+
+        C_0304_0086: $("#cmbexiunicab").val(),//Tipo de cruce de transporte
+
+        C_0304_0087_id: $("#cmbetipocrucetrans").val(), //¿Existe unión de cables?
+
+        C_0304_0088: $("#cmbexiunicab").val(),//¿Existe unión de cables? (si, no, desconocido)
+
+
+        C_0304_0089: $("#txtultpottubapago").val(),//Último potencial de tubería a tierra medido (expresado en voltios) se apag+o
+
+        C_0304_0090: $("#txtultpotencen").val(),//Último potencial de tubería a tierra medido (expresado en voltios) se encendió
+
+        C_0304_0091: $("#txtrectubext").val(),// Recubrimiento de tubería extranjera
+        C_0304_0092: $("#txtdiamnomtub").val(),//Diámetro nominal tubería extranjera
+
+        C_0304_0093_id: $("#cmntiptub").val(),//Tipo de tuberia
+        C_0304_0094: $("#cmbexisunioncabcruceytub").val(),//¿Existe unión de cables entre el servicio de cruce y la tubería?
+        C_0304_0095_id: $("#cmbtipcruceserv").val(),//Tipo de cruce de servicio
+        C_0304_0096: $("#txtvoltajecruce").val,// Voltaje transportado por el servicio
+        coordenada_especifica: $("#coord_esp_identipocruce").val(),
+        kilometro_especifico: $("#km_esp_idenptipocruce").val()
+    };
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                console.log(data)
+                alert("Información almacenada correctamente");
+                $('#construforms').show();
+                $('#tiposcrucesfrm').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function saveConstruccionHermeticidad() {
+
+    var webMethod = "saveConstruccionHermeticidad";
+
+    var params = {
+        C_0101_0001_id: area,
+        C_0305_0097: $("#txtnombempher").val(),//Nombre de la empresa
+        C_0305_0098: $("#fecpruebher").val(),//Fecha de prueba
+        C_0305_0099: $("#txtdurpruebher").val(),//Duración de la prueba
+        C_0305_0100: $("#txtmedempher").val(),//Medio de prueba de empleo
+        C_0305_0101: $("#txtlongducprobados").val(),//Longitud de los ductos probados
+        C_0305_0102: $("#txtpresprueb").val(),//Presión de diseño
+        C_0305_0103: $("#txtpresdisger").val(),//Calibración
+        C_0305_0104: $("#txtcalbher").val(),//Variaciones de presión
+        C_0305_0105: $("#txtvarher").val(),//Presión de prueba mínima
+        C_0305_0106: $("#txtvarpreher").val(),//Variaciones de presión
+        coordenada_especifica: $("#coord_esp_idenherm").val(),
+        kilometro_especifico: $("#km_esp_idenpherm").val()
+    };
+
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                console.log(data)
+                alert("Información almacenada correctamente");
+                $('#construforms').show();
+                $('#hermetisidadfrm').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function saveConstruccioInspeccion() {
+
+    var webMethod = "disenio_servicio/store";
+
+    var params = {
+        C_0101_0001_id: area,
+        C_0302_0049_id: $("#cmtipotecnicaunion").val(),
+        C_0302_0050: $("#txtidentificadorunion").val(),
+        C_0302_0051: $("#txtrecaplsolunion").val(),
+        C_0302_0052: $("#fechaserunion").val(),
+        C_0302_0053: $("#fecinstunion").val(),
+        C_0302_0054_id: $("#cmbmetubicsoldunion").val(),
+        C_0302_0055: $("#fecfabunion").val(),
+        C_0302_0056: $("#txtedoactunion").val(),
+        C_0302_0057: $("#txtedohisunion").val(),
+        coordenada_especifica: $("#coord_esp_idenunion").val(),
+        kilometro_especifico: $("#km_esp_idenunion").val()
+    };
+
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                console.log(data)
+                alert("Información almacenada correctamente");
+                $('#disenioforms').show();
+                $('#serviciofrm').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function saveConstruccioCatodica() {
+
+    var webMethod = "saveConstruccionCatodica";
+
+    var params = {
+        C_0101_0001_id: area,
+        C_0310_116_id: $("#cmbTipocato").val(),
+        C_0310_117_id: $("#cmbtipinstprot").val(),
+        C_0310_118: $("#txtnoserie").val(),
+        C_0310_119: $("#txtfabricante").val(),
+        C_0310_120: $("#extedoprote").val(),
+        coordenada_especifica: $("#coord_esp_idenprot").val(),
+        kilometro_especifico: $("#km_esp_idenpprot").val()
+    };
+
+
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                console.log(data)
+                alert("Información almacenada correctamente");
+                $('#construforms').show();
+                $('#proteccatodicafrm').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function saveConstruccioSeguridad() {
+
+    var webMethod = "disenio_servicio/store";
+
+    var params = {
+        C_0101_0001_id: area,
+        C_0302_0049_id: $("#cmtipotecnicaunion").val(),
+        C_0302_0050: $("#txtidentificadorunion").val(),
+        C_0302_0051: $("#txtrecaplsolunion").val(),
+        C_0302_0052: $("#fechaserunion").val(),
+        C_0302_0053: $("#fecinstunion").val(),
+        C_0302_0054_id: $("#cmbmetubicsoldunion").val(),
+        C_0302_0055: $("#fecfabunion").val(),
+        C_0302_0056: $("#txtedoactunion").val(),
+        C_0302_0057: $("#txtedohisunion").val(),
+        coordenada_especifica: $("#coord_esp_idenunion").val(),
+        kilometro_especifico: $("#km_esp_idenunion").val()
+    };
+
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                console.log(data)
+                alert("Información almacenada correctamente");
+                $('#disenioforms').show();
+                $('#serviciofrm').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+//#endregion
+
+
+
+
 function selectTab(evt, tabName) {
     // Declare all variables
 
