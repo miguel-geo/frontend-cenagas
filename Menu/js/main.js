@@ -690,6 +690,7 @@ function ezBSAlert(options) {
     _show();
     return deferredObject.promise();
 }
+
 function fnFinalizar() {
     document.getElementById('registro').style.display = 'none';
     document.getElementById('forms').style.display = 'block';
