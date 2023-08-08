@@ -150,6 +150,11 @@ $(document).ready(function () {
 function showotroMaterial() {
     $('#espMaterial').show();
 }
+
+
+function showproteccioncatodica() {
+    $('#crearproteccioncatodica').show();
+}
 function espCostura() {
     $('#espCostura').show();
 }
@@ -783,6 +788,8 @@ function fnshowprotecccato() {
     $("#txtductogeneralprot").val(txtducto);
     $("#txttramogeneralprot").val(txttramo);
     $("#txtareageneralprot ").val(txtarea);
+    
+    loadtipoproteccioncatodica();
 }
 function fnshowseguridadpre() {
     $('#seguridadprearranquefrm').show();
@@ -1420,6 +1427,32 @@ function loadtipomaterialdisenio() {
         }
     });
 }
+function loadtipoproteccioncatodica() {
+    var webMethod = "get_tipoproteccioncatodica";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+                console.log(data.data);
+                $("#cmbTipocato").empty();
+                $('#cmbTipocato').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+                    $('#cmbTipocato').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].C_0310_116
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
 function loadDuctos() {
     var webMethod = "ductos/fetch";
     var params = {
@@ -1666,6 +1699,10 @@ function saveotroCostura() {
 function cancelotroMaterialDisenio() {
     $("#espMaterial").hide();
 }
+
+function cancelotroProteccionCatodica() {
+    $("#crearproteccioncatodica").hide();
+}
 function cancelotroCostura() {
     $("#espCostura").hide();
 }
@@ -1782,6 +1819,41 @@ function saveDisenioProteccion() {
 
 }
 
+
+function saveotroProteccionCatodica() {
+    var webMethod = "saveTypeProteccionCatodica";
+    var params = {
+        C_0310_116: $("#newTipoProteccion").val(),
+        descripcion: $("#newDescProteccion").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoproteccioncatodica();
+                $("#crearproteccioncatodica").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
 
 
 function saveDisenioServicio() {

@@ -338,7 +338,6 @@
                                         <option value=5>ASTM A381</option>
                                         <option value=6>ASTM A671</option>
                                         <option value=7>ASTM A672</option>
-                                        <option value=8>API-5L-X65</option>
                                     </select>
                                     <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
@@ -1668,9 +1667,24 @@
                                             <option value=1>a)Ánodos galvánicos o de sacrificio</option>
                                             <option value=2>b) Corriente impresa</option>
                                         </select>
-                                        <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                        <button type="button" onclick="showproteccioncatodica()" class="btn btn-secondary">
                                             <i class="fas fa-square-plus"></i>
                                         </button>
+                                        
+                                    </div>
+                                    <div class="input-group mb-3" id="crearproteccioncatodica" style="display:none">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Tipo de Próteccion</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoProteccion" aria-describedby="basic-addon1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="newDescProteccion" aria-describedby="basic-addon1">
+                                        <div>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroProteccionCatodica()">Cancelar</button>
+                                            <button type="button" id="btn_saveMaterial" onclick="saveotroProteccionCatodica()" class="btn btn-success">Guardar</button>
+                                        </div>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
