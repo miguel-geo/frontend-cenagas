@@ -499,34 +499,20 @@ function inicializarEventos() {
         areaCon = event.target.value;
     });
     //Combo Temas
-    const selectTemas = document.getElementById('cmbTemas_con');
+    const selectTemas = document.getElementById('cmbTemasPrincipal_con');
     selectTemas.addEventListener('change', function handleChange(event) {
         temaconsulta = event.target.value;
         switch (event.target.value) {
-            case "T1":
-                limpiarTabas();
-                $("#tablaPersonas > tbody").empty();
-                $("#tablaPersonas").show();
-                $("#tablapresion").hide();
-                $("#datapresioncons").hide();
-                $("#dataGeneral").show();
-                $("#tablaproteccion").hide();
+            case "T1":                
+                $("#cmbTemasDisenio_con").show();
+                $("#cmbTemasConstruccion_con").hide();
              break;
             case "T2":
-                limpiarTabas();               
-                $("#tablaPersonas").hide();
-                $("#tablapresion").show();
-                $("#datapresioncons").show();
-                $("#dataGeneral").hide();
-                $("#tablaproteccion").hide();
+                $("#cmbTemasDisenio_con").hide();
+                $("#cmbTemasConstruccion_con").show()
             break;
             case "T3":
-                limpiarTabas();
-                $("#datapresioncons").hide();
-                $("#dataGeneral").hide();
-                $("#tablaPersonas").hide();
-                $("#tablapresion").hide();
-                $("#tablaproteccion").show();
+                //Aún no existe
             break;
             default:
         }
@@ -534,7 +520,105 @@ function inicializarEventos() {
         txttramo = event.target[event.target.selectedIndex].text;
         loadAreas(event.target.value);
     });
+    //Combo Tema Diseño
+    const selectTemasDisenio = document.getElementById('cmbTemasDisenio_con');
+    selectTemasDisenio.addEventListener('change', function handleChange(event) {
+        temaconsultadisenio = event.target.value;
+        switch (event.target.value) {
+            case "Dis1":
+            limpiarTabas();
+            $("#tablaPersonas > tbody").empty();
+            $("#tablaPersonas").show();
+            $("#tablapresion").hide();
+            $("#datapresioncons").hide();
+            $("#dataGeneral").show();
+            $("#tablaproteccion").hide();
+            break;
+            case "Dis2":
+            limpiarTabas();
+            $("#tablaPersonas").hide();
+            $("#tablapresion").show();
+            $("#datapresioncons").show();
+            $("#dataGeneral").hide();
+            $("#tablaproteccion").hide();
+            break;
+            case "Dis3":
+            limpiarTabas();
+            $("#datapresioncons").hide();
+            $("#dataGeneral").hide();
+            $("#tablaPersonas").hide();
+            $("#tablapresion").hide();
+            $("#tablaproteccion").show();
+            break;
+        default:
+    }
+        tramo = event.target.value;
+        txttramo = event.target[event.target.selectedIndex].text;
+        loadAreas(event.target.value);
+    });
+    //Combo Tema Diseño
+    const selectTemasConstruccion = document.getElementById('cmbTemasConstruccion_con');
+    selectTemasConstruccion.addEventListener('change', function handleChange(event) {
+        temaconsultaconstruccion = event.target.value;
+        switch (event.target.value) {
+            case "Cons1":
 
+                break;
+            case "Cons2":
+                
+                break;
+            case "Cons3":
+
+                break;
+            case "Cons4":
+
+                break;
+            case "Cons5":
+
+                break;
+            case "Cons6":
+
+                break;
+            case "Cons7":
+
+                break;
+            case "Cons8":
+
+                break;
+            default:
+        }
+        tramo = event.target.value;
+        txttramo = event.target[event.target.selectedIndex].text;
+        loadAreas(event.target.value);
+    });
+    //switch (event.target.value) {
+    //    case "T1":
+    //        limpiarTabas();
+    //        $("#tablaPersonas > tbody").empty();
+    //        $("#tablaPersonas").show();
+    //        $("#tablapresion").hide();
+    //        $("#datapresioncons").hide();
+    //        $("#dataGeneral").show();
+    //        $("#tablaproteccion").hide();
+    //        break;
+    //    case "T2":
+    //        limpiarTabas();
+    //        $("#tablaPersonas").hide();
+    //        $("#tablapresion").show();
+    //        $("#datapresioncons").show();
+    //        $("#dataGeneral").hide();
+    //        $("#tablaproteccion").hide();
+    //        break;
+    //    case "T3":
+    //        limpiarTabas();
+    //        $("#datapresioncons").hide();
+    //        $("#dataGeneral").hide();
+    //        $("#tablaPersonas").hide();
+    //        $("#tablapresion").hide();
+    //        $("#tablaproteccion").show();
+    //        break;
+    //    default:
+    //}
 
     //Combo seleccionar Tipo de cruce
     //const selectTipoCruce = document.getElementById('cmbTipcruce');
@@ -1258,7 +1342,11 @@ function saveConstruccionHermeticidad() {
         C_0305_0105: $("#txtvarher").val(),//Presión de prueba mínima
         C_0305_0106: $("#txtvarpreher").val(),//Variaciones de presión
         coordenada_especifica: $("#coord_esp_idenherm").val(),
-        kilometro_especifico: $("#km_esp_idenpherm").val()
+        kilometro_especifico: $("#km_esp_idenpherm").val(),
+        unidad_presion_max: $("#cmbunidadpresionmax").val(),
+        unidad_presion_disenio: $("#cmbunidadpresiondisenio").val(),
+        unidad_presion_min: $("#cmbunidadpresionmin").val(),
+        unidad_variaciones_presion: $("#cmbunidadvariacionespres").val()
     };
 
 

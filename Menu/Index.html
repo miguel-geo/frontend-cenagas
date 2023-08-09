@@ -449,8 +449,8 @@
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                               aria-describedby="inputGroupFileAddon01" accept=".pdf" lang="es">
-                                        <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo PDF</label>
+                                               aria-describedby="inputGroupFileAddon01"  lang="es">
+                                        <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -459,8 +459,8 @@
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile02"
-                                               aria-describedby="inputGroupFileAddon01" accept=".pdf" lang="es">
-                                        <label class="custom-file-label" for="inputGroupFile02">Escoje el archivo PDF</label>
+                                               aria-describedby="inputGroupFileAddon01" lang="es">
+                                        <label class="custom-file-label" for="inputGroupFile02">Escoje el archivo</label>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -469,8 +469,8 @@
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile03"
-                                               aria-describedby="inputGroupFileAddon01" accept=".pdf" lang="es">
-                                        <label class="custom-file-label" for="inputGroupFile03">Escoje el archivo PDF</label>
+                                               aria-describedby="inputGroupFileAddon01"  lang="es">
+                                        <label class="custom-file-label" for="inputGroupFile03">Escoje el archivo</label>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -479,8 +479,8 @@
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile04"
-                                               aria-describedby="inputGroupFileAddon01" accept=".pdf" lang="es">
-                                        <label class="custom-file-label" for="inputGroupFile04">Escoje el archivo PDF</label>
+                                               aria-describedby="inputGroupFileAddon01"lang="es">
+                                        <label class="custom-file-label" for="inputGroupFile04">Escoje el archivo</label>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -495,6 +495,8 @@
                                 </div>
 
                                 <div class="modal-footer">
+                                
+                                     <label  id="inputGroupFileAddon01" style="margin-right:10px;">Nota: Seleccionar al menos un archivo para guardar correctamente</label>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelDisenioServicio()">Cancelar</button>
                                     <button type="button" id="btn_saveiServicio" onclick="saveDisenioServicio()" class="btn btn-success">Guardar</button>
                                 </div>
@@ -904,7 +906,7 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Prueba de hermeticidad (PSI)</span>
+                                            <span class="input-group-text" id="basic-addon1">Presión de prueba de hermeticidad (PSI)</span>
                                         </div>
                                         <input type="text" class="form-control" placeholder="" aria-label="" id="presionhermebasecons" aria-describedby="basic-addon1">
                                     </div>
@@ -1560,15 +1562,26 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Presión de prueba</span>
+                                            <span class="input-group-text" id="basic-addon1">Presión de prueba máxima</span>
                                         </div>
                                         <input type="text" class="form-control" placeholder="" aria-label="" id="txtpresprueb" aria-describedby="basic-addon1">
+                                        <select class="selectpicker form-control" id="cmbunidadpresionmax">
+                                            <option value=0>Selecciona unidad medida...</option>
+                                            <option value="PSI">PSI</option>
+                                            <option value="kg/cm2">kg/cm2</option>
+                                        </select>
                                     </div>
+                                   
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Presión de diseño  </span>
                                         </div>
                                         <input type="text" class="form-control" placeholder="" aria-label="" id="txtpresdisger" aria-describedby="basic-addon1">
+                                        <select class="selectpicker form-control" id="cmbunidadpresiondisenio">
+                                            <option value=0>Selecciona unidad medida...</option>
+                                            <option value="PSI">PSI</option>
+                                            <option value="kg/cm2">kg/cm2</option>
+                                        </select>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -1581,12 +1594,22 @@
                                             <span class="input-group-text" id="basic-addon1">Presión de prueba mínima </span>
                                         </div>
                                         <input type="text" class="form-control" placeholder="" aria-label="" id="txtvarher" aria-describedby="basic-addon1">
+                                        <select class="selectpicker form-control" id="cmbunidadpresionmin">
+                                            <option value=0>Selecciona unidad medida...</option>
+                                            <option value="PSI">PSI</option>
+                                            <option value="kg/cm2">kg/cm2</option>
+                                        </select>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Variaciones de presión</span>
                                         </div>
                                         <input type="text" class="form-control" placeholder="" aria-label="" id="txtvarpreher" aria-describedby="basic-addon1">
+                                        <select class="selectpicker form-control" id="cmbunidadvariacionespres">
+                                            <option value=0>Selecciona unidad medida...</option>
+                                            <option value="PSI">PSI</option>
+                                            <option value="kg/cm2">kg/cm2</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -1865,21 +1888,140 @@
                             <option>Selecciona...</option>
 
                         </select>
-
-                        <label for="exampleFormControlSelect1">Tema</label>
-                        <select class="selectpicker form-control" id="cmbTemas_con">
-                            <option value="0">Selecciona...</option>
-                            <option value="T1">Identificacíón</option>
-                            <option value="T2">Presión</option>
-                            <option value="T3">Protección</option>
-                        </select>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" onclick="consulta()" id="btnConsultar" data-dismiss="modal">Consultar</button>
+                        <div class="input-group mb-3 mt-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Tema</span>
+                            </div>
+                            <select class="selectpicker form-control" id="cmbTemasPrincipal_con">
+                                <option value="0">Selecciona...</option>
+                                <option value="T1">Diseño</option>
+                                <option value="T2">Construcción</option>
+                                <option value="T3">Operación</option>
+                            </select>
+                            <select class="selectpicker form-control" id="cmbTemasDisenio_con" style="display:none">
+                                <option value="0">Selecciona...</option>
+                                <option value="Dis1">Identificacíón</option>
+                                <option value="Dis2">Presión</option>
+                                <option value="Dis3">Protección</option>
+                            </select>
+                            <select class="selectpicker form-control" id="cmbTemasConstruccion_con" style="display:none">
+                                <option value="0">Selecciona...</option>
+                                <option value="Cons1">Base</option>
+                                <option value="Cons2">Unión</option>
+                                <option value="Cons3">Profundidad</option>
+                                <option value="Cons4">Tipo de cruces</option>
+                                <option value="Cons5">Hermeticidad</option>
+                                <option value="Cons6">Inspección</option>
+                                <option value="Cons7">Catódica</option>
+                                <option value="Cons8">Seguridad</option>
+                            </select>
                         </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" onclick="consulta()" id="btnConsultar" data-dismiss="modal">Consultar</button>
+                            </div>
 
-                        <div class="table-responsive">
-                            <div id="dataGeneral" style="display:none">
-                                <div class="card">
+                            <div class="table-responsive">
+                                <div id="dataGeneral" style="display:none">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Resumen
+                                        </div>
+                                        <div class="card-block">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Diametro (mm)</h6>
+                                                            <p class="card-text" id="diammcons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Diametro (in)</h6>
+                                                            <p class="card-text" id="diaincons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Espesor de pared (mm)</h6>
+                                                            <p class="card-text" id="espmmcons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Espero de pared (in)</h6>
+                                                            <p class="card-text" id="espincons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Especificación de material</h6>
+                                                            <p class="card-text" id="espmatcons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Temperatura °C</h6>
+                                                            <p class="card-text" id="tempconsc"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Temperatura °F</h6>
+                                                            <p class="card-text" id="tempconsf"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Fache de fabricación</h6>
+                                                            <p class="card-text" id="fecfabcons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">% de carbono</h6>
+                                                            <p class="card-text" id="porcons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Resistencia a la tracción</h6>
+                                                            <p class="card-text" id="restraccons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Límite elástico</h6>
+                                                            <p class="card-text" id="limelacons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="datapresioncons" style="display:none">
                                     <div class="card-header">
                                         Resumen
                                     </div>
@@ -1888,288 +2030,189 @@
                                             <div class="col-md-2">
                                                 <div class="card h-100">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">Diametro (mm)</h6>
-                                                        <p class="card-text" id="diammcons"></p>
+                                                        <h6 class="card-title">Presión de diseño (PSI)</h6>
+                                                        <p class="card-text" id="presdiscons"></p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="card h-100">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">Diametro (in)</h6>
-                                                        <p class="card-text" id="diaincons"></p>
+                                                        <h6 class="card-title">Presión máxima de operación (PSI)</h6>
+                                                        <p class="card-text" id="presmaxoppsicons"></p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="card h-100">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">Espesor de pared (mm)</h6>
-                                                        <p class="card-text" id="espmmcons"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Espero de pared (in)</h6>
-                                                        <p class="card-text" id="espincons"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Especificación de material</h6>
-                                                        <p class="card-text" id="espmatcons"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Temperatura °C</h6>
-                                                        <p class="card-text" id="tempconsc"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Temperatura °F</h6>
-                                                        <p class="card-text" id="tempconsf"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Fache de fabricación</h6>
-                                                        <p class="card-text" id="fecfabcons"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">% de carbono</h6>
-                                                        <p class="card-text" id="porcons"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Resistencia a la tracción</h6>
-                                                        <p class="card-text" id="restraccons"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Límite elástico</h6>
-                                                        <p class="card-text" id="limelacons"></p>
+                                                        <h6 class="card-title">Presión máxima de operación (kg/cm2)</h6>
+                                                        <p class="card-text" id="presmaxopecons"></p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
+                                <!--Table-->
+                                <table id="tablaPersonas" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Longitud
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo costura
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+
+                                <table id="tablapresion" class="table table-bordered" style="display:none">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Entidad/Empresa
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Método de cálculo
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión Máxima (PSI)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión Máxima (kg)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaproteccion" class="table table-bordered" style="display:none">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Ubicación protección
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Orden de aplicación
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Localización
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Temperatura máxima
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <!--Table-->
+
 
                             </div>
-                            <div id="datapresioncons" style="display:none">
-                                <div class="card-header">
-                                    Resumen
-                                </div>
-                                <div class="card-block">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="card h-100">
-                                                <div class="card-body">
-                                                    <h6 class="card-title">Presión de diseño (PSI)</h6>
-                                                    <p class="card-text" id="presdiscons"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="card h-100">
-                                                <div class="card-body">
-                                                    <h6 class="card-title">Presión máxima de operación (PSI)</h6>
-                                                    <p class="card-text" id="presmaxoppsicons"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="card h-100">
-                                                <div class="card-body">
-                                                    <h6 class="card-title">Presión máxima de operación (kg/cm2)</h6>
-                                                    <p class="card-text" id="presmaxopecons"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!--Table-->
-                            <table id="tablaPersonas" class="table table-bordered" style="display:none;margin-top:15px;">
-
-                                <!--Table head-->
-                                <thead>
-                                    <tr>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Área unitaria
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Coordenada específica
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Kilometro específico
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Longitud
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Tipo costura
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Acciones
-                                            </a>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <!--Table head-->
-                                <!--Table body-->
-                                <tbody>
-                                </tbody>
-                                <!--Table body-->
-                            </table>
-
-                            <table id="tablapresion" class="table table-bordered" style="display:none">
-
-                                <!--Table head-->
-                                <thead>
-                                    <tr>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Área unitaria
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Coordenada específica
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Kilometro específico
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Entidad/Empresa
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Método de cálculo
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Presión Máxima (PSI)
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Presión Máxima (kg)
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Acciones
-                                            </a>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <!--Table head-->
-                                <!--Table body-->
-                                <tbody>
-                                </tbody>
-                                <!--Table body-->
-                            </table>
-                            <table id="tablaproteccion" class="table table-bordered" style="display:none">
-
-                                <!--Table head-->
-                                <thead>
-                                    <tr>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Área unitaria
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Coordenada específica
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Kilometro específico
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Ubicación protección
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Orden de aplicación
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                               Localización
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Temperatura máxima
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Acciones
-                                            </a>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <!--Table head-->
-                                <!--Table body-->
-                                <tbody>
-                                </tbody>
-                                <!--Table body-->
-                            </table>
-                            <!--Table-->
-
-
+                            <!-- Table with panel -->
                         </div>
-                        <!-- Table with panel -->
                     </div>
-                </div>
                 <div id="Opcion2" class="tabcontent">
                     <h3>MENU 2</h3>
                     <p></p>
