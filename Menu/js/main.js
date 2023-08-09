@@ -534,6 +534,96 @@ function inicializarEventos() {
         txttramo = event.target[event.target.selectedIndex].text;
         loadAreas(event.target.value);
     });
+
+
+    //Combo seleccionar Tipo de cruce
+    //const selectTipoCruce = document.getElementById('cmbTipcruce');
+    //selectTipoCruce.addEventListener('change', function handleChange(event) {
+    //    var tipocruce = event.target.value;
+    //    switch (tipocruce) {
+    //        case "A":
+    //            $("#att_llanurainundacion").show();
+    //            $("#att_tipocrucehidro").show();
+    //            $("#att_transportepesado").hide();
+    //            $("#att_gasoductopatrullado").hide();
+    //            $("#att_vialidadabierta").hide();
+    //            $("#att_carrilesvialidad").hide();
+    //            $("#att_edohistodos").hide();
+    //            $("#att_edoactualdos").hide();
+    //            $("#att_tipocrucetrnasporte").hide();
+    //            $("#att_existeunioncables").hide();
+    //            $("#att_ultimopotencialapago").hide();
+    //            $("#att_ultimopontencialencendio").hide();
+    //            $("#att_rectuberiaextranjera").hide();
+    //            $("#att_diametronom").hide();
+    //            $("#att_tipotuberia").hide();
+    //            $("#att_existecruceytuberia").hide();
+    //            $("#att_tipocruceservicio").hide();
+    //            $("#att_voltajetransportadoporservicio").hide();
+    //            break;
+    //        case "C":
+    //            $("#att_llanurainundacion").hide();
+    //            $("#att_tipocrucehidro").hide();
+    //            $("#att_transportepesado").show();
+    //            $("#att_gasoductopatrullado").show();
+    //            $("#att_vialidadabierta").show();
+    //            $("#att_carrilesvialidad").show();
+    //            $("#att_edohistodos").show();
+    //            $("#att_edoactualdos").show();
+    //            $("#att_tipocrucetrnasporte").show();
+    //            $("#att_existeunioncables").hide();
+    //            $("#att_ultimopotencialapago").hide();
+    //            $("#att_ultimopontencialencendio").hide();
+    //            $("#att_rectuberiaextranjera").hide();
+    //            $("#att_diametronom").hide();
+    //            $("#att_tipotuberia").hide();
+    //            $("#att_existecruceytuberia").hide();
+    //            $("#att_tipocruceservicio").hide();
+    //            $("#att_voltajetransportadoporservicio").hide();
+    //            break;
+    //        case "E":
+    //            $("#att_llanurainundacion").hide();
+    //            $("#att_tipocrucehidro").hide();
+    //            $("#att_transportepesado").hide();
+    //            $("#att_gasoductopatrullado").hide();
+    //            $("#att_vialidadabierta").hide();
+    //            $("#att_carrilesvialidad").hide();
+    //            $("#att_edohistodos").hide();
+    //            $("#att_edoactualdos").hide();
+    //            $("#att_tipocrucetrnasporte").hide();
+    //            $("#att_existeunioncables").show();
+    //            $("#att_ultimopotencialapago").show();
+    //            $("#att_ultimopontencialencendio").show();
+    //            $("#att_rectuberiaextranjera").show();
+    //            $("#att_diametronom").show();
+    //            $("#att_tipotuberia").show();
+    //            $("#att_existecruceytuberia").hide();
+    //            $("#att_tipocruceservicio").hide();
+    //            $("#att_voltajetransportadoporservicio").hide();
+    //            break
+    //        case "S":
+    //            $("#att_llanurainundacion").hide();
+    //            $("#att_tipocrucehidro").hide();
+    //            $("#att_transportepesado").hide();
+    //            $("#att_gasoductopatrullado").hide();
+    //            $("#att_vialidadabierta").hide();
+    //            $("#att_carrilesvialidad").hide();
+    //            $("#att_edohistodos").hide();
+    //            $("#att_edoactualdos").hide();
+    //            $("#att_tipocrucetrnasporte").hide();
+    //            $("#att_existeunioncables").hide();
+    //            $("#att_ultimopotencialapago").hide();
+    //            $("#att_ultimopontencialencendio").hide();
+    //            $("#att_rectuberiaextranjera").hide();
+    //            $("#att_diametronom").hide();
+    //            $("#att_tipotuberia").hide();
+    //            $("#att_existecruceytuberia").show();
+    //            $("#att_tipocruceservicio").show();
+    //            $("#att_voltajetransportadoporservicio").show();
+    //            break;
+    //        default:
+    //    }
+    //});
 }
 
 
@@ -762,6 +852,9 @@ function fnshowprotipocruces() {
     $("#txtductogeneraltipcruce").val(txtducto);
     $("#txttramogeneraltipocruce").val(txttramo);
     $("#txtareageneralptipocruce ").val(txtarea);
+    loadCmbCruceServicio();
+    loadCmbCruceTuberia();
+    loadCmbCruceTransporte();
 }
 function fnshowhermeti() {
     $('#hermetisidadfrm').show();
@@ -1094,13 +1187,13 @@ function saveConstruccionCruces() {
 
         C_0304_0082: $("#cmbgasnecpat").val(),// El gasoducto necesita ser patrullado
 
-        C_0304_0083: $("#txtNumCarrillesVialidad").val(),//No. de Carrilles de la vialidad-
+        C_0304_0083: $("#txtvialidadabierta").val(),//No. de Carrilles de la vialidad-
 
-        C_0304_0084: $("#txtEdohistoricoCrucedos").val(), //Estado histórico
+        C_0304_0084: $("#txtNumCarrillesVialidad").val(), //Estado histórico
 
-        C_0304_0085: $("#txtEdoActualCrucedos").val(),//Estado actual
+        C_0304_0085: $("#txtEdohistoricoCrucedos").val(),//Estado actual
 
-        C_0304_0086: $("#cmbexiunicab").val(),//Tipo de cruce de transporte
+        C_0304_0086: $("#txtEdoActualCrucedos").val(),//Tipo de cruce de transporte
 
         C_0304_0087_id: $("#cmbetipocrucetrans").val(), //¿Existe unión de cables?
 
@@ -1338,6 +1431,212 @@ function saveConstruccioSeguridad() {
             alert("Error: " + error);
         });
 }
+function cancelotroCruceServicio() {
+    $("#espcruceServicio").hide();
+}
+function saveotroCruceServicio() {
+    var webMethod = "saveCruceServicio";
+    var params = {
+        C_0304_0095: $("#newCruceServicio").val(),
+        descripcion: $("#newDescTipoServicio").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadCmbCruceServicio();
+                $("#espcruceServicio").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotroCruceServicio() {
+    $('#espcruceServicio').show();
+}
+function loadCmbCruceServicio() {
+    var webMethod = "get_CruceServicioCons";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+                console.log(data.data);
+                $("#cmbtipcruceserv").empty();
+                $('#cmbtipcruceserv').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+                    $('#cmbtipcruceserv').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].C_0304_0095
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
+
+
+function cancelotroTuberiaCruce() {
+    $("#espcruceTuberia").hide();
+}
+function showotroCruceTuberia() {
+    $('#espcruceTuberia').show();
+}
+function saveotroCruceTuberia() {
+    var webMethod = "saveTuberiaCons";
+    var params = {
+        C_0304_0093: $("#newCruceTuberia").val(),
+        descripcion: $("#newDescCruceTuberia").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadCmbCruceTuberia();
+                $("#espcruceTuberia").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function loadCmbCruceTuberia() {
+    var webMethod = "get_Tuberia";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+                console.log(data.data);
+                $("#cmntiptub").empty();
+                $('#cmntiptub').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+                    $('#cmntiptub').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].C_0304_0093
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
+
+
+function cancelotroTransporteCruce() {
+    $("#espcruceTransporte").hide();
+}
+function showotroCruceTransporte() {
+    $('#espcruceTransporte').show();
+}
+function saveotroCruceTransporte() {
+    var webMethod = "saveCruceTransporte";
+    var params = {
+        C_0304_0087: $("#newCruceTransporte").val(),
+        descripcion: $("#newDescTipoTransporte").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadCmbCruceTransporte();
+                $("#espcruceTransporte").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function loadCmbCruceTransporte() {
+    var webMethod = "get_CruceTransporteCons";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+                console.log(data.data);
+                $("#cmbetipocrucetrans").empty();
+                $('#cmbetipocrucetrans').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+                    $('#cmbetipocrucetrans').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].C_0304_0087
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
+
+
+
+
 //#endregion
 function selectTab(evt, tabName) {
     // Declare all variables

@@ -1204,36 +1204,33 @@
                                     </div>
                                     <select class="selectpicker form-control" id="cmbTipcruce">
                                         <option value=0>Selecciona...</option>
-                                        <option value=1>Cuerpos de agua aéreo</option>
-                                        <optin value=2>Cuerpos de agua subfluvial</optin>
-                                        <option value=3>Infraestructura de comunicación</option>
-                                        <option value=4>Ductos extranjeros</option>
-                                        <option value=5>Servicios de comunicación</option>
+                                        <option value="A">Cuerpos de agua aéreo</option>
+                                        <option value="A">Cuerpos de agua subfluvial</option>
+                                        <option value="C">Infraestructura de comunicación</option>
+                                        <option value="E">Ductos extranjeros</option>
+                                        <option value="S">Servicios de comunicación</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
                                 </div>
                                 <!-- Clase de localización -->
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Clase de localización</span>
                                     </div>
-                                    <input type="text" class="form-control" id="txtclaseloca"  placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="txtclaseloca" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!--Propietario -->
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Propietario</span>
                                     </div>
-                                    <input type="text" class="form-control" id="txtpropietario"  placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="txtpropietario" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!--Distancia del cruce encima o debajo de la tubería   -->
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Distancia del cruce encima o debajo de la tubería</span>
                                     </div>
-                                    <input type="text" class="form-control" id="txtdictacruce"  placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="txtdictacruce" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!-- Distancia desde el punto de cruce influye en la dirección aguas abajo-->
                                 <div class="input-group mb-3">
@@ -1271,21 +1268,21 @@
                                     <input type="text" class="form-control" id="txtedohistcruce" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!--Tipo de llanura de inundación-->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_llanurainundacion">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de llanura de inundación</span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="" aria-label="" id="txttipllanurainun" aria-describedby="basic-addon1">
                                 </div>
                                 <!-- Tipo de cruce hidrológico-->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_tipocrucehidro">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de cruce hidrológico</span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="" id="txttipcrucehidro" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!-- Indica si el camino es de transporte pesado  -->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_transportepesado">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Indica si el camino es de transporte pesado</span>
                                     </div>
@@ -1296,12 +1293,9 @@
                                         <option value=3>No aplica</option>
                                         <option value=4>Desconocido</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
                                 </div>
                                 <!-- El gasoducto necesita ser patrullado-->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_gasoductopatrullado ">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">El gasoducto necesita ser patrullado</span>
                                     </div>
@@ -1312,33 +1306,37 @@
                                         <option value=3>No aplica</option>
                                         <option value=4>Desconocido</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
+                                </div>
+                                <!-- Vialidad abierta al público-->
+                                <div class="input-group mb-3" style="display:none" id="att_vialidadabierta">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">No. de Carrilles de la vialidad</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtvialidadabierta" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!-- No. de Carrilles de la vialidad-->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_carrilesvialidad">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">No. de Carrilles de la vialidad</span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="" id="txtNumCarrillesVialidad" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!-- Estado histórico -->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_edohistodos">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Estado histórico</span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="" id="txtEdohistoricoCrucedos" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!-- Estado actual -->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_edoactualdos">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Estado actual</span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="" id="txtEdoActualCrucedos" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!-- Tipo de cruce de transporte -->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_tipocrucetrnasporte">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de cruce de transporte</span>
                                     </div>
@@ -1351,14 +1349,29 @@
                                         <option value=5>Camino</option>
                                         <option value=6>Camino Estacional</option>
                                         <option value=7>Carretera estatal</option>
-                                        <option value=8>No aplica</option>
+                                        <option value=8>Carretera Federal</option>
+                                        <option value=9>No aplica</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotroCruceTransporte()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
+                                <div class="input-group mb-3" id="espcruceTransporte" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newCruceTransporte" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescTipoTransporte" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTransporteCruce()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroCruceTransporte()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
                                 <!-- ¿Existe unión de cables? -->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_existeunioncables">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">¿Existe unión de cables?</span>
                                     </div>
@@ -1368,55 +1381,66 @@
                                         <optin value=2>No</optin>
                                         <option value=3>No aplica</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
                                 </div>
                                 <!-- Último potencial de tubería a tierra medido (expresado en voltios) se apagó    -->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_ultimopotencialapago">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Último potencial de tubería a tierra medido (expresado en voltios) se apagó</span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="" id="txtultpottubapago" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!--Último potencial de tubería a tierra medido (expresado en voltios) se encendió   -->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_ultimopontencialencendio">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Último potencial de tubería a tierra medido (expresado en voltios) se encendió</span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="" id="txtultpotencen" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!--Recubrimiento de tubería extranjera    -->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_rectuberiaextranjera">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Recubrimiento de tubería extranjera</span>
                                     </div>
-                                    <input type="date" class="form-control" placeholder="" id="txtrectubext" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="" id="txtrectubext" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!-- Diámetro nominal tubería extranjera    -->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_diametronom">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Diámetro nominal tubería extranjera </span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="" id="txtdiamnomtub" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!--Tipo de tubería-->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_tipotuberia">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de tubería</span>
                                     </div>
                                     <select class="selectpicker form-control" id="cmntiptub">
                                         <option value=0>Selecciona...</option>
                                         <option value=1>Gas</option>
-                                        <optin value=2>Petróleo</optin>
+                                        <option value=2>Petróleo</option>
                                         <option value=3>Drenaje</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotroCruceTuberia()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
+                                <div class="input-group mb-3" id="espcruceTuberia" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newCruceTuberia" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescCruceTuberia" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTuberiaCruce()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroCruceTuberia()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
                                 <!--¿Existe unión de cables entre el servicio de cruce y la tubería?    -->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_existecruceytuberia">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">¿Existe unión de cables entre el servicio de cruce y la tubería?</span>
                                     </div>
@@ -1426,12 +1450,10 @@
                                         <optin value=2>No</optin>
                                         <option value=3>No aplica</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
                                 </div>
+
                                 <!--Tipo de cruce de servicio  -->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_tipocruceservicio">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de cruce de servicio</span>
                                     </div>
@@ -1441,12 +1463,26 @@
                                         <option value=2>Servicio eléctrico</option>
                                         <option value=3>Telefonía</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotroCruceServicio()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
+                                <div class="input-group mb-3" id="espcruceServicio" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newCruceServicio" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescTipoServicio" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroCruceServicio()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroCruceServicio()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
                                 <!-- Voltaje transportado por el servicio publico -->
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none" id="att_voltajetransportadoporservicio">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Voltaje transportado por el servicio publico</span>
                                     </div>
