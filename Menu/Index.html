@@ -971,7 +971,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de técnica</span>
                                     </div>
-                                    <select class="selectpicker form-control" id="cmtipotecnicaunion">
+                                    <select class="selectpicker form-control" id="cmtiptecnicaunion">
                                         <option value=0>Selecciona...</option>
                                         <option value=1>soldadura por resistencia eléctrica</option>
                                         <option value=2>soldadura a tope en horno</option>
@@ -981,10 +981,26 @@
                                         <option value=6>soldadura continua</option>
                                         <option value=7>soldadura por flasheo eléctrico</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                    <button type="button" onclick="showtipotecnica()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
+                                    
                                 </div>
+                                <div class="input-group mb-3" id="creartipotecnicaunion" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de Técnica</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoTecnica" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescTecnica" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoTecnica()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroTipoTecnica()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+                                
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Identificador</span>
@@ -1021,9 +1037,23 @@
                                         <option value=4>inspección no destructiva</option>
                                         <option value=5>Desconocido</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotroTipoUbicacion()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
+                                </div>
+                                <div class="input-group mb-3" id="creartipoubicacionunion" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de Ubicación</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoUbicacion" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescUbicacion" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoUbicacion()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroTipoUbicacion()" class="btn btn-success">Guardar</button>
+                                    </div>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">

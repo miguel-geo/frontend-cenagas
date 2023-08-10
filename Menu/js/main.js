@@ -154,6 +154,15 @@ function showotroMaterial() {
 }
 
 
+function showtipotecnica() {
+    $('#creartipotecnicaunion').show();
+}
+
+
+function showotroTipoUbicacion() {
+    $('#creartipoubicacionunion').show();
+}
+
 function showproteccioncatodica() {
     $('#crearproteccioncatodica').show();
 }
@@ -932,6 +941,9 @@ function fnshowmetunion() {
     $("#txtductogeneralunion").val(txtducto);
     $("#txttramogeneralunion").val(txttramo);
     $("#txtareageneralunion ").val(txtarea);
+    loadtipotecnica();
+    loadtipoubicacion();
+
 }
 function fnshowprofenterrado() {
     $('#profenterradofrm').show();
@@ -1672,6 +1684,13 @@ function loadCmbCruceTuberia() {
 function cancelotroTransporteCruce() {
     $("#espcruceTransporte").hide();
 }
+
+
+function creartipotecnicaunion() {
+    $("#espcruceTransporte").hide();
+}
+
+
 function showotroCruceTransporte() {
     $('#espcruceTransporte').show();
 }
@@ -1874,6 +1893,63 @@ function loadtipoinstalacion() {
         }
     });
 }
+
+function loadtipotecnica() {
+    var webMethod = "get_tipotecnica";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+
+                $("#cmtiptecnicaunion").empty();
+                $('#cmtiptecnicaunion').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+
+                    $('#cmtiptecnicaunion').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].C_0302_0049
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
+
+function loadtipoubicacion() {
+    var webMethod = "get_tipoubicacion";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+                console.log(data.data);
+                $("#cmbmetubicsoldunion").empty();
+                $('#cmbmetubicsoldunion').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+                    $('#cmbmetubicsoldunion').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].C_0302_0054
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
+
+
 function loadDuctos() {
     var webMethod = "ductos/fetch";
     var params = {
@@ -2128,6 +2204,10 @@ function cancelotroProteccionCatodica() {
 function cancelotroTipoInstalacion() {
     $("#creartipoinstalacion").hide();
 }
+
+function cancelotroTipoUbicacion() {
+    $("#creartipoubicacionunion").hide();
+}
 function cancelotroCostura() {
     $("#espCostura").hide();
 }
@@ -2316,6 +2396,80 @@ function saveotroTipoInstalacion() {
             alert("Error: " + error);
         });
 }
+
+
+function saveotroTipoTecnica() {
+    var webMethod = "saveTypeTecnica";
+    var params = {
+        C_0302_0049: $("#newTipoTecnica").val(),
+        descripcion: $("#newDescTecnica").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipotecnica();
+                $("#creartipotecnicaunion").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+
+
+function saveotroTipoUbicacion() {
+    var webMethod = "saveTypeUbicacion";
+    var params = {
+        C_0302_0054: $("#newTipoUbicacion").val(),
+        descripcion: $("#newDescUbicacion").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoubicacion();
+                $("#creartipoubicacionunion").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+
+
 
 
 
