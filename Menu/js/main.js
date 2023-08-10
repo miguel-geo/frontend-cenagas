@@ -2091,7 +2091,7 @@ function savebasecons() {
             C_0307_0110: $("#txtmatrellenobaseconst").val(),
             C_0308_0110: $("#presionhermebasecons").val(),
             file: formData,
-            C_0308_0111: $("#cmtipotecnicaunion").val(),
+            C_0308_0111: $("#cmtiporecubrimientobase").val(),
             coordenada_especifica: $("#coord_esp_idenbasecons").val(),
             kilometro_especifico: $("#km_esp_idenbasecons").val()
         };
@@ -2114,7 +2114,7 @@ function savebasecons() {
                     console.log(data.data);
                     alert("Información almacenada correctamente");
                     $('#construforms').show();
-                    $('#hermetisidadfrm').hide();
+                    $('#constbasefrm').hide();
                 }
             })
             .catch(error => {
