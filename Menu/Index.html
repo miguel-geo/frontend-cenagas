@@ -1751,12 +1751,25 @@
                                         </div>
                                         <select class="selectpicker form-control" id="cmbtipinstprot">
                                             <option value=0>Selecciona...</option>
-                                            <option value=1>Rectificador</option>
-                                            <option value=2>cama anódica</option>
+
                                         </select>
-                                        <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                        <button type="button" onclick="showotroTipoInstalacion()" class="btn btn-secondary">
                                             <i class="fas fa-square-plus"></i>
                                         </button>
+                                    </div>
+                                    <div class="input-group mb-3" id="creartipoinstalacion" style="display:none">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Tipo de Próteccion</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoInstalacion" aria-describedby="basic-addon1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="" aria-label="" id="newDescInstalacion" aria-describedby="basic-addon1">
+                                        <div>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoInstalacion()">Cancelar</button>
+                                            <button type="button" id="btn_saveMaterial" onclick="saveotroTipoInstalacion()" class="btn btn-success">Guardar</button>
+                                        </div>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">

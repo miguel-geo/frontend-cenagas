@@ -157,6 +157,10 @@ function showotroMaterial() {
 function showproteccioncatodica() {
     $('#crearproteccioncatodica').show();
 }
+
+function showotroTipoInstalacion() {
+    $('#creartipoinstalacion').show();
+}
 function espCostura() {
     $('#espCostura').show();
 }
@@ -968,6 +972,7 @@ function fnshowprotecccato() {
     $("#txtareageneralprot ").val(txtarea);
     
     loadtipoproteccioncatodica();
+    loadtipoinstalacion();
 }
 function fnshowseguridadpre() {
     $('#seguridadprearranquefrm').show();
@@ -1841,6 +1846,34 @@ function loadtipoproteccioncatodica() {
         }
     });
 }
+
+
+function loadtipoinstalacion() {
+    var webMethod = "get_tipoinstalacion";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+                console.log(data.data);
+                $("#cmbtipinstprot").empty();
+                $('#cmbtipinstprot').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+                    $('#cmbtipinstprot').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].C_0310_117
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
 function loadDuctos() {
     var webMethod = "ductos/fetch";
     var params = {
@@ -2091,6 +2124,10 @@ function cancelotroMaterialDisenio() {
 function cancelotroProteccionCatodica() {
     $("#crearproteccioncatodica").hide();
 }
+
+function cancelotroTipoInstalacion() {
+    $("#creartipoinstalacion").hide();
+}
 function cancelotroCostura() {
     $("#espCostura").hide();
 }
@@ -2242,6 +2279,44 @@ function saveotroProteccionCatodica() {
             alert("Error: " + error);
         });
 }
+
+
+
+function saveotroTipoInstalacion() {
+    var webMethod = "saveTypeInstalacion";
+    var params = {
+        C_0310_117: $("#newTipoInstalacion").val(),
+        descripcion: $("#newDescInstalacion").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoinstalacion();
+                $("#creartipoinstalacion").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+
 
 
 function saveDisenioServicio() {
