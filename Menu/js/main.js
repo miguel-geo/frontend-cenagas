@@ -14,6 +14,8 @@ var tramocon;
 var areacon;
 var temaconsulta = "";
 var docbasecons = "";
+var temaconsultaconstruccion = "";
+var temaconsultadisenio = "";
 const headers = new Headers({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
@@ -504,34 +506,20 @@ function inicializarEventos() {
         areaCon = event.target.value;
     });
     //Combo Temas
-    const selectTemas = document.getElementById('cmbTemas_con');
+    const selectTemas = document.getElementById('cmbTemasPrincipal_con');
     selectTemas.addEventListener('change', function handleChange(event) {
         temaconsulta = event.target.value;
         switch (event.target.value) {
-            case "T1":
-                limpiarTabas();
-                $("#tablaPersonas > tbody").empty();
-                $("#tablaPersonas").show();
-                $("#tablapresion").hide();
-                $("#datapresioncons").hide();
-                $("#dataGeneral").show();
-                $("#tablaproteccion").hide();
+            case "T1":                
+                $("#cmbTemasDisenio_con").show();
+                $("#cmbTemasConstruccion_con").hide();
              break;
             case "T2":
-                limpiarTabas();               
-                $("#tablaPersonas").hide();
-                $("#tablapresion").show();
-                $("#datapresioncons").show();
-                $("#dataGeneral").hide();
-                $("#tablaproteccion").hide();
+                $("#cmbTemasDisenio_con").hide();
+                $("#cmbTemasConstruccion_con").show()
             break;
             case "T3":
-                limpiarTabas();
-                $("#datapresioncons").hide();
-                $("#dataGeneral").hide();
-                $("#tablaPersonas").hide();
-                $("#tablapresion").hide();
-                $("#tablaproteccion").show();
+                //Aún no existe
             break;
             default:
         }
@@ -539,6 +527,193 @@ function inicializarEventos() {
         txttramo = event.target[event.target.selectedIndex].text;
         loadAreas(event.target.value);
     });
+    //Combo Tema Diseño
+    const selectTemasDisenio = document.getElementById('cmbTemasDisenio_con');
+    selectTemasDisenio.addEventListener('change', function handleChange(event) {
+        temaconsultadisenio = event.target.value;
+        switch (event.target.value) {
+            case "Dis1":
+            limpiarTabas();
+            $("#tablaPersonas > tbody").empty();
+            $("#tablaPersonas").show();
+            $("#tablapresion").hide();
+            $("#datapresioncons").hide();
+            $("#dataGeneral").show();
+            $("#tablaproteccion").hide();
+            break;
+            case "Dis2":
+            limpiarTabas();
+            $("#tablaPersonas").hide();
+            $("#tablapresion").show();
+            $("#datapresioncons").show();
+            $("#dataGeneral").hide();
+            $("#tablaproteccion").hide();
+            break;
+            case "Dis3":
+            limpiarTabas();
+            $("#datapresioncons").hide();
+            $("#dataGeneral").hide();
+            $("#tablaPersonas").hide();
+            $("#tablapresion").hide();
+            $("#tablaproteccion").show();
+            break;
+        default:
+    }
+        tramo = event.target.value;
+        txttramo = event.target[event.target.selectedIndex].text;
+        loadAreas(event.target.value);
+    });
+    //Combo Tema Diseño
+    const selectTemasConstruccion = document.getElementById('cmbTemasConstruccion_con');
+    selectTemasConstruccion.addEventListener('change', function handleChange(event) {
+        temaconsultaconstruccion = event.target.value;
+        switch (event.target.value) {
+            case "Cons1":
+                $("#tablabasecons").show();
+                $("#databasegeneral").show();
+                break;
+            case "Cons2":
+                $("#tablaunionCons").show();
+                break;
+            case "Cons3":
+                $("#tablaProfundidad").show();
+                break;
+            case "Cons4":
+                $("#tablaConsCruces").show();
+                break;
+            case "Cons5":
+                $("#tablaHermeticidad").show();
+                break;
+            case "Cons6":
+
+                break;
+            case "Cons7":
+                $("#tablaConsCatodica").show();
+                $("#datacatodica").show();
+                break;
+            case "Cons8":
+
+                break;
+            default:
+        }
+    });
+    //switch (event.target.value) {
+    //    case "T1":
+    //        limpiarTabas();
+    //        $("#tablaPersonas > tbody").empty();
+    //        $("#tablaPersonas").show();
+    //        $("#tablapresion").hide();
+    //        $("#datapresioncons").hide();
+    //        $("#dataGeneral").show();
+    //        $("#tablaproteccion").hide();
+    //        break;
+    //    case "T2":
+    //        limpiarTabas();
+    //        $("#tablaPersonas").hide();
+    //        $("#tablapresion").show();
+    //        $("#datapresioncons").show();
+    //        $("#dataGeneral").hide();
+    //        $("#tablaproteccion").hide();
+    //        break;
+    //    case "T3":
+    //        limpiarTabas();
+    //        $("#datapresioncons").hide();
+    //        $("#dataGeneral").hide();
+    //        $("#tablaPersonas").hide();
+    //        $("#tablapresion").hide();
+    //        $("#tablaproteccion").show();
+    //        break;
+    //    default:
+    //}
+
+    //Combo seleccionar Tipo de cruce
+    //const selectTipoCruce = document.getElementById('cmbTipcruce');
+    //selectTipoCruce.addEventListener('change', function handleChange(event) {
+    //    var tipocruce = event.target.value;
+    //    switch (tipocruce) {
+    //        case "A":
+    //            $("#att_llanurainundacion").show();
+    //            $("#att_tipocrucehidro").show();
+    //            $("#att_transportepesado").hide();
+    //            $("#att_gasoductopatrullado").hide();
+    //            $("#att_vialidadabierta").hide();
+    //            $("#att_carrilesvialidad").hide();
+    //            $("#att_edohistodos").hide();
+    //            $("#att_edoactualdos").hide();
+    //            $("#att_tipocrucetrnasporte").hide();
+    //            $("#att_existeunioncables").hide();
+    //            $("#att_ultimopotencialapago").hide();
+    //            $("#att_ultimopontencialencendio").hide();
+    //            $("#att_rectuberiaextranjera").hide();
+    //            $("#att_diametronom").hide();
+    //            $("#att_tipotuberia").hide();
+    //            $("#att_existecruceytuberia").hide();
+    //            $("#att_tipocruceservicio").hide();
+    //            $("#att_voltajetransportadoporservicio").hide();
+    //            break;
+    //        case "C":
+    //            $("#att_llanurainundacion").hide();
+    //            $("#att_tipocrucehidro").hide();
+    //            $("#att_transportepesado").show();
+    //            $("#att_gasoductopatrullado").show();
+    //            $("#att_vialidadabierta").show();
+    //            $("#att_carrilesvialidad").show();
+    //            $("#att_edohistodos").show();
+    //            $("#att_edoactualdos").show();
+    //            $("#att_tipocrucetrnasporte").show();
+    //            $("#att_existeunioncables").hide();
+    //            $("#att_ultimopotencialapago").hide();
+    //            $("#att_ultimopontencialencendio").hide();
+    //            $("#att_rectuberiaextranjera").hide();
+    //            $("#att_diametronom").hide();
+    //            $("#att_tipotuberia").hide();
+    //            $("#att_existecruceytuberia").hide();
+    //            $("#att_tipocruceservicio").hide();
+    //            $("#att_voltajetransportadoporservicio").hide();
+    //            break;
+    //        case "E":
+    //            $("#att_llanurainundacion").hide();
+    //            $("#att_tipocrucehidro").hide();
+    //            $("#att_transportepesado").hide();
+    //            $("#att_gasoductopatrullado").hide();
+    //            $("#att_vialidadabierta").hide();
+    //            $("#att_carrilesvialidad").hide();
+    //            $("#att_edohistodos").hide();
+    //            $("#att_edoactualdos").hide();
+    //            $("#att_tipocrucetrnasporte").hide();
+    //            $("#att_existeunioncables").show();
+    //            $("#att_ultimopotencialapago").show();
+    //            $("#att_ultimopontencialencendio").show();
+    //            $("#att_rectuberiaextranjera").show();
+    //            $("#att_diametronom").show();
+    //            $("#att_tipotuberia").show();
+    //            $("#att_existecruceytuberia").hide();
+    //            $("#att_tipocruceservicio").hide();
+    //            $("#att_voltajetransportadoporservicio").hide();
+    //            break
+    //        case "S":
+    //            $("#att_llanurainundacion").hide();
+    //            $("#att_tipocrucehidro").hide();
+    //            $("#att_transportepesado").hide();
+    //            $("#att_gasoductopatrullado").hide();
+    //            $("#att_vialidadabierta").hide();
+    //            $("#att_carrilesvialidad").hide();
+    //            $("#att_edohistodos").hide();
+    //            $("#att_edoactualdos").hide();
+    //            $("#att_tipocrucetrnasporte").hide();
+    //            $("#att_existeunioncables").hide();
+    //            $("#att_ultimopotencialapago").hide();
+    //            $("#att_ultimopontencialencendio").hide();
+    //            $("#att_rectuberiaextranjera").hide();
+    //            $("#att_diametronom").hide();
+    //            $("#att_tipotuberia").hide();
+    //            $("#att_existecruceytuberia").show();
+    //            $("#att_tipocruceservicio").show();
+    //            $("#att_voltajetransportadoporservicio").show();
+    //            break;
+    //        default:
+    //    }
+    //});
 }
 
 
@@ -767,6 +942,9 @@ function fnshowprotipocruces() {
     $("#txtductogeneraltipcruce").val(txtducto);
     $("#txttramogeneraltipocruce").val(txttramo);
     $("#txtareageneralptipocruce ").val(txtarea);
+    loadCmbCruceServicio();
+    loadCmbCruceTuberia();
+    loadCmbCruceTransporte();
 }
 function fnshowhermeti() {
     $('#hermetisidadfrm').show();
@@ -1101,13 +1279,13 @@ function saveConstruccionCruces() {
 
         C_0304_0082: $("#cmbgasnecpat").val(),// El gasoducto necesita ser patrullado
 
-        C_0304_0083: $("#txtNumCarrillesVialidad").val(),//No. de Carrilles de la vialidad-
+        C_0304_0083: $("#txtvialidadabierta").val(),//No. de Carrilles de la vialidad-
 
-        C_0304_0084: $("#txtEdohistoricoCrucedos").val(), //Estado histórico
+        C_0304_0084: $("#txtNumCarrillesVialidad").val(), //Estado histórico
 
-        C_0304_0085: $("#txtEdoActualCrucedos").val(),//Estado actual
+        C_0304_0085: $("#txtEdohistoricoCrucedos").val(),//Estado actual
 
-        C_0304_0086: $("#cmbexiunicab").val(),//Tipo de cruce de transporte
+        C_0304_0086: $("#txtEdoActualCrucedos").val(),//Tipo de cruce de transporte
 
         C_0304_0087_id: $("#cmbetipocrucetrans").val(), //¿Existe unión de cables?
 
@@ -1172,7 +1350,11 @@ function saveConstruccionHermeticidad() {
         C_0305_0105: $("#txtvarher").val(),//Presión de prueba mínima
         C_0305_0106: $("#txtvarpreher").val(),//Variaciones de presión
         coordenada_especifica: $("#coord_esp_idenherm").val(),
-        kilometro_especifico: $("#km_esp_idenpherm").val()
+        kilometro_especifico: $("#km_esp_idenpherm").val(),
+        unidad_presion_max: $("#cmbunidadpresionmax").val(),
+        unidad_presion_disenio: $("#cmbunidadpresiondisenio").val(),
+        unidad_presion_min: $("#cmbunidadpresionmin").val(),
+        unidad_variaciones_presion: $("#cmbunidadvariacionespres").val()
     };
 
 
@@ -1346,6 +1528,212 @@ function saveConstruccioSeguridad() {
             alert("Error: " + error);
         });
 }
+function cancelotroCruceServicio() {
+    $("#espcruceServicio").hide();
+}
+function saveotroCruceServicio() {
+    var webMethod = "saveCruceServicio";
+    var params = {
+        C_0304_0095: $("#newCruceServicio").val(),
+        descripcion: $("#newDescTipoServicio").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadCmbCruceServicio();
+                $("#espcruceServicio").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotroCruceServicio() {
+    $('#espcruceServicio').show();
+}
+function loadCmbCruceServicio() {
+    var webMethod = "get_CruceServicioCons";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+                console.log(data.data);
+                $("#cmbtipcruceserv").empty();
+                $('#cmbtipcruceserv').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+                    $('#cmbtipcruceserv').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].C_0304_0095
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
+
+
+function cancelotroTuberiaCruce() {
+    $("#espcruceTuberia").hide();
+}
+function showotroCruceTuberia() {
+    $('#espcruceTuberia').show();
+}
+function saveotroCruceTuberia() {
+    var webMethod = "saveTuberiaCons";
+    var params = {
+        C_0304_0093: $("#newCruceTuberia").val(),
+        descripcion: $("#newDescCruceTuberia").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadCmbCruceTuberia();
+                $("#espcruceTuberia").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function loadCmbCruceTuberia() {
+    var webMethod = "get_Tuberia";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+                console.log(data.data);
+                $("#cmntiptub").empty();
+                $('#cmntiptub').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+                    $('#cmntiptub').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].C_0304_0093
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
+
+
+function cancelotroTransporteCruce() {
+    $("#espcruceTransporte").hide();
+}
+function showotroCruceTransporte() {
+    $('#espcruceTransporte').show();
+}
+function saveotroCruceTransporte() {
+    var webMethod = "saveCruceTransporte";
+    var params = {
+        C_0304_0087: $("#newCruceTransporte").val(),
+        descripcion: $("#newDescTipoTransporte").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadCmbCruceTransporte();
+                $("#espcruceTransporte").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function loadCmbCruceTransporte() {
+    var webMethod = "get_CruceTransporteCons";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+                console.log(data.data);
+                $("#cmbetipocrucetrans").empty();
+                $('#cmbetipocrucetrans').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+                    $('#cmbetipocrucetrans').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].C_0304_0087
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
+
+
+
+
 //#endregion
 function selectTab(evt, tabName) {
     // Declare all variables
@@ -2100,106 +2488,280 @@ function consulta() {
         }
         switch (temaconsulta) {
             case "T1":
-                $('#tablaPersonas tbody')[0].innerHTML = "";
-                var webMethod = "get_diseniogeneral";
-                $.ajax({
-                    type: "POST",
-                    url: apiUrl + webMethod,
-                    data: params,
-                    success: function (data) {
-                        if (data.data.length > 0) {
-                            //Diametro mm
-                            $('#diammcons').text(data.data[0].C_0202_0007);
-                            //Diametro in
-                            $('#diaincons').text(data.data[0].C_0202_0008);
-                            //Espesor mm
-                            $('#diaincons').text(data.data[0].C_0203_0009);
-                            //Espesor in
-                            $('#espincons').text(data.data[0].C_0203_0010);
-                            //Especificación material
-                            $('#espincons').text(data.data[0].C_0204_0011);
-                            //Temperatura °C
-                            $('#espincons').text(data.data[0].C_0207_0027);
-                            //Temperatura °F
-                            $('#espincons').text(data.data[0].C_0207_0028);
-                            //Fecha fabricación
-                            $('#espincons').text(data.data[0].C_0209_0030);
-                            //% carbono
-                            $('#espincons').text(data.data[0].C_0210_0031);
-                            //% resistencia tracción
-                            $('#espincons').text(data.data[0].C_0210_0032);
-                            //% Límite elástico
-                            $('#espincons').text(data.data[0].C_0210_0033);
-                        }
-                        
-                        if (data.success) {
-                            for (i = 0; i < data.data.length; i++) {
-                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0201_0006, data.data[i].C_0208_0029];
-                                llenarTablas(persona, "tablaPersonas");
-                            }
-                            if (data.data.length > 0) {
-                                // ExportarDatos(data.data);
-                            }
-                        }
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
+                switch (temaconsultadisenio) {
+                    case "Dis1":
+                        $('#tablaPersonas tbody')[0].innerHTML = "";
+                        var webMethod = "get_diseniogeneral";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethod,
+                            data: params,
+                            success: function (data) {
+                                if (data.data.length > 0) {
+                                    //Diametro mm
+                                    $('#diammcons').text(data.data[0].C_0202_0007);
+                                    //Diametro in
+                                    $('#diaincons').text(data.data[0].C_0202_0008);
+                                    //Espesor mm
+                                    $('#diaincons').text(data.data[0].C_0203_0009);
+                                    //Espesor in
+                                    $('#espincons').text(data.data[0].C_0203_0010);
+                                    //Especificación material
+                                    $('#espincons').text(data.data[0].C_0204_0011);
+                                    //Temperatura °C
+                                    $('#espincons').text(data.data[0].C_0207_0027);
+                                    //Temperatura °F
+                                    $('#espincons').text(data.data[0].C_0207_0028);
+                                    //Fecha fabricación
+                                    $('#espincons').text(data.data[0].C_0209_0030);
+                                    //% carbono
+                                    $('#espincons').text(data.data[0].C_0210_0031);
+                                    //% resistencia tracción
+                                    $('#espincons').text(data.data[0].C_0210_0032);
+                                    //% Límite elástico
+                                    $('#espincons').text(data.data[0].C_0210_0033);
+                                }
 
-                    }
-                });
+                                if (data.success) {
+                                    for (i = 0; i < data.data.length; i++) {
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0201_0006, data.data[i].C_0208_0029];
+                                        llenarTablas(persona, "tablaPersonas");
+                                    }
+                                    if (data.data.length > 0) {
+                                        // ExportarDatos(data.data);
+                                    }
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
+                    case "Dis2":
+                        $('#tablapresion tbody')[0].innerHTML = "";
+                        var webMethodPresion = "get_Presion";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodPresion,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                    if (data.data.length > 0) {
+                                        //Presión diseño
+                                        $('#presdiscons').text(data.data[0].C_0206_0022);
+                                        //Presion Max PSI
+                                        $('#presmaxoppsicons').text(data.data[0].C_0206_0023);
+                                        //Presion Max Kg
+                                        $('#presmaxopecons').text(data.data[0].C_0206_0024);
+                                    }
+                                    for (i = 0; i < data.data.length; i++) {
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0206_0017, data.data[i].C_0206_0019, data.data[i].C_0206_0023, data.data[i].C_0206_0024];
+                                        llenarTablas(persona, "tablapresion");
+                                    }
+                                    if (data.data.length > 0) {
+                                        // ExportarDatos(data.data);
+                                    }
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
+                    case "Dis3":
+                        $('#tablaproteccion tbody')[0].innerHTML = "";
+                        var webMethodProteccion = "get_Proteccion";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodProteccion,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                    for (i = 0; i < data.data.length; i++) {
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0211_0043, data.data[i].C_0211_0044, data.data[i].C_0211_0045, data.data[i].C_0211_0046];
+                                        llenarTablas(persona, "tablaproteccion");
+                                    }
+                                    if (data.data.length > 0) {
+                                        // ExportarDatos(data.data);
+                                    }
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
+                    default:
+                }             
                 break;
             case "T2":
-                $('#tablapresion tbody')[0].innerHTML = "";
-                var webMethodPresion = "get_Presion";
-                $.ajax({
-                    type: "POST",
-                    url: apiUrl + webMethodPresion,
-                    data: params,
-                    success: function (data) {
-                        if (data.success) {
-                            if (data.data.length > 0) {
-                                //Presión diseño
-                                $('#presdiscons').text(data.data[0].C_0206_0022);
-                                //Presion Max PSI
-                                $('#presmaxoppsicons').text(data.data[0].C_0206_0023);
-                                //Presion Max Kg
-                                $('#presmaxopecons').text(data.data[0].C_0206_0024);
-                            }
-                            for (i = 0; i < data.data.length; i++) {
-                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0206_0017, data.data[i].C_0206_0019, data.data[i].C_0206_0023, data.data[i].C_0206_0024];
-                                llenarTablas(persona, "tablapresion");
-                            }
-                            if (data.data.length > 0) {
-                                // ExportarDatos(data.data);
-                            }
-                        }
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
+                switch (temaconsultaconstruccion) {
+                    case "Cons1":
+                        $('#tablabasecons tbody')[0].innerHTML = "";
+                        var webMethodCatodica = "get_construcciongeneral";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodCatodica,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                    if (data.data.length > 0) {
+                                        //Fecha construcción
+                                        $('#tipocatodicacons').text(data.data[0].C_0301_0048);
+                                        //Recubrimiento anticorrosivo
+                                        $('#recuanticorro').text(data.data[0].C_0306_0108);
+                                        //Tipo de suelo
+                                        $('#tiposueloconsbase').text(data.data[0].C_0307_0109);
+                                        //Material de relleno
+                                        $('#matrellenobasecons').text(data.data[0].C_0307_0110);
+                                        //Tipo recubrimiento
+                                        $('#tiporecconsbase').text(data.data[0].C_0311_121);
+                                    }
+                                    for (i = 0; i < data.data.length; i++) {
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0308_0110];
+                                        llenarTablas(persona, "tablabasecons");
+                                    }
+                                    if (data.data.length > 0) {
+                                        // ExportarDatos(data.data);
+                                    }
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
 
-                    }
-                });
+                            }
+                        });
+                        break;
+                    case "Cons2":
+                        $('#tablaunionCons tbody')[0].innerHTML = "";
+                        var webMethodUnion = "get_construccionunion";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodUnion,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+
+                                    for (i = 0; i < data.data.length; i++) {
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0302_0049, data.data[i].C_0302_0050, data.data[i].C_0302_0051, data.data[i].C_0302_0052];
+                                        llenarTablas(persona, "tablaunionCons");
+                                    }
+                                    if (data.data.length > 0) {
+                                        // ExportarDatos(data.data);
+                                    }
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
+                    case "Cons3":
+                        $('#tablaProfundidad tbody')[0].innerHTML = "";
+                        var webMethodProfundidad = "get_construccionprofundidad";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodProfundidad,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                    
+                                    for (i = 0; i < data.data.length; i++) {
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0303_0058, data.data[i].C_0303_0059, data.data[i].C_0303_0060, data.data[i].C_0303_0061];
+                                        llenarTablas(persona, "tablaProfundidad");
+                                    }
+                                    if (data.data.length > 0) {
+                                        // ExportarDatos(data.data);
+                                    }
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
+                    case "Cons4":
+                        $('#tablaConsCruces tbody')[0].innerHTML = "";
+                        var webMethodCruces = "get_construccioncruces";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodCruces,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                    for (i = 0; i < data.data.length; i++) {
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0304_0070, data.data[i].C_0304_0071, data.data[i].C_0304_0072, data.data[i].C_0304_0073, data.data[i].C_0304_0074, data.data[i].C_0304_0075];
+                                        llenarTablas(persona, "tablaConsCruces");
+                                    }
+                                    if (data.data.length > 0) {
+                                        // ExportarDatos(data.data);
+                                    }
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
+                    case "Cons5"://tablaHermeticidad
+                        $('#tablaHermeticidad tbody')[0].innerHTML = "";
+                        var webMethodHermeticidad = "get_construccionhermeticidad";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodHermeticidad,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                    if (data.data.length > 0) {
+                                        //Tipo catódica
+                                        $('#tipocatodicacons').text(data.data[0].C_0310_116);
+                                    }
+                                    for (i = 0; i < data.data.length; i++) {
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0305_0097, data.data[i].C_0305_0098, data.data[i].C_0305_0099, data.data[i].C_0305_0100, data.data[i].C_0305_0101];
+                                        llenarTablas(persona, "tablaHermeticidad");
+                                    }
+                                    if (data.data.length > 0) {
+                                        // ExportarDatos(data.data);
+                                    }
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
+                    case "Cons7":
+                        $('#tablaConsCatodica tbody')[0].innerHTML = "";
+                        var webMethodCatodica = "get_construccioncatodica";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodCatodica,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                    if (data.data.length > 0) {
+                                        //Tipo catódica
+                                        $('#tipocatodicacons').text(data.data[0].C_0310_116);
+                                    }
+                                    for (i = 0; i < data.data.length; i++) {
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0310_117, data.data[i].C_0310_118, data.data[i].C_0310_119, data.data[i].C_0310_120, data.data[i].nombre];
+                                        llenarTablas(persona, "tablaConsCatodica");
+                                    }
+                                        if (data.data.length > 0) {
+                                            // ExportarDatos(data.data);
+                                        }
+                                    }
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+
+                                }
+                            });
+                        break;
+                    default:
+                }
+                
                 break;
             case "T3":
-                $('#tablaproteccion tbody')[0].innerHTML = "";
-                var webMethodProteccion = "get_Proteccion";
-                $.ajax({
-                    type: "POST",
-                    url: apiUrl + webMethodProteccion,
-                    data: params,
-                    success: function (data) {
-                        if (data.success) {
-                            for (i = 0; i < data.data.length; i++) {
-                                var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0211_0043, data.data[i].C_0211_0044, data.data[i].C_0211_0045, data.data[i].C_0211_0046];
-                                llenarTablas(persona, "tablaproteccion");
-                            }
-                            if (data.data.length > 0) {
-                                // ExportarDatos(data.data);
-                            }
-                        }
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-
-                    }
-                });
+               
                 break;
             default:
         }

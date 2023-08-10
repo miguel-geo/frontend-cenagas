@@ -448,8 +448,8 @@
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                               aria-describedby="inputGroupFileAddon01" accept=".pdf" lang="es">
-                                        <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo PDF</label>
+                                               aria-describedby="inputGroupFileAddon01"  lang="es">
+                                        <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -458,8 +458,8 @@
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile02"
-                                               aria-describedby="inputGroupFileAddon01" accept=".pdf" lang="es">
-                                        <label class="custom-file-label" for="inputGroupFile02">Escoje el archivo PDF</label>
+                                               aria-describedby="inputGroupFileAddon01" lang="es">
+                                        <label class="custom-file-label" for="inputGroupFile02">Escoje el archivo</label>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -468,8 +468,8 @@
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile03"
-                                               aria-describedby="inputGroupFileAddon01" accept=".pdf" lang="es">
-                                        <label class="custom-file-label" for="inputGroupFile03">Escoje el archivo PDF</label>
+                                               aria-describedby="inputGroupFileAddon01"  lang="es">
+                                        <label class="custom-file-label" for="inputGroupFile03">Escoje el archivo</label>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -478,8 +478,8 @@
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile04"
-                                               aria-describedby="inputGroupFileAddon01" accept=".pdf" lang="es">
-                                        <label class="custom-file-label" for="inputGroupFile04">Escoje el archivo PDF</label>
+                                               aria-describedby="inputGroupFileAddon01"lang="es">
+                                        <label class="custom-file-label" for="inputGroupFile04">Escoje el archivo</label>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -494,6 +494,8 @@
                                 </div>
 
                                 <div class="modal-footer">
+                                
+                                     <label  id="inputGroupFileAddon01" style="margin-right:10px;">Nota: Seleccionar al menos un archivo para guardar correctamente</label>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelDisenioServicio()">Cancelar</button>
                                     <button type="button" id="btn_saveiServicio" onclick="saveDisenioServicio()" class="btn btn-success">Guardar</button>
                                 </div>
@@ -903,7 +905,7 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Prueba de hermeticidad (PSI)</span>
+                                            <span class="input-group-text" id="basic-addon1">Presión de prueba de hermeticidad (PSI)</span>
                                         </div>
                                         <input type="text" class="form-control" placeholder="" aria-label="" id="presionhermebasecons" aria-describedby="basic-addon1">
                                     </div>
@@ -1209,30 +1211,27 @@
                                         <option value=4>ductos extranjeros (E)</option>
                                         <option value=5>servicios de comunicación(S)</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
                                 </div>
                                 <!-- Clase de localización -->
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Clase de localización</span>
                                     </div>
-                                    <input type="text" class="form-control" id="txtclaseloca" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="txtclaseloca" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!--Propietario -->
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Propietario</span>
                                     </div>
-                                    <input type="text" class="form-control" id="txtpropietario" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="txtpropietario" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!--Distancia del cruce encima o debajo de la tubería   -->
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Distancia del cruce encima o debajo de la tubería</span>
                                     </div>
-                                    <input type="text" class="form-control" id="txtdictacruce" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="txtdictacruce" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!-- Distancia desde el punto de cruce influye en la dirección aguas abajo-->
                                 <div class="input-group mb-3">
@@ -1295,9 +1294,6 @@
                                         <option value=3>No aplica</option>
                                         <option value=4>Desconocido</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
                                 </div>
                                 <!-- El gasoducto necesita ser patrullado-->
                                 <div class="input-groñup mb-3 infraestructura" style="display:none;">
@@ -1311,9 +1307,13 @@
                                         <option value=3>No aplica</option>
                                         <option value=4>Desconocido</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
+                                </div>
+                                <!-- Vialidad abierta al público-->
+                                <div class="input-group mb-3" style="display:none" id="att_vialidadabierta">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">No. de Carrilles de la vialidad</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" id="txtvialidadabierta" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!-- No. de Carrilles de la vialidad-->
                                 <div class="input-group mb-3 infraestructura" style="display:none;">
@@ -1350,11 +1350,26 @@
                                         <option value=5>Camino</option>
                                         <option value=6>Camino Estacional</option>
                                         <option value=7>Carretera estatal</option>
-                                        <option value=8>No aplica</option>
+                                        <option value=8>Carretera Federal</option>
+                                        <option value=9>No aplica</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotroCruceTransporte()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
+                                </div>
+                                <div class="input-group mb-3" id="espcruceTransporte" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newCruceTransporte" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescTipoTransporte" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTransporteCruce()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroCruceTransporte()" class="btn btn-success">Guardar</button>
+                                    </div>
                                 </div>
                                 <!-- ¿Existe unión de cables? -->
                                 <div class="input-group mb-3 extranjeros" style="display:none;">
@@ -1367,9 +1382,6 @@
                                         <option value=2>No</option>
                                         <option value=3>Desconocido</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
                                 </div>
                                 <!-- Último potencial de tubería a tierra medido (expresado en voltios) se apagó    -->
                                 <div class="input-group mb-3 extranjeros" style="display:none;">
@@ -1390,7 +1402,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Recubrimiento de tubería extranjera</span>
                                     </div>
-                                    <input type="date" class="form-control" placeholder="" id="txtrectubext" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="" id="txtrectubext" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!-- Diámetro nominal tubería extranjera    -->
                                 <div class="input-group mb-3 extranjeros" style="display:none;">
@@ -1410,9 +1422,23 @@
                                         <option value=2>Petróleo</option>
                                         <option value=3>Drenaje</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotroCruceTuberia()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
+                                </div>
+                                <div class="input-group mb-3" id="espcruceTuberia" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newCruceTuberia" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescCruceTuberia" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTuberiaCruce()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroCruceTuberia()" class="btn btn-success">Guardar</button>
+                                    </div>
                                 </div>
                                 <!--¿Existe unión de cables entre el servicio de cruce y la tubería?    -->
                                 <div class="input-group mb-3 comunicacion" style="display:none;">
@@ -1425,10 +1451,8 @@
                                         <option value=2>No</option>
                                         <option value=3>No aplica</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
                                 </div>
+
                                 <!--Tipo de cruce de servicio  -->
                                 <div class="input-group mb-3 comunicacion" style="display:none;">
                                     <div class="input-group-prepend">
@@ -1440,9 +1464,23 @@
                                         <option value=2>Servicio eléctrico</option>
                                         <option value=3>Telefonía</option>
                                     </select>
-                                    <button type="button" onclick="showotroMaterial()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotroCruceServicio()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
+                                </div>
+                                <div class="input-group mb-3" id="espcruceServicio" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newCruceServicio" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescTipoServicio" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroCruceServicio()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroCruceServicio()" class="btn btn-success">Guardar</button>
+                                    </div>
                                 </div>
                                 <!-- Voltaje transportado por el servicio publico -->
                                 <div class="input-group mb-3 comunicacion" style="display:none;">
@@ -1523,15 +1561,26 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Presión de prueba</span>
+                                            <span class="input-group-text" id="basic-addon1">Presión de prueba máxima</span>
                                         </div>
                                         <input type="text" class="form-control" placeholder="" aria-label="" id="txtpresprueb" aria-describedby="basic-addon1">
+                                        <select class="selectpicker form-control" id="cmbunidadpresionmax">
+                                            <option value=0>Selecciona unidad medida...</option>
+                                            <option value="PSI">PSI</option>
+                                            <option value="kg/cm2">kg/cm2</option>
+                                        </select>
                                     </div>
+                                   
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Presión de diseño  </span>
                                         </div>
                                         <input type="text" class="form-control" placeholder="" aria-label="" id="txtpresdisger" aria-describedby="basic-addon1">
+                                        <select class="selectpicker form-control" id="cmbunidadpresiondisenio">
+                                            <option value=0>Selecciona unidad medida...</option>
+                                            <option value="PSI">PSI</option>
+                                            <option value="kg/cm2">kg/cm2</option>
+                                        </select>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -1544,12 +1593,22 @@
                                             <span class="input-group-text" id="basic-addon1">Presión de prueba mínima </span>
                                         </div>
                                         <input type="text" class="form-control" placeholder="" aria-label="" id="txtvarher" aria-describedby="basic-addon1">
+                                        <select class="selectpicker form-control" id="cmbunidadpresionmin">
+                                            <option value=0>Selecciona unidad medida...</option>
+                                            <option value="PSI">PSI</option>
+                                            <option value="kg/cm2">kg/cm2</option>
+                                        </select>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Variaciones de presión</span>
                                         </div>
                                         <input type="text" class="form-control" placeholder="" aria-label="" id="txtvarpreher" aria-describedby="basic-addon1">
+                                        <select class="selectpicker form-control" id="cmbunidadvariacionespres">
+                                            <option value=0>Selecciona unidad medida...</option>
+                                            <option value="PSI">PSI</option>
+                                            <option value="kg/cm2">kg/cm2</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -1849,21 +1908,140 @@
                             <option>Selecciona...</option>
 
                         </select>
-
-                        <label for="exampleFormControlSelect1">Tema</label>
-                        <select class="selectpicker form-control" id="cmbTemas_con">
-                            <option value="0">Selecciona...</option>
-                            <option value="T1">Identificacíón</option>
-                            <option value="T2">Presión</option>
-                            <option value="T3">Protección</option>
-                        </select>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" onclick="consulta()" id="btnConsultar" data-dismiss="modal">Consultar</button>
+                        <div class="input-group mb-3 mt-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Tema</span>
+                            </div>
+                            <select class="selectpicker form-control" id="cmbTemasPrincipal_con">
+                                <option value="0">Selecciona...</option>
+                                <option value="T1">Diseño</option>
+                                <option value="T2">Construcción</option>
+                                <option value="T3">Operación</option>
+                            </select>
+                            <select class="selectpicker form-control" id="cmbTemasDisenio_con" style="display:none">
+                                <option value="0">Selecciona...</option>
+                                <option value="Dis1">Identificacíón</option>
+                                <option value="Dis2">Presión</option>
+                                <option value="Dis3">Protección</option>
+                            </select>
+                            <select class="selectpicker form-control" id="cmbTemasConstruccion_con" style="display:none">
+                                <option value="0">Selecciona...</option>
+                                <option value="Cons1">Base</option>
+                                <option value="Cons2">Unión</option>
+                                <option value="Cons3">Profundidad</option>
+                                <option value="Cons4">Tipo de cruces</option>
+                                <option value="Cons5">Hermeticidad</option>
+                                <option value="Cons6">Inspección</option>
+                                <option value="Cons7">Catódica</option>
+                                <option value="Cons8">Seguridad</option>
+                            </select>
                         </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" onclick="consulta()" id="btnConsultar" data-dismiss="modal">Consultar</button>
+                            </div>
 
-                        <div class="table-responsive">
-                            <div id="dataGeneral" style="display:none">
-                                <div class="card">
+                            <div class="table-responsive">
+                                <div id="dataGeneral" style="display:none">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Resumen
+                                        </div>
+                                        <div class="card-block">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Diametro (mm)</h6>
+                                                            <p class="card-text" id="diammcons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Diametro (in)</h6>
+                                                            <p class="card-text" id="diaincons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Espesor de pared (mm)</h6>
+                                                            <p class="card-text" id="espmmcons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Espero de pared (in)</h6>
+                                                            <p class="card-text" id="espincons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Especificación de material</h6>
+                                                            <p class="card-text" id="espmatcons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Temperatura °C</h6>
+                                                            <p class="card-text" id="tempconsc"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Temperatura °F</h6>
+                                                            <p class="card-text" id="tempconsf"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Fache de fabricación</h6>
+                                                            <p class="card-text" id="fecfabcons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">% de carbono</h6>
+                                                            <p class="card-text" id="porcons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Resistencia a la tracción</h6>
+                                                            <p class="card-text" id="restraccons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="card h-100">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Límite elástico</h6>
+                                                            <p class="card-text" id="limelacons"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="datapresioncons" style="display:none">
                                     <div class="card-header">
                                         Resumen
                                     </div>
@@ -1872,288 +2050,576 @@
                                             <div class="col-md-2">
                                                 <div class="card h-100">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">Diametro (mm)</h6>
-                                                        <p class="card-text" id="diammcons"></p>
+                                                        <h6 class="card-title">Presión de diseño (PSI)</h6>
+                                                        <p class="card-text" id="presdiscons"></p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="card h-100">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">Diametro (in)</h6>
-                                                        <p class="card-text" id="diaincons"></p>
+                                                        <h6 class="card-title">Presión máxima de operación (PSI)</h6>
+                                                        <p class="card-text" id="presmaxoppsicons"></p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="card h-100">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">Espesor de pared (mm)</h6>
-                                                        <p class="card-text" id="espmmcons"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Espero de pared (in)</h6>
-                                                        <p class="card-text" id="espincons"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Especificación de material</h6>
-                                                        <p class="card-text" id="espmatcons"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Temperatura °C</h6>
-                                                        <p class="card-text" id="tempconsc"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Temperatura °F</h6>
-                                                        <p class="card-text" id="tempconsf"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Fache de fabricación</h6>
-                                                        <p class="card-text" id="fecfabcons"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">% de carbono</h6>
-                                                        <p class="card-text" id="porcons"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Resistencia a la tracción</h6>
-                                                        <p class="card-text" id="restraccons"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="card h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">Límite elástico</h6>
-                                                        <p class="card-text" id="limelacons"></p>
+                                                        <h6 class="card-title">Presión máxima de operación (kg/cm2)</h6>
+                                                        <p class="card-text" id="presmaxopecons"></p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            </div>
-                            <div id="datapresioncons" style="display:none">
-                                <div class="card-header">
-                                    Resumen
                                 </div>
-                                <div class="card-block">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="card h-100">
-                                                <div class="card-body">
-                                                    <h6 class="card-title">Presión de diseño (PSI)</h6>
-                                                    <p class="card-text" id="presdiscons"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="card h-100">
-                                                <div class="card-body">
-                                                    <h6 class="card-title">Presión máxima de operación (PSI)</h6>
-                                                    <p class="card-text" id="presmaxoppsicons"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="card h-100">
-                                                <div class="card-body">
-                                                    <h6 class="card-title">Presión máxima de operación (kg/cm2)</h6>
-                                                    <p class="card-text" id="presmaxopecons"></p>
+                                <!--Table-->
+                                <table id="tablaPersonas" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Longitud
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo costura
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+
+                                <table id="tablapresion" class="table table-bordered" style="display:none">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Entidad/Empresa
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Método de cálculo
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión Máxima (PSI)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión Máxima (kg)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaproteccion" class="table table-bordered" style="display:none">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Ubicación protección
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Orden de aplicación
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Localización
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Temperatura máxima
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <!--Table-->
+                                <!-- #region Tablas Construcción -->
+                                <table id="tablaConsCruces" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de cruce
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Clase de localización
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Propietario
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Distancia del cruce encima o debajo de la tubería
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Distancia desde el punto de cruce influye en la dirección aguas abajo
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Distancia desde el punto de cruce influye en la dirección aguas arriba
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <div id="datacatodica" style="display:none">
+                                    <div class="card-header">
+                                        Resumen
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Tipo de protección catódica</h6>
+                                                        <p class="card-text" id="tipocatodicacons"></p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
+                                <table id="tablaConsCatodica" class="table table-bordered" style="display:none;margin-top:15px;">
 
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de instalación
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Id o no. De seri
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Propietario
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fabricante
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Estado
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <div id="databasegeneral" style="display:none">
+                                    <div class="card-header">
+                                        Resumen
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Fecha de construcción</h6>
+                                                        <p class="card-text" id="fechaconsbase"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Recubrimiento anticorrosivo</h6>
+                                                        <p class="card-text" id="recuanticorro"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Tipo de suelo</h6>
+                                                        <p class="card-text" id="tiposueloconsbase"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Material de relleno</h6>
+                                                        <p class="card-text" id="matrellenobasecons"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Tipo de recubrimiento</h6>
+                                                        <p class="card-text" id="tiporecconsbase"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <table id="tablabasecons" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión de prueba de hermeticidad
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaHermeticidad" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Nombre de la empresa
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha de prueba
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Duración de la prueba
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Medio de prueba empleado
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Longitud de los ductos probados
+                                                </a>
+                                            </th>
+
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaProfundidad" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Profundidad de cobertura
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Medida profundidad bajo el agua
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Elevación del fondo de la tubería
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Elevación del centro de la tubería
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaunionCons" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de técnica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Identificador
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Recubrimiento aplicado en la soldadura
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha de servicio
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <!-- #endregion  -->
                             </div>
-                            <!--Table-->
-                            <table id="tablaPersonas" class="table table-bordered" style="display:none;margin-top:15px;">
-
-                                <!--Table head-->
-                                <thead>
-                                    <tr>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Área unitaria
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Coordenada específica
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Kilometro específico
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Longitud
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Tipo costura
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Acciones
-                                            </a>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <!--Table head-->
-                                <!--Table body-->
-                                <tbody>
-                                </tbody>
-                                <!--Table body-->
-                            </table>
-
-                            <table id="tablapresion" class="table table-bordered" style="display:none">
-
-                                <!--Table head-->
-                                <thead>
-                                    <tr>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Área unitaria
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Coordenada específica
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Kilometro específico
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Entidad/Empresa
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Método de cálculo
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Presión Máxima (PSI)
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Presión Máxima (kg)
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Acciones
-                                            </a>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <!--Table head-->
-                                <!--Table body-->
-                                <tbody>
-                                </tbody>
-                                <!--Table body-->
-                            </table>
-                            <table id="tablaproteccion" class="table table-bordered" style="display:none">
-
-                                <!--Table head-->
-                                <thead>
-                                    <tr>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Área unitaria
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Coordenada específica
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Kilometro específico
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Ubicación protección
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Orden de aplicación
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                               Localización
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Temperatura máxima
-                                            </a>
-                                        </th>
-                                        <th class="th-lg">
-                                            <a style="color: #265C4F;">
-                                                Acciones
-                                            </a>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <!--Table head-->
-                                <!--Table body-->
-                                <tbody>
-                                </tbody>
-                                <!--Table body-->
-                            </table>
-                            <!--Table-->
-
-
+                            <!-- Table with panel -->
                         </div>
-                        <!-- Table with panel -->
                     </div>
-                </div>
                 <div id="Opcion2" class="tabcontent">
                     <h3>MENU 2</h3>
                     <p></p>
