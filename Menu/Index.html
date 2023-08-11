@@ -155,11 +155,11 @@
                                             </div>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="km_origen">KM Origen</span>
+                                                    <span class="input-group-text" id="km_origen">KM Origen DDV</span>
                                                 </div>
                                                 <input type="text" id="txtkmOrigen" class="form-control" placeholder="" aria-describedby="basic-addon1" readonly>
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="km_destino">KM Destino</span>
+                                                    <span class="input-group-text" id="km_destino">KM Destino DDV</span>
                                                 </div>
                                                 <input type="text" id="txtkmDestino" class="form-control" placeholder="" aria-describedby="basic-addon1" readonly>
                                             </div>
@@ -869,9 +869,13 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                            <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_idenbasecons" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenbasecons_x" aria-describedby="basic-addon1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                        </div>
+                                        <input type="text" class="form-control validate-pattern" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenbasecons_y" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -908,6 +912,11 @@
                                             <span class="input-group-text" id="basic-addon1">Presión de prueba de hermeticidad (PSI)</span>
                                         </div>
                                         <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="presionhermebasecons" aria-describedby="basic-addon1">
+                                        <select class="selectpicker form-control" id="cmbunidadpresionhermebasecons">
+                                            <option value=0>Selecciona unidad medida...</option>
+                                            <option value="PSI">PSI</option>
+                                            <option value="kg/cm2">kg/cm2</option>
+                                        </select>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -928,6 +937,23 @@
                                         <option value="Poliuretanos">Poliuretanos</option>
                                         <option value="Sistema Tricapa">Sistema Tricapa</option>
                                     </select>
+                                    <button type="button" onclick="showtiporecubrimiento()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="creartiporecubrimiento" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de Recubrimiento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoRecubrimiento" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescRecubrimiento" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoRecubrimiento()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroTipoRecubrimiento()" class="btn btn-success">Guardar</button>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelbasecons()" data-dismiss="modal">Cancelar</button>
@@ -958,9 +984,13 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                            <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_idenunion" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenunion_x" aria-describedby="basic-addon1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                        </div>
+                                        <input type="text" class="form-control validate-pattern" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenunion_y" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -1102,9 +1132,13 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_idenprofent" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenpprofent_x" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenpprofent_y" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -1217,9 +1251,13 @@
                                 <!--Coordenada Específica-->
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_identipocruce" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenptipocruce_x" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenptipocruce_y" aria-describedby="basic-addon1">
                                 </div>
                                 <!--Kilometro específico-->
                                 <div class="input-group mb-3">
@@ -1235,11 +1273,11 @@
                                     </div>
                                     <select class="selectpicker form-control" id="cmbTipcruce">
                                         <option value=0>Selecciona...</option>
-                                        <option value=1>Tipo de cruce (Cuerpos de agua aéreo (A)</option>
-                                        <option value=2>cuerpos de agua subfluvial (A)</option>
-                                        <option value=3>infraestructura de comunicación (C)</option>
-                                        <option value=4>ductos extranjeros (E)</option>
-                                        <option value=5>servicios de comunicación(S)</option>
+                                        <option value=1>Tipo de cruce (Cuerpos de agua aéreo)</option>
+                                        <option value=2>Cuerpos de agua subfluvial</option>
+                                        <option value=3>Infraestructura de comunicación</option>
+                                        <option value=4>Ductos extranjeros</option>
+                                        <option value=5>Servicios de comunicación</option>
                                     </select>
                                 </div>
                                 <!-- Clase de localización -->
@@ -1548,9 +1586,13 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_idenherm" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenpherm_x" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenpherm_y" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -1670,9 +1712,13 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="coord_esp_idenrep" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenprep_x" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenprep_y" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -1736,9 +1782,13 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_idenprot" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenpprot_x" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenpprot_y" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -1858,9 +1908,13 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Coordenada Específica</span>
+                                            <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="" aria-label="" id="coord_esp_idenseg" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenpseg_x" aria-describedby="basic-addon1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                        </div>
+                                        <input type="text" class="form-control validate-pattern" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenpseg_y" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
