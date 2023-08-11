@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://192.168.1.83/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -24,7 +24,8 @@ const headers = new Headers({
 
 
 $(document).ready(function () {
-
+   
+   
     llenar_ductos();
     //loadidentificacion();
     $('.custom-file-input').on('change', function(event) {
