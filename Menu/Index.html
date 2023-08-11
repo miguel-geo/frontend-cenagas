@@ -912,6 +912,11 @@
                                             <span class="input-group-text" id="basic-addon1">Presión de prueba de hermeticidad (PSI)</span>
                                         </div>
                                         <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="presionhermebasecons" aria-describedby="basic-addon1">
+                                        <select class="selectpicker form-control" id="cmbunidadpresionhermebasecons">
+                                            <option value=0>Selecciona unidad medida...</option>
+                                            <option value="PSI">PSI</option>
+                                            <option value="kg/cm2">kg/cm2</option>
+                                        </select>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -932,6 +937,23 @@
                                         <option value="Poliuretanos">Poliuretanos</option>
                                         <option value="Sistema Tricapa">Sistema Tricapa</option>
                                     </select>
+                                    <button type="button" onclick="showtiporecubrimiento()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="creartiporecubrimiento" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de Recubrimiento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoRecubrimiento" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescRecubrimiento" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoRecubrimiento()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroTipoRecubrimiento()" class="btn btn-success">Guardar</button>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelbasecons()" data-dismiss="modal">Cancelar</button>
@@ -1251,11 +1273,11 @@
                                     </div>
                                     <select class="selectpicker form-control" id="cmbTipcruce">
                                         <option value=0>Selecciona...</option>
-                                        <option value=1>Tipo de cruce (Cuerpos de agua aéreo (A)</option>
-                                        <option value=2>cuerpos de agua subfluvial (A)</option>
-                                        <option value=3>infraestructura de comunicación (C)</option>
-                                        <option value=4>ductos extranjeros (E)</option>
-                                        <option value=5>servicios de comunicación(S)</option>
+                                        <option value=1>Tipo de cruce (Cuerpos de agua aéreo)</option>
+                                        <option value=2>Cuerpos de agua subfluvial</option>
+                                        <option value=3>Infraestructura de comunicación</option>
+                                        <option value=4>Ductos extranjeros</option>
+                                        <option value=5>Servicios de comunicación</option>
                                     </select>
                                 </div>
                                 <!-- Clase de localización -->

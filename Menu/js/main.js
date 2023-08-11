@@ -157,7 +157,9 @@ function showotroMaterial() {
 function showtipotecnica() {
     $('#creartipotecnicaunion').show();
 }
-
+function showtiporecubrimiento() {
+    $('#creartiporecubrimiento').show();
+}
 
 function showotroTipoUbicacion() {
     $('#creartipoubicacionunion').show();
@@ -1163,6 +1165,7 @@ function fnshowbaseconst() {
     $("#txtductogeneralbasecons").val(txtducto);
     $("#txttramogeneralbasecons").val(txttramo);
     $("#txtareageneralbasecons").val(txtarea);
+    loadtiporecubrimiento();
 }
 function cancelbasecons() {
     $('#constbasefrm').hide();
@@ -1355,32 +1358,37 @@ function saveConstruccionUnion() {
     };
 
 
-
-    fetch(apiUrl + webMethod, {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify(params)
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-
+    if ($("#cmtiptecnicaunion").val() !== "0") {
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(params)
         })
-        .then(data => {
-            console.log(typeof data)
-            console.log(data)
-            if (data.success) {
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+    
+            })
+            .then(data => {
+                console.log(typeof data)
                 console.log(data)
-                alert("Información almacenada correctamente");
-                $('#construforms').show();
-                $('#metodounionfrm').hide();
-            }
-        })
-        .catch(error => {
-            alert("Error: " + error);
-        });
+                if (data.success) {
+                    console.log(data)
+                    alert("Información almacenada correctamente");
+                    $('#construforms').show();
+                    $('#metodounionfrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+    else {
+        alert("Es necesario ingresar el tipo de técnica para realizar el registro");
+    }
+    
 }
 function saveConstruccionProfundidad() {
 
@@ -1977,6 +1985,34 @@ function loadtipocostura() {
         }
     });
 }
+
+
+function loadtiporecubrimiento() {
+    var webMethod = "get_tiporecubrimiento";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+                console.log(data.data);
+                $("#cmtiporecubrimientobase").empty();
+                $('#cmtiporecubrimientobase').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+                    $('#cmtiporecubrimientobase').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].C_0308_0111
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
 function loadtipomaterialdisenio() {
     var webMethod = "get_tipomaterialdisenio";
     $.ajax({
@@ -2235,7 +2271,7 @@ function saveDisenioGral() {
 }
 function savebasecons() {
     var webMethod = "saveConstruccionGeneral";
-    if ($("#coord_esp_idenbasecons").val() !== "") {
+    if ($("#fechaconstbase").val() !== "") {
         const formData = new FormData();
 
         formData.append("C_0101_0001_id", area)
@@ -2254,6 +2290,7 @@ function savebasecons() {
             C_0307_0109: $("#txttiposuelobaseconst").val(),
             C_0307_0110: $("#txtmatrellenobaseconst").val(),
             C_0308_0110: $("#presionhermebasecons").val(),
+            unidad_presion_prueba: $("#cmbunidadpresionhermebasecons").val(),
             file: formData,
             C_0308_0111: $("#cmtiporecubrimientobase").val(),
             coordenada_especifica: $("#coord_esp_idenbasecons_x").val()+' '+$("#coord_esp_idenbasecons_y").val(),
@@ -2286,7 +2323,7 @@ function savebasecons() {
             });
     }
     else {
-        alert("Es necesario ingresar el diámetro en pulgadas para realizar el registro");
+        alert("Es necesario ingresar la fecha de construcción para realizar el registro");
     }
 }
 function saveotroMaterialDisenio() {
@@ -2371,6 +2408,11 @@ function cancelotroTipoInstalacion() {
 
 function cancelotroTipoUbicacion() {
     $("#creartipoubicacionunion").hide();
+}
+
+
+function cancelotroTipoRecubrimiento() {
+    $("#creartiporecubrimiento").hide();
 }
 function cancelotroCostura() {
     $("#espCostura").hide();
@@ -2597,6 +2639,41 @@ function saveotroTipoTecnica() {
         });
 }
 
+
+function saveotroTipoRecubrimiento() {
+    var webMethod = "saveTypeRecubrimiento";
+    var params = {
+        C_0308_0111: $("#newTipoRecubrimiento").val(),
+        descripcion: $("#newDescRecubrimiento").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtiporecubrimiento();
+                $("#creartiporecubrimiento").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
 
 function saveotroTipoUbicacion() {
     var webMethod = "saveTypeUbicacion";
