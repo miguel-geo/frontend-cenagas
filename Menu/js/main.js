@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:80/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://192.168.1.83/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -2781,28 +2781,28 @@ function consulta() {
                             data: params,
                             success: function (data) {
                                 if (data.data.length > 0) {
-                                    //Diametro mm
+                                   //Diametro mm
                                     $('#diammcons').text(data.data[0].C_0202_0007);
                                     //Diametro in
                                     $('#diaincons').text(data.data[0].C_0202_0008);
                                     //Espesor mm
-                                    $('#diaincons').text(data.data[0].C_0203_0009);
+                                    $('#espmmcons').text(data.data[0].C_0203_0009);
                                     //Espesor in
                                     $('#espincons').text(data.data[0].C_0203_0010);
                                     //Especificación material
-                                    $('#espincons').text(data.data[0].C_0204_0011);
+                                    $('#espmatcons').text(data.data[0].C_0204_0011);
                                     //Temperatura °C
-                                    $('#espincons').text(data.data[0].C_0207_0027);
+                                    $('#tempconsc').text(data.data[0].C_0207_0027);
                                     //Temperatura °F
-                                    $('#espincons').text(data.data[0].C_0207_0028);
+                                    $('#tempconsf').text(data.data[0].C_0207_0028);
                                     //Fecha fabricación
-                                    $('#espincons').text(data.data[0].C_0209_0030);
+                                    $('#fecfabcons').text(data.data[0].C_0209_0030);
                                     //% carbono
-                                    $('#espincons').text(data.data[0].C_0210_0031);
+                                    $('#porcons').text(data.data[0].C_0210_0031);
                                     //% resistencia tracción
-                                    $('#espincons').text(data.data[0].C_0210_0032);
+                                    $('#restraccons').text(data.data[0].C_0210_0032);
                                     //% Límite elástico
-                                    $('#espincons').text(data.data[0].C_0210_0033);
+                                    $('#limelacons').text(data.data[0].C_0210_0033);
                                 }
 
                                 if (data.success) {
