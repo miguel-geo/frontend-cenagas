@@ -1350,7 +1350,7 @@ function saveConstruccionUnion() {
         C_0302_0055: $("#fecfabunion").val(),
         C_0302_0056: $("#txtedoactunion").val(),
         C_0302_0057: $("#txtedohisunion").val(),
-        coordenada_especifica: $("#coord_esp_idenunion").val(),
+        coordenada_especifica: $("#coord_esp_idenunion_x").val()+' '+$("#coord_esp_idenunion_y").val(),
         kilometro_especifico: $("#km_esp_idenunion").val()
     };
 
@@ -1400,7 +1400,7 @@ function saveConstruccionProfundidad() {
         C_0303_0067: $("#txtmetmedprof").val(),
         C_0303_0068: $("#txtedoactprof").val(),
         C_0303_0069: $("#txtedohisprof").val(),
-        coordenada_especifica: $("#coord_esp_idenprofent").val(),
+        coordenada_especifica: $("#coord_esp_idenpprofent_x").val()+' '+$("#coord_esp_idenpprofent_y").val(),
         kilometro_especifico: $("#km_esp_idenpprofent").val()
     };
 
@@ -1484,7 +1484,7 @@ function saveConstruccionCruces() {
         C_0304_0094: $("#cmbexisunioncabcruceytub").val(),//¿Existe unión de cables entre el servicio de cruce y la tubería?
         C_0304_0095_id: $("#cmbtipcruceserv").val(),//Tipo de cruce de servicio
         C_0304_0096: $("#txtvoltajecruce").val,// Voltaje transportado por el servicio
-        coordenada_especifica: $("#coord_esp_identipocruce").val(),
+        coordenada_especifica: $("#coord_esp_idenptipocruce_x").val()+' '+$("#coord_esp_idenptipocruce_y").val(),
         kilometro_especifico: $("#km_esp_idenptipocruce").val()
     };
 
@@ -1530,7 +1530,7 @@ function saveConstruccionHermeticidad() {
         C_0305_0104: $("#txtcalbher").val(),//Variaciones de presión
         C_0305_0105: $("#txtvarher").val(),//Presión de prueba mínima
         C_0305_0106: $("#txtvarpreher").val(),//Variaciones de presión
-        coordenada_especifica: $("#coord_esp_idenherm").val(),
+        coordenada_especifica: $("#coord_esp_idenpherm_x").val()+' '+$("#coord_esp_idenpherm_y").val(),
         kilometro_especifico: $("#km_esp_idenpherm").val(),
         unidad_presion_max: $("#cmbunidadpresionmax").val(),
         unidad_presion_disenio: $("#cmbunidadpresiondisenio").val(),
@@ -1581,7 +1581,7 @@ function saveConstruccioInspeccion() {
         C_0302_0055: $("#fecfabunion").val(),
         C_0302_0056: $("#txtedoactunion").val(),
         C_0302_0057: $("#txtedohisunion").val(),
-        coordenada_especifica: $("#coord_esp_idenunion").val(),
+        coordenada_especifica: $("#coord_esp_idenunion_x").val()+' '+$("#coord_esp_idenunion_y").val(),
         kilometro_especifico: $("#km_esp_idenunion").val()
     };
 
@@ -1627,7 +1627,7 @@ function saveConstruccioCatodica() {
         C_0310_118: $("#txtnoserie").val(),
         C_0310_119: $("#txtfabricante").val(),
         C_0310_120: $("#extedoprote").val(),
-        coordenada_especifica: $("#coord_esp_idenprot").val(),
+        coordenada_especifica: $("#coord_esp_idenpprot_x").val()+' '+$("#coord_esp_idenpprot_y").val(),
         kilometro_especifico: $("#km_esp_idenpprot").val()
     };
 
@@ -1675,7 +1675,7 @@ function saveConstruccioSeguridad() {
         C_0302_0055: $("#fecfabunion").val(),
         C_0302_0056: $("#txtedoactunion").val(),
         C_0302_0057: $("#txtedohisunion").val(),
-        coordenada_especifica: $("#coord_esp_idenunion").val(),
+        coordenada_especifica: $("#coord_esp_idenunion_x").val()+' '+$("#coord_esp_idenunion_y").val(),
         kilometro_especifico: $("#km_esp_idenunion").val()
     };
 
@@ -2256,7 +2256,7 @@ function savebasecons() {
             C_0308_0110: $("#presionhermebasecons").val(),
             file: formData,
             C_0308_0111: $("#cmtiporecubrimientobase").val(),
-            coordenada_especifica: $("#coord_esp_idenbasecons").val(),
+            coordenada_especifica: $("#coord_esp_idenbasecons_x").val()+' '+$("#coord_esp_idenbasecons_y").val(),
             kilometro_especifico: $("#km_esp_idenbasecons").val()
         };
         console.log(JSON.stringify(params))
