@@ -1203,9 +1203,7 @@ function cancelseguridadpre() {
 function reiniciarFormsConstruccion() {
     $('#registro').show();
     $('#forms').hide();
-    $('#step-1').show();
-    $('#step-2').hide();
-    $('#step-3').hide();
+    goToStep1()
     $('#construforms').hide();
     loadDuctos();
     $("#cmbTramo").empty();
@@ -2229,15 +2227,26 @@ function loadDuctos() {
         }
     });
 }
+
+
+function goToStep1() {
+    // Simulating click on step-1
+    $('a[href="#step-1"]').click();
+    
+    // Resetting step buttons to initial state
+    $('.stepwizard-step a').removeClass('btn-primary').addClass('btn-default').attr('disabled', 'disabled'); // Making all steps disabled
+    $('a[href="#step-1"]').addClass('btn-primary').removeClass('btn-default').removeAttr('disabled'); // Enabling only step-1
+}
+
+
 function reg_newArea() {
     reiniciarForms();
 }
 function reiniciarForms() {
     $('#registro').show();
     $('#forms').hide();
-    $('#step-1').show();
-    $('#step-2').hide();
-    $('#step-3').hide();
+    goToStep1()
+
     $('#disenioforms').hide();
     loadDuctos();
     $("#cmbTramo").empty();
