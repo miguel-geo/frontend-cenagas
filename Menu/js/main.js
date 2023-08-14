@@ -1855,11 +1855,11 @@ function saveConstruccionHermeticidad() {
 }
 function saveConstruccioInspeccion() {
 
-    var webMethod = "disenio_servicio/store";
+    var webMethod = "saveConstruccionInspeccion";
 
     const formData = new FormData();
 
-    formData.append("kilometro_especifica",$("#km_esp_idenprep").val() )
+    formData.append("kilometro_especifico",$("#km_esp_idenprep").val() )
     formData.append("coordenada_especifica",  $("#coord_esp_idenprep_x").val()+' '+$("#coord_esp_idenprep_y").val(),)
     formData.append("C_0101_0001_id", area)
     // Make sure files are being selected and appended properly
@@ -1896,10 +1896,14 @@ function saveConstruccioInspeccion() {
         console.log(typeof data)
         console.log(data)
         if (data.success) {
-            console.log(data)
+            $("#C_0309_112").val('');
+            $("#C_0309_113").val('');
+            $("#C_0309_114").val('');
+            $("#C_0309_115").val('');
+
             alert("Información almacenada correctamente");
-            $('#disenioforms').show();
-            $('#serviciofrm').hide();
+            $('#construforms').show();
+            $('#reportesInspeccionfrm').hide();
         }
     })
     .catch(error => {
@@ -1957,11 +1961,12 @@ function saveConstruccioCatodica() {
 
 function saveConstruccioSeguridad() {
 
-    var webMethod = "disenio_servicio/store";
+
+    var webMethod = "saveConstruccionSeguridad";
 
     const formData = new FormData();
 
-    formData.append("kilometro_especifica",$("#km_esp_idenpseg").val() )
+    formData.append("kilometro_especifico",$("#km_esp_idenpseg").val() )
     formData.append("coordenada_especifica",  $("#coord_esp_idenpprot_x").val()+' '+$("#coord_esp_idenpprot_y").val(),)
     formData.append("C_0101_0001_id", area)
     // Make sure files are being selected and appended properly
@@ -1996,6 +2001,8 @@ function saveConstruccioSeguridad() {
     for (var pair of formData.entries()) {
         console.log(pair[0] + ', ' + pair[1]);
     }
+
+
     fetch(apiUrl + webMethod, {
         method: 'POST',
         headers: {
@@ -2014,15 +2021,23 @@ function saveConstruccioSeguridad() {
         console.log(typeof data)
         console.log(data)
         if (data.success) {
-            console.log(data)
+            $("#C_0312_122").val('');
+            $("#C_0312_123").val('');
+            $("#C_0312_124").val('');
+            $("#C_0312_125").val('');
+            $("#C_0312_126").val('');
+            $("#C_0312_127").val('');
+            $("#C_0312_128").val('');
+            $("#C_0312_129").val('');
             alert("Información almacenada correctamente");
-            $('#disenioforms').show();
-            $('#serviciofrm').hide();
+            $('#construforms').show();
+            $('#seguridadprearranquefrm').hide();
         }
     })
     .catch(error => {
         alert("Error: " + error);
     });
+
 }
 
 
