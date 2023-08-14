@@ -307,23 +307,33 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Diametro nominal(mm) </span>
+                                        <span class="input-group-text" id="basic-addon1">Diametro nominal</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="diam_mm" aria-describedby="basic-addon1" >
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Diametro nominal(in) *</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="diam_in" aria-describedby="basic-addon1" required>
+                                    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="diam_mm" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control" id="cmbunidaddiametro">
+                                        <option value=0>Selecciona unidad medida...</option>
+                                        <option value="mm">mm</option>
+                                        <option value="in">in</option>
+                                    </select>
+                                    <!--<div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Diametro nominal(in) *</span>
+    </div>
+    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="diam_in" aria-describedby="basic-addon1" required>-->
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Espesor pared(mm)</span>
                                     </div>
                                     <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="esp_mm" aria-describedby="basic-addon1">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Espesor pared(in)</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="esp_in" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control" id="cmbunidadespesor">
+                                        <option value=0>Selecciona unidad medida...</option>
+                                        <option value="mm">mm</option>
+                                        <option value="in">in</option>
+                                    </select>
+                                    <!--<div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Espesor pared(in)</span>
+    </div>
+    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="esp_in" aria-describedby="basic-addon1">-->
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -359,13 +369,18 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Temperatura(°C)</span>
+                                        <span class="input-group-text" id="basic-addon1">Temperatura</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="temp_c" aria-describedby="basic-addon1">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Temperatura(°F)</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="temp_f" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="temp_c" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control" id="cmbunidadtemperatura">
+                                        <option value=0>Selecciona unidad medida...</option>
+                                        <option value="C°">C°</option>
+                                        <option value="F°">F°</option>
+                                    </select>
+                                    <!--<div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Temperatura(°F)</span>
+    </div>
+    <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="temp_f" aria-describedby="basic-addon1">-->
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -557,45 +572,47 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Presión nominal (PSI)</span>
+                                        <span class="input-group-text" id="basic-addon1">Presión nominal</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresNomPSI" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresNomPSI" aria-label="" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control" id="cmbunidadpresnominal">
+                                        <option value=0>Selecciona unidad medida...</option>
+                                        <option value="PSI">PSI</option>
+                                        <option value="kg/cm2">kg/cm2</option>
+                                    </select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Presión nominal (kg/cm2)</span>
+                                        <span class="input-group-text" id="basic-addon1">Presión de diseño*</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresNomKG" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresDisenio" aria-label="" aria-describedby="basic-addon1" required>
+                                    <select class="selectpicker form-control" id="cmbunidadpresiondisenio">
+                                        <option value=0>Selecciona unidad medida...</option>
+                                        <option value="PSI">PSI</option>
+                                        <option value="kg/cm2">kg/cm2</option>
+                                    </select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Presión de diseño (PSI) *</span>
+                                        <span class="input-group-text" id="basic-addon1">Presión Máxima de Operación Permitida</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresDisenio" aria-label="" aria-describedby="basic-addon1" required>
+                                    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresMaxPSI" aria-label="" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control" id="cmbunidadpresionmaxope">
+                                        <option value=0>Selecciona unidad medida...</option>
+                                        <option value="PSI">PSI</option>
+                                        <option value="kg/cm2">kg/cm2</option>
+                                    </select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Presión Máxima de Operación Permitida (PSI)</span>
+                                        <span class="input-group-text" id="basic-addon1">Presión de Red o Presión de Segmento</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresMaxPSI" aria-label="" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Presión Máxima de Operación Permitida (kg/cm2)</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresMaxKG" aria-label="" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Presión de Red o Presión de Segmento (PSI)</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresRedPSI" aria-label="" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Presión de Red o Presión de Segmento (kg/cm2)</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresRedKG" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresRedPSI" aria-label="" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control" id="cmbunidadpresionsegmento">
+                                        <option value=0>Selecciona unidad medida...</option>
+                                        <option value="PSI">PSI</option>
+                                        <option value="kg/cm2">kg/cm2</option>
+                                    </select>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelDisenioPresion()" data-dismiss="modal">Cancelar</button>
@@ -705,7 +722,7 @@
                                     </div>
                                     <input type="date" class="form-control validate-pattern"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"  placeholder="" id="txtfecaplicacion" aria-label="" aria-describedby="basic-addon1">
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Ubicación en que se aplico la protección al ducto</span>
                                     </div>
@@ -2018,7 +2035,7 @@
                                                 <div class="col-md-2">
                                                     <div class="card h-100">
                                                         <div class="card-body">
-                                                            <h6 class="card-title">Espero de pared (in)</h6>
+                                                            <h6 class="card-title">espesor de pared (in)</h6>
                                                             <p class="card-text" id="espincons"></p>
                                                         </div>
                                                     </div>

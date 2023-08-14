@@ -2074,12 +2074,9 @@ function saveDisenioGral() {
             area_unitaria_id: area,
             longitud: $("#longitud").val(),
             diametro_mm: $("#diam_mm").val(),
-            diametro_in: $("#diam_in").val(),
             espesor_mm: $("#esp_mm").val(),
-            espesor_in: $("#esp_in").val(),
             tipo_material_disenio: $("#cmbTipoMaterial").val(),
             temp_c: $("#temp_c").val(),
-            temp_f: $("#temp_f").val(),
             tipo_costura: $("#cmbTipoCostura").val(),
             fecha_fab: $("#fec_fab").val(),
             porcentaje_carbono: $("#porc_carbono").val(),
@@ -2087,7 +2084,10 @@ function saveDisenioGral() {
             resistencia_elastico: $("#lim_elas").val(),
             coordenada_especifica: $("#coord_esp_iden_x").val()+' '+$("#coord_esp_iden_y").val(),
             kilometro_especifico: $("#km_esp_iden").val(),
-            fec_fab_fin: $("#fec_fab_fin").val()
+            fec_fab_fin: $("#fec_fab_fin").val(),
+            diametro_nominal: $("#cmbunidaddiametro").val(),
+            espesor_pared: $("#cmbunidadespesor").val(),
+            temperatura: $("#cmbunidadtemperatura").val()
         };
 
 
@@ -2280,7 +2280,12 @@ function saveDisenioPresion()  {
         presion_red_psi: $("#txtPresRedPSI").val(),
         presion_red_kg: $("#txtPresRedKG").val(),
         coordenada_especifica: $("#coord_esp_iden_pres_x").val()+' '+$("#coord_esp_iden_pres_y").val(),
-        kilometro_especifico: $("#km_esp_iden_pres").val()
+        kilometro_especifico: $("#km_esp_iden_pres").val(),
+        pres_nominal: $("#cmbunidadpresnominal").val(),
+        pres_disenio: $("#cmbunidadpresiondisenio").val(),
+        pres_max_ope: $("#cmbunidadpresionmaxope").val(),
+        pres_segmento: $("#cmbunidadpresionsegmento").val()
+
 
     };
     
