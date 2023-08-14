@@ -16,6 +16,7 @@ var temaconsulta = "";
 var docbasecons = "";
 var temaconsultaconstruccion = "";
 var temaconsultadisenio = "";
+var contar_longitud=0;
 const headers = new Headers({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
@@ -2953,11 +2954,13 @@ function loadidentificacion() {
         type: "GET",
         url: apiUrl + webMethod,
         success: function (data) {
+            
             if (data.success) {
                 for (i = 0; i < data.data.length; i++) {
                     var persona = [data.data[i].nombre, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0204_0011,
                     data.data[i].C_0208_0029,];
                     llenarTablas(persona, "tablaPersonas");
+                    contar_longitud=contar_longitud+data.data[i].C_0201_0006
                 }
             }
         },
@@ -2968,6 +2971,7 @@ function loadidentificacion() {
 }
 
 function consulta() {
+    contar_longitud=0;
     var params;
     if (
         $("#cmbDucto_con option:selected").text() !== "Selecciona..." ||
@@ -3060,7 +3064,10 @@ function consulta() {
                                     for (i = 0; i < data.data.length; i++) {
                                         var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0201_0006, data.data[i].C_0208_0029];
                                         llenarTablas(persona, "tablaPersonas");
+                                        contar_longitud=contar_longitud+data.data[i].C_0201_0006
                                     }
+                                    contar_longitud=contar_longitud/1000
+                                    $('#longitud_total').text(contar_longitud);
                                     if (data.data.length > 0) {
                                         // ExportarDatos(data.data);
                                     }
