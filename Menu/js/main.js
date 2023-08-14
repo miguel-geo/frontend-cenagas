@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -158,7 +158,9 @@ function showotroMaterial() {
 function showtipotecnica() {
     $('#creartipotecnicaunion').show();
 }
-
+function showtiporecubrimiento() {
+    $('#creartiporecubrimiento').show();
+}
 
 function showotroTipoUbicacion() {
     $('#creartipoubicacionunion').show();
@@ -329,19 +331,53 @@ function inicializarEventos() {
     document.getElementById('filepruebabasecons').addEventListener('change', handleFileSelect, false);
     $(document).on("click", ".delete", function (e) {
         if(confirm("¿Seguro quiere borrar ese registro?")) {
-         
+        temaconsulta=$("#cmbTemasPrincipal_con").val() ;
+        temaconsultadisenio=$("#cmbTemasDisenio_con").val() ;
+        temaconsultaconstruccion=$("#cmbTemasConstruccion_con").val() ;
+
         var webMethod = "";
         switch (temaconsulta) {
             case "T1":
-                webMethod = "disenio_general/destroy";
-                break;
+                switch(temaconsultadisenio){
+                    case "Dis1":
+                        webMethod = "disenio_general/destroy";
+                        break;
+                    case "Dis2":
+                        webMethod = "disenio_presion/destroy";
+                        break;
+                    case "Dis3":
+                        webMethod = "disenio_proteccion/destroy";
+                        break;
+                    default:}
             case "T2":
-                webMethod = "disenio_presion/destroy";
-                break;
-            case "T3":
-                webMethod = "disenio_proteccion/destroy";
-                break;
-            default:
+                switch(temaconsultaconstruccion){
+                    case "Cons1":
+                        webMethod = "general/destroyBase";
+                        break;
+                    case "Cons2":
+                        webMethod = "union/destroyUnion";
+                        break;
+                    case "Cons3":
+                        webMethod = "profundidad/destroyProfundidad";
+                        break;
+                    case "Cons4":
+                        webMethod = "cruces/destroycruces";
+                        break;
+                    case "Cons5":
+                        webMethod = "hermeticidad/destroyHermeticidad";
+                        break;
+                    case "Cons6":
+                        webMethod = "";
+                        break;
+                    case "Cons7":
+                        webMethod = "catodica/destroycatodica";
+                        break;
+                    case "Cons8":
+                        webMethod = "";
+                        break;
+
+                        
+                    default:}
         }
         var params = {
             id: e.currentTarget.dataset["id"] ,
@@ -395,20 +431,93 @@ function inicializarEventos() {
                 $(this).parent("td").html($(this).val());
             });
             var webMethod = "";
-            switch (temaconsulta) {
-                case "T1":
-                    webMethod = "disenio_general/update";
+            temaconsulta=$("#cmbTemasPrincipal_con").val() ;
+        temaconsultadisenio=$("#cmbTemasDisenio_con").val() ;
+        temaconsultaconstruccion=$("#cmbTemasConstruccion_con").val() ;
+        console.log(valores)
+        var params = {               
+        };
+        var webMethod = "";
+        switch (temaconsulta) {
+            case "T1":
+                switch(temaconsultadisenio){
+                    case "Dis1":
+                        webMethod = "disenio_general/update";
+                        params = {
+                            id: valores[0],
+                            coordenada_especifica: valores[2],
+                            kilometro_especifico: valores[3],
+                            C_0201_0006: valores[4],
+                            C_0202_0007: valores[5],
+                            C_0207_0027: valores[6],
+                            C_0210_0031: valores[7]
+                    };
+                        break;
+                    case "Dis2":
+                        webMethod = "disenio_presion/update";
+                        params = {
+                            id: valores[0],
+                            coordenada_especifica: valores[2],
+                            kilometro_especifico: valores[3],
+                            C_0206_0017: valores[4],
+                            C_0206_0019: valores[5],
+                            C_0206_0023: valores[6],
+                            C_0206_0024: valores[7]
+                        };
+                        break;
+                    case "Dis3":
+                        webMethod = "disenio_proteccion/update";
+                        params = {
+                            id: valores[0],
+                            coordenada_especifica: valores[2],
+                            kilometro_especifico: valores[3],
+                            C_0211_0043: valores[4],
+                            C_0211_0044: valores[5],
+                            C_0211_0045: valores[6],
+                            C_0211_0046: valores[7]
+                        };
+                        break;
+                    default:}
                     break;
-                case "T2":
-                    webMethod = "disenio_presion/update";
+            case "T2":
+                switch(temaconsultaconstruccion){
+                    case "Cons1":
+                        webMethod = "general/updateBaseCons";
+                        params = {
+                            id: valores[0],
+                            coordenada_especifica: valores[2],
+                            kilometro_especifico: valores[3],
+                            C_0211_0043: valores[4],
+                            C_0211_0044: valores[5],
+                            C_0211_0045: valores[6],
+                            C_0211_0046: valores[7]
+                        };
+                        break;
+                    case "Cons2":
+                        webMethod = "union/updateUnion";
+                        break;
+                    case "Cons3":
+                        webMethod = "profundidad/updateProfundidad";
+                        break;
+                    case "Cons4":
+                        webMethod = "cruces/updateCruces";
+                        break;
+                    case "Cons5":
+                        webMethod = "hermeticidad/updateHermeticidad";
+                        break;
+                    case "Cons6":
+                        webMethod = "";
+                        break;
+                    case "Cons7":
+                        webMethod = "catodica/updateCatodica";
+                        break;
+                    case "Cons8":
+                        webMethod = "";
+                        break;                    
+                    default:}
                     break;
-                case "T3":
-                    webMethod = "disenio_proteccion/update";
-                    break;
-                default:
-            }
-            var params = {               
-            };
+        }
+            
             switch (temaconsulta) {
                 case "T1":
                     limpiarTabas();
@@ -436,9 +545,13 @@ function inicializarEventos() {
                     $("#tablaproteccion").show();
                 break;
             }
+
             $.ajax({
                 type: "POST",
                 url: apiUrl + webMethod,
+                headers: {
+                    'Accept': 'application/json'
+                },
                 data: params,
                 success: function (data) {
                     alert("El registro fue actualizado correctamente");
@@ -1053,6 +1166,7 @@ function fnshowbaseconst() {
     $("#txtductogeneralbasecons").val(txtducto);
     $("#txttramogeneralbasecons").val(txttramo);
     $("#txtareageneralbasecons").val(txtarea);
+    loadtiporecubrimiento();
 }
 function cancelbasecons() {
     $('#constbasefrm').hide();
@@ -1240,37 +1354,42 @@ function saveConstruccionUnion() {
         C_0302_0055: $("#fecfabunion").val(),
         C_0302_0056: $("#txtedoactunion").val(),
         C_0302_0057: $("#txtedohisunion").val(),
-        coordenada_especifica: $("#coord_esp_idenunion").val(),
+        coordenada_especifica: $("#coord_esp_idenunion_x").val()+' '+$("#coord_esp_idenunion_y").val(),
         kilometro_especifico: $("#km_esp_idenunion").val()
     };
 
 
-
-    fetch(apiUrl + webMethod, {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify(params)
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-
+    if ($("#cmtiptecnicaunion").val() !== "0") {
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(params)
         })
-        .then(data => {
-            console.log(typeof data)
-            console.log(data)
-            if (data.success) {
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+    
+            })
+            .then(data => {
+                console.log(typeof data)
                 console.log(data)
-                alert("Información almacenada correctamente");
-                $('#construforms').show();
-                $('#metodounionfrm').hide();
-            }
-        })
-        .catch(error => {
-            alert("Error: " + error);
-        });
+                if (data.success) {
+                    console.log(data)
+                    alert("Información almacenada correctamente");
+                    $('#construforms').show();
+                    $('#metodounionfrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+    else {
+        alert("Es necesario ingresar el tipo de técnica para realizar el registro");
+    }
+    
 }
 function saveConstruccionProfundidad() {
 
@@ -1290,7 +1409,7 @@ function saveConstruccionProfundidad() {
         C_0303_0067: $("#txtmetmedprof").val(),
         C_0303_0068: $("#txtedoactprof").val(),
         C_0303_0069: $("#txtedohisprof").val(),
-        coordenada_especifica: $("#coord_esp_idenprofent").val(),
+        coordenada_especifica: $("#coord_esp_idenpprofent_x").val()+' '+$("#coord_esp_idenpprofent_y").val(),
         kilometro_especifico: $("#km_esp_idenpprofent").val()
     };
 
@@ -1374,7 +1493,7 @@ function saveConstruccionCruces() {
         C_0304_0094: $("#cmbexisunioncabcruceytub").val(),//¿Existe unión de cables entre el servicio de cruce y la tubería?
         C_0304_0095_id: $("#cmbtipcruceserv").val(),//Tipo de cruce de servicio
         C_0304_0096: $("#txtvoltajecruce").val,// Voltaje transportado por el servicio
-        coordenada_especifica: $("#coord_esp_identipocruce").val(),
+        coordenada_especifica: $("#coord_esp_idenptipocruce_x").val()+' '+$("#coord_esp_idenptipocruce_y").val(),
         kilometro_especifico: $("#km_esp_idenptipocruce").val()
     };
 
@@ -1420,7 +1539,7 @@ function saveConstruccionHermeticidad() {
         C_0305_0104: $("#txtcalbher").val(),//Variaciones de presión
         C_0305_0105: $("#txtvarher").val(),//Presión de prueba mínima
         C_0305_0106: $("#txtvarpreher").val(),//Variaciones de presión
-        coordenada_especifica: $("#coord_esp_idenherm").val(),
+        coordenada_especifica: $("#coord_esp_idenpherm_x").val()+' '+$("#coord_esp_idenpherm_y").val(),
         kilometro_especifico: $("#km_esp_idenpherm").val(),
         unidad_presion_max: $("#cmbunidadpresionmax").val(),
         unidad_presion_disenio: $("#cmbunidadpresiondisenio").val(),
@@ -1471,7 +1590,7 @@ function saveConstruccioInspeccion() {
         C_0302_0055: $("#fecfabunion").val(),
         C_0302_0056: $("#txtedoactunion").val(),
         C_0302_0057: $("#txtedohisunion").val(),
-        coordenada_especifica: $("#coord_esp_idenunion").val(),
+        coordenada_especifica: $("#coord_esp_idenunion_x").val()+' '+$("#coord_esp_idenunion_y").val(),
         kilometro_especifico: $("#km_esp_idenunion").val()
     };
 
@@ -1517,7 +1636,7 @@ function saveConstruccioCatodica() {
         C_0310_118: $("#txtnoserie").val(),
         C_0310_119: $("#txtfabricante").val(),
         C_0310_120: $("#extedoprote").val(),
-        coordenada_especifica: $("#coord_esp_idenprot").val(),
+        coordenada_especifica: $("#coord_esp_idenpprot_x").val()+' '+$("#coord_esp_idenpprot_y").val(),
         kilometro_especifico: $("#km_esp_idenpprot").val()
     };
 
@@ -1565,7 +1684,7 @@ function saveConstruccioSeguridad() {
         C_0302_0055: $("#fecfabunion").val(),
         C_0302_0056: $("#txtedoactunion").val(),
         C_0302_0057: $("#txtedohisunion").val(),
-        coordenada_especifica: $("#coord_esp_idenunion").val(),
+        coordenada_especifica: $("#coord_esp_idenunion_x").val()+' '+$("#coord_esp_idenunion_y").val(),
         kilometro_especifico: $("#km_esp_idenunion").val()
     };
 
@@ -1867,6 +1986,34 @@ function loadtipocostura() {
         }
     });
 }
+
+
+function loadtiporecubrimiento() {
+    var webMethod = "get_tiporecubrimiento";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+                console.log(data.data);
+                $("#cmtiporecubrimientobase").empty();
+                $('#cmtiporecubrimientobase').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+                    $('#cmtiporecubrimientobase').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].C_0308_0111
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
 function loadtipomaterialdisenio() {
     var webMethod = "get_tipomaterialdisenio";
     $.ajax({
@@ -2125,7 +2272,7 @@ function saveDisenioGral() {
 }
 function savebasecons() {
     var webMethod = "saveConstruccionGeneral";
-    if ($("#coord_esp_idenbasecons").val() !== "") {
+    if ($("#fechaconstbase").val() !== "") {
         const formData = new FormData();
 
         formData.append("C_0101_0001_id", area)
@@ -2144,9 +2291,10 @@ function savebasecons() {
             C_0307_0109: $("#txttiposuelobaseconst").val(),
             C_0307_0110: $("#txtmatrellenobaseconst").val(),
             C_0308_0110: $("#presionhermebasecons").val(),
+            unidad_presion_prueba: $("#cmbunidadpresionhermebasecons").val(),
             file: formData,
             C_0308_0111: $("#cmtiporecubrimientobase").val(),
-            coordenada_especifica: $("#coord_esp_idenbasecons").val(),
+            coordenada_especifica: $("#coord_esp_idenbasecons_x").val()+' '+$("#coord_esp_idenbasecons_y").val(),
             kilometro_especifico: $("#km_esp_idenbasecons").val()
         };
         console.log(JSON.stringify(params))
@@ -2176,7 +2324,7 @@ function savebasecons() {
             });
     }
     else {
-        alert("Es necesario ingresar el diámetro en pulgadas para realizar el registro");
+        alert("Es necesario ingresar la fecha de construcción para realizar el registro");
     }
 }
 function saveotroMaterialDisenio() {
@@ -2261,6 +2409,11 @@ function cancelotroTipoInstalacion() {
 
 function cancelotroTipoUbicacion() {
     $("#creartipoubicacionunion").hide();
+}
+
+
+function cancelotroTipoRecubrimiento() {
+    $("#creartiporecubrimiento").hide();
 }
 function cancelotroCostura() {
     $("#espCostura").hide();
@@ -2492,6 +2645,41 @@ function saveotroTipoTecnica() {
         });
 }
 
+
+function saveotroTipoRecubrimiento() {
+    var webMethod = "saveTypeRecubrimiento";
+    var params = {
+        C_0308_0111: $("#newTipoRecubrimiento").val(),
+        descripcion: $("#newDescRecubrimiento").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtiporecubrimiento();
+                $("#creartiporecubrimiento").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
 
 function saveotroTipoUbicacion() {
     var webMethod = "saveTypeUbicacion";
@@ -2787,7 +2975,7 @@ function consulta() {
                             data: params,
                             success: function (data) {
                                 if (data.data.length > 0) {
-                                    //Diametro mm
+                                   //Diametro mm
                                     $('#diammcons').text(data.data[0].C_0202_0007);
                                     //Diametro in
                                     $('#diaincons').text(data.data[0].C_0202_0008);
