@@ -1059,13 +1059,242 @@ function fnFinalizar() {
     //$('#registro').hide();
    
 }
+//#region Actulizacion Diseño
 
+var idDiseniogral;
+function consultaDatosIdentificacionArea() {
+
+
+    var params;
+    params = {
+        id: $("#cmbAreas option:selected").val(),
+        op: 1
+    };
+    var webMethod = "get_diseniogeneral";
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        success: function (data) {
+            if (data.success) {
+                if (data.data.length > 0) {
+                    llenarDatosActualizacion(data.data);
+                    $("#btn_saveidentificacion").hide();
+                    $("#btn_updateidentificacion").show();
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
+function llenarDatosActualizacion(data) {
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_iden_x").val(coords[0]);
+        $("#coord_esp_iden_y").val(coords[1]);
+    }
+    $("#km_esp_iden").val(data[0].kilometro_especifico);
+    $("#longitud").val(data[0].C_0201_0006);
+    $("#diam_mm").val(data[0].C_0201_0006);
+    $("#cmbunidaddiametro").val(data[0].diametro_nominal);
+    $("#esp_mm").val(data[0].C_0203_0009);
+    $("#cmbunidadespesor").val(data[0].espesor_pared);
+    $("#cmbTipoMaterial option:contains(" + data[0].C_0204_0011 + ")").attr('selected', 'selected');
+    $("#temp_c").val(data[0].C_0207_0027);
+    $("#cmbunidadtemperatura").val(data[0].temperatura);
+    $("#cmbTipoCostura option:contains(" + data[0].C_0208_0029 + ")").attr('selected', 'selected');
+    if (data[0].C_0209_0030 !== "" && data[0].C_0209_0030 !== undefined) {
+        const fecha_fab = data[0].C_0209_0030.split(' ');
+        const fecha_comp = fecha_fab[0].split('-');
+        document.getElementById("fec_fab").text = fecha_comp[2] + '/' + fecha_comp[1] + '/' + fecha_comp[0];
+        //$("#fec_fab").val(fecha_fab.format('YYYY-MM-DD'));
+    }
+    $("#fec_fab").val(data[0].C_0209_0030);
+    $("#fec_fab_fin").val(data[0].C_0209_0030_2);
+    $("#porc_carbono").val(data[0].C_0210_0031);
+    $("#res_trac").val(data[0].C_0210_0032);
+    $("#lim_elas").val(data[0].C_0210_0033);
+    idDiseniogral = data[0].id;
+    habilitarformdiseniogral(true);
+}
+function habilitarformdiseniogral(bandera) {
+    $("input.setAlg").attr("disabled", bandera);
+}
+function updateIdentificacionDisenio() {
+    if ($("#btn_updateidentificacion").text() === "Actualizar") {
+        habilitarformdiseniogral(false);
+        $("#btn_updateidentificacion").text('Guardar');
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateIdentificacion";
+        params = {
+            id: idDiseniogral,
+            C_0101_0001_id: area,
+            C_0201_0006: $("#longitud").val(),
+            C_0202_0007: $("#diam_mm").val(),
+            C_0203_0009: $("#esp_mm").val(),
+            C_0203_0011_id: $("#cmbTipoMaterial").val(),
+            C_0207_0027: $("#temp_c").val(),
+            C_0208_0029_id: $("#cmbTipoCostura").val(),
+            C_0209_0030: $("#fec_fab").val(),
+            C_0209_0030_2: $("#fec_fab_fin").val(),
+            C_0210_0031: $("#porc_carbono").val(),
+            C_0210_0032: $("#res_trac").val(),
+            C_0210_0033: $("#lim_elas").val(),
+            coordenada_especifica: $("#coord_esp_iden_x").val() + ' ' + $("#coord_esp_iden_y").val(),
+            kilometro_especifico: $("#km_esp_iden").val(),
+            diametro_nominal: $("#cmbunidaddiametro").val(),
+            espesor_pared: $("#cmbunidadespesor").val(),
+            temperatura: $("#cmbunidadtemperatura").val()
+        };
+        $.ajax({
+            type: "POST",
+            url: apiUrl + webMethod,
+            headers: {
+                'Accept': 'application/json'
+            },
+            data: params,
+            success: function (data) {
+                alert("El registro fue actualizado correctamente");
+                $('#disenioforms').show();
+                $('#identificacionfrm').hide();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+            }
+        });
+    }
+}
+function consultaDatosProteccionArea() {
+
+
+    var params;
+    params = {
+        id: $("#cmbAreas option:selected").val(),
+        op: 1
+    };
+    var webMethod = "get_Proteccion";
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        success: function (data) {
+            if (data.success) {
+                if (data.data.length > 0) {
+                    llenarDatosActualizacionProteccion(data.data);
+                    $("#btnsaveproteccion").hide();
+                    $("#btn_updateproteccion").show();
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
+var idDisenioproteccion;
+function llenarDatosActualizacionProteccion(data) {
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_iden_prot_x").val(coords[0]);
+        $("#coord_esp_iden_prot_y").val(coords[1]);
+    }
+    $("#km_esp_iden_prot").val(data[0].kilometro_especifico);
+    $("#txtiporecubrimiento").val(data[0].C_0211_0034);
+    $("#txtiporecubrimiento_2").val(data[0].C_0211_0034_2);
+    $("#txtkminicialrecubrimiento").val(data[0].C_0211_0035);
+    $("#txtkmfinalrecubrimiento").val(data[0].C_0211_0036);
+    $("#txtlongtotalrecubrimiento").val(data[0].C_0211_0037);
+    $("#txtempresaaplicoservicio").val(data[0].C_0211_0038);
+    $("#txtfecinicioservicio").val(data[0].C_0211_0039);
+    $("#txtfecfabrico").val(data[0].C_0211_0040);
+    $("#txtfecinstalacion").val(data[0].C_0211_0041);
+    $("#txtfecinstalacion_2").val(data[0].C_0211_0041_2);
+    $("#txtordenaplicacion").val(data[0].C_0211_0044);
+    $("#txtlocalizacion").val(data[0].C_0211_0045);
+    $("#txtTempMaxFuncionamiento").val(data[0].C_0211_0046);
+    $("#txtmotivoinstalacion").val(data[0].C_0211_0047);
+    $("#txtmaterialfabricacion").val(data[0].C_0211_0048);
+    $("#txtespesorrecubrimiento").val(data[0].C_0211_0049);
+    $("#cmbdecisionAislamiento").val(data[0].C_0211_0050);
+    $("#cmbdecisionCorrosion").val(data[0].C_0211_0051);
+    idDisenioproteccion = data[0].id;
+    habilitarformdisenioproteccion(true);
+}
+function habilitarformdisenioproteccion(bandera) {
+    $("input.setprotdis").attr("disabled", bandera);
+}
+function updateDisenioproteccion() {
+    if ($("#btn_updateproteccion").text() === "Actualizar") {
+        habilitarformdisenioproteccion(false);
+        $("#btn_updateproteccion").text('Guardar');
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateProteccion";
+        params = {
+            id: idDisenioproteccion,
+            C_0101_0001_id: area,
+            C_0211_0034: $("#txtiporecubrimiento").val(),
+            C_0211_0035: $("#txtkminicialrecubrimiento").val(),
+            C_0211_0036: $("#txtkmfinalrecubrimiento").val(),
+            C_0211_0037: $("#txtlongtotalrecubrimiento").val(),
+            C_0211_0038: $("#txtempresaaplicoservicio").val(),
+            C_0211_0039: $("#txtfecinicioservicio").val(),
+            C_0211_0040: $("#txtfecfabrico").val(),
+            C_0211_0041: $("#txtfecinstalacion").val(),
+            C_0211_0042: $("#txtfecaplicacion").val(),
+            C_0211_0044: $("#txtordenaplicacion").val(),
+            C_0211_0045: $("#txtlocalizacion").val(),
+            C_0211_0046: $("#txtTempMaxFuncionamiento").val(),
+            C_0211_0047: $("#txtmotivoinstalacion").val(),
+            C_0211_0048: $("#txtmaterialfabricacion").val(),
+            C_0211_0049: $("#txtespesorrecubrimiento").val(),
+            C_0211_0050: $("#cmbdecisionAislamiento").val(),
+            C_0211_0051: $("#cmbdecisionCorrosion").val(),
+            C_0211_0034_2: $("#txtiporecubrimiento_2").val(),
+            C_0211_0041_2: $("#txtfecinstalacion_2").val(),
+            coordenada_especifica: $("#coord_esp_iden_prot_x").val() + ' ' + $("#coord_esp_iden_prot_y").val(),
+            kilometro_especifico: $("#km_esp_iden_prot").val()
+        };
+        $.ajax({
+            type: "POST",
+            url: apiUrl + webMethod,
+            headers: {
+                'Accept': 'application/json'
+            },
+            data: params,
+            success: function (data) {
+                alert("El registro fue actualizado correctamente");
+                $('#disenioforms').show();
+                $('#proteccionfrm').hide();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+            }
+        });
+    }
+}
+//#endregion
 //#region FORMULARIOS DISEÑO
 function fnshowIndentificacion() {
     $('#identificacionfrm').show();
     $('#disenioforms').hide();
     loadtipocostura();
-    loadtipomaterialdisenio();
+  
+   
+
 }
 function fnshowServicio() {
     $('#serviciofrm').show();
@@ -1078,6 +1307,7 @@ function fnshowPresion() {
 function fnshowProteccion() {
     $('#proteccionfrm').show();
     $('#disenioforms').hide();
+    consultaDatosProteccionArea();
 }
 function fnshowdisenioforms() {
     $('#disenioforms').show();
@@ -1979,6 +2209,7 @@ function loadtipocostura() {
                         text: data.data[i].C_0208_0029
                     }));
                 }
+                loadtipomaterialdisenio();
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -2033,6 +2264,7 @@ function loadtipomaterialdisenio() {
                         text: data.data[i].C_0204_0011
                     }));
                 }
+                consultaDatosIdentificacionArea();
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
