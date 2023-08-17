@@ -1093,7 +1093,7 @@ function consultaDatosIdentificacionArea() {
 
 }
 function llenarDatosActualizacion(data) {
-    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined) {
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined&& data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
         $("#coord_esp_iden_x").val(coords[0]);
         $("#coord_esp_iden_y").val(coords[1]);
