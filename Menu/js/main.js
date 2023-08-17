@@ -1,4 +1,4 @@
-var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+var apiUrl = "http://localhost:80/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -16,6 +16,7 @@ var temaconsulta = "";
 var docbasecons = "";
 var temaconsultaconstruccion = "";
 var temaconsultadisenio = "";
+var area_unitaria_id;
 const headers = new Headers({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
@@ -397,17 +398,73 @@ function inicializarEventos() {
     }   
     });
     $(document).on("click", ".edit", function (e) {
-        var c = 0;
-        $(this).parents("tr").find("td:not(:last-child)").each(function () {
-            if (c === 0) {
-                $(this).html('<input type="text" class="form-control" disabled value="' + $(this).text() + '">');
-            } else {
-                $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
-            }
-            c++;
-        });
-        $("#ra" + e.currentTarget.dataset["id"]).show();
-        $("#re" + e.currentTarget.dataset["id"]).hide();
+        
+        let nombre_area_unitaria = $(this).closest('tr').children('td:first').text();
+        console.log(nombre_area_unitaria)
+        
+    
+        switch (temaconsulta) {
+            case "T1":
+                switch(temaconsultadisenio){
+                    case "Dis1":
+                        selectTabupdate(e, 'Opcion1');
+                        document.getElementById('registro').style.display = 'none';
+                        var params;
+
+                        $('#identificacionfrm').show();
+                        $('#disenioforms').hide();
+                        loadtipocostura();
+                        loadtipomaterialdisenio();
+                        getidByAreaUnitarianombre(nombre_area_unitaria).then(data => {
+                            setDropdownValue('#cmbAreas', data.id);
+                            console.log($("#cmbAreas").val(),data.id);
+                            params = {
+                                id: data.id,
+                                op: 1
+                            };
+                            consultaDatosIdentificacionArea(params);
+                        
+                
+                        });
+                        
+                        break;
+                    case "Dis2":
+                        webMethod = "disenio_presion/destroy";
+                        break;
+                    case "Dis3":
+                        webMethod = "disenio_proteccion/destroy";
+                        break;
+                    default:}
+            case "T2":
+                switch(temaconsultaconstruccion){
+                    case "Cons1":
+                        webMethod = "general/destroyBase";
+                        break;
+                    case "Cons2":
+                        webMethod = "union/destroyUnion";
+                        break;
+                    case "Cons3":
+                        webMethod = "profundidad/destroyProfundidad";
+                        break;
+                    case "Cons4":
+                        webMethod = "cruces/destroycruces";
+                        break;
+                    case "Cons5":
+                        webMethod = "hermeticidad/destroyHermeticidad";
+                        break;
+                    case "Cons6":
+                        webMethod = "";
+                        break;
+                    case "Cons7":
+                        webMethod = "catodica/destroycatodica";
+                        break;
+                    case "Cons8":
+                        webMethod = "";
+                        break;
+
+                        
+                    default:}
+        }
     });
     $(document).on("click", ".add", function (e) {
         var empty = false;
@@ -1062,19 +1119,18 @@ function fnFinalizar() {
 //#region Actulizacion Diseño
 
 var idDiseniogral;
-function consultaDatosIdentificacionArea() {
+function consultaDatosIdentificacionArea(params) {
 
 
-    var params;
-    params = {
-        id: $("#cmbAreas option:selected").val(),
-        op: 1
-    };
+    
     var webMethod = "get_diseniogeneral";
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
+        headers:{
+            'Accept': 'application/json'
+        },
         success: function (data) {
             if (data.success) {
                 if (data.data.length > 0) {
@@ -1092,11 +1148,26 @@ function consultaDatosIdentificacionArea() {
 
 }
 function llenarDatosActualizacion(data) {
-    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined) {
+    $("#btn_updateidentificacion").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
         $("#coord_esp_iden_x").val(coords[0]);
         $("#coord_esp_iden_y").val(coords[1]);
     }
+    else{$("#coord_esp_iden_x").val("");
+    $("#coord_esp_iden_y").val("");}
+
+    getNamesByAreaUnitariaId(data[0].C_0101_0001_id).then(data => {
+        let area_unitaria_nombre = data.area_unitaria_nombre;
+        let tramo_nombre = data.tramo_nombre;
+        let ducto_nombre = data.ducto_nombre;
+    
+        $("#txtductogeneral").val(ducto_nombre);
+        $("#txttramogeneral").val(tramo_nombre);
+        $("#txtareageneral").val(area_unitaria_nombre);
+    });
+    
+
     $("#km_esp_iden").val(data[0].kilometro_especifico);
     $("#longitud").val(data[0].C_0201_0006);
     $("#diam_mm").val(data[0].C_0201_0006);
@@ -1109,11 +1180,10 @@ function llenarDatosActualizacion(data) {
     $("#cmbTipoCostura option:contains(" + data[0].C_0208_0029 + ")").attr('selected', 'selected');
     if (data[0].C_0209_0030 !== "" && data[0].C_0209_0030 !== undefined) {
         const fecha_fab = data[0].C_0209_0030.split(' ');
-        const fecha_comp = fecha_fab[0].split('-');
-        document.getElementById("fec_fab").text = fecha_comp[2] + '/' + fecha_comp[1] + '/' + fecha_comp[0];
-        //$("#fec_fab").val(fecha_fab.format('YYYY-MM-DD'));
+        $("#fec_fab").val(fecha_fab[0]);
     }
-    $("#fec_fab").val(data[0].C_0209_0030);
+    const fecha_fab_fin = data[0].C_0209_0030.split(' ')
+    $("#fec_fab_fin").val(fecha_fab_fin[0] );
     $("#fec_fab_fin").val(data[0].C_0209_0030_2);
     $("#porc_carbono").val(data[0].C_0210_0031);
     $("#res_trac").val(data[0].C_0210_0032);
@@ -1292,7 +1362,12 @@ function fnshowIndentificacion() {
     $('#identificacionfrm').show();
     $('#disenioforms').hide();
     loadtipocostura();
-  
+    loadtipomaterialdisenio();
+    params = {
+        id: $("#cmbAreas option:selected").val(),
+        op: 1
+    };
+    consultaDatosIdentificacionArea(params);
    
 
 }
@@ -1312,9 +1387,7 @@ function fnshowProteccion() {
 function fnshowdisenioforms() {
     $('#disenioforms').show();
     $('#forms').hide();
-    $("#txtductogeneral").val(txtducto);
-    $("#txttramogeneral").val(txttramo);
-    $("#txtareageneral").val(txtarea);
+
     $("#txtductopresion").val(txtducto);
     $("#txttramopresion").val(txttramo);
     $("#txtareapresion").val(txtarea);
@@ -2183,13 +2256,40 @@ function selectTab(evt, tabName) {
     evt.currentTarget.className += " active";
     document.getElementById("Contenido").style.display = "block";
     if (tabName === 'Opcion1') {
-        console.log(tabName)
         loadDuctos();
        
     }
 
-    
 }
+
+
+
+function selectTabupdate(evt, tabName) {
+    // Declare all variables
+
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("nav-item");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+    document.getElementById("Contenido").style.display = "block";
+
+
+}
+
+
+
 function loadtipocostura() {
     var webMethod = "get_tipocostura";
     $.ajax({
@@ -2209,7 +2309,7 @@ function loadtipocostura() {
                         text: data.data[i].C_0208_0029
                     }));
                 }
-                loadtipomaterialdisenio();
+                
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -2264,7 +2364,8 @@ function loadtipomaterialdisenio() {
                         text: data.data[i].C_0204_0011
                     }));
                 }
-                consultaDatosIdentificacionArea();
+                var params;
+                
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -3627,6 +3728,67 @@ $(document).ready(function(){
         }
     });
 });
+
+
+function setDropdownValue(dropdownSelector, desiredValue) {
+    // Check if the value already exists in the dropdown options
+    if ($(dropdownSelector + ' option[value="' + desiredValue + '"]').length == 0) {
+        // If the value doesn't exist, create a new option and append it to the dropdown
+        $(dropdownSelector).append(new Option(desiredValue, desiredValue));
+    }
+
+    // Now set the value of the dropdown to the desired value
+    $(dropdownSelector).val(desiredValue).trigger('change');
+}
+
+
+
+function getNamesByAreaUnitariaId(area_unitaria_id) {
+    const webMethod='getNamesByAreaUnitariaId';
+    url=apiUrl+webMethod;
+    console.log(area_unitaria_id,"id");
+    return fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'id': area_unitaria_id})
+      })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error;
+        });
+}
+
+
+
+function getidByAreaUnitarianombre(area_unitaria_nombre) {
+    const webMethod='getidByNombre';
+    url=apiUrl+webMethod;
+    return fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'nombre': area_unitaria_nombre})
+      })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error;
+        });
+}
 
 
 
