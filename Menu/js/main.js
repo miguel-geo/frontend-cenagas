@@ -399,8 +399,8 @@ function inicializarEventos() {
     });
     $(document).on("click", ".edit", function (e) {
         
-        let nombre_area_unitaria = $(this).closest('tr').children('td:first').text();
-        console.log(nombre_area_unitaria)
+        let nombre_area_id = e.currentTarget.dataset["id"];
+
         
     
         switch (temaconsulta) {
@@ -408,9 +408,9 @@ function inicializarEventos() {
                 switch(temaconsultadisenio){
                     case "Dis1":
                         consultatoform(e)
-                        getidByAreaUnitarianombre(nombre_area_unitaria).then(data => {
-                            setDropdownValue('#cmbAreas', data.id);
-                            area=data.id;
+                        getAreaIdByDisenioId(nombre_area_id ).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area=data.area_unitaria_id;
                             fnshowIndentificacion();
                         });
                         
@@ -1107,7 +1107,7 @@ function fnFinalizar() {
 
 var idDiseniogral;
 function consultaDatosIdentificacionArea(params) {
-
+    
 
     
     var webMethod = "get_diseniogeneral";
@@ -1124,7 +1124,25 @@ function consultaDatosIdentificacionArea(params) {
                     llenarDatosActualizacion(data.data);
                     $("#btn_saveidentificacion").hide();
                     $("#btn_updateidentificacion").show();
+                }else{
+
+                    clearInputTextValues('identificacionfrm');
+                    habilitarformdiseniogral(false);
+                    $("#btn_saveidentificacion").show();
+                    $("#btn_updateidentificacion").hide();
+
                 }
+
+                console.log(data.data)
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+                
+                    $("#txtductogeneral").val(ducto_nombre);
+                    $("#txttramogeneral").val(tramo_nombre);
+                    $("#txtareageneral").val(area_unitaria_nombre);
+                });
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -1135,6 +1153,7 @@ function consultaDatosIdentificacionArea(params) {
 
 }
 function llenarDatosActualizacion(data) {
+    
     $("#btn_updateidentificacion").text('Actualizar');
     if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
@@ -1144,15 +1163,7 @@ function llenarDatosActualizacion(data) {
     else{$("#coord_esp_iden_x").val("");
     $("#coord_esp_iden_y").val("");}
 
-    getNamesByAreaUnitariaId(data[0].C_0101_0001_id).then(data => {
-        let area_unitaria_nombre = data.area_unitaria_nombre;
-        let tramo_nombre = data.tramo_nombre;
-        let ducto_nombre = data.ducto_nombre;
     
-        $("#txtductogeneral").val(ducto_nombre);
-        $("#txttramogeneral").val(tramo_nombre);
-        $("#txtareageneral").val(area_unitaria_nombre);
-    });
     
 
     $("#km_esp_iden").val(data[0].kilometro_especifico);
@@ -3805,6 +3816,29 @@ function getidByAreaUnitarianombre(area_unitaria_nombre) {
 }
 
 
+function getAreaIdByDisenioId(disenio_id) {
+    const webMethod='getAreaIdByDisenioId';
+    url=apiUrl+webMethod;
+    return fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'id': disenio_id})
+      })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error;
+        });
+}
+
+
 
 
 function validateForm(formId, saveFn) {
@@ -3896,3 +3930,12 @@ function showClass(className) {
 function consultatoform(e){
     selectTabupdate(e, 'Opcion1');
     document.getElementById('registro').style.display = 'none';}
+
+function clearInputTextValues(divId) {
+    const div = document.getElementById(divId);
+    const textInputs = div.querySelectorAll('input[type="text"], input[type="date"]');
+
+    textInputs.forEach(input => {
+        input.value = '';
+    });
+}    
