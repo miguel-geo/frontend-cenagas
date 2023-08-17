@@ -1,4 +1,4 @@
-var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:80/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -1107,14 +1107,8 @@ function llenarDatosActualizacion(data) {
     $("#temp_c").val(data[0].C_0207_0027);
     $("#cmbunidadtemperatura").val(data[0].temperatura);
     $("#cmbTipoCostura option:contains(" + data[0].C_0208_0029 + ")").attr('selected', 'selected');
-    if (data[0].C_0209_0030 !== "" && data[0].C_0209_0030 !== undefined) {
-        const fecha_fab = data[0].C_0209_0030.split(' ');
-        const fecha_comp = fecha_fab[0].split('-');
-        document.getElementById("fec_fab").text = fecha_comp[2] + '/' + fecha_comp[1] + '/' + fecha_comp[0];
-        //$("#fec_fab").val(fecha_fab.format('YYYY-MM-DD'));
-    }
-    $("#fec_fab").val(data[0].C_0209_0030);
-    $("#fec_fab_fin").val(data[0].C_0209_0030_2);
+    $("#fec_fab").val(data[0].C_0209_0030.split(' ')[0]);
+    $("#fec_fab_fin").val(data[0].C_0209_0030_2.split(' ')[0]);
     $("#porc_carbono").val(data[0].C_0210_0031);
     $("#res_trac").val(data[0].C_0210_0032);
     $("#lim_elas").val(data[0].C_0210_0033);
@@ -1203,7 +1197,7 @@ function consultaDatosProteccionArea() {
 }
 var idDisenioproteccion;
 function llenarDatosActualizacionProteccion(data) {
-    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined) {
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined&& data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
         $("#coord_esp_iden_prot_x").val(coords[0]);
         $("#coord_esp_iden_prot_y").val(coords[1]);
@@ -1215,8 +1209,8 @@ function llenarDatosActualizacionProteccion(data) {
     $("#txtkmfinalrecubrimiento").val(data[0].C_0211_0036);
     $("#txtlongtotalrecubrimiento").val(data[0].C_0211_0037);
     $("#txtempresaaplicoservicio").val(data[0].C_0211_0038);
-    $("#txtfecinicioservicio").val(data[0].C_0211_0039);
-    $("#txtfecfabrico").val(data[0].C_0211_0040);
+    $("#txtfecinicioservicio").val(data[0].C_0211_0039.split(' ')[0]);
+    $("#txtfecfabrico").val(data[0].C_0211_0040.split(' ')[0]);
     $("#txtfecinstalacion").val(data[0].C_0211_0041);
     $("#txtfecinstalacion_2").val(data[0].C_0211_0041_2);
     $("#txtordenaplicacion").val(data[0].C_0211_0044);
@@ -1317,7 +1311,7 @@ function consultaDatosPresionArea() {
 }
 var idDiseniopresion;
 function llenarDatosActualizacionPresion(data) {
-    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined) {
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined&& data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
         $("#coord_esp_iden_pres_x").val(coords[0]);
         $("#coord_esp_iden_pres_y").val(coords[1]);
