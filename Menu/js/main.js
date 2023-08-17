@@ -1286,6 +1286,59 @@ function updateDisenioproteccion() {
         });
     }
 }
+function consultaDatosPresionArea() {
+
+
+    var params;
+    params = {
+        id: $("#cmbAreas option:selected").val(),
+        op: 1
+    };
+    var webMethod = "get_Presion";
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        success: function (data) {
+            if (data.success) {
+                if (data.data.length > 0) {
+                    llenarDatosActualizacionPresion(data.data);
+                   // $("#btnsaveproteccion").hide();
+                    //$("#btn_updateproteccion").show();
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
+var idDiseniopresion;
+function llenarDatosActualizacionPresion(data) {
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_iden_pres_x").val(coords[0]);
+        $("#coord_esp_iden_pres_y").val(coords[1]);
+    }
+    $("#km_esp_iden_pres").val(data[0].kilometro_especifico);
+    $("#txtEntidadEmpresa").val(data[0].C_0211_0034);
+    $("#txtfechacalculo").val(data[0].C_0211_0034_2);
+    $("#txtMetodoCalculo").val(data[0].C_0211_0035);
+    $("#txtPresNomPSI").val(data[0].C_0211_0036);
+    $("#cmbunidadpresnominal").val(data[0].C_0211_0037);
+    $("#txtPresDisenio").val(data[0].C_0211_0038);
+    $("#cmbunidadpresionmaxope").val(data[0].C_0211_0039);
+    $("#txtPresRedPSI").val(data[0].C_0211_0040);
+    $("#cmbunidadpresionsegmento").val(data[0].C_0211_0041);
+    idDiseniopresion = data[0].id;
+    habilitarformdiseniopresion(true);
+}
+function habilitarformdiseniopresion(bandera) {
+    $("input.setPres").attr("disabled", bandera);
+    $("select.setPres").attr("disabled", bandera);
+}
 //#endregion
 //#region FORMULARIOS DISEÑO
 function fnshowIndentificacion() {
@@ -1303,6 +1356,7 @@ function fnshowServicio() {
 function fnshowPresion() {
     $('#presionfrm').show();
     $('#disenioforms').hide();
+    consultaDatosPresionArea();
 }
 function fnshowProteccion() {
     $('#proteccionfrm').show();
