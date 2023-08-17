@@ -1134,7 +1134,6 @@ function consultaDatosIdentificacionArea(params) {
 
                 }
 
-                console.log(data.data)
                 getNamesByAreaUnitariaId(area).then(data => {
                     let area_unitaria_nombre = data.area_unitaria_nombre;
                     let tramo_nombre = data.tramo_nombre;
