@@ -407,24 +407,11 @@ function inicializarEventos() {
             case "T1":
                 switch(temaconsultadisenio){
                     case "Dis1":
-                        selectTabupdate(e, 'Opcion1');
-                        document.getElementById('registro').style.display = 'none';
-                        var params;
-
-                        $('#identificacionfrm').show();
-                        $('#disenioforms').hide();
-                        loadtipocostura();
-                        loadtipomaterialdisenio();
+                        consultatoform(e)
                         getidByAreaUnitarianombre(nombre_area_unitaria).then(data => {
                             setDropdownValue('#cmbAreas', data.id);
-                            console.log($("#cmbAreas").val(),data.id);
-                            params = {
-                                id: data.id,
-                                op: 1
-                            };
-                            consultaDatosIdentificacionArea(params);
-                        
-                
+                            area=data.id;
+                            fnshowIndentificacion();
                         });
                         
                         break;
@@ -1358,19 +1345,39 @@ function updateDisenioproteccion() {
 }
 //#endregion
 //#region FORMULARIOS DISEÑO
-function fnshowIndentificacion() {
+
+async function executeInOrder() {
+    
+}
+
+// Call the function to start the sequence
+executeInOrder();
+
+
+
+async function fnshowIndentificacion() {
     $('#identificacionfrm').show();
     $('#disenioforms').hide();
-    loadtipocostura();
-    loadtipomaterialdisenio();
-    params = {
-        id: $("#cmbAreas option:selected").val(),
-        op: 1
-    };
-    consultaDatosIdentificacionArea(params);
-   
+    try {
+        await loadtipocostura();
+        await loadtipomaterialdisenio();
 
+        const params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+
+        await consultaDatosIdentificacionArea(params);
+
+        // If you want to do something after all functions have completed, you can do it here
+
+    } catch(error) {
+        console.error("An error occurred:", error);
+    }
+    resetValidationClasses('identificacionfrm');
 }
+
+
 function fnshowServicio() {
     $('#serviciofrm').show();
     $('#disenioforms').hide();
@@ -2291,30 +2298,33 @@ function selectTabupdate(evt, tabName) {
 
 
 function loadtipocostura() {
-    var webMethod = "get_tipocostura";
-    $.ajax({
-        type: "GET",
-        url: apiUrl + webMethod,
-        success: function (data) {
-            if (data.success) {
-                console.log(data.data);
-                $("#cmbTipoCostura").empty();
-                $('#cmbTipoCostura').append($('<option>', {
-                    value: 0,
-                    text: 'Selecciona...'
-                }));
-                for (var i = 0; i < data.data.length; i++) {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_tipocostura";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmbTipoCostura").empty();
                     $('#cmbTipoCostura').append($('<option>', {
-                        value: data.data[i].id,
-                        text: data.data[i].C_0208_0029
+                        value: 0,
+                        text: 'Selecciona...'
                     }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmbTipoCostura').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0208_0029
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
                 }
-                
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
             }
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-
-        }
+        });
     });
 }
 
@@ -2346,33 +2356,37 @@ function loadtiporecubrimiento() {
     });
 }
 function loadtipomaterialdisenio() {
-    var webMethod = "get_tipomaterialdisenio";
-    $.ajax({
-        type: "GET",
-        url: apiUrl + webMethod,
-        success: function (data) {
-            if (data.success) {
-                console.log(data.data);
-                $("#cmbTipoMaterial").empty();
-                $('#cmbTipoMaterial').append($('<option>', {
-                    value: 0,
-                    text: 'Selecciona...'
-                }));
-                for (var i = 0; i < data.data.length; i++) {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_tipomaterialdisenio";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    console.log(data.data);
+                    $("#cmbTipoMaterial").empty();
                     $('#cmbTipoMaterial').append($('<option>', {
-                        value: data.data[i].id,
-                        text: data.data[i].C_0204_0011
+                        value: 0,
+                        text: 'Selecciona...'
                     }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmbTipoMaterial').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0204_0011
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
                 }
-                var params;
-                
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
             }
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-
-        }
+        });
     });
 }
+
 function loadtipoproteccioncatodica() {
     var webMethod = "get_tipoproteccioncatodica";
     $.ajax({
@@ -3813,6 +3827,15 @@ function validateForm(formId, saveFn) {
 }
 
 
+function resetValidationClasses(divId) {
+    const div = document.getElementById(divId);
+    const inputs = div.querySelectorAll('.form-control');
+
+    inputs.forEach(input => {
+        input.classList.remove('is-valid');
+        input.classList.remove('is-invalid');
+    });
+}
 
 
 
@@ -3869,3 +3892,7 @@ function showClass(className) {
         element.style.display = "";
     });
 }
+
+function consultatoform(e){
+    selectTabupdate(e, 'Opcion1');
+    document.getElementById('registro').style.display = 'none';}
