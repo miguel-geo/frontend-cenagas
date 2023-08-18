@@ -310,7 +310,7 @@
                                         <span class="input-group-text" id="basic-addon1">Diametro nominal</span>
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="diam_mm" aria-describedby="basic-addon1">
-                                    <select class="selectpicker form-control" id="cmbunidaddiametro">
+                                    <select class="selectpicker form-control setAlg" id="cmbunidaddiametro">
                                         <option value=0>Selecciona unidad medida...</option>
                                         <option value="mm">mm</option>
                                         <option value="in">in</option>
@@ -339,7 +339,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Especificación de material</span>
                                     </div>
-                                    <select class="selectpicker form-control  validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  id="cmbTipoMaterial">
+                                    <select class="selectpicker form-control  validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  id="cmbTipoMaterial">
                                         <option value=0>Selecciona...</option>
                                         <option value=1>ASTM A106</option>
                                         <option value=2>ASTM A135</option>
@@ -372,7 +372,7 @@
                                         <span class="input-group-text" id="basic-addon1">Temperatura</span>
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="temp_c" aria-describedby="basic-addon1">
-                                    <select class="selectpicker form-control" id="cmbunidadtemperatura">
+                                    <select class="selectpicker form-control setAlg" id="cmbunidadtemperatura">
                                         <option value=0>Selecciona unidad medida...</option>
                                         <option value="C°">C°</option>
                                         <option value="F°">F°</option>
@@ -425,7 +425,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Porcentajes(%) de Carbono</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$" placeholder="" aria-label="" id="porc_carbono" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$" placeholder="" aria-label="" id="porc_carbono" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Resistencia a la tracción(PSI)</span>
                                     </div>
@@ -541,42 +541,42 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setPres"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_iden_pres_x" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_iden_pres_x" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setPres"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_iden_pres_y" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_iden_pres_y" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setPres"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="km_esp_iden_pres" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="km_esp_iden_pres" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Entidad o Empresa responsable</span>
                                     </div>
-                                    <input type="text" class="form-control  validate-pattern setPres"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtEntidadEmpresa" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control  validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtEntidadEmpresa" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Fecha de cálculo</span>
                                     </div>
-                                    <input type="date" class="form-control validate-pattern setPres"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"  placeholder="" id="txtfechacalculo" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="date" class="form-control validate-pattern setAlg"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"  placeholder="" id="txtfechacalculo" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Método de cálculo</span>
                                     </div>
-                                    <input type="text" class="form-control setPres" placeholder="" id="txtMetodoCalculo" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" id="txtMetodoCalculo" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Presión nominal</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setPres" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresNomPSI" aria-label="" aria-describedby="basic-addon1">
-                                    <select class="selectpicker form-control setPres" id="cmbunidadpresnominal">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresNomPSI" aria-label="" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control setAlg" id="cmbunidadpresnominal">
                                         <option value=0>Selecciona unidad medida...</option>
                                         <option value="PSI">PSI</option>
                                         <option value="kg/cm2">kg/cm2</option>
@@ -586,8 +586,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Presión de diseño*</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setPres" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresDisenio" aria-label="" aria-describedby="basic-addon1" required>
-                                    <select class="selectpicker form-control setPres" id="cmbunidadpresiondisenio">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresDisenio" aria-label="" aria-describedby="basic-addon1" required>
+                                    <select class="selectpicker form-control setAlg" id="cmbunidadpresiondisenio">
                                         <option value=0>Selecciona unidad medida...</option>
                                         <option value="PSI">PSI</option>
                                         <option value="kg/cm2">kg/cm2</option>
@@ -597,8 +597,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Presión Máxima de Operación Permitida</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setPres" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresMaxPSI" aria-label="" aria-describedby="basic-addon1">
-                                    <select class="selectpicker form-control setPres" id="cmbunidadpresionmaxope">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresMaxPSI" aria-label="" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control setAlg" id="cmbunidadpresionmaxope">
                                         <option value=0>Selecciona unidad medida...</option>
                                         <option value="PSI">PSI</option>
                                         <option value="kg/cm2">kg/cm2</option>
@@ -608,8 +608,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Presión de Red o Presión de Segmento</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setPres" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresRedPSI" aria-label="" aria-describedby="basic-addon1">
-                                    <select class="selectpicker form-control setPres" id="cmbunidadpresionsegmento">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresRedPSI" aria-label="" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control setAlg" id="cmbunidadpresionsegmento">
                                         <option value=0>Selecciona unidad medida...</option>
                                         <option value="PSI">PSI</option>
                                         <option value="kg/cm2">kg/cm2</option>
@@ -617,7 +617,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelDisenioPresion()" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" id="btnGuardarPresion" onclick="validateForm('presion-form', saveDisenioPresion)" class="btn btn-success">Guardar</button>
+                                    <button type="button" id="btnsavepresion" onclick="validateForm('presion-form', updateDiseniopresion())" class="btn btn-success">Guardar</button>
+                                    <button type="button" id="btn_updatepresion" onclick="updateDiseniopresion()" style="display:none" class="btn btn-info">Actualizar</button>
                                 </div>
                             </form>
                         </div>
@@ -645,131 +646,131 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setprotdis"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_iden_prot_x" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_iden_prot_x" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setprotdis"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_iden_prot_y" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="coord_esp_iden_prot_y" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setprotdis"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="km_esp_iden_prot" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="km_esp_iden_prot" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de recubrimiento*</span>
                                     </div>
-                                    <input type="text" class="form-control  validate-pattern setprotdis"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtiporecubrimiento" aria-label="" aria-describedby="basic-addon1" required>
+                                    <input type="text" class="form-control  validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtiporecubrimiento" aria-label="" aria-describedby="basic-addon1" required>
                                 </div>
                                 <div class="input-group mb-3" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Otro Tipo de recubrimiento</span>
                                     </div>
-                                    <input type="text" class="form-control  validate-pattern setprotdis"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtiporecubrimiento_2" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control  validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtiporecubrimiento_2" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Kilometraje inicial del recubrimiento</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setprotdis"  pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtkminicialrecubrimiento" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtkminicialrecubrimiento" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Kilometraje final del recubrimiento</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setprotdis"  pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtkmfinalrecubrimiento" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtkmfinalrecubrimiento" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Longitud total del recubrimiento</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setprotdis"  pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtlongtotalrecubrimiento" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtlongtotalrecubrimiento" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Empresa que aplico el recubrimiento</span>
                                     </div>
-                                    <input type="text" class="form-control  validate-pattern setprotdis"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtempresaaplicoservicio" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control  validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtempresaaplicoservicio" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Fecha inicio de servicio</span>
                                     </div>
-                                    <input type="date" class="form-control validate-pattern setprotdis"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"  placeholder="" id="txtfecinicioservicio" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="date" class="form-control validate-pattern setAlg"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"  placeholder="" id="txtfecinicioservicio" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Fecha en que se fabrico</span>
                                     </div>
-                                    <input type="date" class="form-control validate-pattern setprotdis"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"  placeholder="" id="txtfecfabrico" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="date" class="form-control validate-pattern setAlg"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"  placeholder="" id="txtfecfabrico" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Fecha de instalación </span>
                                     </div>
-                                    <input type="date" class="form-control validate-pattern setprotdis"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"  placeholder="" id="txtfecinstalacion" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="date" class="form-control validate-pattern setAlg"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"  placeholder="" id="txtfecinstalacion" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Otra Fecha de instalación</span>
                                     </div>
-                                    <input type="date" class="form-control validate-pattern setprotdis"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"  placeholder="" id="txtfecinstalacion_2" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="date" class="form-control validate-pattern setAlg"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"  placeholder="" id="txtfecinstalacion_2" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Fecha de aplicación  </span>
                                     </div>
-                                    <input type="date" class="form-control validate-pattern setprotdis"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"  placeholder="" id="txtfecaplicacion" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="date" class="form-control validate-pattern setAlg"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"  placeholder="" id="txtfecaplicacion" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Ubicación en que se aplico la protección al ducto</span>
                                     </div>
-                                    <input type="text" class="form-control  validate-pattern setprotdis"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtubicacionproteccion" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control  validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtubicacionproteccion" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Orden de aplicación (interno -1,-2 externo 1, 2)</span>
                                     </div>
-                                    <input type="text" class="form-control  validate-pattern setprotdis"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" aria-label="" id="txtordenaplicacion" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control  validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" aria-label="" id="txtordenaplicacion" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Localización (interno/externo)</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setprotdis"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" aria-label="" id="txtlocalizacion" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" aria-label="" id="txtlocalizacion" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Temperatura máxima de funcionamiento</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setprotdis"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="txtTempMaxFuncionamiento" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="txtTempMaxFuncionamiento" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Motivo de instalación</span>
                                     </div>
-                                    <input type="text" class="form-control  validate-pattern setprotdis"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" aria-label="" id="txtmotivoinstalacion" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control  validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" aria-label="" id="txtmotivoinstalacion" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Material de fabricación </span>
                                     </div>
-                                    <input type="text" class="form-control  validate-pattern setprotdis"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" aria-label="" id="txtmaterialfabricacion" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control  validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" aria-label="" id="txtmaterialfabricacion" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Espesor del recubrimiento</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setprotdis"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="txtespesorrecubrimiento" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="txtespesorrecubrimiento" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Aislamiento eléctrico</span>
                                     </div>
-                                    <select class="selectpicker form-control setprotdis" id="cmbdecisionAislamiento">
+                                    <select class="selectpicker form-control setAlg" id="cmbdecisionAislamiento">
                                         <option value="0">Selecciona...</option>
                                         <option value="Sí">Sí</option>
                                         <option value="No">No</option>
@@ -779,7 +780,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Control de la corrosión</span>
                                     </div>
-                                    <select class="selectpicker form-control setprotdis" id="cmbdecisionCorrosion">
+                                    <select class="selectpicker form-control setAlg" id="cmbdecisionCorrosion">
                                         <option value="0">Selecciona...</option>
                                         <option value="Sí">Sí</option>
                                         <option value="No">No</option>
@@ -788,7 +789,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" onclick="cancelDisenioProteccion()" id="btncancelproteccion" data-dismiss="modal">Cancelar</button>
                                     <button type="button" id="btn_updateproteccion" onclick="updateDisenioproteccion()" style="display:none" class="btn btn-info">Actualizar</button>
-                                    <button type="button" id="btnsaveproteccion" onclick="validateForm('proteccion-form', saveDisenioProteccion)" class="btn btn-success">Guardar</button>
+                                    <button type="button" id="btnsaveproteccion" onclick="validateForm('proteccionfrm', saveDisenioProteccion)" class="btn btn-success">Guardar</button>
                                 </div>
                             </form>
                         </div>
@@ -890,48 +891,48 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenbasecons_x" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenbasecons_x" aria-describedby="basic-addon1">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenbasecons_y" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenbasecons_y" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="km_esp_idenbasecons" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="km_esp_idenbasecons" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Fecha de construcción </span>
                                         </div>
-                                        <input type="date" class="form-control validate-pattern"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"   id="fechaconstbase" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        <input type="date" class="form-control validate-pattern setAlg"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$"   id="fechaconstbase" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Método de recubrimiento</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  id="metrecubbase" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  id="metrecubbase" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Tipo de suelo</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  id="txttiposuelobaseconst" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  id="txttiposuelobaseconst" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Material de relleno</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  id="txtmatrellenobaseconst" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  id="txtmatrellenobaseconst" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Presión de prueba de hermeticidad (PSI)</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="presionhermebasecons" aria-describedby="basic-addon1">
-                                        <select class="selectpicker form-control" id="cmbunidadpresionhermebasecons">
+                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="presionhermebasecons" aria-describedby="basic-addon1">
+                                        <select class="selectpicker form-control setAlg" id="cmbunidadpresionhermebasecons">
                                             <option value=0>Selecciona unidad medida...</option>
                                             <option value="PSI">PSI</option>
                                             <option value="kg/cm2">kg/cm2</option>
@@ -946,7 +947,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de recubrimiento</span>
                                     </div>
-                                    <select class="selectpicker form-control" id="cmtiporecubrimientobase">
+                                    <select class="selectpicker form-control setAlg" id="cmtiporecubrimientobase">
                                         <option value=0>Selecciona...</option>
                                         <option value="Esmalte de brea de alquitrán de hulla">Esmalte de brea de alquitrán de hulla</option>
                                         <option value="Ceras microcristalinas de petróleo">Ceras microcristalinas de petróleo</option>
@@ -964,11 +965,11 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de Recubrimiento</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoRecubrimiento" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="newTipoRecubrimiento" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Descripción</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescRecubrimiento" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="newDescRecubrimiento" aria-describedby="basic-addon1">
                                     <div>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoRecubrimiento()">Cancelar</button>
                                         <button type="button" id="btn_saveMaterial" onclick="saveotroTipoRecubrimiento()" class="btn btn-success">Guardar</button>
@@ -976,7 +977,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelbasecons()" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" id="btnGuardarPresion" onclick="validateForm('constbasefrm', savebasecons)" class="btn btn-success">Guardar</button>
+                                    <button type="button" id="btn_updateconsgeneral" onclick="updateConsGeneral()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_saveconsgeneral" onclick="validateForm('constbasefrm', savebasecons)" class="btn btn-success">Guardar</button>
                                 </div>
                             </form>
                         </div>
@@ -1005,7 +1007,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenunion_x" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenunion_x" aria-describedby="basic-addon1">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
                                         </div>
@@ -1054,13 +1056,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Identificador</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  id="txtidentificadorunion" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  id="txtidentificadorunion" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Recubrimiento aplicado en la soldadura</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  id="txtrecaplsolunion" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  id="txtrecaplsolunion" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -1114,13 +1116,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Estado actual</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"   placeholder="" id="txtedoactunion" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"   placeholder="" id="txtedoactunion" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Estado histórico</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"   placeholder="" id="txtedohisunion" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"   placeholder="" id="txtedohisunion" aria-label="" aria-describedby="basic-addon1">
                                 </div>
 
                                 <div class="modal-footer">
@@ -1217,25 +1219,25 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Perforación direccional horizontal para excavar</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtperdirhor" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtperdirhor" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Método de medición</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtmetmedprof" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtmetmedprof" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Estado actual</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtedoactprof" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtedoactprof" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Estado histórico</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtedohisprof" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" id="txtedohisprof" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="fncancelprofenterrado()" data-dismiss="modal">Cancelar</button>
@@ -1636,13 +1638,13 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Duración de la prueba</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  id="txtdurpruebher" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  id="txtdurpruebher" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Medio de prueba empleado </span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  placeholder="" aria-label="" id="txtmedempher" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  placeholder="" aria-label="" id="txtmedempher" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -1677,7 +1679,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Calibración</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"   placeholder="" aria-label="" id="txtcalbher" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"   placeholder="" aria-label="" id="txtcalbher" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -1893,25 +1895,25 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Nombre</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  id="txtnombrecatodica" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  id="txtnombrecatodica" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Id o no. De serie</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  id="txtnoserie" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  id="txtnoserie" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Fabricante </span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  id="txtfabricante" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  id="txtfabricante" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Estado</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$"  id="extedoprote" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`\[\]{}|:;'>,.?/\\ ]+$"  id="extedoprote" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
                                 <div class="modal-footer">

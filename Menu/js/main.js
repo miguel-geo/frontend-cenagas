@@ -16,6 +16,7 @@ var temaconsulta = "";
 var docbasecons = "";
 var temaconsultaconstruccion = "";
 var temaconsultadisenio = "";
+var area_unitaria_id;
 var contar_longitud=0;
 const headers = new Headers({
     'Accept': 'application/json',
@@ -398,17 +399,70 @@ function inicializarEventos() {
     }   
     });
     $(document).on("click", ".edit", function (e) {
-        var c = 0;
-        $(this).parents("tr").find("td:not(:last-child)").each(function () {
-            if (c === 0) {
-                $(this).html('<input type="text" class="form-control" disabled value="' + $(this).text() + '">');
-            } else {
-                $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
-            }
-            c++;
-        });
-        $("#ra" + e.currentTarget.dataset["id"]).show();
-        $("#re" + e.currentTarget.dataset["id"]).hide();
+        
+        let row_id = e.currentTarget.dataset["id"];
+
+        
+    
+        switch (temaconsulta) {
+            case "T1":
+                switch(temaconsultadisenio){
+                    case "Dis1":
+                        consultatoform(e)
+                        getAreaIdById("getAreaIdByDisenioId",row_id ).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area=data.area_unitaria_id;
+                            fnshowIndentificacion();
+                        });
+                        
+                        break;
+                    case "Dis2":
+                        consultatoform(e)
+                        getAreaIdById("getAreaIdByPresionId",row_id ).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area=data.area_unitaria_id;
+                            fnshowPresion();
+                        });
+                        break;
+                    case "Dis3":
+                        consultatoform(e)
+                        getAreaIdById("getAreaIdByProteccionId",row_id ).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area=data.area_unitaria_id;
+                            fnshowProteccion();
+                        });
+                        break;
+                    default:}
+            case "T2":
+                switch(temaconsultaconstruccion){
+                    case "Cons1":
+                        webMethod = "general/destroyBase";
+                        break;
+                    case "Cons2":
+                        webMethod = "union/destroyUnion";
+                        break;
+                    case "Cons3":
+                        webMethod = "profundidad/destroyProfundidad";
+                        break;
+                    case "Cons4":
+                        webMethod = "cruces/destroycruces";
+                        break;
+                    case "Cons5":
+                        webMethod = "hermeticidad/destroyHermeticidad";
+                        break;
+                    case "Cons6":
+                        webMethod = "";
+                        break;
+                    case "Cons7":
+                        webMethod = "catodica/destroycatodica";
+                        break;
+                    case "Cons8":
+                        webMethod = "";
+                        break;
+
+                        
+                    default:}
+        }
     });
     $(document).on("click", ".add", function (e) {
         var empty = false;
@@ -1060,29 +1114,52 @@ function fnFinalizar() {
     //$('#registro').hide();
    
 }
+
+
+
+function inhabilitarform(divSelector, bandera) {
+    $(divSelector + " input.setAlg").prop("disabled", bandera);
+    $(divSelector + " select.setAlg").prop("disabled", bandera);
+}
 //#region Actulizacion Diseño
 
 var idDiseniogral;
-function consultaDatosIdentificacionArea() {
+function consultaDatosIdentificacionArea(params) {
+    
 
-
-    var params;
-    params = {
-        id: $("#cmbAreas option:selected").val(),
-        op: 1
-    };
+    
     var webMethod = "get_diseniogeneral";
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
+        headers:{
+            'Accept': 'application/json'
+        },
         success: function (data) {
             if (data.success) {
                 if (data.data.length > 0) {
                     llenarDatosActualizacion(data.data);
                     $("#btn_saveidentificacion").hide();
                     $("#btn_updateidentificacion").show();
+                }else{
+
+                    clearInputTextValues('identificacionfrm');
+                    inhabilitarform("#identificacionfrm",false)
+                    $("#btn_saveidentificacion").show();
+                    $("#btn_updateidentificacion").hide();
+
                 }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+                
+                    $("#txtductogeneral").val(ducto_nombre);
+                    $("#txttramogeneral").val(tramo_nombre);
+                    $("#txtareageneral").val(area_unitaria_nombre);
+                });
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -1093,14 +1170,18 @@ function consultaDatosIdentificacionArea() {
 
 }
 function llenarDatosActualizacion(data) {
-    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined&& data[0].coordenada_especifica !== null) {
+    
+    $("#btn_updateidentificacion").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
         $("#coord_esp_iden_x").val(coords[0]);
         $("#coord_esp_iden_y").val(coords[1]);
     }
+    else{$("#coord_esp_iden_x").val("");
+    $("#coord_esp_iden_y").val("");}
     $("#km_esp_iden").val(data[0].kilometro_especifico);
     $("#longitud").val(data[0].C_0201_0006);
-    $("#diam_mm").val(data[0].C_0201_0006);
+    $("#diam_mm").val(data[0].C_0201_0007);
     $("#cmbunidaddiametro").val(data[0].diametro_nominal);
     $("#esp_mm").val(data[0].C_0203_0009);
     $("#cmbunidadespesor").val(data[0].espesor_pared);
@@ -1114,14 +1195,14 @@ function llenarDatosActualizacion(data) {
     $("#res_trac").val(data[0].C_0210_0032);
     $("#lim_elas").val(data[0].C_0210_0033);
     idDiseniogral = data[0].id;
-    habilitarformdiseniogral(true);
+    inhabilitarform("#identificacionfrm", true);
 }
-function habilitarformdiseniogral(bandera) {
-    $("input.setAlg").attr("disabled", bandera);
-}
+
+
+
 function updateIdentificacionDisenio() {
     if ($("#btn_updateidentificacion").text() === "Actualizar") {
-        habilitarformdiseniogral(false);
+        inhabilitarform("#identificacionfrm",false)
         $("#btn_updateidentificacion").text('Guardar');
     }
     else {
@@ -1182,11 +1263,31 @@ function consultaDatosProteccionArea() {
         data: params,
         success: function (data) {
             if (data.success) {
+                clearInputTextValues('proteccionfrm');    
+
                 if (data.data.length > 0) {
+
                     llenarDatosActualizacionProteccion(data.data);
                     $("#btnsaveproteccion").hide();
                     $("#btn_updateproteccion").show();
+                }else{
+
+
+                    inhabilitarform("#proteccionfrm",false)
+                    $("#btnsaveproteccion").show();
+                    $("#btn_updateproteccion").hide();
+
                 }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+                    $("#txtductoproteccion").val(ducto_nombre);
+                    $("#txttramoproteccion").val(tramo_nombre);
+                    $("#txtareaproteccion").val(area_unitaria_nombre);
+                });
+
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -1198,6 +1299,7 @@ function consultaDatosProteccionArea() {
 }
 var idDisenioproteccion;
 function llenarDatosActualizacionProteccion(data) {
+    $("#btn_updateproteccion").text('Actualizar');
     if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined&& data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
         $("#coord_esp_iden_prot_x").val(coords[0]);
@@ -1223,14 +1325,12 @@ function llenarDatosActualizacionProteccion(data) {
     $("#cmbdecisionAislamiento").val(data[0].C_0211_0050);
     $("#cmbdecisionCorrosion").val(data[0].C_0211_0051);
     idDisenioproteccion = data[0].id;
-    habilitarformdisenioproteccion(true);
+    inhabilitarform("#proteccionfrm", true);
 }
-function habilitarformdisenioproteccion(bandera) {
-    $("input.setprotdis").attr("disabled", bandera);
-}
+
 function updateDisenioproteccion() {
     if ($("#btn_updateproteccion").text() === "Actualizar") {
-        habilitarformdisenioproteccion(false);
+        inhabilitarform("#proteccionfrm", false);
         $("#btn_updateproteccion").text('Guardar');
     }
     else {
@@ -1296,11 +1396,33 @@ function consultaDatosPresionArea() {
         data: params,
         success: function (data) {
             if (data.success) {
+
+
+                clearInputTextValues('presionfrm');    
+
                 if (data.data.length > 0) {
+
                     llenarDatosActualizacionPresion(data.data);
-                   // $("#btnsaveproteccion").hide();
-                    //$("#btn_updateproteccion").show();
+                    $("#btnsavepresion").hide();
+                    $("#btn_updatepresion").show();
+                }else{
+
+
+                    inhabilitarform("#presionfrm",false)
+                    $("#btnsavepresion").show();
+                    $("#btn_updatepresion").hide();
+
                 }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+                    $("#txtductopresion").val(ducto_nombre);
+                    $("#txttramopresion").val(tramo_nombre);
+                    $("#txtareapresion").val(area_unitaria_nombre);
+                });
+
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -1312,46 +1434,116 @@ function consultaDatosPresionArea() {
 }
 var idDiseniopresion;
 function llenarDatosActualizacionPresion(data) {
+
+    $("#btn_updatepresion").text('Actualizar');
     if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined&& data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
         $("#coord_esp_iden_pres_x").val(coords[0]);
         $("#coord_esp_iden_pres_y").val(coords[1]);
     }
     $("#km_esp_iden_pres").val(data[0].kilometro_especifico);
-    $("#txtEntidadEmpresa").val(data[0].C_0211_0034);
-    $("#txtfechacalculo").val(data[0].C_0211_0034_2);
-    $("#txtMetodoCalculo").val(data[0].C_0211_0035);
-    $("#txtPresNomPSI").val(data[0].C_0211_0036);
-    $("#cmbunidadpresnominal").val(data[0].C_0211_0037);
-    $("#txtPresDisenio").val(data[0].C_0211_0038);
-    $("#cmbunidadpresionmaxope").val(data[0].C_0211_0039);
-    $("#txtPresRedPSI").val(data[0].C_0211_0040);
-    $("#cmbunidadpresionsegmento").val(data[0].C_0211_0041);
+    $("#txtEntidadEmpresa").val(data[0].C_0206_0017);
+    $("#txtfechacalculo").val(data[0].C_0206_0018.split(' ')[0]);
+    $("#txtMetodoCalculo").val(data[0].C_0206_0019);
+    $("#txtPresNomPSI").val(data[0].C_0206_0020);
+    $("#cmbunidadpresnominal").val(data[0].C_0206_0021);
+    $("#txtPresDisenio").val(data[0].C_0206_0022);
+    $("#cmbunidadpresionmaxope").val(data[0].C_0206_0023);
+    $("#txtPresRedPSI").val(data[0].C_0206_0024);
+    $("#cmbunidadpresionsegmento").val(data[0].C_0206_0025);
     idDiseniopresion = data[0].id;
-    habilitarformdiseniopresion(true);
+    inhabilitarform("#presionfrm", true);
 }
-function habilitarformdiseniopresion(bandera) {
-    $("input.setPres").attr("disabled", bandera);
-    $("select.setPres").attr("disabled", bandera);
+
+//#endregion
+//#region FORMULARIOS DISEÑO
+
+function updateDiseniopresion() {
+    if ($("#btn_updatepresion").text() === "Actualizar") {
+        inhabilitarform("#presionfrm", false);
+        $("#btn_updatepresion").text('Guardar');
+    }
+    else {
+        
+        var params = {
+            id: idDiseniopresion,
+            C_0101_0001_id: area,
+            C_0206_0017: $("#cmbEntidad").val(),
+            C_0206_0018: $("#txtfechacalculo").val(),
+            C_0206_0019: $("#txtMetodoCalculo").val(),
+            C_0206_0020: $("#txtPresNomPSI").val(),
+            C_0206_0021: $("#txtPresNomKG").val(),
+            C_0206_0022: $("#txtPresDisenio").val(),
+            C_0206_0023: $("#txtPresMaxPSI").val(),
+            C_0206_0024: $("#txtPresMaxKG").val(),
+            C_0206_0025: $("#txtPresRedPSI").val(),
+            C_0206_0026: $("#txtPresRedKG").val(),
+            coordenada_especifica: $("#coord_esp_iden_pres_x").val()+' '+$("#coord_esp_iden_pres_y").val(),
+            kilometro_especifico: $("#km_esp_iden_pres").val(),
+            pres_nominal: $("#cmbunidadpresnominal").val(),
+            pres_disenio: $("#cmbunidadpresiondisenio").val(),
+            pres_max_ope: $("#cmbunidadpresionmaxope").val(),
+            pres_segmento: $("#cmbunidadpresionsegmento").val()
+        };
+        var webMethod = "";
+        webMethod = "updatePresion";
+        $.ajax({
+            type: "POST",
+            url: apiUrl + webMethod,
+            headers: {
+                'Accept': 'application/json'
+            },
+            data: params,
+            success: function (data) {
+                alert("El registro fue actualizado correctamente");
+                $('#disenioforms').show();
+                $('#presionfrm').hide();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+            }
+        });
+    }
 }
-function consultaDatosConsCruces() {
-    var params;
-    params = {
-        id: $("#cmbAreas option:selected").val(),
-        op: 1
-    };
-    var webMethod = "get_construccioncruces";
+
+
+
+//Consulta Modificar
+// General
+var idConsbase;
+function consultaDatosConsGeneral(params) {
+    var webMethod = "get_construcciongeneral";
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
+        headers:{
+            'Accept': 'application/json'
+        },
         success: function (data) {
             if (data.success) {
                 if (data.data.length > 0) {
-                    //llenarDatosActualizacionPresion(data.data);
-                    // $("#btnsaveproteccion").hide();
-                    //$("#btn_updateproteccion").show();
+                    llenarDatosActualizacionConsGeneral(data.data);
+                    $("#btn_saveconsgeneral").hide();
+                    $("#btn_updateconsgeneral").show();
+                }else{
+
+                    clearInputTextValues('constbasefrm');
+                    inhabilitarform("#constbasefrm",false)
+                    $("#btn_saveconsgeneral").show();
+                    $("#btn_updateconsgeneral").hide();
+
                 }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+                
+                    $("#txttramogeneralbasecons").val(ducto_nombre);
+                    $("#txtductogeneralbasecons").val(tramo_nombre);
+                    $("#txtareageneralbasecons").val(area_unitaria_nombre);
+                });
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -1361,16 +1553,146 @@ function consultaDatosConsCruces() {
 
 
 }
-//#endregion
-//#region FORMULARIOS DISEÑO
-function fnshowIndentificacion() {
-    $('#identificacionfrm').show();
-    $('#disenioforms').hide();
-    loadtipocostura();
-  
-   
+function llenarDatosActualizacionConsGeneral(data) {
+    
+    $("#btn_updateconsgeneral").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null&& data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_idenbasecons_x").val(coords[0]);
+        $("#coord_esp_idenbasecons_y").val(coords[1]);
+    }
+    else{$("##coord_esp_idenbasecons_x").val("");
+    $("#coord_esp_idenbasecons_y").val("");}
+
+    $("#fechaconstbase").val(data[0].C_0301_0048.split(" ")[0]);
+    $("#metrecubbase").val(data[0].C_0306_0108);
+    $("#txttiposuelobaseconst").val(data[0].C_0307_0109);
+    $("#txtmatrellenobaseconst").val(data[0].C_0307_0110);
+    $("#presionhermebasecons").val(data[0].C_0307_0110);
+    $("#cmbunidadpresionhermebasecons").val(data[0].unidad_presion_prueba);
+
+    $("#cmtiporecubrimientobase option:contains(" + data[0].C_0308_0111  + ")").attr('selected', 'selected');
+
+    idConsbase = data[0].id;
+    inhabilitarform("#constbasefrm", true);
+}
+
+
+
+function updateConsGeneral() {
+    if ($("#btn_updateconsgeneral").text() === "Actualizar") {
+        inhabilitarform("#constbasefrm",false)
+        $("#btn_updateconsgeneral").text('Guardar');
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "general/updateConstruccionGeneral";
+        params = {
+            id: idConsbase,
+            C_0101_0001_id: area,
+            C_0301_0048: $("#fechaconstbase").val(),
+            C_0306_0108: $("#metrecubbase").val(),
+            C_0307_0109: $("#txttiposuelobaseconst").val(),
+            C_0307_0110: $("#txtmatrellenobaseconst").val(),
+            C_0308_0110: $("#presionhermebasecons").val(),
+            unidad_presion_prueba: $("#cmbunidadpresionhermebasecons").val(),
+            C_0308_0111: $("#cmtiporecubrimientobase").val(),
+            coordenada_especifica: $("#coord_esp_idenbasecons_x").val()+' '+$("#coord_esp_idenbasecons_y").val(),
+            kilometro_especifico: $("#km_esp_idenbasecons").val()
+        };
+        $.ajax({
+            type: "POST",
+            url: apiUrl + webMethod,
+            headers: {
+                'Accept': 'application/json'
+            },
+            data: params,
+            success: function (data) {
+                alert("El registro fue actualizado correctamente");
+                $('#construforms').show();
+                $('#constbasefrm').hide();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+            }
+        });
+    }
+}
+function consultaDatosProteccionArea() {
+
+
+    var params;
+    params = {
+        id: $("#cmbAreas option:selected").val(),
+        op: 1
+    };
+    var webMethod = "get_Proteccion";
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        success: function (data) {
+            if (data.success) {
+                clearInputTextValues('proteccionfrm');    
+
+                if (data.data.length > 0) {
+
+                    llenarDatosActualizacionProteccion(data.data);
+                    $("#btnsaveproteccion").hide();
+                    $("#btn_updateproteccion").show();
+                }else{
+
+
+                    inhabilitarform("#proteccionfrm",false)
+                    $("#btnsaveproteccion").show();
+                    $("#btn_updateproteccion").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+                    $("#txtductoproteccion").val(ducto_nombre);
+                    $("#txttramoproteccion").val(tramo_nombre);
+                    $("#txtareaproteccion").val(area_unitaria_nombre);
+                });
+
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
 
 }
+
+async function fnshowIndentificacion() {
+    $('#identificacionfrm').show();
+    $('#disenioforms').hide();
+    try {
+        await loadtipocostura();
+        await loadtipomaterialdisenio();
+
+        const params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+
+        await consultaDatosIdentificacionArea(params);
+
+        // If you want to do something after all functions have completed, you can do it here
+
+    } catch(error) {
+        console.error("An error occurred:", error);
+    }
+    resetValidationClasses('identificacionfrm');
+}
+
+
 function fnshowServicio() {
     $('#serviciofrm').show();
     $('#disenioforms').hide();
@@ -1378,22 +1700,21 @@ function fnshowServicio() {
 function fnshowPresion() {
     $('#presionfrm').show();
     $('#disenioforms').hide();
+
     consultaDatosPresionArea();
+    resetValidationClasses('presionfrm');
 }
 function fnshowProteccion() {
     $('#proteccionfrm').show();
     $('#disenioforms').hide();
     consultaDatosProteccionArea();
+    resetValidationClasses('proteccionfrm');
 }
 function fnshowdisenioforms() {
     $('#disenioforms').show();
     $('#forms').hide();
-    $("#txtductogeneral").val(txtducto);
-    $("#txttramogeneral").val(txttramo);
-    $("#txtareageneral").val(txtarea);
-    $("#txtductopresion").val(txtducto);
-    $("#txttramopresion").val(txttramo);
-    $("#txtareapresion").val(txtarea);
+
+
     $("#txtductoproteccion").val(txtducto);
     $("#txttramoproteccion").val(txttramo);
     $("#txtareaproteccion").val(txtarea);
@@ -1466,14 +1787,31 @@ function fnshowseguridadpre() {
     $("#txttramogeneralseg").val(txttramo);
     $("#txtareageneralseg ").val(txtarea);
 }
-function fnshowbaseconst() {
+async function fnshowbaseconst() {
     $('#constbasefrm').show();
     $('#construforms').hide();
-    $("#txtductogeneralbasecons").val(txtducto);
-    $("#txttramogeneralbasecons").val(txttramo);
-    $("#txtareageneralbasecons").val(txtarea);
-    loadtiporecubrimiento();
+    try {
+
+        await loadtiporecubrimiento();
+
+        const params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+
+        await consultaDatosConsGeneral(params);
+
+        // If you want to do something after all functions have completed, you can do it here
+
+    } catch(error) {
+        console.error("An error occurred:", error);
+    }
+    resetValidationClasses('constbasefrm');
+
 }
+
+
+
 function cancelbasecons() {
     $('#constbasefrm').hide();
     $('#construforms').show();
@@ -2305,95 +2643,135 @@ function selectTab(evt, tabName) {
     evt.currentTarget.className += " active";
     document.getElementById("Contenido").style.display = "block";
     if (tabName === 'Opcion1') {
-        console.log(tabName)
         loadDuctos();
        
     }
 
-    
 }
-function loadtipocostura() {
-    var webMethod = "get_tipocostura";
-    $.ajax({
-        type: "GET",
-        url: apiUrl + webMethod,
-        success: function (data) {
-            if (data.success) {
-                console.log(data.data);
-                $("#cmbTipoCostura").empty();
-                $('#cmbTipoCostura').append($('<option>', {
-                    value: 0,
-                    text: 'Selecciona...'
-                }));
-                for (var i = 0; i < data.data.length; i++) {
-                    $('#cmbTipoCostura').append($('<option>', {
-                        value: data.data[i].id,
-                        text: data.data[i].C_0208_0029
-                    }));
-                }
-                loadtipomaterialdisenio();
-            }
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
 
-        }
+
+
+function selectTabupdate(evt, tabName) {
+    // Declare all variables
+
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("nav-item");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+    document.getElementById("Contenido").style.display = "block";
+
+
+}
+
+
+
+function loadtipocostura() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_tipocostura";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmbTipoCostura").empty();
+                    $('#cmbTipoCostura').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmbTipoCostura').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0208_0029
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
     });
 }
-
 
 function loadtiporecubrimiento() {
-    var webMethod = "get_tiporecubrimiento";
-    $.ajax({
-        type: "GET",
-        url: apiUrl + webMethod,
-        success: function (data) {
-            if (data.success) {
-                console.log(data.data);
-                $("#cmtiporecubrimientobase").empty();
-                $('#cmtiporecubrimientobase').append($('<option>', {
-                    value: 0,
-                    text: 'Selecciona...'
-                }));
-                for (var i = 0; i < data.data.length; i++) {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_tiporecubrimiento";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    console.log(data.data);
+                    $("#cmtiporecubrimientobase").empty();
                     $('#cmtiporecubrimientobase').append($('<option>', {
-                        value: data.data[i].id,
-                        text: data.data[i].C_0308_0111
+                        value: 0,
+                        text: 'Selecciona...'
                     }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmtiporecubrimientobase').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0308_0111
+                        }));
+                    }
+                    resolve();  // Resolve the promise when the success condition is met.
+                } else {
+                    reject(new Error('Data was not successful'));  // Reject the promise if data.success is false.
                 }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(new Error(thrownError));  // Reject the promise when there's an error.
             }
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-
-        }
+        });
     });
 }
+
 function loadtipomaterialdisenio() {
-    var webMethod = "get_tipomaterialdisenio";
-    $.ajax({
-        type: "GET",
-        url: apiUrl + webMethod,
-        success: function (data) {
-            if (data.success) {
-                console.log(data.data);
-                $("#cmbTipoMaterial").empty();
-                $('#cmbTipoMaterial').append($('<option>', {
-                    value: 0,
-                    text: 'Selecciona...'
-                }));
-                for (var i = 0; i < data.data.length; i++) {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_tipomaterialdisenio";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    console.log(data.data);
+                    $("#cmbTipoMaterial").empty();
                     $('#cmbTipoMaterial').append($('<option>', {
-                        value: data.data[i].id,
-                        text: data.data[i].C_0204_0011
+                        value: 0,
+                        text: 'Selecciona...'
                     }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmbTipoMaterial').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0204_0011
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
                 }
-                consultaDatosIdentificacionArea();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
             }
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-
-        }
+        });
     });
 }
+
 function loadtipoproteccioncatodica() {
     var webMethod = "get_tipoproteccioncatodica";
     $.ajax({
@@ -3768,6 +4146,89 @@ $(document).ready(function(){
 });
 
 
+function setDropdownValue(dropdownSelector, desiredValue) {
+    // Check if the value already exists in the dropdown options
+    if ($(dropdownSelector + ' option[value="' + desiredValue + '"]').length == 0) {
+        // If the value doesn't exist, create a new option and append it to the dropdown
+        $(dropdownSelector).append(new Option(desiredValue, desiredValue));
+    }
+
+    // Now set the value of the dropdown to the desired value
+    $(dropdownSelector).val(desiredValue).trigger('change');
+}
+
+
+
+function getNamesByAreaUnitariaId(area_unitaria_id) {
+    const webMethod='getNamesByAreaUnitariaId';
+    url=apiUrl+webMethod;
+    console.log(area_unitaria_id,"id");
+    return fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'id': area_unitaria_id})
+      })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error;
+        });
+}
+
+
+
+function getidByAreaUnitarianombre(area_unitaria_nombre) {
+    const webMethod='getidByNombre';
+    url=apiUrl+webMethod;
+    return fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'nombre': area_unitaria_nombre})
+      })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error;
+        });
+}
+
+
+function getAreaIdById(webMethod ,id) {
+    url=apiUrl+webMethod;
+    return fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'id':id})
+      })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error;
+        });
+}
+
+
 
 
 function validateForm(formId, saveFn) {
@@ -3790,6 +4251,15 @@ function validateForm(formId, saveFn) {
 }
 
 
+function resetValidationClasses(divId) {
+    const div = document.getElementById(divId);
+    const inputs = div.querySelectorAll('.form-control');
+
+    inputs.forEach(input => {
+        input.classList.remove('is-valid');
+        input.classList.remove('is-invalid');
+    });
+}
 
 
 
@@ -3846,3 +4316,16 @@ function showClass(className) {
         element.style.display = "";
     });
 }
+
+function consultatoform(e){
+    selectTabupdate(e, 'Opcion1');
+    document.getElementById('registro').style.display = 'none';}
+
+function clearInputTextValues(divId) {
+    const div = document.getElementById(divId);
+    const textInputs = div.querySelectorAll('input[type="text"], input[type="date"]');
+
+    textInputs.forEach(input => {
+        input.value = '';
+    });
+}    
