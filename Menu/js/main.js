@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:80/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -4319,7 +4319,25 @@ function showClass(className) {
 
 function consultatoform(e){
     selectTabupdate(e, 'Opcion1');
-    document.getElementById('registro').style.display = 'none';}
+    document.getElementById('registro').style.display = 'none';
+    $("#forms").hide();
+    $("#disenioforms").hide();
+    $("#identificacionfrm").hide();
+    $("#serviciofrm").hide();
+    $("#presionfrm").hide();
+    $("#proteccionfrm").hide();
+    $("#construforms").hide();
+    $("#constbasefrm").hide();
+    $("#metodounionfrm").hide();
+    $("#profenterradofrm").hide();
+    $("#tiposcrucesfrm").hide();
+    $("#hermetisidadfrm").hide();
+    $("#reportesInspeccionfrm").hide();
+    $("#proteccatodicafrm").hide();
+    $("#seguridadprearranquefrm").hide();
+
+
+}
 
 function clearInputTextValues(divId) {
     const div = document.getElementById(divId);
