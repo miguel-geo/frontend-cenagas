@@ -1512,7 +1512,6 @@ function updateDiseniopresion() {
 // General
 var idConsbase;
 function consultaDatosConsGeneral(params) {
-   
     var webMethod = "get_construcciongeneral";
     $.ajax({
         type: "POST",
@@ -1571,7 +1570,9 @@ function llenarDatosActualizacionConsGeneral(data) {
     $("#txtmatrellenobaseconst").val(data[0].C_0307_0110);
     $("#presionhermebasecons").val(data[0].C_0307_0110);
     $("#cmbunidadpresionhermebasecons").val(data[0].unidad_presion_prueba);
-    $("#cmtiporecubrimientobase option:contains(" + data[0].C_0308_0111 + ")").attr('selected', 'selected');
+
+    $("#cmtiporecubrimientobase option:contains(" + data[0].C_0308_0111  + ")").attr('selected', 'selected');
+
     idConsbase = data[0].id;
     inhabilitarform("#constbasefrm", true);
 }
@@ -1587,7 +1588,7 @@ function updateConsGeneral() {
         var params = {
         };
         var webMethod = "";
-        webMethod = "updateConsBase";
+        webMethod = "general/updateConstruccionGeneral";
         params = {
             id: idConsbase,
             C_0101_0001_id: area,
@@ -1597,7 +1598,6 @@ function updateConsGeneral() {
             C_0307_0110: $("#txtmatrellenobaseconst").val(),
             C_0308_0110: $("#presionhermebasecons").val(),
             unidad_presion_prueba: $("#cmbunidadpresionhermebasecons").val(),
-            file: formData,
             C_0308_0111: $("#cmtiporecubrimientobase").val(),
             coordenada_especifica: $("#coord_esp_idenbasecons_x").val()+' '+$("#coord_esp_idenbasecons_y").val(),
             kilometro_especifico: $("#km_esp_idenbasecons").val()
@@ -1611,8 +1611,8 @@ function updateConsGeneral() {
             data: params,
             success: function (data) {
                 alert("El registro fue actualizado correctamente");
-                $('#disenioforms').show();
-                $('#identificacionfrm').hide();
+                $('#construforms').show();
+                $('#constbasefrm').hide();
             },
             error: function (xhr, ajaxOptions, thrownError) {
 
@@ -1791,7 +1791,7 @@ async function fnshowbaseconst() {
     $('#constbasefrm').show();
     $('#construforms').hide();
     try {
-        console.log("fas")
+
         await loadtiporecubrimiento();
 
         const params = {
@@ -1799,15 +1799,19 @@ async function fnshowbaseconst() {
             op: 1
         };
 
-        consultaDatosConsGeneral(params);
+        await consultaDatosConsGeneral(params);
 
         // If you want to do something after all functions have completed, you can do it here
 
     } catch(error) {
         console.error("An error occurred:", error);
     }
+    resetValidationClasses('constbasefrm');
 
 }
+
+
+
 function cancelbasecons() {
     $('#constbasefrm').hide();
     $('#construforms').show();
@@ -2704,9 +2708,7 @@ function loadtipocostura() {
     });
 }
 
-
 function loadtiporecubrimiento() {
-    
     return new Promise((resolve, reject) => {
         var webMethod = "get_tiporecubrimiento";
         $.ajax({
@@ -2726,16 +2728,18 @@ function loadtiporecubrimiento() {
                             text: data.data[i].C_0308_0111
                         }));
                     }
+                    resolve();  // Resolve the promise when the success condition is met.
+                } else {
+                    reject(new Error('Data was not successful'));  // Reject the promise if data.success is false.
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
-    
+                reject(new Error(thrownError));  // Reject the promise when there's an error.
             }
         });
     });
-
-    
 }
+
 function loadtipomaterialdisenio() {
     return new Promise((resolve, reject) => {
         var webMethod = "get_tipomaterialdisenio";
