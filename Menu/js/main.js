@@ -1198,7 +1198,7 @@ function llenarDatosActualizacion(data) {
     $("#coord_esp_iden_y").val("");}
     $("#km_esp_iden").val(data[0].kilometro_especifico);
     $("#longitud").val(data[0].C_0201_0006);
-    $("#diam_mm").val(data[0].C_0201_0007);
+    $("#diam_mm").val(data[0].C_0202_0007);
     $("#cmbunidaddiametro").val(data[0].diametro_nominal);
     $("#esp_mm").val(data[0].C_0203_0009);
     $("#cmbunidadespesor").val(data[0].espesor_pared);
@@ -1511,16 +1511,22 @@ function llenarDatosActualizacionPresion(data) {
         $("#coord_esp_iden_pres_x").val(coords[0]);
         $("#coord_esp_iden_pres_y").val(coords[1]);
     }
-    $("#km_esp_iden_pres").val(data[0].kilometro_especifico);
     $("#txtEntidadEmpresa").val(data[0].C_0206_0017);
-    $("#txtfechacalculo").val(data[0].C_0206_0018.split(' ')[0]);
+    $("#txtfechacalculo").val(data[0].C_0206_0018);
     $("#txtMetodoCalculo").val(data[0].C_0206_0019);
     $("#txtPresNomPSI").val(data[0].C_0206_0020);
-    $("#cmbunidadpresnominal").val(data[0].C_0206_0021);
+    $("#txtPresNomKG").val(data[0].C_0206_0021);
     $("#txtPresDisenio").val(data[0].C_0206_0022);
-    $("#cmbunidadpresionmaxope").val(data[0].C_0206_0023);
-    $("#txtPresRedPSI").val(data[0].C_0206_0024);
-    $("#cmbunidadpresionsegmento").val(data[0].C_0206_0025);
+    $("#txtPresMaxPSI").val(data[0].C_0206_0023);
+    $("#txtPresMaxKG").val(data[0].C_0206_0024);
+    $("#txtPresRedPSI").val(data[0].C_0206_0025);
+    $("#txtPresRedKG").val(data[0].C_0206_0026);
+    $("#km_esp_iden_pres").val(data[0].kilometro_especifico);
+    $("#cmbunidadpresnominal").val(data[0].pres_nominal);
+    $("#cmbunidadpresiondisenio").val(data[0].pres_disenio);
+    $("#cmbunidadpresionmaxope").val(data[0].pres_max_ope);
+    $("#cmbunidadpresionsegmento").val(data[0].pres_segmento);
+
     idDiseniopresion = data[0].id;
     inhabilitarform("#presionfrm", true);
 }
@@ -1538,7 +1544,7 @@ function updateDiseniopresion() {
         var params = {
             id: idDiseniopresion,
             C_0101_0001_id: area,
-            C_0206_0017: $("#cmbEntidad").val(),
+            C_0206_0017: $("#txtEntidadEmpresa").val(),
             C_0206_0018: $("#txtfechacalculo").val(),
             C_0206_0019: $("#txtMetodoCalculo").val(),
             C_0206_0020: $("#txtPresNomPSI").val(),
@@ -1638,10 +1644,9 @@ function llenarDatosActualizacionConsGeneral(data) {
     $("#metrecubbase").val(data[0].C_0306_0108);
     $("#txttiposuelobaseconst").val(data[0].C_0307_0109);
     $("#txtmatrellenobaseconst").val(data[0].C_0307_0110);
-    $("#presionhermebasecons").val(data[0].C_0307_0110);
+    $("#presionhermebasecons").val(data[0].C_0308_0110);
     $("#cmbunidadpresionhermebasecons").val(data[0].unidad_presion_prueba);
-
-    $("#cmtiporecubrimientobase option:contains(" + data[0].C_0308_0111  + ")").attr('selected', 'selected');
+    $("#cmtiporecubrimientobase").val( data[0].C_0311_121);
 
     idConsbase = data[0].id;
     inhabilitarform("#constbasefrm", true);
@@ -1668,7 +1673,7 @@ function updateConsGeneral() {
             C_0307_0110: $("#txtmatrellenobaseconst").val(),
             C_0308_0110: $("#presionhermebasecons").val(),
             unidad_presion_prueba: $("#cmbunidadpresionhermebasecons").val(),
-            C_0308_0111: $("#cmtiporecubrimientobase").val(),
+            C_0311_121: $("#cmtiporecubrimientobase").val(),
             coordenada_especifica: $("#coord_esp_idenbasecons_x").val()+' '+$("#coord_esp_idenbasecons_y").val(),
             kilometro_especifico: $("#km_esp_idenbasecons").val()
         };
@@ -3342,8 +3347,7 @@ function savebasecons() {
             C_0307_0110: $("#txtmatrellenobaseconst").val(),
             C_0308_0110: $("#presionhermebasecons").val(),
             unidad_presion_prueba: $("#cmbunidadpresionhermebasecons").val(),
-            file: formData,
-            C_0308_0111: $("#cmtiporecubrimientobase").val(),
+            C_0311_121: $("#cmtiporecubrimientobase").val(),
             coordenada_especifica: $("#coord_esp_idenbasecons_x").val()+' '+$("#coord_esp_idenbasecons_y").val(),
             kilometro_especifico: $("#km_esp_idenbasecons").val()
         };
@@ -3472,7 +3476,7 @@ function saveDisenioPresion()  {
     var webMethod = "savePresion";
     var params = {
         area_unitaria_id: area,
-        entidad: $("#cmbEntidad").val(),
+        entidad: $("#txtEntidadEmpresa").val(),
         fecha_calculo: $("#txtfechacalculo").val(),
         metodo_calculo: $("#txtMetodoCalculo").val(),
         presion_nom_psi: $("#txtPresNomPSI").val(),
