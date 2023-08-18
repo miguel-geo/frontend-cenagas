@@ -1,4 +1,4 @@
-var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -16,6 +16,7 @@ var temaconsulta = "";
 var docbasecons = "";
 var temaconsultaconstruccion = "";
 var temaconsultadisenio = "";
+var contar_longitud=0;
 const headers = new Headers({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
@@ -1092,7 +1093,7 @@ function consultaDatosIdentificacionArea() {
 
 }
 function llenarDatosActualizacion(data) {
-    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined) {
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined&& data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
         $("#coord_esp_iden_x").val(coords[0]);
         $("#coord_esp_iden_y").val(coords[1]);
@@ -1107,14 +1108,8 @@ function llenarDatosActualizacion(data) {
     $("#temp_c").val(data[0].C_0207_0027);
     $("#cmbunidadtemperatura").val(data[0].temperatura);
     $("#cmbTipoCostura option:contains(" + data[0].C_0208_0029 + ")").attr('selected', 'selected');
-    if (data[0].C_0209_0030 !== "" && data[0].C_0209_0030 !== undefined) {
-        const fecha_fab = data[0].C_0209_0030.split(' ');
-        const fecha_comp = fecha_fab[0].split('-');
-        document.getElementById("fec_fab").text = fecha_comp[2] + '/' + fecha_comp[1] + '/' + fecha_comp[0];
-        //$("#fec_fab").val(fecha_fab.format('YYYY-MM-DD'));
-    }
-    $("#fec_fab").val(data[0].C_0209_0030);
-    $("#fec_fab_fin").val(data[0].C_0209_0030_2);
+    $("#fec_fab").val(data[0].C_0209_0030.split(' ')[0]);
+    $("#fec_fab_fin").val(data[0].C_0209_0030_2.split(' ')[0]);
     $("#porc_carbono").val(data[0].C_0210_0031);
     $("#res_trac").val(data[0].C_0210_0032);
     $("#lim_elas").val(data[0].C_0210_0033);
@@ -1203,7 +1198,7 @@ function consultaDatosProteccionArea() {
 }
 var idDisenioproteccion;
 function llenarDatosActualizacionProteccion(data) {
-    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined) {
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined&& data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
         $("#coord_esp_iden_prot_x").val(coords[0]);
         $("#coord_esp_iden_prot_y").val(coords[1]);
@@ -1215,8 +1210,8 @@ function llenarDatosActualizacionProteccion(data) {
     $("#txtkmfinalrecubrimiento").val(data[0].C_0211_0036);
     $("#txtlongtotalrecubrimiento").val(data[0].C_0211_0037);
     $("#txtempresaaplicoservicio").val(data[0].C_0211_0038);
-    $("#txtfecinicioservicio").val(data[0].C_0211_0039);
-    $("#txtfecfabrico").val(data[0].C_0211_0040);
+    $("#txtfecinicioservicio").val(data[0].C_0211_0039.split(' ')[0]);
+    $("#txtfecfabrico").val(data[0].C_0211_0040.split(' ')[0]);
     $("#txtfecinstalacion").val(data[0].C_0211_0041);
     $("#txtfecinstalacion_2").val(data[0].C_0211_0041_2);
     $("#txtordenaplicacion").val(data[0].C_0211_0044);
@@ -1317,7 +1312,7 @@ function consultaDatosPresionArea() {
 }
 var idDiseniopresion;
 function llenarDatosActualizacionPresion(data) {
-    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined) {
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined&& data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
         $("#coord_esp_iden_pres_x").val(coords[0]);
         $("#coord_esp_iden_pres_y").val(coords[1]);
@@ -1516,9 +1511,7 @@ function cancelseguridadpre() {
 function reiniciarFormsConstruccion() {
     $('#registro').show();
     $('#forms').hide();
-    $('#step-1').show();
-    $('#step-2').hide();
-    $('#step-3').hide();
+    goToStep1()
     $('#construforms').hide();
     loadDuctos();
     $("#cmbTramo").empty();
@@ -1890,22 +1883,26 @@ function saveConstruccionHermeticidad() {
 }
 function saveConstruccioInspeccion() {
 
-    var webMethod = "disenio_servicio/store";
+    var webMethod = "saveConstruccionInspeccion";
 
-    var params = {
-        C_0101_0001_id: area,
-        C_0302_0049_id: $("#cmtipotecnicaunion").val(),
-        C_0302_0050: $("#txtidentificadorunion").val(),
-        C_0302_0051: $("#txtrecaplsolunion").val(),
-        C_0302_0052: $("#fechaserunion").val(),
-        C_0302_0053: $("#fecinstunion").val(),
-        C_0302_0054_id: $("#cmbmetubicsoldunion").val(),
-        C_0302_0055: $("#fecfabunion").val(),
-        C_0302_0056: $("#txtedoactunion").val(),
-        C_0302_0057: $("#txtedohisunion").val(),
-        coordenada_especifica: $("#coord_esp_idenunion_x").val()+' '+$("#coord_esp_idenunion_y").val(),
-        kilometro_especifico: $("#km_esp_idenunion").val()
-    };
+    const formData = new FormData();
+
+    formData.append("kilometro_especifico",$("#km_esp_idenprep").val() )
+    formData.append("coordenada_especifica",  $("#coord_esp_idenprep_x").val()+' '+$("#coord_esp_idenprep_y").val(),)
+    formData.append("C_0101_0001_id", area)
+    // Make sure files are being selected and appended properly
+    if($("#C_0309_112")[0].files[0]) {
+        formData.append("C_0309_112", $("#C_0309_112")[0].files[0]);
+    }
+    if($("#C_0309_113")[0].files[0]) {
+        formData.append("C_0309_113", $("#C_0309_113")[0].files[0]);
+    }
+    if($("#C_0309_114")[0].files[0]) {
+        formData.append("C_0309_114", $("#C_0309_114")[0].files[0]);
+    }
+    if($("#C_0309_115")[0].files[0]) {
+        formData.append("C_0309_115", $("#C_0309_115")[0].files[0]);
+    }
 
 
 
@@ -1916,26 +1913,30 @@ function saveConstruccioInspeccion() {
         },
         body: formData
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        
+    })
+    .then(data => {
+        console.log(typeof data)
+        console.log(data)
+        if (data.success) {
+            $("#C_0309_112").val('');
+            $("#C_0309_113").val('');
+            $("#C_0309_114").val('');
+            $("#C_0309_115").val('');
 
-        })
-        .then(data => {
-            console.log(typeof data)
-            console.log(data)
-            if (data.success) {
-                console.log(data)
-                alert("Información almacenada correctamente");
-                $('#disenioforms').show();
-                $('#serviciofrm').hide();
-            }
-        })
-        .catch(error => {
-            alert("Error: " + error);
-        });
+            alert("Información almacenada correctamente");
+            $('#construforms').show();
+            $('#reportesInspeccionfrm').hide();
+        }
+    })
+    .catch(error => {
+        alert("Error: " + error);
+    });
 }
 function saveConstruccioCatodica() {
 
@@ -1982,25 +1983,52 @@ function saveConstruccioCatodica() {
             alert("Error: " + error);
         });
 }
+
+
+
+
 function saveConstruccioSeguridad() {
 
-    var webMethod = "disenio_servicio/store";
 
-    var params = {
-        C_0101_0001_id: area,
-        C_0302_0049_id: $("#cmtipotecnicaunion").val(),
-        C_0302_0050: $("#txtidentificadorunion").val(),
-        C_0302_0051: $("#txtrecaplsolunion").val(),
-        C_0302_0052: $("#fechaserunion").val(),
-        C_0302_0053: $("#fecinstunion").val(),
-        C_0302_0054_id: $("#cmbmetubicsoldunion").val(),
-        C_0302_0055: $("#fecfabunion").val(),
-        C_0302_0056: $("#txtedoactunion").val(),
-        C_0302_0057: $("#txtedohisunion").val(),
-        coordenada_especifica: $("#coord_esp_idenunion_x").val()+' '+$("#coord_esp_idenunion_y").val(),
-        kilometro_especifico: $("#km_esp_idenunion").val()
-    };
+    var webMethod = "saveConstruccionSeguridad";
 
+    const formData = new FormData();
+
+    formData.append("kilometro_especifico",$("#km_esp_idenpseg").val() )
+    formData.append("coordenada_especifica",  $("#coord_esp_idenpprot_x").val()+' '+$("#coord_esp_idenpprot_y").val(),)
+    formData.append("C_0101_0001_id", area)
+    // Make sure files are being selected and appended properly
+    if($("#C_0312_122")[0].files[0]) {
+        formData.append("C_0312_122", $("#C_0312_122")[0].files[0]);
+    }
+    if($("#C_0312_123")[0].files[0]) {
+        formData.append("C_0312_123", $("#C_0312_123")[0].files[0]);
+    }
+    if($("#C_0312_124")[0].files[0]) {
+        formData.append("C_0312_124", $("#C_0312_124")[0].files[0]);
+    }
+    if($("#C_0312_125")[0].files[0]) {
+        formData.append("C_0312_125", $("#C_0312_125")[0].files[0]);
+    }
+    if($("#C_0312_126")[0].files[0]) {
+        formData.append("C_0312_126", $("#C_0312_126")[0].files[0]);
+    }
+    if($("#C_0312_127")[0].files[0]) {
+        formData.append("C_0312_127", $("#C_0312_127")[0].files[0]);
+    }
+    if($("#C_0312_128")[0].files[0]) {
+        formData.append("C_0312_128", $("#C_0312_128")[0].files[0]);
+    }
+    if($("#C_0312_129")[0].files[0]) {
+        formData.append("C_0312_129", $("#C_0312_129")[0].files[0]);
+    }
+
+
+
+    // Log formData to console for debugging (this will not display the content of the files)
+    for (var pair of formData.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
+    }
 
 
     fetch(apiUrl + webMethod, {
@@ -2010,27 +2038,40 @@ function saveConstruccioSeguridad() {
         },
         body: formData
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        
+    })
+    .then(data => {
+        console.log(typeof data)
+        console.log(data)
+        if (data.success) {
+            $("#C_0312_122").val('');
+            $("#C_0312_123").val('');
+            $("#C_0312_124").val('');
+            $("#C_0312_125").val('');
+            $("#C_0312_126").val('');
+            $("#C_0312_127").val('');
+            $("#C_0312_128").val('');
+            $("#C_0312_129").val('');
+            alert("Información almacenada correctamente");
+            $('#construforms').show();
+            $('#seguridadprearranquefrm').hide();
+        }
+    })
+    .catch(error => {
+        alert("Error: " + error);
+    });
 
-        })
-        .then(data => {
-            console.log(typeof data)
-            console.log(data)
-            if (data.success) {
-                console.log(data)
-                alert("Información almacenada correctamente");
-                $('#disenioforms').show();
-                $('#serviciofrm').hide();
-            }
-        })
-        .catch(error => {
-            alert("Error: " + error);
-        });
 }
+
+
+
+
+
 function cancelotroCruceServicio() {
     $("#espcruceServicio").hide();
 }
@@ -2496,15 +2537,26 @@ function loadDuctos() {
         }
     });
 }
+
+
+function goToStep1() {
+    // Simulating click on step-1
+    $('a[href="#step-1"]').click();
+    
+    // Resetting step buttons to initial state
+    $('.stepwizard-step a').removeClass('btn-primary').addClass('btn-default').attr('disabled', 'disabled'); // Making all steps disabled
+    $('a[href="#step-1"]').addClass('btn-primary').removeClass('btn-default').removeAttr('disabled'); // Enabling only step-1
+}
+
+
 function reg_newArea() {
     reiniciarForms();
 }
 function reiniciarForms() {
     $('#registro').show();
     $('#forms').hide();
-    $('#step-1').show();
-    $('#step-2').hide();
-    $('#step-3').hide();
+    goToStep1()
+
     $('#disenioforms').hide();
     loadDuctos();
     $("#cmbTramo").empty();
@@ -3211,11 +3263,13 @@ function loadidentificacion() {
         type: "GET",
         url: apiUrl + webMethod,
         success: function (data) {
+            
             if (data.success) {
                 for (i = 0; i < data.data.length; i++) {
                     var persona = [data.data[i].nombre, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0204_0011,
                     data.data[i].C_0208_0029,];
                     llenarTablas(persona, "tablaPersonas");
+                    contar_longitud=contar_longitud+data.data[i].C_0201_0006
                 }
             }
         },
@@ -3226,6 +3280,7 @@ function loadidentificacion() {
 }
 
 function consulta() {
+    contar_longitud=0;
     var params;
     if (
         $("#cmbDucto_con option:selected").text() !== "Selecciona..." ||
@@ -3318,7 +3373,10 @@ function consulta() {
                                     for (i = 0; i < data.data.length; i++) {
                                         var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0201_0006, data.data[i].C_0208_0029];
                                         llenarTablas(persona, "tablaPersonas");
+                                        contar_longitud=contar_longitud+data.data[i].C_0201_0006
                                     }
+                                    contar_longitud=contar_longitud/1000
+                                    $('#longitud_total').text(contar_longitud);
                                     if (data.data.length > 0) {
                                         // ExportarDatos(data.data);
                                     }
