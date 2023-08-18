@@ -1339,6 +1339,35 @@ function habilitarformdiseniopresion(bandera) {
     $("input.setPres").attr("disabled", bandera);
     $("select.setPres").attr("disabled", bandera);
 }
+function consultaDatosConsCruces() {
+
+
+    var params;
+    params = {
+        id: $("#cmbAreas option:selected").val(),
+        op: 1
+    };
+    var webMethod = "get_construccioncruces";
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        success: function (data) {
+            if (data.success) {
+                if (data.data.length > 0) {
+                    //llenarDatosActualizacionPresion(data.data);
+                    // $("#btnsaveproteccion").hide();
+                    //$("#btn_updateproteccion").show();
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
 //#endregion
 //#region FORMULARIOS DISEÑO
 function fnshowIndentificacion() {
