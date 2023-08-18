@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -1335,8 +1335,6 @@ function habilitarformdiseniopresion(bandera) {
     $("select.setPres").attr("disabled", bandera);
 }
 function consultaDatosConsCruces() {
-
-
     var params;
     params = {
         id: $("#cmbAreas option:selected").val(),
