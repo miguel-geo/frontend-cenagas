@@ -3438,6 +3438,7 @@ function saveDisenioProteccion() {
                 alert("Error: " + error);
             });
     }
+    else {alert("Es necesario ingresar tipo de recubrimiento")}
 
 }
 
