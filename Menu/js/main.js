@@ -332,14 +332,17 @@ function inicializarEventos() {
 
     document.getElementById('filepruebabasecons').addEventListener('change', handleFileSelect, false);
     $(document).on("click", ".delete", function (e) {
-        if(confirm("¿Seguro quiere borrar ese registro?")) {
         temaconsulta=$("#cmbTemasPrincipal_con").val() ;
         temaconsultadisenio=$("#cmbTemasDisenio_con").val() ;
         temaconsultaconstruccion=$("#cmbTemasConstruccion_con").val() ;
 
+        if(confirm("¿Seguro quiere borrar ese registro?")) {
+
+        console.log(temaconsulta,temaconsultadisenio,temaconsultaconstruccion)
         var webMethod = "";
         switch (temaconsulta) {
             case "T1":
+                console.log("T1")
                 switch(temaconsultadisenio){
                     case "Dis1":
                         webMethod = "disenio_general/destroy";
@@ -351,6 +354,7 @@ function inicializarEventos() {
                         webMethod = "disenio_proteccion/destroy";
                         break;
                     default:}
+                break;
             case "T2":
                 switch(temaconsultaconstruccion){
                     case "Cons1":
@@ -380,6 +384,7 @@ function inicializarEventos() {
 
                         
                     default:}
+                    break;
         }
         var params = {
             id: e.currentTarget.dataset["id"] ,
@@ -433,6 +438,7 @@ function inicializarEventos() {
                         });
                         break;
                     default:}
+                    break;
             case "T2":
                 switch(temaconsultaconstruccion){
                     case "Cons1":
@@ -479,166 +485,10 @@ function inicializarEventos() {
 
                         
                     default:}
+                break;
         }
     });
-    $(document).on("click", ".add", function (e) {
-        var empty = false;
-        
-        var valores=[];
-        var input = $(this).parents("tr").find('input[type="text"]');
-        valores.push(e.currentTarget.dataset["id"]);
-        input.each(function () {
-            valores.push($(this).val());
-           // alert($(this).val());
-            if (!$(this).val()) {
-                $(this).addClass("error");
-                empty = true;
-            } else {
-                $(this).removeClass("error");
-            }
-        });
-        $(this).parents("tr").find(".error").first().focus();
-        if (!empty) {
-            input.each(function () {
-                $(this).parent("td").html($(this).val());
-            });
-            var webMethod = "";
-            temaconsulta=$("#cmbTemasPrincipal_con").val() ;
-        temaconsultadisenio=$("#cmbTemasDisenio_con").val() ;
-        temaconsultaconstruccion=$("#cmbTemasConstruccion_con").val() ;
-        console.log(valores)
-        var params = {               
-        };
-        var webMethod = "";
-        switch (temaconsulta) {
-            case "T1":
-                switch(temaconsultadisenio){
-                    case "Dis1":
-                        webMethod = "disenio_general/update";
-                        params = {
-                            id: valores[0],
-                            coordenada_especifica: valores[2],
-                            kilometro_especifico: valores[3],
-                            C_0201_0006: valores[4],
-                            C_0202_0007: valores[5],
-                            C_0207_0027: valores[6],
-                            C_0210_0031: valores[7]
-                    };
-                        break;
-                    case "Dis2":
-                        webMethod = "disenio_presion/update";
-                        params = {
-                            id: valores[0],
-                            coordenada_especifica: valores[2],
-                            kilometro_especifico: valores[3],
-                            C_0206_0017: valores[4],
-                            C_0206_0019: valores[5],
-                            C_0206_0023: valores[6],
-                            C_0206_0024: valores[7]
-                        };
-                        break;
-                    case "Dis3":
-                        webMethod = "disenio_proteccion/update";
-                        params = {
-                            id: valores[0],
-                            coordenada_especifica: valores[2],
-                            kilometro_especifico: valores[3],
-                            C_0211_0043: valores[4],
-                            C_0211_0044: valores[5],
-                            C_0211_0045: valores[6],
-                            C_0211_0046: valores[7]
-                        };
-                        break;
-                    default:}
-                    break;
-            case "T2":
-                switch(temaconsultaconstruccion){
-                    case "Cons1":
-                        webMethod = "general/updateBaseCons";
-                        params = {
-                            id: valores[0],
-                            coordenada_especifica: valores[2],
-                            kilometro_especifico: valores[3],
-                            C_0211_0043: valores[4],
-                            C_0211_0044: valores[5],
-                            C_0211_0045: valores[6],
-                            C_0211_0046: valores[7]
-                        };
-                        break;
-                    case "Cons2":
-                        webMethod = "union/updateUnion";
-                        break;
-                    case "Cons3":
-                        webMethod = "profundidad/updateProfundidad";
-                        break;
-                    case "Cons4":
-                        webMethod = "cruces/updateCruces";
-                        break;
-                    case "Cons5":
-                        webMethod = "hermeticidad/updateHermeticidad";
-                        break;
-                    case "Cons6":
-                        webMethod = "";
-                        break;
-                    case "Cons7":
-                        webMethod = "catodica/updateCatodica";
-                        break;
-                    case "Cons8":
-                        webMethod = "";
-                        break;                    
-                    default:}
-                    break;
-        }
-            
-            switch (temaconsulta) {
-                case "T1":
-                    limpiarTabas();
-                    $("#tablaPersonas > tbody").empty();
-                    $("#tablaPersonas").show();
-                    $("#tablapresion").hide();
-                    $("#datapresioncons").hide();
-                    $("#dataGeneral").show();
-                    $("#tablaproteccion").hide();
-                 break;
-                case "T2":
-                    limpiarTabas();               
-                    $("#tablaPersonas").hide();
-                    $("#tablapresion").show();
-                    $("#datapresioncons").show();
-                    $("#dataGeneral").hide();
-                    $("#tablaproteccion").hide();
-                break;
-                case "T3":
-                    limpiarTabas();
-                    $("#datapresioncons").hide();
-                    $("#dataGeneral").hide();
-                    $("#tablaPersonas").hide();
-                    $("#tablapresion").hide();
-                    $("#tablaproteccion").show();
-                break;
-            }
 
-            $.ajax({
-                type: "POST",
-                url: apiUrl + webMethod,
-                headers: {
-                    'Accept': 'application/json'
-                },
-                data: params,
-                success: function (data) {
-                    alert("El registro fue actualizado correctamente");
-                    consulta();
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-
-                }
-            });
-            $("#ra" + e.currentTarget.dataset["id"]).hide();
-            $("#re" + e.currentTarget.dataset["id"]).show();
-        }
-       
-       
-    });
    
 
 
@@ -3212,7 +3062,8 @@ function loadDuctos() {
                     value: 0,
                     text: 'Selecciona...'
                 }));
-                for (var i = 0; i < data.length; i++) {                  
+                for (var i = 0; i < data.length; i++) {    
+                    console.log(data[i].nombre)              
                     $('#cmbDucto').append($('<option>', {
                         value: data[i].id,
                         text: data[i].nombre
