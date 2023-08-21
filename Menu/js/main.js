@@ -406,35 +406,37 @@ function inicializarEventos() {
     
         switch (temaconsulta) {
             case "T1":
-                switch(temaconsultadisenio){
+                switch (temaconsultadisenio) {
                     case "Dis1":
                         consultatoform(e)
-                        getAreaIdById("getAreaIdByDisenioId",row_id ).then(data => {
+                        getAreaIdById("getAreaIdByDisenioId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
-                            area=data.area_unitaria_id;
+                            area = data.area_unitaria_id;
                             fnshowIndentificacion();
                         });
-                        
+
                         break;
                     case "Dis2":
                         consultatoform(e)
-                        getAreaIdById("getAreaIdByPresionId",row_id ).then(data => {
+                        getAreaIdById("getAreaIdByPresionId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
-                            area=data.area_unitaria_id;
+                            area = data.area_unitaria_id;
                             fnshowPresion();
                         });
                         break;
                     case "Dis3":
                         consultatoform(e)
-                        getAreaIdById("getAreaIdByProteccionId",row_id ).then(data => {
+                        getAreaIdById("getAreaIdByProteccionId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
-                            area=data.area_unitaria_id;
+                            area = data.area_unitaria_id;
                             fnshowProteccion();
                         });
                         break;
-                    default:}
+                    default:
+                }
+                break;
             case "T2":
-                switch(temaconsultaconstruccion){
+                switch (temaconsultaconstruccion) {
                     case "Cons1":
                         webMethod = "general/destroyBase";
                         break;
@@ -446,22 +448,40 @@ function inicializarEventos() {
                         break;
                     case "Cons4":
                         webMethod = "cruces/destroycruces";
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByCrucesId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowprotipocruces();
+                        });
                         break;
-                    case "Cons5":
-                        webMethod = "hermeticidad/destroyHermeticidad";
+                    case "Cons5"://getAreaIdByHermeticidadId
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByHermeticidadId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowhermeti();
+                        });
                         break;
                     case "Cons6":
                         webMethod = "";
                         break;
                     case "Cons7":
-                        webMethod = "catodica/destroycatodica";
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByCatodicaId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowprotecccato();
+                        });
                         break;
                     case "Cons8":
                         webMethod = "";
                         break;
 
-                        
-                    default:}
+
+                    default:
+                }
+                break;
         }
     });
     $(document).on("click", ".add", function (e) {
@@ -1746,23 +1766,363 @@ function fnshowprofenterrado() {
     $("#txttramogeneralprofent").val(txttramo);
     $("#txtareageneralprofent ").val(txtarea);
 }
-function fnshowprotipocruces() {
+async function fnshowprotipocruces() {
+    //$('#tiposcrucesfrm').show();
+    //$('#construforms').hide();
+    //$("#txtductogeneraltipcruce").val(txtducto);
+    //$("#txttramogeneraltipocruce").val(txttramo);
+    //$("#txtareageneralptipocruce ").val(txtarea);
+    //loadCmbCruceServicio();
+    //loadCmbCruceTuberia();
+    //loadCmbC $('#identificacionfrm').show();  
     $('#tiposcrucesfrm').show();
     $('#construforms').hide();
-    $("#txtductogeneraltipcruce").val(txtducto);
-    $("#txttramogeneraltipocruce").val(txttramo);
-    $("#txtareageneralptipocruce ").val(txtarea);
-    loadCmbCruceServicio();
-    loadCmbCruceTuberia();
-    loadCmbCruceTransporte();
+    try {
+        await loadCmbCruceServicio();
+        await loadCmbCruceTuberia();
+        await loadCmbCruceTransporte();
+
+        const params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+
+        await consultaDatosConsCruces(params);
+
+        // If you want to do something after all functions have completed, you can do it here
+
+    }
+    catch (error) {
+        console.error("An error occurred:", error);
+    }
+    resetValidationClasses('identificacionfrm');
 }
-function fnshowhermeti() {
+//#region consulta y actualización Construcción crcuces
+var idConsCruces;
+function consultaDatosConsCruces(params) {
+
+
+
+    var webMethod = "get_construccioncruces";
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            if (data.success) {
+                if (data.data.length > 0) {
+                    llenarDatosActualizacionCruces(data.data);
+                    $("#btnGuardarCruces").hide();
+                    $("#btn_updatecruces").show();
+                } else {
+
+                    clearInputTextValues('tiposcrucesfrm');
+                    inhabilitarform("#tiposcrucesfrm", false)
+                    $("#btnGuardarCruces").show();
+                    $("#btn_updatecruces").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductogeneraltipcruce").val(ducto_nombre);
+                    $("#txttramogeneraltipocruce").val(tramo_nombre);
+                    $("#txtareageneralptipocruce").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
+function llenarDatosActualizacionCruces(data) {
+
+    $("#btn_updatecruces").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_idenptipocruce_x").val(coords[0]);
+        $("#coord_esp_idenptipocruce_y").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_idenptipocruce_x").val("");
+        $("#coord_esp_idenptipocruce_y").val("");
+    }
+    $("#km_esp_idenptipocruce").val(data[0].kilometro_especifico);
+    $("#cmbTipcruce option:contains(" + data[0].C_0304_0070 + ")").attr('selected', 'selected');
+    $("#txtclaseloca").val(data[0].C_0304_0071);
+    $("#txtpropietario").val(data[0].C_0304_0072);
+    $("#txtdictacruce").val(data[0].C_0304_0073);
+    $("#txtdistinf").val(data[0].C_0304_0074);
+    $("#txtdistptocruce").val(data[0].C_0304_0075);
+    $("#txtloccruresptub").val(data[0].C_0304_0076);
+    $("#txtedoactualcruce").val(data[0].C_0304_0077);
+    $("#txtedohistcruce").val(data[0].C_0304_0078);
+    $("#txttipllanurainun").val(data[0].C_0304_0079);
+    $("#txttipcrucehidro").val(data[0].C_0304_0080);
+    $("#cmbtipcamtrans option:contains(" + data[0].C_0304_0081 + ")").attr('selected', 'selected');
+    $("#cmbgasnecpat option:contains(" + data[0].C_0304_0082 + ")").attr('selected', 'selected');
+    $("#txtvialidadabierta").val(data[0].C_0304_0083);
+    $("#txtNumCarrillesVialidad").val(data[0].C_0304_0084);
+    $("#txtEdohistoricoCrucedos").val(data[0].C_0304_0085);
+    $("#txtEdoActualCrucedos").val(data[0].C_0304_0086);
+    $("#cmbetipocrucetrans option:contains(" + data[0].C_0304_0087 + ")").attr('selected', 'selected');
+    $("#cmbexiunicab option:contains(" + data[0].C_0304_0088 + ")").attr('selected', 'selected');
+    $("#txtultpottubapago").val(data[0].C_0304_0089);
+    $("#txtultpotencen").val(data[0].C_0304_0090);
+    $("#txtrectubext").val(data[0].C_0304_0091);//
+    $("#txtdiamnomtub").val(data[0].C_0304_0092);
+    $("#cmntiptub option:contains(" + data[0].C_0304_0093 + ")").attr('selected', 'selected');
+    $("#cmbexisunioncabcruceytub option:contains(" + data[0].C_0304_0094 + ")").attr('selected', 'selected');
+    $("#cmbtipcruceserv option:contains(" + data[0].C_0304_0095 + ")").attr('selected', 'selected');
+    $("#txtvoltajecruce").val(data[0].C_0304_0096);
+    idConsCruces = data[0].id;
+    inhabilitarform("#tiposcrucesfrm", true);
+}
+function updateCrucesConstruccion() {
+    if ($("#btn_updatecruces").text() === "Actualizar") {
+        inhabilitarform("#tiposcrucesfrm", false)
+        $("#btn_updatecruces").text('Guardar');
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "cruces/updateConstruccionCruces";
+        params = {
+            id: idConsCruces,
+            C_0101_0001_id: area,
+            C_0304_0070_id: $("#cmbTipcruce").val(),//Tipod de cruce
+            C_0304_0071: $("#txtclaseloca").val(),//Clase de Localización
+
+            C_0304_0072: $("#txtpropietario").val(),//Propietario
+
+            C_0304_0073: $("#txtdictacruce").val(), //Distancia del cruce encima o debajo de la tubería
+
+            C_0304_0074: $("#txtdistinf").val(),// Distancia desde el punto de cruce influye en la dirección aguas abajo
+
+            C_0304_0075: $("#txtdistptocruce").val(),//Distancia desde el punto de cruce influye en la dirección aguas arriba
+
+            C_0304_0076: $("#txtloccruresptub").val(),//Localización del cruce respecto la tubería (arriba/abajo)
+
+            C_0304_0077: $("#txtedoactualcruce").val(),//Estado Actual
+
+            C_0304_0078: $("#txtedohistcruce").val(),//Estado histórico
+
+            C_0304_0079: $("#txttipllanurainun").val(),//Tipo de llanura de inundación
+            C_0304_0080: $("#txttipcrucehidro").val(),//Tipo de cruce hidrológico
+            C_0304_0081: $("#cmbtipcamtrans").val(),//Indica si el camino es de transporte pesado
+
+            C_0304_0082: $("#cmbgasnecpat").val(),// El gasoducto necesita ser patrullado
+
+            C_0304_0083: $("#txtvialidadabierta").val(),//No. de Carrilles de la vialidad-
+
+            C_0304_0084: $("#txtNumCarrillesVialidad").val(), //Estado histórico
+
+            C_0304_0085: $("#txtEdohistoricoCrucedos").val(),//Estado actual
+
+            C_0304_0086: $("#txtEdoActualCrucedos").val(),//Tipo de cruce de transporte
+
+            C_0304_0087_id: $("#cmbetipocrucetrans").val(), //¿Existe unión de cables?
+
+            C_0304_0088: $("#cmbexiunicab").val(),//¿Existe unión de cables? (si, no, desconocido)
+
+
+            C_0304_0089: $("#txtultpottubapago").val(),//Último potencial de tubería a tierra medido (expresado en voltios) se apag+o
+
+            C_0304_0090: $("#txtultpotencen").val(),//Último potencial de tubería a tierra medido (expresado en voltios) se encendió
+
+            C_0304_0091: $("#txtrectubext").val(),// Recubrimiento de tubería extranjera
+            C_0304_0092: $("#txtdiamnomtub").val(),//Diámetro nominal tubería extranjera
+
+            C_0304_0093_id: $("#cmntiptub").val(),//Tipo de tuberia
+            C_0304_0094: $("#cmbexisunioncabcruceytub").val(),//¿Existe unión de cables entre el servicio de cruce y la tubería?
+            C_0304_0095_id: $("#cmbtipcruceserv").val(),//Tipo de cruce de servicio
+            C_0304_0096: $("#txtvoltajecruce").val(),// Voltaje transportado por el servicio
+            coordenada_especifica: $("#coord_esp_idenptipocruce_x").val() + ' ' + $("#coord_esp_idenptipocruce_y").val(),
+            kilometro_especifico: $("#km_esp_idenptipocruce").val()
+        };
+        $.ajax({
+            type: "POST",
+            url: apiUrl + webMethod,
+            headers: {
+                'Accept': 'application/json'
+            },
+            data: params,
+            success: function (data) {
+                alert("El registro fue actualizado correctamente");
+                $('#construforms').show();
+                $('#tiposcrucesfrm').hide();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+            }
+        });
+    }
+}
+//#endregion 
+async function fnshowhermeti() {
     $('#hermetisidadfrm').show();
     $('#construforms').hide();
-    $("#txtductogeneralherm").val(txtducto);
-    $("#txttramogeneralherm").val(txttramo);
-    $("#txtareageneralherm ").val(txtarea);
+    try {
+
+        const params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+
+        await consultaDatosConsHermeticidad(params);
+
+        // If you want to do something after all functions have completed, you can do it here
+
+    }
+    catch (error) {
+        console.error("An error occurred:", error);
+    }
+    resetValidationClasses('identificacionfrm');
 }
+//#region consulta y actualización Construcción Hermeticidad
+var idConsHerme;
+function consultaDatosConsHermeticidad(params) {
+
+
+
+    var webMethod = "get_construccionhermeticidad";
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            if (data.success) {
+                if (data.data.length > 0) {
+                    llenarDatosActualizacionHermeticidad(data.data);
+                    $("#btnGuardarHermeticidad").hide();
+                    $("#btn_updatehermeticidad").show();
+                } else {
+
+                    clearInputTextValues('hermetisidadfrm');
+                    inhabilitarform("#hermetisidadfrm", false)
+                    $("#btnGuardarHermeticidad").show();
+                    $("#btn_updatehermeticidad").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductogeneralherm").val(ducto_nombre);
+                    $("#txttramogeneralherm").val(tramo_nombre);
+                    $("#txtareageneralherm").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
+function llenarDatosActualizacionHermeticidad(data) {
+
+    $("#btn_updatecruces").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_idenpherm_x").val(coords[0]);
+        $("#coord_esp_idenpherm_y").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_idenpherm_x").val("");
+        $("#coord_esp_idenpherm_y").val("");
+    }
+    $("#km_esp_idenpherm").val(data[0].kilometro_especifico);
+    $("#txtnombempher").val(data[0].C_0305_0097);
+    $("#fecpruebher").val(data[0].C_0305_0098.split(' ')[0]);
+    $("#txtdurpruebher").val(data[0].C_0305_0099);
+    $("#txtmedempher").val(data[0].C_0305_0100);
+    $("#txtlongducprobados").val(data[0].C_0305_0101);
+    $("#txtpresprueb").val(data[0].C_0305_0102);
+    $("#cmbunidadpresionmax option:contains(" + data[0].unidad_presion_max + ")").attr('selected', 'selected');
+
+
+    $("#txtpresdisger").val(data[0].C_0305_0103);
+    $("#cmbunidadpresiondisenio option:contains(" + data[0].unidad_presion_disenio + ")").attr('selected', 'selected');
+
+    $("#txtcalbher").val(data[0].C_0305_0104);
+
+
+    $("#txtvarher").val(data[0].C_0305_0105);
+    $("#cmbunidadpresionmin option:contains(" + data[0].unidad_presion_min + ")").attr('selected', 'selected');
+
+
+    $("#txtvarpreher").val(data[0].C_0305_0106);
+    $("#cmbunidadvariacionespres option:contains(" + data[0].unidad_variaciones_presion + ")").attr('selected', 'selected');
+
+    idConsHerme = data[0].id;
+    inhabilitarform("#hermetisidadfrm", true);
+}
+function updateHermeticidadConstruccion() {
+    if ($("#btn_updatehermeticidad").text() === "Actualizar") {
+        inhabilitarform("#hermetisidadfrm", false)
+        $("#btn_updatehermeticidad").text('Guardar');
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";//saveConstruccionHermeticidad
+        webMethod = "hermeticidad/updateConstruccionHermeticidad";
+        params = {
+            id: idConsHerme,
+            C_0101_0001_id: area,
+            C_0305_0097: $("#txtnombempher").val(),//Nombre de la empresa
+            C_0305_0098: $("#fecpruebher").val(),//Fecha de prueba
+            C_0305_0099: $("#txtdurpruebher").val(),//Duración de la prueba
+            C_0305_0100: $("#txtmedempher").val(),//Medio de prueba de empleo
+            C_0305_0101: $("#txtlongducprobados").val(),//Longitud de los ductos probados
+            C_0305_0102: $("#txtpresprueb").val(),//Presión de diseño
+            C_0305_0103: $("#txtpresdisger").val(),//Calibración
+            C_0305_0104: $("#txtcalbher").val(),//Variaciones de presión
+            C_0305_0105: $("#txtvarher").val(),//Presión de prueba mínima
+            C_0305_0106: $("#txtvarpreher").val(),//Variaciones de presión
+            coordenada_especifica: $("#coord_esp_idenpherm_x").val() + ' ' + $("#coord_esp_idenpherm_y").val(),
+            kilometro_especifico: $("#km_esp_idenpherm").val(),
+            unidad_presion_max: $("#cmbunidadpresionmax").val(),
+            unidad_presion_disenio: $("#cmbunidadpresiondisenio").val(),
+            unidad_presion_min: $("#cmbunidadpresionmin").val(),
+            unidad_variaciones_presion: $("#cmbunidadvariacionespres").val()
+        };
+        $.ajax({
+            type: "POST",
+            url: apiUrl + webMethod,
+            headers: {
+                'Accept': 'application/json'
+            },
+            data: params,
+            success: function (data) {
+                alert("El registro fue actualizado correctamente");
+                $('#construforms').show();
+                $('#hermetisidadfrm').hide();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+            }
+        });
+    }
+}
+//#endrgegion
 function fnshowreporteinsp() {
     $('#reportesInspeccionfrm').show();
     $('#construforms').hide();
@@ -1770,16 +2130,151 @@ function fnshowreporteinsp() {
     $("#txttramogeneralrep").val(txttramo);
     $("#txtareageneralrep ").val(txtarea);
 }
-function fnshowprotecccato() {
+async function fnshowprotecccato() {
+    //$('#proteccatodicafrm').show();
+    //$('#construforms').hide();
+    //$("#txtductogeneralprot").val(txtducto);
+    //$("#txttramogeneralprot").val(txttramo);
+    //$("#txtareageneralprot ").val(txtarea);
+    
+    //loadtipoproteccioncatodica();
+    //loadtipoinstalacion();
     $('#proteccatodicafrm').show();
     $('#construforms').hide();
-    $("#txtductogeneralprot").val(txtducto);
-    $("#txttramogeneralprot").val(txttramo);
-    $("#txtareageneralprot ").val(txtarea);
-    
-    loadtipoproteccioncatodica();
-    loadtipoinstalacion();
+    try {
+        await loadtipoproteccioncatodica();
+        await loadtipoinstalacion();
+
+        const params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+
+        await consultaDatosConsCatodica(params);
+
+        // If you want to do something after all functions have completed, you can do it here
+
+    }
+    catch (error) {
+        console.error("An error occurred:", error);
+    }
+    resetValidationClasses('identificacionfrm');
 }
+//region consulta y actualziación Construcción Catódica
+var idConsCato;
+function consultaDatosConsCatodica(params) {
+
+
+
+    var webMethod = "get_construccioncatodica";
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            if (data.success) {
+                if (data.data.length > 0) {
+                    llenarDatosActualizacionCatodica(data.data);
+                    $("#btnGuardarcatodica").hide();
+                    $("#btn_updatecatodica").show();
+                } else {
+
+                    clearInputTextValues('proteccatodicafrm');
+                    inhabilitarform("#proteccatodicafrm", false)
+                    $("#btnGuardarcatodica").show();
+                    $("#btn_updatecatodica").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductogeneralprot").val(ducto_nombre);
+                    $("#txttramogeneralprot").val(tramo_nombre);
+                    $("#txtareageneralprot").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
+function llenarDatosActualizacionCatodica(data) {
+
+    $("#btn_updatecatodica").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_idenpprot_x").val(coords[0]);
+        $("#coord_esp_idenpprot_y").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_idenpprot_x").val("");
+        $("#coord_esp_idenpprot_y").val("");
+    }
+    $("#km_esp_idenpprot").val(data[0].kilometro_especifico);
+    $("#cmbTipocato option:contains(" + data[0].C_0310_116 + ")").attr('selected', 'selected');
+    $("#cmbtipinstprot option:contains(" + data[0].C_0310_117 + ")").attr('selected', 'selected');
+
+
+    $("#txtnombrecatodica").val(data[0].nombre);
+    $("#txtnoserie").val(data[0].C_0310_118);
+    $("#txtfabricante").val(data[0].C_0310_119);
+    $("#extedoprote").val(data[0].C_0310_120);
+
+    idConsCato = data[0].id;
+    inhabilitarform("#proteccatodicafrm", true);
+}
+//
+function updateConstruccionCatodica() {
+    if ($("#btn_updatecatodica").text() === "Actualizar") {
+        inhabilitarform("#proteccatodicafrm", false)
+        $("#btn_updatecatodica").text('Guardar');
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";//saveConstruccionHermeticidad
+        webMethod = "catodica/updateConstruccionCatodica";
+        params = {
+            id: idConsCato,
+            C_0101_0001_id: area,
+            C_0310_116_id: $("#cmbTipocato").val(),
+            C_0310_117_id: $("#cmbtipinstprot").val(),
+            nombre: $("#txtnombrecatodica").val(),
+            C_0310_118: $("#txtnoserie").val(),
+            C_0310_119: $("#txtfabricante").val(),
+            C_0310_120: $("#extedoprote").val(),
+            coordenada_especifica: $("#coord_esp_idenpprot_x").val() + ' ' + $("#coord_esp_idenpprot_y").val(),
+            kilometro_especifico: $("#km_esp_idenpprot").val()
+        };
+        $.ajax({
+            type: "POST",
+            url: apiUrl + webMethod,
+            headers: {
+                'Accept': 'application/json'
+            },
+            data: params,
+            success: function (data) {
+                alert("El registro fue actualizado correctamente");
+                $('#construforms').show();
+                $('#proteccatodicafrm').hide();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+            }
+        });
+    }
+}
+
+//endregion
 function fnshowseguridadpre() {
     $('#seguridadprearranquefrm').show();
     $('#construforms').hide();
@@ -3915,7 +4410,7 @@ function consulta() {
                             success: function (data) {
                                 if (data.success) {
                                     for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0304_0070, data.data[i].C_0304_0071, data.data[i].C_0304_0072, data.data[i].C_0304_0073, data.data[i].C_0304_0074, data.data[i].C_0304_0075];
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0304_0070, data.data[i].C_0304_0071, data.data[i].C_0304_0072, data.data[i].C_0304_0073, data.data[i].C_0304_0074];
                                         llenarTablas(persona, "tablaConsCruces");
                                     }
                                     if (data.data.length > 0) {
@@ -4319,7 +4814,8 @@ function showClass(className) {
 
 function consultatoform(e){
     selectTabupdate(e, 'Opcion1');
-    document.getElementById('registro').style.display = 'none';}
+    document.getElementById('registro').style.display = 'none';
+}
 
 function clearInputTextValues(divId) {
     const div = document.getElementById(divId);
