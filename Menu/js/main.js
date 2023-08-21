@@ -2098,7 +2098,7 @@ async function fnshowprotipocruces() {
     catch (error) {
         console.error("An error occurred:", error);
     }
-    resetValidationClasses('identificacionfrm');
+    resetValidationClasses('tiposcrucesfrm');
 }
 //#region consulta y actualización Construcción crcuces
 var idConsCruces;
@@ -2290,7 +2290,7 @@ async function fnshowhermeti() {
     catch (error) {
         console.error("An error occurred:", error);
     }
-    resetValidationClasses('identificacionfrm');
+    resetValidationClasses('hermetisidadfrm');
 }
 //#region consulta y actualización Construcción Hermeticidad
 var idConsHerme;
@@ -2341,7 +2341,7 @@ function consultaDatosConsHermeticidad(params) {
 }
 function llenarDatosActualizacionHermeticidad(data) {
 
-    $("#btn_updatecruces").text('Actualizar');
+    $("#btn_updatehermeticidad").text('Actualizar');
     if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
         $("#coord_esp_idenpherm_x").val(coords[0]);
