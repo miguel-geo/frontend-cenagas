@@ -1663,7 +1663,7 @@ function llenarDatosActualizacionConsGeneral(data) {
         $("#coord_esp_idenbasecons_x").val(coords[0]);
         $("#coord_esp_idenbasecons_y").val(coords[1]);
     }
-    else{$("##coord_esp_idenbasecons_x").val("");
+    else{$("#coord_esp_idenbasecons_x").val("");
     $("#coord_esp_idenbasecons_y").val("");}
 
     $("#fechaconstbase").val(data[0].C_0301_0048.split(" ")[0]);
