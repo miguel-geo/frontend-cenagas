@@ -417,7 +417,7 @@ function inicializarEventos() {
                         getAreaIdById("getAreaIdByDisenioId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
                             area = data.area_unitaria_id;
-                            fnshowIndentificacion();
+                            fnshowIndentificacion(id_d=row_id);
                         });
 
                         break;
@@ -426,7 +426,7 @@ function inicializarEventos() {
                         getAreaIdById("getAreaIdByPresionId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
                             area = data.area_unitaria_id;
-                            fnshowPresion();
+                            fnshowPresion(id_d=row_id);
                         });
                         break;
                     case "Dis3":
@@ -434,7 +434,7 @@ function inicializarEventos() {
                         getAreaIdById("getAreaIdByProteccionId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
                             area = data.area_unitaria_id;
-                            fnshowProteccion();
+                            fnshowProteccion(id_d=row_id);
                         });
                         break;
                     default:
@@ -448,7 +448,7 @@ function inicializarEventos() {
                         getAreaIdById("getAreaIdByConsBaseId",row_id ).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
                             area=data.area_unitaria_id;
-                            fnshowbaseconst();
+                            fnshowbaseconst(id_d=row_id);
                         });
                         break;
                     case "Cons2":
@@ -457,7 +457,7 @@ function inicializarEventos() {
                         getAreaIdById("getAreaIdByConsUnionId",row_id ).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
                             area=data.area_unitaria_id;
-                            fnshowmetunion();
+                            fnshowmetunion(id_d=row_id);
                         });
                         break;
                     case "Cons3":
@@ -465,7 +465,7 @@ function inicializarEventos() {
                         getAreaIdById("getAreaIdByConsProfundidadId",row_id ).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
                             area=data.area_unitaria_id;
-                            fnshowprofenterrado();
+                            fnshowprofenterrado(id_d=row_id);
                         });
                         break;
                     case "Cons4":
@@ -474,7 +474,7 @@ function inicializarEventos() {
                         getAreaIdById("getAreaIdByCrucesId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
                             area = data.area_unitaria_id;
-                            fnshowprotipocruces();
+                            fnshowprotipocruces(id_d=row_id);
                         });
                         break;
                     case "Cons5"://getAreaIdByHermeticidadId
@@ -482,7 +482,7 @@ function inicializarEventos() {
                         getAreaIdById("getAreaIdByHermeticidadId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
                             area = data.area_unitaria_id;
-                            fnshowhermeti();
+                            fnshowhermeti(id_d=row_id);
                         });
                         break;
                     case "Cons6":
@@ -493,7 +493,7 @@ function inicializarEventos() {
                         getAreaIdById("getAreaIdByCatodicaId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
                             area = data.area_unitaria_id;
-                            fnshowprotecccato();
+                            fnshowprotecccato(id_d=row_id);
                         });
                         break;
                     case "Cons8":
@@ -1173,11 +1173,23 @@ function nuevoIdentificacionDisenio(){
 
 }
 var idDiseniogral;
-function consultaDatosIdentificacionArea(params) {
-    
-
-    
-    var webMethod = "get_diseniogeneral";
+function consultaDatosIdentificacionArea(id_d=null) {
+    var webMethod;
+    var params;
+    if (id_d)
+        {webMethod = "getDisenioGeneralById";
+         params = {
+            id: id_d
+        };}
+        
+    else {
+        
+        webMethod = "get_diseniogeneral";
+         params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
@@ -1186,8 +1198,10 @@ function consultaDatosIdentificacionArea(params) {
             'Accept': 'application/json'
         },
         success: function (data) {
+            
             if (data.success) {
-                if (data.data.length > 0) {
+
+                if (data.data.length > 0  ) {
                     llenarDatosActualizacion(data.data);
                     $("#btn_saveidentificacion").hide();
                     $("#btn_updateidentificacion").show();
@@ -1310,15 +1324,25 @@ function nuevoDisenioproteccion(){
 
 }
 
-function consultaDatosProteccionArea() {
+function consultaDatosProteccionArea(id_d=null) {
 
 
+    var webMethod;
     var params;
-    params = {
-        id: $("#cmbAreas option:selected").val(),
-        op: 1
-    };
-    var webMethod = "get_Proteccion";
+    if (id_d)
+        {webMethod = "getDisenioProteccionById";
+         params = {
+            id: id_d
+        };}
+        
+    else {
+        
+        webMethod = "get_Proteccion";
+         params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
@@ -1458,15 +1482,25 @@ function nuevoDiseniopresion(){
 
 }
 
-function consultaDatosPresionArea() {
+function consultaDatosPresionArea(id_d=null) {
 
 
+    var webMethod;
     var params;
-    params = {
-        id: $("#cmbAreas option:selected").val(),
-        op: 1
-    };
-    var webMethod = "get_Presion";
+    if (id_d)
+        {webMethod = "getDisenioPresionById";
+         params = {
+            id: id_d
+        };}
+        
+    else {
+        
+        webMethod = "get_Presion";
+         params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
@@ -1612,8 +1646,26 @@ function nuevoconsgeneral(){
 
 
 
-function consultaDatosConsGeneral(params) {
-    var webMethod = "get_construcciongeneral";
+function consultaDatosConsGeneral(id_d=null) {
+
+
+    var webMethod;
+    var params;
+    if (id_d)
+        {webMethod = "getConsGeneralById";
+            params = {
+            id: id_d
+        };}
+        
+    else {
+        
+        webMethod = "get_construcciongeneral";
+            params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
+    
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
@@ -1666,6 +1718,7 @@ function llenarDatosActualizacionConsGeneral(data) {
     else{$("#coord_esp_idenbasecons_x").val("");
     $("#coord_esp_idenbasecons_y").val("");}
 
+    $("#km_esp_idenbasecons").val(data[0].kilometro_especifico ),
     $("#fechaconstbase").val(data[0].C_0301_0048.split(" ")[0]);
     $("#metrecubbase").val(data[0].C_0306_0108);
     $("#txttiposuelobaseconst").val(data[0].C_0307_0109);
@@ -1739,8 +1792,25 @@ function nuevoconsunion(){
 
 }
 
-function consultaDatosConsUnion(params) {
-    var webMethod = "get_construccionunion";
+function consultaDatosConsUnion(id_d=null) {
+    var webMethod;
+    var params;
+    if (id_d)
+        {webMethod = "getConsUnionById";
+         params = {
+            id: id_d
+        };}
+        
+    else {
+        
+        webMethod = "get_construccionunion";
+         params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+}
+
+
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
@@ -1875,8 +1945,24 @@ function nuevoconsprofent(){
 }
 
 
-function consultaDatosConsProfundidad(params) {
-    var webMethod = "get_construccionprofundidad";
+function consultaDatosConsProfundidad(id_d=null) {
+    var webMethod;
+    var params;
+    if (id_d)
+        {webMethod = "getConsProfundidadById";
+         params = {
+            id: id_d
+        };}
+        
+    else {
+        
+        webMethod = "get_construccionprofundidad";
+         params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+}
+
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
@@ -2002,19 +2088,17 @@ function updateConsProfundidad() {
     }
 }
 
-async function fnshowIndentificacion() {
+async function fnshowIndentificacion(id_d=null) {
     $('#identificacionfrm').show();
     $('#disenioforms').hide();
     try {
         await loadtipocostura();
         await loadtipomaterialdisenio();
 
-        const params = {
-            id: $("#cmbAreas option:selected").val(),
-            op: 1
-        };
-
-        await consultaDatosIdentificacionArea(params);
+       
+        if (id_d){
+        await consultaDatosIdentificacionArea(id_d=id_d);}
+        else { consultaDatosIdentificacionArea();}
 
         // If you want to do something after all functions have completed, you can do it here
 
@@ -2029,17 +2113,17 @@ function fnshowServicio() {
     $('#serviciofrm').show();
     $('#disenioforms').hide();
 }
-function fnshowPresion() {
+function fnshowPresion(id_d=null) {
     $('#presionfrm').show();
     $('#disenioforms').hide();
 
-    consultaDatosPresionArea();
+    consultaDatosPresionArea(id_d=id_d);
     resetValidationClasses('presionfrm');
 }
-function fnshowProteccion() {
+function fnshowProteccion(id_d=null) {
     $('#proteccionfrm').show();
     $('#disenioforms').hide();
-    consultaDatosProteccionArea();
+    consultaDatosProteccionArea(id_d=id_d);
     resetValidationClasses('proteccionfrm');
 }
 function fnshowdisenioforms() {
@@ -2061,7 +2145,7 @@ function fnsshowconstruforms() {
     $('#forms').hide();
 
 }
-async function fnshowmetunion() {
+async function fnshowmetunion(id_d=null) {
 
 
     $('#metodounionfrm').show();
@@ -2071,12 +2155,11 @@ async function fnshowmetunion() {
         await loadtipotecnica();
         await loadtipoubicacion();;
 
-        const params = {
-            id: $("#cmbAreas option:selected").val(),
-            op: 1
-        };
+        
+    if (id_d){
+         consultaDatosConsUnion(id_d=id_d);}
+        else { consultaDatosConsUnion();}
 
-        await consultaDatosConsUnion(params);
 
         // If you want to do something after all functions have completed, you can do it here
 
@@ -2086,20 +2169,19 @@ async function fnshowmetunion() {
     resetValidationClasses('metodounionfrm');
 
 }
-function fnshowprofenterrado() {
+function fnshowprofenterrado(id_d=null) {
     $('#profenterradofrm').show();
     $('#construforms').hide();
     
-    const params = {
-        id: $("#cmbAreas option:selected").val(),
-        op: 1
-    };
-    consultaDatosConsProfundidad(params);
+
+    if (id_d){
+        consultaDatosConsProfundidad(id_d=id_d);}
+        else { consultaDatosConsProfundidad();}
     resetValidationClasses('profenterradofrm');
     
 
 }
-async function fnshowprotipocruces() {
+async function fnshowprotipocruces(id_d=null) {
     //$('#tiposcrucesfrm').show();
     //$('#construforms').hide();
     //$("#txtductogeneraltipcruce").val(txtducto);
@@ -2115,12 +2197,12 @@ async function fnshowprotipocruces() {
         await loadCmbCruceTuberia();
         await loadCmbCruceTransporte();
 
-        const params = {
-            id: $("#cmbAreas option:selected").val(),
-            op: 1
-        };
+        if (id_d){
+             consultaDatosConsCruces(id_d=id_d);}
+            else { consultaDatosConsCruces();}
 
-        await consultaDatosConsCruces(params);
+
+    
 
         // If you want to do something after all functions have completed, you can do it here
 
@@ -2147,7 +2229,23 @@ function consultaDatosConsCruces(params) {
 
 
 
-    var webMethod = "get_construccioncruces";
+    var webMethod;
+    var params;
+    if (id_d)
+        {webMethod = "getConsCrucesById";
+         params = {
+            id: id_d
+        };}
+        
+    else {
+        
+        webMethod = "get_construccioncruces";
+         params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+}
+
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
@@ -2314,17 +2412,15 @@ function updateCrucesConstruccion() {
     }
 }
 //#endregion 
-async function fnshowhermeti() {
+async function fnshowhermeti(id_d=null) {
     $('#hermetisidadfrm').show();
     $('#construforms').hide();
     try {
 
-        const params = {
-            id: $("#cmbAreas option:selected").val(),
-            op: 1
-        };
+        if (id_d){
+            await consultaDatosConsHermeticidad(id_d=id_d);}
+            else { consultaDatosConsHermeticidad();}
 
-        await consultaDatosConsHermeticidad(params);
 
         // If you want to do something after all functions have completed, you can do it here
 
@@ -2348,11 +2444,24 @@ function nuevoconshermeticidad(){
 }
 
 
-function consultaDatosConsHermeticidad(params) {
+function consultaDatosConsHermeticidad(id_d=null) {
 
-
-
-    var webMethod = "get_construccionhermeticidad";
+    var webMethod;
+    var params;
+    if (id_d)
+        {webMethod = "getConsHermeticidadById";
+         params = {
+            id: id_d
+        };}
+        
+    else {
+        
+        webMethod = "get_construccionhermeticidad";
+         params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+}
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
@@ -2488,7 +2597,7 @@ function fnshowreporteinsp() {
     $("#txttramogeneralrep").val(txttramo);
     $("#txtareageneralrep ").val(txtarea);
 }
-async function fnshowprotecccato() {
+async function fnshowprotecccato(id_d=null) {
     //$('#proteccatodicafrm').show();
     //$('#construforms').hide();
     //$("#txtductogeneralprot").val(txtducto);
@@ -2503,12 +2612,9 @@ async function fnshowprotecccato() {
         await loadtipoproteccioncatodica();
         await loadtipoinstalacion();
 
-        const params = {
-            id: $("#cmbAreas option:selected").val(),
-            op: 1
-        };
-
-        await consultaDatosConsCatodica(params);
+        if (id_d){
+            await consultaDatosConsCatodica(id_d=id_d);}
+            else { consultaDatosConsCatodica();}
 
         // If you want to do something after all functions have completed, you can do it here
 
@@ -2533,11 +2639,25 @@ function nuevoconscatodica(){
 
 
 
-function consultaDatosConsCatodica(params) {
+function consultaDatosConsCatodica(id_d=null) {
 
+    var webMethod;
+    var params;
+    if (id_d)
+        {webMethod = "getConsCatodicaById";
+         params = {
+            id: id_d
+        };}
+        
+    else {
+        
+        webMethod = "get_construccioncatodica";
+         params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+}
 
-
-    var webMethod = "get_construccioncatodica";
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
@@ -2654,19 +2774,18 @@ function fnshowseguridadpre() {
     $("#txttramogeneralseg").val(txttramo);
     $("#txtareageneralseg ").val(txtarea);
 }
-async function fnshowbaseconst() {
+async function fnshowbaseconst(id_d=null) {
     $('#constbasefrm').show();
     $('#construforms').hide();
     try {
 
         await loadtiporecubrimiento();
 
-        const params = {
-            id: $("#cmbAreas option:selected").val(),
-            op: 1
-        };
+        
+        if (id_d){
+             consultaDatosConsGeneral(id_d=id_d);}
+            else { consultaDatosConsGeneral();}
 
-        await consultaDatosConsGeneral(params);
 
         // If you want to do something after all functions have completed, you can do it here
 
