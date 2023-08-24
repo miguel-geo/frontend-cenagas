@@ -1163,7 +1163,15 @@ function inhabilitarform(divSelector, bandera) {
     $(divSelector + " select.setAlg").prop("disabled", bandera);
 }
 //#region Actulizacion Diseño
+function nuevoIdentificacionDisenio(){
 
+    $("#btn_saveidentificacion").show();
+    $("#btn_newidentificacion").hide();
+    $("#btn_updateidentificacion").hide();
+    clearInputTextValuesNew('identificacionfrm');
+    inhabilitarform("#identificacionfrm", false);
+
+}
 var idDiseniogral;
 function consultaDatosIdentificacionArea(params) {
     
@@ -1183,6 +1191,7 @@ function consultaDatosIdentificacionArea(params) {
                     llenarDatosActualizacion(data.data);
                     $("#btn_saveidentificacion").hide();
                     $("#btn_updateidentificacion").show();
+                    $("#btn_newidentificacion").show();
                 }else{
 
                     clearInputTextValues('identificacionfrm');
@@ -1289,6 +1298,18 @@ function updateIdentificacionDisenio() {
         });
     }
 }
+
+
+function nuevoDisenioproteccion(){
+
+    $("#btnsaveproteccion").show();
+    $("#btn_newproteccion").hide();
+    $("#btn_updateproteccion").hide();
+    clearInputTextValuesNew('proteccionfrm');
+    inhabilitarform("#proteccionfrm", false);
+
+}
+
 function consultaDatosProteccionArea() {
 
 
@@ -1310,6 +1331,7 @@ function consultaDatosProteccionArea() {
 
                     llenarDatosActualizacionProteccion(data.data);
                     $("#btnsaveproteccion").hide();
+                    $("#btn_newproteccion").show();
                     $("#btn_updateproteccion").show();
                 }else{
 
@@ -1338,6 +1360,7 @@ function consultaDatosProteccionArea() {
 
 
 }
+
 var idDisenioproteccion;
 function llenarDatosActualizacionProteccion(data) {
     $("#btn_updateproteccion").text('Actualizar');
@@ -1422,6 +1445,19 @@ function updateDisenioproteccion() {
         });
     }
 }
+
+
+
+function nuevoDiseniopresion(){
+
+    $("#btnsavepresion").show();
+    $("#btn_newpresion").hide();
+    $("#btn_updatepresion").hide();
+    clearInputTextValuesNew('presionfrm');
+    inhabilitarform("#presionfrm", false);
+
+}
+
 function consultaDatosPresionArea() {
 
 
@@ -1444,6 +1480,7 @@ function consultaDatosPresionArea() {
                 if (data.data.length > 0) {
 
                     llenarDatosActualizacionPresion(data.data);
+                    $("#btn_newpresion").show();
                     $("#btnsavepresion").hide();
                     $("#btn_updatepresion").show();
                 }else{
@@ -1476,55 +1513,6 @@ function consultaDatosPresionArea() {
 var idDiseniopresion;
 
 
-function consultaDatosProteccionArea() {
-
-
-    var params;
-    params = {
-        id: $("#cmbAreas option:selected").val(),
-        op: 1
-    };
-    var webMethod = "get_Proteccion";
-    $.ajax({
-        type: "POST",
-        url: apiUrl + webMethod,
-        data: params,
-        success: function (data) {
-            if (data.success) {
-                clearInputTextValues('proteccionfrm');    
-
-                if (data.data.length > 0) {
-
-                    llenarDatosActualizacionProteccion(data.data);
-                    $("#btnsaveproteccion").hide();
-                    $("#btn_updateproteccion").show();
-                }else{
-
-
-                    inhabilitarform("#proteccionfrm",false)
-                    $("#btnsaveproteccion").show();
-                    $("#btn_updateproteccion").hide();
-
-                }
-
-                getNamesByAreaUnitariaId(area).then(data => {
-                    let area_unitaria_nombre = data.area_unitaria_nombre;
-                    let tramo_nombre = data.tramo_nombre;
-                    let ducto_nombre = data.ducto_nombre;
-                    $("#txtductoproteccion").val(ducto_nombre);
-                    $("#txttramoproteccion").val(tramo_nombre);
-                    $("#txtareaproteccion").val(area_unitaria_nombre);
-                });
-
-            }
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-
-        }
-    });
-
-
-}
 
 
 function llenarDatosActualizacionPresion(data) {
@@ -1611,6 +1599,19 @@ function updateDiseniopresion() {
 //Consulta Modificar
 // General
 var idConsbase;
+
+function nuevoconsgeneral(){
+
+    $("#btn_saveconsgeneral").show();
+    $("#btn_updateconsgeneral").hide();
+    $("#btn_newconsgeneral").hide();
+    clearInputTextValuesNew('constbasefrm');
+    inhabilitarform("#constbasefrm", false);
+
+}
+
+
+
 function consultaDatosConsGeneral(params) {
     var webMethod = "get_construcciongeneral";
     $.ajax({
@@ -1625,6 +1626,7 @@ function consultaDatosConsGeneral(params) {
                 if (data.data.length > 0) {
                     llenarDatosActualizacionConsGeneral(data.data);
                     $("#btn_saveconsgeneral").hide();
+                    $("#btn_newconsgeneral").show();
                     $("#btn_updateconsgeneral").show();
                 }else{
 
@@ -1724,6 +1726,19 @@ function updateConsGeneral() {
 
 // Union
 var idConsunion;
+
+
+
+function nuevoconsunion(){
+
+    $("#btn_saveconsunion").show();
+    $("#btn_updateconsunion").hide();
+    $("#btn_newconsunion").hide();
+    clearInputTextValuesNew('metodounionfrm');
+    inhabilitarform("#metodounionfrm", false);
+
+}
+
 function consultaDatosConsUnion(params) {
     var webMethod = "get_construccionunion";
     $.ajax({
@@ -1738,6 +1753,7 @@ function consultaDatosConsUnion(params) {
                 if (data.data.length > 0) {
                     llenarDatosActualizacionConsUnion(data.data);
                     $("#btn_saveconsunion").hide();
+                    $("#btn_newconsunion").show();
                     $("#btn_updateconsunion").show();
                 }else{
 
@@ -1846,6 +1862,19 @@ function updateConsUnion() {
 
 // Profundidad
 var idConsprofundidad;
+
+
+function nuevoconsprofent(){
+
+    $("#btn_saveconsprofent").show();
+    $("#btn_updateconsprofent").hide();
+    $("#btn_newconsprofent").hide();
+    clearInputTextValuesNew('profenterradofrm');
+    inhabilitarform("#profenterradofrm", false);
+
+}
+
+
 function consultaDatosConsProfundidad(params) {
     var webMethod = "get_construccionprofundidad";
     $.ajax({
@@ -1861,6 +1890,7 @@ function consultaDatosConsProfundidad(params) {
                     llenarDatosActualizacionConsProfundidad(data.data);
                     $("#btn_saveconsprofent").hide();
                     $("#btn_updateconsprofent").show();
+                    $("#btn_newconsprofent").show();
                 }else{
 
                     clearInputTextValues('profenterradofrm');
@@ -2102,6 +2132,17 @@ async function fnshowprotipocruces() {
 }
 //#region consulta y actualización Construcción crcuces
 var idConsCruces;
+
+function nuevoconscruces(){
+
+    $("#btnGuardarCruces").show();
+    $("#btn_updatecruces").hide();
+    $("#btn_newconscruces").hide();
+    clearInputTextValuesNew('tiposcrucesfrm');
+    inhabilitarform("#tiposcrucesfrm", false);
+
+}
+
 function consultaDatosConsCruces(params) {
 
 
@@ -2120,6 +2161,7 @@ function consultaDatosConsCruces(params) {
                     llenarDatosActualizacionCruces(data.data);
                     $("#btnGuardarCruces").hide();
                     $("#btn_updatecruces").show();
+                    $("#btn_newconscruces").show();
                 } else {
 
                     clearInputTextValues('tiposcrucesfrm');
@@ -2294,6 +2336,18 @@ async function fnshowhermeti() {
 }
 //#region consulta y actualización Construcción Hermeticidad
 var idConsHerme;
+
+function nuevoconshermeticidad(){
+
+    $("#btnGuardarHermeticidad").show();
+    $("#btn_updatehermeticidad").hide();
+    $("#btn_newconshermeticidad").hide();
+    clearInputTextValuesNew('hermetisidadfrm');
+    inhabilitarform("#hermetisidadfrm", false);
+
+}
+
+
 function consultaDatosConsHermeticidad(params) {
 
 
@@ -2312,6 +2366,7 @@ function consultaDatosConsHermeticidad(params) {
                     llenarDatosActualizacionHermeticidad(data.data);
                     $("#btnGuardarHermeticidad").hide();
                     $("#btn_updatehermeticidad").show();
+                    $("#btn_newconshermeticidad").show();
                 } else {
 
                     clearInputTextValues('hermetisidadfrm');
@@ -2465,6 +2520,19 @@ async function fnshowprotecccato() {
 }
 //region consulta y actualziación Construcción Catódica
 var idConsCato;
+
+function nuevoconscatodica(){
+
+    $("#btnGuardarcatodica").show();
+    $("#btn_updatecatodica").hide();
+    $("#btn_newconscatodica").hide();
+    clearInputTextValuesNew('proteccatodicafrm');
+    inhabilitarform("#proteccatodicafrm", false);
+
+}
+
+
+
 function consultaDatosConsCatodica(params) {
 
 
@@ -2482,6 +2550,7 @@ function consultaDatosConsCatodica(params) {
                 if (data.data.length > 0) {
                     llenarDatosActualizacionCatodica(data.data);
                     $("#btnGuardarcatodica").hide();
+                    $("#btn_newconscatodica").show();
                     $("#btn_updatecatodica").show();
                 } else {
 
@@ -5154,6 +5223,15 @@ function consultatoform(e){
 function clearInputTextValues(divId) {
     const div = document.getElementById(divId);
     const textInputs = div.querySelectorAll('input[type="text"], input[type="date"]');
+
+    textInputs.forEach(input => {
+        input.value = '';
+    });
+}    
+
+function clearInputTextValuesNew(divId) {
+    const div = document.getElementById(divId);
+    const textInputs = div.querySelectorAll(' input[type="date"], .setAlg');
 
     textInputs.forEach(input => {
         input.value = '';
