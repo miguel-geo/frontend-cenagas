@@ -1861,7 +1861,7 @@ function llenarDatosActualizacionConsUnion(data) {
         $("#coord_esp_idenunion_x").val(coords[0]);
         $("#coord_esp_idenunion_y").val(coords[1]);
     }
-    else{$("##coord_esp_idenunion_x").val("");
+    else{$("#coord_esp_idenunion_x").val("");
     $("#coord_esp_idenunion_y").val("");}
 
 
