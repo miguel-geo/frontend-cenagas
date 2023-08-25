@@ -159,9 +159,3 @@ nav .navbar-nav li a {
     line-height: 1.428571429;
     border-radius: 15px;
 }
-$('.custom-file-input').on('change', function(event) {
-    var inputFile = event.currentTarget;
-    $(inputFile).parent()
-        .find('.custom-file-label')
-        .html(inputFile.files[0].name);
-}); 

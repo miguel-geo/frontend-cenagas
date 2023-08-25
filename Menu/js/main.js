@@ -1470,6 +1470,189 @@ function updateDisenioproteccion() {
 }
 
 
+// Servicio
+
+var idDisenioservicio;
+
+
+function nuevoDisenioServicio(){
+
+    $("#btn_saveservicio").show();
+    $("#btn_newservicio").hide();
+    $("#btn_updateservicio").hide();
+    clearInputTextValuesNew('serviciofrm');
+    inhabilitarform("#serviciofrm", false);
+
+}
+
+
+
+function consultaDatosServicio(id_d = null) {
+    clearAllFileInputsInDiv('serviciofrm')
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getDisenioProteccionById";
+        params = {
+            id: id_d
+        };
+    } else {
+        webMethod = "getDisenioServicio";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+        };
+    }
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+    .then(response => response.json())
+    .then(data => {
+        
+        // 1. Remove all existing download icons before adding new ones.
+        const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+        existingDownloadIcons.forEach(icon => icon.remove());
+       
+
+        const { id: serviceId, success:success, ...columnsData } = data;
+        if (success){
+        idDisenioservicio=serviceId
+        Object.values(columnsData).forEach(item => {
+            if (item.hasFile) {
+                // Find the correct input group using the data-column attribute
+                const inputGroup = document.querySelector(`.input-group[data-column="${item.column}"]`);
+                const customFileDiv = inputGroup.querySelector('.custom-file');
+        
+                if (customFileDiv) {
+                    // Create the download icon
+                    const downloadIcon = document.createElement('a');
+                    downloadIcon.href = `${apiUrl}disenio-servicio/${serviceId}/download/${item.column}`;
+                    downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+                    downloadIcon.target = "_blank";
+                    downloadIcon.className = "download-icon";
+                    downloadIcon.style.marginLeft = "10px";
+                    downloadIcon.setAttribute('data-columna', item.column);
+                    downloadIcon.setAttribute('data-id_otro', serviceId);
+                    
+                    // Insert the download icon after the custom-file div
+                    if (customFileDiv.nextSibling) {
+                        inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+                    } else {
+                        inputGroup.appendChild(downloadIcon);
+                    }
+
+                    const destroyIcon = document.createElement('a');
+                    destroyIcon.href = `${apiUrl}disenio-servicio/${serviceId}/destroy/${item.column}`;
+                    destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+                    destroyIcon.target = "_blank";
+                    destroyIcon.className = "destroy-icon";
+                    destroyIcon.style.marginLeft = "10px";
+                    destroyIcon.style.display = "none"; 
+                    destroyIcon.setAttribute('data-columna', item.column);
+                    destroyIcon.setAttribute('data-id_otro', serviceId);
+                   
+                    
+                    // Insert the download icon after the custom-file div
+                    if (customFileDiv.nextSibling) {
+                        inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+                    } else {
+                        inputGroup.appendChild(destroyIcon);
+                    }
+
+
+                    
+                }
+            }
+            
+        });
+        $("#btn_updateservicio").text("Actualizar") 
+        inhabilitarform("#serviciofrm", true)
+        $("#btn_saveservicio").hide();
+        $("#btn_newservicio").show();
+        $("#btn_updateservicio").show();
+        showDestroyIcons('serviciofrm',false);
+    }
+
+    else {
+
+        inhabilitarform("#serviciofrm", false)
+        $("#btn_saveservicio").show();
+        $("#btn_newservicio").hide();
+        $("#btn_updateservicio").hide();
+        showDestroyIcons('serviciofrm',false);
+    }
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+
+
+function updateDisenioServicio() {
+    if ($("#btn_updateservicio").text() === "Actualizar") {
+        inhabilitarform("#serviciofrm", false);
+        showDestroyIcons('serviciofrm',true);
+        $("#btn_updateservicio").text('Guardar');
+    }
+    else {
+        var webMethod = "updateServicio";
+
+        const formData = new FormData();
+        formData.append("id", idDisenioservicio)
+        // Make sure files are being selected and appended properly
+        if($("#inputGroupFile01")[0].files[0]) {
+            formData.append("C_0205_0012", $("#inputGroupFile01")[0].files[0]);
+        }
+        if($("#inputGroupFile02")[0].files[0]) {
+            formData.append("C_0205_0013", $("#inputGroupFile02")[0].files[0]);
+        }
+        if($("#inputGroupFile03")[0].files[0]) {
+            formData.append("C_0205_0014", $("#inputGroupFile03")[0].files[0]);
+        }
+        if($("#inputGroupFile04")[0].files[0]) {
+            formData.append("C_0205_0015", $("#inputGroupFile04")[0].files[0]);
+        }
+        if($("#inputGroupFile05")[0].files[0]) {
+            formData.append("C_0205_0016", $("#inputGroupFile05")[0].files[0]);
+        }
+    
+        // Log formData to console for debugging (this will not display the content of the files)
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            
+        })
+        .then(data => {
+            if (data.success) {
+
+                alert("Información almacenada correctamente");
+                $('#disenioforms').show();
+                $('#serviciofrm').hide();
+                $("#btn_updateservicio").text("Actualizar")
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+    }
+}
+
+
+
+//Presion
 
 function nuevoDiseniopresion(){
 
@@ -2107,11 +2290,210 @@ async function fnshowIndentificacion(id_d=null) {
     resetValidationClasses('identificacionfrm');
 }
 
+// inspeccion
 
-function fnshowServicio() {
+var idDisenioinspeccion;
+
+
+function nuevoDisenioinspeccion(){
+
+    $("#btn_saveinspeccion").show();
+    //$("#btn_newinspeccion").hide();
+    $("#btn_updateinspeccion").hide();
+    clearInputTextValuesNew('reportesInspeccionfrm');
+    inhabilitarform("#reportesInspeccionfrm", false);
+
+}
+
+
+
+function consultaDatosinspeccion(id_d = null) {
+    clearAllFileInputsInDiv('reportesInspeccionfrm')
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getDisenioProteccionById";
+        params = {
+            id: id_d
+        };
+    } else {
+        webMethod = "getConstruccionInspeccion";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+        };
+    }
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+    .then(response => response.json())
+    .then(data => {
+        
+        // 1. Remove all existing download icons before adding new ones.
+        const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+        existingDownloadIcons.forEach(icon => icon.remove());
+       
+
+        const { id: serviceId, success:success,coordenada_especifica:coordenada_especifica,kilometro_especifico:kilometro_especifico, ...columnsData } = data;
+        if (success){
+        idDisenioinspeccion=serviceId
+        if (data.coordenada_especifica !== "" && data.coordenada_especifica !== null&& data.coordenada_especifica !== null) {
+            const coords = data.coordenada_especifica.split(' ');
+            $("#coord_esp_idenprep_x").val(coords[0]);
+            $("#coord_esp_idenprep_y").val(coords[1]);
+        }
+        else{$("#coord_esp_idenprep_x").val("");
+        $("#coord_esp_idenprep_y").val("");}    
+
+        $("#km_esp_idenprep").val(data.kilometro_especifico)
+        Object.values(columnsData).forEach(item => {
+            if (item.hasFile) {
+                // Find the correct input group using the data-column attribute
+                const inputGroup = document.querySelector(`.input-group[data-column="${item.column}"]`);
+                const customFileDiv = inputGroup.querySelector('.custom-file');
+        
+                if (customFileDiv) {
+                    // Create the download icon
+                    const downloadIcon = document.createElement('a');
+                    downloadIcon.href = `${apiUrl}disenio-inspeccion/${serviceId}/download/${item.column}`;
+                    downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+                    downloadIcon.target = "_blank";
+                    downloadIcon.className = "download-icon";
+                    downloadIcon.style.marginLeft = "10px";
+                    downloadIcon.setAttribute('data-columna', item.column);
+                    downloadIcon.setAttribute('data-id_otro', serviceId);
+                    
+                    // Insert the download icon after the custom-file div
+                    if (customFileDiv.nextSibling) {
+                        inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+                    } else {
+                        inputGroup.appendChild(downloadIcon);
+                    }
+
+                    const destroyIcon = document.createElement('a');
+                    destroyIcon.href = `${apiUrl}disenio-inspeccion/${serviceId}/destroy/${item.column}`;
+                    destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+                    destroyIcon.target = "_blank";
+                    destroyIcon.className = "destroy-icon";
+                    destroyIcon.style.marginLeft = "10px";
+                    destroyIcon.style.display = "none"; 
+                    destroyIcon.setAttribute('data-columna', item.column);
+                    destroyIcon.setAttribute('data-id_otro', serviceId);
+                   
+                    
+                    // Insert the download icon after the custom-file div
+                    if (customFileDiv.nextSibling) {
+                        inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+                    } else {
+                        inputGroup.appendChild(destroyIcon);
+                    }
+
+
+                    
+                }
+            }
+            
+        });
+        $("#btn_updateinspeccion").text("Actualizar") 
+        inhabilitarform("#reportesInspeccionfrm", true)
+        $("#btn_saveinspeccion").hide();
+        //$("#btn_newinspeccion").show();
+        $("#btn_updateinspeccion").show();
+        showDestroyIcons('reportesInspeccionfrm',false);
+    }
+
+    else {
+
+        inhabilitarform("#reportesInspeccionfrm", false)
+        $("#btn_saveinspeccion").show();
+        $("#btn_newinspeccion").hide();
+        $("#btn_updateinspeccion").hide();
+        showDestroyIcons('reportesInspeccionfrm',false);
+    }
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+
+
+function updateConstruccionInspeccion() {
+    if ($("#btn_updateinspeccion").text() === "Actualizar") {
+        inhabilitarform("#reportesInspeccionfrm", false);
+        showDestroyIcons('reportesInspeccionfrm',true);
+        $("#btn_updateinspeccion").text('Guardar');
+    }
+    else {
+        var webMethod = "updateinspeccion";
+
+        const formData = new FormData();
+        formData.append("id", idDisenioinspeccion)
+        formData.append("kilometro_especifico",$("#km_esp_idenprep").val() )
+        formData.append("coordenada_especifica",  $("#coord_esp_idenprep_x").val()+' '+$("#coord_esp_idenprep_y").val(),)
+        formData.append("C_0101_0001_id", area)
+        // Make sure files are being selected and appended properly
+        if($("#C_0309_112")[0].files[0]) {
+            formData.append("C_0309_112", $("#C_0309_112")[0].files[0]);
+        }
+        if($("#C_0309_113")[0].files[0]) {
+            formData.append("C_0309_113", $("#C_0309_113")[0].files[0]);
+        }
+        if($("#C_0309_114")[0].files[0]) {
+            formData.append("C_0309_114", $("#C_0309_114")[0].files[0]);
+        }
+        if($("#C_0309_115")[0].files[0]) {
+            formData.append("C_0309_115", $("#C_0309_115")[0].files[0]);
+        }
+        
+        // Log formData to console for debugging (this will not display the content of the files)
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            
+        })
+        .then(data => {
+            if (data.success) {
+
+                alert("Información almacenada correctamente");
+                $('#construformsforms').show();
+                $('#reportesInspeccionfrm').hide();
+                $("#btn_updateinspeccion").text("Actualizar")
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+    }
+}
+
+
+
+
+
+
+
+function fnshowServicio(id_d=null) {
     $('#serviciofrm').show();
     $('#disenioforms').hide();
+    if (id_d){
+        consultaDatosServicio(id_d=id_d);}
+        else { consultaDatosServicio();}   
 }
+
+
 function fnshowPresion(id_d=null) {
     $('#presionfrm').show();
     $('#disenioforms').hide();
@@ -2591,6 +2973,7 @@ function updateHermeticidadConstruccion() {
 //#endrgegion
 function fnshowreporteinsp() {
     $('#reportesInspeccionfrm').show();
+    consultaDatosinspeccion();
     $('#construforms').hide();
     $("#txtductogeneralrep").val(txtducto);
     $("#txttramogeneralrep").val(txttramo);
@@ -5347,3 +5730,48 @@ function clearInputTextValuesNew(divId) {
         input.value = '';
     });
 }    
+
+
+function showDestroyIcons(parentDivId,bandera) {
+    if (bandera){
+        $(`#${parentDivId} .destroy-icon`).css('display', 'inline');
+    }
+    else{
+    // Select elements with class 'destroy-icon' inside the specified div
+    $(`#${parentDivId} .destroy-icon`).css('display', 'none');}
+}
+
+$(document).ready(function() {
+    $('body').on('click', '.destroy-icon', function(event) {
+        if(confirm("¿Seguro quiere borrar ese documento?")) {
+        // Use $(this) to turn 'this' into a jQuery object
+        let columna = $(this).data('columna');
+        let idOtro = $(this).data('id_otro');
+        let hrefwebmethod=$(this).attr('href');
+        // Prevent default hyperlink behavior and stop propagation
+        event.preventDefault();
+
+            console.log(hrefwebmethod)
+        fetch(hrefwebmethod, {
+            method: 'GET', // or 'POST', 'PUT', etc.
+            headers: headers
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'File content erased successfully') {
+                let destroyIcon = $(`a[data-columna="${columna}"][data-id_otro="${idOtro}"]`);
+                destroyIcon.remove();
+            }
+        })
+        .catch(error => console.error("Error fetching data: ", error));
+    }
+    });
+});
+
+function clearAllFileInputsInDiv(divId) {
+    // Select all file inputs within the specified div and set their value to an empty string
+    $(`#${divId} .custom-file-input`).val('');
+
+    // Optionally, if you also want to reset the label
+    $(`#${divId} .custom-file-label`).text('Escoje el archivo PDF');
+}
