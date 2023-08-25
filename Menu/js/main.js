@@ -1512,7 +1512,7 @@ function consultaDatosPresionArea(id_d=null) {
 
                 if (data.data.datagrid.length > 0) {
 
-                    llenarDatosActualizacionPresion(data.data);
+                    llenarDatosActualizacionPresion(data.data.datagrid);
                     $("#btn_newpresion").show();
                     $("#btnsavepresion").hide();
                     $("#btn_updatepresion").show();
