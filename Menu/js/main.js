@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:80/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -1179,8 +1179,8 @@ function consultaDatosIdentificacionArea(params) {
         },
         success: function (data) {
             if (data.success) {
-                if (data.data.length > 0) {
-                    llenarDatosActualizacion(data.data);
+                if (data.data.datagrid.length > 0) {
+                    llenarDatosActualizacion(data.data.datagrid);
                     $("#btn_saveidentificacion").hide();
                     $("#btn_updateidentificacion").show();
                 }else{
@@ -1441,9 +1441,9 @@ function consultaDatosPresionArea() {
 
                 clearInputTextValues('presionfrm');    
 
-                if (data.data.length > 0) {
+                if (data.data.datagrid.length > 0) {
 
-                    llenarDatosActualizacionPresion(data.data);
+                    llenarDatosActualizacionPresion(data.data.datagrid);
                     $("#btnsavepresion").hide();
                     $("#btn_updatepresion").show();
                 }else{
@@ -1622,8 +1622,8 @@ function consultaDatosConsGeneral(params) {
         },
         success: function (data) {
             if (data.success) {
-                if (data.data.length > 0) {
-                    llenarDatosActualizacionConsGeneral(data.data);
+                if (data.data.datagrid.length > 0) {
+                    llenarDatosActualizacionConsGeneral(data.data.datagrid);
                     $("#btn_saveconsgeneral").hide();
                     $("#btn_updateconsgeneral").show();
                 }else{
@@ -2479,8 +2479,8 @@ function consultaDatosConsCatodica(params) {
         },
         success: function (data) {
             if (data.success) {
-                if (data.data.length > 0) {
-                    llenarDatosActualizacionCatodica(data.data);
+                if (data.data.datagrid.length > 0) {
+                    llenarDatosActualizacionCatodica(data.data.datagrid);
                     $("#btnGuardarcatodica").hide();
                     $("#btn_updatecatodica").show();
                 } else {
@@ -4532,42 +4532,39 @@ function consulta() {
                             url: apiUrl + webMethod,
                             data: params,
                             success: function (data) {
-                                if (data.data.length > 0) {
+                                if (data.data.datagrid.length > 0) {
                                    //Diametro mm
-                                    $('#diammcons').text(data.data[0].C_0202_0007);
+                                    $('#diammcons').text(data.data.diametromm[0].C_0202_0007);
                                     //Diametro in
-                                    $('#diaincons').text(data.data[0].C_0202_0008);
+                                    $('#diaincons').text(data.data.diametroin[0].C_0202_0008);
                                     //Espesor mm
-                                    $('#espmmcons').text(data.data[0].C_0203_0009);
+                                    $('#espmmcons').text(data.data.espesormm[0].C_0203_0009);
                                     //Espesor in
-                                    $('#espincons').text(data.data[0].C_0203_0010);
+                                    $('#espincons').text(data.data.espesorin[0].C_0203_0010);
                                     //Especificación material
-                                    $('#espmatcons').text(data.data[0].C_0204_0011);
+                                    $('#espmatcons').text(data.data.espmaterial[0].C_0204_0011);
                                     //Temperatura °C
-                                    $('#tempconsc').text(data.data[0].C_0207_0027);
+                                    $('#tempconsc').text(data.data.tempc[0].C_0207_0027);
                                     //Temperatura °F
-                                    $('#tempconsf').text(data.data[0].C_0207_0028);
+                                    $('#tempconsf').text(data.data.tempf[0].C_0207_0028);
                                     //Fecha fabricación
-                                    $('#fecfabcons').text(data.data[0].C_0209_0030);
+                                    $('#fecfabcons').text(data.data.fechafab[0].C_0209_0030);
                                     //% carbono
-                                    $('#porcons').text(data.data[0].C_0210_0031);
+                                    $('#porcons').text(data.data.carbono[0].C_0210_0031);
                                     //% resistencia tracción
-                                    $('#restraccons').text(data.data[0].C_0210_0032);
+                                    $('#restraccons').text(data.data.resistencia[0].C_0210_0032);
                                     //% Límite elástico
-                                    $('#limelacons').text(data.data[0].C_0210_0033);
+                                    $('#limelacons').text(data.data.elastico[0].C_0210_0033);
                                 }
 
                                 if (data.success) {
-                                    for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0201_0006, data.data[i].C_0208_0029];
+                                    for (i = 0; i < data.data.datagrid.length; i++) {
+                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0201_0006, data.data.datagrid[i].C_0208_0029];
                                         llenarTablas(persona, "tablaPersonas");
-                                        contar_longitud=contar_longitud+data.data[i].C_0201_0006
+                                        contar_longitud = contar_longitud + data.data.datagrid[i].C_0201_0006
                                     }
                                     contar_longitud=contar_longitud/1000
                                     $('#longitud_total').text(contar_longitud);
-                                    if (data.data.length > 0) {
-                                        // ExportarDatos(data.data);
-                                    }
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -4584,20 +4581,17 @@ function consulta() {
                             data: params,
                             success: function (data) {
                                 if (data.success) {
-                                    if (data.data.length > 0) {
+                                    if (data.data.datagrid.length > 0) {
                                         //Presión diseño
-                                        $('#presdiscons').text(data.data[0].C_0206_0022);
+                                        $('#presdiscons').text(data.data.presionpsi[0].C_0206_0022);
                                         //Presion Max PSI
-                                        $('#presmaxoppsicons').text(data.data[0].C_0206_0023);
+                                        $('#presmaxoppsicons').text(data.data.presionmaxpsi[0].C_0206_0023);
                                         //Presion Max Kg
-                                        $('#presmaxopecons').text(data.data[0].C_0206_0024);
+                                        $('#presmaxopecons').text(data.data.presionmaxkg[0].C_0206_0024);
                                     }
-                                    for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0206_0017, data.data[i].C_0206_0019, data.data[i].C_0206_0023, data.data[i].C_0206_0024];
+                                    for (i = 0; i < data.data.datagrid.length; i++) {
+                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0206_0017, data.data.datagrid[i].C_0206_0019, data.data.datagrid[i].C_0206_0023, data.data.datagrid[i].C_0206_0024];
                                         llenarTablas(persona, "tablapresion");
-                                    }
-                                    if (data.data.length > 0) {
-                                        // ExportarDatos(data.data);
                                     }
                                 }
                             },
@@ -4776,17 +4770,15 @@ function consulta() {
                             data: params,
                             success: function (data) {
                                 if (data.success) {
-                                    if (data.data.length > 0) {
+                                    if (data.data.datagrid.length > 0) {
                                         //Tipo catódica
-                                        $('#tipocatodicacons').text(data.data[0].C_0310_116);
+                                        $('#tipocatodicacons').text(data.data.conscato[0].C_0310_116);
                                     }
-                                    for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0310_117, data.data[i].C_0310_118, data.data[i].C_0310_119, data.data[i].C_0310_120, data.data[i].nombre];
+                                    for (i = 0; i < data.data.datagrid.length; i++) {
+                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0310_117, data.data.datagrid[i].C_0310_118, data.data.datagrid[i].C_0310_119, data.data.datagrid[i].C_0310_120, data.data.datagrid[i].nombre];
                                         llenarTablas(persona, "tablaConsCatodica");
                                     }
-                                        if (data.data.length > 0) {
-                                            // ExportarDatos(data.data);
-                                        }
+                                        
                                     }
                                 },
                                 error: function (xhr, ajaxOptions, thrownError) {
