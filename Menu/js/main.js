@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -2468,7 +2468,7 @@ function updateConstruccionInspeccion() {
             if (data.success) {
 
                 alert("Información almacenada correctamente");
-                $('#construformsforms').show();
+                $('#construforms').show();
                 $('#reportesInspeccionfrm').hide();
                 $("#btn_updateinspeccion").text("Actualizar")
             }
