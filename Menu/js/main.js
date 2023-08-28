@@ -663,10 +663,9 @@ function inicializarEventos() {
         }
        
        
-    });
-   
-
-    //Combo Ductos
+    });   
+    
+    //Combo Ductos  
     const selectDucto = document.getElementById('cmbDucto');
     selectDucto.addEventListener('change', function handleChange(event) {
         ducto = event.target.value;
@@ -2138,6 +2137,9 @@ function fnshowdisenioforms() {
     $("#txtareaservicio").val(txtarea);
 }
 //#endregion 
+//#region unidad medida diseño
+
+//#endregion
 //#region FORMULARIOS NAGEVACIÓN CONSTRUCCIÓN
 function fnsshowconstruforms() {
     $('#construforms').show();
@@ -3958,11 +3960,19 @@ function saveDisenioGral() {
     var miCadena = $("#fec_fab").val();
     miCadena= miCadena.replace(/["']/g, "");
     var webMethod = "saveIdentificacion";
+    var diam_mm = "";
+    if ($('#diam_mm').is(':visible')) {
+        diam_mm = $('#diam_mm').val();
+    }
+    else {
+        diam_mm = "";
+    }
     if ($("#diam_in").val() != "") {
         var params = {
             area_unitaria_id: area,
             longitud: $("#longitud").val(),
-            diametro_mm: $("#diam_mm").val(),
+            diametro_in: $('#diam_in').val(),
+            diametro_mm: diam_mm,
             espesor_mm: $("#esp_mm").val(),
             tipo_material_disenio: $("#cmbTipoMaterial").val(),
             temp_c: $("#temp_c").val(),

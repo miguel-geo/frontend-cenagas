@@ -297,7 +297,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="km_esp_iden" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_esp_iden" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -307,18 +307,32 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Diametro nominal</span>
+                                        <span class="input-group-text" id="basic-addon1">Diametro nominal en in</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="diam_mm" aria-describedby="basic-addon1">
-                                    <select class="selectpicker form-control setAlg" id="cmbunidaddiametro">
-                                        <option value=0>Selecciona unidad medida...</option>
-                                        <option value="mm">mm</option>
-                                        <option value="in">in</option>
-                                    </select>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="diam_in" aria-describedby="basic-addon1" required>
+                                    <!--<button type="button" onclick="showdataunidad()" class="btn btn-danger">
+                                        <i class="fas fa-square-minus"></i>
+                                    </button>-->
+                                    <button type="button" title="Agregar valor diametro nominal en mm" onclick="$('#diam_mm').show()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                    <!--<input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="diam_mm" aria-describedby="basic-addon1">-->
                                     <!--<div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">Diametro nominal(in) *</span>
     </div>
     <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="diam_in" aria-describedby="basic-addon1" required>-->
+                                </div>
+                                <div class="input-group mb-3" id="diam_mm" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Diametro nominal en mm</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="diam_mm" aria-describedby="basic-addon1">
+                                    <button type="button" onclick="$('#diam_mm').hide()" class="btn btn-danger">
+                                        <i class="fas fa-square-minus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="diam_in" style="display:none">
+                                   
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -331,15 +345,15 @@
                                         <option value="in">in</option>
                                     </select>
                                     <!--<div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">Espesor pared(in)</span>
-    </div>
-    <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="esp_in" aria-describedby="basic-addon1">-->
+            <span class="input-group-text" id="basic-addon1">Espesor pared(in)</span>
+        </div>
+        <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="esp_in" aria-describedby="basic-addon1">-->
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Especificación de material</span>
                                     </div>
-                                    <select class="selectpicker form-control  validate-pattern setAlg"  pattern="^.*$"  id="cmbTipoMaterial">
+                                    <select class="selectpicker form-control  validate-pattern setAlg" pattern="^.*$" id="cmbTipoMaterial">
                                         <option value=0>Selecciona...</option>
                                         <option value=1>ASTM A106</option>
                                         <option value=2>ASTM A135</option>
@@ -378,9 +392,9 @@
                                         <option value="F°">F°</option>
                                     </select>
                                     <!--<div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">Temperatura(°F)</span>
-    </div>
-    <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="temp_f" aria-describedby="basic-addon1">-->
+            <span class="input-group-text" id="basic-addon1">Temperatura(°F)</span>
+        </div>
+        <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="temp_f" aria-describedby="basic-addon1">-->
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -415,30 +429,30 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Fecha de fabricación inicial</span>
                                     </div>
-                                    <input type="date" class="form-control validate-pattern setAlg"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fec_fab" aria-describedby="basic-addon1">
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fec_fab" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Fecha de fabricación final</span>
                                     </div>
-                                    <input type="date" class="form-control validate-pattern setAlg"  pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fec_fab_fin" aria-describedby="basic-addon1">
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fec_fab_fin" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Porcentajes(%) de Carbono</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="porc_carbono" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="porc_carbono" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Resistencia a la tracción(PSI)</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="res_trac" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="res_trac" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Límite elástico(PSI)</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="lim_elas" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="lim_elas" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelDisenioGeneral()">Cancelar</button>
-                                    <button type="button" id="btn_newidentificacion" onclick="nuevoIdentificacionDisenio()"  style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
-                                    <button type="button" id="btn_updateidentificacion" onclick="updateIdentificacionDisenio()"  style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_newidentificacion" onclick="nuevoIdentificacionDisenio()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updateidentificacion" onclick="updateIdentificacionDisenio()" style="display:none" class="btn btn-info">Actualizar</button>
                                     <button type="button" id="btn_saveidentificacion" onclick="validateForm('identi-form', saveDisenioGral)" class="btn btn-success">Guardar</button>
                                 </div>
                             </form>
