@@ -166,12 +166,24 @@ nav .navbar-nav li a {
     display: none;
   }
   
-  #MDB-logo-mobile {
+  #lmt-logo-mobile {
     display: none;
     margin-top: -15px;
   }
   
   #lmt {
+    display: block;
+    margin-top: -20px;
+    height: 70px;
+  }
+
+
+  #MDB-logo-mobile {
+    display: none;
+    margin-top: -15px;
+  }
+  
+  #MDB-logo {
     display: block;
     margin-top: -20px;
     height: 70px;
@@ -218,11 +230,28 @@ nav .navbar-nav li a {
   
     #Titulo{margin-top: -15px;}
   
-    #MDB-logo-mobile {
+    #lmt-logo-mobile {
         display: inline-block;
         margin-top: -27px;
         margin-left: 20px;
     }
+
+    #MDB-logo {
+        display: none;
+        margin-top: -15px;
+        height: 70px;
+      }
+      
+    
+
+    
+      #MDB-logo-mobile {
+          display: inline-block;
+
+          height:90px;
+          width: auto;
+      }
+    
   
   
     #sidebar{
