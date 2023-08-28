@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -1199,8 +1199,16 @@ function consultaDatosIdentificacionArea(id_d=null) {
         success: function (data) {
             
             if (data.success) {
-                if (data.data.datagrid.length > 0) {
-                    llenarDatosActualizacion(data.data.datagrid);
+                var infodata;
+                if (webMethod === "getDisenioGeneralById")
+                    infodata=(data.data);
+                else if (webMethod === "get_diseniogeneral")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    if (webMethod ==="getDisenioGeneralById")
+                        llenarDatosActualizacion(infodata);
+                    else if (webMethod === "get_diseniogeneral")
+                        llenarDatosActualizacion(infodata);
                     $("#btn_saveidentificacion").hide();
                     $("#btn_updateidentificacion").show();
                     $("#btn_newidentificacion").show();
@@ -1690,11 +1698,15 @@ function consultaDatosPresionArea(id_d=null) {
             if (data.success) {
 
 
-                clearInputTextValues('presionfrm');    
+                clearInputTextValues('presionfrm');
+                var datainfo;
+                if (webMethod === "getDisenioPresionById")
+                    datainfo = data.data;
+                else if (webMethod === "get_Presion")
+                    datainfo = data.data.datagrid;
+                if (datainfo.length > 0) {
 
-                if (data.data.datagrid.length > 0) {
-
-                    llenarDatosActualizacionPresion(data.data.datagrid);
+                    llenarDatosActualizacionPresion(datainfo);
                     $("#btn_newpresion").show();
                     $("#btnsavepresion").hide();
                     $("#btn_updatepresion").show();
@@ -3254,8 +3266,13 @@ function consultaDatosConsCatodica(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
-                if (data.data.datagrid.length > 0) {
-                    llenarDatosActualizacionCatodica(data.data.datagrid);
+                var datainfo;
+                if (webMethod === "getConsCatodicaById")
+                    datainfo = data.data;
+                else if (webMethod === "get_construccioncatodica")
+                    datainfo = data.data.datagrid;
+                if (datainfo.length > 0) {
+                    llenarDatosActualizacionCatodica(datainfo);
                     $("#btnGuardarcatodica").hide();
                     $("#btn_newconscatodica").show();
                     $("#btn_updatecatodica").show();
