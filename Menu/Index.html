@@ -22,6 +22,7 @@
 
     <div class="container-fluid">
         <div class="row">
+            
 
             <div class="col-12 d-flex justify-content-center mb-3 banner">
                 <img id="MDB-logo"
@@ -32,14 +33,22 @@
 
             
             <div id="Titulo">
-                <img id="MDB-logo"
+                <a class="pull-bs-canvas-left d-inline-block d-xl-none  text-white text-decoration-none" href="#" id="togglesidebar">
+                    <span class="display-4" style="margin-top: -45px;">&#9776;</span>
+                </a>
+                <img id="MDB-logo-mobile"
+                     src="images/ltm-logo-mobile.png"
+                     alt="LMT-net"
+                     draggable="false"
+                     height="60" />
+                <img id="lmt"
                      src="images/ltm-logo.png"
                      alt="LMT-net"
-                     draggable="false" style="margin-top:-25px;"/>
+                     draggable="false"/>
             </div>
         </div>
         <div class="row">
-            <div class="col-2 collapse show d-md-flex bg-light pt-2 pl-0 min-vh-100" id="sidebar">
+            <div class="col-2 collapse show d-xl-flex bg-light pt-2 pl-0 min-vh-100 " id="sidebar">
                 <ul class="nav flex-column flex-nowrap overflow-hidden">
                     <li class="nav-item">
                         <a onclick="selectTab(event, 'Principal')" class="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#submenu1"><i class="fa fa-pencil-alt" style="color: #265C4F;font-weight:bold;"></i> <span class="d-none d-sm-inline" style="color: #265C4F;font-weight:bold;">Registro</span></a>
@@ -93,8 +102,8 @@
                             </div>
                             <form role="form">
                                 <div class="row setup-content" id="step-1">
-                                    <div>
-                                        <div>
+                                    <div class="col-xl-4">
+                                        <div >
                                             <h3> Ducto</h3>
                                             <div class="form-group">
                                                 <label for="exampleFormControlSelect1">Ducto</label>
@@ -107,7 +116,7 @@
                                     </div>
                                 </div>
                                 <div class="row setup-content" id="step-2">
-                                    <div class="col-xs-12">
+                                    <div class="col-xl-4">
                                         <div class="col-md-12">
                                             <h3> Tramo</h3>
                                             <div class="form-group">
@@ -123,7 +132,7 @@
                                     </div>
                                 </div>
                                 <div class="row setup-content" id="step-3">
-                                    <div class="col-xs-12">
+                                    <div class="col-xl-4">
                                         <div class="col-md-12">
                                             <h3> Área unitaria</h3>
                                             <div class="form-group">
@@ -2843,6 +2852,36 @@
                     <p></p>
                 </div>
             </div>
+        </div>
+        <div class="bs-canvas bs-canvas-left position-fixed bg-light h-100">
+            <header class="bs-canvas-header p-3" style="background-color: #265C4F;">
+                <h4 class="d-inline-block text-light mb-0">Menú</h4>
+                <button type="button" class="bs-canvas-close close" aria-label="Close"><span aria-hidden="true" class="text-light">&times;</span></button>
+            </header>
+            <div class="bs-canvas-content px-3 py-5">
+                <ul class="nav flex-column flex-nowrap overflow-hidden">
+                    <li class="nav-item">
+                        <a onclick="selectTab(event, 'Principal')" class="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#submenu1"><i class="fa fa-pencil-alt" style="color: #265C4F;font-weight:bold;"></i> <span class="d-none d-sm-inline" style="color: #265C4F;font-weight:bold;">Registro</span></a>
+                        <div class="collapse" id="submenu1" aria-expanded="false">
+                            <ul class="flex-column pl-2 nav">
+                                <li onclick="selectTab(event, 'Opcion1')" class="nav-item"><a class="nav-link py-0" href="#"><span style="color: #265C4F;">SNG</span></a></li>
+                                <li onclick="selectTab(event, 'Opcion2')" class="nav-item"><a class="nav-link py-0" href="#"><span style="color: #265C4F;">SNH</span></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a onclick="selectTab(event, 'Principal')" class="nav-link collapsed text-truncate" href="#submenu2" data-toggle="collapse" data-target="#submenu2"><i class="fa fa-table" style="color: #265C4F;font-weight:bold;"></i> <span class="d-none d-sm-inline" style="color: #265C4F;font-weight:bold;">Consultas</span></a>
+                        <div class="collapse" id="submenu2" aria-expanded="false">
+                            <ul class="flex-column pl-2 nav">
+                                <li onclick="selectTab(event, 'Consulta')" class="nav-item"><a class="nav-link py-0" href="#"><span style="color: #265C4F;">Consultar</span></a></li>
+                                <!--<li onclick="selectTab(event, 'Principal')" class="nav-item"><a class="nav-link py-0" href="#"><span style="color: #265C4F;">Opcion 2</span></a></li>-->
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+            
+            </div>    
         </div>
 
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="background-color: #265C4F;">

@@ -159,3 +159,74 @@ nav .navbar-nav li a {
     line-height: 1.428571429;
     border-radius: 15px;
 }
+
+
+
+#togglesidebar {
+    display: none;
+  }
+  
+  #MDB-logo-mobile {
+    display: none;
+    margin-top: -15px;
+  }
+  
+  #lmt {
+    display: block;
+    margin-top: -20px;
+    height: 70px;
+  }
+  
+  
+  
+  .bs-canvas-overlay {
+    opacity: 0.85;
+  z-index: 1100;
+  }
+  
+  .bs-canvas {
+  top: 0;
+  z-index: 1110;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 330px;
+  transition: margin .4s ease-out;
+  -webkit-transition: margin .4s ease-out;
+  -moz-transition: margin .4s ease-out;
+  -ms-transition: margin .4s ease-out;
+  }
+  
+  .bs-canvas-left {
+  left: 0;
+  margin-left: -330px;
+  }
+  
+  
+  /* Styles for screen widths below 1200px */
+  @media (max-width: 1199px) {
+    #togglesidebar {
+        display: inline;
+        height: 40;
+    }
+  
+    #lmt {
+      display: none;
+      margin-top: -15px;
+      height: 70px;
+    }
+    
+  
+    #Titulo{margin-top: -15px;}
+  
+    #MDB-logo-mobile {
+        display: inline-block;
+        margin-top: -27px;
+        margin-left: 20px;
+    }
+  
+  
+    #sidebar{
+      display:none
+    }
+  
+  }
