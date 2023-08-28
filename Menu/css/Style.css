@@ -232,7 +232,7 @@ nav .navbar-nav li a {
   
     #lmt-logo-mobile {
         display: inline-block;
-        margin-top: -27px;
+        margin-top: -35px;
         margin-left: 20px;
     }
 
@@ -247,7 +247,7 @@ nav .navbar-nav li a {
     
       #MDB-logo-mobile {
           display: inline-block;
-
+          margin-left: 100px;  
           height:90px;
           width: auto;
       }
