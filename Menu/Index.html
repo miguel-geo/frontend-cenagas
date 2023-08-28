@@ -473,52 +473,52 @@
                                     </div>
                                     <input type="text" class="form-control" id="txtareaservicio" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" data-column="C_0205_0012">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Diagrama de flujo</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                        <input type="file" class="custom-file-input setAlg" id="inputGroupFile01"
                                                aria-describedby="inputGroupFileAddon01"  lang="es">
                                         <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" data-column="C_0205_0013">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Planos del proyecto</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile02"
+                                        <input type="file" class="custom-file-input setAlg" id="inputGroupFile02"
                                                aria-describedby="inputGroupFileAddon01" lang="es">
                                         <label class="custom-file-label" for="inputGroupFile02">Escoje el archivo</label>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" data-column="C_0205_0014">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Normas y especificaciones</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile03"
+                                        <input type="file" class="custom-file-input setAlg" id="inputGroupFile03"
                                                aria-describedby="inputGroupFileAddon01"  lang="es">
                                         <label class="custom-file-label" for="inputGroupFile03">Escoje el archivo</label>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" data-column="C_0205_0015">
                                     <div class="input-group-prepend">
-                                        <span class="input-g    roup-text" id="inputGroupFileAddon01">Memoria de cálculo</span>
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Memoria de cálculo</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile04"
+                                        <input type="file" class="custom-file-input setAlg" id="inputGroupFile04"
                                                aria-describedby="inputGroupFileAddon01"lang="es">
                                         <label class="custom-file-label" for="inputGroupFile04">Escoje el archivo</label>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" data-column="C_0205_0016">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Otros datos</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile05"
+                                        <input type="file" class="custom-file-input setAlg" id="inputGroupFile05"
                                                aria-describedby="inputGroupFileAddon01" lang="es">
                                         <label class="custom-file-label" for="inputGroupFile05">Escoje el archivo PDF</label>
                                     </div>
@@ -528,7 +528,8 @@
                                 
                                      <label  id="inputGroupFileAddon01" style="margin-right:10px;">Nota: Seleccionar al menos un archivo para guardar correctamente</label>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelDisenioServicio()">Cancelar</button>
-                                    <button type="button" id="btn_saveiServicio" onclick="saveDisenioServicio()" class="btn btn-success">Guardar</button>
+                                    <button type="button" id="btn_updateservicio" onclick="updateDisenioServicio()"  style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_saveservicio" onclick="saveDisenioServicio()" class="btn btn-success">Guardar</button>
                                 </div>
                             </form>
                         </div>
@@ -1330,6 +1331,13 @@
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$" id="txtclaseloca" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                 </div>
+                                <!-- Clase de localización -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Nombre</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^[a-zA-Z0-9!@#$%^&*()\-_+=~`[\]{}|:;'>,.?/\\ ]+$" id="txtnombrecruces" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
                                 <!--Propietario -->
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -1761,58 +1769,58 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenprep_x" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenprep_x" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenprep_y" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenprep_y" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="km_esp_idenprep" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="km_esp_idenprep" aria-describedby="basic-addon1">
                                 </div>
                 
                                 <div class="input-group mb-3">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" data-column="C_0309_112">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Auditorias y revisiones</span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="C_0309_112"
-                                                   aria-describedby="inputGroupFile01"  lang="es">
+                                            <input type="file" class="custom-file-input setAlg" id="C_0309_112"
+                                                   aria-describedby="inputGroupFile01"  lang="es" >
                                             <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                         </div>
                                     </div>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" data-column="C_0309_113">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Propiedades físico-quimicas del producto</span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="C_0309_113"
-                                                   aria-describedby="inputGroupFile01"  lang="es">
+                                            <input type="file" class="custom-file-input setAlg" id="C_0309_113"
+                                                   aria-describedby="inputGroupFile01"  lang="es" >
                                             <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                         </div>
                                     </div>
 
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" data-column="C_0309_114">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Servicio de operación</span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="C_0309_114"
+                                            <input type="file" class="custom-file-input setAlg" id="C_0309_114"
                                                    aria-describedby="inputGroupFile01"  lang="es">
                                             <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                         </div>
                                     </div>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" data-column="C_0309_115">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Historial de condiciones </span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="C_0309_115"
-                                                   aria-describedby="inputGroupFile01"  lang="es">
+                                            <input type="file" class="custom-file-input setAlg" id="C_0309_115"
+                                                   aria-describedby="inputGroupFile01"  lang="es" >
                                             <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                         </div>
                                     </div>
@@ -1820,7 +1828,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelreporteinsp()" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" id="btnGuardarPresion" onclick="validateForm('reportesInspeccionfrm',saveConstruccioInspeccion)" class="btn btn-success">Guardar</button>
+                                    <button type="button" id="btn_updateinspeccion" onclick="updateConstruccionInspeccion()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_saveinspeccion" onclick="validateForm('reportesInspeccionfrm',saveConstruccioInspeccion)" class="btn btn-success">Guardar</button>
                                 </div>
                             </form>
                         </div>
@@ -1978,101 +1987,101 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenpseg_x" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenpseg_x" aria-describedby="basic-addon1">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                            <span class="input-group-text setAlg" id="basic-addon1">Coordenada Específica Y (UTM)</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenpseg_y" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenpseg_y" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="" aria-label="" id="km_esp_idenpseg" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="km_esp_idenpseg" aria-describedby="basic-addon1">
                                     </div>
                                     
 
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" data-column="C_0312_122">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Revisión física</span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="C_0312_122"
+                                            <input type="file" class="custom-file-input setAlg" id="C_0312_122"
                                                    aria-describedby="inputGroupFile01"  lang="es">
                                             <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                         </div>
                                     </div>
 
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" data-column="C_0312_123">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Revisión documental</span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="C_0312_123"
+                                            <input type="file" class="custom-file-input setAlg" id="C_0312_123"
                                                    aria-describedby="inputGroupFile01"  lang="es">
                                             <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                         </div>
                                     </div>
 
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" data-column="C_0312_124">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Identificación de hallazgos </span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="C_0312_124"
+                                            <input type="file" class="custom-file-input setAlg" id="C_0312_124"
                                                    aria-describedby="inputGroupFile01"  lang="es">
                                             <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                         </div>
                                     </div>
 
 
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" data-column="C_0312_125">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Evaluación y clasificación de los hallazgos </span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="C_0312_125"
+                                            <input type="file" class="custom-file-input setAlg" id="C_0312_125"
                                                    aria-describedby="inputGroupFile01"  lang="es">
                                             <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                         </div>
                                     </div>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" data-column="C_0312_126">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Elaboración de los programas de atención de recomendaciones de los hallazgos</span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="C_0312_126"
+                                            <input type="file" class="custom-file-input setAlg" id="C_0312_126"
                                                    aria-describedby="inputGroupFile01"  lang="es">
                                             <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                         </div>
                                     </div>
 
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" data-column="C_0312_127">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Validación del cumplimiento de recomendaciones</span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="C_0312_127"
+                                            <input type="file" class="custom-file-input setAlg" id="C_0312_127"
                                                    aria-describedby="inputGroupFile01"  lang="es">
                                             <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                         </div>
                                     </div>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" data-column="C_0312_128">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Autorización interna para el arranque</span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="C_0312_128"
+                                            <input type="file" class="custom-file-input setAlg" id="C_0312_128"
                                                    aria-describedby="inputGroupFile01"  lang="es">
                                             <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                         </div>
                                     </div>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" data-column="C_0312_129">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Cierre para la RSPA</span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="C_0312_129"
+                                            <input type="file" class="custom-file-input setAlg" id="C_0312_129"
                                                    aria-describedby="inputGroupFile01"  lang="es">
                                             <label class="custom-file-label" for="inputGroupFile01">Escoje el archivo</label>
                                         </div>
@@ -2081,7 +2090,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelseguridadpre()" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" id="btnGuardarPresion" onclick="validateForm('seguridadprearranquefrm', saveConstruccioSeguridad)" class="btn btn-success">Guardar</button>
+                                    <button type="button" id="btn_updateseguridad" onclick="updateConstruccionSeguridad()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_saveseguridad" onclick="validateForm('seguridadprearranquefrm', saveConstruccioSeguridad)" class="btn btn-success">Guardar</button>
                                 </div>
                             </form>
                         </div>
