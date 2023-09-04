@@ -1212,7 +1212,8 @@ function consultaDatosIdentificacionArea(id_d=null) {
                     $("#btn_saveidentificacion").hide();
                     $("#btn_updateidentificacion").show();
                     $("#btn_newidentificacion").show();
-                }else{
+                }
+                else {
 
                     clearInputTextValues('identificacionfrm');
                     inhabilitarform("#identificacionfrm",false)
@@ -1266,6 +1267,49 @@ function llenarDatosActualizacion(data) {
     $("#lim_elas").val(data[0].C_0210_0033);
     idDiseniogral = data[0].id;
     inhabilitarform("#identificacionfrm", true);
+    if (data[0].file !== "" && data[0].file !== null) {
+        // Find the correct input group using the data-column attribute
+        const inputGroup = document.querySelector(`#filefrmgral`);
+        const customFileDiv = inputGroup.querySelector('#fileconteinergral');
+
+        if (customFileDiv) {
+            // Create the download icon
+            const downloadIcon = document.createElement('a');
+            downloadIcon.href = `${apiUrl}disenio-general/${data[0].id}/download`;
+            downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+            downloadIcon.target = "_blank";
+            downloadIcon.className = "download-icon";
+            downloadIcon.style.marginLeft = "10px";
+            //downloadIcon.setAttribute('data-columna', item.column);
+            downloadIcon.setAttribute('data-id_otro', data[0].id);
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+            } else {
+                inputGroup.appendChild(downloadIcon);
+            }
+
+            const destroyIcon = document.createElement('a');
+            destroyIcon.href = `${apiUrl}disenio-general/${data[0].id}/destroy`;
+            destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+            destroyIcon.target = "_blank";
+            destroyIcon.className = "destroy-icon";
+            destroyIcon.style.marginLeft = "10px";
+            destroyIcon.style.display = "none";
+            //destroyIcon.setAttribute('data-columna', item.column);
+            destroyIcon.setAttribute('data-id_otro', data[0].id);
+
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+            }
+            else {
+                inputGroup.appendChild(destroyIcon);
+            }
+        }
+    }
 }
 
 
@@ -1274,6 +1318,7 @@ function updateIdentificacionDisenio() {
     if ($("#btn_updateidentificacion").text() === "Actualizar") {
         inhabilitarform("#identificacionfrm",false)
         $("#btn_updateidentificacion").text('Guardar');
+        showDestroyIcons('identificacionfrm', true);
     }
     else {
         var params = {
@@ -1300,22 +1345,34 @@ function updateIdentificacionDisenio() {
             espesor_pared: $("#cmbunidadespesor").val(),
             temperatura: $("#cmbunidadtemperatura").val()
         };
-        $.ajax({
-            type: "POST",
-            url: apiUrl + webMethod,
-            headers: {
-                'Accept': 'application/json'
-            },
-            data: params,
-            success: function (data) {
-                alert("El registro fue actualizado correctamente");
-                $('#disenioforms').show();
-                $('#identificacionfrm').hide();
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
+        var formData = new FormData();
+        formData.append('file', $("#filedisenioidentificacion")[0].files[0]);
 
-            }
-        });
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+       
+        //Método
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#disenioforms').show();
+                    $('#identificacionfrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
     }
 }
 
@@ -1420,11 +1477,55 @@ function llenarDatosActualizacionProteccion(data) {
     $("#cmbdecisionCorrosion").val(data[0].C_0211_0051);
     idDisenioproteccion = data[0].id;
     inhabilitarform("#proteccionfrm", true);
+    if (data[0].file !== "" && data[0].file !== null) {
+        // Find the correct input group using the data-column attribute
+        const inputGroup = document.querySelector(`#filefrmproteccion`);
+        const customFileDiv = inputGroup.querySelector('#fileconteinerproteccion');
+
+        if (customFileDiv) {
+            // Create the download icon
+            const downloadIcon = document.createElement('a');
+            downloadIcon.href = `${apiUrl}disenio-proteccion/${data[0].id}/download`;
+            downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+            downloadIcon.target = "_blank";
+            downloadIcon.className = "download-icon";
+            downloadIcon.style.marginLeft = "10px";
+            //downloadIcon.setAttribute('data-columna', item.column);
+            downloadIcon.setAttribute('data-id_otro', data[0].id);
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+            } else {
+                inputGroup.appendChild(downloadIcon);
+            }
+
+            const destroyIcon = document.createElement('a');
+            destroyIcon.href = `${apiUrl}disenio-proteccion/${data[0].id}/destroy`;
+            destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+            destroyIcon.target = "_blank";
+            destroyIcon.className = "destroy-icon";
+            destroyIcon.style.marginLeft = "10px";
+            destroyIcon.style.display = "none";
+            //destroyIcon.setAttribute('data-columna', item.column);
+            destroyIcon.setAttribute('data-id_otro', data[0].id);
+
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+            }
+            else {
+                inputGroup.appendChild(destroyIcon);
+            }
+        }
+    }
 }
 
 function updateDisenioproteccion() {
     if ($("#btn_updateproteccion").text() === "Actualizar") {
         inhabilitarform("#proteccionfrm", false);
+        showDestroyIcons('proteccionfrm', true);
         $("#btn_updateproteccion").text('Guardar');
     }
     else {
@@ -1516,8 +1617,7 @@ function consultaDatosServicio(id_d = null) {
         body: JSON.stringify(params)
     })
     .then(response => response.json())
-    .then(data => {
-        
+    .then(data => {        
         // 1. Remove all existing download icons before adding new ones.
         const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
         existingDownloadIcons.forEach(icon => icon.remove());
@@ -1745,6 +1845,7 @@ var idDiseniopresion;
 function llenarDatosActualizacionPresion(data) {
 
     $("#btn_updatepresion").text('Actualizar');
+
     if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined&& data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
         $("#coord_esp_iden_pres_x").val(coords[0]);
@@ -1768,6 +1869,49 @@ function llenarDatosActualizacionPresion(data) {
 
     idDiseniopresion = data[0].id;
     inhabilitarform("#presionfrm", true);
+    if (data[0].file !== "" && data[0].file !== null) {
+        // Find the correct input group using the data-column attribute
+        const inputGroup = document.querySelector(`#filefrmpresion`);
+        const customFileDiv = inputGroup.querySelector('#fileconteinerpresion');
+
+        if (customFileDiv) {
+            // Create the download icon
+            const downloadIcon = document.createElement('a');
+            downloadIcon.href = `${apiUrl}disenio-presion/${data[0].id}/download`;
+            downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+            downloadIcon.target = "_blank";
+            downloadIcon.className = "download-icon";
+            downloadIcon.style.marginLeft = "10px";
+            //downloadIcon.setAttribute('data-columna', item.column);
+            downloadIcon.setAttribute('data-id_otro', data[0].id);
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+            } else {
+                inputGroup.appendChild(downloadIcon);
+            }
+
+            const destroyIcon = document.createElement('a');
+            destroyIcon.href = `${apiUrl}disenio-presion/${data[0].id}/destroy`;
+            destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+            destroyIcon.target = "_blank";
+            destroyIcon.className = "destroy-icon";
+            destroyIcon.style.marginLeft = "10px";
+            destroyIcon.style.display = "none";
+            //destroyIcon.setAttribute('data-columna', item.column);
+            destroyIcon.setAttribute('data-id_otro', data[0].id);
+
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+            }
+            else {
+                inputGroup.appendChild(destroyIcon);
+            }
+        }
+    }
 }
 
 //#endregion
@@ -1776,6 +1920,7 @@ function llenarDatosActualizacionPresion(data) {
 function updateDiseniopresion() {
     if ($("#btn_updatepresion").text() === "Actualizar") {
         inhabilitarform("#presionfrm", false);
+        showDestroyIcons('presionfrm', true);
         $("#btn_updatepresion").text('Guardar');
     }
     else {
@@ -1922,6 +2067,49 @@ function llenarDatosActualizacionConsGeneral(data) {
 
     idConsbase = data[0].id;
     inhabilitarform("#constbasefrm", true);
+    if (data[0].file !== "" && data[0].file !== null) {
+        // Find the correct input group using the data-column attribute
+        const inputGroup = document.querySelector(`#filefrmconsbase`);
+        const customFileDiv = inputGroup.querySelector('#fileconteinerconsbase');
+
+        if (customFileDiv) {
+            // Create the download icon
+            const downloadIcon = document.createElement('a');
+            downloadIcon.href = `${apiUrl}construccion-general/${data[0].id}/download`;
+            downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+            downloadIcon.target = "_blank";
+            downloadIcon.className = "download-icon";
+            downloadIcon.style.marginLeft = "10px";
+            //downloadIcon.setAttribute('data-columna', item.column);
+            downloadIcon.setAttribute('data-id_otro', data[0].id);
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+            } else {
+                inputGroup.appendChild(downloadIcon);
+            }
+
+            const destroyIcon = document.createElement('a');
+            destroyIcon.href = `${apiUrl}construccion-general/${data[0].id}/destroy`;
+            destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+            destroyIcon.target = "_blank";
+            destroyIcon.className = "destroy-icon";
+            destroyIcon.style.marginLeft = "10px";
+            destroyIcon.style.display = "none";
+            //destroyIcon.setAttribute('data-columna', item.column);
+            destroyIcon.setAttribute('data-id_otro', data[0].id);
+
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+            }
+            else {
+                inputGroup.appendChild(destroyIcon);
+            }
+        }
+    }
 }
 
 
@@ -1930,6 +2118,7 @@ function updateConsGeneral() {
     if ($("#btn_updateconsgeneral").text() === "Actualizar") {
         inhabilitarform("#constbasefrm",false)
         $("#btn_updateconsgeneral").text('Guardar');
+        showDestroyIcons('constbasefrm',true);
     }
     else {
         var params = {
@@ -1949,13 +2138,18 @@ function updateConsGeneral() {
             coordenada_especifica: $("#coord_esp_idenbasecons_x").val()+' '+$("#coord_esp_idenbasecons_y").val(),
             kilometro_especifico: $("#km_esp_idenbasecons").val()
         };
+        var formData = new FormData();
+        formData.append('file', $("#fileconstruccionbase")[0].files[0]);
+
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        for (var value of formData.values()) {
+            console.log(value);
+        }
         $.ajax({
-            type: "POST",
             url: apiUrl + webMethod,
-            headers: {
-                'Accept': 'application/json'
-            },
-            data: params,
+            method: 'POST',
+            body: formData,
             success: function (data) {
                 alert("El registro fue actualizado correctamente");
                 $('#construforms').show();
@@ -2068,7 +2262,49 @@ function llenarDatosActualizacionConsUnion(data) {
     $("#txtedoactunion").val(data[0].C_0302_0056);
     $("#txtedohisunion").val(data[0].C_0302_0057);
     $("#km_esp_idenunion").val(data[0].kilometro_especifico);
+    if (data[0].file !== "" && data[0].file !== null) {
+        // Find the correct input group using the data-column attribute
+        const inputGroup = document.querySelector(`#filefrmconsunion`);
+        const customFileDiv = inputGroup.querySelector('#fileconteinerconsunion');
 
+        if (customFileDiv) {
+            // Create the download icon
+            const downloadIcon = document.createElement('a');
+            downloadIcon.href = `${apiUrl}construccion-union/${data[0].id}/download`;
+            downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+            downloadIcon.target = "_blank";
+            downloadIcon.className = "download-icon";
+            downloadIcon.style.marginLeft = "10px";
+            //downloadIcon.setAttribute('data-columna', item.column);
+            downloadIcon.setAttribute('data-id_otro', data[0].id);
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+            } else {
+                inputGroup.appendChild(downloadIcon);
+            }
+
+            const destroyIcon = document.createElement('a');
+            destroyIcon.href = `${apiUrl}construccion-union/${data[0].id}/destroy`;
+            destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+            destroyIcon.target = "_blank";
+            destroyIcon.className = "destroy-icon";
+            destroyIcon.style.marginLeft = "10px";
+            destroyIcon.style.display = "none";
+            //destroyIcon.setAttribute('data-columna', item.column);
+            destroyIcon.setAttribute('data-id_otro', data[0].id);
+
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+            }
+            else {
+                inputGroup.appendChild(destroyIcon);
+            }
+        }
+    }
 
 
     idConsbase = data[0].id;
@@ -2081,6 +2317,7 @@ function updateConsUnion() {
     if ($("#btn_updateconsunion").text() === "Actualizar") {
         inhabilitarform("#metodounionfrm",false)
         $("#btn_updateconsunion").text('Guardar');
+        showDestroyIcons('metodounionfrm', true);
     }
     else {
         var params = {
@@ -2102,13 +2339,19 @@ function updateConsUnion() {
             coordenada_especifica: $("#coord_esp_idenunion_x").val()+' '+$("#coord_esp_idenunion_y").val(),
             kilometro_especifico: $("#km_esp_idenunion").val()
         };
+        var formData = new FormData();
+        formData.append('file', $("#fileconstruccionunion")[0].files[0]);
+
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        for (var value of formData.values()) {
+            console.log(value);
+        }
         $.ajax({
             type: "POST",
             url: apiUrl + webMethod,
-            headers: {
-                'Accept': 'application/json'
-            },
-            data: params,
+            method: 'POST',
+            body: formData,
             success: function (data) {
                 alert("El registro fue actualizado correctamente");
                 $('#construforms').show();
@@ -2223,7 +2466,49 @@ function llenarDatosActualizacionConsProfundidad(data) {
     $("#txtedoactprof").val(data[0].C_0303_0068);
     $("#txtedohisprof").val(data[0].C_0303_0069);
     $("#km_esp_idenpprofent").val(data[0].kilometro_especifico)
+    if (data[0].file !== "" && data[0].file !== null) {
+        // Find the correct input group using the data-column attribute
+        const inputGroup = document.querySelector(`#filefrmconsprofundidad`);
+        const customFileDiv = inputGroup.querySelector('#fileconteinerconsprofundidad');
 
+        if (customFileDiv) {
+            // Create the download icon
+            const downloadIcon = document.createElement('a');
+            downloadIcon.href = `${apiUrl}construccion-profundidad/${data[0].id}/download`;
+            downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+            downloadIcon.target = "_blank";
+            downloadIcon.className = "download-icon";
+            downloadIcon.style.marginLeft = "10px";
+            //downloadIcon.setAttribute('data-columna', item.column);
+            downloadIcon.setAttribute('data-id_otro', data[0].id);
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+            } else {
+                inputGroup.appendChild(downloadIcon);
+            }
+
+            const destroyIcon = document.createElement('a');
+            destroyIcon.href = `${apiUrl}construccion-profundidad/${data[0].id}/destroy`;
+            destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+            destroyIcon.target = "_blank";
+            destroyIcon.className = "destroy-icon";
+            destroyIcon.style.marginLeft = "10px";
+            destroyIcon.style.display = "none";
+            //destroyIcon.setAttribute('data-columna', item.column);
+            destroyIcon.setAttribute('data-id_otro', data[0].id);
+
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+            }
+            else {
+                inputGroup.appendChild(destroyIcon);
+            }
+        }
+    }
 
 
 
@@ -2238,6 +2523,7 @@ function updateConsProfundidad() {
     if ($("#btn_updateconsprofent").text() === "Actualizar") {
         inhabilitarform("#profenterradofrm",false)
         $("#btn_updateconsprofent").text('Guardar');
+        showDestroyIcons('profenterradofrm', true);
     }
     else {
         var params = {
@@ -2262,13 +2548,19 @@ function updateConsProfundidad() {
             coordenada_especifica: $("#coord_esp_idenpprofent_x").val()+' '+$("#coord_esp_idenpprofent_y").val(),
             kilometro_especifico: $("#km_esp_idenpprofent").val()
         };
+        var formData = new FormData();
+        formData.append('file', $("#fileconstruccionprofundidad")[0].files[0]);
+
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        for (var value of formData.values()) {
+            console.log(value);
+        }
         $.ajax({
             type: "POST",
             url: apiUrl + webMethod,
-            headers: {
-                'Accept': 'application/json'
-            },
-            data: params,
+            method: 'POST',
+            body: formData,
             success: function (data) {
                 alert("El registro fue actualizado correctamente");
                 $('#construforms').show();
@@ -2926,11 +3218,55 @@ function llenarDatosActualizacionCruces(data) {
     $("#txtnombrescruces").val(data[0].nombre);
     idConsCruces = data[0].id;
     inhabilitarform("#tiposcrucesfrm", true);
+    if (data[0].file !== "" && data[0].file !== null) {
+        // Find the correct input group using the data-column attribute
+        const inputGroup = document.querySelector(`#filefrmconscruces`);
+        const customFileDiv = inputGroup.querySelector('#fileconteinerconscruces');
+
+        if (customFileDiv) {
+            // Create the download icon
+            const downloadIcon = document.createElement('a');
+            downloadIcon.href = `${apiUrl}construccion-cruces/${data[0].id}/download`;
+            downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+            downloadIcon.target = "_blank";
+            downloadIcon.className = "download-icon";
+            downloadIcon.style.marginLeft = "10px";
+            //downloadIcon.setAttribute('data-columna', item.column);
+            downloadIcon.setAttribute('data-id_otro', data[0].id);
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+            } else {
+                inputGroup.appendChild(downloadIcon);
+            }
+
+            const destroyIcon = document.createElement('a');
+            destroyIcon.href = `${apiUrl}construccion-cruces/${data[0].id}/destroy`;
+            destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+            destroyIcon.target = "_blank";
+            destroyIcon.className = "destroy-icon";
+            destroyIcon.style.marginLeft = "10px";
+            destroyIcon.style.display = "none";
+            //destroyIcon.setAttribute('data-columna', item.column);
+            destroyIcon.setAttribute('data-id_otro', data[0].id);
+
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+            }
+            else {
+                inputGroup.appendChild(destroyIcon);
+            }
+        }
+    }
 }
 function updateCrucesConstruccion() {
     if ($("#btn_updatecruces").text() === "Actualizar") {
         inhabilitarform("#tiposcrucesfrm", false)
         $("#btn_updatecruces").text('Guardar');
+        showDestroyIcons("tiposcrucesfrm", true);
     }
     else {
         var params = {
@@ -2991,13 +3327,19 @@ function updateCrucesConstruccion() {
             kilometro_especifico: $("#km_esp_idenptipocruce").val(),
             nombre: $("#txtnombrecruces").val()
         };
+        var formData = new FormData();
+        formData.append('file', $("#fileconstruccioncruces")[0].files[0]);
+
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        for (var value of formData.values()) {
+            console.log(value);
+        }
         $.ajax({
             type: "POST",
             url: apiUrl + webMethod,
-            headers: {
-                'Accept': 'application/json'
-            },
-            data: params,
+            method: 'POST',
+            body: formData,
             success: function (data) {
                 alert("El registro fue actualizado correctamente");
                 $('#construforms').show();
@@ -3138,11 +3480,55 @@ function llenarDatosActualizacionHermeticidad(data) {
 
     idConsHerme = data[0].id;
     inhabilitarform("#hermetisidadfrm", true);
+    if (data[0].file !== "" && data[0].file !== null) {
+        // Find the correct input group using the data-column attribute
+        const inputGroup = document.querySelector(`#filefrmhermeticidad`);
+        const customFileDiv = inputGroup.querySelector('#fileconteinerconshermeticidad');
+
+        if (customFileDiv) {
+            // Create the download icon
+            const downloadIcon = document.createElement('a');
+            downloadIcon.href = `${apiUrl}construccion-hermeticidad/${data[0].id}/download`;
+            downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+            downloadIcon.target = "_blank";
+            downloadIcon.className = "download-icon";
+            downloadIcon.style.marginLeft = "10px";
+            //downloadIcon.setAttribute('data-columna', item.column);
+            downloadIcon.setAttribute('data-id_otro', data[0].id);
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+            } else {
+                inputGroup.appendChild(downloadIcon);
+            }
+
+            const destroyIcon = document.createElement('a');
+            destroyIcon.href = `${apiUrl}construccion-hermeticidad/${data[0].id}/destroy`;
+            destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+            destroyIcon.target = "_blank";
+            destroyIcon.className = "destroy-icon";
+            destroyIcon.style.marginLeft = "10px";
+            destroyIcon.style.display = "none";
+            //destroyIcon.setAttribute('data-columna', item.column);
+            destroyIcon.setAttribute('data-id_otro', data[0].id);
+
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+            }
+            else {
+                inputGroup.appendChild(destroyIcon);
+            }
+        }
+    }
 }
 function updateHermeticidadConstruccion() {
     if ($("#btn_updatehermeticidad").text() === "Actualizar") {
         inhabilitarform("#hermetisidadfrm", false)
         $("#btn_updatehermeticidad").text('Guardar');
+        showDestroyIcons('hermetisidadfrm', true)
     }
     else {
         var params = {
@@ -3169,13 +3555,19 @@ function updateHermeticidadConstruccion() {
             unidad_presion_min: $("#cmbunidadpresionmin").val(),
             unidad_variaciones_presion: $("#cmbunidadvariacionespres").val()
         };
+        var formData = new FormData();
+        formData.append('file', $("#fileconstruccionhermeticidad")[0].files[0]);
+
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        for (var value of formData.values()) {
+            console.log(value);
+        }
         $.ajax({
             type: "POST",
             url: apiUrl + webMethod,
-            headers: {
-                'Accept': 'application/json'
-            },
-            data: params,
+            method: 'POST',
+            body: formData,
             success: function (data) {
                 alert("El registro fue actualizado correctamente");
                 $('#construforms').show();
@@ -3327,12 +3719,56 @@ function llenarDatosActualizacionCatodica(data) {
 
     idConsCato = data[0].id;
     inhabilitarform("#proteccatodicafrm", true);
+    if (data[0].file !== "" && data[0].file !== null) {
+        // Find the correct input group using the data-column attribute
+        const inputGroup = document.querySelector(`#filefrmcatodica`);
+        const customFileDiv = inputGroup.querySelector('#fileconteinerconscatodica');
+
+        if (customFileDiv) {
+            // Create the download icon
+            const downloadIcon = document.createElement('a');
+            downloadIcon.href = `${apiUrl}construccion-catodica/${data[0].id}/download`;
+            downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+            downloadIcon.target = "_blank";
+            downloadIcon.className = "download-icon";
+            downloadIcon.style.marginLeft = "10px";
+            //downloadIcon.setAttribute('data-columna', item.column);
+            downloadIcon.setAttribute('data-id_otro', data[0].id);
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+            } else {
+                inputGroup.appendChild(downloadIcon);
+            }
+
+            const destroyIcon = document.createElement('a');
+            destroyIcon.href = `${apiUrl}construccion-catodica/${data[0].id}/destroy`;
+            destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+            destroyIcon.target = "_blank";
+            destroyIcon.className = "destroy-icon";
+            destroyIcon.style.marginLeft = "10px";
+            destroyIcon.style.display = "none";
+            //destroyIcon.setAttribute('data-columna', item.column);
+            destroyIcon.setAttribute('data-id_otro', data[0].id);
+
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+            }
+            else {
+                inputGroup.appendChild(destroyIcon);
+            }
+        }
+    }
 }
 //
 function updateConstruccionCatodica() {
     if ($("#btn_updatecatodica").text() === "Actualizar") {
         inhabilitarform("#proteccatodicafrm", false)
         $("#btn_updatecatodica").text('Guardar');
+        showDestroyIcons("proteccatodicafrm", true)
     }
     else {
         var params = {
@@ -3351,13 +3787,19 @@ function updateConstruccionCatodica() {
             coordenada_especifica: $("#coord_esp_idenpprot_x").val() + ' ' + $("#coord_esp_idenpprot_y").val(),
             kilometro_especifico: $("#km_esp_idenpprot").val()
         };
+        var formData = new FormData();
+        formData.append('file', $("#fileconstruccioncatodica")[0].files[0]);
+
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        for (var value of formData.values()) {
+            console.log(value);
+        }
         $.ajax({
             type: "POST",
             url: apiUrl + webMethod,
-            headers: {
-                'Accept': 'application/json'
-            },
-            data: params,
+            method: 'POST',
+            body: formData,
             success: function (data) {
                 alert("El registro fue actualizado correctamente");
                 $('#construforms').show();
@@ -3536,7 +3978,8 @@ function saveConstruccionGeneral() {
     if ($("#inputGroupFile05")[0].files[0]) {
         formData.append("C_0205_0016", $("#inputGroupFile05")[0].files[0]);
     }
-
+   
+    formData.append('file', $("#filedisenioservicio")[0].files[0]);
     // Log formData to console for debugging (this will not display the content of the files)
     for (var pair of formData.entries()) {
         console.log(pair[0] + ', ' + pair[1]);
@@ -3596,10 +4039,17 @@ function saveConstruccionUnion() {
 
 
     if ($("#cmtiptecnicaunion").val() !== "0") {
+        var formData = new FormData();
+        formData.append('file', $("#fileconstruccionunion")[0].files[0]);
+
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        for (var value of formData.values()) {
+            console.log(value);
+        }
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            headers: headers,
-            body: JSON.stringify(params)
+            body: formData
         })
             .then(response => {
                 if (!response.ok) {
@@ -3649,11 +4099,17 @@ function saveConstruccionProfundidad() {
         kilometro_especifico: $("#km_esp_idenpprofent").val()
     };
 
+    var formData = new FormData();
+    formData.append('file', $("#fileconstruccionprofundidad")[0].files[0]);
 
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+    for (var value of formData.values()) {
+        console.log(value);
+    }
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        headers: headers,
-        body: JSON.stringify(params)
+        body: formData
     })
         .then(response => {
             if (!response.ok) {
@@ -3691,7 +4147,7 @@ function saveConstruccionCruces() {
 
         C_0304_0074: $("#txtdistinf").val(),// Distancia desde el punto de cruce influye en la dirección aguas abajo
 
-        C_0304_0075: $("#txtdistptocruce").val,//Distancia desde el punto de cruce influye en la dirección aguas arriba
+        C_0304_0075: $("#txtdistptocruce").val(),//Distancia desde el punto de cruce influye en la dirección aguas arriba
 
         C_0304_0076: $("#txtloccruresptub").val(),//Localización del cruce respecto la tubería (arriba/abajo)
 
@@ -3731,13 +4187,19 @@ function saveConstruccionCruces() {
         C_0304_0096: $("#txtvoltajecruce").val(),// Voltaje transportado por el servicio
         coordenada_especifica: $("#coord_esp_idenptipocruce_x").val()+' '+$("#coord_esp_idenptipocruce_y").val(),
         kilometro_especifico: $("#km_esp_idenptipocruce").val(),
-        nombre: $("#txtnombrecruces").val(),
+        nombre: $("#txtnombrecruces").val()
     };
+    var formData = new FormData();
+    formData.append('file', $("#fileconstruccioncruces")[0].files[0]);
 
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+    for (var value of formData.values()) {
+        console.log(value);
+    }
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        headers: headers,
-        body: JSON.stringify(params)
+        body: formData
     })
         .then(response => {
             if (!response.ok) {
@@ -3783,14 +4245,18 @@ function saveConstruccionHermeticidad() {
         unidad_presion_min: $("#cmbunidadpresionmin").val(),
         unidad_variaciones_presion: $("#cmbunidadvariacionespres").val()
     };
+    var formData = new FormData();
+    formData.append('file', $("#fileconstruccionhermeticidad")[0].files[0]);
 
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
 
-
-    fetch(apiUrl + webMethod, {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify(params)
-    })
+    for (var value of formData.values()) {
+        console.log(value);
+    }
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -3834,7 +4300,9 @@ function saveConstruccioInspeccion() {
     if($("#C_0309_115")[0].files[0]) {
         formData.append("C_0309_115", $("#C_0309_115")[0].files[0]);
     }
-
+    if ($("#fileconstruccioninspeccion")[0].files[0]) {
+        formData.append("file", $("#fileconstruccioninspeccion")[0].files[0]);
+    }
 
 
     fetch(apiUrl + webMethod, {
@@ -3885,13 +4353,18 @@ function saveConstruccioCatodica() {
         kilometro_especifico: $("#km_esp_idenpprot").val()
     };
 
+    var formData = new FormData();
+    formData.append('file', $("#fileconstruccioncatodica")[0].files[0]);
 
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
 
-
+    for (var value of formData.values()) {
+        console.log(value);
+    }
+    
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        headers: headers,
-        body: JSON.stringify(params)
+        body: formData
     })
         .then(response => {
             if (!response.ok) {
@@ -3952,6 +4425,9 @@ function saveConstruccioSeguridad() {
     }
     if($("#C_0312_129")[0].files[0]) {
         formData.append("C_0312_129", $("#C_0312_129")[0].files[0]);
+    }
+    if ($("#fileconstruccionseguridad")[0].files[0]) {
+        formData.append("file", $("#fileconstruccionseguridad")[0].files[0]);
     }
 
 
@@ -4596,13 +5072,17 @@ function saveDisenioGral() {
             espesor_pared: $("#cmbunidadespesor").val(),
             temperatura: $("#cmbunidadtemperatura").val()
         };
+        var formData = new FormData();
+        formData.append('file', $("#filedisenioidentificacion")[0].files[0]);
 
-
-        console.log(JSON.stringify(params))
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+       
+        for (var value of formData.values()) {
+            console.log(value);
+        }
         fetch(apiUrl + webMethod, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(params)
+           method: 'POST',
+            body: formData
         })
             .then(response => {
                 if (!response.ok) {
@@ -4633,17 +5113,7 @@ function saveDisenioGral() {
 function savebasecons() {
     var webMethod = "saveConstruccionGeneral";
     if ($("#fechaconstbase").val() !== "") {
-        const formData = new FormData();
-
-        formData.append("C_0101_0001_id", area)
-        // Make sure files are being selected and appended properly
-        if ($("#inputGroupFile01")[0].files[0]) {
-            formData.append("C_0308_0111", $("#filepruebabasecons")[0].files[0]);
-        }
-        // Log formData to console for debugging (this will not display the content of the files)
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        }
+        
         var params = {
             C_0101_0001_id: area,
             C_0301_0048: $("#fechaconstbase").val(),
@@ -4656,11 +5126,19 @@ function savebasecons() {
             coordenada_especifica: $("#coord_esp_idenbasecons_x").val()+' '+$("#coord_esp_idenbasecons_y").val(),
             kilometro_especifico: $("#km_esp_idenbasecons").val()
         };
-        console.log(JSON.stringify(params))
+        var formData = new FormData();
+        formData.append('file', $("#fileconstruccionbase")[0].files[0]);
+
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        for (var value of formData.values()) {
+            console.log(value);
+        }
+
+       // console.log(JSON.stringify(params))
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            headers: headers,
-            body: JSON.stringify(params)
+            body: formData
         })
             .then(response => {
                 if (!response.ok) {
@@ -4785,31 +5263,27 @@ function saveDisenioPresion()  {
         fecha_calculo: $("#txtfechacalculo").val(),
         metodo_calculo: $("#txtMetodoCalculo").val(),
         presion_nom_psi: $("#txtPresNomPSI").val(),
-        presion_nom_kg: $("#txtPresNomKG").val(),
         presion_dis_psi: $("#txtPresDisenio").val(),
-        presion_max_psi: $("#txtPresMaxPSI").val(),
-        presion_max_kg: $("#txtPresMaxKG").val(),
-        presion_red_psi: $("#txtPresRedPSI").val(),
-        presion_red_kg: $("#txtPresRedKG").val(),
+        presion_red_psi: $("#txtPresRedPSI").val(), 
         coordenada_especifica: $("#coord_esp_iden_pres_x").val()+' '+$("#coord_esp_iden_pres_y").val(),
         kilometro_especifico: $("#km_esp_iden_pres").val(),
         pres_nominal: $("#cmbunidadpresnominal").val(),
         pres_disenio: $("#cmbunidadpresiondisenio").val(),
         pres_max_ope: $("#cmbunidadpresionmaxope").val(),
         pres_segmento: $("#cmbunidadpresionsegmento").val()
-
-
     };
-    
+    var formData = new FormData();
+    formData.append('file', $("#filediseniopresion")[0].files[0]);
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
 
-
-    if ($("#txtPresDisenio").val() != ""){
-
-    console.log(JSON.stringify(params))
+    if ($("#txtPresDisenio").val() != "") {
+        var i = 0;
+        for (var value of formData.values()) {
+            console.log(value + " i: "+ i);
+        }
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        headers: headers,
-        body: JSON.stringify(params)
+        body: formData
     })
     .then(response => {
         if (!response.ok) {
@@ -4865,12 +5339,21 @@ function saveDisenioProteccion() {
         kilometro_especifico: $("#km_esp_iden_prot").val()
 
     };
+    var formData = new FormData();
+    formData.append('file', $("#filedisenioproteccion")[0].files[0]);
 
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+    for (var value of formData.values()) {
+        console.log(value);
+    }
+    
     if ($("#txtiporecubrimiento").val() != "") {
+
+
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            headers: headers,
-            body: JSON.stringify(params)
+            body: formData
         })
             .then(response => {
                 if (!response.ok) {
@@ -5102,7 +5585,9 @@ function saveDisenioServicio() {
     if($("#inputGroupFile05")[0].files[0]) {
         formData.append("C_0205_0016", $("#inputGroupFile05")[0].files[0]);
     }
-
+    if ($("#inputGroupFile06")[0].files[0]) {
+        formData.append("file", $("#inputGroupFile06")[0].files[0]);
+    }
     // Log formData to console for debugging (this will not display the content of the files)
     for (var pair of formData.entries()) {
         console.log(pair[0] + ', ' + pair[1]);
