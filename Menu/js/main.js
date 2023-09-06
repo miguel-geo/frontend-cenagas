@@ -6103,7 +6103,6 @@ function consulta() {
                             data: params,
                             success: function (data) {
                                 if (data.success) {
-                                    console.log("oreo")
                                     if (data.data.datagrid.length > 0) {
                                         //Fecha construcción
                                         $('#fechaconsbase').text(data.data.datagrid[0].C_0301_0048.split(" ")[0]);
@@ -6141,7 +6140,7 @@ function consulta() {
                                 if (data.success) {
 
                                     for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0302_0049, data.data[i].C_0302_0050, data.data[i].C_0302_0051, data.data[i].C_0302_0052];
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0302_0049, data.data[i].C_0302_0050, data.data[i].C_0302_0051, data.data[i].C_0302_0052.split(" ")[0]];
                                         llenarTablas(persona, "tablaunionCons");
                                     }
                                     if (data.data.length > 0) {
