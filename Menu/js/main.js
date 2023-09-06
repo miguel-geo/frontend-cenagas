@@ -1558,22 +1558,56 @@ function updateDisenioproteccion() {
             coordenada_especifica: $("#coord_esp_iden_prot_x").val() + ' ' + $("#coord_esp_iden_prot_y").val(),
             kilometro_especifico: $("#km_esp_iden_prot").val()
         };
-        $.ajax({
-            type: "POST",
-            url: apiUrl + webMethod,
-            headers: {
-                'Accept': 'application/json'
-            },
-            data: params,
-            success: function (data) {
-                alert("El registro fue actualizado correctamente");
-                $('#disenioforms').show();
-                $('#proteccionfrm').hide();
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
 
-            }
-        });
+        var formData = new FormData();
+        formData.append('file', $("#filedisenioproteccion")[0].files[0]);
+
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        //Método
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#disenioforms').show();
+                    $('#proteccionfrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+
+
+
+
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: apiUrl + webMethod,
+        //    headers: {
+        //        'Accept': 'application/json'
+        //    },
+        //    data: params,
+        //    success: function (data) {
+        //        alert("El registro fue actualizado correctamente");
+        //        $('#disenioforms').show();
+        //        $('#proteccionfrm').hide();
+        //    },
+        //    error: function (xhr, ajaxOptions, thrownError) {
+
+        //    }
+        //});
     }
 }
 
@@ -1723,7 +1757,7 @@ function updateDisenioServicio() {
         if($("#inputGroupFile05")[0].files[0]) {
             formData.append("C_0205_0016", $("#inputGroupFile05")[0].files[0]);
         }
-    
+        formData.append('file', $("#inputGroupFile06")[0].files[0]);
         // Log formData to console for debugging (this will not display the content of the files)
         for (var pair of formData.entries()) {
             console.log(pair[0] + ', ' + pair[1]);
@@ -2146,19 +2180,41 @@ function updateConsGeneral() {
         for (var value of formData.values()) {
             console.log(value);
         }
-        $.ajax({
-            url: apiUrl + webMethod,
-            method: 'POST',
-            body: formData,
-            success: function (data) {
-                alert("El registro fue actualizado correctamente");
-                $('#construforms').show();
-                $('#constbasefrm').hide();
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
+            //$.ajax({
+            //    url: apiUrl + webMethod,
+            //    method: 'POST',
+            //    body: formData,
+            //    success: function (data) {
+            //        alert("El registro fue actualizado correctamente");
+            //        $('#construforms').show();
+            //        $('#constbasefrm').hide();
+            //    },
+            //    error: function (xhr, ajaxOptions, thrownError) {
 
-            }
-        });
+            //    }
+            //});
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#construforms').show();
+                    $('#constbasefrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
     }
 }
 
@@ -2347,7 +2403,29 @@ function updateConsUnion() {
         for (var value of formData.values()) {
             console.log(value);
         }
-        $.ajax({
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#construforms').show();
+                    $('#metodounionfrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+        /*$.ajax({
             type: "POST",
             url: apiUrl + webMethod,
             method: 'POST',
@@ -2360,7 +2438,7 @@ function updateConsUnion() {
             error: function (xhr, ajaxOptions, thrownError) {
 
             }
-        });
+        });*/
     }
 }
 
@@ -2556,20 +2634,47 @@ function updateConsProfundidad() {
         for (var value of formData.values()) {
             console.log(value);
         }
-        $.ajax({
-            type: "POST",
-            url: apiUrl + webMethod,
-            method: 'POST',
-            body: formData,
-            success: function (data) {
-                alert("El registro fue actualizado correctamente");
-                $('#construforms').show();
-                $('#profenterradofrm').hide();
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
 
-            }
-        });
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#construforms').show();
+                    $('#profenterradofrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+
+
+
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: apiUrl + webMethod,
+        //    method: 'POST',
+        //    body: formData,
+        //    success: function (data) {
+        //        alert("El registro fue actualizado correctamente");
+        //        $('#construforms').show();
+        //        $('#profenterradofrm').hide();
+        //    },
+        //    error: function (xhr, ajaxOptions, thrownError) {
+
+        //    }
+        //});
     }
 }
 
@@ -3335,20 +3440,46 @@ function updateCrucesConstruccion() {
         for (var value of formData.values()) {
             console.log(value);
         }
-        $.ajax({
-            type: "POST",
-            url: apiUrl + webMethod,
+        fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData,
-            success: function (data) {
-                alert("El registro fue actualizado correctamente");
-                $('#construforms').show();
-                $('#tiposcrucesfrm').hide();
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
 
-            }
-        });
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#construforms').show();
+                    $('#tiposcrucesfrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+
+
+
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: apiUrl + webMethod,
+        //    method: 'POST',
+        //    body: formData,
+        //    success: function (data) {
+        //        alert("El registro fue actualizado correctamente");
+        //        $('#construforms').show();
+        //        $('#tiposcrucesfrm').hide();
+        //    },
+        //    error: function (xhr, ajaxOptions, thrownError) {
+
+        //    }
+        //});
     }
 }
 //#endregion 
@@ -3563,20 +3694,43 @@ function updateHermeticidadConstruccion() {
         for (var value of formData.values()) {
             console.log(value);
         }
-        $.ajax({
-            type: "POST",
-            url: apiUrl + webMethod,
+        fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData,
-            success: function (data) {
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
                 alert("El registro fue actualizado correctamente");
                 $('#construforms').show();
                 $('#hermetisidadfrm').hide();
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
 
-            }
-        });
+        //$.ajax({
+        //    type: "POST",
+        //    url: apiUrl + webMethod,
+        //    method: 'POST',
+        //    body: formData,
+        //    success: function (data) {
+        //        alert("El registro fue actualizado correctamente");
+        //        $('#construforms').show();
+        //        $('#hermetisidadfrm').hide();
+        //    },
+        //    error: function (xhr, ajaxOptions, thrownError) {
+
+        //    }
+        //});
     }
 }
 //#endrgegion
@@ -3795,20 +3949,42 @@ function updateConstruccionCatodica() {
         for (var value of formData.values()) {
             console.log(value);
         }
-        $.ajax({
-            type: "POST",
-            url: apiUrl + webMethod,
+        fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData,
-            success: function (data) {
-                alert("El registro fue actualizado correctamente");
-                $('#construforms').show();
-                $('#proteccatodicafrm').hide();
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
 
-            }
-        });
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#construforms').show();
+                    $('#proteccatodicafrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+        //$.ajax({
+        //    type: "POST",
+        //    url: apiUrl + webMethod,
+        //    method: 'POST',
+        //    body: formData,
+        //    success: function (data) {
+        //        alert("El registro fue actualizado correctamente");
+        //        $('#construforms').show();
+        //        $('#proteccatodicafrm').hide();
+        //    },
+        //    error: function (xhr, ajaxOptions, thrownError) {
+
+        //    }
+        //});
     }
 }
 
@@ -3979,7 +4155,7 @@ function saveConstruccionGeneral() {
         formData.append("C_0205_0016", $("#inputGroupFile05")[0].files[0]);
     }
    
-    formData.append('file', $("#filedisenioservicio")[0].files[0]);
+    formData.append('file', $("#inputGroupFile06")[0].files[0]);
     // Log formData to console for debugging (this will not display the content of the files)
     for (var pair of formData.entries()) {
         console.log(pair[0] + ', ' + pair[1]);
