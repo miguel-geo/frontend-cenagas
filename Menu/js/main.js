@@ -6214,7 +6214,7 @@ function consulta() {
                                         $('#tipocatodicacons').text(data.data[0].C_0310_116);
                                     }
                                     for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0305_0097, data.data[i].C_0305_0098, data.data[i].C_0305_0099, data.data[i].C_0305_0100, data.data[i].C_0305_0101];
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0305_0097, data.data[i].C_0305_0098.split(" ")[0], data.data[i].C_0305_0099, data.data[i].C_0305_0100, data.data[i].C_0305_0101];
                                         llenarTablas(persona, "tablaHermeticidad");
                                     }
                                     if (data.data.length > 0) {
@@ -6620,12 +6620,18 @@ function clearInputTextValues(divId) {
 
 function clearInputTextValuesNew(divId) {
     const div = document.getElementById(divId);
-    const textInputs = div.querySelectorAll(' input[type="date"], .setAlg');
+    const textInputs = div.querySelectorAll('input[type="date"], .setAlg');
+    const selectInputs = div.querySelectorAll('select');
 
     textInputs.forEach(input => {
         input.value = '';
     });
-}    
+
+    selectInputs.forEach(select => {
+        select.selectedIndex = 0;
+    });
+}
+
 
 
 function showDestroyIcons(parentDivId,bandera) {
