@@ -6103,23 +6103,24 @@ function consulta() {
                             data: params,
                             success: function (data) {
                                 if (data.success) {
-                                    if (data.data.length > 0) {
+                                    console.log("oreo")
+                                    if (data.data.datagrid.length > 0) {
                                         //Fecha construcción
-                                        $('#tipocatodicacons').text(data.data[0].C_0301_0048);
+                                        $('#fechaconsbase').text(data.data.datagrid[0].C_0301_0048.split(" ")[0]);
                                         //Recubrimiento anticorrosivo
-                                        $('#recuanticorro').text(data.data[0].C_0306_0108);
+                                        $('#recuanticorro').text(data.data.datagrid[0].C_0306_0108);
                                         //Tipo de suelo
-                                        $('#tiposueloconsbase').text(data.data[0].C_0307_0109);
+                                        $('#tiposueloconsbase').text(data.data.datagrid[0].C_0307_0109);
                                         //Material de relleno
-                                        $('#matrellenobasecons').text(data.data[0].C_0307_0110);
+                                        $('#matrellenobasecons').text(data.data.datagrid[0].C_0307_0110);
                                         //Tipo recubrimiento
-                                        $('#tiporecconsbase').text(data.data[0].C_0311_121);
+                                        $('#tiporecconsbase').text(data.data.datagrid[0].C_0311_121);
                                     }
-                                    for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0308_0110];
+                                    for (i = 0; i < data.data.datagrid.length; i++) {
+                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0308_0110];
                                         llenarTablas(persona, "tablabasecons");
                                     }
-                                    if (data.data.length > 0) {
+                                    if (data.data.datagrid.length > 0) {
                                         // ExportarDatos(data.data);
                                     }
                                 }
