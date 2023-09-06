@@ -6000,7 +6000,7 @@ function consulta() {
                             success: function (data) {
                                 if (data.data.datagrid.length > 0) {
                                    //Diametro mm
-                                    $('#diammcons').text(data.data.diametromm[0].C_0202_0007);
+                                   
                                     //Diametro in
                                     $('#diaincons').text(data.data.diametroin[0].C_0202_0008);
                                     //Espesor mm
@@ -6014,7 +6014,7 @@ function consulta() {
                                     //Temperatura °F
                                     $('#tempconsf').text(data.data.tempf[0].C_0207_0028);
                                     //Fecha fabricación
-                                    $('#fecfabcons').text(data.data.fechafab[0].C_0209_0030);
+                                    $('#fecfabcons').text(data.data.fechafab[0].C_0209_0030.split(" ")[0]);
                                     //% carbono
                                     $('#porcons').text(data.data.carbono[0].C_0210_0031);
                                     //% resistencia tracción
