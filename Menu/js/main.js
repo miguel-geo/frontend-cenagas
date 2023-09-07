@@ -6031,6 +6031,7 @@ function consulta() {
                                     }
                                     contar_longitud=contar_longitud/1000
                                     $('#longitud_total').text(contar_longitud);
+
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -6055,10 +6056,8 @@ function consulta() {
                                         //Presion Max Kg
                                         $('#presmaxopecons').text(data.data.presionmaxkg[0].C_0206_0024);
                                     }
-                                    for (i = 0; i < data.data.datagrid.length; i++) {
-                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0206_0017, data.data.datagrid[i].C_0206_0019, data.data.datagrid[i].C_0206_0023, data.data.datagrid[i].C_0206_0024];
-                                        llenarTablas(persona, "tablapresion");
-                                    }
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", "C_0206_0017", "C_0206_0019", "C_0206_0023", "C_0206_0024"];
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablapresion", keysForPresion );
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -6669,6 +6668,51 @@ $(document).ready(function() {
     }
     });
 });
+
+
+
+
+
+function processTableDataAndHideNullColumns(data, tableId, keys) {
+
+    var nonNullColumns = [];
+    var numCols = keys.length;
+    
+    // Initialize nonNullColumns and reset visibility of all columns
+    for (var k = 0; k < numCols; k++) {
+        nonNullColumns.push(false);
+        $('#' + tableId + ' thead th').eq(k).show();
+        $('#' + tableId + ' tbody tr').each(function() {
+            $(this).find('td').eq(k).show();
+        });
+    }
+
+    for (i = 1; i < data.length; i++) {
+        var persona = keys.map(key => data[i][key]);
+        // Update nonNullColumns array
+        for (var j = 0; j < persona.length; j++) {
+            if (persona[j] !== null) {
+                nonNullColumns[j] = true;
+            }
+        }
+
+        llenarTablas(persona, tableId);
+    }
+
+    const nonNullColumns1 = nonNullColumns.slice(1);
+    for (var j = 1; j < nonNullColumns1.length; j++) {
+
+        if (!nonNullColumns1[j]) {
+            $('#' + tableId + ' thead th').eq(j).hide();
+            $('#' + tableId + ' tbody tr').each(function() {
+                $(this).find('td').eq(j).hide();
+            });
+        }
+    }
+
+}
+
+
 
 function clearAllFileInputsInDiv(divId) {
     // Select all file inputs within the specified div and set their value to an empty string
