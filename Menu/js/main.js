@@ -1197,6 +1197,8 @@ function consultaDatosIdentificacionArea(id_d=null) {
             'Accept': 'application/json'
         },
         success: function (data) {
+            const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+            existingDownloadIcons.forEach(icon => icon.remove());  
             
             if (data.success) {
                 var infodata;
@@ -1412,11 +1414,13 @@ function consultaDatosProteccionArea(id_d=null) {
         data: params,
         success: function (data) {
             if (data.success) {
-                clearInputTextValues('proteccionfrm');    
+                clearInputTextValues('proteccionfrm');
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                existingDownloadIcons.forEach(icon => icon.remove());    
 
-                if (data.data.length > 0) {
+                if (data.data.datagrid.length > 0) {
 
-                    llenarDatosActualizacionProteccion(data.data);
+                    llenarDatosActualizacionProteccion(data.data.datagrid);
                     $("#btnsaveproteccion").hide();
                     $("#btn_newproteccion").show();
                     $("#btn_updateproteccion").show();
@@ -1450,6 +1454,7 @@ function consultaDatosProteccionArea(id_d=null) {
 
 var idDisenioproteccion;
 function llenarDatosActualizacionProteccion(data) {
+    console.log("hola")
     $("#btn_updateproteccion").text('Actualizar');
     if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined&& data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
@@ -1833,6 +1838,8 @@ function consultaDatosPresionArea(id_d=null) {
 
 
                 clearInputTextValues('presionfrm');
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                existingDownloadIcons.forEach(icon => icon.remove());  
                 var datainfo;
                 if (webMethod === "getDisenioPresionById")
                     datainfo = data.data;
@@ -2047,6 +2054,8 @@ function consultaDatosConsGeneral(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                existingDownloadIcons.forEach(icon => icon.remove());  
                 if (data.data.datagrid.length > 0) {
                     llenarDatosActualizacionConsGeneral(data.data.datagrid);
                     $("#btn_saveconsgeneral").hide();
@@ -2263,6 +2272,8 @@ function consultaDatosConsUnion(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                existingDownloadIcons.forEach(icon => icon.remove());  
                 if (data.data.length > 0) {
                     llenarDatosActualizacionConsUnion(data.data);
                     $("#btn_saveconsunion").hide();
@@ -2486,6 +2497,8 @@ function consultaDatosConsProfundidad(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                existingDownloadIcons.forEach(icon => icon.remove());  
                 if (data.data.length > 0) {
                     llenarDatosActualizacionConsProfundidad(data.data);
                     $("#btn_saveconsprofent").hide();
@@ -3248,6 +3261,8 @@ function consultaDatosConsCruces(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                 existingDownloadIcons.forEach(icon => icon.remove());
                 if (data.data.length > 0) {
                     llenarDatosActualizacionCruces(data.data);
                     $("#btnGuardarCruces").hide();
@@ -3542,6 +3557,8 @@ function consultaDatosConsHermeticidad(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                 existingDownloadIcons.forEach(icon => icon.remove());
                 if (data.data.length > 0) {
                     llenarDatosActualizacionHermeticidad(data.data);
                     $("#btnGuardarHermeticidad").hide();
@@ -3811,6 +3828,8 @@ function consultaDatosConsCatodica(id_d=null) {
             'Accept': 'application/json'
         },
         success: function (data) {
+            const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                 existingDownloadIcons.forEach(icon => icon.remove());
             if (data.success) {
                 var datainfo;
                 if (webMethod === "getConsCatodicaById")
