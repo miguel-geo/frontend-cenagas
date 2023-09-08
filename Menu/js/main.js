@@ -1429,6 +1429,7 @@ function consultaDatosProteccionArea(id_d=null) {
                 else if (webMethod === "get_Proteccion")
                     infodata = (data.data.datagrid);
                 if (infodata.length > 0) {
+
                 clearInputTextValues('proteccionfrm');
                 const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
                 existingDownloadIcons.forEach(icon => icon.remove());    
@@ -1437,7 +1438,8 @@ function consultaDatosProteccionArea(id_d=null) {
                     $("#btnsaveproteccion").hide();
                     $("#btn_newproteccion").show();
                     $("#btn_updateproteccion").show();
-                }else{
+                }
+                else {
 
 
                     inhabilitarform("#proteccionfrm",false)
@@ -2289,6 +2291,8 @@ function consultaDatosConsUnion(id_d=null) {
                     infodata = (data.data);
                 else if (webMethod === "get_construccionunion")
                     infodata = (data.data.datagrid);
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                existingDownloadIcons.forEach(icon => icon.remove());
                 if (infodata.length > 0) {
                     llenarDatosActualizacionConsUnion(infodata);
                     $("#btn_saveconsunion").hide();
