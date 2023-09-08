@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -1206,6 +1206,8 @@ function consultaDatosIdentificacionArea(id_d=null) {
             'Accept': 'application/json'
         },
         success: function (data) {
+            const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+            existingDownloadIcons.forEach(icon => icon.remove());  
             
             if (data.success) {
                 var infodata;
@@ -1427,6 +1429,9 @@ function consultaDatosProteccionArea(id_d=null) {
                 else if (webMethod === "get_Proteccion")
                     infodata = (data.data.datagrid);
                 if (infodata.length > 0) {
+                clearInputTextValues('proteccionfrm');
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                existingDownloadIcons.forEach(icon => icon.remove());    
 
                     llenarDatosActualizacionProteccion(infodata);
                     $("#btnsaveproteccion").hide();
@@ -1462,6 +1467,7 @@ function consultaDatosProteccionArea(id_d=null) {
 
 var idDisenioproteccion;
 function llenarDatosActualizacionProteccion(data) {
+    console.log("hola")
     $("#btn_updateproteccion").text('Actualizar');
     if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== undefined&& data[0].coordenada_especifica !== null) {
         const coords = data[0].coordenada_especifica.split(' ');
@@ -1845,6 +1851,8 @@ function consultaDatosPresionArea(id_d=null) {
 
 
                 clearInputTextValues('presionfrm');
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                existingDownloadIcons.forEach(icon => icon.remove());  
                 var datainfo;
                 if (webMethod === "getDisenioPresionById")
                     datainfo = data.data;
@@ -2059,6 +2067,8 @@ function consultaDatosConsGeneral(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                existingDownloadIcons.forEach(icon => icon.remove());  
                 if (data.data.datagrid.length > 0) {
                     llenarDatosActualizacionConsGeneral(data.data.datagrid);
                     $("#btn_saveconsgeneral").hide();
@@ -2502,6 +2512,8 @@ function consultaDatosConsProfundidad(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                existingDownloadIcons.forEach(icon => icon.remove());  
                 if (data.data.length > 0) {
                     llenarDatosActualizacionConsProfundidad(data.data);
                     $("#btn_saveconsprofent").hide();
@@ -3264,6 +3276,8 @@ function consultaDatosConsCruces(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                 existingDownloadIcons.forEach(icon => icon.remove());
                 if (data.data.length > 0) {
                     llenarDatosActualizacionCruces(data.data);
                     $("#btnGuardarCruces").hide();
@@ -3558,6 +3572,8 @@ function consultaDatosConsHermeticidad(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
+                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                 existingDownloadIcons.forEach(icon => icon.remove());
                 if (data.data.length > 0) {
                     llenarDatosActualizacionHermeticidad(data.data);
                     $("#btnGuardarHermeticidad").hide();
@@ -3827,6 +3843,8 @@ function consultaDatosConsCatodica(id_d=null) {
             'Accept': 'application/json'
         },
         success: function (data) {
+            const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+                 existingDownloadIcons.forEach(icon => icon.remove());
             if (data.success) {
                 var datainfo;
                 if (webMethod === "getConsCatodicaById")
@@ -6016,7 +6034,7 @@ function consulta() {
                             success: function (data) {
                                 if (data.data.datagrid.length > 0) {
                                    //Diametro mm
-                                    $('#diammcons').text(data.data.diametromm[0].C_0202_0007);
+                                   
                                     //Diametro in
                                     $('#diaincons').text(data.data.diametroin[0].C_0202_0008);
                                     //Espesor mm
@@ -6030,7 +6048,7 @@ function consulta() {
                                     //Temperatura °F
                                     $('#tempconsf').text(data.data.tempf[0].C_0207_0028);
                                     //Fecha fabricación
-                                    $('#fecfabcons').text(data.data.fechafab[0].C_0209_0030);
+                                    $('#fecfabcons').text(data.data.fechafab[0].C_0209_0030.split(" ")[0]);
                                     //% carbono
                                     $('#porcons').text(data.data.carbono[0].C_0210_0031);
                                     //% resistencia tracción
@@ -6047,6 +6065,7 @@ function consulta() {
                                     }
                                     contar_longitud=contar_longitud/1000
                                     $('#longitud_total').text(contar_longitud);
+
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -6071,10 +6090,8 @@ function consulta() {
                                         //Presion Max Kg
                                         $('#presmaxopecons').text(data.data.presionmaxkg[0].C_0206_0024);
                                     }
-                                    for (i = 0; i < data.data.datagrid.length; i++) {
-                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0206_0017, data.data.datagrid[i].C_0206_0019, data.data.datagrid[i].C_0206_0023, data.data.datagrid[i].C_0206_0024];
-                                        llenarTablas(persona, "tablapresion");
-                                    }
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", "C_0206_0017", "C_0206_0019", "C_0206_0023", "C_0206_0024"];
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablapresion", keysForPresion );
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -6120,23 +6137,23 @@ function consulta() {
                             data: params,
                             success: function (data) {
                                 if (data.success) {
-                                    if (data.data.length > 0) {
+                                    if (data.data.datagrid.length > 0) {
                                         //Fecha construcción
-                                        $('#tipocatodicacons').text(data.data[0].C_0301_0048);
+                                        $('#fechaconsbase').text(data.data.datagrid[0].C_0301_0048.split(" ")[0]);
                                         //Recubrimiento anticorrosivo
-                                        $('#recuanticorro').text(data.data[0].C_0306_0108);
+                                        $('#recuanticorro').text(data.data.datagrid[0].C_0306_0108);
                                         //Tipo de suelo
-                                        $('#tiposueloconsbase').text(data.data[0].C_0307_0109);
+                                        $('#tiposueloconsbase').text(data.data.datagrid[0].C_0307_0109);
                                         //Material de relleno
-                                        $('#matrellenobasecons').text(data.data[0].C_0307_0110);
+                                        $('#matrellenobasecons').text(data.data.datagrid[0].C_0307_0110);
                                         //Tipo recubrimiento
-                                        $('#tiporecconsbase').text(data.data[0].C_0311_121);
+                                        $('#tiporecconsbase').text(data.data.datagrid[0].C_0311_121);
                                     }
-                                    for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0308_0110];
+                                    for (i = 0; i < data.data.datagrid.length; i++) {
+                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0308_0110];
                                         llenarTablas(persona, "tablabasecons");
                                     }
-                                    if (data.data.length > 0) {
+                                    if (data.data.datagrid.length > 0) {
                                         // ExportarDatos(data.data);
                                     }
                                 }
@@ -6234,7 +6251,7 @@ function consulta() {
                                         $('#tipocatodicacons').text(data.data[0].C_0310_116);
                                     }
                                     for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0305_0097, data.data[i].C_0305_0098, data.data[i].C_0305_0099, data.data[i].C_0305_0100, data.data[i].C_0305_0101];
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0305_0097, data.data[i].C_0305_0098.split(" ")[0], data.data[i].C_0305_0099, data.data[i].C_0305_0100, data.data[i].C_0305_0101];
                                         llenarTablas(persona, "tablaHermeticidad");
                                     }
                                     if (data.data.length > 0) {
@@ -6640,12 +6657,18 @@ function clearInputTextValues(divId) {
 
 function clearInputTextValuesNew(divId) {
     const div = document.getElementById(divId);
-    const textInputs = div.querySelectorAll(' input[type="date"], .setAlg');
+    const textInputs = div.querySelectorAll('input[type="date"], .setAlg');
+    const selectInputs = div.querySelectorAll('select');
 
     textInputs.forEach(input => {
         input.value = '';
     });
-}    
+
+    selectInputs.forEach(select => {
+        select.selectedIndex = 0;
+    });
+}
+
 
 
 function showDestroyIcons(parentDivId,bandera) {
@@ -6683,6 +6706,51 @@ $(document).ready(function() {
     }
     });
 });
+
+
+
+
+
+function processTableDataAndHideNullColumns(data, tableId, keys) {
+
+    var nonNullColumns = [];
+    var numCols = keys.length;
+    
+    // Initialize nonNullColumns and reset visibility of all columns
+    for (var k = 0; k < numCols; k++) {
+        nonNullColumns.push(false);
+        $('#' + tableId + ' thead th').eq(k).show();
+        $('#' + tableId + ' tbody tr').each(function() {
+            $(this).find('td').eq(k).show();
+        });
+    }
+
+    for (i = 1; i < data.length; i++) {
+        var persona = keys.map(key => data[i][key]);
+        // Update nonNullColumns array
+        for (var j = 0; j < persona.length; j++) {
+            if (persona[j] !== null) {
+                nonNullColumns[j] = true;
+            }
+        }
+
+        llenarTablas(persona, tableId);
+    }
+
+    const nonNullColumns1 = nonNullColumns.slice(1);
+    for (var j = 1; j < nonNullColumns1.length; j++) {
+
+        if (!nonNullColumns1[j]) {
+            $('#' + tableId + ' thead th').eq(j).hide();
+            $('#' + tableId + ' tbody tr').each(function() {
+                $(this).find('td').eq(j).hide();
+            });
+        }
+    }
+
+}
+
+
 
 function clearAllFileInputsInDiv(divId) {
     // Select all file inputs within the specified div and set their value to an empty string
