@@ -762,7 +762,8 @@ function inicializarEventos() {
             $("#tablapresion").hide();
             $("#datapresioncons").hide();
             $("#dataGeneral").show();
-            $("#tablaproteccion").hide();
+                $("#tablaproteccion").hide();
+                $("#datadisenioproteccion").hide(); 
             break;
             case "Dis2":
                 limpiarTabas();
@@ -771,7 +772,8 @@ function inicializarEventos() {
             $("#tablapresion").show();
             $("#datapresioncons").show();
             $("#dataGeneral").hide();
-            $("#tablaproteccion").hide();
+                $("#tablaproteccion").hide();
+                $("#datadisenioproteccion").hide();
             break;
             case "Dis3":
                 limpiarTabas();
@@ -781,6 +783,7 @@ function inicializarEventos() {
             $("#tablaPersonas").hide();
             $("#tablapresion").hide();
             $("#tablaproteccion").show();
+            $("#datadisenioproteccion").show();
             break;
         default:
     }
@@ -795,6 +798,7 @@ function inicializarEventos() {
         switch (event.target.value) {
             case "Cons1":
                 ocultartablasdisenio();
+                $("#dataconstruccionunion").hide();
                 $("#tablabasecons").show();
                 $("#databasegeneral").show();
                 $("#tablaunionCons").hide();
@@ -807,6 +811,7 @@ function inicializarEventos() {
             case "Cons2":
                 ocultartablasdisenio();
                 $("#tablaunionCons").show();
+                $("#dataconstruccionunion").show();
                 $("#tablabasecons").hide();
                 $("#databasegeneral").hide();
                 $("#tablaProfundidad").hide();
@@ -817,6 +822,7 @@ function inicializarEventos() {
                 break;
             case "Cons3":
                 ocultartablasdisenio();
+                $("#dataconstruccionunion").hide();
                 $("#tablaProfundidad").show();
                 $("#tablaunionCons").hide();
                 $("#tablabasecons").hide();
@@ -828,6 +834,7 @@ function inicializarEventos() {
                 break;
             case "Cons4":
                 ocultartablasdisenio();
+                $("#dataconstruccionunion").hide();
                 $("#tablaConsCruces").show();
                 $("#tablaProfundidad").hide();
                 $("#tablaunionCons").hide();
@@ -838,6 +845,7 @@ function inicializarEventos() {
                 break;
             case "Cons5":
                 ocultartablasdisenio();
+                $("#dataconstruccionunion").hide();
                 $("#tablaHermeticidad").show();
                 $("#tablaConsCruces").hide();
                 $("#tablaProfundidad").hide();
@@ -851,6 +859,7 @@ function inicializarEventos() {
                 break;
             case "Cons7":
                 ocultartablasdisenio();
+                $("#dataconstruccionunion").hide();
                 $("#tablaConsCatodica").show();
                 $("#datacatodica").show();
                 $("#tablaHermeticidad").hide();
@@ -1413,10 +1422,13 @@ function consultaDatosProteccionArea(id_d=null) {
         success: function (data) {
             if (data.success) {
                 clearInputTextValues('proteccionfrm');    
+                if (webMethod === "getDisenioProteccionById")
+                    infodata = (data.data);
+                else if (webMethod === "get_Proteccion")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
 
-                if (data.data.length > 0) {
-
-                    llenarDatosActualizacionProteccion(data.data);
+                    llenarDatosActualizacionProteccion(infodata);
                     $("#btnsaveproteccion").hide();
                     $("#btn_newproteccion").show();
                     $("#btn_updateproteccion").show();
@@ -2263,8 +2275,12 @@ function consultaDatosConsUnion(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
-                if (data.data.length > 0) {
-                    llenarDatosActualizacionConsUnion(data.data);
+                if (webMethod === "getConsUnionById")
+                    infodata = (data.data);
+                else if (webMethod === "get_construccionunion")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    llenarDatosActualizacionConsUnion(infodata);
                     $("#btn_saveconsunion").hide();
                     $("#btn_newconsunion").show();
                     $("#btn_updateconsunion").show();
@@ -6075,12 +6091,13 @@ function consulta() {
                             data: params,
                             success: function (data) {
                                 if (data.success) {
-                                    for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0211_0043, data.data[i].C_0211_0044, data.data[i].C_0211_0045, data.data[i].C_0211_0046];
-                                        llenarTablas(persona, "tablaproteccion");
+                                    if (data.data.datagrid.length > 0) {
+                                        //Tipo de recubrimiento
+                                        $('#prottiporecubrimiento').text(data.data.tiporecubrimiento[0].C_0211_0034);
                                     }
-                                    if (data.data.length > 0) {
-                                        // ExportarDatos(data.data);
+                                    for (i = 0; i < data.data.datagrid.length; i++) {
+                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0211_0043, data.data.datagrid[i].C_0211_0044, data.data.datagrid[i].C_0211_0045, data.data.datagrid[i].C_0211_0046];
+                                        llenarTablas(persona, "tablaproteccion");
                                     }
                                 }
                             },
@@ -6138,9 +6155,12 @@ function consulta() {
                             data: params,
                             success: function (data) {
                                 if (data.success) {
-
-                                    for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0302_0049, data.data[i].C_0302_0050, data.data[i].C_0302_0051, data.data[i].C_0302_0052];
+                                    if (data.data.datagrid.length > 0) {
+                                        //Tipo de técnica
+                                        $('#resumenconsuniontecnica').text(data.data.tipotecnica[0].C_0302_0049);
+                                    }
+                                    for (i = 0; i < data.data.datagrid.length; i++) {
+                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0302_0049, data.data.datagrid[i].C_0302_0050, data.data.datagrid[i].C_0302_0051, data.data.datagrid[i].C_0302_0052];
                                         llenarTablas(persona, "tablaunionCons");
                                     }
                                     if (data.data.length > 0) {
