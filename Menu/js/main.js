@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -486,7 +486,12 @@ function inicializarEventos() {
                         });
                         break;
                     case "Cons6":
-                        webMethod = "";
+                        consultatoform(e);
+                        getAreaIdById("getConstruccionInspeccionById", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowreporteinsp(id_d = row_id);
+                        });
                         break;
                     case "Cons7":
                         consultatoform(e);
@@ -497,7 +502,12 @@ function inicializarEventos() {
                         });
                         break;
                     case "Cons8":
-                        webMethod = "";
+                        consultatoform(e);
+                        getAreaIdById("getConstruccionSeguridadById", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowseguridadpre(id_d = row_id);
+                        });
                         break;
 
 
@@ -855,7 +865,17 @@ function inicializarEventos() {
                 $("#tablaConsCatodica").hide();
                 break;
             case "Cons6":
-
+                //tablaconsInspeccion
+                ocultartablasdisenio();
+                $("#dataconstruccionunion").hide();
+                $("#tablaconsInspeccion").show();
+                $("#datacatodica").hide();
+                $("#tablaHermeticidad").hide();
+                $("#tablaConsCruces").hide();
+                $("#tablaProfundidad").hide();
+                $("#tablaunionCons").hide();
+                $("#tablabasecons").hide();
+                $("#databasegeneral").hide();
                 break;
             case "Cons7":
                 ocultartablasdisenio();
@@ -870,7 +890,16 @@ function inicializarEventos() {
                 $("#databasegeneral").hide();
                 break;
             case "Cons8":
-
+                ocultartablasdisenio();
+                $("#dataconstruccionunion").hide();
+                $("#tablaconsSeguridad").show();
+                $("#datacatodica").hide();
+                $("#tablaHermeticidad").hide();
+                $("#tablaConsCruces").hide();
+                $("#tablaProfundidad").hide();
+                $("#tablaunionCons").hide();
+                $("#tablabasecons").hide();
+                $("#databasegeneral").hide();
                 break;
             default:
         }
@@ -2752,7 +2781,7 @@ function consultaDatosinspeccion(id_d = null) {
     var webMethod;
     var params;
     if (id_d) {
-        webMethod = "getDisenioProteccionById";
+        webMethod = "getConstruccionInspeccionById";
         params = {
             id: id_d
         };
@@ -2944,7 +2973,7 @@ function consultaDatosseguridad(id_d = null) {
     var webMethod;
     var params;
     if (id_d) {
-        webMethod = "getDisenioProteccionById";
+        webMethod = "getConstruccionSeguridadById";
         params = {
             id: id_d
         };
@@ -3770,14 +3799,38 @@ function updateHermeticidadConstruccion() {
     }
 }
 //#endrgegion
-function fnshowreporteinsp() {
+function fnshowreporteinsp(id_d = null) {
     $('#reportesInspeccionfrm').show();
-    consultaDatosinspeccion();
+    if (id_d) {
+        consultaDatosinspeccion(id_d = id_d);
+    }
+    else { consultaDatosinspeccion(); }
+
     $('#construforms').hide();
     $("#txtductogeneralrep").val(txtducto);
     $("#txttramogeneralrep").val(txttramo);
     $("#txtareageneralrep ").val(txtarea);
+
+
+
+
 }
+//function fnshowseguridadpre(id_d = null) {
+//    $('#seguridadprearranquefrm').show();
+//    if (id_d) {
+//        consultaDatosseguridad(id_d = id_d);
+//    }
+//    else { consultaDatosseguridad(); }
+
+//    $('#construforms').hide();
+//    $("#txtductogeneralseg").val(txtducto);
+//    $("#txttramogeneralseg").val(txttramo);
+//    $("#txtareageneralseg ").val(txtarea);
+//}
+
+
+
+
 async function fnshowprotecccato(id_d=null) {
     //$('#proteccatodicafrm').show();
     //$('#construforms').hide();
@@ -5990,6 +6043,7 @@ function consulta() {
                 id: $("#cmbDucto_con option:selected").val(),
                 op:4
             };
+            $("#resumenestudio").text("Ducto: " + $("#cmbDucto_con option:selected").text());
         }
         else if (
             $("#cmbDucto_con option:selected").text() !== "Selecciona..." &&
@@ -6001,6 +6055,7 @@ function consulta() {
                 id: $("#cmbTramo_con option:selected").val(),
                 op: 3
             };
+            $("#resumenestudio").text("Ducto: " + $("#cmbDucto_con option:selected").text() + " -->"+" Tramo: " + $("#cmbTramo_con option:selected").text());
         }
         else if (
             $("#cmbDucto_con option:selected").text() !== "Selecciona..." &&
@@ -6012,6 +6067,7 @@ function consulta() {
                 id: $("#cmbSegmento_con option:selected").val(),
                 op: 2
             };
+            $("#resumenestudio").text("Ducto: " + $("#cmbDucto_con option:selected").text() + " -->" + " Tramo: " + $("#cmbTramo_con option:selected").text() + " -->"+ " Segmento: " + $("#cmbSegmento_con option:selected").text());
         }
         else if (
             $("#cmbDucto_con option:selected").text() !== "Selecciona..." &&
@@ -6023,7 +6079,9 @@ function consulta() {
                 id: $("#cmbAreas_con option:selected").val(),
                 op: 1
             };
+            $("#resumenestudio").text("Ducto: " + $("#cmbDucto_con option:selected").text() + " -->" + " Tramo: " + $("#cmbTramo_con option:selected").text() + " -->" + " Segmento: " + $("#cmbSegmento_con option:selected").text() + " -->" +" Área unitaria: "+$("#cmbAreas_con option:selected").text());
         }
+
         switch (temaconsulta) {
             case "T1":
                 switch (temaconsultadisenio) {
@@ -6268,6 +6326,28 @@ function consulta() {
                             }
                         });
                         break;
+                    case "Cons6":
+                        $('#tablaconsInspeccion tbody')[0].innerHTML = "";
+                        var webMethodInspeccion = "get_construccioninspeccion";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodInspeccion,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+
+                                    for (i = 0; i < data.data.length; i++) {
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].C_0309_112 + ',' + 'C_0309_112', data.data[i].C_0309_113 + ',' + 'C_0309_113', data.data[i].C_0309_114 + ',' + 'C_0309_114', data.data[i].C_0309_115 + ',' + 'C_0309_115'];
+                                        llenarTablasFileInspeccion(persona, "tablaconsInspeccion", data.data[i].id);
+                                    }
+
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
                     case "Cons7":
                         $('#tablaConsCatodica tbody')[0].innerHTML = "";
                         var webMethodCatodica = "get_construccioncatodica";
@@ -6292,6 +6372,28 @@ function consulta() {
 
                                 }
                             });
+                        break;
+                    case "Cons8":
+                        $('#tablaconsSeguridad tbody')[0].innerHTML = "";
+                        var webMethodSeguridad = "get_construccionseguridad";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodSeguridad,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                  
+                                    for (i = 0; i < data.data.length; i++) {
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].C_0312_122 + ',' + 'C_0312_122', data.data[i].C_0312_123 + ',' + 'C_0312_123', data.data[i].C_0312_124 + ',' + 'C_0312_124', data.data[i].C_0312_125 + ',' + 'C_0312_125', data.data[i].C_0312_126 + ',' + 'C_0312_126', data.data[i].C_0312_127 + ',' + 'C_0312_127', data.data[i].C_0312_128 + ',' + 'C_0312_128', data.data[i].C_0312_129 + ',' + 'C_0312_129'];
+                                        llenarTablasFileSeguridad(persona, "tablaconsSeguridad", data.data[i].id);
+                                    }
+
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
                         break;
                     default:
                 }
@@ -6377,6 +6479,50 @@ function llenarTablas(obj, nameTabla) {
     row = row + '</tr>';
     
    $('#' + nameTabla + ' tbody').append(row);
+}
+function llenarTablasFileSeguridad(obj, nameTabla,id) {
+    // $('#tablaPersonas tbody')[0].innerHTML = "";
+    var row = '<tr>';
+    for (j = 1; j < obj.length; j++) {
+        if (obj[j].split(',')[0] !== null && obj[j].split(',')[0] !== "" && obj[j].split(',')[0] !== undefined && obj[j].split(',')[0] !== "null") {
+            if (obj[j].split(',')[1] !== undefined) {
+                row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  target="_blank"  href=' + apiUrl + 'construccion-seguridad/' + id + '/download/' + obj[j].split(',')[1] + ' title="Descargar" data-toggle="tooltip" id="' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-download"></i></a></td>';
+            }
+            else {
+                row = row + '<td>' + obj[j] + '</td>';
+            }
+         }
+        else {
+                row = row + '<td style="text-align: center;color:gray;"><a class="download-icon" disabled title="No existe archivo" data-toggle="tooltip"id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i  class="fa fa-download"></i></a></td>';
+            
+         }
+    }
+    row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip"id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] + '"><i class="fa fa-trash"></i></a></td>';
+    row = row + '</tr>';
+
+    $('#' + nameTabla + ' tbody').append(row);
+}
+function llenarTablasFileInspeccion(obj, nameTabla, id) {
+    // $('#tablaPersonas tbody')[0].innerHTML = "";
+    var row = '<tr>';
+    for (j = 1; j < obj.length; j++) {
+        if (obj[j].split(',')[0] !== null && obj[j].split(',')[0] !== "" && obj[j].split(',')[0] !== undefined && obj[j].split(',')[0] !== "null") {
+            if (obj[j].split(',')[1] !== undefined) {
+                row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  target="_blank"  href=' + apiUrl + 'disenio-inspeccion/' + id + '/download/' + obj[j].split(',')[1] + ' title="Descargar" data-toggle="tooltip" id="' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-download"></i></a></td>';
+            }
+            else {
+                row = row + '<td>' + obj[j] + '</td>';
+            }
+        }
+        else {
+            row = row + '<td style="text-align: center;color:gray;"><a class="download-icon" disabled title="No existe archivo" data-toggle="tooltip"id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i  class="fa fa-download"></i></a></td>';
+
+        }
+    }
+    row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip"id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] + '"><i class="fa fa-trash"></i></a></td>';
+    row = row + '</tr>';
+
+    $('#' + nameTabla + ' tbody').append(row);
 }
 
 
