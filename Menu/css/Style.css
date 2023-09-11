@@ -84,6 +84,7 @@ nav .navbar-nav li a {
 
 .banner {
     background-color: #265C4F;
+    height: 70px;
 }
 
 #MDB-logo {
@@ -174,7 +175,7 @@ nav .navbar-nav li a {
   #lmt {
     display: block;
     margin-top: -20px;
-    height: 70px;
+    height: 60px;
   }
 
 
@@ -185,7 +186,6 @@ nav .navbar-nav li a {
   
   #MDB-logo {
     display: block;
-    margin-top: -20px;
     height: 70px;
   }
   
