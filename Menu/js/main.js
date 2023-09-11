@@ -2069,10 +2069,18 @@ function consultaDatosConsGeneral(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
+                let data1;
+                if (webMethod==="get_construcciongeneral"){
+
+                    data1=data.data.datagrid
+
+                } else {
+                    data1=data.data
+                }
                 const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
                 existingDownloadIcons.forEach(icon => icon.remove());  
-                if (data.data.datagrid.length > 0) {
-                    llenarDatosActualizacionConsGeneral(data.data.datagrid);
+                if (data1.length > 0) {
+                    llenarDatosActualizacionConsGeneral(data1);
                     $("#btn_saveconsgeneral").hide();
                     $("#btn_newconsgeneral").show();
                     $("#btn_updateconsgeneral").show();
