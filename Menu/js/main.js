@@ -812,6 +812,8 @@ function inicializarEventos() {
                 $("#tablabasecons").show();
                 $("#databasegeneral").show();
                 $("#tablaunionCons").hide();
+                $("#tablaconsInspeccion").hide();
+                $("#tablaconsSeguridad").hide();
                 $("#tablaProfundidad").hide();
                 $("#tablaConsCruces").hide();
                 $("#tablaHermeticidad").hide();
@@ -822,9 +824,11 @@ function inicializarEventos() {
                 ocultartablasdisenio();
                 $("#tablaunionCons").show();
                 $("#dataconstruccionunion").show();
+                $("#tablaconsSeguridad").hide();
                 $("#tablabasecons").hide();
                 $("#databasegeneral").hide();
                 $("#tablaProfundidad").hide();
+                $("#tablaconsInspeccion").hide();
                 $("#tablaConsCruces").hide();
                 $("#tablaHermeticidad").hide();
                 $("#tablaConsCatodica").hide();
@@ -834,8 +838,10 @@ function inicializarEventos() {
                 ocultartablasdisenio();
                 $("#dataconstruccionunion").hide();
                 $("#tablaProfundidad").show();
+                $("#tablaconsSeguridad").hide();
                 $("#tablaunionCons").hide();
                 $("#tablabasecons").hide();
+                $("#tablaconsInspeccion").hide();
                 $("#databasegeneral").hide();
                 $("#tablaConsCruces").hide();
                 $("#tablaHermeticidad").hide();
@@ -846,7 +852,9 @@ function inicializarEventos() {
                 ocultartablasdisenio();
                 $("#dataconstruccionunion").hide();
                 $("#tablaConsCruces").show();
+                $("#tablaconsSeguridad").hide();
                 $("#tablaProfundidad").hide();
+                $("#tablaconsInspeccion").hide();
                 $("#tablaunionCons").hide();
                 $("#tablabasecons").hide();
                 $("#databasegeneral").hide();
@@ -856,11 +864,13 @@ function inicializarEventos() {
             case "Cons5":
                 ocultartablasdisenio();
                 $("#dataconstruccionunion").hide();
+                $("#tablaconsSeguridad").hide();
                 $("#tablaHermeticidad").show();
                 $("#tablaConsCruces").hide();
                 $("#tablaProfundidad").hide();
                 $("#tablaunionCons").hide();
                 $("#tablabasecons").hide();
+                $("#tablaconsInspeccion").hide();
                 $("#databasegeneral").hide();
                 $("#tablaConsCatodica").hide();
                 break;
@@ -869,6 +879,7 @@ function inicializarEventos() {
                 ocultartablasdisenio();
                 $("#dataconstruccionunion").hide();
                 $("#tablaconsInspeccion").show();
+                $("#tablaconsSeguridad").hide();
                 $("#datacatodica").hide();
                 $("#tablaHermeticidad").hide();
                 $("#tablaConsCruces").hide();
@@ -880,12 +891,14 @@ function inicializarEventos() {
             case "Cons7":
                 ocultartablasdisenio();
                 $("#dataconstruccionunion").hide();
+                $("#tablaconsSeguridad").hide();
                 $("#tablaConsCatodica").show();
                 $("#datacatodica").show();
                 $("#tablaHermeticidad").hide();
                 $("#tablaConsCruces").hide();
                 $("#tablaProfundidad").hide();
                 $("#tablaunionCons").hide();
+                $("#tablaconsInspeccion").hide();
                 $("#tablabasecons").hide();
                 $("#databasegeneral").hide();
                 break;
@@ -900,6 +913,7 @@ function inicializarEventos() {
                 $("#tablaunionCons").hide();
                 $("#tablabasecons").hide();
                 $("#databasegeneral").hide();
+                $("#tablaconsInspeccion").hide();
                 break;
             default:
         }
@@ -6420,14 +6434,16 @@ function consulta() {
    
 }
 function OcultarConstruccionConsulta() {
+    $("#dataconstruccionunion").hide();
+    $("#tablaconsSeguridad").hide();
+    $("#datacatodica").hide();
+    $("#tablaHermeticidad").hide();
+    $("#tablaConsCruces").hide();
+    $("#tablaProfundidad").hide();
+    $("#tablaunionCons").hide();
     $("#tablabasecons").hide();
     $("#databasegeneral").hide();
-    $("#tablaunionCons").hide();
-    $("#tablaProfundidad").hide();
-    $("#tablaConsCruces").hide();
-    $("#tablaHermeticidad").hide();
-    $("#tablaConsCatodica").hide();
-    $("#datacatodica").hide();
+    $("#tablaconsInspeccion").hide();
 }
 function ExportarDatos(registros) {
 
