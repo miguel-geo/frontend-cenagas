@@ -6052,7 +6052,7 @@ function consulta() {
                 op:4
             };
             $("#resumenestudio").text("Ducto: " + $("#cmbDucto_con option:selected").text());
-        }
+        }   
         else if (
             $("#cmbDucto_con option:selected").text() !== "Selecciona..." &&
             $("#cmbTramo_con option:selected").text() != "Selecciona..." &&
@@ -6247,7 +6247,7 @@ function consulta() {
                                         $('#resumenconsuniontecnica').text(data.data.tipotecnica[0].C_0302_0049);
                                     }
                                     for (i = 0; i < data.data.datagrid.length; i++) {
-                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0302_0049, data.data.datagrid[i].C_0302_0050, data.data.datagrid[i].C_0302_0051, data.data.datagrid[i].C_0302_0052];
+                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0302_0050, data.data.datagrid[i].C_0302_0051, data.data.datagrid[i].C_0302_0052];
                                         llenarTablas(persona, "tablaunionCons");
                                     }
                                     if (data.data.length > 0) {
