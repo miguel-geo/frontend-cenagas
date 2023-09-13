@@ -6102,7 +6102,7 @@ function consulta() {
                                         //Presion Max Kg
                                         $('#presmaxopecons').text(data.data.presionmaxkg[0].C_0206_0024);
                                     }
-                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", "C_0206_0017", "C_0206_0019", "C_0206_0023", "C_0206_0024"];
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", "C_0206_0017","C_0206_0018", "C_0206_0019","C_0206_0020","C_0206_0021","C_0206_0022", "C_0206_0023", "C_0206_0024","C_0206_0025","C_0206_0026"];
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablapresion", keysForPresion );
                                 }
                             },
@@ -6737,7 +6737,7 @@ function processTableDataAndHideNullColumns(data, tableId, keys) {
         });
     }
 
-    for (i = 1; i < data.length; i++) {
+    for (i = 0; i < data.length; i++) {
         var persona = keys.map(key => data[i][key]);
         // Update nonNullColumns array
         for (var j = 0; j < persona.length; j++) {
@@ -6749,16 +6749,16 @@ function processTableDataAndHideNullColumns(data, tableId, keys) {
         llenarTablas(persona, tableId);
     }
 
-    const nonNullColumns1 = nonNullColumns.slice(1);
-    for (var j = 1; j < nonNullColumns1.length; j++) {
+    // const nonNullColumns1 = nonNullColumns.slice(1);
+    // for (var j = 1; j < nonNullColumns1.length; j++) {
 
-        if (!nonNullColumns1[j]) {
-            $('#' + tableId + ' thead th').eq(j).hide();
-            $('#' + tableId + ' tbody tr').each(function() {
-                $(this).find('td').eq(j).hide();
-            });
-        }
-    }
+    //     if (!nonNullColumns1[j]) {
+    //         $('#' + tableId + ' thead th').eq(j).hide();
+    //         $('#' + tableId + ' tbody tr').each(function() {
+    //             $(this).find('td').eq(j).hide();
+    //         });
+    //     }
+    // }
 
 }
 
