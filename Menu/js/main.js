@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -2129,7 +2129,7 @@ function llenarDatosActualizacionConsGeneral(data) {
     $("#txtmatrellenobaseconst").val(data[0].C_0307_0110);
     $("#presionhermebasecons").val(data[0].C_0308_0110);
     $("#cmbunidadpresionhermebasecons").val(data[0].unidad_presion_prueba);
-    $("#cmtiporecubrimientobase").val( data[0].C_0311_121);
+    $("#cmtiporecubrimientobase").val( data[0].C_0311_121_id);
 
     idConsbase = data[0].id;
     inhabilitarform("#constbasefrm", true);
@@ -6071,10 +6071,24 @@ function consulta() {
 
                                 if (data.success) {
                                     for (i = 0; i < data.data.datagrid.length; i++) {
-                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0201_0006, data.data.datagrid[i].C_0208_0029];
-                                        llenarTablas(persona, "tablaPersonas");
                                         contar_longitud = contar_longitud + data.data.datagrid[i].C_0201_0006
                                     }
+                                    var keysForDisenio = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico",
+                                        'C_0201_0006',
+                                        'C_0202_0007',
+                                        'C_0202_0008',
+                                        'C_0203_0009',
+                                        'C_0203_0010',
+                                        'C_0204_0011',
+                                        'C_0207_0027',
+                                        'C_0207_0028',
+                                        'C_0208_0029',
+                                        'C_0209_0030',
+                                        'C_0209_0030_2',
+                                        'C_0210_0031',
+                                        'C_0210_0032',
+                                        'C_0210_0033'];
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablaPersonas", keysForDisenio );
                                     contar_longitud=contar_longitud/1000
                                     $('#longitud_total').text(contar_longitud);
 
@@ -6124,10 +6138,21 @@ function consulta() {
                                         //Tipo de recubrimiento
                                         $('#prottiporecubrimiento').text(data.data.tiporecubrimiento[0].C_0211_0034);
                                     }
-                                    for (i = 0; i < data.data.datagrid.length; i++) {
-                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0211_0043, data.data.datagrid[i].C_0211_0044, data.data.datagrid[i].C_0211_0045, data.data.datagrid[i].C_0211_0046];
-                                        llenarTablas(persona, "tablaproteccion");
-                                    }
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                                    'C_0211_0034',
+                                    'C_0211_0037',
+                                    'C_0211_0038',
+                                    'C_0211_0039',
+                                    'C_0211_0040',
+                                    'C_0211_0044',
+                                    'C_0211_0045',
+                                    'C_0211_0046',
+                                    'C_0211_0047',
+                                    'C_0211_0048',
+                                    'C_0211_0049',
+                                    'C_0211_0050',
+                                    'C_0211_0051'];
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablaproteccion", keysForPresion );
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -6161,13 +6186,16 @@ function consulta() {
                                         //Tipo recubrimiento
                                         $('#tiporecconsbase').text(data.data.datagrid[0].C_0311_121);
                                     }
-                                    for (i = 0; i < data.data.datagrid.length; i++) {
-                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0308_0110];
-                                        llenarTablas(persona, "tablabasecons");
-                                    }
-                                    if (data.data.datagrid.length > 0) {
-                                        // ExportarDatos(data.data);
-                                    }
+
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                                    'C_0301_0048',//fecha
+                                    'C_0306_0108',//metodo recubrumiento
+                                    'C_0307_0109',//tipo suelo
+                                    'C_0307_0110',//Material de rellon
+                                    'C_0308_0110',//Presion de hermeticidad
+                                    'C_0308_0111'];//Tipo de recubrumiento
+
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablabasecons", keysForPresion );
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -6188,13 +6216,18 @@ function consulta() {
                                         //Tipo de técnica
                                         $('#resumenconsuniontecnica').text(data.data.tipotecnica[0].C_0302_0049);
                                     }
-                                    for (i = 0; i < data.data.datagrid.length; i++) {
-                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0302_0049, data.data.datagrid[i].C_0302_0050, data.data.datagrid[i].C_0302_0051, data.data.datagrid[i].C_0302_0052];
-                                        llenarTablas(persona, "tablaunionCons");
-                                    }
-                                    if (data.data.length > 0) {
-                                        // ExportarDatos(data.data);
-                                    }
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                                    'C_0302_0049',
+                                    'C_0302_0050',
+                                    'C_0302_0051',
+                                    'C_0302_0052',
+                                    'C_0302_0053',
+                                    'C_0302_0054',
+                                    'C_0302_0055',
+                                    'C_0302_0056',
+                                    'C_0302_0057'];
+                                    
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablaunionCons", keysForPresion );
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -6212,13 +6245,21 @@ function consulta() {
                             success: function (data) {
                                 if (data.success) {
                                     
-                                    for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0303_0058, data.data[i].C_0303_0059, data.data[i].C_0303_0060, data.data[i].C_0303_0061];
-                                        llenarTablas(persona, "tablaProfundidad");
-                                    }
-                                    if (data.data.length > 0) {
-                                        // ExportarDatos(data.data);
-                                    }
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                                    'C_0303_0058',
+                                    'C_0303_0059',
+                                    'C_0303_0060',
+                                    'C_0303_0061',
+                                    'C_0303_0062',
+                                    'C_0303_0063',
+                                    'C_0303_0064',
+                                    'C_0303_0065',
+                                    'C_0303_0066',
+                                    'C_0303_0067',
+                                    'C_0303_0068',
+                                    'C_0303_0069'];
+                                    
+                                    processTableDataAndHideNullColumns(data.data, "tablaProfundidad", keysForPresion );
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -6724,7 +6765,7 @@ $(document).ready(function() {
 
 
 function processTableDataAndHideNullColumns(data, tableId, keys) {
-
+    
     var nonNullColumns = [];
     var numCols = keys.length;
     
@@ -6738,29 +6779,39 @@ function processTableDataAndHideNullColumns(data, tableId, keys) {
     }
 
     for (i = 0; i < data.length; i++) {
-        var persona = keys.map(key => data[i][key]);
+        var persona = keys.map(key => {
+            // Check if the value matches the datetime format
+            var match = /^(\d{4}-\d{2}-\d{2}) \d{2}:\d{2}:\d{2}$/.exec(data[i][key]);
+            if (match) {
+                // If it matches, return only the date part
+                return match[1];
+            }
+            return data[i][key];
+        });
+
         // Update nonNullColumns array
         for (var j = 0; j < persona.length; j++) {
-            if (persona[j] !== null) {
+            if (persona[j] !== null ) {
                 nonNullColumns[j] = true;
             }
         }
+        
 
         llenarTablas(persona, tableId);
     }
 
-    // const nonNullColumns1 = nonNullColumns.slice(1);
-    // for (var j = 1; j < nonNullColumns1.length; j++) {
+    const nonNullColumns1 = nonNullColumns.slice(1);
+    for (var j = 1; j < nonNullColumns1.length; j++) {
 
-    //     if (!nonNullColumns1[j]) {
-    //         $('#' + tableId + ' thead th').eq(j).hide();
-    //         $('#' + tableId + ' tbody tr').each(function() {
-    //             $(this).find('td').eq(j).hide();
-    //         });
-    //     }
-    // }
-
+        if (!nonNullColumns1[j]) {
+            $('#' + tableId + ' thead th').eq(j).hide();
+            $('#' + tableId + ' tbody tr').each(function() {
+                $(this).find('td').eq(j).hide();
+            });
+        }
+    }
 }
+
 
 
 
