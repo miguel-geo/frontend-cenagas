@@ -6280,9 +6280,15 @@ function consulta() {
                                         var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0304_0070, data.data[i].C_0304_0071, data.data[i].C_0304_0072, data.data[i].C_0304_0073, data.data[i].C_0304_0074];
                                         llenarTablas(persona, "tablaConsCruces");
                                     }
-                                    if (data.data.length > 0) {
-                                        // ExportarDatos(data.data);
-                                    }
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                                    'C_0304_0070',
+                                    'C_0304_0071',
+                                    'C_0304_0072',
+                                    'C_0304_0073',
+                                    'C_0304_0074'
+                                ];
+                                    
+                                    processTableDataAndHideNullColumns(data.data, "tablaConsCruces", keysForPresion );
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -6303,13 +6309,19 @@ function consulta() {
                                         //Tipo catódica
                                         $('#tipocatodicacons').text(data.data[0].C_0310_116);
                                     }
-                                    for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0305_0097, data.data[i].C_0305_0098.split(" ")[0], data.data[i].C_0305_0099, data.data[i].C_0305_0100, data.data[i].C_0305_0101];
-                                        llenarTablas(persona, "tablaHermeticidad");
-                                    }
-                                    if (data.data.length > 0) {
-                                        // ExportarDatos(data.data);
-                                    }
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                                    'C_0305_0097',
+                                    'C_0305_0098',
+                                    'C_0305_0099',
+                                    'C_0305_0100',
+                                    'C_0305_0101',
+                                    'C_0305_0102',
+                                    'C_0305_0103',
+                                    'C_0305_0104',
+                                    'C_0305_0105',
+                                    'C_0305_0106'];
+                                    
+                                    processTableDataAndHideNullColumns(data.data, "tablaHermeticidad", keysForPresion );
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -6330,10 +6342,15 @@ function consulta() {
                                         //Tipo catódica
                                         $('#tipocatodicacons').text(data.data.conscato[0].C_0310_116);
                                     }
-                                    for (i = 0; i < data.data.datagrid.length; i++) {
-                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].C_0310_117, data.data.datagrid[i].C_0310_118, data.data.datagrid[i].C_0310_119, data.data.datagrid[i].C_0310_120, data.data.datagrid[i].nombre];
-                                        llenarTablas(persona, "tablaConsCatodica");
-                                    }
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                                    'C_0310_116',
+                                    'C_0310_117',
+                                    'nombre',
+                                    'C_0310_118',
+                                    'C_0310_119',
+                                    'C_0310_120'];
+                                    
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablaConsCatodica", keysForPresion );
                                         
                                     }
                                 },
