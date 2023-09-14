@@ -6158,9 +6158,9 @@ function consulta() {
                                     }
                                     var keysForDisenio = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico",
                                         'C_0201_0006',
-                                        'C_0202_0007',
+                                        //'C_0202_0007',
                                         'C_0202_0008',
-                                        'C_0203_0009',
+                                        //'C_0203_0009',
                                         'C_0203_0010',
                                         'C_0204_0011',
                                         'C_0207_0027',
