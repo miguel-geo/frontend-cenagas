@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://127.0.0.1:8000/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -6662,11 +6662,11 @@ function llenarTablas(obj, nameTabla) {
             // If not, create a new tbody for this category
             $('#'+nameTabla).append('<tbody id="' + escapedCategory+temaconsultavar + '"><tr><td colspan="100%" style="background-color:#f5f5f5; text-align:center;"><strong>Tramo: ' + category + '</strong></td></tr></tbody>');
         }
-        console.log(escapedCategory+temaconsultavar)
+
     // Append row to the appropriate tbody
             $('#' + escapedCategory+temaconsultavar).append(row);}
     else{
-        console.log(nivelconsulta)
+
         $('#' + nameTabla).append(row);
 
     }
@@ -7070,7 +7070,6 @@ function processTableDataAndHideNullColumns(data, tableId, keys) {
     var numCols = keys.length;
     
 
-    console.log(data)
     // Initialize nonNullColumns and reset visibility of all columns
     for (var k = 0; k < numCols; k++) {
         nonNullColumns.push(false);
