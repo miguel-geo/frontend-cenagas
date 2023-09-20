@@ -6615,6 +6615,22 @@ function loadDisenioGral() {
     
 //    $('#' + nameTabla + ' tbody').append(row);
 // }
+$(document).ready(function() {
+    $('#tablas').on('click', 'table tbody tr.hideable-row', function() {
+        // Toggle the visibility of the following rows until the next 'hideable-row' or the end of the tbody
+        var $nextRows = $(this).nextAll();
+        $nextRows.each(function() {
+            if ($(this).hasClass('hideable-row')) {
+                return false; // Exit the loop
+            }
+            $(this).toggle();
+        });
+    });
+});
+
+
+
+
 
 function llenarTablas(obj, nameTabla) {
     
