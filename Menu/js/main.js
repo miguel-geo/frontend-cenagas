@@ -6615,19 +6615,33 @@ function loadDisenioGral() {
     
 //    $('#' + nameTabla + ' tbody').append(row);
 // }
-$(document).ready(function() {
-    $('#tablas').on('click', 'table tbody tr.hideable-row', function() {
-        // Toggle the visibility of the following rows until the next 'hideable-row' or the end of the tbody
-        var $nextRows = $(this).nextAll();
-        $nextRows.each(function() {
-            if ($(this).hasClass('hideable-row')) {
-                return false; // Exit the loop
-            }
-            $(this).toggle();
-        });
-    });
-});
 
+// $(document).ready(function() {
+//     $('#tablas').on('click', 'table tbody tr.hideable-row', function() {
+//         // Toggle the visibility of the following rows until the next 'hideable-row' or the end of the tbody
+//         var $nextRows = $(this).nextAll();
+//         $nextRows.each(function() {
+//             if ($(this).hasClass('hideable-row')) {
+//                 return false; // Exit the loop
+//             }
+//             $(this).slideToggle({
+//                 duration: 200, // You can adjust the duration as needed
+//                 easing: 'linear' // One of jQuery UI's easing options
+//             }); // This will animate the visibility toggle
+//         });
+//     });
+// });
+
+
+$(document).ready(function() {
+$('#tablas').on('click', 'table tbody tr.hideable-row', function() {
+    // Get the clicked row's parent tbody
+    var parentTbody = $(this).closest('tbody');
+    
+    // Toggle the rows below the clicked row in the same tbody until the next hideable-row
+    $(this).closest('tr').nextUntil('.hideable-row').toggleClass('d-none');
+});
+});
 
 
 
@@ -6638,7 +6652,7 @@ function llenarTablas(obj, nameTabla) {
     
     var category = obj.pop(); 
     // Assuming 4th column determines category
-    var row = '<tr>';
+    var row = '<tr class="content-row">';
     for (j = 1; j < obj.length; j++) {
         
         row = row + '<td>' + obj[j] + '</td>';
@@ -6660,7 +6674,7 @@ function llenarTablas(obj, nameTabla) {
         if ($('#' + escapedCategory+temaconsultavar).length === 0) {
            
             // If not, create a new tbody for this category
-            $('#'+nameTabla).append('<tbody id="' + escapedCategory+temaconsultavar + '"><tr><td colspan="100%" style="background-color:#f5f5f5; text-align:center;"><strong>Tramo: ' + category + '</strong></td></tr></tbody>');
+            $('#'+nameTabla).append('<tbody class="dynamic-tbody" id="' + escapedCategory+temaconsultavar + '"><tr class="hideable-row"><td colspan="100%" style="background-color:#f5f5f5; text-align:center;"><a class="toggle-category"><strong>Tramo: ' + category + '</strong></a></td></tr></tbody>');
         }
 
     // Append row to the appropriate tbody
