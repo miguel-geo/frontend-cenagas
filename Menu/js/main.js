@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://127.0.0.1:8000/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -895,6 +895,7 @@ function inicializarEventos() {
                 $("#tablaunionCons").hide();
                 $("#tablabasecons").hide();
                 $("#databasegeneral").hide();
+                $("#tablaConsCatodica").hide();
                 $("#datadisenioproteccion").hide();
                 break;
             case "Cons7":
@@ -921,6 +922,7 @@ function inicializarEventos() {
                 $("#tablaConsCruces").hide();
                 $("#tablaProfundidad").hide();
                 $("#tablaunionCons").hide();
+                $("#tablaConsCatodica").hide();
                 $("#tablabasecons").hide();
                 $("#databasegeneral").hide();
                 $("#tablaconsInspeccion").hide();
@@ -6057,6 +6059,9 @@ function loadidentificacion() {
     });
 }
 
+
+
+var nivelconsulta=""
 function consulta() {
     contar_longitud=0;
     var params;
@@ -6076,6 +6081,7 @@ function consulta() {
                 id: $("#cmbDucto_con option:selected").val(),
                 op:4
             };
+            nivelconsulta="Ducto"
             $("#resumenestudio").text("Ducto: " + $("#cmbDucto_con option:selected").text());
         }   
         else if (
@@ -6088,6 +6094,7 @@ function consulta() {
                 id: $("#cmbTramo_con option:selected").val(),
                 op: 3
             };
+            nivelconsulta="Tramo"
             $("#resumenestudio").text("Ducto: " + $("#cmbDucto_con option:selected").text() + " -->"+" Tramo: " + $("#cmbTramo_con option:selected").text());
         }
         else if (
@@ -6100,6 +6107,7 @@ function consulta() {
                 id: $("#cmbSegmento_con option:selected").val(),
                 op: 2
             };
+            nivelconsulta="Segmento"
             $("#resumenestudio").text("Ducto: " + $("#cmbDucto_con option:selected").text() + " -->" + " Tramo: " + $("#cmbTramo_con option:selected").text() + " -->"+ " Segmento: " + $("#cmbSegmento_con option:selected").text());
         }
         else if (
@@ -6112,6 +6120,7 @@ function consulta() {
                 id: $("#cmbAreas_con option:selected").val(),
                 op: 1
             };
+            nivelconsulta="Area"
             $("#resumenestudio").text("Ducto: " + $("#cmbDucto_con option:selected").text() + " -->" + " Tramo: " + $("#cmbTramo_con option:selected").text() + " -->" + " Segmento: " + $("#cmbSegmento_con option:selected").text() + " -->" +" Área unitaria: "+$("#cmbAreas_con option:selected").text());
         }
 
@@ -6121,6 +6130,7 @@ function consulta() {
                 
                     case "Dis1":
                         $('#tablaPersonas tbody')[0].innerHTML = "";
+                        $('#tablaPersonas tbody:not(:first)').remove();
                         var webMethod = "get_diseniogeneral";
                         $.ajax({
                             type: "POST",
@@ -6170,7 +6180,7 @@ function consulta() {
                                         'C_0209_0030_2',
                                         'C_0210_0031',
                                         'C_0210_0032',
-                                        'C_0210_0033'];
+                                        'C_0210_0033','tramo'];
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablaPersonas", keysForDisenio );
                                     contar_longitud=contar_longitud/1000
                                     $('#longitud_total').text(contar_longitud);
@@ -6184,6 +6194,7 @@ function consulta() {
                         break;                     
                     case "Dis2":
                         $('#tablapresion tbody')[0].innerHTML = "";
+                        $('#tablapresion tbody:not(:first)').remove();
                         var webMethodPresion = "get_Presion";
                         $.ajax({
                             type: "POST",
@@ -6199,7 +6210,7 @@ function consulta() {
                                         //Presion Max Kg
                                         $('#presmaxopecons').text(data.data.presionmaxkg[0].C_0206_0024);
                                     }
-                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", "C_0206_0017","C_0206_0018", "C_0206_0019","C_0206_0020","C_0206_0021","C_0206_0022", "C_0206_0023", "C_0206_0024","C_0206_0025","C_0206_0026"];
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", "C_0206_0017","C_0206_0018", "C_0206_0019","C_0206_0020","C_0206_0021","C_0206_0022", "C_0206_0023", "C_0206_0024","C_0206_0025","C_0206_0026",'tramo'];
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablapresion", keysForPresion );
                                 }
                             },
@@ -6210,6 +6221,8 @@ function consulta() {
                         break;
                     case "Dis3":
                         $('#tablaproteccion tbody')[0].innerHTML = "";
+
+                        $('#tablaproteccion tbody:not(:first)').remove();
                         var webMethodProteccion = "get_Proteccion";
                         $.ajax({
                             type: "POST",
@@ -6234,7 +6247,8 @@ function consulta() {
                                     'C_0211_0048',
                                     'C_0211_0049',
                                     'C_0211_0050',
-                                    'C_0211_0051'];
+                                    'C_0211_0051',
+                                    'tramo'];
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablaproteccion", keysForPresion );
                                 }
                             },
@@ -6250,6 +6264,7 @@ function consulta() {
                 switch (temaconsultaconstruccion) {
                     case "Cons1":
                         $('#tablabasecons tbody')[0].innerHTML = "";
+                        $('#tablabasecons tbody:not(:first)').remove();
                         var webMethodCatodica = "get_construcciongeneral";
                         $.ajax({
                             type: "POST",
@@ -6276,7 +6291,8 @@ function consulta() {
                                     'C_0307_0109',//tipo suelo
                                     'C_0307_0110',//Material de rellon
                                     'C_0308_0110',//Presion de hermeticidad
-                                    'C_0308_0111'];//Tipo de recubrumiento
+                                    'C_0308_0111',
+                                'tramo'];//Tipo de recubrumiento
 
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablabasecons", keysForPresion );
                                 }
@@ -6288,6 +6304,7 @@ function consulta() {
                         break;
                     case "Cons2":
                         $('#tablaunionCons tbody')[0].innerHTML = "";
+                        $('#tablaunionCons tbody:not(:first)').remove();
                         var webMethodUnion = "get_construccionunion";
                         $.ajax({
                             type: "POST",
@@ -6308,7 +6325,7 @@ function consulta() {
                                     'C_0302_0054',
                                     'C_0302_0055',
                                     'C_0302_0056',
-                                    'C_0302_0057'];
+                                    'C_0302_0057','tramo'];
                                     
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablaunionCons", keysForPresion );
                                 }
@@ -6320,6 +6337,7 @@ function consulta() {
                         break;
                     case "Cons3":
                         $('#tablaProfundidad tbody')[0].innerHTML = "";
+                        $('#tablaProfundidad tbody:not(:first)').remove();
                         var webMethodProfundidad = "get_construccionprofundidad";
                         $.ajax({
                             type: "POST",
@@ -6340,7 +6358,7 @@ function consulta() {
                                     'C_0303_0066',
                                     'C_0303_0067',
                                     'C_0303_0068',
-                                    'C_0303_0069'];
+                                    'C_0303_0069','tramo'];
                                     
                                     processTableDataAndHideNullColumns(data.data, "tablaProfundidad", keysForPresion );
                                 }
@@ -6352,6 +6370,7 @@ function consulta() {
                         break;
                     case "Cons4":
                         $('#tablaConsCruces tbody')[0].innerHTML = "";
+                        $('#tablaConsCruces tbody:not(:first)').remove();
                         var webMethodCruces = "get_construccioncruces";
                         $.ajax({
                             type: "POST",
@@ -6359,18 +6378,15 @@ function consulta() {
                             data: params,
                             success: function (data) {
                                 if (data.success) {
-                                    for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].coordenada_especifica, data.data[i].kilometro_especifico, data.data[i].C_0304_0070, data.data[i].C_0304_0071, data.data[i].C_0304_0072, data.data[i].C_0304_0073, data.data[i].C_0304_0074];
-                                        llenarTablas(persona, "tablaConsCruces");
-                                    }
+                                    
                                     var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
                                     'C_0304_0070',
                                     'C_0304_0071',
                                     'C_0304_0072',
                                     'C_0304_0073',
-                                    'C_0304_0074'
+                                    'C_0304_0074',
+                                    'tramo'
                                 ];
-                                    
                                     processTableDataAndHideNullColumns(data.data, "tablaConsCruces", keysForPresion );
                                 }
                             },
@@ -6381,6 +6397,7 @@ function consulta() {
                         break;
                     case "Cons5"://tablaHermeticidad
                         $('#tablaHermeticidad tbody')[0].innerHTML = "";
+                        $('#tablaHermeticidad tbody:not(:first)').remove();
                         var webMethodHermeticidad = "get_construccionhermeticidad";
                         $.ajax({
                             type: "POST",
@@ -6402,7 +6419,7 @@ function consulta() {
                                     'C_0305_0103',
                                     'C_0305_0104',
                                     'C_0305_0105',
-                                    'C_0305_0106'];
+                                    'C_0305_0106','tramo'];
                                     
                                     processTableDataAndHideNullColumns(data.data, "tablaHermeticidad", keysForPresion );
                                 }
@@ -6414,6 +6431,7 @@ function consulta() {
                         break;
                     case "Cons6":
                         $('#tablaconsInspeccion tbody')[0].innerHTML = "";
+                        $('#tablaconsInspeccion tbody:not(:first)').remove();
                         var webMethodInspeccion = "get_construccioninspeccion";
                         $.ajax({
                             type: "POST",
@@ -6458,6 +6476,7 @@ function consulta() {
                         break;
                     case "Cons7":
                         $('#tablaConsCatodica tbody')[0].innerHTML = "";
+                        $('#tablaConsCatodica tbody:not(:first)').remove();
                         var webMethodCatodica = "get_construccioncatodica";
                         $.ajax({
                             type: "POST",
@@ -6475,7 +6494,8 @@ function consulta() {
                                     'nombre',
                                     'C_0310_118',
                                     'C_0310_119',
-                                    'C_0310_120'];
+                                    'C_0310_120',
+                                'tramo'];
                                     
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablaConsCatodica", keysForPresion );
                                         
@@ -6584,16 +6604,64 @@ function loadDisenioGral() {
     });
 }
 
+// function llenarTablas(obj, nameTabla) {
+//    // $('#tablaPersonas tbody')[0].innerHTML = "";
+//     var row = '<tr>';
+//     for (j = 1; j < obj.length; j++) {
+//         row = row + '<td>' + obj[j] + '</td>';
+//     }
+//     row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip"id="ra' + obj[0] + '" data-id="' + obj[0] +'"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] +'"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] +'"><i class="fa fa-trash"></i></a></td>';
+//     row = row + '</tr>';
+    
+//    $('#' + nameTabla + ' tbody').append(row);
+// }
+
 function llenarTablas(obj, nameTabla) {
-   // $('#tablaPersonas tbody')[0].innerHTML = "";
+    
+    
+    
+    var category = obj.pop(); 
+    // Assuming 4th column determines category
     var row = '<tr>';
     for (j = 1; j < obj.length; j++) {
+        
         row = row + '<td>' + obj[j] + '</td>';
     }
-    row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip"id="ra' + obj[0] + '" data-id="' + obj[0] +'"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] +'"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] +'"><i class="fa fa-trash"></i></a></td>';
+    row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip" id="ra' + obj[0] + '" data-id="' + obj[0] +'"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] +'"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] +'"><i class="fa fa-trash"></i></a></td>';
     row = row + '</tr>';
     
-   $('#' + nameTabla + ' tbody').append(row);
+   
+    if (nivelconsulta==="Ducto"){
+        var temaconsultavar;
+        if (temaconsulta==="T1"){
+            temaconsultavar=temaconsultadisenio
+        } else if (temaconsulta==="T2"){
+            temaconsultavar=temaconsultaconstruccion
+        }
+        var escapedCategory = removeSpecialCharacters(category)
+        
+        // Check if tbody for this category exists
+        if ($('#' + escapedCategory+temaconsultavar).length === 0) {
+           
+            // If not, create a new tbody for this category
+            $('#'+nameTabla).append('<tbody id="' + escapedCategory+temaconsultavar + '"><tr><td colspan="100%" style="background-color:#f5f5f5; text-align:center;"><strong>Tramo: ' + category + '</strong></td></tr></tbody>');
+        }
+        console.log(escapedCategory+temaconsultavar)
+    // Append row to the appropriate tbody
+            $('#' + escapedCategory+temaconsultavar).append(row);}
+    else{
+        console.log(nivelconsulta)
+        $('#' + nameTabla).append(row);
+
+    }
+}
+
+function removeSpecialCharacters(str) {
+    return str.replace(/[^a-zA-Z0-9_]/g, '');
+}
+
+function jqSelectorEscape(str) {
+    return str.replace(/([!"#$%&'()*+,.\/:;<=>?@[\]^`{|}~ ])/g, '\\$1');
 }
 function llenarTablasFileSeguridad(obj, nameTabla,id) {
     // $('#tablaPersonas tbody')[0].innerHTML = "";
@@ -6977,10 +7045,16 @@ $(document).ready(function() {
 
 
 function processTableDataAndHideNullColumns(data, tableId, keys) {
+    $('#' + tableId + ' tbody:not(:first)').remove();
     
+    $('#' + tableId+ ' tbody').each(function() {
+        $(this).empty();
+    });
     var nonNullColumns = [];
     var numCols = keys.length;
     
+
+    console.log(data)
     // Initialize nonNullColumns and reset visibility of all columns
     for (var k = 0; k < numCols; k++) {
         nonNullColumns.push(false);
@@ -7008,7 +7082,7 @@ function processTableDataAndHideNullColumns(data, tableId, keys) {
             }
         }
         
-
+      
         llenarTablas(persona, tableId);
     }
 
