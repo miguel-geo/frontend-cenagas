@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -839,6 +839,7 @@ function inicializarEventos() {
     const selectTemasConstruccion = document.getElementById('cmbTemasConstruccion_con');
     selectTemasConstruccion.addEventListener('change', function handleChange(event) {
         temaconsultaconstruccion = event.target.value;
+        
         switch (event.target.value) {
             case "Cons1":
                 ocultartablasdisenio();
