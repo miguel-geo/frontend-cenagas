@@ -13,6 +13,33 @@
     z-index: 100000;
 }
 
+.table-responsive{
+    overflow-x:visible;
+}
+
+#tablas {
+    margin-top: 30px;
+        /* Set a fixed width or max-width for the container */
+    overflow-x: auto;       /* Enable horizontal scrolling */
+    white-space: nowrap;    /* Prevent content from wrapping to the next line */
+    border: 1px solid #ccc; /* Optional: just to visualize the box */
+}
+
+.content-row td, .content-row th {
+    border: 1px solid #dee2e6 !important; /* You can adjust the border color and style as needed */
+}
+
+
+ .hideable-row {
+    cursor: pointer;
+}
+
+/* .content-row {
+    max-height: 40px;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}  */
+
 .loader__element {
     border-radius: 100%;
     border: var(--size) solid var(--point-color);
@@ -227,6 +254,7 @@ nav .navbar-nav li a {
       height: 70px;
     }
     
+ 
   
     #Titulo{margin-top: -15px;}
   
