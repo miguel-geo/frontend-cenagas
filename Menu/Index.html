@@ -2276,7 +2276,7 @@
                                     </div>
                                 </div>
                                 <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="">
+                                    <img src="images/formCENAGAS.jpg" onclick="fnshowAnalisisDocumental()" class="card-img-top" alt="..." style="cursor: pointer;" onclick="">
                                     <div class="card-body">
                                         <h6 class="card-title">Información documental</h6>
                                         <p class="card-text">En éste formulario contendrá información relacionada a...</p>
@@ -2620,101 +2620,145 @@
 
                         <div id="documentallisisform" style="display:none;margin-top:15px;">
                             <form role="form" id="identi-form" class="needs-validation">
-                                <div class="input-group mb-3" id="filefrmplano">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductoanalisisdocumental" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramoanalisisdocumental" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareaanalisisdocumental" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_iden_x_analisis_documental" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_iden_y_analisis_documental" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_esp_iden_analisis_documental" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3" data-column="diagramas_tuberia">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Diagramas de tubería e instrumentación (DTI)</span>
                                     </div>
                                     <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="fileplanosmapasreportes"
-                                               aria-describedby="fileplanosmapasreportes" lang="es">
-                                        <label class="custom-file-label" for="fileplanosmapasreportes">Escoje el archivo</label>
+                                        <input type="file" class="custom-file-input setAlg" id="diagramas_tuberia"
+                                               aria-describedby="diagramas_tuberia" lang="es">
+                                        <label class="custom-file-label" for="diagramas_tuberia">Escoje el archivo</label>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3" id="filefrmplano">
+                                <div class="input-group mb-3" data-column="planos_actualizados_ducto">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Planos actualizados del Ducto, Segmento o sección</span>
                                     </div>
                                     <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="fileplanosmapasreportes"
-                                               aria-describedby="fileplanosmapasreportes" lang="es">
-                                        <label class="custom-file-label" for="fileplanosmapasreportes">Escoje el archivo</label>
+                                        <input type="file" class="custom-file-input setAlg" id="planos_actualizados_ducto"
+                                               aria-describedby="planos_actualizados_ducto" lang="es">
+                                        <label class="custom-file-label" for="planos_actualizados_ducto">Escoje el archivo</label>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3" id="filefrmplano">
+                                <div class="input-group mb-3" data-column="certificados_materiales">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Certificados de materiales</span>
                                     </div>
                                     <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="fileplanosmapasreportes"
-                                               aria-describedby="fileplanosmapasreportes" lang="es">
-                                        <label class="custom-file-label" for="fileplanosmapasreportes">Escoje el archivo</label>
+                                        <input type="file" class="custom-file-input setAlg" id="certificados_materiales"
+                                               aria-describedby="certificados_materiales" lang="es">
+                                        <label class="custom-file-label" for="certificados_materiales">Escoje el archivo</label>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3" id="filefrmplano">
+                                <div class="input-group mb-3" data-column="planos_reportes">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Planos y reportes de reconocimiento de la franja de seguridad</span>
                                     </div>
                                     <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="fileplanosmapasreportes"
-                                               aria-describedby="fileplanosmapasreportes" lang="es">
-                                        <label class="custom-file-label" for="fileplanosmapasreportes">Escoje el archivo</label>
+                                        <input type="file" class="custom-file-input setAlg" id="planos_reportes"
+                                               aria-describedby="planos_reportes" lang="es">
+                                        <label class="custom-file-label" for="planos_reportes">Escoje el archivo</label>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3" id="filefrmplano">
+                                <div class="input-group mb-3" data-column="reportes_condiciones_seguidad">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Reportes sobre las condiciones de seguridad</span>
                                     </div>
                                     <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="fileplanosmapasreportes"
-                                               aria-describedby="fileplanosmapasreportes" lang="es">
-                                        <label class="custom-file-label" for="fileplanosmapasreportes">Escoje el archivo</label>
+                                        <input type="file" class="custom-file-input setAlg" id="reportes_condiciones_seguidad"
+                                               aria-describedby="reportes_condiciones_seguidad" lang="es">
+                                        <label class="custom-file-label" for="reportes_condiciones_seguidad">Escoje el archivo</label>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3" id="filefrmplano">
+                                <div class="input-group mb-3" data-column="especificaciones_estandares_regulados">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Especificaciones y estándares utilizados por los Regulados</span>
                                     </div>
                                     <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="fileplanosmapasreportes"
-                                               aria-describedby="fileplanosmapasreportes" lang="es">
-                                        <label class="custom-file-label" for="fileplanosmapasreportes">Escoje el archivo</label>
+                                        <input type="file" class="custom-file-input setAlg" id="especificaciones_estandares_regulados"
+                                               aria-describedby="especificaciones_estandares_regulados" lang="es">
+                                        <label class="custom-file-label" for="especificaciones_estandares_regulados">Escoje el archivo</label>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3" id="filefrmplano">
+                                <div class="input-group mb-3" data-column="planes_respuesta_emergencia">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Planes de respuesta a emergencia</span>
                                     </div>
                                     <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="fileplanosmapasreportes"
-                                               aria-describedby="fileplanosmapasreportes" lang="es">
-                                        <label class="custom-file-label" for="fileplanosmapasreportes">Escoje el archivo</label>
+                                        <input type="file" class="custom-file-input setAlg" id="planes_respuesta_emergencia"
+                                               aria-describedby="planes_respuesta_emergencia" lang="es">
+                                        <label class="custom-file-label" for="planes_respuesta_emergencia">Escoje el archivo</label>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3" id="filefrmplano">
+                                <div class="input-group mb-3" data-column="registro_cumplimiento">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Registro de Cumplimiento</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="registro_cumplimiento"
+                                               aria-describedby="registro_cumplimiento" lang="es">
+                                        <label class="custom-file-label" for="registro_cumplimiento">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="evaluaciones_tecnicas">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Evaluaciones Técnicas</span>
                                     </div>
                                     <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="fileplanosmapasreportes"
-                                               aria-describedby="fileplanosmapasreportes" lang="es">
-                                        <label class="custom-file-label" for="fileplanosmapasreportes">Escoje el archivo</label>
+                                        <input type="file" class="custom-file-input setAlg" id="evaluaciones_tecnicas"
+                                               aria-describedby="evaluaciones_tecnicas" lang="es">
+                                        <label class="custom-file-label" for="evaluaciones_tecnicas">Escoje el archivo</label>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3" id="filefrmplano">
+                                <div class="input-group mb-3" data-column="manuales_fabricante">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Manuales del fabricante</span>
                                     </div>
                                     <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="fileplanosmapasreportes"
-                                               aria-describedby="fileplanosmapasreportes" lang="es">
-                                        <label class="custom-file-label" for="fileplanosmapasreportes">Escoje el archivo</label>
+                                        <input type="file" class="custom-file-input setAlg" id="manuales_fabricante"
+                                               aria-describedby="manuales_fabricante" lang="es">
+                                        <label class="custom-file-label" for="manuales_fabricante">Escoje el archivo</label>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisPlanos()">Cancelar</button>
-                                    <button type="button" id="btn_newdocumentoss_analisis" onclick="nuevoAnalisisGeoespacial()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
-                                    <button type="button" id="btn_updatedocumentos_analisis" onclick="updateAnalisisGeoespacial()" style="display:none" class="btn btn-info">Actualizar</button>
-                                    <button type="button" id="btn_savedocumentos_analisis" onclick="validateForm('identi-form', saveAnalisisPlanos)" class="btn btn-success">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisDocumental()">Cancelar</button>
+                                    <button type="button" id="btn_newdocumentoss_analisis" onclick="nuevoAnalisisDocumental()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updatedocumentos_analisis" onclick="updateAnalisisDocumental()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_savedocumentos_analisis" onclick="validateForm('documentallisisform', saveAnalisisDocumental)" class="btn btn-success">Guardar</button>
                                 </div>
                             </form>
                         </div>
@@ -3197,6 +3241,79 @@
                                             <th class="th-lg">
                                                 <a style="color: #265C4F;">
                                                     Límite Elástico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaAnalisisDocumental" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Diagramas de tubería e instrumentación (DTI)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Planos actualizados del Ducto, Segmento o sección
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Certificados de materiales
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Planos y reportes de reconocimiento de la franja de seguridad
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Reportes sobre las condiciones de seguridad
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Especificaciones y estándares utilizados por los Regulados 
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Planes de respuesta a emergencia
+                                                </a>
+                                            </th><th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Registro de Cumplimiento
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Evaluaciones Técnicas
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Manuales del fabricante
                                                 </a>
                                             </th>
                                             <th class="th-lg">

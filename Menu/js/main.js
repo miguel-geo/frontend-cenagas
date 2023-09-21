@@ -386,6 +386,32 @@ function inicializarEventos() {
                         
                     default:}
                     break;
+                case "T4":
+                    switch(temaconsultaanalisis){
+                        case "Ana1":
+                            webMethod = "";
+                            break;
+                        case "Ana2":
+                            webMethod = "";
+                            break;
+                        case "Ana3":
+                            webMethod = "";
+                            break;
+                        case "Ana4":
+                            webMethod = "";
+                            break;
+                        case "Ana5":
+                            webMethod = "";
+                            break;
+                        case "Ana6":
+                            webMethod = "";
+                            break;
+                        case "Ana7":
+                            webMethod = "analisisdocumental/destroy";
+                            break;
+                            
+                        default:}
+                        break;
         }
         var params = {
             id: e.currentTarget.dataset["id"] ,
@@ -535,6 +561,15 @@ function inicializarEventos() {
                         });
 
                         break;
+
+                        case "Ana7":
+                            consultatoform(e);
+                            getAreaIdById("getAreaIdByDocumentalId", row_id).then(data => {
+                                setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                                area = data.area_unitaria_id;
+                                fnshowAnalisisDocumental(id_d = row_id);
+                            });
+                            break;
                     default:
                 }
                 break;
@@ -801,6 +836,7 @@ function inicializarEventos() {
             case "Dis1":
                 limpiarTabas();
                 OcultarConstruccionConsulta();
+                ocultartablasanalisis()
             $("#tablaPersonas > tbody").empty();
             $("#tablaPersonas").show();
             $("#tablapresion").hide();
@@ -811,6 +847,7 @@ function inicializarEventos() {
             break;
             case "Dis2":
                 limpiarTabas();
+                ocultartablasanalisis()
                 OcultarConstruccionConsulta();
             $("#tablaPersonas").hide();
             $("#tablapresion").show();
@@ -822,6 +859,7 @@ function inicializarEventos() {
             case "Dis3":
                 limpiarTabas();
                 OcultarConstruccionConsulta();
+                ocultartablasanalisis()
             $("#datapresioncons").hide();
             $("#dataGeneral").hide();
             $("#tablaPersonas").hide();
@@ -843,6 +881,7 @@ function inicializarEventos() {
         switch (event.target.value) {
             case "Cons1":
                 ocultartablasdisenio();
+                ocultartablasanalisis()
                 $("#dataconstruccionunion").hide();
                 $("#tablabasecons").show();
                 $("#databasegeneral").show();
@@ -858,6 +897,7 @@ function inicializarEventos() {
                 break;
             case "Cons2":
                 ocultartablasdisenio();
+                ocultartablasanalisis()
                 $("#tablaunionCons").show();
                 $("#dataconstruccionunion").show();
                 $("#tablaconsSeguridad").hide();
@@ -873,6 +913,7 @@ function inicializarEventos() {
                 break;
             case "Cons3":
                 ocultartablasdisenio();
+                ocultartablasanalisis()
                 $("#dataconstruccionunion").hide();
                 $("#tablaProfundidad").show();
                 $("#tablaconsSeguridad").hide();
@@ -888,6 +929,7 @@ function inicializarEventos() {
                 break;
             case "Cons4":
                 ocultartablasdisenio();
+                ocultartablasanalisis()
                 $("#dataconstruccionunion").hide();
                 $("#tablaConsCruces").show();
                 $("#tablaconsSeguridad").hide();
@@ -902,6 +944,7 @@ function inicializarEventos() {
                 break;
             case "Cons5":
                 ocultartablasdisenio();
+                ocultartablasanalisis()
                 $("#dataconstruccionunion").hide();
                 $("#tablaconsSeguridad").hide();
                 $("#tablaHermeticidad").show();
@@ -917,6 +960,7 @@ function inicializarEventos() {
             case "Cons6":
                 //tablaconsInspeccion
                 ocultartablasdisenio();
+                ocultartablasanalisis()
                 $("#dataconstruccionunion").hide();
                 $("#tablaconsInspeccion").show();
                 $("#tablaconsSeguridad").hide();
@@ -932,6 +976,7 @@ function inicializarEventos() {
                 break;
             case "Cons7":
                 ocultartablasdisenio();
+                ocultartablasanalisis()
                 $("#dataconstruccionunion").hide();
                 $("#tablaconsSeguridad").hide();
                 $("#tablaConsCatodica").show();
@@ -947,6 +992,7 @@ function inicializarEventos() {
                 break;
             case "Cons8":
                 ocultartablasdisenio();
+                ocultartablasanalisis()
                 $("#dataconstruccionunion").hide();
                 $("#tablaconsSeguridad").show();
                 $("#datacatodica").hide();
@@ -973,16 +1019,27 @@ function inicializarEventos() {
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 $("#tablaAnalisisGral").show();
+                $("#tablaAnalisisDocumental").hide();
+                $("#tablaAnalisisGeoespacial").hide();
                 break;
             case "Ana2":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 $("#tablaAnalisisGral").hide();
                 $("#tablaAnalisisGeoespacial").show();
+                $("#tablaAnalisisDocumental").hide();
                 break;
             case "Ana3":
                
                 break;
+            case "Ana7":
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                $("#tablaAnalisisGral").hide();
+                $("#tablaAnalisisGeoespacial").hide();
+                $("#tablaAnalisisDocumental").show();
+            break;
+
             default:
         }
     });
@@ -1124,6 +1181,12 @@ function ocultartablasdisenio() {
     $("#datapresioncons").hide();
     $("#dataGeneral").hide();
     $("#tablaproteccion").hide();
+}
+
+function ocultartablasanalisis() {
+    $("#tablaAnalisisDocumental").hide();
+    $("#tablaAnalisisGral").hide();
+    $("#tablaAnalisisGeoespacial").hide();
 }
 
 function handleFileSelect(evt) {
@@ -5393,7 +5456,8 @@ function reiniciarForms() {
     $('#registro').show();
     $('#forms').hide();
     goToStep1()
-
+    
+    $('#analisisforms').hide();
     $('#disenioforms').hide();
     loadDuctos();
     $("#cmbTramo").empty();
@@ -6652,6 +6716,29 @@ function consulta() {
                             }
                         });
                         break;
+
+                    case "Ana7":
+                        $('#tablaAnalisisDocumental tbody')[0].innerHTML = "";
+                        var webMethodSeguridad = "get_analisisdocumental";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodSeguridad,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                  
+                                    for (i = 0; i < data.data.length; i++) {
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].diagramas_tuberia+ ',' + 'diagramas_tuberia', data.data[i].planos_actualizados_ducto + ',' + 'planos_actualizados_ducto', data.data[i].certificados_materiales + ',' + 'certificados_materiales', data.data[i].planos_reportes + ',' + 'planos_reportes', data.data[i].reportes_condiciones_seguidad + ',' + 'reportes_condiciones_seguidad', data.data[i].especificaciones_estandares_regulados + ',' + 'especificaciones_estandares_regulados', data.data[i].planes_respuesta_emergencia + ',' + 'planes_respuesta_emergencia', data.data[i].registro_cumplimiento + ',' + 'registro_cumplimiento', data.data[i].evaluaciones_tecnicas + ',' + 'evaluaciones_tecnicas', data.data[i].manuales_fabricante + ',' + 'manuales_fabricante'];
+                                        llenarTablasFileDocumental(persona, "tablaAnalisisDocumental", data.data[i].id);
+                                    }
+
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
                     default:
                 }
                 break;
@@ -6813,6 +6900,33 @@ function removeSpecialCharacters(str) {
 function jqSelectorEscape(str) {
     return str.replace(/([!"#$%&'()*+,.\/:;<=>?@[\]^`{|}~ ])/g, '\\$1');
 }
+
+function llenarTablasFileDocumental(obj, nameTabla,id) {
+    // $('#tablaPersonas tbody')[0].innerHTML = "";
+    var row = '<tr>';
+    for (j = 1; j < obj.length; j++) {
+        if (obj[j].split(',')[0] !== null && obj[j].split(',')[0] !== "" && obj[j].split(',')[0] !== undefined && obj[j].split(',')[0] !== "null") {
+            if (obj[j].split(',')[1] !== undefined) {
+                row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  target="_blank"  href=' + apiUrl + 'analisis-documental/' + id + '/download/' + obj[j].split(',')[1] + ' title="Descargar" data-toggle="tooltip" id="' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-download"></i></a></td>';
+            }
+            else {
+                row = row + '<td>' + obj[j] + '</td>';
+            }
+         }
+        else {
+                row = row + '<td style="text-align: center;color:gray;"><a class="download-icon" disabled title="No existe archivo" data-toggle="tooltip"id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i  class="fa fa-download"></i></a></td>';
+            
+         }
+    }
+    row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip"id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] + '"><i class="fa fa-trash"></i></a></td>';
+    row = row + '</tr>';
+
+    $('#' + nameTabla + ' tbody').append(row);
+}
+
+
+
+
 function llenarTablasFileSeguridad(obj, nameTabla,id) {
     // $('#tablaPersonas tbody')[0].innerHTML = "";
     var row = '<tr>';
@@ -7126,6 +7240,10 @@ function consultatoform(e){
     $("#proteccatodicafrm").hide();
     $("#seguridadprearranquefrm").hide();
 
+    $("#generalanalisisform").hide();
+    $("#infogeoespacialanalisisform").hide();
+    $("#planosanalisisform").hide();
+    $("#documentallisisform").hide();
 
 }
 
@@ -7884,6 +8002,341 @@ function saveAnalisisPlanos() {
             });
 }
 //#endregion planos
+
+
+
+// Documental
+
+function cancelAnalisisDocumental() {
+    $('#analisisforms').show();
+    $('#documentallisisform').hide();
+}
+
+
+var idAnaDocumental;
+
+function fnshowAnalisisDocumental(id_d=null) {
+    $('#documentallisisform').show();
+    if (id_d){
+        consultaDatosAnaDocumental(id_d=id_d);}
+       else { consultaDatosAnaDocumental();}
+    
+    $('#analisisforms').hide();
+    resetValidationClasses('documentallisisform')
+   
+}
+
+
+function nuevoAnalisisDocumental(){
+
+    $("#btn_savedocumentos_analisis").show();
+    //$("#btn_newseguridad").hide();
+    $("#btn_newdocumentoss_analisis").hide();
+    clearInputTextValuesNew('documentallisisform');
+    inhabilitarform("#documentallisisform", false);
+
+}
+
+
+
+function consultaDatosAnaDocumental(id_d = null) {
+    clearAllFileInputsInDiv('documentallisisform')
+    clearInputTextValues('documentallisisform');
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getAnalisisDocumentalById";
+        params = {
+            id: id_d
+        };
+    } else {
+        webMethod = "getAnalisisDocumental";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+        };
+    }
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+    .then(response => response.json())
+    .then(data => {
+        
+        // 1. Remove all existing download icons before adding new ones.
+        const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+        existingDownloadIcons.forEach(icon => icon.remove());
+       
+
+        const { id: serviceId, success:success,coordenada_especifica:coordenada_especifica,kilometro_especifico:kilometro_especifico, ...columnsData } = data;
+        if (success){
+        idAnaDocumental=serviceId
+        if (data.coordenada_especifica !== "" && data.coordenada_especifica !== null&& data.coordenada_especifica !== null) {
+            const coords = data.coordenada_especifica.split(' ');
+            $("#coord_esp_iden_x_analisis_documental").val(coords[0]);
+            $("#coord_esp_iden_y_analisis_documental").val(coords[1]);
+        }
+        else{$("#coord_esp_iden_y_analisis_documental").val("");
+        $("#coord_esp_iden_y_analisis_documental").val("");}    
+
+        $("#km_esp_iden_analisis_documental").val(data.kilometro_especifico)
+        Object.values(columnsData).forEach(item => {
+            if (item.hasFile) {
+                // Find the correct input group using the data-column attribute
+                const inputGroup = document.querySelector(`.input-group[data-column="${item.column}"]`);
+                const customFileDiv = inputGroup.querySelector('.custom-file');
+        
+                if (customFileDiv) {
+                    // Create the download icon
+                    const downloadIcon = document.createElement('a');
+                    downloadIcon.href = `${apiUrl}analisis-documental/${serviceId}/download/${item.column}`;
+                    downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+                    downloadIcon.target = "_blank";
+                    downloadIcon.className = "download-icon";
+                    downloadIcon.style.marginLeft = "10px";
+                    downloadIcon.setAttribute('data-columna', item.column);
+                    downloadIcon.setAttribute('data-id_otro', serviceId);
+                    
+                    // Insert the download icon after the custom-file div
+                    if (customFileDiv.nextSibling) {
+                        inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+                    } else {
+                        inputGroup.appendChild(downloadIcon);
+                    }
+
+                    const destroyIcon = document.createElement('a');
+                    destroyIcon.href = `${apiUrl}analisis-documental/${serviceId}/destroy/${item.column}`;
+                    destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+                    destroyIcon.target = "_blank";
+                    destroyIcon.className = "destroy-icon";
+                    destroyIcon.style.marginLeft = "10px";
+                    destroyIcon.style.display = "none"; 
+                    destroyIcon.setAttribute('data-columna', item.column);
+                    destroyIcon.setAttribute('data-id_otro', serviceId);
+                   
+                    
+                    // Insert the download icon after the custom-file div
+                    if (customFileDiv.nextSibling) {
+                        inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+                    } else {
+                        inputGroup.appendChild(destroyIcon);
+                    }
+
+
+                    
+                }
+            }
+            
+        });
+        $("#btn_updatedocumentos_analisis").text("Actualizar") 
+        $("#btn_updatedocumentos_analisis").show()
+        inhabilitarform("#documentallisisform", true)
+        $("#btn_savedocumentos_analisis").hide();
+        //$("#btn_newseguridad").show();
+        $("#btn_newdocumentoss_analisis").hide();
+        showDestroyIcons('documentallisisform',false);
+    }
+
+    else {
+
+        inhabilitarform("#documentallisisform", false)
+        $("#btn_savedocumentos_analisis").show();
+        $("#btn_newdocumentoss_analisis").hide();
+        $("#btn_updatedocumentos_analisis").hide();
+        showDestroyIcons('documentallisisform',false);
+    }
+
+
+    getNamesByAreaUnitariaId(area).then(data => {
+        let area_unitaria_nombre = data.area_unitaria_nombre;
+        let tramo_nombre = data.tramo_nombre;
+        let ducto_nombre = data.ducto_nombre;
+    
+        $("#txtductogeneral").val(ducto_nombre);
+        $("#txttramogeneral").val(tramo_nombre);
+        $("#txtareageneral").val(area_unitaria_nombre);
+        $("#txtductoanalisisdocumental").val(ducto_nombre);
+        $("#txttramoanalisisdocumental").val(tramo_nombre);
+        $("#txtareaanalisisdocumental").val(area_unitaria_nombre);
+
+
+    })
+
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+function saveAnalisisDocumental() {
+
+
+    var webMethod = "saveAnaDocumental";
+
+    const formData = new FormData();
+
+    formData.append("kilometro_especifico",$("#km_esp_iden_analisis_documental").val() )
+    formData.append("coordenada_especifica",  $("#coord_esp_iden_x_analisis_documental").val()+' '+$("#coord_esp_iden_y_analisis_documental").val(),)
+    formData.append("C_0101_0001_id", area)
+    // Make sure files are being selected and appended properly
+    if($("#diagramas_tuberia")[0].files[0]) {
+        formData.append("diagramas_tuberia", $("#diagramas_tuberia")[0].files[0]);
+    }
+    if($("#planos_actualizados_ducto")[0].files[0]) {
+        formData.append("planos_actualizados_ducto", $("#planos_actualizados_ducto")[0].files[0]);
+    }
+    if($("#certificados_materiales")[0].files[0]) {
+        formData.append("certificados_materiales", $("#certificados_materiales")[0].files[0]);
+    }
+    if($("#planos_reportes")[0].files[0]) {
+        formData.append("planos_reportes", $("#planos_reportes")[0].files[0]);
+    }
+    if($("#reportes_condiciones_seguidad")[0].files[0]) {
+        formData.append("reportes_condiciones_seguidad", $("#reportes_condiciones_seguidad")[0].files[0]);
+    }
+    if($("#especificaciones_estandares_regulados")[0].files[0]) {
+        formData.append("especificaciones_estandares_regulados", $("#especificaciones_estandares_regulados")[0].files[0]);
+    }
+    if($("#planes_respuesta_emergencia")[0].files[0]) {
+        formData.append("planes_respuesta_emergencia", $("#planes_respuesta_emergencia")[0].files[0]);
+    }
+    if($("#registro_cumplimiento")[0].files[0]) {
+        formData.append("registro_cumplimiento", $("#registro_cumplimiento")[0].files[0]);
+    }
+    if ($("#evaluaciones_tecnicas")[0].files[0]) {
+        formData.append("evaluaciones_tecnicas", $("#evaluaciones_tecnicas")[0].files[0]);
+    }
+    if ($("#manuales_fabricante")[0].files[0]) {
+        formData.append("manuales_fabricante", $("#manuales_fabricante")[0].files[0]);
+    }
+
+
+
+    // Log formData to console for debugging (this will not display the content of the files)
+    for (var pair of formData.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
+    }
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        
+    })
+    .then(data => {
+        console.log(typeof data)
+        console.log(data)
+        if (data.success) {
+            $("#diagramas_tuberia").val('');
+            $("#planos_actualizados_ducto").val('');
+            $("#certificados_materiales").val('');
+            $("#planos_reportes").val('');
+            $("#reportes_condiciones_seguidad").val('');
+            $("#especificaciones_estandares_regulados").val('');
+            $("#planes_respuesta_emergencia").val('');
+            $("#registro_cumplimiento").val('');
+            $("#evaluaciones_tecnicas").val('');
+            $("#manuales_fabricante").val('');
+            alert("Información almacenada correctamente");
+            $('#analisisforms').show();
+            $('#documentallisisform').hide();
+        }
+    })
+    .catch(error => {
+        alert("Error: " + error);
+    });
+
+}
+
+function updateAnalisisDocumental() {
+    if ($("#btn_updatedocumentos_analisis").text() === "Actualizar") {
+        inhabilitarform("#documentallisisform", false);
+        showDestroyIcons('documentallisisform',true);
+        $("#btn_updatedocumentos_analisis").text('Guardar');
+    }
+    else {
+        var webMethod = "updateAnaDocumental";
+
+        const formData = new FormData();
+        formData.append("id", idAnaDocumental)
+        formData.append("kilometro_especifico",$("#km_esp_iden_analisis_documental").val() )
+        formData.append("coordenada_especifica",  $("#coord_esp_iden_x_analisis_documental").val()+' '+$("#coord_esp_iden_y_analisis_documental").val(),)
+        formData.append("C_0101_0001_id", area)
+        // Make sure files are being selected and appended properly
+        if($("#diagramas_tuberia")[0].files[0]) {
+            formData.append("diagramas_tuberia", $("#diagramas_tuberia")[0].files[0]);
+        }
+        if($("#planos_actualizados_ducto")[0].files[0]) {
+            formData.append("planos_actualizados_ducto", $("#planos_actualizados_ducto")[0].files[0]);
+        }
+        if($("#certificados_materiales")[0].files[0]) {
+            formData.append("certificados_materiales", $("#certificados_materiales")[0].files[0]);
+        }
+        if($("#planos_reportes")[0].files[0]) {
+            formData.append("planos_reportes", $("#planos_reportes")[0].files[0]);
+        }
+        if($("#reportes_condiciones_seguidad")[0].files[0]) {
+            formData.append("reportes_condiciones_seguidad", $("#reportes_condiciones_seguidad")[0].files[0]);
+        }
+        if($("#especificaciones_estandares_regulados")[0].files[0]) {
+            formData.append("especificaciones_estandares_regulados", $("#especificaciones_estandares_regulados")[0].files[0]);
+        }
+        if($("#planes_respuesta_emergencia")[0].files[0]) {
+            formData.append("planes_respuesta_emergencia", $("#planes_respuesta_emergencia")[0].files[0]);
+        }
+        if($("#registro_cumplimiento")[0].files[0]) {
+            formData.append("registro_cumplimiento", $("#registro_cumplimiento")[0].files[0]);
+        }
+        if ($("#evaluaciones_tecnicas")[0].files[0]) {
+            formData.append("evaluaciones_tecnicas", $("#evaluaciones_tecnicas")[0].files[0]);
+        }
+        if ($("#manuales_fabricante")[0].files[0]) {
+            formData.append("manuales_fabricante", $("#manuales_fabricante")[0].files[0]);
+        }
+
+
+        
+        // Log formData to console for debugging (this will not display the content of the files)
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            
+        })
+        .then(data => {
+            if (data.success) {
+
+                alert("Información almacenada correctamente");
+                $('#analisisforms').show();
+                $('#documentallisisform').hide();
+                $("#btn_updatedocumentos_analisis").text("Actualizar")
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+    }
+}
+
 
 
 
