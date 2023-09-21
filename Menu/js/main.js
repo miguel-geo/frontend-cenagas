@@ -16,6 +16,7 @@ var temaconsulta = "";
 var docbasecons = "";
 var temaconsultaconstruccion = "";
 var temaconsultadisenio = "";
+var temaconsultaanalisis = "";
 var area_unitaria_id;
 var contar_longitud=0;
 const headers = new Headers({
@@ -335,7 +336,7 @@ function inicializarEventos() {
         temaconsulta=$("#cmbTemasPrincipal_con").val() ;
         temaconsultadisenio=$("#cmbTemasDisenio_con").val() ;
         temaconsultaconstruccion=$("#cmbTemasConstruccion_con").val() ;
-
+        temaconsultaanalisis = $("#cmbTemasAnalisis_con").val();
         if(confirm("¿Seguro quiere borrar ese registro?")) {
 
         console.log(temaconsulta,temaconsultadisenio,temaconsultaconstruccion)
@@ -511,6 +512,29 @@ function inicializarEventos() {
                         break;
 
 
+                    default:
+                }
+                break;
+            case "T4":
+                switch (temaconsultaanalisis) {
+                    case "Ana1":
+                        consultatoform(e)
+                        getAreaIdById("getAreaIdByAnalisisId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowAnalisisGeneral(id_d = row_id);
+                        });
+
+                        break;
+                    case "Ana2":
+                        consultatoform(e)
+                        getAreaIdById("getAnalisisGeoespacialById", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowAnalisisGeoespacial(id_d = row_id);
+                        });
+
+                        break;
                     default:
                 }
                 break;
@@ -745,14 +769,21 @@ function inicializarEventos() {
             case "T1":                
                 $("#cmbTemasDisenio_con").show();
                 $("#cmbTemasConstruccion_con").hide();
+                $("#cmbTemasAnalisis_con").hide();
              break;
             case "T2":
                 $("#cmbTemasDisenio_con").hide();
                 $("#cmbTemasConstruccion_con").show()
+                $("#cmbTemasAnalisis_con").hide();
             break;
             case "T3":
                 //Aún no existe
-            break;
+                break;
+            case "T4":
+                $("#cmbTemasAnalisis_con").show();
+                $("#cmbTemasConstruccion_con").hide();
+                $("#cmbTemasDisenio_con").hide();
+                break;
             default:
         }
         tramo = event.target.value;
@@ -918,6 +949,43 @@ function inicializarEventos() {
             default:
         }
     });
+
+    //Combo Tema Analisis
+    const selectTemasAnalisis = document.getElementById('cmbTemasAnalisis_con');
+    selectTemasAnalisis.addEventListener('change', function handleChange(event) {
+        temaconsultaanalisis = event.target.value;
+        switch (event.target.value) {
+            case "Ana1":
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                $("#tablaAnalisisGral").show();
+                break;
+            case "Ana2":
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                $("#tablaAnalisisGral").hide();
+                $("#tablaAnalisisGeoespacial").show();
+                break;
+            case "Ana3":
+               
+                break;
+            default:
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //switch (event.target.value) {
     //    case "T1":
     //        limpiarTabas();
@@ -3218,6 +3286,11 @@ function fnshowdisenioforms() {
 //#region FORMULARIOS NAGEVACIÓN CONSTRUCCIÓN
 function fnsshowconstruforms() {
     $('#construforms').show();
+    $('#forms').hide();
+
+}
+function fnsshowAnalisisforms() {
+    $('#analisisforms').show();
     $('#forms').hide();
 
 }
@@ -6424,6 +6497,52 @@ function consulta() {
             case "T3":
                
                 break;
+            case "T4":
+                switch (temaconsultaanalisis) {
+
+                    case "Ana1":
+                        $('#tablaAnalisisGral tbody')[0].innerHTML = "";
+                        var webMethod = "get_Analisisgeneral";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethod,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                    for (i = 0; i < data.data.datagrid.length; i++) {
+                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].compania, data.data.datagrid[i].porcentaje_posee, data.data.datagrid[i].fabricante_producto];
+                                        llenarTablas(persona, "tablaAnalisisGral");
+                                    }
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
+                    case "Ana2":
+                        $('#tablaAnalisisGeoespacial tbody')[0].innerHTML = "";
+                        var webMethod = "get_AnalisisGeoespacial";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethod,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                    for (i = 0; i < data.data.datagrid.length; i++) {
+                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].clase_localizacion, data.data.datagrid[i].autoridad_determina, data.data.datagrid[i].id_documento];
+                                        llenarTablas(persona, "tablaAnalisisGeoespacial");
+                                    }
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
+                    default:
+                }
+                break;
             default:
         }
 
@@ -6951,3 +7070,616 @@ jQuery(document).ready(function($){
 		return false;
 	});
 });
+//#region Métodos Análisis
+//#region General
+async function fnshowAnalisisGeneral(id_d = null) {
+    $('#generalanalisisform').show();
+    $('#analisisforms').hide();
+    try {
+        if (id_d) {
+            await consultaDatosAnalisisGeneral(id_d = id_d);
+        }
+        else { consultaDatosAnalisisGeneral(); }
+
+        //// If you want to do something after all functions have completed, you can do it here
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+    resetValidationClasses('identificacionfrm');
+}
+function cancelAnalisisGeneral() {
+    $('#analisisforms').show();
+    $('#generalanalisisform').hide();
+}
+function saveAnalisisGral() {
+    var webMethod = "saveAnalisisGeneral";
+    if ($("#compania_analisis").val() != "") {
+        var params = {
+            C_0101_0001_id: area,
+            compania: $("#compania_analisis").val(),
+            porcentaje_posee: $('#porc_posee_analisis').val(),
+            fabricante_producto: $('#fabricante_ducto_analisis').val(),
+            origen_instalacion: $("#origen_instalacion_analisis").val(),
+            pais: $("#pais_analisis").val(),
+            estado: $("#estado_analisis").val(),
+            ciudad: $("#ciudad_analisis").val(),
+            sector: $("#sector_analisis").val(),
+            coordenada_especifica: $("#coord_esp_iden_x_analisis").val() + ' ' + $("#coord_esp_iden_y_analisis").val(),
+            kilometro_especifico: $("#km_esp_iden_analisis").val()
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+       
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    console.log(data.data);
+                    alert("Información almacenada correctamente");
+                    $('#analisisforms').show();
+                    $('#generalanalisisform').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+    else {
+        alert("Es necesario ingresar la compañía para realizar el registro");
+    }
+}
+function consultaDatosAnalisisGeneral(id_d = null) {
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getAnalisisGeneralById";
+        params = {
+            id: id_d
+        };
+    }
+
+    else {
+
+        webMethod = "get_Analisisgeneral";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+            existingDownloadIcons.forEach(icon => icon.remove());
+
+            if (data.success) {
+                var infodata;
+                if (webMethod === "getAnalisisGeneralById")
+                    infodata = (data.data);
+                else if (webMethod === "get_Analisisgeneral")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    if (webMethod === "getAnalisisGeneralById")
+                        llenarDatosActualizacionAnalisisGeneral(infodata);
+                    else if (webMethod === "get_Analisisgeneral")
+                        llenarDatosActualizacionAnalisisGeneral(infodata);
+                    $("#btn_savegeneral_analisis").hide();
+                    $("#btn_updategeneral_analisis").show();
+                    $("#btn_newgeneral_analisis").show();
+                }
+                else {
+
+                    clearInputTextValues('generalanalisisform');
+                    inhabilitarform("#generalanalisisform", false)
+                    $("#btn_savegeneral_analisis").show();
+                    $("#btn_updategeneral_analisis").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductoanalisisgeneral").val(ducto_nombre);
+                    $("#txttramoanalisisgeneral").val(tramo_nombre);
+                    $("#txtareaanalisisgeneral").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+}
+var idAnalisisgral;
+function llenarDatosActualizacionAnalisisGeneral(data) {
+    $("#btn_updateidentificacion").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_iden_x_analisis").val(coords[0]);
+        $("#coord_esp_iden_y_analisis").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_iden_x_analisis").val("");
+        $("#coord_esp_iden_y_analisis").val("");
+    }
+    $("#km_esp_iden_analisis").val(data[0].kilometro_especifico);
+    $("#compania_analisis").val(data[0].compania);
+    $("#porc_posee_analisis").val(data[0].porcentaje_posee);
+    $("#fabricante_ducto_analisis").val(data[0].fabricante_producto);
+    $("#origen_instalacion_analisis").val(data[0].origen_instalacion);
+    $("#pais_analisis").val(data[0].pais);
+    $("#estado_analisis").val(data[0].estado);
+    $("#ciudad_analisis").val(data[0].ciudad);
+    $("#sector_analisis").val(data[0].sector);
+    idAnalisisgral = data[0].id;
+    inhabilitarform("#generalanalisisform", true);   
+}
+function updateAnalisisGeneral() {
+    if ($("#btn_updategeneral_analisis").text() === "Actualizar") {
+        inhabilitarform("#generalanalisisform", false)
+        $("#btn_updategeneral_analisis").text('Guardar');
+        showDestroyIcons('generalanalisisform', true);
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateAnalisisGeneral";
+        params = {
+            id: idAnalisisgral,
+            C_0101_0001_id: area,
+            compania: $("#compania_analisis").val(),
+            porcentaje_posee: $('#porc_posee_analisis').val(),
+            fabricante_producto: $('#fabricante_ducto_analisis').val(),
+            origen_instalacion: $("#origen_instalacion_analisis").val(),
+            pais: $("#pais_analisis").val(),
+            estado: $("#estado_analisis").val(),
+            ciudad: $("#ciudad_analisis").val(),
+            sector: $("#sector_analisis").val(),
+            coordenada_especifica: $("#coord_esp_iden_x_analisis").val() + ' ' + $("#coord_esp_iden_y_analisis").val(),
+            kilometro_especifico: $("#km_esp_iden_analisis").val()
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#analisisforms').show();
+                    $('#generalanalisisform').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+}
+function nuevoAnalisisGeneral() {
+
+    $("#btn_savegeneral_analisis").show();
+    $("#btn_newgeneral_analisis").hide();
+    $("#btn_updategeneral_analisis").hide();
+    clearInputTextValuesNew('generalanalisisform');
+    inhabilitarform("#generalanalisisform", false);
+
+}
+//#endregion
+
+
+//#region Geoespacial
+async function fnshowAnalisisGeoespacial(id_d = null) {
+    $('#infogeoespacialanalisisform').show();
+    $('#analisisforms').hide();
+    try {
+        if (id_d) {
+            await consultaDatosAnalisisGeoespacial(id_d = id_d);
+        }
+        else { consultaDatosAnalisisGeoespacial(); }
+
+        //// If you want to do something after all functions have completed, you can do it here
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+    resetValidationClasses('infogeoespacialanalisisform');
+}
+function consultaDatosAnalisisGeoespacial(id_d = null) {
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getAnalisisGeoespacialById";
+        params = {
+            id: id_d
+        };
+    }
+
+    else {
+
+        webMethod = "get_AnalisisGeoespacial";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            
+            if (data.success) {
+                var infodata;
+                if (webMethod === "getAnalisisGeoespacialById")
+                    infodata = (data.data);
+                else if (webMethod === "get_AnalisisGeoespacial")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    if (webMethod === "getAnalisisGeoespacialById")
+                        llenarDatosActualizacionAnalisisGeoespacial(infodata);
+                    else if (webMethod === "get_AnalisisGeoespacial")
+                        llenarDatosActualizacionAnalisisGeoespacial(infodata);
+                    $("#btn_savegeoespacial_analisis").hide();
+                    $("#btn_updategeoespacial_analisis").show();
+                    $("#btn_newgeoespacial_analisis").show();
+                }
+                else {
+
+                    clearInputTextValues('generalanalisisform');
+                    inhabilitarform("#generalanalisisform", false)
+                    $("#btn_savegeoespacial_analisis").show();
+                    $("#btn_updategeoespacial_analisis").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductogeogenera_geo").val(ducto_nombre);
+                    $("#txttramogeogeneral_geo").val(tramo_nombre);
+                    $("#txtareageogeneral_geo").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+}
+function cancelAnalisisGeoespacial() {
+    $('#analisisforms').show();
+    $('#infogeoespacialanalisisform').hide();
+}
+function saveAnalisisGeoespacial() {
+    var webMethod = "saveAnalisisGeoespecial";
+  
+        var params = {
+            C_0101_0001_id: area,
+            clase_localizacion: $("#cmb_claselocalizacion_geo").val(),
+            fecha_determinacion: $('#fecha_determinacion_geo').val(),
+            autoridad_determina: $('#autoridad_determina_geo').val(),
+            id_documento: $("#idocomento_geo").val(),
+            poblacion_total: $("#pobtot_geo").val(),
+            densidad_poblacion: $("#densidadpob_geo").val(),
+            fecha_dato: $("#fechadato_geo").val(),
+            metodo_determinacion: $("#metododeterminacion_geo").val(),
+            fuente_informacion: $("#fuenteinformacion_geo").val(),
+            coordenada_especifica: $("#coord_esp_iden_x_geo").val() + ' ' + $("#coord_esp_iden_y_geo").val(),
+            kilometro_especifico: $("#km_esp_iden_geo").val()
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    console.log(data.data);
+                    alert("Información almacenada correctamente");
+                    $('#analisisforms').show();
+                    $('#infogeoespacialanalisisform').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });   
+}
+var idAnalisisGo;
+function llenarDatosActualizacionAnalisisGeoespacial(data) {
+    $("#btn_updategeoespacial_analisis").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_iden_x_geo").val(coords[0]);
+        $("#coord_esp_iden_y_geo").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_iden_x_geo").val("");
+        $("#coord_esp_iden_y_geo").val("");
+    }
+    $("#cmb_claselocalizacion_geo option:contains(" + data[0].clase_localizacion + ")").attr('selected', 'selected');
+    $("#km_esp_iden_geo").val(data[0].kilometro_especifico);
+    $("#fecha_determinacion_geo").val(data[0].fecha_determinacion.split(" ")[0]);
+    $("#autoridad_determina_geo").val(data[0].autoridad_determina);
+    $("#idocomento_geo").val(data[0].id_documento);
+    $("#pobtot_geo").val(data[0].poblacion_total);
+    $("#densidadpob_geo").val(data[0].densidad_poblacion);
+    $("#fechadato_geo").val(data[0].fecha_dato.split(" ")[0]);
+    $("#metododeterminacion_geo").val(data[0].metodo_determinacion);
+    $("#fuenteinformacion_geo").val(data[0].fuente_informacion);
+    idAnalisisGo = data[0].id;
+    inhabilitarform("#infogeoespacialanalisisform", true);
+}
+function updateAnalisisGeoespacial() {
+    if ($("#btn_updategeoespacial_analisis").text() === "Actualizar") {
+        inhabilitarform("#infogeoespacialanalisisform", false)
+        $("#btn_updategeoespacial_analisis").text('Guardar');
+        showDestroyIcons('infogeoespacialanalisisform', true);
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateAnalisisGeoespacial";
+        params = {
+            id: idAnalisisGo,
+            C_0101_0001_id: area,
+            clase_localizacion: $("#cmb_claselocalizacion_geo").val(),
+            fecha_determinacion: $('#fecha_determinacion_geo').val(),
+            autoridad_determina: $('#autoridad_determina_geo').val(),
+            id_documento: $("#idocomento_geo").val(),
+            poblacion_total: $("#pobtot_geo").val(),
+            densidad_poblacion: $("#densidadpob_geo").val(),
+            fecha_dato: $("#fechadato_geo").val(),
+            metodo_determinacion: $("#metododeterminacion_geo").val(),
+            fuente_informacion: $("#fuenteinformacion_geo").val(),
+            coordenada_especifica: $("#coord_esp_iden_x_geo").val() + ' ' + $("#coord_esp_iden_y_geo").val(),
+            kilometro_especifico: $("#km_esp_iden_geo").val()
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#analisisforms').show();
+                    $('#infogeoespacialanalisisform').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+}
+function nuevoAnalisisGeoespacial() {
+
+    $("#btn_savegeoespacial_analisis").show();
+    $("#btn_newgeoespacial_analisis").hide();
+    $("#btn_updategeoespacial_analisis").hide();
+    clearInputTextValuesNew('infogeoespacialanalisisform');
+    inhabilitarform("#infogeoespacialanalisisform", false);
+
+}
+//#endregion
+//#region Planos
+async function fnshowAnalisisPlanos(id_d = null) {
+    $('#planosanalisisform').show();
+    $('#analisisforms').hide();
+    try {
+        if (id_d) {
+            await consultaDatosAnalisisPlanos(id_d = id_d);
+        }
+        else { consultaDatosAnalisisPlanos(); }
+
+        //// If you want to do something after all functions have completed, you can do it here
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+    resetValidationClasses('planosanalisisform');
+}
+function consultaDatosAnalisisPlanos(id_d = null) {
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getAnalisisPlanosById";
+        params = {
+            id: id_d
+        };
+    }
+
+    else {
+
+        webMethod = "get_AnalisisPlanos";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+
+            if (data.success) {
+                var infodata;
+                if (webMethod === "getAnalisisPlanosById")
+                    infodata = (data.data);
+                else if (webMethod === "get_AnalisisPlanos")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    if (webMethod === "getAnalisisPlanosById")
+                        llenarDatosActualizacionAnalisisPlanos(infodata);
+                    else if (webMethod === "get_AnalisisPlanos")
+                        llenarDatosActualizacionAnalisisPlanos(infodata);
+                    $("#btn_saveplanos_analisis").hide();
+                    $("#btn_updateplanos_analisis").show();
+                    $("#btn_newplanos_analisis").show();
+                }
+                else {
+
+                    clearInputTextValues('planosanalisisform');
+                    inhabilitarform("#planosanalisisform", false)
+                    $("#btn_saveplanos_analisis").show();
+                    $("#btn_updateplanos_analisis").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductogeogenera_planos").val(ducto_nombre);
+                    $("#txttramogeogeneral_planos").val(tramo_nombre);
+                    $("#txtareageogeneral_planos").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+}
+var idAnalisisPlanos;
+function llenarDatosActualizacionAnalisisPlanos(data) {
+    $("#btn_updateplanos_analisis").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_iden_x_planos").val(coords[0]);
+        $("#coord_esp_iden_y_planos").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_iden_x_planos").val("");
+        $("#coord_esp_iden_y_planos").val("");
+    }   
+    $("#km_esp_iden_planos").val(data[0].kilometro_especifico);
+    $("#fecha_identificacion_planos").val(data[0].fecha_indetificacion.split(" ")[0]);
+    $("#fecha_registro_planos").val(data[0].fecha_registro.split(" ")[0]);
+    $("#cmb_tuberisobresuelo_plano option:contains(" + data[0].tuberia_sobre_suelo + ")").attr('selected', 'selected');
+    $("#cmb_tuberiencimaagua_plano option:contains(" + data[0].tuberia_encima_agua + ")").attr('selected', 'selected');
+    $("#cmb_tuberiaaltamar_plano option:contains(" + data[0].tuberia_altamar + ")").attr('selected', 'selected');
+    $("#cmb_tuberiaaltamar_plano option:contains(" + data[0].perforacion_direccional_horizontal + ")").attr('selected', 'selected');
+    $("#condicionprocedencia_plano").val(data[0].condicion_prosedencia);
+    idAnalisisPlanos = data[0].id;
+    inhabilitarform("#planosanalisisform", true);
+}
+function cancelAnalisisPlanos() {
+    $('#analisisforms').show();
+    $('#planosanalisisform').hide();
+}
+function saveAnalisisPlanos() {
+    var webMethod = "saveAnalisisPlanos";
+    var params = {
+            area_unitaria_id: area,
+        fecha_indetificacion: $("#fecha_identificacion_planos").val(),
+        fecha_registro: $('#fecha_registro_planos').val(),
+        tuberia_sobre_suelo: $('#cmb_tuberisobresuelo_plano').val(),
+        tuberia_encima_agua: $("#cmb_tuberiencimaagua_plano").val(),
+        tuberia_altamar: $("#cmb_tuberiaaltamar_plano").val(),
+        perforacion_direccional_horizontal: $("#cmb_perforaciondireccional_plano").val(),
+        condicion_prosedencia: $("#condicionprocedencia_plano").val(),
+        coordenada_especifica: $("#coord_esp_iden_x_planos").val() + ' ' + $("#coord_esp_iden_y_planos").val(),
+        kilometro_especifico: $("#km_esp_iden_planos").val()
+        };
+        var formData = new FormData();
+       /* formData.append('planos_mapas_reportes', $("#fileplanosmapasreportes")[0].files[0]);*/
+
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        for (var value of formData.values()) {
+            console.log(value);
+        }
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    console.log(data.data);
+                    alert("Información almacenada correctamente");
+                    //$('#analisisforms').show();
+                    //$('#infogeoespacialanalisisform').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+}
+//#endregion planos
+
+
+
+//#endregion 

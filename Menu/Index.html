@@ -109,7 +109,7 @@
                             <form role="form">
                                 <div class="row setup-content" id="step-1">
                                     <div class="col-xl-4">
-                                        <div >
+                                        <div>
                                             <h3> Ducto</h3>
                                             <div class="form-group">
                                                 <label for="exampleFormControlSelect1">Ducto</label>
@@ -150,7 +150,7 @@
                                             </div>
                                             <div class="card-group">
                                                 <div class="card ">
-                                                    <img src="" id="myImage" style="cursor: pointer;height:70%"  class="card-img-top" alt="...">
+                                                    <img src="" id="myImage" style="cursor: pointer;height:70%" class="card-img-top" alt="...">
 
                                                     <div class="card-footer">
                                                         <small class="text-muted">Esquema</small>
@@ -206,6 +206,16 @@
                                     <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnsshowconstruforms()" alt="...">
                                     <div class="card-body">
                                         <h6 class="card-title">Construcción</h6>
+                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">CENAGAS</small>
+                                    </div>
+                                </div>
+                                <div class="card ml-1">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnsshowAnalisisforms()" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Análisis</h6>
                                         <p class="card-text">En éste formulario contendrá información relacionada a...</p>
                                     </div>
                                     <div class="card-footer">
@@ -278,6 +288,7 @@
                                 <button class="btn btn-secondary" onclick="reg_newArea()"><i class="fa fa-arrow-left"></i> | Registrar nueva área unitaria</button>
                             </div>
                         </div>
+
                         <div id="identificacionfrm" style="display:none;margin-top:15px;">
                             <form role="form" id="identi-form" class="needs-validation">
                                 <div class="input-group mb-3">
@@ -325,17 +336,10 @@
                                         <span class="input-group-text" id="basic-addon1">Diametro nominal en in</span>
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="diam_in" aria-describedby="basic-addon1" required>
-                                    <!--<button type="button" onclick="showdataunidad()" class="btn btn-danger">
-            <i class="fas fa-square-minus"></i>
-        </button>-->
+
                                     <button type="button" title="Agregar valor diametro nominal en mm" onclick="$('#diam_mm').show()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
-                                    <!--<input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="diam_mm" aria-describedby="basic-addon1">-->
-                                    <!--<div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Diametro nominal(in) *</span>
-        </div>
-        <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="diam_in" aria-describedby="basic-addon1" required>-->
                                 </div>
                                 <div class="input-group mb-3" id="diam_mm" style="display:none">
                                     <div class="input-group-prepend">
@@ -359,10 +363,6 @@
                                         <option value="mm">mm</option>
                                         <option value="in">in</option>
                                     </select>
-                                    <!--<div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Espesor pared(in)</span>
-        </div>
-        <input type="text" class="form-control validate-pattern" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="esp_in" aria-describedby="basic-addon1">-->
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -406,10 +406,6 @@
                                         <option value="C°">C°</option>
                                         <option value="F°">F°</option>
                                     </select>
-                                    <!--<div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Temperatura(°F)</span>
-        </div>
-        <input type="text" class="form-control validate-pattern"  pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="temp_f" aria-describedby="basic-addon1">-->
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -560,11 +556,11 @@
                                 </div>
 
                                 <!--<div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Archivo fuente</span>
-                                    </div>
-                                    <input type="file" class="form-control" placeholder="" aria-label="" id="filedisenioservicio" aria-describedby="basic-addon1">
-                                </div>-->
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Archivo fuente</span>
+                </div>
+                <input type="file" class="form-control" placeholder="" aria-label="" id="filedisenioservicio" aria-describedby="basic-addon1">
+            </div>-->
                                 <div class="modal-footer">
 
                                     <label id="inputGroupFileAddon01" style="margin-right:10px;">Nota: Seleccionar al menos un archivo para guardar correctamente</label>
@@ -1341,11 +1337,11 @@
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" id="txtedohisprof" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!--<div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Archivo fuente</span>
-                                    </div>
-                                    <input type="file" class="form-control" placeholder="" aria-label="" id="fileconstruccionprofundidad" aria-describedby="basic-addon1">
-                                </div>-->
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Archivo fuente</span>
+                </div>
+                <input type="file" class="form-control" placeholder="" aria-label="" id="fileconstruccionprofundidad" aria-describedby="basic-addon1">
+            </div>-->
                                 <div class="input-group mb-3" id="filefrmconsprofundidad">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Archivo fuente</span>
@@ -1841,7 +1837,7 @@
                                             <option value="kg/cm2">kg/cm2</option>
                                         </select>
                                     </div>
-                                </div>                               
+                                </div>
                                 <div class="input-group mb-3" id="filefrmhermeticidad">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Archivo fuente</span>
@@ -2072,7 +2068,7 @@
                                         </div>
                                         <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" id="extedoprote" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                     </div>
-                                </div>                               
+                                </div>
                                 <div class="input-group mb-3" id="filefrmcatodica">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Archivo fuente</span>
@@ -2235,8 +2231,393 @@
                         </div>
 
                         <!--#endregion -->
+                        <!--#region FORMULARIOS ANÁLISIS  -->
+
+                        <div id="analisisforms" style="display:none;margin-top:15px;">
+                            <div class="card-group">
+                                <div class="card ">
+                                    <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowAnalisisGeneral()" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title">General</h6>
+                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">Diseño</small>
+                                    </div>
+                                </div>
+                                <div class="card ml-1">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowAnalisisGeoespacial()" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Información geoespacial</h6>
+                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">Diseño</small>
+                                    </div>
+                                </div>
+                                <div class="card ml-1">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowAnalisisPlanos()" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Planos, mapas y reportes del Sistema de Recolección, Transporte, y Distribución de Ductos</h6>
+                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">Diseño</small>
+                                    </div>
+                                </div>
+                                <div class="card ml-1">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="fnshowProteccion()">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Datos del Riesgo e incidentes</h6>
+                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">Diseño</small>
+                                    </div>
+                                </div>
+                                <div class="card ml-1">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="fnshowProteccion()">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Información documental</h6>
+                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">Diseño</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" onclick="reg_newArea()"><i class="fa fa-arrow-left"></i> | Registrar nueva área unitaria</button>
+                            </div>
+                        </div>
+
+                        <div id="generalanalisisform" style="display:none;margin-top:15px;">
+                            <form role="form" id="identi-form" class="needs-validation">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductoanalisisgeneral" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramoanalisisgeneral" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareaanalisisgeneral" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_iden_x_analisis" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_iden_y_analisis" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_esp_iden_analisis" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Compañía</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="compania_analisis" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Porcentaje que posee</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="porc_posee_analisis" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fabricante del ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="fabricante_ducto_analisis" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Origen de la instalación</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="origen_instalacion_analisis" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">País</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="pais_analisis" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="estado_analisis" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ciudad</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="ciudad_analisis" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Sector</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="sector_analisis" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisGeneral()">Cancelar</button>
+                                    <button type="button" id="btn_newgeneral_analisis" onclick="nuevoAnalisisGeneral()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updategeneral_analisis" onclick="updateAnalisisGeneral()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_savegeneral_analisis" onclick="validateForm('identi-form', saveAnalisisGral)" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="infogeoespacialanalisisform" style="display:none;margin-top:15px;">
+                            <form role="form" id="identi-form" class="needs-validation">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductogeogenera_geo" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramogeogeneral_geo" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareageogeneral_geo" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_iden_x_geo" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_iden_y_geo" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_esp_iden_geo" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Clase localización</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_claselocalizacion_geo">
+                                        <option>Selecciona...</option>
+                                        <option value="Clase de localización 1">Clase de localización 1</option>
+                                        <option value="Clase de localización 2">Clase de localización 2</option>
+                                        <option value="Clase de localización 3">Clase de localización 3</option>
+                                        <option value="Clase de localización 4">Clase de localización 4</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de determinación</span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="fecha_determinacion_geo" aria-describedby="basic-addon1" required>
 
 
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Autoridad que determina</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="autoridad_determina_geo" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Id de documento</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="idocomento_geo" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Población total</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="pobtot_geo" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Densidad población</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="densidadpob_geo" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha dato población</span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="fechadato_geo" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Método de determinación</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="metododeterminacion_geo" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fuente de información</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="fuenteinformacion_geo" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisGeoespacial()">Cancelar</button>
+                                    <button type="button" id="btn_newgeoespacial_analisis" onclick="nuevoAnalisisGeoespacial()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updategeoespacial_analisis" onclick="updateAnalisisGeoespacial()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_savegeoespacial_analisis" onclick="validateForm('identi-form', saveAnalisisGeoespacial)" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="planosanalisisform" style="display:none;margin-top:15px;">
+                            <form role="form" id="identi-form" class="needs-validation">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductogeogenera_planos" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramogeogeneral_planos" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareageogeneral_planos" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_iden_x_planos" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_iden_y_planos" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_esp_iden_planos" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de identificación</span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="fecha_identificacion_planos" aria-describedby="basic-addon1" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de registro</span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="fecha_registro_planos" aria-describedby="basic-addon1" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tubería esta sobre el suelo </span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tuberisobresuelo_plano">
+                                        <option>Selecciona...</option>
+                                        <option value="Sí">Sí</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tubería por encima del agua </span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tuberiencimaagua_plano">
+                                        <option>Selecciona...</option>
+                                        <option value="Sí">Sí</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tubería en altamar </span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tuberiaaltamar_plano">
+                                        <option>Selecciona...</option>
+                                        <option value="Sí">Sí</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Perforación direccional horizontal</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_perforaciondireccional_plano">
+                                        <option>Selecciona...</option>
+                                        <option value="Sí">Sí</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Condición de procedencia</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="condicionprocedencia_plano" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3" id="filefrmplano">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Planos, mapas o reportes</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="fileplanosmapasreportes"
+                                               aria-describedby="fileplanosmapasreportes" lang="es">
+                                        <label class="custom-file-label" for="fileplanosmapasreportes">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisPlanos()">Cancelar</button>
+                                    <button type="button" id="btn_newplanos_analisis" onclick="nuevoAnalisisGeoespacial()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updateplanos_analisis" onclick="updateAnalisisGeoespacial()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_saveplanos_analisis" onclick="validateForm('identi-form', saveAnalisisPlanos)" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!--#endregion FORMULARIOS ANÁLISIS  -->
                     </div>
                 </div>
 
@@ -2269,6 +2650,7 @@
                                 <option value="T1">Diseño</option>
                                 <option value="T2">Construcción</option>
                                 <option value="T3">Operación</option>
+                                <option value="T4">Análisis</option>
                             </select>
                             <select class="selectpicker form-control" id="cmbTemasDisenio_con" style="display:none">
                                 <option value="0">Selecciona...</option>
@@ -2286,6 +2668,16 @@
                                 <option value="Cons6">Inspección</option>
                                 <option value="Cons7">Catódica</option>
                                 <option value="Cons8">Seguridad</option>
+                            </select>
+                            <select class="selectpicker form-control" id="cmbTemasAnalisis_con" style="display:none">
+                                <option value="0">Selecciona...</option>
+                                <option value="Ana1">General</option>
+                                <option value="Ana2">Información geoespacial</option>
+                                <option value="Ana3">Planos, mapas y reportes del Sistema de Recolección, Transporte, y Distribución de Ductos</option>
+                                <option value="Ana4">Datos del Riesgo e incidentes</option>
+                                <option value="Ana5">Reportes de Diseño e ingeniería</option>
+                                <option value="Ana6">Análisis de Riesgo en la fase de Diseño, sólo para Ductos nuevos</option>
+                                <option value="Ana7">Información documental</option>
                             </select>
                         </div>
                             <div class="modal-footer">
@@ -2445,12 +2837,12 @@
                                     </div>
 
                                 </div>
-                                <div id="dataestudio" >
+                                <div id="dataestudio">
                                     <div class="card-header">
                                         Resumen, área de estudio:  <p class="card-text" id="resumenestudio"></p>
                                     </div>
                                 </div>
-                                <div id="dataconstruccionunion" style="display:none">                                    
+                                <div id="dataconstruccionunion" style="display:none">
                                     <div class="card-block">
                                         <div class="row">
                                             <div class="col-md-2">
@@ -2509,7 +2901,102 @@
                                     </tbody>
                                     <!--Table body-->
                                 </table>
+                                <table id="tablaAnalisisGral" class="table table-bordered" style="display:none;margin-top:15px;">
 
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Compañía
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Porcentaje poseé
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fabricante producto
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaAnalisisGeoespacial" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Clase de localización
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Autoridad determina
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Id documento
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
                                 <table id="tablapresion" class="table table-bordered" style="display:none">
 
                                     <!--Table head-->
