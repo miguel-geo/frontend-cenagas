@@ -6717,6 +6717,8 @@ function consulta() {
                         });
                         break;
 
+                    
+
                     case "Ana7":
                         $('#tablaAnalisisDocumental tbody')[0].innerHTML = "";
                         var webMethodSeguridad = "get_analisisdocumental";
@@ -8337,7 +8339,267 @@ function updateAnalisisDocumental() {
     }
 }
 
+// Riesgo de diseño
 
+async function fnshowAnalisisriesdis(id_d = null) {
+    $('#riesdisanalisisform').show();
+    $('#analisisforms').hide();
+    try {
+        if (id_d) {
+            await consultaDatosAnalisisriesdis(id_d = id_d);
+        }
+        else { consultaDatosAnalisisriesdis(); }
+
+        //// If you want to do something after all functions have completed, you can do it here
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+    resetValidationClasses('riesdisanalisisform');
+}
+function cancelAnalisisriesdis() {
+    $('#analisisforms').show();
+    $('#riesdisanalisisform').hide();
+}
+function saveAnalisisRepDis() {
+    var webMethod = "saveAnalisisRiesgoDisenio";
+    if (area) {
+        var params = {
+            C_0101_0001_id: area,
+            coordenada_especifica: $("#coord_esp_iden_x_ana_RiesDis").val()+' '+$("#coord_esp_iden_y_ana_RiesDis").val(),
+            kilometro_especifico: $("#km_esp_iden_ana_RiesDis").val(),
+            zona_riesgo: $("#riesdis_zona_riesgo").val(),
+            dependencia_determina: $("#riesdis_dependencia_determina").val(),
+            id_elementos_expuestos: $("#riesdis_id_elementos_expuestos").val(),
+            fecha: $("#riesdis_fecha").val(),
+            clase_localizacion: $("#riesdis_clase_localizacion").val(),
+            estado_historico: $("#riesdis_estado_historico").val(),
+            estado_actual: $("#riesdis_estado_actual").val(),
+            id_riesgo: $("#riesdis_id_riesgo").val(),
+            A1: $("#riesdis_a1").val(),
+            A2: $("#riesdis_a2").val(),
+            A3: $("#riesdis_a3").val(),
+            A4: $("#riesdis_a4").val(),
+            A5: $("#riesdis_a5").val(),
+            A6: $("#riesdis_a6").val(),
+            A7: $("#riesdis_a7").val(),
+            A8: $("#riesdis_a8").val(),
+            A9: $("#riesdis_a9").val(),
+            A10: $("#riesdis_a10").val(),
+            A11: $("#riesdis_a11").val(),
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+       
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    console.log(data.data);
+                    alert("Información almacenada correctamente");
+                    $('#analisisforms').show();
+                    $('#riesdisanalisisform').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+    else {
+        alert("Es necesario ingresar la compañía para realizar el registro");
+    }
+}
+function consultaDatosAnalisisriesdis(id_d = null) {
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getAnalisisRiesgoDisenioById";
+        params = {
+            id: id_d
+        };
+    }
+
+    else {
+
+        webMethod = "getAnalisisRiesgoDisenio";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+            existingDownloadIcons.forEach(icon => icon.remove());
+
+            if (data.success) {
+                var infodata;
+                if (webMethod === "getAnalisisRiesgoDisenioById")
+                    infodata = (data.data);
+                else if (webMethod === "getAnalisisRiesgoDisenio")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    if (webMethod === "getAnalisisRiesgoDisenioById")
+                        llenarDatosActualizacionAnalisisriesdis(infodata);
+                    else if (webMethod === "getAnalisisRiesgoDisenio")
+                        llenarDatosActualizacionAnalisisriesdis(infodata);
+                    $("#btn_saveriesdis_analisis").hide();
+                    $("#btn_updateriesdis_analisis").show();
+                    
+                    $("#btn_newriesdis_analisis").show();
+                }
+                else {
+
+                    clearInputTextValues('riesdisanalisisform');
+                    inhabilitarform("#riesdisanalisisform", false)
+                    $("#btn_saveriesdis_analisis").show();
+                    $("#btn_updateriesdis_analisis").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductoanalisisRiesDis").val(ducto_nombre);
+                    $("#txttramoanalisisRiesDis").val(tramo_nombre);
+                    $("#txtareaanalisisRiesDis").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+}
+var idAnalisisRiesDis;
+function llenarDatosActualizacionAnalisisriesdis(data) {
+    $("#btn_updateidentificacion").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_iden_x_ana_RiesDis").val(coords[0]);
+        $("#coord_esp_iden_y_ana_RiesDis").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_iden_x_ana_RiesDis").val("");
+        $("#coord_esp_iden_y_ana_RiesDis").val("");
+    }
+    $("#km_esp_iden_ana_RiesDis").val(data[0].kilometro_especifico);
+    $("#riesdis_zona_riesgo").val(data[0].zona_riesgo);
+    $("#riesdis_dependencia_determina").val(data[0].dependencia_determina);
+    $("#riesdis_id_elementos_expuestos").val(data[0].id_elementos_expuestos);
+    $("#riesdis_fecha").val(data[0].fecha);
+    $("#riesdis_clase_localizacion").val(data[0].clase_localizacion);
+    $("#riesdis_estado_historico").val(data[0].estado_historico);
+    $("#riesdis_estado_actual").val(data[0].estado_actual);
+    $("#riesdis_id_riesgo").val(data[0].id_riesgo);
+    $("#riesdis_a1").val(data[0].A1);
+    $("#riesdis_a2").val(data[0].A2);
+    $("#riesdis_a3").val(data[0].A3);
+    $("#riesdis_a4").val(data[0].A4);
+    $("#riesdis_a5").val(data[0].A5);
+    $("#riesdis_a6").val(data[0].A6);
+    $("#riesdis_a7").val(data[0].A7);
+    $("#riesdis_a8").val(data[0].A8);
+    $("#riesdis_a9").val(data[0].A9);
+    $("#riesdis_a10").val(data[0].A10);
+    $("#riesdis_a11").val(data[0].A11);
+
+    idAnalisisRiesDis = data[0].id;
+    inhabilitarform("#riesdisanalisisform", true);   
+}
+function updateAnalisisriesdis() {
+    if ($("#btn_updateriesdis_analisis").text() === "Actualizar") {
+        inhabilitarform("#riesdisanalisisform", false)
+        $("#btn_updateriesdis_analisis").text('Guardar');
+        showDestroyIcons('riesdisanalisisform', true);
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateAnalisisRiesgoDisenio";
+        var params = {
+            id:idAnalisisRiesDis,
+            C_0101_0001_id: area,
+            coordenada_especifica: $("#coord_esp_iden_x_ana_RiesDis").val()+' '+$("#coord_esp_iden_y_ana_RiesDis").val(),
+            kilometro_especifico: $("#km_esp_iden_ana_RiesDis").val(),
+            zona_riesgo: $("#riesdis_zona_riesgo").val(),
+            dependencia_determina: $("#riesdis_dependencia_determina").val(),
+            id_elementos_expuestos: $("#riesdis_id_elementos_expuestos").val(),
+            fecha: $("#riesdis_fecha").val(),
+            clase_localizacion: $("#riesdis_clase_localizacion").val(),
+            estado_historico: $("#riesdis_estado_historico").val(),
+            estado_actual: $("#riesdis_estado_actual").val(),
+            id_riesgo: $("#riesdis_id_riesgo").val(),
+            A1: $("#riesdis_a1").val(),
+            A2: $("#riesdis_a2").val(),
+            A3: $("#riesdis_a3").val(),
+            A4: $("#riesdis_a4").val(),
+            A5: $("#riesdis_a5").val(),
+            A6: $("#riesdis_a6").val(),
+            A7: $("#riesdis_a7").val(),
+            A8: $("#riesdis_a8").val(),
+            A9: $("#riesdis_a9").val(),
+            A10: $("#riesdis_a10").val(),
+            A11: $("#riesdis_a11").val(),
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#analisisforms').show();
+                    $('#riesdisanalisisform').hide();
+                    $("#btn_updateriesdis_analisis").text('Actualizar')
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+}
+function nuevoAnalisisriesdis() {
+
+    $("#btn_saveriesdis_analisis").show();
+    $("#btn_newriesdis_analisis").hide();
+    $("#btn_updateriesdis_analisis").hide();
+    clearInputTextValuesNew('riesdisanalisisform');
+    inhabilitarform("#riesdisanalisisform", false);
+
+}
 
 
 //#endregion 
