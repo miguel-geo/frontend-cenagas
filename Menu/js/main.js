@@ -404,7 +404,7 @@ function inicializarEventos() {
                             webMethod = "";
                             break;
                         case "Ana6":
-                            webMethod = "";
+                            webMethod = "analisisriesgo/destroy";
                             break;
                         case "Ana7":
                             webMethod = "analisisdocumental/destroy";
@@ -560,6 +560,14 @@ function inicializarEventos() {
                             fnshowAnalisisGeoespacial(id_d = row_id);
                         });
 
+                        break;
+                    case "Ana6":
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByAnalisisRiesgoId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowAnalisisriesdis(id_d = row_id);
+                        });
                         break;
 
                         case "Ana7":
@@ -1018,6 +1026,7 @@ function inicializarEventos() {
             case "Ana1":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
+                $("#tablaAnalisisRiesgos").hide();
                 $("#tablaAnalisisGral").show();
                 $("#tablaAnalisisDocumental").hide();
                 $("#tablaAnalisisGeoespacial").hide();
@@ -1025,6 +1034,7 @@ function inicializarEventos() {
             case "Ana2":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
+                $("#tablaAnalisisRiesgos").hide();
                 $("#tablaAnalisisGral").hide();
                 $("#tablaAnalisisGeoespacial").show();
                 $("#tablaAnalisisDocumental").hide();
@@ -1032,10 +1042,22 @@ function inicializarEventos() {
             case "Ana3":
                
                 break;
+
+
+            case "Ana6":
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                $("#tablaAnalisisGral").hide();
+                $("#tablaAnalisisGeoespacial").hide();
+                $("#tablaAnalisisDocumental").hide();
+                $("#tablaAnalisisRiesgos").show();
+                
+            break;
             case "Ana7":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 $("#tablaAnalisisGral").hide();
+                $("#tablaAnalisisRiesgos").hide();
                 $("#tablaAnalisisGeoespacial").hide();
                 $("#tablaAnalisisDocumental").show();
             break;
@@ -6716,7 +6738,37 @@ function consulta() {
                             }
                         });
                         break;
+                    case "Ana6":
+                        $('#tablaAnalisisRiesgos tbody')[0].innerHTML = "";
+                        $('#tablaAnalisisRiesgos tbody:not(:first)').remove();
+                        var webMethodCatodica = "getAnalisisRiesgoDisenio";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodCatodica,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                    
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                                    'zona_riesgo',
+                                    'dependencia_determina',
+                                    'elementos_expuestos',
+                                    'fecha',
+                                    'clase_localizacion',
+                                    'estado_historico',
+                                    'estado_actual',
+                                    'riesgo',
+                                'tramo'];
+                                    
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablaAnalisisRiesgos", keysForPresion );
+                                        
+                                    }
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
 
+                                }
+                            });
+                        break;
                     
 
                     case "Ana7":
@@ -6741,7 +6793,7 @@ function consulta() {
                             }
                         });
                         break;
-                    default:
+
                 }
                 break;
             default:
@@ -7202,12 +7254,68 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the dropdown element
+    const tipoCruceDropdown = document.getElementById("riesdis_id_riesgo");
+
+    // Add event listener for change event
+    tipoCruceDropdown.addEventListener("change", function() {
+        // Hide all the classes first
+        hideAllClasses1();
+
+        // Get the selected value
+        const selectedValue = this.value;
+
+        // Show the respective class based on the selected value
+        switch (selectedValue) {
+            case "1":
+                showClass("sismo");
+                break;
+            case "2":
+                showClass("desplazamiento");
+                break;
+            case "3":
+                showClass("clima");
+                break;
+            case "4":
+                showClass("inundacion");
+                break;
+            case "5":
+                showClass("descarga");
+                break;
+            case "6":
+                showClass("vientos");
+                break;
+            case "7":
+                showClass("tornados");
+                break;
+        }
+    });
+});
+
 function hideAllClasses() {
     hideClass("acuatico");
     hideClass("infraestructura");
     hideClass("extranjeros");
     hideClass("comunicacion");
+
+    
 }
+
+
+
+function hideAllClasses1() {
+    hideClass("sismo");
+    hideClass("desplazamiento");
+    hideClass("clima");
+    hideClass("descarga");
+    hideClass("vientos");
+    hideClass("tornados");
+    hideClass("inundacion");
+}
+
 
 function hideClass(className) {
     const elements = document.querySelectorAll("." + className);
@@ -8507,7 +8615,7 @@ function llenarDatosActualizacionAnalisisriesdis(data) {
     $("#riesdis_zona_riesgo").val(data[0].zona_riesgo);
     $("#riesdis_dependencia_determina").val(data[0].dependencia_determina);
     $("#riesdis_id_elementos_expuestos").val(data[0].id_elementos_expuestos);
-    $("#riesdis_fecha").val(data[0].fecha);
+    $("#riesdis_fecha").val(data[0].fecha.split(" ")[0]);
     $("#riesdis_clase_localizacion").val(data[0].clase_localizacion);
     $("#riesdis_estado_historico").val(data[0].estado_historico);
     $("#riesdis_estado_actual").val(data[0].estado_actual);

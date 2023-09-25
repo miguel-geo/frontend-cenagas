@@ -2811,131 +2811,175 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Compañía</span>
+                                        <span class="input-group-text" id="basic-addon1">Zona de Riesgo</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_zona_riesgo" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="riesdis_zona_riesgo" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Porcentaje que posee</span>
+                                        <span class="input-group-text" id="basic-addon1">Dependencia que determina</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="riesdis_dependencia_determina" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label=""  pattern="^.*$" id="riesdis_dependencia_determina" aria-describedby="basic-addon1">
 
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Fabricante del ducto</span>
+                                        <span class="input-group-text" id="basic-addon1">Elementos Expuestos</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_id_elementos_expuestos" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control setAlg" id="riesdis_id_elementos_expuestos">
+                                        <option value=0>Selecciona...</option>
+                                        <option value='1'>Población</option>
+                                        <option value='2'>Infraestructura</option>
+                                        <option value='3'>Zona de Conservación</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha</span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg"  placeholder="" aria-label="" id="riesdis_fecha" aria-describedby="basic-addon1">
 
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Origen de la instalación</span>
+                                        <span class="input-group-text" id="basic-addon1">Clase de Localización</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_fecha" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_clase_localizacion" aria-describedby="basic-addon1">
 
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">País</span>
+                                        <span class="input-group-text" id="basic-addon1">Estado histórico</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_clase_localizacion" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_estado_historico" aria-describedby="basic-addon1">
 
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Estado</span>
+                                        <span class="input-group-text" id="basic-addon1">Estado actual</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_estado_historico" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_estado_actual" aria-describedby="basic-addon1">
 
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Ciudad</span>
+                                        <span class="input-group-text" id="basic-addon1">Tipo de Riesgo</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_estado_actual" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control setAlg" id="riesdis_id_riesgo">
+                                        <option value=0>Selecciona...</option>
+                                        <option value='1'>Sismos</option>
+                                        <option value='2'>Desplazamiento de Tierra o Lecho Marino</option>
+                                        <option value='3'>Clima Extremo</option>
+                                        <option value='4'>Inundaciones</option>
+                                        <option value='5'>Descarga Eléctrica atmosférica</option>
+                                        <option value='6'>Cargas de Vientos</option>
+                                        <option value='7'>Tornados</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3 sismo" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a1" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value='Sí'>Sí</option>
+                                        <option value='No'>No</option>
 
-                                </div>
-                                <div class="input-group mb-3">
+                                    </select>                                </div>
+                                <div class="input-group mb-3 sismo" style="display:none;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Sector</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_id_riesgo" aria-describedby="basic-addon1">
-
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Compañía</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_a1" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Porcentaje que posee</span>
+                                        <span class="input-group-text" id="basic-addon1">Velocidad de aceleración maxima</span>
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="riesdis_a2" aria-describedby="basic-addon1">
 
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3 sismo" style="display:none;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Fabricante del ducto</span>
+                                        <span class="input-group-text" id="basic-addon1">Tiempo de retorno</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_a3" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_a3" aria-describedby="basic-addon1">
 
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3 desplazamiento" style="display:none;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Origen de la instalación</span>
+                                        <span class="input-group-text" id="basic-addon1">Hay presencia</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_a4" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a4" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value='Sí'>Sí</option>
+                                        <option value='No'>No</option>
 
+                                    </select>
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3 desplazamiento" style="display:none;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">País</span>
+                                        <span class="input-group-text" id="basic-addon1">Susceptibilidad de pendiente</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_a5" aria-describedby="basic-addon1">
-
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a5" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value="Alto">Alto</option>
+                                        <option value="Medio">Medio</option>
+                                        <option value="Bajo">Bajo</option>    
+                                    </select>
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3 clima" style="display:none;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Estado</span>
+                                        <span class="input-group-text" id="basic-addon1">Clima extremo</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_a6" aria-describedby="basic-addon1">
-
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a6" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value='Sí'>Sí</option>
+                                        <option value='No'>No</option>
+                                        <option value='Desconocido'>Desconocido</option>
+                                    </select>
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3 inundacion" style="display:none;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Ciudad</span>
+                                        <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_a7" aria-describedby="basic-addon1">
-
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a7" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value='Sí'>Sí</option>
+                                        <option value='No'>No</option>
+                                        <option value='Desconocido'>Desconocido</option>
+                                    </select>
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3" style="display:none;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Sector</span>
+                                        <span class="input-group-text" id="basic-addon1">Índice de peligro</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_a8" aria-describedby="basic-addon1">
-
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a8" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value="Alto">Alto</option>
+                                        <option value="Medio">Medio</option>
+                                        <option value="Bajo">Bajo</option>    
+                                    </select>
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3 descarga" style="display:none;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">País</span>
+                                        <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_a9" aria-describedby="basic-addon1">
-
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a9" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value='Sí'>Sí</option>
+                                        <option value='No'>No</option>
+                                        <option value='Desconocido'>Desconocido</option>
+                                    </select>
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3 vientos" style="display:none;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Estado</span>
+                                        <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_a10" aria-describedby="basic-addon1">
-
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a7" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value='Sí'>Sí</option>
+                                        <option value='No'>No</option>
+                                        <option value='Desconocido'>Desconocido</option>
+                                    </select>
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3 tornados" style="display:none;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Ciudad</span>
+                                        <span class="input-group-text" id="basic-addon1">Cantidad de tornados en los últimos 10 años</span>
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_a11" aria-describedby="basic-addon1">
 
@@ -3596,6 +3640,76 @@
                                                 <a style="color: #265C4F;">
                                                     Id documento
                                                 </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaAnalisisRiesgos" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Zona de Riesgo
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Dependencia que determina
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Elementos Expuestos
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Clase de Localización 
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Estado histórico                                                 </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Estado actual                                                 </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de Riesgo                                                 </a>
                                             </th>
                                             <th class="th-lg">
                                                 <a style="color: #265C4F;">
