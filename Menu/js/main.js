@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -8146,8 +8146,51 @@ function llenarDatosActualizacionAnalisisPlanos(data) {
     $("#cmb_tuberisobresuelo_plano option:contains(" + data[0].tuberia_sobre_suelo + ")").attr('selected', 'selected');
     $("#cmb_tuberiencimaagua_plano option:contains(" + data[0].tuberia_encima_agua + ")").attr('selected', 'selected');
     $("#cmb_tuberiaaltamar_plano option:contains(" + data[0].tuberia_altamar + ")").attr('selected', 'selected');
-    $("#cmb_tuberiaaltamar_plano option:contains(" + data[0].perforacion_direccional_horizontal + ")").attr('selected', 'selected');
+    $("#cmb_perforaciondireccional_plano option:contains(" + data[0].perforacion_direccional_horizontal + ")").attr('selected', 'selected');
     $("#condicionprocedencia_plano").val(data[0].condicion_prosedencia);
+    if (data[0].planos_mapas_reportes !== "" && data[0].planos_mapas_reportes !== null) {
+        // Find the correct input group using the data-column attribute
+        const inputGroup = document.querySelector(`#filefrmplano`);
+        const customFileDiv = inputGroup.querySelector('#fileconteinerplano ');
+
+        if (customFileDiv) {
+            // Create the download icon
+            const downloadIcon = document.createElement('a');
+            downloadIcon.href = `${apiUrl}analisis-planos/${data[0].id}/download`;
+            downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+            downloadIcon.target = "_blank";
+            downloadIcon.className = "download-icon";
+            downloadIcon.style.marginLeft = "10px";
+            //downloadIcon.setAttribute('data-columna', item.column);
+            downloadIcon.setAttribute('data-id_otro', data[0].id);
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+            } else {
+                inputGroup.appendChild(downloadIcon);
+            }
+
+            const destroyIcon = document.createElement('a');
+            destroyIcon.href = `${apiUrl}analisis-planos/${data[0].id}/destroy`;
+            destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+            destroyIcon.target = "_blank";
+            destroyIcon.className = "destroy-icon";
+            destroyIcon.style.marginLeft = "10px";
+            destroyIcon.style.display = "none";
+            //destroyIcon.setAttribute('data-columna', item.column);
+            destroyIcon.setAttribute('data-id_otro', data[0].id);
+
+
+            // Insert the download icon after the custom-file div
+            if (customFileDiv.nextSibling) {
+                inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+            }
+            else {
+                inputGroup.appendChild(destroyIcon);
+            }
+        }
+    }
     idAnalisisPlanos = data[0].id;
     inhabilitarform("#planosanalisisform", true);
 }
@@ -8155,10 +8198,11 @@ function cancelAnalisisPlanos() {
     $('#analisisforms').show();
     $('#planosanalisisform').hide();
 }
+/*
 function saveAnalisisPlanos() {
     var webMethod = "saveAnalisisPlanos";
     var params = {
-            area_unitaria_id: area,
+         area_unitaria_id: area,
         fecha_indetificacion: $("#fecha_identificacion_planos").val(),
         fecha_registro: $('#fecha_registro_planos').val(),
         tuberia_sobre_suelo: $('#cmb_tuberisobresuelo_plano').val(),
@@ -8170,7 +8214,7 @@ function saveAnalisisPlanos() {
         kilometro_especifico: $("#km_esp_iden_planos").val()
         };
         var formData = new FormData();
-       /* formData.append('planos_mapas_reportes', $("#fileplanosmapasreportes")[0].files[0]);*/
+       //formData.append('planos_mapas_reportes', $("#fileplanosmapasreportes")[0].files[0]);
 
         Object.keys(params).forEach(key => formData.append(key, params[key]));
 
@@ -8200,18 +8244,63 @@ function saveAnalisisPlanos() {
             .catch(error => {
                 alert("Error: " + error);
             });
+}*/
+function saveAnalisisPlanos() {
+    var webMethod = "saveAnalisisPlanos";
+    const formData = new FormData();
+
+    formData.append("kilometro_especifico", $("#km_esp_iden_planos").val())
+    formData.append("coordenada_especifica", $("#coord_esp_iden_x_planos").val() + ' ' + $("#coord_esp_iden_y_planos").val(),)
+    formData.append("C_0101_0001_id", area)
+    formData.append("fecha_indetificacion", $('#fecha_identificacion_planos').val())
+    formData.append("fecha_registro", $('#fecha_registro_planos').val())
+    formData.append("tuberia_sobre_suelo", $('#cmb_tuberisobresuelo_plano').val())
+    formData.append("tuberia_encima_agua", $('#cmb_tuberiencimaagua_plano').val())
+    formData.append("tuberia_altamar", $('#cmb_tuberiaaltamar_plano').val())
+    formData.append("perforacion_direccional_horizontal", $('#cmb_perforaciondireccional_plano').val())
+    formData.append("condicion_prosedencia", $('#condicionprocedencia_plano').val())
+    formData.append('planos_mapas_reportes', $("#fileplanosmapasreportes")[0].files[0]);
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                    $('#analisisforms').show();
+                    $('#planosanalisisform').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
 }
+
 function updateAnalisisPlanos() {
-    if ($("#btn_updategeoespacial_analisis").text() === "Actualizar") {
-        inhabilitarform("#infogeoespacialanalisisform", false)
-        $("#btn_updategeoespacial_analisis").text('Guardar');
-        showDestroyIcons('infogeoespacialanalisisform', true);
+    if ($("#btn_updateplanos_analisis").text() === "Actualizar") {
+        inhabilitarform("#planosanalisisform", false)
+        $("#btn_updateplanos_analisis").text('Guardar');
+        showDestroyIcons('planosanalisisform', true);
     }
     else {
         var params = {
         };
         var webMethod = "";
-        webMethod = "updateAnalisisGeoespacial";
+        webMethod = "updateAnalisisPlanos";
+        /*
         params = {
             id: idAnalisisGo,
             C_0101_0001_id: area,
@@ -8228,7 +8317,20 @@ function updateAnalisisPlanos() {
             kilometro_especifico: $("#km_esp_iden_geo").val()
         };
         var formData = new FormData();
-        Object.keys(params).forEach(key => formData.append(key, params[key]));
+        Object.keys(params).forEach(key => formData.append(key, params[key]));*/
+        const formData = new FormData();
+        formData.append("kilometro_especifico", $("#km_esp_iden_planos").val())
+        formData.append("coordenada_especifica", $("#coord_esp_iden_x_planos").val() + ' ' + $("#coord_esp_iden_y_planos").val(),)
+        formData.append("C_0101_0001_id", area)
+        formData.append("id", idAnalisisPlanos)
+        formData.append("fecha_indetificacion", $('#fecha_identificacion_planos').val())
+        formData.append("fecha_registro", $('#fecha_registro_planos').val())
+        formData.append("tuberia_sobre_suelo", $('#cmb_tuberisobresuelo_plano').val())
+        formData.append("tuberia_encima_agua", $('#cmb_tuberiencimaagua_plano').val())
+        formData.append("tuberia_altamar", $('#cmb_tuberiaaltamar_plano').val())
+        formData.append("perforacion_direccional_horizontal", $('#cmb_perforaciondireccional_plano').val())
+        formData.append("condicion_prosedencia", $('#condicionprocedencia_plano').val())
+        formData.append('planos_mapas_reportes', $("#fileplanosmapasreportes")[0].files[0]);
 
         fetch(apiUrl + webMethod, {
             method: 'POST',
@@ -8246,13 +8348,22 @@ function updateAnalisisPlanos() {
                 if (data.success) {
                     alert("El registro fue actualizado correctamente");
                     $('#analisisforms').show();
-                    $('#infogeoespacialanalisisform').hide();
+                    $('#planosanalisisform').hide();
                 }
             })
             .catch(error => {
                 alert("Error: " + error);
             });
     }
+}
+function nuevoAnalisisPlanos() {
+
+    $("#btn_saveplanos_analisis").show();
+    $("#btn_newplanos_analisis").hide();
+    $("#btn_updateplanos_analisis").hide();
+    clearInputTextValuesNew('planosanalisisform');
+    inhabilitarform("#planosanalisisform", false);
+
 }
 //#endregion planos
 
