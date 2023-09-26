@@ -1044,18 +1044,22 @@ function inicializarEventos() {
             case "Ana1":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
-                $("#tablaAnalisisRiesgos").hide();
                 $("#tablaAnalisisGral").show();
-                $("#tablaAnalisisDocumental").hide();
                 $("#tablaAnalisisGeoespacial").hide();
+                $("#tablaAnalisisRiesgoIncidentes").hide();
+                $("#tablaAnalisisIngenieria").hide();
+                $("#tablaAnalisisDocumental").hide();
+                $("#tablaAnalisisRiesgos").hide();
                 break;
             case "Ana2":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
-                $("#tablaAnalisisRiesgos").hide();
                 $("#tablaAnalisisGral").hide();
                 $("#tablaAnalisisGeoespacial").show();
+                $("#tablaAnalisisRiesgoIncidentes").hide();
+                $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
+                $("#tablaAnalisisRiesgos").hide();
                 break;
             case "Ana3":
                
@@ -1067,6 +1071,8 @@ function inicializarEventos() {
                 ocultartablasdisenio();
                 $("#tablaAnalisisGral").hide();
                 $("#tablaAnalisisGeoespacial").hide();
+                $("#tablaAnalisisRiesgoIncidentes").hide();
+                $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
                 $("#tablaAnalisisRiesgos").show();
                 
@@ -1075,9 +1081,11 @@ function inicializarEventos() {
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 $("#tablaAnalisisGral").hide();
-                $("#tablaAnalisisRiesgos").hide();
                 $("#tablaAnalisisGeoespacial").hide();
+                $("#tablaAnalisisRiesgoIncidentes").hide();
+                $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").show();
+                $("#tablaAnalisisRiesgos").hide();
             break;
 
                 break;
@@ -1086,7 +1094,10 @@ function inicializarEventos() {
                 ocultartablasdisenio();
                 $("#tablaAnalisisGral").hide();
                 $("#tablaAnalisisGeoespacial").hide();
-                $("#tablaAnalisisRiesgoIncidentes").show();
+                $("#tablaAnalisisRiesgoIncidentes").hide();
+                $("#tablaAnalisisIngenieria").hide();
+                $("#tablaAnalisisDocumental").hide();
+                $("#tablaAnalisisRiesgos").show();
                 break;
             case "Ana5":
                 OcultarConstruccionConsulta();
@@ -1095,6 +1106,8 @@ function inicializarEventos() {
                 $("#tablaAnalisisGeoespacial").hide();
                 $("#tablaAnalisisRiesgoIncidentes").hide();
                 $("#tablaAnalisisIngenieria").show();
+                $("#tablaAnalisisDocumental").hide();
+                $("#tablaAnalisisRiesgos").hide();
                 break;
             default:
         }
@@ -1243,6 +1256,8 @@ function ocultartablasanalisis() {
     $("#tablaAnalisisDocumental").hide();
     $("#tablaAnalisisGral").hide();
     $("#tablaAnalisisGeoespacial").hide();
+    $("#tablaAnalisisRiesgos").hide();
+
 }
 
 function handleFileSelect(evt) {
@@ -8580,6 +8595,8 @@ function updateAnalisisDocumental() {
 async function fnshowAnalisisriesdis(id_d = null) {
     $('#riesdisanalisisform').show();
     $('#analisisforms').hide();
+    await loadElemento();
+    await loadRiesgo();
     try {
         if (id_d) {
             await consultaDatosAnalisisriesdis(id_d = id_d);
@@ -8707,6 +8724,7 @@ function consultaDatosAnalisisriesdis(id_d = null) {
                     inhabilitarform("#riesdisanalisisform", false)
                     $("#btn_saveriesdis_analisis").show();
                     $("#btn_updateriesdis_analisis").hide();
+                    $("#btn_newriesdis_analisis").hide();
 
                 }
 
@@ -8743,7 +8761,10 @@ function llenarDatosActualizacionAnalisisriesdis(data) {
     $("#riesdis_zona_riesgo").val(data[0].zona_riesgo);
     $("#riesdis_dependencia_determina").val(data[0].dependencia_determina);
     $("#riesdis_id_elementos_expuestos").val(data[0].id_elementos_expuestos);
-    $("#riesdis_fecha").val(data[0].fecha.split(" ")[0]);
+    if (data[0].fecha!== "" && data[0].fecha!== null) {
+        $("#riesdis_fecha").val(data[0].fecha.split(" ")[0]);
+    }else{ $("#riesdis_fecha").val("");}
+    
     $("#riesdis_clase_localizacion").val(data[0].clase_localizacion);
     $("#riesdis_estado_historico").val(data[0].estado_historico);
     $("#riesdis_estado_actual").val(data[0].estado_actual);
@@ -8836,6 +8857,144 @@ function nuevoAnalisisriesdis() {
     inhabilitarform("#riesdisanalisisform", false);
 
 }
+
+
+//CAt Riesgos
+function cancelotroRiesgoDis() {
+    $("#espRiesgoDis").hide();
+}
+function saveotroRiesgoDis() {
+    var webMethod = "saveTypeRiesgo";
+    var params = {
+        nombre: $("#newRiesgoDis").val(),
+        descripcion: $("#newDescRiesgoDis").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadRiesgo();
+                $("#espRiesgoDis").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotroRiesgo() {
+    $('#espRiesgoDis').show();
+}
+function loadRiesgo() {
+    var webMethod = "get_tiporiesgo";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+                console.log(data.data);
+                $("#riesdis_id_riesgo").empty();
+                $('#riesdis_id_riesgo').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+                    $('#riesdis_id_riesgo').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].nombre
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
+
+//Cat Elementos Expuestos
+function cancelotroElemento() {
+    $("#espElemento_Expuesto").hide();
+}
+function saveotroElemento() {
+    var webMethod = "saveTypeElemento";
+    var params = {
+        nombre: $("#newElemento").val(),
+        descripcion: $("#newDescElemento").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadElemento();
+                $("#espElemento_Expuesto").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotroElemento() {
+    $('#espElemento_Expuesto').show();
+}
+function loadElemento() {
+    var webMethod = "get_tipoelemento";
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.success) {
+                console.log(data.data);
+                $("#riesdis_id_elementos_expuestos").empty();
+                $('#riesdis_id_elementos_expuestos').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.data.length; i++) {
+                    $('#riesdis_id_elementos_expuestos').append($('<option>', {
+                        value: data.data[i].id,
+                        text: data.data[i].nombre
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
+
 //#region Riesgos e incidentes
 async function fnshowRiesgosIncidentes(id_d = null) {
     $('#riesgosincidentesanalisisform').show();
@@ -9766,5 +9925,6 @@ function cancelotrosegmento() {
     $("#esptiposegmento").hide(); te
 }
 //#endregion Analsis de Ingenieria
+
 
 //#endregion 
