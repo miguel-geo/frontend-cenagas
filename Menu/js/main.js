@@ -535,6 +535,24 @@ function inicializarEventos() {
                         });
 
                         break;
+                    case "Ana4":
+                        consultatoform(e)
+                        getAreaIdById("getAnalisisRiesgosIncidentesById", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowRiesgosIncidentes(id_d = row_id);
+                        });
+
+                        break;
+                    case "Ana5":
+                        consultatoform(e)
+                        getAreaIdById("getAnalisisIngenieriaById", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowAnalisisIngenieria(id_d = row_id);
+                        });
+
+                        break;
                     default:
                 }
                 break;
@@ -981,6 +999,21 @@ function inicializarEventos() {
                 break;
             case "Ana3":
                
+                break;
+            case "Ana4":
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                $("#tablaAnalisisGral").hide();
+                $("#tablaAnalisisGeoespacial").hide();
+                $("#tablaAnalisisRiesgoIncidentes").show();
+                break;
+            case "Ana5":
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                $("#tablaAnalisisGral").hide();
+                $("#tablaAnalisisGeoespacial").hide();
+                $("#tablaAnalisisRiesgoIncidentes").hide();
+                $("#tablaAnalisisIngenieria").show();
                 break;
             default:
         }
@@ -6651,6 +6684,46 @@ function consulta() {
                             }
                         });
                         break;
+                    case "Ana4":
+                        $('#tablaAnalisisRiesgoIncidentes tbody')[0].innerHTML = "";
+                        var webMethod = "get_AnalisisRiesgosIncidentes";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethod,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                    for (i = 0; i < data.data.datagrid.length; i++) {
+                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].tiporiesgo, data.data.datagrid[i].poblado, data.data.datagrid[i].municipio];
+                                        llenarTablas(persona, "tablaAnalisisRiesgoIncidentes");
+                                    }
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
+                    case "Ana5":
+                        $('#tablaAnalisisIngenieria tbody')[0].innerHTML = "";
+                        var webMethod = "get_AnalisisIngenieria";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethod,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                    for (i = 0; i < data.data.datagrid.length; i++) {
+                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].tiporegulacion, data.data.datagrid[i].gradoacero, data.data.datagrid[i].fecha_inicio_servicio];
+                                        llenarTablas(persona, "tablaAnalisisIngenieria");
+                                    }
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
                     default:
                 }
                 break;
@@ -7882,8 +7955,990 @@ function saveAnalisisPlanos() {
                 alert("Error: " + error);
             });
 }
+function updateAnalisisPlanos() {
+    if ($("#btn_updategeoespacial_analisis").text() === "Actualizar") {
+        inhabilitarform("#infogeoespacialanalisisform", false)
+        $("#btn_updategeoespacial_analisis").text('Guardar');
+        showDestroyIcons('infogeoespacialanalisisform', true);
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateAnalisisGeoespacial";
+        params = {
+            id: idAnalisisGo,
+            C_0101_0001_id: area,
+            clase_localizacion: $("#cmb_claselocalizacion_geo").val(),
+            fecha_determinacion: $('#fecha_determinacion_geo').val(),
+            autoridad_determina: $('#autoridad_determina_geo').val(),
+            id_documento: $("#idocomento_geo").val(),
+            poblacion_total: $("#pobtot_geo").val(),
+            densidad_poblacion: $("#densidadpob_geo").val(),
+            fecha_dato: $("#fechadato_geo").val(),
+            metodo_determinacion: $("#metododeterminacion_geo").val(),
+            fuente_informacion: $("#fuenteinformacion_geo").val(),
+            coordenada_especifica: $("#coord_esp_iden_x_geo").val() + ' ' + $("#coord_esp_iden_y_geo").val(),
+            kilometro_especifico: $("#km_esp_iden_geo").val()
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#analisisforms').show();
+                    $('#infogeoespacialanalisisform').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+}
 //#endregion planos
 
+//#region Riesgos e incidentes
+async function fnshowRiesgosIncidentes(id_d = null) {
+    $('#riesgosincidentesanalisisform').show();
+    $('#analisisforms').hide();
+    try {
+        await loadtiporiesgo();
 
+
+        if (id_d) {
+            await consultaDatosAnalisisRiesgosIncidentes(id_d = id_d);
+        }
+        else { consultaDatosAnalisisRiesgosIncidentes(); }
+
+        // If you want to do something after all functions have completed, you can do it here
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+    resetValidationClasses('riesgosincidentesanalisisform');
+}
+function loadtiporiesgo() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_tiporiesgo";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tiporiesgo_ri").empty();
+                    $('#cmb_tiporiesgo_ri').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tiporiesgo_ri').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].nombre
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+var idAnalisisRiesgosIncidentes;
+function consultaDatosAnalisisRiesgosIncidentes(id_d = null) {
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getAnalisisRiesgosIncidentesById";
+        params = {
+            id: id_d
+        };
+    }
+
+    else {
+
+        webMethod = "get_AnalisisRiesgosIncidentes";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+            existingDownloadIcons.forEach(icon => icon.remove());
+
+            if (data.success) {
+                var infodata;
+                if (webMethod === "getAnalisisRiesgosIncidentesById")
+                    infodata = (data.data);
+                else if (webMethod === "get_AnalisisRiesgosIncidentes")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    if (webMethod === "getAnalisisRiesgosIncidentesById")
+                        llenarDatosActualizacionAnalisisRiesgosIncidentes(infodata);
+                    else if (webMethod === "get_AnalisisRiesgosIncidentes")
+                        llenarDatosActualizacionAnalisisRiesgosIncidentes(infodata);
+                    $("#btn_saveRiesgosIncidentes_analisis").hide();
+                    $("#btn_updateRiesgosIncidentes_analisis").show();
+                    $("#btn_newRiesgosIncidentes_analisis").show();
+                }
+                else {
+
+                    clearInputTextValues('riesgosincidentesanalisisform');
+                    inhabilitarform("#riesgosincidentesanalisisform", false)
+                    $("#btn_saveRiesgosIncidentes_analisis").show();
+                    $("#btn_updateRiesgosIncidentes_analisis").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductogeogenera_ri").val(ducto_nombre);
+                    $("#txttramogeogeneral_ri").val(tramo_nombre);
+                    $("#txtareageogeneral_ri").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
+function llenarDatosActualizacionAnalisisRiesgosIncidentes(data) {
+    $("#btn_updateRiesgosIncidentes_analisis").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_iden_x_ri").val(coords[0]);
+        $("#coord_esp_iden_y_ri").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_iden_x_ri").val("");
+        $("#coord_esp_iden_y_ri").val("");
+    }
+    $("#km_esp_iden_ri").val(data[0].kilometro_especifico);
+    $("#cmb_tiporiesgo_ri option:contains(" + data[0].tiporiesgo + ")").attr('selected', 'selected');
+    $("#fecha_ri").val(data[0].fecha.split(" ")[0]);
+    $("#horaocurrenciaevento_ri").val(data[0].hora_ocurrencia_evento);
+    $("#horacontrolevento_ri").val(data[0].hora_control_evento);
+    $("#poblado_ri").val(data[0].poblado);
+    $("#municipio_ri").val(data[0].municipio);
+    $("#estado_ri").val(data[0].estado);
+    $("#causaaccidente_ri").val(data[0].causa_accidente);
+    $("#causaconstruccion_ri").val(data[0].causa_construccion);
+    $("#numlesionados_ri").val(data[0].numero_lesionado);
+    $("#tipoevento_ri").val(data[0].tipo_evento);
+    $("#horafinalreparacion_ri").val(data[0].hora_final_reparacion);
+    $("#exposicion_ri").val(data[0].exposicion);
+    $("#alturamaxexposicion_ri").val(data[0].altura_max_exposicion);
+    $("#distanciaaguasabajo_ri").val(data[0].distancia_aguas_abajo);
+    $("#observacion_ri").val(data[0].observacion);
+    idAnalisisRiesgosIncidentes = data[0].id;
+    inhabilitarform("#riesgosincidentesanalisisform", true);
+}
+function saveAnalisisRiesgosIncidentes() {
+    var webMethod = "saveAnalisisRiesgosIncidentes";
+
+    var params = {
+        C_0101_0001_id: area,
+        id_tipo_riesgo: $("#cmb_tiporiesgo_ri").val(),
+        fecha: $('#fecha_ri').val(),
+        hora_ocurrencia_evento: $('#horaocurrenciaevento_ri').val(),
+        hora_control_evento: $("#horacontrolevento_ri").val(),
+        poblado: $("#poblado_ri").val(),
+        municipio: $("#municipio_ri").val(),
+        estado: $("#estado_ri").val(),
+        causa_accidente: $("#causaaccidente_ri").val(),
+        causa_construccion: $("#causaconstruccion_ri").val(),
+        numero_lesionado: $("#numlesionados_ri").val(),
+        tipo_evento: $("#tipoevento_ri").val(),
+        hora_final_reparacion: $("#horafinalreparacion_ri").val(),
+        exposicion: $("#exposicion_ri").val(),
+        altura_max_exposicion: $("#alturamaxexposicion_ri").val(),
+        distancia_aguas_abajo: $("#distanciaaguasabajo_ri").val(),
+        observacion: $("#observacion_ri").val(),
+        coordenada_especifica: $("#coord_esp_iden_x_ri").val() + ' ' + $("#coord_esp_iden_y_ri").val(),
+        kilometro_especifico: $("#km_esp_iden_ri").val()
+    };
+    var formData = new FormData();
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                $('#analisisforms').show();
+                $('#riesgosincidentesanalisisform').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function updateAnalisisRiesgosIncidentes() {
+    if ($("#btn_updateRiesgosIncidentes_analisis").text() === "Actualizar") {
+        inhabilitarform("#riesgosincidentesanalisisform", false)
+        $("#btn_updateRiesgosIncidentes_analisis").text('Guardar');
+        showDestroyIcons('riesgosincidentesanalisisform', true);
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateAnalisisRiesgosIncidentes";
+        params = {
+            id: idAnalisisRiesgosIncidentes,
+            C_0101_0001_id: area,
+            id_tipo_riesgo: $("#cmb_tiporiesgo_ri").val(),
+            fecha: $('#fecha_ri').val(),
+            hora_ocurrencia_evento: $('#horaocurrenciaevento_ri').val(),
+            hora_control_evento: $("#horacontrolevento_ri").val(),
+            poblado: $("#poblado_ri").val(),
+            municipio: $("#municipio_ri").val(),
+            estado: $("#estado_ri").val(),
+            causa_accidente: $("#causaaccidente_ri").val(),
+            causa_construccion: $("#causaconstruccion_ri").val(),
+            numero_lesionado: $("#numlesionados_ri").val(),
+            tipo_evento: $("#tipoevento_ri").val(),
+            hora_final_reparacion: $("#horafinalreparacion_ri").val(),
+            exposicion: $("#exposicion_ri").val(),
+            altura_max_exposicion: $("#alturamaxexposicion_ri").val(),
+            distancia_aguas_abajo: $("#distanciaaguasabajo_ri").val(),
+            observacion: $("#observacion_ri").val(),
+            coordenada_especifica: $("#coord_esp_iden_x_ri").val() + ' ' + $("#coord_esp_iden_y_ri").val(),
+            kilometro_especifico: $("#km_esp_iden_ri").val()
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#analisisforms').show();
+                    $('#riesgosincidentesanalisisform').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+}
+function cancelAnalisisRiesgosIncidentes() {
+    $('#analisisforms').show();
+    $('#riesgosincidentesanalisisform').hide();
+}
+function nuevoAnalisisRiesgoIncidentes() {
+
+    $("#btn_saveRiesgosIncidentes_analisis").show();
+    $("#btn_newRiesgosIncidentes_analisis").hide();
+    $("#btn_updateRiesgosIncidentes_analisis").hide();
+    clearInputTextValuesNew('riesgosincidentesanalisisform');
+    inhabilitarform("#riesgosincidentesanalisisform", false);
+
+}
+function saveotroRiesgo() {
+    var webMethod = "saveTypeRiesgo";
+    var params = {
+        nombre: $("#newTipoRiesgo").val(),
+        descripcion: $("#newDescRiesgo").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtiporiesgo();
+                $("#espTipoRiesgo").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function espRiesgo() {
+    $('#espTipoRiesgo').show();
+}
+function cancelotroRiesgo() {
+    $("#espTipoRiesgo").hide();
+}
+//#endregion Riesgos e incidentes
+
+//#region Analisis de Ingeniería
+async function fnshowAnalisisIngenieria(id_d = null) {
+    $('#ingenieriaanalisisform').show();
+    $('#analisisforms').hide();
+    try {
+        await loadtiporegulacion();
+        await loadgradoacero();
+        await loadtecnicasoldadura();
+        await loadmaterial();
+        await loadsegmento();
+        if (id_d) {
+            await consultaDatosAnalisisIngenieria(id_d = id_d);
+        }
+        else { consultaDatosAnalisisIngenieria(); }
+
+        // If you want to do something after all functions have completed, you can do it here
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+    resetValidationClasses('riesgosincidentesanalisisform');
+}
+function loadtiporegulacion() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_tiporegulacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tiporegulacion_di").empty();
+                    $('#cmb_tiporegulacion_di').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tiporegulacion_di').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].nombre
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function loadgradoacero() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_gradoacero";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_gradoacero_di").empty();
+                    $('#cmb_gradoacero_di').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_gradoacero_di').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].nombre
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function loadtecnicasoldadura() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TecnicaSoldadura";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tecnicasoldadura_di").empty();
+                    $('#cmb_tecnicasoldadura_di').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tecnicasoldadura_di').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].nombre
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function loadmaterial() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_MaterialIngenieria";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_Material_di").empty();
+                    $('#cmb_Material_di').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_Material_di').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].nombre
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function loadsegmento() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_SegmentoIngenieria";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tiposeging_di").empty();
+                    $('#cmb_tiposeging_di').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tiposeging_di').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].nombre
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+var idAnalisisIngenieria;
+function consultaDatosAnalisisIngenieria(id_d = null) {
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getAnalisisIngenieriaById";
+        params = {
+            id: id_d
+        };
+    }
+
+    else {
+
+        webMethod = "get_AnalisisIngenieria";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+            existingDownloadIcons.forEach(icon => icon.remove());
+
+            if (data.success) {
+                var infodata;
+                if (webMethod === "getAnalisisIngenieriaById")
+                    infodata = (data.data);
+                else if (webMethod === "get_AnalisisIngenieria")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    if (webMethod === "getAnalisisIngenieriaById")
+                        llenarDatosActualizacionAnalisisIngenieria(infodata);
+                    else if (webMethod === "get_AnalisisIngenieria")
+                        llenarDatosActualizacionAnalisisIngenieria(infodata);
+                    $("#btn_saveIngenieria_analisis").hide();
+                    $("#btn_updateIngenieria_analisis").show();
+                    $("#btn_newIngenieria_analisis").show();
+                }
+                else {
+
+                    clearInputTextValues('ingenieriaanalisisform');
+                    inhabilitarform("#ingenieriaanalisisform", false)
+                    $("#btn_saveIngenieria_analisis").show();
+                    $("#btn_updateIngenieria_analisis").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductogeogenera_di").val(ducto_nombre);
+                    $("#txttramogeogeneral_di").val(tramo_nombre);
+                    $("#txtareageogeneral_di").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
+function llenarDatosActualizacionAnalisisIngenieria(data) {
+    $("#btn_updateRiesgosIncidentes_analisis").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_iden_x_di").val(coords[0]);
+        $("#coord_esp_iden_y_di").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_iden_x_di").val("");
+        $("#coord_esp_iden_y_di").val("");
+    }
+    $("#km_esp_iden_di").val(data[0].kilometro_especifico);
+    $("#cmb_tiporegulacion_di option:contains(" + data[0].tiporegulacion + ")").attr('selected', 'selected');
+    $("#cmb_gradoacero_di option:contains(" + data[0].gradoacero + ")").attr('selected', 'selected');
+    $("#cmb_tecnicasoldadura_di option:contains(" + data[0].tecnicasoldadura + ")").attr('selected', 'selected');
+    $("#cmb_Material_di option:contains(" + data[0].materialingenieria + ")").attr('selected', 'selected');
+    $("#cmb_tiposeging_di option:contains(" + data[0].segmentoingeneria + ")").attr('selected', 'selected');    
+    $("#fecha_inicio_servicio_di").val(data[0].fecha_inicio_servicio.split(" ")[0]);
+    $("#fecha_instalacion_di").val(data[0].fecha_instalacion.split(" ")[0]);
+    $("#cmbdecisionestuberiaaisladora option:contains(" + data[0].es_tuberia_portadora + ")").attr('selected', 'selected');
+    $("#cmbdecisionesinspeccionenlinea option:contains(" + data[0].puede_inspeccion_linea + ")").attr('selected', 'selected');
+    $("#cmbdecisionestuberiasolopuedeserinspeccionada option:contains(" + data[0].puede_inspeccion_raspaduras + ")").attr('selected', 'selected');
+    $("#fecha_fabricacion_di").val(data[0].fecha_fabricacion.split(" ")[0]);
+    $("#ciudadmolino_di").val(data[0].ciudad_molino_construccion);
+    $("#diam_nom_di").val(data[0].diametro_nominal);
+    $("#cmbdecisionestuberiaoriginal option:contains(" + data[0].es_tuberia_original + ")").attr('selected', 'selected');
+    $("#lim_elas_di").val(data[0].limite_elastico_minimo);
+    $("#esp_dis_di").val(data[0].especificacion_disenio);
+    $("#cri_cons_di").val(data[0].criterios_construccion);
+    $("#edo_his_di").val(data[0].estado_historico);
+    $("#edo_act_di").val(data[0].estado_actual);
+    idAnalisisIngenieria = data[0].id;
+    inhabilitarform("#ingenieriaanalisisform", true);
+}
+function saveAnalisisIngenieria() {
+    var webMethod = "saveAnalisisIngenieria";
+
+    var params = {
+        C_0101_0001_id: area,
+        id_tipo_regulacion: $("#cmb_tiporegulacion_di").val(),
+        id_grado_acero: $("#cmb_gradoacero_di").val(),
+        fecha_inicio_servicio: $('#fecha_inicio_servicio_di').val(),
+        fecha_instalacion: $('#fecha_instalacion_di').val(),
+        es_tuberia_portadora: $('#cmbdecisionestuberiaaisladora').val(),
+        puede_inspeccion_linea: $("#cmbdecisionesinspeccionenlinea").val(),
+        puede_inspeccion_raspaduras: $("#cmbdecisionestuberiasolopuedeserinspeccionada").val(),
+        id_tecnica_soldadura: $("#cmb_tecnicasoldadura_di").val(),
+        fecha_fabricacion: $("#fecha_fabricacion_di").val(),
+        id_material: $("#cmb_Material_di").val(),
+        ciudad_molino_construccion: $("#ciudadmolino_di").val(),
+        diametro_nominal: $("#diam_nom_di").val(),
+        es_tuberia_original: $("#cmbdecisionestuberiaoriginal").val(),
+        id_tipo_segmento: $("#cmb_tiposeging_di").val(),
+        limite_elastico_minimo: $("#lim_elas_di").val(),
+        especificacion_disenio: $("#esp_dis_di").val(),
+        criterios_construccion: $("#cri_cons_di").val(),
+        estado_historico: $("#edo_his_di").val(),
+        estado_actual: $("#edo_act_di").val(),
+        coordenada_especifica: $("#coord_esp_iden_x_di").val() + ' ' + $("#coord_esp_iden_y_di").val(),
+        kilometro_especifico: $("#km_esp_iden_di").val()
+    };
+    var formData = new FormData();
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                $('#analisisforms').show();
+                $('#ingenieriaanalisisform').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function updateAnalisisIngenieria() {
+    if ($("#btn_updateIngenieria_analisis").text() === "Actualizar") {
+        inhabilitarform("#ingenieriaanalisisform", false)
+        $("#btn_updateIngenieria_analisis").text('Guardar');
+        showDestroyIcons('riesgosincidentesanalisisform', true);
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateAnalisisIngenieria";
+        params = {
+            id: idAnalisisIngenieria,
+            C_0101_0001_id: area,
+            id_tipo_regulacion: $("#cmb_tiporegulacion_di").val(),
+            id_grado_acero: $("#cmb_gradoacero_di").val(),
+            fecha_inicio_servicio: $('#fecha_inicio_servicio_di').val(),
+            fecha_instalacion: $('#fecha_instalacion_di').val(),
+            es_tuberia_portadora: $('#cmbdecisionestuberiaaisladora').val(),
+            puede_inspeccion_linea: $("#cmbdecisionesinspeccionenlinea").val(),
+            puede_inspeccion_raspaduras: $("#cmbdecisionestuberiasolopuedeserinspeccionada").val(),
+            id_tecnica_soldadura: $("#cmb_tecnicasoldadura_di").val(),
+            fecha_fabricacion: $("#fecha_fabricacion_di").val(),
+            id_material: $("#cmb_Material_di").val(),
+            ciudad_molino_construccion: $("#ciudadmolino_di").val(),
+            diametro_nominal: $("#diam_nom_di").val(),
+            es_tuberia_original: $("#cmbdecisionestuberiaoriginal").val(),
+            id_tipo_segmento: $("#cmb_tiposeging_di").val(),
+            limite_elastico_minimo: $("#lim_elas_di").val(),
+            especificacion_disenio: $("#esp_dis_di").val(),
+            criterios_construccion: $("#cri_cons_di").val(),
+            estado_historico: $("#edo_his_di").val(),
+            estado_actual: $("#edo_act_di").val(),
+            coordenada_especifica: $("#coord_esp_iden_x_di").val() + ' ' + $("#coord_esp_iden_y_di").val(),
+            kilometro_especifico: $("#km_esp_iden_di").val()
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#analisisforms').show();
+                    $('#ingenieriaanalisisform').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+}
+function cancelAnalisisIngenieria() {
+    $('#analisisforms').show();
+    $('#ingenieriaanalisisform').hide();
+}
+function nuevoAnalisisRiesgoIngenieria() {
+
+    $("#btn_saveIngenieria_analisis").show();
+    $("#btn_newIngenieria_analisis").hide();
+    $("#btn_updateIngenieria_analisis").hide();
+    clearInputTextValuesNew('ingenieriaanalisisform');
+    inhabilitarform("#ingenieriaanalisisform", false);
+
+}
+function saveotroRegulacion() {
+    var webMethod = "saveTypeRegulacion";
+    var params = {
+        nombre: $("#newTipoRegulacion").val(),
+        descripcion: $("#newDescRegulacion").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtiporegulacion();
+                $("#espregulacion").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function espRegulacion() {
+    $('#espregulacion').show();
+}
+function cancelotroRegulacion() {
+    $("#espregulacion").hide();
+}
+function saveotroAcero() {
+    var webMethod = "saveGradoAcero";
+    var params = {
+        nombre: $("#newGradoAcero").val(),
+        descripcion: $("#newDescGradoAcero").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadgradoacero();
+                $("#espGradoAcero").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function espGracoAcero() {
+    $('#espGradoAcero').show();
+}
+function cancelotroGradoAcero() {
+    $("#espGradoAcero").hide();
+}
+function saveotrotecnicasoldadura() {
+    var webMethod = "saveTecnicaSoldadura";
+    var params = {
+        nombre: $("#newtecnicasoldadura").val(),
+        descripcion: $("#newDesctecnicasoldadura").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtecnicasoldadura();
+                $("#esptecnicasoldadura").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function esptecsoldadura() {
+    $('#esptecnicasoldadura').show();
+}
+function cancelotroTecnicaSoldadura() {
+    $("#esptecnicasoldadura").hide();te
+}
+function saveotromaterialing() {
+    var webMethod = "saveMaterialIngenieria";
+    var params = {
+        nombre: $("#newmaterialing").val(),
+        descripcion: $("#newDescmaterialing").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadmaterial();
+                $("#espmaterialing").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function espmaterialing() {
+    $('#espmaterialing').show();
+}
+function cancelotromaterialing() {
+    $("#espmaterialing").hide(); te
+}
+function saveotromsegmentoing() {
+    var webMethod = "saveSegmentoIngenieria";
+    var params = {
+        nombre: $("#newmtiposegmento").val(),
+        descripcion: $("#newDesctiposegmento").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadsegmento();
+                $("#esptiposegmento").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function espsegmento() {
+    $('#esptiposegmento').show();
+}
+function cancelotrosegmento() {
+    $("#esptiposegmento").hide(); te
+}
+//#endregion Analsis de Ingenieria
 
 //#endregion 
