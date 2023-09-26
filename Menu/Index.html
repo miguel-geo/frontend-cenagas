@@ -2088,8 +2088,6 @@
                             </form>
                         </div>
 
-
-
                         <div id="seguridadprearranquefrm" style="display:none;margin-top:15px;">
                             <form role="form">
                                 <div class="input-group mb-3">
@@ -2276,7 +2274,7 @@
                                     </div>
                                 </div>
                                 <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" onclick="fnshowAnalisisDocumental()" class="card-img-top" alt="..." style="cursor: pointer;" onclick="">
+                                    
                                     <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="fnshowAnalisisIngenieria()">
                                     <div class="card-body">
                                         <h6 class="card-title">Reportes de Diseño e ingeniería</h6>
@@ -2287,8 +2285,7 @@
                                     </div>
                                 </div>
                                 <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="">
-                                    <div class="card-body">
+                                    <img src="images/formCENAGAS.jpg" onclick="fnshowAnalisisDocumental()" class="card-img-top" alt="..." style="cursor: pointer;" onclick="">                                    <div class="card-body">
                                         <h6 class="card-title">Información documental</h6>
                                         <p class="card-text">En éste formulario contendrá información relacionada a...</p>
                                     </div>
@@ -2843,12 +2840,227 @@
                                         <option value='2'>Infraestructura</option>
                                         <option value='3'>Zona de Conservación</option>
                                     </select>
+                                    <button type="button" onclick="showotroElemento()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                    
+                                </div>
+                                <div class="input-group mb-3" id="espElemento_Expuesto" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newElemento" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescElemento" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroElemento()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroElemento()" class="btn btn-success">Guardar</button>
+                                    </div>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Fecha</span>
                                     </div>
                                     <input type="date" class="form-control validate-pattern setAlg"  placeholder="" aria-label="" id="riesdis_fecha" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Clase de Localización</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_clase_localizacion" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Hora final reparación</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="horafinalreparacion_ri" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado histórico</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_estado_historico" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Exposición</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="exposicion_ri" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado actual</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_estado_actual" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Altura máxima exposición</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="alturamaxexposicion_ri" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de Riesgo</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="riesdis_id_riesgo">
+                                        <option value=0>Selecciona...</option>
+                                        <option value='1'>Sismos</option>
+                                        <option value='2'>Desplazamiento de Tierra o Lecho Marino</option>
+                                        <option value='3'>Clima Extremo</option>
+                                        <option value='4'>Inundaciones</option>
+                                        <option value='5'>Descarga Eléctrica atmosférica</option>
+                                        <option value='6'>Cargas de Vientos</option>
+                                        <option value='7'>Tornados</option>
+                                    </select>
+                                    <button type="button" onclick="showotroRiesgo()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                    
+                                </div>
+                                <div class="input-group mb-3" id="espRiesgoDis" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newRiesgoDis" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescRiesgoDis" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroRiesgoDis()">Cancelar</button>
+                                        <button type="button" id="btn_saveMaterial" onclick="saveotroRiesgoDis()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3 sismo" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a1" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value='Sí'>Sí</option>
+                                        <option value='No'>No</option>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Distancia aguas abajo</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="distanciaaguasabajo_ri" aria-describedby="basic-addon1">
+
+                                    </select>                                </div>
+                                <div class="input-group mb-3 sismo" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Velocidad de aceleración maxima</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="riesdis_a2" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3 sismo" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tiempo de retorno</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_a3" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3 desplazamiento" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Hay presencia</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a4" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value='Sí'>Sí</option>
+                                        <option value='No'>No</option>
+
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3 desplazamiento" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Susceptibilidad de pendiente</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a5" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value="Alto">Alto</option>
+                                        <option value="Medio">Medio</option>
+                                        <option value="Bajo">Bajo</option>    
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3 clima" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Clima extremo</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a6" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value='Sí'>Sí</option>
+                                        <option value='No'>No</option>
+                                        <option value='Desconocido'>Desconocido</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3 inundacion" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a7" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value='Sí'>Sí</option>
+                                        <option value='No'>No</option>
+                                        <option value='Desconocido'>Desconocido</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Índice de peligro</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a8" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value="Alto">Alto</option>
+                                        <option value="Medio">Medio</option>
+                                        <option value="Bajo">Bajo</option>    
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3 descarga" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a9" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value='Sí'>Sí</option>
+                                        <option value='No'>No</option>
+                                        <option value='Desconocido'>Desconocido</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3 vientos" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a7" >
+                                        <option value=0>Selecciona...</option>
+                                        <option value='Sí'>Sí</option>
+                                        <option value='No'>No</option>
+                                        <option value='Desconocido'>Desconocido</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3 tornados" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Cantidad de tornados en los últimos 10 años</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_a11" aria-describedby="basic-addon1">
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisriesdis()">Cancelar</button>
+                                    <button type="button" id="btn_newriesdis_analisis" onclick="nuevoAnalisisriesdis()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updateriesdis_analisis" onclick="updateAnalisisriesdis()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_saveriesdis_analisis" onclick="validateForm('riesdisanalisisform', saveAnalisisRepDis)" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+
                         <div id="riesgosincidentesanalisisform" style="display:none;margin-top:15px;">
                             <form role="form" id="identi-form" class="needs-validation">
                                 <div class="input-group mb-3">
@@ -2981,187 +3193,6 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Clase de Localización</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_clase_localizacion" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Hora final reparación</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="horafinalreparacion_ri" aria-describedby="basic-addon1">
-
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Estado histórico</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_estado_historico" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Exposición</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="exposicion_ri" aria-describedby="basic-addon1">
-
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Estado actual</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_estado_actual" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Altura máxima exposición</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="alturamaxexposicion_ri" aria-describedby="basic-addon1">
-
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Tipo de Riesgo</span>
-                                    </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_id_riesgo">
-                                        <option value=0>Selecciona...</option>
-                                        <option value='1'>Sismos</option>
-                                        <option value='2'>Desplazamiento de Tierra o Lecho Marino</option>
-                                        <option value='3'>Clima Extremo</option>
-                                        <option value='4'>Inundaciones</option>
-                                        <option value='5'>Descarga Eléctrica atmosférica</option>
-                                        <option value='6'>Cargas de Vientos</option>
-                                        <option value='7'>Tornados</option>
-                                    </select>
-                                </div>
-                                <div class="input-group mb-3 sismo" style="display:none;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
-                                    </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a1" >
-                                        <option value=0>Selecciona...</option>
-                                        <option value='Sí'>Sí</option>
-                                        <option value='No'>No</option>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Distancia aguas abajo</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="distanciaaguasabajo_ri" aria-describedby="basic-addon1">
-
-                                    </select>                                </div>
-                                <div class="input-group mb-3 sismo" style="display:none;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Velocidad de aceleración maxima</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="riesdis_a2" aria-describedby="basic-addon1">
-
-                                </div>
-                                <div class="input-group mb-3 sismo" style="display:none;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Tiempo de retorno</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_a3" aria-describedby="basic-addon1">
-
-                                </div>
-                                <div class="input-group mb-3 desplazamiento" style="display:none;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Hay presencia</span>
-                                    </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a4" >
-                                        <option value=0>Selecciona...</option>
-                                        <option value='Sí'>Sí</option>
-                                        <option value='No'>No</option>
-
-                                    </select>
-                                </div>
-                                <div class="input-group mb-3 desplazamiento" style="display:none;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Susceptibilidad de pendiente</span>
-                                    </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a5" >
-                                        <option value=0>Selecciona...</option>
-                                        <option value="Alto">Alto</option>
-                                        <option value="Medio">Medio</option>
-                                        <option value="Bajo">Bajo</option>    
-                                    </select>
-                                </div>
-                                <div class="input-group mb-3 clima" style="display:none;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Clima extremo</span>
-                                    </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a6" >
-                                        <option value=0>Selecciona...</option>
-                                        <option value='Sí'>Sí</option>
-                                        <option value='No'>No</option>
-                                        <option value='Desconocido'>Desconocido</option>
-                                    </select>
-                                </div>
-                                <div class="input-group mb-3 inundacion" style="display:none;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
-                                    </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a7" >
-                                        <option value=0>Selecciona...</option>
-                                        <option value='Sí'>Sí</option>
-                                        <option value='No'>No</option>
-                                        <option value='Desconocido'>Desconocido</option>
-                                    </select>
-                                </div>
-                                <div class="input-group mb-3" style="display:none;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Índice de peligro</span>
-                                    </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a8" >
-                                        <option value=0>Selecciona...</option>
-                                        <option value="Alto">Alto</option>
-                                        <option value="Medio">Medio</option>
-                                        <option value="Bajo">Bajo</option>    
-                                    </select>
-                                </div>
-                                <div class="input-group mb-3 descarga" style="display:none;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
-                                    </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a9" >
-                                        <option value=0>Selecciona...</option>
-                                        <option value='Sí'>Sí</option>
-                                        <option value='No'>No</option>
-                                        <option value='Desconocido'>Desconocido</option>
-                                    </select>
-                                </div>
-                                <div class="input-group mb-3 vientos" style="display:none;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
-                                    </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a7" >
-                                        <option value=0>Selecciona...</option>
-                                        <option value='Sí'>Sí</option>
-                                        <option value='No'>No</option>
-                                        <option value='Desconocido'>Desconocido</option>
-                                    </select>
-                                </div>
-                                <div class="input-group mb-3 tornados" style="display:none;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Cantidad de tornados en los últimos 10 años</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_a11" aria-describedby="basic-addon1">
-
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisriesdis()">Cancelar</button>
-                                    <button type="button" id="btn_newriesdis_analisis" onclick="nuevoAnalisisriesdis()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
-                                    <button type="button" id="btn_updateriesdis_analisis" onclick="updateAnalisisriesdis()" style="display:none" class="btn btn-info">Actualizar</button>
-                                    <button type="button" id="btn_saveriesdis_analisis" onclick="validateForm('riesdisanalisisform', saveAnalisisRepDis)" class="btn btn-success">Guardar</button>
-                                </div>
-                            </form>
-                        </div>
-
-
-
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Observación</span>
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="observacion_ri" aria-describedby="basic-addon1">
@@ -3175,6 +3206,8 @@
                                 </div>
                             </form>
                         </div>
+
+
                         <div id="ingenieriaanalisisform" style="display:none;margin-top:15px;">
                             <form role="form" id="identi-form" class="needs-validation">
                                 <div class="input-group mb-3">
@@ -4118,932 +4151,1003 @@
                                         </tbody>
                                         <!--Table body-->
                                     </table>
-                                    <table id="tablaAnalisisGral" class="table table-bordered" style="display:none;margin-top:15px;">
+                                <table id="tablaAnalisisGral" class="table table-bordered" style="display:none;margin-top:15px;">
 
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Coordenada específica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Kilometro específico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Compañía
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Porcentaje poseé
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Fabricante producto
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
-                                    <table id="tablaAnalisisGeoespacial" class="table table-bordered" style="display:none;margin-top:15px;">
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Compañía
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Porcentaje poseé
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fabricante producto
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
 
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Coordenada específica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Kilometro específico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Clase de localización
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Autoridad determina
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Id documento
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
-                                    <table id="tablaAnalisisRiesgoIncidentes" class="table table-bordered" style="display:none;margin-top:15px;">
+                                <table id="tablaAnalisisRiesgos" class="table table-bordered" style="display:none;margin-top:15px;">
 
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Coordenada específica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Kilometro específico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Tipo de Riesgo
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Poblado
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Municipio
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
-                                    <table id="tablaAnalisisIngenieria" class="table table-bordered" style="display:none;margin-top:15px;">
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Zona de Riesgo
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Dependencia que determina
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Elementos Expuestos
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Clase de Localización 
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Estado histórico                                                 </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Estado actual                                                 </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de Riesgo                                                 </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaAnalisisGeoespacial" class="table table-bordered" style="display:none;margin-top:15px;">
 
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Coordenada específica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Kilometro específico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Tipo de Regulación
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Grado de acero
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Fecha inicio de servicio
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
-                                    <table id="tablapresion" class="table table-bordered" style="display:none">
-
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Coordenada específica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Kilometro específico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Entidad/Empresa
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Fecha de Cálculo
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Método de cálculo
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Presión Nominal (PSI)
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Presión Nominal (kg)
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Presión de Diseño (PSI)
-                                                    </a>
-                                                </th>
-
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Presión Máxima de Operación Permitida (PSI)
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Presión Máxima de Operación Permitida  (kg)
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Presión de Segmento (PSI)
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Presión de Segmento  (kg)
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
-                                    <table id="tablaproteccion" class="table table-bordered" style="display:none">
-
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Coordenada específica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Kilometro específico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Tipo de Recubrimiento
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Longitud total del recubrimiento
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Empresa que aplico el recubrimiento
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Fecha inicio de servicio
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Fecha en que se fabricó
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Orden de aplicación
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Localización
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Temperatura máxima de funcionamiento
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Motivo de instalación
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Material de fabricación
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Espesor del recubrimiento
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Aislamiento eléctrico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Control de la corrosión
-                                                    </a>
-                                                </th>
-
-
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
-                                    <!--Table-->
-                                    <!-- #region Tablas Construcción -->
-                                    <table id="tablaConsCruces" class="table table-bordered" style="display:none;margin-top:15px;">
-
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Coordenada específica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Kilometro específico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Tipo de cruce
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg"
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
                                                 <a style="color: #265C4F;">
                                                     Clase de localización
                                                 </a>
                                             </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Propietario
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Distancia del cruce encima o debajo de la tubería
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Distancia desde el punto de cruce influye en la dirección aguas abajo
-                                                    </a>
-                                                </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Autoridad determina
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Id documento
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaAnalisisRiesgoIncidentes" class="table table-bordered" style="display:none;margin-top:15px;">
 
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de Riesgo
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Poblado
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Municipio
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaAnalisisIngenieria" class="table table-bordered" style="display:none;margin-top:15px;">
 
-                                    <table id="tablaConsCatodica" class="table table-bordered" style="display:none;margin-top:15px;">
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de Regulación
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Grado de acero
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha inicio de servicio
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablapresion" class="table table-bordered" style="display:none">
 
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Coordenada específica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Kilometro específico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Tipo de protección catódica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Tipo de instalación
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Nombre
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Id o no. De seri
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Fabricante
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Estado
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Entidad/Empresa
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha de Cálculo
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Método de cálculo
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión Nominal (PSI)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión Nominal (kg)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión de Diseño (PSI)
+                                                </a>
+                                            </th>
 
-                                    <table id="tablabasecons" class="table table-bordered" style="display:none;margin-top:15px;">
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión Máxima de Operación Permitida (PSI)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión Máxima de Operación Permitida  (kg)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión de Segmento (PSI)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión de Segmento  (kg)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaproteccion" class="table table-bordered" style="display:none">
 
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Coordenada específica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Kilometro específico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Fecha de construcción
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Método de recubrimiento
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Tipo de Suelo
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Material de relleno
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Presión de prueba de hermeticidad (PSI)
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Tipo de recubrimiento
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
-                                    <table id="tablaHermeticidad" class="table table-bordered" style="display:none;margin-top:15px;">
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de Recubrimiento
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Longitud total del recubrimiento
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Empresa que aplico el recubrimiento
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha inicio de servicio
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha en que se fabricó
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Orden de aplicación
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Localización
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Temperatura máxima de funcionamiento
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Motivo de instalación
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Material de fabricación
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Espesor del recubrimiento
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Aislamiento eléctrico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Control de la corrosión
+                                                </a>
+                                            </th>
 
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Coordenada específica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Kilometro específico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Nombre de la empresa
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Fecha de prueba
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Duración de la prueba
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Medio de prueba empleado
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Longitud de los ductos probados
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Presión de prueba máxima
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Presión de diseño
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Calibración
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Presión de prueba mínima
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Variaciones de presión
-                                                    </a>
-                                                </th>
 
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
-                                    <table id="tablaProfundidad" class="table table-bordered" style="display:none;margin-top:15px;">
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <!--Table-->
+                                <!-- #region Tablas Construcción -->
+                                <table id="tablaConsCruces" class="table table-bordered" style="display:none;margin-top:15px;">
 
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Coordenada específica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Kilometro específico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Profundidad de cobertura
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Medida profundidad bajo el agua
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Elevación del fondo de la tubería (m)
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Elevación del centro de la tubería (m)
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Elevación del terreno (m)
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Elevación de la parte superior de la tubería (m)
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Distancia del inicio de la ruta de red al punto
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Fecha de medida
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Perforación direccional horizontal para excavar
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Método de medición
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Estado actual
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Estado histórico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
-                                    <table id="tablaunionCons" class="table table-bordered" style="display:none;margin-top:15px;">
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de cruce
+                                                </a>
+                                            </th>
+                                            <th class="th-lg"
+                                            <a style="color: #265C4F;">
+                                                Clase de localización
+                                            </a>
+                                        </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Propietario
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Distancia del cruce encima o debajo de la tubería
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Distancia desde el punto de cruce influye en la dirección aguas abajo
+                                                </a>
+                                            </th>
 
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Coordenada específica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Kilometro específico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Tipo de técnica
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Identificador
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Recubrimiento aplicado en la soldadura
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Fecha de servicio
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Fecha de instalación
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Método para determinar la ubicación de la soldadura
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Fecha de fabricación
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Estado Actual
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Estado histórico
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
 
-                                    <table id="tablaconsSeguridad" class="table table-bordered" style="display:none;margin-top:15px;">
+                                <table id="tablaConsCatodica" class="table table-bordered" style="display:none;margin-top:15px;">
 
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Revisión física
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Revisión documental
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Identificación de hallazgos
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Evaluación y clasificación de los hallazgos
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Elaboración de los programas de atención de recomendaciones de los hallazgos
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Validación del cumplimiento de recomendaciones
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Autorización interna para el arranque
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Cierre para la RSPA
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de protección catódica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de instalación
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Nombre
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Id o no. De seri
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fabricante
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Estado
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
 
-                                    <table id="tablaconsInspeccion" class="table table-bordered" style="display:none;margin-top:15px;">
+                                <table id="tablabasecons" class="table table-bordered" style="display:none;margin-top:15px;">
 
-                                        <!--Table head-->
-                                        <thead>
-                                            <tr>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Área unitaria
-                                                    </a>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Auditorias y revisiones
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Propiedades físico-quimicas del producto
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Servicio de operación
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Historial de condiciones
-                                                    </a>
-                                                </th>
-                                                <th class="th-lg">
-                                                    <a style="color: #265C4F;">
-                                                        Acciones
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <!--Table head-->
-                                        <!--Table body-->
-                                        <tbody>
-                                        </tbody>
-                                        <!--Table body-->
-                                    </table>
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha de construcción
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Método de recubrimiento
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de Suelo
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Material de relleno
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión de prueba de hermeticidad (PSI)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de recubrimiento
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaHermeticidad" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Nombre de la empresa
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha de prueba
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Duración de la prueba
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Medio de prueba empleado
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Longitud de los ductos probados
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión de prueba máxima
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión de diseño
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Calibración
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Presión de prueba mínima
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Variaciones de presión
+                                                </a>
+                                            </th>
+
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaProfundidad" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Profundidad de cobertura
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Medida profundidad bajo el agua
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Elevación del fondo de la tubería (m)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Elevación del centro de la tubería (m)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Elevación del terreno (m)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Elevación de la parte superior de la tubería (m)
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Distancia del inicio de la ruta de red al punto
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha de medida
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Perforación direccional horizontal para excavar
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Método de medición
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Estado actual
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Estado histórico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <table id="tablaunionCons" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Coordenada específica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Tipo de técnica
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Identificador
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Recubrimiento aplicado en la soldadura
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha de servicio
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha de instalación
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Método para determinar la ubicación de la soldadura
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Fecha de fabricación
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Estado Actual
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Estado histórico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+
+                                <table id="tablaconsSeguridad" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Revisión física
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Revisión documental
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Identificación de hallazgos
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Evaluación y clasificación de los hallazgos
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Elaboración de los programas de atención de recomendaciones de los hallazgos
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Validación del cumplimiento de recomendaciones
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Autorización interna para el arranque
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Cierre para la RSPA
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+
+                                <table id="tablaconsInspeccion" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                    <!--Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Área unitaria
+                                                </a>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Auditorias y revisiones
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Propiedades físico-quimicas del producto
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Servicio de operación
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Historial de condiciones
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Acciones
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
 
                                     <!-- #endregion  -->
                                 </div>
