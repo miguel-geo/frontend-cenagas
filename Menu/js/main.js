@@ -8828,7 +8828,7 @@ function consultaDatosAnalisisriesdis(id_d = null) {
                         llenarDatosActualizacionAnalisisriesdis(infodata);
                     $("#btn_saveriesdis_analisis").hide();
                     $("#btn_updateriesdis_analisis").show();
-                    
+                    $("#btn_updateriesdis_analisis").text('Actualizar')
                     $("#btn_newriesdis_analisis").show();
                 }
                 else {
