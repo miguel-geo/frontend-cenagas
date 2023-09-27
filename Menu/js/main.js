@@ -6752,6 +6752,7 @@ function consulta() {
 
                     case "Ana1":
                         $('#tablaAnalisisGral tbody')[0].innerHTML = "";
+                        $('#tablaAnalisisGral tbody:not(:first)').remove();
                         var webMethod = "get_Analisisgeneral";
                         $.ajax({
                             type: "POST",
@@ -6774,7 +6775,8 @@ function consulta() {
                                         'pais',
                                         'estado',
                                         'ciudad',
-                                        'sector'];
+                                        'sector',
+                                        'tramo'];
 
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablaAnalisisGral", keysForPresion);
 
@@ -6787,6 +6789,7 @@ function consulta() {
                         break;
                     case "Ana2":
                         $('#tablaAnalisisGeoespacial tbody')[0].innerHTML = "";
+                        $('#tablaAnalisisGeoespacial tbody:not(:first)').remove();
                         var webMethod = "get_AnalisisGeoespacial";
                         $.ajax({
                             type: "POST",
@@ -6813,7 +6816,7 @@ function consulta() {
                                         'poblacion_total',
                                         'densidad_poblacion',
                                         'fecha_dato',
-                                        'metodo_determinacion', 'fuente_informacion'];
+                                        'metodo_determinacion', 'fuente_informacion','tramo'];
 
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablaAnalisisGeoespacial", keysForPresion);
 
@@ -6882,6 +6885,7 @@ function consulta() {
 
                     case "Ana4":
                         $('#tablaAnalisisRiesgoIncidentes tbody')[0].innerHTML = "";
+                        $('#tablaAnalisisRiesgoIncidentes tbody:not(:first)').remove();
                         var webMethod = "get_AnalisisRiesgosIncidentes";
                         $.ajax({
                             type: "POST",
@@ -6908,7 +6912,7 @@ function consulta() {
                                         'poblado',
                                         'municipio',
                                         'estado',
-                                        'causa_accidente', 'causa_construccion', 'numero_lesionado', 'tipo_evento', 'hora_final_reparacion', 'exposicion', 'altura_max_exposicion', 'distancia_aguas_abajo', 'observacion'];
+                                        'causa_accidente', 'causa_construccion', 'numero_lesionado', 'tipo_evento', 'hora_final_reparacion', 'exposicion', 'altura_max_exposicion', 'distancia_aguas_abajo', 'observacion','tramo'];
 
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablaAnalisisRiesgoIncidentes", keysForPresion);
 
@@ -6921,6 +6925,7 @@ function consulta() {
                         break;
                     case "Ana5":
                         $('#tablaAnalisisIngenieria tbody')[0].innerHTML = "";
+                        $('#tablaAnalisisIngenieria tbody:not(:first)').remove();
                         var webMethod = "get_AnalisisIngenieria";
                         $.ajax({
                             type: "POST",
@@ -6946,7 +6951,7 @@ function consulta() {
                                     'es_tuberia_portadora',
                                     'puede_inspeccion_linea',
                                     'puede_inspeccion_raspaduras',
-                                    'tecnicasoldadura', 'fecha_fabricacion', 'materialingenieria', 'ciudad_molino_construccion', 'diametro_nominal', 'es_tuberia_original', 'segmentoingeneria', 'limite_elastico_minimo', 'especificacion_disenio', 'criterios_construccion', 'estado_historico', 'estado_actual'];
+                                    'tecnicasoldadura', 'fecha_fabricacion', 'materialingenieria', 'ciudad_molino_construccion', 'diametro_nominal', 'es_tuberia_original', 'segmentoingeneria', 'limite_elastico_minimo', 'especificacion_disenio', 'criterios_construccion', 'estado_historico', 'estado_actual','tramo'];
 
                                 processTableDataAndHideNullColumns(data.data.datagrid, "tablaAnalisisIngenieria", keysForPresion);
 
@@ -7092,7 +7097,8 @@ function llenarTablas(obj, nameTabla) {
             temaconsultavar=temaconsultadisenio
         } else if (temaconsulta==="T2"){
             temaconsultavar=temaconsultaconstruccion
-        }
+        } else if(temaconsulta==="T4"){temaconsultavar=temaconsultaanalisis}
+        else if (temaconsulta==="T3"){temaconsultavar=temaconsultaoperacion}
         var escapedCategory = removeSpecialCharacters(category)
         
         // Check if tbody for this category exists
