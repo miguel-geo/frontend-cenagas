@@ -8977,7 +8977,7 @@ function cancelotroRiesgoDis() {
     $("#espRiesgoDis").hide();
 }
 function saveotroRiesgoDis() {
-    var webMethod = "saveTypeRiesgo";
+    var webMethod = "saveTypeRiesgos";
     var params = {
         nombre: $("#newRiesgoDis").val(),
         descripcion: $("#newDescRiesgoDis").val()
@@ -9014,7 +9014,7 @@ function showotroRiesgo() {
     $('#espRiesgoDis').show();
 }
 function loadRiesgo() {
-    var webMethod = "get_tiporiesgo";
+    var webMethod = "get_tiporiesgos";
     $.ajax({
         type: "GET",
         url: apiUrl + webMethod,
