@@ -7713,6 +7713,7 @@ function consultaDatosAnalisisGeneral(id_d = null) {
                     inhabilitarform("#generalanalisisform", false)
                     $("#btn_savegeneral_analisis").show();
                     $("#btn_updategeneral_analisis").hide();
+                    $("#btn_newgeneral_analisis").hide();
 
                 }
 
@@ -7886,6 +7887,7 @@ function consultaDatosAnalisisGeoespacial(id_d = null) {
                     inhabilitarform("#generalanalisisform", false)
                     $("#btn_savegeoespacial_analisis").show();
                     $("#btn_updategeoespacial_analisis").hide();
+                    $("#btn_newgeoespacial_analisis").hide();
 
                 }
 
@@ -8108,7 +8110,7 @@ function consultaDatosAnalisisPlanos(id_d = null) {
                     inhabilitarform("#planosanalisisform", false)
                     $("#btn_saveplanos_analisis").show();
                     $("#btn_updateplanos_analisis").hide();
-
+                    $("#btn_newplanos_analisis").hide();
                 }
 
                 getNamesByAreaUnitariaId(area).then(data => {
@@ -9207,6 +9209,7 @@ function consultaDatosAnalisisRiesgosIncidentes(id_d = null) {
                     inhabilitarform("#riesgosincidentesanalisisform", false)
                     $("#btn_saveRiesgosIncidentes_analisis").show();
                     $("#btn_updateRiesgosIncidentes_analisis").hide();
+                    $("#btn_newRiesgosIncidentes_analisis").hide();
 
                 }
 
@@ -9649,6 +9652,7 @@ function consultaDatosAnalisisIngenieria(id_d = null) {
                     inhabilitarform("#ingenieriaanalisisform", false)
                     $("#btn_saveIngenieria_analisis").show();
                     $("#btn_updateIngenieria_analisis").hide();
+                    $("#btn_newIngenieria_analisis").hide();
 
                 }
 
