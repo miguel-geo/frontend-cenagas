@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -6972,14 +6972,12 @@ function consulta() {
                                 if (data.success) {
 
                                     var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
-                                        'clase_localizacion',
-                                        'fecha_determinacion',
-                                        'autoridad_determina',
-                                        'id_documento',
-                                        'poblacion_total',
-                                        'densidad_poblacion',
-                                        'fecha_dato',
-                                        'metodo_determinacion', 'fuente_informacion'];
+                                        'fecha_indetificacion',
+                                        'fecha_registro',
+                                        'tuberia_sobre_suelo',
+                                        'tuberia_encima_agua',
+                                        'tuberia_altamar',
+                                        'perforacion_direccional_horizontal','condicion_prosedencia','tramo'];
 
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablaAnalisisPlanos", keysForPresion);
 
