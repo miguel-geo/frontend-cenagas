@@ -596,6 +596,15 @@ function inicializarEventos() {
                         });
 
                         break;
+                    case "Ana3":
+                        consultatoform(e)
+                        getAreaIdById("getAreaIdByAnalisisPlanosId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowAnalisisPlanos(id_d = row_id);
+                        });
+
+                        break;
                     default:
                 }
                 break;
@@ -1065,7 +1074,7 @@ function inicializarEventos() {
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 $("#tablaAnalisisGral").hide();
-                $("#tablaAnalisisGeoespacial").show();
+                $("#tablaAnalisisPlanos").show();
                 $("#tablaAnalisisRiesgoIncidentes").hide();
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
@@ -6793,16 +6802,6 @@ function consulta() {
                             url: apiUrl + webMethod,
                             data: params,
                             success: function (data) {
-                            //    if (data.success) {
-                            //        for (i = 0; i < data.data.datagrid.length; i++) {
-                            //            var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].clase_localizacion, data.data.datagrid[i].autoridad_determina, data.data.datagrid[i].id_documento];
-                            //            llenarTablas(persona, "tablaAnalisisGeoespacial");
-                            //        }
-                            //    }
-                            //},
-                            //error: function (xhr, ajaxOptions, thrownError) {
-
-                            //}
                                 if (data.success) {
 
                                     var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
@@ -6952,6 +6951,35 @@ function consulta() {
 
                             }
                         },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
+                    case "Ana3":
+                        $('#tablaAnalisisPlanos tbody')[0].innerHTML = "";
+                        var webMethod = "get_AnalisisPlanos";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethod,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+
+                                    var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
+                                        'clase_localizacion',
+                                        'fecha_determinacion',
+                                        'autoridad_determina',
+                                        'id_documento',
+                                        'poblacion_total',
+                                        'densidad_poblacion',
+                                        'fecha_dato',
+                                        'metodo_determinacion', 'fuente_informacion'];
+
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablaAnalisisPlanos", keysForPresion);
+
+                                }
+                            },
                             error: function (xhr, ajaxOptions, thrownError) {
 
                             }
