@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -7787,6 +7787,7 @@ function consultaDatosAnalisisGeneral(id_d = null) {
                     inhabilitarform("#generalanalisisform", false)
                     $("#btn_savegeneral_analisis").show();
                     $("#btn_updategeneral_analisis").hide();
+                    $("#btn_newgeneral_analisis").hide();
 
                 }
 
@@ -7960,6 +7961,7 @@ function consultaDatosAnalisisGeoespacial(id_d = null) {
                     inhabilitarform("#generalanalisisform", false)
                     $("#btn_savegeoespacial_analisis").show();
                     $("#btn_updategeoespacial_analisis").hide();
+                    $("#btn_newgeoespacial_analisis").hide();
 
                 }
 
@@ -8182,7 +8184,7 @@ function consultaDatosAnalisisPlanos(id_d = null) {
                     inhabilitarform("#planosanalisisform", false)
                     $("#btn_saveplanos_analisis").show();
                     $("#btn_updateplanos_analisis").hide();
-
+                    $("#btn_newplanos_analisis").hide();
                 }
 
                 getNamesByAreaUnitariaId(area).then(data => {
@@ -8900,7 +8902,7 @@ function consultaDatosAnalisisriesdis(id_d = null) {
                         llenarDatosActualizacionAnalisisriesdis(infodata);
                     $("#btn_saveriesdis_analisis").hide();
                     $("#btn_updateriesdis_analisis").show();
-                    
+                    $("#btn_updateriesdis_analisis").text('Actualizar')
                     $("#btn_newriesdis_analisis").show();
                 }
                 else {
@@ -9049,7 +9051,7 @@ function cancelotroRiesgoDis() {
     $("#espRiesgoDis").hide();
 }
 function saveotroRiesgoDis() {
-    var webMethod = "saveTypeRiesgo";
+    var webMethod = "saveTypeRiesgos";
     var params = {
         nombre: $("#newRiesgoDis").val(),
         descripcion: $("#newDescRiesgoDis").val()
@@ -9086,7 +9088,7 @@ function showotroRiesgo() {
     $('#espRiesgoDis').show();
 }
 function loadRiesgo() {
-    var webMethod = "get_tiporiesgo";
+    var webMethod = "get_tiporiesgos";
     $.ajax({
         type: "GET",
         url: apiUrl + webMethod,
@@ -9281,6 +9283,7 @@ function consultaDatosAnalisisRiesgosIncidentes(id_d = null) {
                     inhabilitarform("#riesgosincidentesanalisisform", false)
                     $("#btn_saveRiesgosIncidentes_analisis").show();
                     $("#btn_updateRiesgosIncidentes_analisis").hide();
+                    $("#btn_newRiesgosIncidentes_analisis").hide();
 
                 }
 
@@ -9723,6 +9726,7 @@ function consultaDatosAnalisisIngenieria(id_d = null) {
                     inhabilitarform("#ingenieriaanalisisform", false)
                     $("#btn_saveIngenieria_analisis").show();
                     $("#btn_updateIngenieria_analisis").hide();
+                    $("#btn_newIngenieria_analisis").hide();
 
                 }
 
