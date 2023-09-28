@@ -1059,6 +1059,7 @@ function inicializarEventos() {
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
                 $("#tablaAnalisisRiesgos").hide();
+                $("#tablaAnalisisPlanos").hide();
                 break;
             case "Ana2":
                 OcultarConstruccionConsulta();
@@ -1069,6 +1070,7 @@ function inicializarEventos() {
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
                 $("#tablaAnalisisRiesgos").hide();
+                $("#tablaAnalisisPlanos").hide();
                 break;
             case "Ana3":
                 OcultarConstruccionConsulta();
@@ -1089,6 +1091,7 @@ function inicializarEventos() {
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
                 $("#tablaAnalisisRiesgos").show();
+                $("#tablaAnalisisPlanos").hide();
                 
             break;
             case "Ana7":
@@ -1100,6 +1103,7 @@ function inicializarEventos() {
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").show();
                 $("#tablaAnalisisRiesgos").hide();
+                $("#tablaAnalisisPlanos").hide();
             break;
             case "Ana4":
                 OcultarConstruccionConsulta();
@@ -1110,6 +1114,7 @@ function inicializarEventos() {
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
                 $("#tablaAnalisisRiesgoIncidentes").show();
+                $("#tablaAnalisisPlanos").hide();
                 break;
             case "Ana5":
                 OcultarConstruccionConsulta();
@@ -1120,6 +1125,7 @@ function inicializarEventos() {
                 $("#tablaAnalisisIngenieria").show();
                 $("#tablaAnalisisDocumental").hide();
                 $("#tablaAnalisisRiesgos").hide();
+                $("#tablaAnalisisPlanos").hide();
                 break;
             default:
         }
@@ -1265,10 +1271,13 @@ function ocultartablasdisenio() {
 }
 
 function ocultartablasanalisis() {
-    $("#tablaAnalisisDocumental").hide();
     $("#tablaAnalisisGral").hide();
     $("#tablaAnalisisGeoespacial").hide();
+    $("#tablaAnalisisRiesgoIncidentes").hide();
+    $("#tablaAnalisisIngenieria").hide();
+    $("#tablaAnalisisDocumental").hide();
     $("#tablaAnalisisRiesgos").hide();
+    $("#tablaAnalisisPlanos").hide();
 
 }
 
