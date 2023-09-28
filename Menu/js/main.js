@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -596,6 +596,15 @@ function inicializarEventos() {
                         });
 
                         break;
+                    case "Ana3":
+                        consultatoform(e)
+                        getAreaIdById("getAreaIdByAnalisisPlanosId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowAnalisisPlanos(id_d = row_id);
+                        });
+
+                        break;
                     default:
                 }
                 break;
@@ -1062,10 +1071,15 @@ function inicializarEventos() {
                 $("#tablaAnalisisRiesgos").hide();
                 break;
             case "Ana3":
-               
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                $("#tablaAnalisisGral").hide();
+                $("#tablaAnalisisPlanos").show();
+                $("#tablaAnalisisRiesgoIncidentes").hide();
+                $("#tablaAnalisisIngenieria").hide();
+                $("#tablaAnalisisDocumental").hide();
+                $("#tablaAnalisisRiesgos").hide();
                 break;
-
-
             case "Ana6":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
@@ -1087,8 +1101,6 @@ function inicializarEventos() {
                 $("#tablaAnalisisDocumental").show();
                 $("#tablaAnalisisRiesgos").hide();
             break;
-
-                break;
             case "Ana4":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
@@ -1097,7 +1109,7 @@ function inicializarEventos() {
                 $("#tablaAnalisisRiesgoIncidentes").hide();
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
-                $("#tablaAnalisisRiesgos").show();
+                $("#tablaAnalisisRiesgoIncidentes").show();
                 break;
             case "Ana5":
                 OcultarConstruccionConsulta();
@@ -6749,17 +6761,34 @@ function consulta() {
 
                     case "Ana1":
                         $('#tablaAnalisisGral tbody')[0].innerHTML = "";
+                        $('#tablaAnalisisGral tbody:not(:first)').remove();
                         var webMethod = "get_Analisisgeneral";
                         $.ajax({
                             type: "POST",
                             url: apiUrl + webMethod,
                             data: params,
                             success: function (data) {
+                                //if (data.success) {
+                                //    for (i = 0; i < data.data.datagrid.length; i++) {
+                                //        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].compania, data.data.datagrid[i].porcentaje_posee, data.data.datagrid[i].fabricante_producto];
+                                //        llenarTablas(persona, "tablaAnalisisGral");
+                                //    }
+                                //}
                                 if (data.success) {
-                                    for (i = 0; i < data.data.datagrid.length; i++) {
-                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].compania, data.data.datagrid[i].porcentaje_posee, data.data.datagrid[i].fabricante_producto];
-                                        llenarTablas(persona, "tablaAnalisisGral");
-                                    }
+
+                                    var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
+                                        'compania',
+                                        'porcentaje_posee',
+                                        'fabricante_producto',
+                                        'origen_instalacion',
+                                        'pais',
+                                        'estado',
+                                        'ciudad',
+                                        'sector',
+                                        'tramo'];
+
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablaAnalisisGral", keysForPresion);
+
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -6769,6 +6798,7 @@ function consulta() {
                         break;
                     case "Ana2":
                         $('#tablaAnalisisGeoespacial tbody')[0].innerHTML = "";
+                        $('#tablaAnalisisGeoespacial tbody:not(:first)').remove();
                         var webMethod = "get_AnalisisGeoespacial";
                         $.ajax({
                             type: "POST",
@@ -6776,10 +6806,19 @@ function consulta() {
                             data: params,
                             success: function (data) {
                                 if (data.success) {
-                                    for (i = 0; i < data.data.datagrid.length; i++) {
-                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].clase_localizacion, data.data.datagrid[i].autoridad_determina, data.data.datagrid[i].id_documento];
-                                        llenarTablas(persona, "tablaAnalisisGeoespacial");
-                                    }
+
+                                    var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
+                                        'clase_localizacion',
+                                        'fecha_determinacion',
+                                        'autoridad_determina',
+                                        'id_documento',
+                                        'poblacion_total',
+                                        'densidad_poblacion',
+                                        'fecha_dato',
+                                        'metodo_determinacion', 'fuente_informacion','tramo'];
+
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablaAnalisisGeoespacial", keysForPresion);
+
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -6845,17 +6884,37 @@ function consulta() {
 
                     case "Ana4":
                         $('#tablaAnalisisRiesgoIncidentes tbody')[0].innerHTML = "";
+                        $('#tablaAnalisisRiesgoIncidentes tbody:not(:first)').remove();
                         var webMethod = "get_AnalisisRiesgosIncidentes";
                         $.ajax({
                             type: "POST",
                             url: apiUrl + webMethod,
                             data: params,
                             success: function (data) {
+                            //    if (data.success) {
+                            //        for (i = 0; i < data.data.datagrid.length; i++) {
+                            //            var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].tiporiesgo, data.data.datagrid[i].poblado, data.data.datagrid[i].municipio];
+                            //            llenarTablas(persona, "tablaAnalisisRiesgoIncidentes");
+                            //        }
+                            //    }
+                            //},
+                            //error: function (xhr, ajaxOptions, thrownError) {
+
+                            //}
                                 if (data.success) {
-                                    for (i = 0; i < data.data.datagrid.length; i++) {
-                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].tiporiesgo, data.data.datagrid[i].poblado, data.data.datagrid[i].municipio];
-                                        llenarTablas(persona, "tablaAnalisisRiesgoIncidentes");
-                                    }
+
+                                    var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
+                                        'tiporiesgo',
+                                        'fecha',
+                                        'hora_ocurrencia_evento',
+                                        'hora_control_evento',
+                                        'poblado',
+                                        'municipio',
+                                        'estado',
+                                        'causa_accidente', 'causa_construccion', 'numero_lesionado', 'tipo_evento', 'hora_final_reparacion', 'exposicion', 'altura_max_exposicion', 'distancia_aguas_abajo', 'observacion','tramo'];
+
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablaAnalisisRiesgoIncidentes", keysForPresion);
+
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -6865,17 +6924,63 @@ function consulta() {
                         break;
                     case "Ana5":
                         $('#tablaAnalisisIngenieria tbody')[0].innerHTML = "";
+                        $('#tablaAnalisisIngenieria tbody:not(:first)').remove();
                         var webMethod = "get_AnalisisIngenieria";
                         $.ajax({
                             type: "POST",
                             url: apiUrl + webMethod,
                             data: params,
                             success: function (data) {
+                            //    if (data.success) {
+                            //        for (i = 0; i < data.data.datagrid.length; i++) {
+                            //            var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].tiporegulacion, data.data.datagrid[i].gradoacero, data.data.datagrid[i].fecha_inicio_servicio];
+                            //            llenarTablas(persona, "tablaAnalisisIngenieria");
+                            //        }
+                            //    }
+                            //},
+                            //error: function (xhr, ajaxOptions, thrownError) {
+
+                            //}
                                 if (data.success) {
-                                    for (i = 0; i < data.data.datagrid.length; i++) {
-                                        var persona = [data.data.datagrid[i].id, data.data.datagrid[i].areaunitaria, data.data.datagrid[i].coordenada_especifica, data.data.datagrid[i].kilometro_especifico, data.data.datagrid[i].tiporegulacion, data.data.datagrid[i].gradoacero, data.data.datagrid[i].fecha_inicio_servicio];
-                                        llenarTablas(persona, "tablaAnalisisIngenieria");
-                                    }
+                                var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
+                                    'tiporegulacion',
+                                    'gradoacero',
+                                    'fecha_inicio_servicio',
+                                    'fecha_instalacion',
+                                    'es_tuberia_portadora',
+                                    'puede_inspeccion_linea',
+                                    'puede_inspeccion_raspaduras',
+                                    'tecnicasoldadura', 'fecha_fabricacion', 'materialingenieria', 'ciudad_molino_construccion', 'diametro_nominal', 'es_tuberia_original', 'segmentoingeneria', 'limite_elastico_minimo', 'especificacion_disenio', 'criterios_construccion', 'estado_historico', 'estado_actual','tramo'];
+
+                                processTableDataAndHideNullColumns(data.data.datagrid, "tablaAnalisisIngenieria", keysForPresion);
+
+                            }
+                        },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
+                    case "Ana3":
+                        $('#tablaAnalisisPlanos tbody')[0].innerHTML = "";
+                        var webMethod = "get_AnalisisPlanos";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethod,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+
+                                    var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
+                                        'fecha_indetificacion',
+                                        'fecha_registro',
+                                        'tuberia_sobre_suelo',
+                                        'tuberia_encima_agua',
+                                        'tuberia_altamar',
+                                        'perforacion_direccional_horizontal','condicion_prosedencia','tramo'];
+
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablaAnalisisPlanos", keysForPresion);
+
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
@@ -7018,7 +7123,8 @@ function llenarTablas(obj, nameTabla) {
             temaconsultavar=temaconsultadisenio
         } else if (temaconsulta==="T2"){
             temaconsultavar=temaconsultaconstruccion
-        }
+        } else if(temaconsulta==="T4"){temaconsultavar=temaconsultaanalisis}
+        else if (temaconsulta==="T3"){temaconsultavar=temaconsultaoperacion}
         var escapedCategory = removeSpecialCharacters(category)
         
         // Check if tbody for this category exists
