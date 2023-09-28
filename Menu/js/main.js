@@ -1077,6 +1077,7 @@ function inicializarEventos() {
                 ocultartablasdisenio();
                 $("#tablaAnalisisGral").hide();
                 $("#tablaAnalisisPlanos").show();
+                $("#tablaAnalisisGeoespacial").hide();
                 $("#tablaAnalisisRiesgoIncidentes").hide();
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
