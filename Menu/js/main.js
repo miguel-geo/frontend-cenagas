@@ -27,7 +27,11 @@ const headers = new Headers({
 
 
 $(document).ready(function () {
-   
+    //$('#ms').change(function () {
+    //    console.log($(this).val());
+    //}).multipleSelect({
+    //    width: '100%'
+    //});
    
     llenar_ductos();
     //loadidentificacion();
@@ -786,6 +790,14 @@ function inicializarEventos() {
         txttramo = event.target[event.target.selectedIndex].text;
         loadAreas(event.target.value);
     });
+    //Combo Tramos documental
+    
+    var selector = document.getElementsByName('cmbtramosdoc');
+    element = $(selector);
+   
+    element.on('change', function () {
+        loadAreaDocument(this.value);
+    });
     //Combo Areas
     const selectAreas = document.getElementById('cmbAreas');
     selectAreas.addEventListener('change', function handleChange(event) {
@@ -1478,6 +1490,7 @@ function consultaDatosIdentificacionArea(id_d=null) {
         },
         success: function (data) {
             const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+            get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
             existingDownloadIcons.forEach(icon => icon.remove());  
             
             if (data.success) {
@@ -2995,7 +3008,7 @@ async function fnshowIndentificacion(id_d=null) {
     try {
         await loadtipocostura();
         await loadtipomaterialdisenio();
-
+        
        
         if (id_d){
         await consultaDatosIdentificacionArea(id_d=id_d);}
@@ -9356,12 +9369,15 @@ function llenarDatosActualizacionAnalisisRiesgosIncidentes(data) {
     $("#poblado_ri").val(data[0].poblado);
     $("#municipio_ri").val(data[0].municipio);
     $("#estado_ri").val(data[0].estado);
-    $("#causaaccidente_ri").val(data[0].causa_accidente);
-    $("#causaconstruccion_ri").val(data[0].causa_construccion);
+   // $("#causaaccidente_ri").val(data[0].causa_accidente);
+    $("#causaaccidente_ri option:contains(" + data[0].causa_accidente + ")").attr('selected', 'selected');
+    $("#causaconstruccion_ri option:contains(" + data[0].causa_construccion + ")").attr('selected', 'selected');
+    //$("#causaconstruccion_ri").val(data[0].causa_construccion);
     $("#numlesionados_ri").val(data[0].numero_lesionado);
     $("#tipoevento_ri").val(data[0].tipo_evento);
     $("#horafinalreparacion_ri").val(data[0].hora_final_reparacion);
-    $("#exposicion_ri").val(data[0].exposicion);
+    //$("#exposicion_ri").val(data[0].exposicion);
+    $("#exposicion_ri option:contains(" + data[0].exposicion + ")").attr('selected', 'selected');
     $("#alturamaxexposicion_ri").val(data[0].altura_max_exposicion);
     $("#distanciaaguasabajo_ri").val(data[0].distancia_aguas_abajo);
     $("#observacion_ri").val(data[0].observacion);
@@ -10143,9 +10159,230 @@ function espsegmento() {
     $('#esptiposegmento').show();
 }
 function cancelotrosegmento() {
-    $("#esptiposegmento").hide(); te
+    $("#esptiposegmento").hide(); 
 }
 //#endregion Analsis de Ingenieria
 
 
 //#endregion 
+
+//#region Carga Documental
+function fnshowdocument() {
+    document.getElementById('registro').style.display = 'none';
+    $("#documentalfrm").show();
+    loadTramosDocuments();
+
+}
+function cancelDocumental_() {
+    document.getElementById('registro').style.display = '';
+    $("#documentalfrm").hide();
+
+}
+function loadTramosDocuments() {
+
+   
+    //$("#cmbtramosdoc option:not(:first)").remove();
+    var property = $("#cmbDucto").val();
+    const webMethod = 'tramos/fetch';
+    url = apiUrl + webMethod;
+    if (property) {
+
+        fetch(url, {
+            method: 'POST', // or 'POST', 'PUT', etc.
+            headers: headers,
+            body: JSON.stringify({ 'property': property })
+        })
+            .then(response => response.json())
+            .then(data => {
+                var selector = document.getElementsByName('cmbtramosdoc');
+                element = $(selector);
+                element.empty();
+                element.append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.length; i++) {
+                    element.append($('<option>', {
+                        value: data[i].id,
+                        text: data[i].nombre
+                    }));
+                }
+            })
+            .catch(error => console.error("Error fetching data: ", error));
+    }
+
+}
+function loadAreaDocument() {
+    $("#areasdocuments option:not(:first)").remove();
+    var selector = document.getElementsByName('cmbtramosdoc');
+    element = $(selector);
+    var property = element.val();
+    const webMethod = 'areas_unitarias/fetch';
+    url = apiUrl + webMethod;
+    if (property) {
+
+        fetch(url, {
+            method: 'POST', // or 'POST', 'PUT', etc.
+            headers: headers,
+            body: JSON.stringify({ 'property': property })
+        })
+            .then(response => response.json())
+            .then(data => {
+
+                $("#areasdocuments").empty();
+                //$('#areasdocuments').append($('<option>', {
+                //    value: 0,
+                //    text: 'Selecciona...'
+                //}));
+                for (var i = 0; i < data.length; i++) {
+                    $('#areasdocuments').append($('<option>', {
+                        value: data[i].id,
+                        text: data[i].nombre
+                    }));
+                }
+            })
+            .catch(error => console.error("Error fetching data: ", error));
+    }
+}
+function savedocumentoreferenciado() {    
+    var webMethod = "createDocumento";
+    const formData = new FormData();
+    var areas = [];
+    $("#areasdocuments option:selected").each(function (i) {
+        areas.push($(this).val());
+    });
+    if (areas.length <= 0) {
+        var selector = document.getElementsByName('cmbtramosdoc');
+        element = $(selector);
+        formData.append("tramo_id", element.val());
+    }
+    formData.append('file', $("#inputfiledocument")[0].files[0]);
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                saveDocumentAreasForms(data.datos.id);
+               // alert("Información almacenada correctamente");
+               
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function saveDocumentAreasForms(idDoc) {
+
+    var webMethod = "GuardarDocumentoArea";
+    const formData = new FormData();
+    var forms = [];
+    $('#lstforms').find('input:checked').each(function () {
+        forms.push($(this)[0].value);
+    });
+    var areas = [];
+    $("#areasdocuments option:selected").each(function (i) {
+        areas.push($(this).val());
+    });
+    areas.forEach((area) => {
+        formData.append("area_id[]", area);
+    });
+    forms.forEach((form) => {
+        formData.append("form_id[]", form);
+    });
+    formData.append("documentos_id", idDoc);
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                //console.log(data.datos.id);
+                alert("Información almacenada correctamente");
+
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function get_relateddocuments(tramo_id,area_id,form_id,table) {
+    var webMethod = "getDocumento";
+    const formData = new FormData();
+    formData.append("tramo_id", tramo_id);
+    formData.append("area_id", area_id);
+    formData.append("form_id", form_id);
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                $('#'+table+' tbody')[0].innerHTML = "";
+                $('#' + table +' tbody:not(:first)').remove();
+                for (i = 0; i < data.data.datagrid.length; i++) {
+                    var persona = [data.data.datagrid[i].id, data.data.datagrid[i].nombre];
+                    llenarTablasdocuments(persona, table);
+              }
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function llenarTablasdocuments(obj, nameTabla) {
+
+
+
+    //var category = obj.pop();
+    // Assuming 4th column determines category
+    var row = '<tr class="content-row">';
+    for (var j = 0; j < obj.length; j++) {
+        if (j === 0) {
+            row = row + '<td style="text-align: center;color:green;"><a class="download-icon" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' +' title="Descargar"><i  class="fa fa-download"></i></a> </td>';
+        }
+       else{
+             row = row + '<td>' + obj[j] + '</td>';
+       }
+    }
+    //row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip" id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] + '"><i class="fa fa-trash"></i></a></td>';
+    row = row + '</tr>';
+  $('#' + nameTabla).append(row);
+}
+//#endregion

@@ -6,6 +6,8 @@
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -117,7 +119,9 @@
                                                     <option>Selecciona...</option>
                                                 </select>
                                             </div>
-                                            <button class="btn btn-secondary nextBtn btn-lg pull-right" type="button">Siguiente</button>
+                                            <button class="btn btn-secondary  btn-lg pull-right" type="button" onclick="fnshowdocument()"><i class="fa fa-file"></i> | Documental</button>
+                                            <button class="btn btn-secondary nextBtn btn-lg pull-right" style="margin-right:5px;" type="button">Siguiente</button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -469,6 +473,19 @@
                                                aria-describedby="filedisenioidentificacion" lang="es">
                                         <label class="custom-file-label" for="filedisenioidentificacion">Escoje el archivo</label>
                                     </div>
+                                </div>
+                                <div id="iden_doc">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_iden_disenio">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelDisenioGeneral()">Cancelar</button>
@@ -2274,7 +2291,7 @@
                                     </div>
                                 </div>
                                 <div class="card ml-1">
-                                    
+
                                     <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="fnshowAnalisisIngenieria()">
                                     <div class="card-body">
                                         <h6 class="card-title">Reportes de Diseño e ingeniería</h6>
@@ -2827,7 +2844,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Dependencia que determina</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label=""  pattern="^.*$" id="riesdis_dependencia_determina" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^.*$" id="riesdis_dependencia_determina" aria-describedby="basic-addon1">
 
                                 </div>
                                 <div class="input-group mb-3">
@@ -2843,7 +2860,7 @@
                                     <button type="button" onclick="showotroElemento()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
-                                    
+
                                 </div>
                                 <div class="input-group mb-3" id="espElemento_Expuesto" style="display:none">
                                     <div class="input-group-prepend">
@@ -2863,29 +2880,29 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Fecha</span>
                                     </div>
-                                    <input type="date" class="form-control validate-pattern setAlg"  placeholder="" aria-label="" id="riesdis_fecha" aria-describedby="basic-addon1">
+                                    <input type="date" class="form-control validate-pattern setAlg" placeholder="" aria-label="" id="riesdis_fecha" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Clase de Localización</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_clase_localizacion" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="riesdis_clase_localizacion" aria-describedby="basic-addon1">
                                 </div>
-                                
+
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Estado histórico</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_estado_historico" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="riesdis_estado_historico" aria-describedby="basic-addon1">
                                 </div>
-                                
+
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Estado actual</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_estado_actual" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="riesdis_estado_actual" aria-describedby="basic-addon1">
                                 </div>
-                                
+
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de Riesgo</span>
@@ -2903,7 +2920,7 @@
                                     <button type="button" onclick="showotroRiesgo()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
-                                    
+
                                 </div>
                                 <div class="input-group mb-3" id="espRiesgoDis" style="display:none">
                                     <div class="input-group-prepend">
@@ -2923,7 +2940,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a1" >
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a1">
                                         <option value=0>Selecciona...</option>
                                         <option value='Sí'>Sí</option>
                                         <option value='No'>No</option>
@@ -2934,7 +2951,8 @@
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="distanciaaguasabajo_ri" aria-describedby="basic-addon1">
 
-                                    </select>                                </div>
+                                    </select>
+                                </div>
                                 <div class="input-group mb-3 sismo" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Velocidad de aceleración maxima</span>
@@ -2946,14 +2964,14 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tiempo de retorno</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg"  pattern="^.*$" placeholder="" aria-label="" id="riesdis_a3" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="riesdis_a3" aria-describedby="basic-addon1">
 
                                 </div>
                                 <div class="input-group mb-3 desplazamiento" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Hay presencia</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a4" >
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a4">
                                         <option value=0>Selecciona...</option>
                                         <option value='Sí'>Sí</option>
                                         <option value='No'>No</option>
@@ -2964,18 +2982,18 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Susceptibilidad de pendiente</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a5" >
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a5">
                                         <option value=0>Selecciona...</option>
                                         <option value="Alto">Alto</option>
                                         <option value="Medio">Medio</option>
-                                        <option value="Bajo">Bajo</option>    
+                                        <option value="Bajo">Bajo</option>
                                     </select>
                                 </div>
                                 <div class="input-group mb-3 clima" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Clima extremo</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a6" >
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a6">
                                         <option value=0>Selecciona...</option>
                                         <option value='Sí'>Sí</option>
                                         <option value='No'>No</option>
@@ -2986,7 +3004,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a7" >
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a7">
                                         <option value=0>Selecciona...</option>
                                         <option value='Sí'>Sí</option>
                                         <option value='No'>No</option>
@@ -2997,18 +3015,18 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Índice de peligro</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a8" >
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a8">
                                         <option value=0>Selecciona...</option>
                                         <option value="Alto">Alto</option>
                                         <option value="Medio">Medio</option>
-                                        <option value="Bajo">Bajo</option>    
+                                        <option value="Bajo">Bajo</option>
                                     </select>
                                 </div>
                                 <div class="input-group mb-3 descarga" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a9" >
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a9">
                                         <option value=0>Selecciona...</option>
                                         <option value='Sí'>Sí</option>
                                         <option value='No'>No</option>
@@ -3019,7 +3037,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Hay Presencia</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="riesdis_a7" >
+                                    <select class="selectpicker form-control setAlg" id="riesdis_a7">
                                         <option value=0>Selecciona...</option>
                                         <option value='Sí'>Sí</option>
                                         <option value='No'>No</option>
@@ -3128,8 +3146,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Exposición</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="exposicion_ri" aria-describedby="basic-addon1">
-
+                                    <!--<input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="exposicion_ri" aria-describedby="basic-addon1">-->
+                                    <select class="selectpicker form-control  validate-pattern setAlg" pattern="^.*$" id="exposicion_ri">
+                                        <option value=0>Selecciona...</option>
+                                        <option value="Intervalos">Intervalos</option>
+                                        <option value="Extendido">Extendido</option>
+                                        <option value="Desconocido">Desconocido</option>
+                                    </select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -3170,15 +3193,23 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Causa accidente</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="causaaccidente_ri" aria-describedby="basic-addon1">
-
+                                    <!--<input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="causaaccidente_ri" aria-describedby="basic-addon1">-->
+                                    <select class="selectpicker form-control  validate-pattern setAlg" pattern="^.*$" id="causaaccidente_ri">
+                                        <option value=0>Selecciona...</option>
+                                        <option value="Accidente">Accidente</option>
+                                        <option value="Intencional">Intencional</option>
+                                    </select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Causa construcción</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="causaconstruccion_ri" aria-describedby="basic-addon1">
-
+                                    <!--<input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="causaconstruccion_ri" aria-describedby="basic-addon1">-->
+                                    <select class="selectpicker form-control  validate-pattern setAlg" pattern="^.*$" id="causaconstruccion_ri">
+                                        <option value=0>Selecciona...</option>
+                                        <option value="Construcción">Construcción</option>
+                                        <option value="Deterioro">Deterioro</option>
+                                    </select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -3400,7 +3431,7 @@
                                         <span class="input-group-text" id="basic-addon1">Ciudad o Molino de construcción de tubería</span>
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$"
-                                    placeholder="" aria-label="" id="ciudadmolino_di" aria-describedby="basic-addon1">
+                                           placeholder="" aria-label="" id="ciudadmolino_di" aria-describedby="basic-addon1">
 
                                 </div>
                                 <div class="input-group mb-3">
@@ -3492,7 +3523,132 @@
 
 
                         <!--#endregion FORMULARIOS ANÁLISIS  -->
-                    </div>
+                                    <!-- #region FORMULARIO DOCUMENTAL -->
+                                    <div id="documentalfrm" style="display:none;margin-top:15px;">
+                                        <form role="form">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="txtductodocumental" value="GSD 42. India Bonita - Est. Ramones (CENDUC-GSD-D0004)" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">Selecciona tramo</span>
+                                                </div>
+                                                <select class="selectpicker form-control  validate-pattern setAlg" pattern="^.*$" name="cmbtramosdoc">
+                                                </select>
+                                            </div>
+                                            <!--<div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Selecciona la(s) áreas unitarias</span>
+            </div>-->
+                                            <!--<select class="selectpicker form-control  validate-pattern setAlg" pattern="^.*$" id="cmbTipoMaterial">
+                <option value=0>Selecciona...</option>
+                <option value=1>A001</option>
+                <option value=2>A002</option>
+            </select>-->
+                                            <!--</div>-->
+                                            <span class="input-group-text" id="inputGroupFileAddon01">Selecciona la(s) área(s) unitaria(s)</span>
+                                            <select id="areasdocuments" multiple="multiple" class="form-control">
+                                            </select>
+                                            <div class="input-group-text mb-3" data-column="file_doc">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroupFileAddon01">Información documental</span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input setAlg" id="inputfiledocument"
+                                                           aria-describedby="inputGroupFileAddon01" lang="es">
+                                                    <label class="custom-file-label" for="inputfiledocument">Escoje el archivo</label>
+                                                </div>
+                                            </div>
+                                            <span class="input-group-text" id="inputGroupFileAddon01">Selecciona la temática</span>
+                                            <div class="list-group" id="lstforms">
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="1">
+                                                    Diseño - Identificación
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="2">
+                                                    Diseño - Presión
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="3">
+                                                    Diseño - Protección
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="4">
+                                                    Construcción - General
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="5">
+                                                    Construcción - Unión
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="6">
+                                                    Construcción - Profundidad
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="7">
+                                                    Construcción - Tipo de cruces
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="8">
+                                                    Construcción - Hermeticidad
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="9">
+                                                    Construcción - Inspección
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="10">
+                                                    Construcción - Catódica
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="11">
+                                                    Construcción - Seguridad
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="12">
+                                                    Anáisis - General
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="13">
+                                                    Análisis - Información geoespacial
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="14">
+                                                    Análisis - Planos, mapas y reportes del Sistema de Recolección, Transporte, y Distribución de Ductos
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="15">
+                                                    Análisis - Datos del Riesgo e incidentes
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="16">
+                                                    Análisis - Reportes de Diseño e ingeniería
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="17">
+                                                    Análisis - Análisis de Riesgo en la fase de Diseño, sólo para Ductos nuevos
+                                                </label>
+                                                <label class="list-group-item">
+                                                    <input class="form-check-input me-1" type="checkbox" value="18">
+                                                    Análisis - Información documental
+                                                </label>
+                                            </div>
+                                            <div class="modal-footer">
+
+                                                <label id="inputGroupFileAddon01" style="margin-right:10px;">Nota: Seleccionar al menos un archivo para guardar correctamente</label>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelDocumental_()">Cancelar</button>
+                                                <button type="button" id="btn_updatedocument" onclick="updateDisenioServicio()" style="display:none" class="btn btn-info">Actualizar</button>
+                                                <button type="button" id="btn_savedocument" onclick="savedocumentoreferenciado()" class="btn btn-success">Guardar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- #endregion -->
+                                </div>
                 </div>
 
                 <div id="Consulta" class="tabcontent">
