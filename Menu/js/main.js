@@ -1071,6 +1071,7 @@ function inicializarEventos() {
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
                 $("#tablaAnalisisRiesgos").hide();
+                $("#tablaAnalisisPlanos").hide();
                 break;
             case "Ana2":
                 OcultarConstruccionConsulta();
@@ -1081,12 +1082,14 @@ function inicializarEventos() {
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
                 $("#tablaAnalisisRiesgos").hide();
+                $("#tablaAnalisisPlanos").hide();
                 break;
             case "Ana3":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 $("#tablaAnalisisGral").hide();
                 $("#tablaAnalisisPlanos").show();
+                $("#tablaAnalisisGeoespacial").hide();
                 $("#tablaAnalisisRiesgoIncidentes").hide();
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
@@ -1101,6 +1104,7 @@ function inicializarEventos() {
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
                 $("#tablaAnalisisRiesgos").show();
+                $("#tablaAnalisisPlanos").hide();
                 
             break;
             case "Ana7":
@@ -1112,6 +1116,7 @@ function inicializarEventos() {
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").show();
                 $("#tablaAnalisisRiesgos").hide();
+                $("#tablaAnalisisPlanos").hide();
             break;
             case "Ana4":
                 OcultarConstruccionConsulta();
@@ -1122,6 +1127,7 @@ function inicializarEventos() {
                 $("#tablaAnalisisIngenieria").hide();
                 $("#tablaAnalisisDocumental").hide();
                 $("#tablaAnalisisRiesgoIncidentes").show();
+                $("#tablaAnalisisPlanos").hide();
                 break;
             case "Ana5":
                 OcultarConstruccionConsulta();
@@ -1132,6 +1138,7 @@ function inicializarEventos() {
                 $("#tablaAnalisisIngenieria").show();
                 $("#tablaAnalisisDocumental").hide();
                 $("#tablaAnalisisRiesgos").hide();
+                $("#tablaAnalisisPlanos").hide();
                 break;
             default:
         }
@@ -1277,10 +1284,13 @@ function ocultartablasdisenio() {
 }
 
 function ocultartablasanalisis() {
-    $("#tablaAnalisisDocumental").hide();
     $("#tablaAnalisisGral").hide();
     $("#tablaAnalisisGeoespacial").hide();
+    $("#tablaAnalisisRiesgoIncidentes").hide();
+    $("#tablaAnalisisIngenieria").hide();
+    $("#tablaAnalisisDocumental").hide();
     $("#tablaAnalisisRiesgos").hide();
+    $("#tablaAnalisisPlanos").hide();
 
 }
 
@@ -7825,6 +7835,7 @@ function consultaDatosAnalisisGeneral(id_d = null) {
                     $("#btn_savegeneral_analisis").hide();
                     $("#btn_updategeneral_analisis").show();
                     $("#btn_newgeneral_analisis").show();
+                    $("#btn_updategeneral_analisis").text('Actualizar')
                 }
                 else {
 
@@ -7999,6 +8010,7 @@ function consultaDatosAnalisisGeoespacial(id_d = null) {
                     $("#btn_savegeoespacial_analisis").hide();
                     $("#btn_updategeoespacial_analisis").show();
                     $("#btn_newgeoespacial_analisis").show();
+                    $("#btn_updategeoespacial_analisis").text('Actualizar')
                 }
                 else {
 
@@ -8222,6 +8234,7 @@ function consultaDatosAnalisisPlanos(id_d = null) {
                     $("#btn_saveplanos_analisis").hide();
                     $("#btn_updateplanos_analisis").show();
                     $("#btn_newplanos_analisis").show();
+                    $("#btn_updateplanos_analisis").text('Actualizar')
                 }
                 else {
 
@@ -9321,6 +9334,7 @@ function consultaDatosAnalisisRiesgosIncidentes(id_d = null) {
                     $("#btn_saveRiesgosIncidentes_analisis").hide();
                     $("#btn_updateRiesgosIncidentes_analisis").show();
                     $("#btn_newRiesgosIncidentes_analisis").show();
+                    $("#btn_updateRiesgosIncidentes_analisis").text('Actualizar')
                 }
                 else {
 
@@ -9767,6 +9781,7 @@ function consultaDatosAnalisisIngenieria(id_d = null) {
                     $("#btn_saveIngenieria_analisis").hide();
                     $("#btn_updateIngenieria_analisis").show();
                     $("#btn_newIngenieria_analisis").show();
+                    $("#btn_updateIngenieria_analisis").text('Actualizar')
                 }
                 else {
 
