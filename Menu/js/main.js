@@ -1474,7 +1474,10 @@ function nuevoIdentificacionDisenio(){
 
 }
 var idDiseniogral;
-function consultaDatosIdentificacionArea(id_d=null) {
+function consultaDatosIdentificacionArea(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
     var webMethod;
     var params;
     if (id_d)
@@ -1498,11 +1501,7 @@ function consultaDatosIdentificacionArea(id_d=null) {
         headers:{
             'Accept': 'application/json'
         },
-        success: function (data) {
-            const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-            get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
-            existingDownloadIcons.forEach(icon => icon.remove());  
-            
+        success: function (data) {            
             if (data.success) {
                 var infodata;
                 if (webMethod === "getDisenioGeneralById")
@@ -1693,7 +1692,9 @@ function nuevoDisenioproteccion(){
 }
 
 function consultaDatosProteccionArea(id_d=null) {
-
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 1, "tbl_prot_disenio");
 
     var webMethod;
     var params;
@@ -1725,8 +1726,6 @@ function consultaDatosProteccionArea(id_d=null) {
                 if (infodata.length > 0) {
 
                 clearInputTextValues('proteccionfrm');
-                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-                existingDownloadIcons.forEach(icon => icon.remove());    
 
                     llenarDatosActualizacionProteccion(infodata);
                     $("#btnsaveproteccion").hide();
@@ -1944,6 +1943,7 @@ function nuevoDisenioServicio(){
 
 
 function consultaDatosServicio(id_d = null) {
+    
     clearAllFileInputsInDiv('serviciofrm')
     var webMethod;
     var params;
@@ -1965,10 +1965,7 @@ function consultaDatosServicio(id_d = null) {
         body: JSON.stringify(params)
     })
     .then(response => response.json())
-    .then(data => {        
-        // 1. Remove all existing download icons before adding new ones.
-        const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-        existingDownloadIcons.forEach(icon => icon.remove());
+    .then(data => {  
        
 
         const { id: serviceId, success:success, ...columnsData } = data;
@@ -2120,7 +2117,9 @@ function nuevoDiseniopresion(){
 }
 
 function consultaDatosPresionArea(id_d=null) {
-
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 1, "tbl_pres_disenio");
 
     var webMethod;
     var params;
@@ -2144,10 +2143,6 @@ function consultaDatosPresionArea(id_d=null) {
         data: params,
         success: function (data) {
             if (data.success) {
-
-
-                clearInputTextValues('presionfrm');
-                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
                 existingDownloadIcons.forEach(icon => icon.remove());  
                 var datainfo;
                 if (webMethod === "getDisenioPresionById")
@@ -2335,7 +2330,9 @@ function nuevoconsgeneral(){
 
 
 function consultaDatosConsGeneral(id_d=null) {
-
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 1, "tbl_base_construccion");
 
     var webMethod;
     var params;
@@ -2371,8 +2368,6 @@ function consultaDatosConsGeneral(id_d=null) {
                 } else {
                     data1=data.data
                 }
-                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-                existingDownloadIcons.forEach(icon => icon.remove());  
                 if (data1.length > 0) {
                     llenarDatosActualizacionConsGeneral(data1);
                     $("#btn_saveconsgeneral").hide();
@@ -2561,7 +2556,10 @@ function nuevoconsunion(){
 
 }
 
-function consultaDatosConsUnion(id_d=null) {
+function consultaDatosConsUnion(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 1, "tbl_union_construccion");
     var webMethod;
     var params;
     if (id_d)
@@ -2593,8 +2591,7 @@ function consultaDatosConsUnion(id_d=null) {
                     infodata = (data.data);
                 else if (webMethod === "get_construccionunion")
                     infodata = (data.data.datagrid);
-                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-                existingDownloadIcons.forEach(icon => icon.remove());
+               
                 if (infodata.length > 0) {
                     llenarDatosActualizacionConsUnion(infodata);
                     $("#btn_saveconsunion").hide();

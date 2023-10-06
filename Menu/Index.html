@@ -474,7 +474,7 @@
                                         <label class="custom-file-label" for="filedisenioidentificacion">Escoje el archivo</label>
                                     </div>
                                 </div>
-                                <div id="iden_doc">
+                                <div>
                                     <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
                                     <table class="table" id="tbl_iden_disenio">
                                         <thead>
@@ -571,13 +571,25 @@
                                         <label class="custom-file-label" for="inputGroupFile06">Escoje el archivo PDF</label>
                                     </div>
                                 </div>
-
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_serv_disenio">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <!--<div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Archivo fuente</span>
-                </div>
-                <input type="file" class="form-control" placeholder="" aria-label="" id="filedisenioservicio" aria-describedby="basic-addon1">
-            </div>-->
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Archivo fuente</span>
+        </div>
+        <input type="file" class="form-control" placeholder="" aria-label="" id="filedisenioservicio" aria-describedby="basic-addon1">
+    </div>-->
                                 <div class="modal-footer">
 
                                     <label id="inputGroupFileAddon01" style="margin-right:10px;">Nota: Seleccionar al menos un archivo para guardar correctamente</label>
@@ -694,6 +706,19 @@
                                                aria-describedby="filediseniopresion" lang="es">
                                         <label class="custom-file-label" for="filediseniopresion">Escoje el archivo</label>
                                     </div>
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_pres_disenio">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelDisenioPresion()" data-dismiss="modal">Cancelar</button>
@@ -876,6 +901,19 @@
                                                aria-describedby="filedisenioproteccion" lang="es">
                                         <label class="custom-file-label" for="filediseniopresion">Escoje el archivo</label>
                                     </div>
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_prot_disenio">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" onclick="cancelDisenioProteccion()" id="btncancelproteccion" data-dismiss="modal">Cancelar</button>
@@ -1077,6 +1115,19 @@
                                         <label class="custom-file-label" for="fileconsbase">Escoje el archivo</label>
                                     </div>
                                 </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_base_construccion">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelbasecons()" data-dismiss="modal">Cancelar</button>
                                     <button type="button" id="btn_newconsgeneral" onclick="nuevoconsgeneral()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
@@ -1237,6 +1288,19 @@
                                         <label class="custom-file-label" for="fileconsunion">Escoje el archivo</label>
                                     </div>
                                 </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_union_construccion">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelunion()" data-dismiss="modal">Cancelar</button>
                                     <button type="button" id="btn_newconsunion" onclick="nuevoconsunion()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
@@ -1354,11 +1418,11 @@
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" id="txtedohisprof" aria-label="" aria-describedby="basic-addon1">
                                 </div>
                                 <!--<div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Archivo fuente</span>
-                </div>
-                <input type="file" class="form-control" placeholder="" aria-label="" id="fileconstruccionprofundidad" aria-describedby="basic-addon1">
-            </div>-->
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Archivo fuente</span>
+        </div>
+        <input type="file" class="form-control" placeholder="" aria-label="" id="fileconstruccionprofundidad" aria-describedby="basic-addon1">
+    </div>-->
                                 <div class="input-group mb-3" id="filefrmconsprofundidad">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">Archivo fuente</span>
@@ -1368,6 +1432,19 @@
                                                aria-describedby="fileconsprofundidad" lang="es">
                                         <label class="custom-file-label" for="fileconsprofundidad">Escoje el archivo</label>
                                     </div>
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_prof_construccion">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="fncancelprofenterrado()" data-dismiss="modal">Cancelar</button>
@@ -1727,6 +1804,19 @@
                                         <label class="custom-file-label" for="fileconsprocruces">Escoje el archivo</label>
                                     </div>
                                 </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_cruces_construccion">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarCruces" onclick="fncanceltipocruces()" data-dismiss="modal">Cancelar</button>
                                     <button type="button" id="btn_newconscruces" onclick="nuevoconscruces()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
@@ -1865,6 +1955,19 @@
                                         <label class="custom-file-label" for="fileconsprohermeticidad">Escoje el archivo</label>
                                     </div>
                                 </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_herme_construccion">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarHermeticidad" onclick="cancelherme()" data-dismiss="modal">Cancelar</button>
                                     <button type="button" id="btn_newconshermeticidad" onclick="nuevoconshermeticidad()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
@@ -1960,6 +2063,19 @@
                                         <span class="input-group-text" id="basic-addon1">Archivo fuente</span>
                                     </div>
                                     <input type="file" class="form-control" placeholder="" aria-label="" id="fileconstruccioninspeccion" aria-describedby="basic-addon1">
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_insp_construccion">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelreporteinsp()" data-dismiss="modal">Cancelar</button>
@@ -2095,6 +2211,19 @@
                                                aria-describedby="fileconscatodica" lang="es">
                                         <label class="custom-file-label" for="fileconsprocatodica">Escoje el archivo</label>
                                     </div>
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_cato_construccion">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarcatodica" onclick="cancelprotcato()" data-dismiss="modal">Cancelar</button>
@@ -2236,6 +2365,19 @@
                                         <input type="file" class="form-control" placeholder="" aria-label="" id="fileconstruccionseguridad" aria-describedby="basic-addon1">
                                     </div>
 
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_segu_construccion">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelseguridadpre()" data-dismiss="modal">Cancelar</button>
@@ -2417,6 +2559,19 @@
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="sector_analisis" aria-describedby="basic-addon1">
 
                                 </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_gral_analisis">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisGeneral()">Cancelar</button>
                                     <button type="button" id="btn_newgeneral_analisis" onclick="nuevoAnalisisGeneral()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
@@ -2524,12 +2679,26 @@
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="metododeterminacion_geo" aria-describedby="basic-addon1">
 
                                 </div>
+
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Fuente de información</span>
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="fuenteinformacion_geo" aria-describedby="basic-addon1">
 
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_geo_analisis">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisGeoespacial()">Cancelar</button>
@@ -2643,6 +2812,19 @@
                                                aria-describedby="fileplanosmapasreportes" lang="es">
                                         <label class="custom-file-label" for="fileplanosmapasreportes">Escoje el archivo</label>
                                     </div>
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_plano_analisis">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisPlanos()">Cancelar</button>
@@ -2788,6 +2970,19 @@
                                                aria-describedby="manuales_fabricante" lang="es">
                                         <label class="custom-file-label" for="manuales_fabricante">Escoje el archivo</label>
                                     </div>
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_doc_analisis">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisDocumental()">Cancelar</button>
@@ -3051,7 +3246,19 @@
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="riesdis_a11" aria-describedby="basic-addon1">
 
                                 </div>
-
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_riesgdis_analisis">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisriesdis()">Cancelar</button>
                                     <button type="button" id="btn_newriesdis_analisis" onclick="nuevoAnalisisriesdis()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
@@ -3231,6 +3438,19 @@
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="observacion_ri" aria-describedby="basic-addon1">
 
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_riesinci_analisis">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisRiesgosIncidentes()">Cancelar</button>
@@ -3510,6 +3730,19 @@
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="edo_act_di" aria-describedby="basic-addon1">
 
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_inge_analisis">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisIngenieria()">Cancelar</button>
