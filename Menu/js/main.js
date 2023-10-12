@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -22,6 +22,68 @@ var contar_longitud=0;
 const headers = new Headers({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
+});
+
+window.addEventListener("message", function(event) {
+    // In a real environment, you should verify that the message comes from the expected domain
+    // if (event.origin !== "http://192.168.0.241:8080") return;
+    console.log('Message received');  
+    const data = JSON.parse(event.data);
+
+    if (data.accion === "autenticar") {
+        // Here you can add the logic to authenticate the user
+        console.log("Username: " + data.username);
+        console.log("Token: " + data.token);
+        document.getElementById("username").textContent = 'username: ' + data.username;
+        document.getElementById("token").textContent = 'refreshToken: ' + data.token;
+        var method = 'usergetorcreate';
+        // Send data to backend
+        fetch(apiUrl+method, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Include the received token in the Authorization header if needed
+            },
+            body: JSON.stringify({
+                name: data.username,
+                // Include any other user data you want to send to the backend
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            var token=response.data['token'];
+            localStorage.setItem('token',token);
+        })
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+});
+
+
+const token = localStorage.getItem('token');
+
+
+function logoutFunction() {
+    localStorage.removeItem('token');
+    window.location.href = "index.html";
+    // ... rest of the logic
+}
+
+
+$(document).ready(function() {
+    if (!token ) {
+        $('#loginModal').modal('show');
+        !console.log('no hay token')
+      } 
+
+    console.log(token)
+      
 });
 
 
