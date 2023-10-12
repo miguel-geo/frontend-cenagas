@@ -31,14 +31,22 @@ window.addEventListener("message", function(event) {
 
     if (data.accion === "autenticar") {
         // Here you can add the logic to authenticate the user
-        if (data.username!==undefined){
+        if (data.username!==undefined&&data.token!==undefined){
         console.log("Username: " + data.username);
         console.log("Token: " + data.token);
         var method = 'usergetorcreate';
+        console.log( JSON.stringify({
+            username: data.username,
+            // Include any other user data you want to send to the backend
+        }))
         // Send data to backend
         fetch(apiUrl+method, {
             method: 'POST',
-            headers: headers1,
+            headers:{
+                'Accept': 'application/json',
+                
+    'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 username: data.username,
                 // Include any other user data you want to send to the backend
@@ -60,6 +68,7 @@ window.addEventListener("message", function(event) {
         })
         .catch((error) => {
             console.error('Error:', error);
+            localStorage.removeItem('token');
         });
     }else {$('#loginModal').modal('show');}
 }
@@ -498,6 +507,7 @@ function inicializarEventos() {
             type: "POST",
             url: apiUrl + webMethod,
             data: params,
+            headers:headers1,
             success: function (data) {
                 alert("El registro fue eliminado correctamente");
                 consulta();
@@ -831,9 +841,7 @@ function inicializarEventos() {
             $.ajax({
                 type: "POST",
                 url: apiUrl + webMethod,
-                headers: {
-                    'Accept': 'application/json'
-                },
+                headers: headers1,
                 data: params,
                 success: function (data) {
                     alert("El registro fue actualizado correctamente");
@@ -1572,9 +1580,7 @@ function consultaDatosIdentificacionArea(id_d = null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
-        headers:{
-            'Accept': 'application/json'
-        },
+        headers:headers1,
         success: function (data) {            
             if (data.success) {
                 var infodata;
@@ -1731,7 +1737,8 @@ function updateIdentificacionDisenio() {
         //Método
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -1790,6 +1797,7 @@ function consultaDatosProteccionArea(id_d=null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
+        headers:headers1,
         success: function (data) {
             if (data.success) {
                 clearInputTextValues('proteccionfrm');    
@@ -1954,7 +1962,8 @@ function updateDisenioproteccion() {
         //Método
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -2134,7 +2143,7 @@ function updateDisenioServicio() {
             formData.append("C_0205_0013", $("#inputGroupFile02")[0].files[0]);
         }
         if($("#inputGroupFile03")[0].files[0]) {
-            formData.append("C_0205_0014", $("#inputGroupFile03")[0].files[0]);
+            formData.append("C_0205_0014", $("#inputGroupFile03")[0].filess[0]);
         }
         if($("#inputGroupFile04")[0].files[0]) {
             formData.append("C_0205_0015", $("#inputGroupFile04")[0].files[0]);
@@ -2149,9 +2158,7 @@ function updateDisenioServicio() {
         }
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json'
-            },
+            headers: headers1,
             body: formData
         })
         .then(response => {
@@ -2215,6 +2222,7 @@ function consultaDatosPresionArea(id_d=null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
+        headers:headers1,
         success: function (data) {
             if (data.success) {
                 existingDownloadIcons.forEach(icon => icon.remove());  
@@ -2369,9 +2377,7 @@ function updateDiseniopresion() {
         $.ajax({
             type: "POST",
             url: apiUrl + webMethod,
-            headers: {
-                'Accept': 'application/json'
-            },
+            headers: headers1,
             data: params,
             success: function (data) {
                 alert("El registro fue actualizado correctamente");
@@ -2429,9 +2435,7 @@ function consultaDatosConsGeneral(id_d=null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
-        headers:{
-            'Accept': 'application/json'
-        },
+        headers:headers1,
         success: function (data) {
             if (data.success) {
                 let data1;
@@ -2590,7 +2594,8 @@ function updateConsGeneral() {
             //});
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -2656,9 +2661,7 @@ function consultaDatosConsUnion(id_d = null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
-        headers:{
-            'Accept': 'application/json'
-        },
+        headers:headers1,
         success: function (data) {
             if (data.success) {
                 if (webMethod === "getConsUnionById")
@@ -2808,7 +2811,8 @@ function updateConsUnion() {
         }
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -2884,9 +2888,7 @@ function consultaDatosConsProfundidad(id_d=null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
-        headers:{
-            'Accept': 'application/json'
-        },
+        headers:headers1,
         success: function (data) {
             if (data.success) {
                 const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
@@ -3042,7 +3044,8 @@ function updateConsProfundidad() {
 
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -3265,9 +3268,7 @@ function updateConstruccionInspeccion() {
         }
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json'
-            },
+            headers: headers1,
             body: formData
         })
         .then(response => {
@@ -3471,9 +3472,7 @@ function updateConstruccionSeguridad() {
         }
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json'
-            },
+            headers: headers1,
             body: formData
         })
         .then(response => {
@@ -3653,9 +3652,7 @@ function consultaDatosConsCruces(id_d=null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         success: function (data) {
             if (data.success) {
                 const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
@@ -3854,7 +3851,8 @@ function updateCrucesConstruccion() {
         }
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -3949,9 +3947,7 @@ function consultaDatosConsHermeticidad(id_d=null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         success: function (data) {
             if (data.success) {
                 const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
@@ -4110,7 +4106,8 @@ function updateHermeticidadConstruccion() {
         }
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -4245,9 +4242,7 @@ function consultaDatosConsCatodica(id_d=null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         success: function (data) {
             const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
                  existingDownloadIcons.forEach(icon => icon.remove());
@@ -4391,7 +4386,8 @@ function updateConstruccionCatodica() {
         }
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -4608,9 +4604,7 @@ function saveConstruccionGeneral() {
 
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         body: formData
     })
         .then(response => {
@@ -4665,7 +4659,8 @@ function saveConstruccionUnion() {
         }
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -4725,8 +4720,8 @@ function saveConstruccionProfundidad() {
     }
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        body: formData
-    })
+        body: formData,
+ headers:headers1   })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -4815,8 +4810,8 @@ function saveConstruccionCruces() {
     }
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        body: formData
-    })
+        body: formData,
+ headers:headers1   })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -4871,7 +4866,8 @@ function saveConstruccionHermeticidad() {
     }
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
         .then(response => {
             if (!response.ok) {
@@ -4923,9 +4919,7 @@ function saveConstruccioInspeccion() {
 
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         body: formData
     })
     .then(response => {
@@ -4980,8 +4974,8 @@ function saveConstruccioCatodica() {
     
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        body: formData
-    })
+        body: formData,
+ headers:headers1   })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -5056,9 +5050,7 @@ function saveConstruccioSeguridad() {
 
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         body: formData
     })
     .then(response => {
@@ -5140,6 +5132,7 @@ function loadCmbCruceServicio() {
     $.ajax({
         type: "GET",
         url: apiUrl + webMethod,
+        headers:headers1,
         success: function (data) {
             if (data.success) {
                 console.log(data.data);
@@ -5208,6 +5201,7 @@ function loadCmbCruceTuberia() {
     $.ajax({
         type: "GET",
         url: apiUrl + webMethod,
+        headers:headers1,
         success: function (data) {
             if (data.success) {
                 console.log(data.data);
@@ -5283,6 +5277,7 @@ function loadCmbCruceTransporte() {
     $.ajax({
         type: "GET",
         url: apiUrl + webMethod,
+        headers:headers1,
         success: function (data) {
             if (data.success) {
                 console.log(data.data);
@@ -5370,6 +5365,7 @@ function loadtipocostura() {
         $.ajax({
             type: "GET",
             url: apiUrl + webMethod,
+            headers:headers1,
             success: function (data) {
                 if (data.success) {
                     $("#cmbTipoCostura").empty();
@@ -5401,6 +5397,7 @@ function loadtiporecubrimiento() {
         $.ajax({
             type: "GET",
             url: apiUrl + webMethod,
+            headers:headers1,
             success: function (data) {
                 if (data.success) {
                     console.log(data.data);
@@ -5433,6 +5430,7 @@ function loadtipomaterialdisenio() {
         $.ajax({
             type: "GET",
             url: apiUrl + webMethod,
+            headers:headers1,
             success: function (data) {
                 if (data.success) {
                     console.log(data.data);
@@ -5464,6 +5462,7 @@ function loadtipoproteccioncatodica() {
     $.ajax({
         type: "GET",
         url: apiUrl + webMethod,
+        headers:headers1,
         success: function (data) {
             if (data.success) {
                 console.log(data.data);
@@ -5492,6 +5491,7 @@ function loadtipoinstalacion() {
     $.ajax({
         type: "GET",
         url: apiUrl + webMethod,
+        headers:headers1,
         success: function (data) {
             if (data.success) {
                 console.log(data.data);
@@ -5520,6 +5520,7 @@ function loadtipotecnica() {
         $.ajax({
             type: "GET",
             url: apiUrl + webMethod,
+            headers:headers1,
             success: function (data) {
                 if (data.success) {
                     $("#cmtiptecnicaunion").empty();
@@ -5555,6 +5556,7 @@ function loadtipoubicacion() {
         $.ajax({
             type: "GET",
             url: apiUrl + webMethod,
+            headers:headers1,
             success: function (data) {
                 if (data.success) {
                     $("#cmbmetubicsoldunion").empty();
@@ -5700,7 +5702,8 @@ function saveDisenioGral() {
         }
         fetch(apiUrl + webMethod, {
            method: 'POST',
-            body: formData
+            body: formData,
+            headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -5756,7 +5759,8 @@ function savebasecons() {
        // console.log(JSON.stringify(params))
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -5901,8 +5905,8 @@ function saveDisenioPresion()  {
         }
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        body: formData
-    })
+        body: formData,
+ headers:headers1   })
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -5971,7 +5975,8 @@ function saveDisenioProteccion() {
 
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -6212,9 +6217,7 @@ function saveDisenioServicio() {
     }
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         body: formData
     })
     .then(response => {
@@ -6333,6 +6336,7 @@ function addPersonas() {
                 type: "POST",
                 url: apiUrl + webMethod,
                 data: params,
+                headers:headers1,
                 success: function (data) {
                     if (data.success) {
                         alert("El Registro ha sido almacenado");
@@ -6358,6 +6362,7 @@ function loadidentificacion() {
     $.ajax({
         type: "GET",
         url: apiUrl + webMethod,
+        headers:headers1,
         success: function (data) {
             
             if (data.success) {
@@ -6451,6 +6456,7 @@ function consulta() {
                         $.ajax({
                             type: "POST",
                             url: apiUrl + webMethod,
+                            headers:headers1,
                             
                             data: params,
                             success: function (data) {
@@ -6517,6 +6523,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethodPresion,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
                                     if (data.data.datagrid.length > 0) {
@@ -6545,6 +6552,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethodProteccion,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
                                     if (data.data.datagrid.length > 0) {
@@ -6587,6 +6595,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethodCatodica,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
                                     if (data.data.datagrid.length > 0) {
@@ -6627,6 +6636,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethodUnion,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
                                     if (data.data.datagrid.length > 0) {
@@ -6660,6 +6670,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethodProfundidad,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
                                     
@@ -6693,6 +6704,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethodCruces,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
                                     
@@ -6720,6 +6732,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethodHermeticidad,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
                                     if (data.data.length > 0) {
@@ -6754,6 +6767,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethodInspeccion,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
 
@@ -6776,6 +6790,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethodInspeccion,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
 
@@ -6799,6 +6814,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethodCatodica,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
                                     if (data.data.datagrid.length > 0) {
@@ -6830,6 +6846,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethodSeguridad,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
                                   
@@ -6863,6 +6880,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethod,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 //if (data.success) {
                                 //    for (i = 0; i < data.data.datagrid.length; i++) {
@@ -6900,6 +6918,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethod,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
 
@@ -6930,6 +6949,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethodCatodica,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
                                     
@@ -6962,6 +6982,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethodSeguridad,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
                                   
@@ -6986,6 +7007,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethod,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                             //    if (data.success) {
                             //        for (i = 0; i < data.data.datagrid.length; i++) {
@@ -7026,6 +7048,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethod,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                             //    if (data.success) {
                             //        for (i = 0; i < data.data.datagrid.length; i++) {
@@ -7064,6 +7087,7 @@ function consulta() {
                             type: "POST",
                             url: apiUrl + webMethod,
                             data: params,
+                            headers:headers1,
                             success: function (data) {
                                 if (data.success) {
 
@@ -7142,6 +7166,7 @@ function loadDisenioGral() {
     $.ajax({
         type: "GET",
         url: apiUrl + webMethod,
+        headers:headers1,
         success: function (data) {
             if (data.success) {
                 for (i = 0; i < data.data.length; i++) {
@@ -7354,9 +7379,7 @@ $('#cmbDucto').change(function() {
     if (property) {      
       fetch(url, {
         method: 'POST', // or 'POST', 'PUT', etc.
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify({'property': property})
       })
           .then(response => response.json())
@@ -7415,9 +7438,7 @@ function getNamesByAreaUnitariaId(area_unitaria_id) {
     console.log(area_unitaria_id,"id");
     return fetch(url, {
         method: 'POST', // or 'POST', 'PUT', etc.
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify({'id': area_unitaria_id})
       })
         .then(response => {
@@ -7439,9 +7460,7 @@ function getidByAreaUnitarianombre(area_unitaria_nombre) {
     url=apiUrl+webMethod;
     return fetch(url, {
         method: 'POST', // or 'POST', 'PUT', etc.
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify({'nombre': area_unitaria_nombre})
       })
         .then(response => {
@@ -7461,9 +7480,7 @@ function getAreaIdById(webMethod ,id) {
     url=apiUrl+webMethod;
     return fetch(url, {
         method: 'POST', // or 'POST', 'PUT', etc.
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify({'id':id})
       })
         .then(response => {
@@ -7839,7 +7856,8 @@ function saveAnalisisGral() {
        
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: headers1,
         })
             .then(response => {
                 if (!response.ok) {
@@ -7887,9 +7905,7 @@ function consultaDatosAnalisisGeneral(id_d = null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         success: function (data) {
             const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
             existingDownloadIcons.forEach(icon => icon.remove());
@@ -7991,7 +8007,8 @@ function updateAnalisisGeneral() {
 
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: headers1,
         })
             .then(response => {
                 if (!response.ok) {
@@ -8064,9 +8081,7 @@ function consultaDatosAnalisisGeoespacial(id_d = null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         success: function (data) {
             
             if (data.success) {
@@ -8139,7 +8154,8 @@ function saveAnalisisGeoespacial() {
 
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: headers1,
         })
             .then(response => {
                 if (!response.ok) {
@@ -8217,7 +8233,8 @@ function updateAnalisisGeoespacial() {
 
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: headers1,
         })
             .then(response => {
                 if (!response.ok) {
@@ -8288,9 +8305,7 @@ function consultaDatosAnalisisPlanos(id_d = null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         success: function (data) {
 
             if (data.success) {
@@ -8430,7 +8445,8 @@ function saveAnalisisPlanos() {
         }
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -8469,9 +8485,7 @@ function saveAnalisisPlanos() {
     formData.append('planos_mapas_reportes', $("#fileplanosmapasreportes")[0].files[0]);
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         body: formData
     })
         .then(response => {
@@ -8541,7 +8555,8 @@ function updateAnalisisPlanos() {
 
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: headers1,
         })
             .then(response => {
                 if (!response.ok) {
@@ -8790,9 +8805,7 @@ function saveAnalisisDocumental() {
 
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         body: formData
     })
     .then(response => {
@@ -8881,9 +8894,7 @@ function updateAnalisisDocumental() {
         }
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json'
-            },
+            headers: headers1,
             body: formData
         })
         .then(response => {
@@ -8965,7 +8976,8 @@ function saveAnalisisRepDis() {
        
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: headers1,
         })
             .then(response => {
                 if (!response.ok) {
@@ -9013,9 +9025,7 @@ function consultaDatosAnalisisriesdis(id_d = null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         success: function (data) {
             const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
             existingDownloadIcons.forEach(icon => icon.remove());
@@ -9143,7 +9153,8 @@ function updateAnalisisriesdis() {
 
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: headers1,
         })
             .then(response => {
                 if (!response.ok) {
@@ -9222,6 +9233,7 @@ function loadRiesgo() {
     var webMethod = "get_tiporiesgos";
     $.ajax({
         type: "GET",
+        headers:headers1,
         url: apiUrl + webMethod,
         success: function (data) {
             if (data.success) {
@@ -9291,6 +9303,7 @@ function loadElemento() {
     $.ajax({
         type: "GET",
         url: apiUrl + webMethod,
+        headers:headers1,
         success: function (data) {
             if (data.success) {
                 console.log(data.data);
@@ -9339,6 +9352,7 @@ function loadtiporiesgo() {
         $.ajax({
             type: "GET",
             url: apiUrl + webMethod,
+            headers:headers1,
             success: function (data) {
                 if (data.success) {
                     $("#cmb_tiporiesgo_ri").empty();
@@ -9386,9 +9400,7 @@ function consultaDatosAnalisisRiesgosIncidentes(id_d = null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         success: function (data) {
             const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
             existingDownloadIcons.forEach(icon => icon.remove());
@@ -9501,7 +9513,8 @@ function saveAnalisisRiesgosIncidentes() {
 
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers:headers1
     })
         .then(response => {
             if (!response.ok) {
@@ -9561,7 +9574,8 @@ function updateAnalisisRiesgosIncidentes() {
 
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+	    headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -9666,6 +9680,7 @@ function loadtiporegulacion() {
         $.ajax({
             type: "GET",
             url: apiUrl + webMethod,
+            headers:headers1,
             success: function (data) {
                 if (data.success) {
                     $("#cmb_tiporegulacion_di").empty();
@@ -9696,6 +9711,7 @@ function loadgradoacero() {
         $.ajax({
             type: "GET",
             url: apiUrl + webMethod,
+            headers:headers1,
             success: function (data) {
                 if (data.success) {
                     $("#cmb_gradoacero_di").empty();
@@ -9726,6 +9742,7 @@ function loadtecnicasoldadura() {
         $.ajax({
             type: "GET",
             url: apiUrl + webMethod,
+            headers:headers1,
             success: function (data) {
                 if (data.success) {
                     $("#cmb_tecnicasoldadura_di").empty();
@@ -9756,6 +9773,7 @@ function loadmaterial() {
         $.ajax({
             type: "GET",
             url: apiUrl + webMethod,
+            headers:headers1,
             success: function (data) {
                 if (data.success) {
                     $("#cmb_Material_di").empty();
@@ -9786,6 +9804,7 @@ function loadsegmento() {
         $.ajax({
             type: "GET",
             url: apiUrl + webMethod,
+            headers:headers1,
             success: function (data) {
                 if (data.success) {
                     $("#cmb_tiposeging_di").empty();
@@ -9833,9 +9852,7 @@ function consultaDatosAnalisisIngenieria(id_d = null) {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         success: function (data) {
             const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
             existingDownloadIcons.forEach(icon => icon.remove());
@@ -9951,8 +9968,8 @@ function saveAnalisisIngenieria() {
 
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        body: formData
-    })
+        body: formData,
+ headers:headers1   })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -10014,7 +10031,8 @@ function updateAnalisisIngenieria() {
 
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers:headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -10347,9 +10365,7 @@ function savedocumentoreferenciado() {
     formData.append('file', $("#inputfiledocument")[0].files[0]);
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         body: formData
     })
         .then(response => {
@@ -10393,9 +10409,7 @@ function saveDocumentAreasForms(idDoc) {
     formData.append("documentos_id", idDoc);
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         body: formData
     })
         .then(response => {
@@ -10426,9 +10440,7 @@ function get_relateddocuments(tramo_id,area_id,form_id,table) {
     formData.append("form_id", form_id);
     fetch(apiUrl + webMethod, {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json'
-        },
+        headers: headers1,
         body: formData
     })
         .then(response => {
