@@ -32,20 +32,16 @@ window.addEventListener("message", function(event) {
 
     if (data.accion === "autenticar") {
         // Here you can add the logic to authenticate the user
+        if (data.username!==undefined){
         console.log("Username: " + data.username);
         console.log("Token: " + data.token);
-        document.getElementById("username").textContent = 'username: ' + data.username;
-        document.getElementById("token").textContent = 'refreshToken: ' + data.token;
         var method = 'usergetorcreate';
         // Send data to backend
         fetch(apiUrl+method, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                // Include the received token in the Authorization header if needed
-            },
+            headers: headers1,
             body: JSON.stringify({
-                name: data.username,
+                username: data.username,
                 // Include any other user data you want to send to the backend
             })
         })
@@ -53,20 +49,25 @@ window.addEventListener("message", function(event) {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            var token=response.data['token'];
-            localStorage.setItem('token',token);
+            return response.json();
+            
         })
         .then(data => {
-            console.log('Success:', data);
+
+            var token=data['token']
+            console.log('token',token)
+            localStorage.removeItem('token');
+            localStorage.setItem('token',token);
         })
         .catch((error) => {
             console.error('Error:', error);
         });
-    }
+    }else {$('#loginModal').modal('show');}
+}
 });
 
 
-const token = localStorage.getItem('token');
+token = localStorage.getItem('token');
 
 
 function logoutFunction() {
@@ -77,6 +78,7 @@ function logoutFunction() {
 
 
 $(document).ready(function() {
+    var token = localStorage.getItem('token')
     if (!token ) {
         $('#loginModal').modal('show');
         !console.log('no hay token')
