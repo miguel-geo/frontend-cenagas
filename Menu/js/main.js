@@ -77,17 +77,18 @@ function logoutFunction() {
 
 
 $(document).ready(function() {
+    var token = localStorage.getItem('token')
     headers = new Headers({
         'Accept': 'application/json',
         'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`,
     })
-    headers1 = new Headers({
+    headers1 = {
         'Accept': 'application/json',
         
     'Authorization': `Bearer ${token}`,
-    })
-    var token = localStorage.getItem('token')
+    }
+    
     if (!token ) {
         $('#loginModal').modal('show');
         !console.log('no hay token')
@@ -5591,6 +5592,7 @@ function loadDuctos() {
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
+        headers: headers1,
         success: function (data) {
             if (data.length > 0 && data !== undefined) {
                 console.log(data.data);
@@ -5609,7 +5611,7 @@ function loadDuctos() {
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
-
+            console.error("Error:", thrownError);
         }
     });
 }
@@ -6449,6 +6451,7 @@ function consulta() {
                         $.ajax({
                             type: "POST",
                             url: apiUrl + webMethod,
+                            
                             data: params,
                             success: function (data) {
                                 if (data.data.datagrid.length > 0) {
