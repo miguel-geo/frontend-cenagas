@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -19,10 +19,9 @@ var temaconsultadisenio = "";
 var temaconsultaanalisis = "";
 var area_unitaria_id;
 var contar_longitud=0;
-const headers = new Headers({
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-});
+var headers;
+var headers1;
+var token;
 
 window.addEventListener("message", function(event) {
     // In a real environment, you should verify that the message comes from the expected domain
@@ -78,6 +77,16 @@ function logoutFunction() {
 
 
 $(document).ready(function() {
+    headers = new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`,
+    })
+    headers1 = new Headers({
+        'Accept': 'application/json',
+        
+    'Authorization': `Bearer ${token}`,
+    })
     var token = localStorage.getItem('token')
     if (!token ) {
         $('#loginModal').modal('show');
