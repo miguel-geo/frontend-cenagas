@@ -393,19 +393,19 @@ function inicializarEventos() {
                 case "T4":
                     switch(temaconsultaanalisis){
                         case "Ana1":
-                            webMethod = "";
+                            webMethod = "analisisgeneral/destroy";
                             break;
                         case "Ana2":
-                            webMethod = "";
+                            webMethod = "analisisgeoespacial/destroy";
                             break;
                         case "Ana3":
-                            webMethod = "";
+                            webMethod = "analisisplanos/destroy";
                             break;
                         case "Ana4":
-                            webMethod = "";
+                            webMethod = "analisisriesgosincidentes/destroy";
                             break;
                         case "Ana5":
-                            webMethod = "";
+                            webMethod = "analisisingenieria/destroy";
                             break;
                         case "Ana6":
                             webMethod = "analisisriesgo/destroy";
@@ -2788,7 +2788,10 @@ function nuevoconsprofent(){
 }
 
 
-function consultaDatosConsProfundidad(id_d=null) {
+function consultaDatosConsProfundidad(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 6, "tbl_prof_construccion");
     var webMethod;
     var params;
     if (id_d)
@@ -2815,8 +2818,7 @@ function consultaDatosConsProfundidad(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
-                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-                existingDownloadIcons.forEach(icon => icon.remove());  
+               
                 if (data.data.length > 0) {
                     llenarDatosActualizacionConsProfundidad(data.data);
                     $("#btn_saveconsprofent").hide();
@@ -3047,6 +3049,9 @@ function nuevoDisenioinspeccion(){
 
 
 function consultaDatosinspeccion(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 9, "tbl_insp_construccion");
     clearAllFileInputsInDiv('reportesInspeccionfrm')
     var webMethod;
     var params;
@@ -3070,9 +3075,7 @@ function consultaDatosinspeccion(id_d = null) {
     .then(response => response.json())
     .then(data => {
         
-        // 1. Remove all existing download icons before adding new ones.
-        const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-        existingDownloadIcons.forEach(icon => icon.remove());
+       
        
 
         const { id: serviceId, success:success,coordenada_especifica:coordenada_especifica,kilometro_especifico:kilometro_especifico, ...columnsData } = data;
@@ -3239,6 +3242,9 @@ function nuevoDisenioseguridad(){
 
 
 function consultaDatosseguridad(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 11, "tbl_segu_construccion");
     clearAllFileInputsInDiv('seguridadprearranquefrm')
     var webMethod;
     var params;
@@ -3261,12 +3267,6 @@ function consultaDatosseguridad(id_d = null) {
     })
     .then(response => response.json())
     .then(data => {
-        
-        // 1. Remove all existing download icons before adding new ones.
-        const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-        existingDownloadIcons.forEach(icon => icon.remove());
-       
-
         const { id: serviceId, success:success,coordenada_especifica:coordenada_especifica,kilometro_especifico:kilometro_especifico, ...columnsData } = data;
         if (success){
         idConsSeguridad=serviceId
@@ -3555,7 +3555,9 @@ function nuevoconscruces(){
 }
 
 function consultaDatosConsCruces(id_d=null) {
-
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 7, "tbl_cruces_construccion");
 
 
     var webMethod;
@@ -3584,8 +3586,6 @@ function consultaDatosConsCruces(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
-                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-                 existingDownloadIcons.forEach(icon => icon.remove());
                 if (data.data.length > 0) {
                     llenarDatosActualizacionCruces(data.data);
                     $("#btnGuardarCruces").hide();
@@ -3854,7 +3854,9 @@ function nuevoconshermeticidad(){
 
 
 function consultaDatosConsHermeticidad(id_d=null) {
-
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 8, "tbl_herme_construccion");
     var webMethod;
     var params;
     if (id_d)
@@ -3880,8 +3882,6 @@ function consultaDatosConsHermeticidad(id_d=null) {
         },
         success: function (data) {
             if (data.success) {
-                const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-                 existingDownloadIcons.forEach(icon => icon.remove());
                 if (data.data.length > 0) {
                     llenarDatosActualizacionHermeticidad(data.data);
                     $("#btnGuardarHermeticidad").hide();
@@ -4149,7 +4149,9 @@ function nuevoconscatodica(){
 
 
 function consultaDatosConsCatodica(id_d=null) {
-
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 10, "tbl_cato_construccion");
     var webMethod;
     var params;
     if (id_d)
@@ -4175,8 +4177,6 @@ function consultaDatosConsCatodica(id_d=null) {
             'Accept': 'application/json'
         },
         success: function (data) {
-            const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-                 existingDownloadIcons.forEach(icon => icon.remove());
             if (data.success) {
                 var datainfo;
                 if (webMethod === "getConsCatodicaById")
@@ -5561,6 +5561,7 @@ function reiniciarForms() {
     goToStep1()
     
     $('#analisisforms').hide();
+    $('#operacionforms').hide();
     $('#disenioforms').hide();
     loadDuctos();
     $("#cmbTramo").empty();
@@ -7790,6 +7791,9 @@ function saveAnalisisGral() {
     }
 }
 function consultaDatosAnalisisGeneral(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 12, "tbl_gral_analisis");
     var webMethod;
     var params;
     if (id_d) {
@@ -7815,9 +7819,6 @@ function consultaDatosAnalisisGeneral(id_d = null) {
             'Accept': 'application/json'
         },
         success: function (data) {
-            const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-            existingDownloadIcons.forEach(icon => icon.remove());
-
             if (data.success) {
                 var infodata;
                 if (webMethod === "getAnalisisGeneralById")
@@ -7967,6 +7968,9 @@ async function fnshowAnalisisGeoespacial(id_d = null) {
     resetValidationClasses('infogeoespacialanalisisform');
 }
 function consultaDatosAnalisisGeoespacial(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 13, "tbl_geo_analisis");
     var webMethod;
     var params;
     if (id_d) {
@@ -8191,6 +8195,9 @@ async function fnshowAnalisisPlanos(id_d = null) {
     resetValidationClasses('planosanalisisform');
 }
 function consultaDatosAnalisisPlanos(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 14, "tbl_plano_analisis");
     var webMethod;
     var params;
     if (id_d) {
@@ -8535,6 +8542,9 @@ function nuevoAnalisisDocumental(){
 
 
 function consultaDatosAnaDocumental(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 18, "tbl_doc_analisis");
     clearAllFileInputsInDiv('documentallisisform')
     clearInputTextValues('documentallisisform');
     var webMethod;
@@ -8560,10 +8570,7 @@ function consultaDatosAnaDocumental(id_d = null) {
     .then(data => {
         
         // 1. Remove all existing download icons before adding new ones.
-        const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-        existingDownloadIcons.forEach(icon => icon.remove());
-       
-
+        
         const { id: serviceId, success:success,coordenada_especifica:coordenada_especifica,kilometro_especifico:kilometro_especifico, ...columnsData } = data;
         if (success){
         idAnaDocumental=serviceId
@@ -8916,6 +8923,9 @@ function saveAnalisisRepDis() {
     }
 }
 function consultaDatosAnalisisriesdis(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 17, "tbl_riesgdis_analisis");
     var webMethod;
     var params;
     if (id_d) {
@@ -9289,6 +9299,9 @@ function loadtiporiesgo() {
 }
 var idAnalisisRiesgosIncidentes;
 function consultaDatosAnalisisRiesgosIncidentes(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 15, "tbl_riesinci_analisis");
     var webMethod;
     var params;
     if (id_d) {
@@ -9736,6 +9749,9 @@ function loadsegmento() {
 }
 var idAnalisisIngenieria;
 function consultaDatosAnalisisIngenieria(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 16, "tbl_inge_analisis");
     var webMethod;
     var params;
     if (id_d) {
@@ -9761,9 +9777,6 @@ function consultaDatosAnalisisIngenieria(id_d = null) {
             'Accept': 'application/json'
         },
         success: function (data) {
-            const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
-            existingDownloadIcons.forEach(icon => icon.remove());
-
             if (data.success) {
                 var infodata;
                 if (webMethod === "getAnalisisIngenieriaById")
@@ -9831,6 +9844,7 @@ function llenarDatosActualizacionAnalisisIngenieria(data) {
     $("#cmbdecisionesinspeccionenlinea option:contains(" + data[0].puede_inspeccion_linea + ")").attr('selected', 'selected');
     $("#cmbdecisionestuberiasolopuedeserinspeccionada option:contains(" + data[0].puede_inspeccion_raspaduras + ")").attr('selected', 'selected');
     $("#fecha_fabricacion_di").val(data[0].fecha_fabricacion.split(" ")[0]);
+    $("#fecha_fabricacion_final_di").val(data[0].feha_fabricacion_final.split(" ")[0]);
     $("#ciudadmolino_di").val(data[0].ciudad_molino_construccion);
     $("#diam_nom_di").val(data[0].diametro_nominal);
     $("#cmbdecisionestuberiaoriginal option:contains(" + data[0].es_tuberia_original + ")").attr('selected', 'selected');
@@ -9856,6 +9870,7 @@ function saveAnalisisIngenieria() {
         puede_inspeccion_raspaduras: $("#cmbdecisionestuberiasolopuedeserinspeccionada").val(),
         id_tecnica_soldadura: $("#cmb_tecnicasoldadura_di").val(),
         fecha_fabricacion: $("#fecha_fabricacion_di").val(),
+        feha_fabricacion_final: $("#fecha_fabricacion_final_di").val(),
         id_material: $("#cmb_Material_di").val(),
         ciudad_molino_construccion: $("#ciudadmolino_di").val(),
         diametro_nominal: $("#diam_nom_di").val(),
@@ -9920,6 +9935,7 @@ function updateAnalisisIngenieria() {
             puede_inspeccion_raspaduras: $("#cmbdecisionestuberiasolopuedeserinspeccionada").val(),
             id_tecnica_soldadura: $("#cmb_tecnicasoldadura_di").val(),
             fecha_fabricacion: $("#fecha_fabricacion_di").val(),
+            feha_fabricacion_final: $("#fecha_fabricacion_final_di").val(),
             id_material: $("#cmb_Material_di").val(),
             ciudad_molino_construccion: $("#ciudadmolino_di").val(),
             diametro_nominal: $("#diam_nom_di").val(),
@@ -10396,5 +10412,29 @@ function llenarTablasdocuments(obj, nameTabla) {
     //row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip" id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] + '"><i class="fa fa-trash"></i></a></td>';
     row = row + '</tr>';
   $('#' + nameTabla).append(row);
+}
+//#endregion
+//#region
+function fnsshowOperacionforms() {
+    $('#operacionforms').show();
+    $('#forms').hide();
+}
+async function fnshowOperacionHistorialFugas(id_d = null) {
+    $('#historialfugasderramesoperacionfrm').show();
+    $('#operacionforms').hide();
+    try {
+        if (id_d) {
+            //await consultaDatosAnalisisPlanos(id_d = id_d);
+        }
+        else {
+            //consultaDatosAnalisisPlanos();
+        }
+
+        //// If you want to do something after all functions have completed, you can do it here
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+   // resetValidationClasses('planosanalisisform');
 }
 //#endregion
