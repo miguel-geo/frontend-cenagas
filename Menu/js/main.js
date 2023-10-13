@@ -70,7 +70,7 @@ window.addEventListener("message", function(event) {
             console.error('Error:', error);
             localStorage.removeItem('token');
         });
-    }else {$('#loginModal').modal('show');}
+    }else {window.top.location.href = "http://www.example.com/newpage.html";}
 }
 });
 
