@@ -9847,7 +9847,9 @@ function llenarDatosActualizacionAnalisisIngenieria(data) {
     $("#cmbdecisionesinspeccionenlinea option:contains(" + data[0].puede_inspeccion_linea + ")").attr('selected', 'selected');
     $("#cmbdecisionestuberiasolopuedeserinspeccionada option:contains(" + data[0].puede_inspeccion_raspaduras + ")").attr('selected', 'selected');
     $("#fecha_fabricacion_di").val(data[0].fecha_fabricacion.split(" ")[0]);
-    $("#fecha_fabricacion_final_di").val(data[0].feha_fabricacion_final.split(" ")[0]);
+    if (data[0].feha_fabricacion_final !== "" && data[0].feha_fabricacion_final !== null) {
+        $("#fecha_fabricacion_final_di").val(data[0].feha_fabricacion_final.split(" ")[0]);
+    }
     $("#ciudadmolino_di").val(data[0].ciudad_molino_construccion);
     $("#diam_nom_di").val(data[0].diametro_nominal);
     $("#cmbdecisionestuberiaoriginal option:contains(" + data[0].es_tuberia_original + ")").attr('selected', 'selected');
@@ -10426,6 +10428,9 @@ async function fnshowOperacionHistorialFugas(id_d = null) {
     $('#historialfugasderramesoperacionfrm').show();
     $('#operacionforms').hide();
     try {
+        await loadtipohisfugasOp();
+        await loadtipoeventohisfugasOp();
+        await loadtiporecuperacionhisfugasOp();
         if (id_d) {
             //await consultaDatosAnalisisPlanos(id_d = id_d);
         }
@@ -10440,4 +10445,35 @@ async function fnshowOperacionHistorialFugas(id_d = null) {
     }
    // resetValidationClasses('planosanalisisform');
 }
+function loadtipohisfugasOp() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_tiporiesgo";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tiporiesgo_ri").empty();
+                    $('#cmb_tiporiesgo_ri').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tiporiesgo_ri').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].nombre
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+
 //#endregion
