@@ -9918,6 +9918,8 @@ function saveAnalisisIngenieria() {
         });
 }
 function updateAnalisisIngenieria() {
+
+
     if ($("#btn_updateIngenieria_analisis").text() === "Actualizar") {
         inhabilitarform("#ingenieriaanalisisform", false)
         $("#btn_updateIngenieria_analisis").text('Guardar');
