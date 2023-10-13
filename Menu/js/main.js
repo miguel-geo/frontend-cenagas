@@ -8889,6 +8889,7 @@ function saveAnalisisRepDis() {
             A9: $("#riesdis_a9").val(),
             A10: $("#riesdis_a10").val(),
             A11: $("#riesdis_a11").val(),
+            A12: $("#riesdis_a12").val()
         };
         var formData = new FormData();
         Object.keys(params).forEach(key => formData.append(key, params[key]));
@@ -9032,6 +9033,7 @@ function llenarDatosActualizacionAnalisisriesdis(data) {
     $("#riesdis_a9").val(data[0].A9);
     $("#riesdis_a10").val(data[0].A10);
     $("#riesdis_a11").val(data[0].A11);
+    $("#riesdis_a12").val(data[0].A12);
 
     idAnalisisRiesDis = data[0].id;
     inhabilitarform("#riesdisanalisisform", true);   
@@ -9071,6 +9073,7 @@ function updateAnalisisriesdis() {
             A9: $("#riesdis_a9").val(),
             A10: $("#riesdis_a10").val(),
             A11: $("#riesdis_a11").val(),
+            A12: $("#riesdis_a12").val()
         };
         var formData = new FormData();
         Object.keys(params).forEach(key => formData.append(key, params[key]));
