@@ -3802,7 +3802,7 @@
                                     </div>
                                 </div>
                                 <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="fnshowRiesgosIncidentes()">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="fnshowOperacionMonitoreoCorrosion()">
                                     <div class="card-body">
                                         <h6 class="card-title">Monitoreo de corrosión externa e interna</h6>
                                         <p class="card-text">En éste formulario contendrá información relacionada a...</p>
@@ -3813,7 +3813,7 @@
                                 </div>
                                 <div class="card ml-1">
 
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="fnshowAnalisisIngenieria()">
+                                    <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="fnshowOperacionHistorialReparaciones()">
                                     <div class="card-body">
                                         <h6 class="card-title">Historial de reparaciones</h6>
                                         <p class="card-text">En éste formulario contendrá información relacionada a...</p>
@@ -3823,7 +3823,7 @@
                                     </div>
                                 </div>
                                 <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" onclick="fnshowAnalisisDocumental()" class="card-img-top" alt="..." style="cursor: pointer;" onclick="">                                    <div class="card-body">
+                                    <img src="images/formCENAGAS.jpg" onclick="fnshowOperacionVandalismo()" class="card-img-top" alt="..." style="cursor: pointer;">                                    <div class="card-body">
                                         <h6 class="card-title">Vandalismo y daños por terceros</h6>
                                         <p class="card-text">En éste formulario contendrá información relacionada a...</p>
                                     </div>
@@ -3838,16 +3838,6 @@
                                     </div>
                                     <div class="card-footer">
                                         <small class="text-muted">Operación</small>
-                                    </div>
-                                </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" onclick="fnshowAnalisisriesdis()" class="card-img-top" alt="..." style="cursor: pointer;" onclick="">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Análisis de Riesgo en la fase de Diseño, sólo para Ductos nuevos</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Análisis</small>
                                     </div>
                                 </div>
                             </div>
@@ -4035,25 +4025,25 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Residencia</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtresidenciahisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtresidenciahisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Poblado</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtpobladohisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtpobladohisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Municipio</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtmunicipiohisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtmunicipiohisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Estado</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtestadohisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtestadohisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4062,13 +4052,13 @@
                                     <select class="selectpicker form-control setAlg" id="cmb_tipohisfug">
                                         <option>Selecciona...</option>
                                     </select>
-                                    <button type="button" onclick="espTipohisfug()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotrotipohistfugasOp()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
                                 <div class="input-group mb-3" id="espTipohisfug" style="display:none">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Tipo de historial de fuga</span>
+                                        <span class="input-group-text" id="basic-addon1">Otro Tipo de historial de fuga</span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="" aria-label="" id="newTipohisfug" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
@@ -4076,8 +4066,8 @@
                                     </div>
                                     <input type="text" class="form-control" placeholder="" aria-label="" id="newDeschisfug" aria-describedby="basic-addon1">
                                     <div>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroRegulacion()">Cancelar</button>
-                                        <button type="button" id="btn_saveOtroRegulacion" onclick="saveotroRegulacion()" class="btn btn-success">Guardar</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoHisFugOp()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtroHisFugOp" onclick="saveotroTipoHisFugaOp()" class="btn btn-success">Guardar</button>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
@@ -4087,7 +4077,7 @@
                                     <select class="selectpicker form-control setAlg" id="cmb_tipoeventohisfug">
                                         <option>Selecciona...</option>
                                     </select>
-                                    <button type="button" onclick="espRegulacion()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotrotipoeventohistfugasOp()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
@@ -4101,13 +4091,13 @@
                                     </div>
                                     <input type="text" class="form-control" placeholder="" aria-label="" id="newDescTipoEventohisfug" aria-describedby="basic-addon1">
                                     <div>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroRegulacion()">Cancelar</button>
-                                        <button type="button" id="btn_saveOtroRegulacion" onclick="saveotroRegulacion()" class="btn btn-success">Guardar</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoeventoHisFugOp()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtroTipoEventohisFuga" onclick="saveotroTipoeventoHisFugaOp()" class="btn btn-success">Guardar</button>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Fech</span>
+                                        <span class="input-group-text" id="basic-addon1">Fecha</span>
                                     </div>
                                     <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fec_hisfug" aria-describedby="basic-addon1">
                                 </div>
@@ -4115,25 +4105,25 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Hora de ocurrencia del evento</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txthoraocurrenciahisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txthoraocurrenciahisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Horario final de reparación</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txthorariofinalhisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txthorariofinalhisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"> Hora de control del evento</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txthoractrlhisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txthoractrlhisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Arreglo de contención </span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtarregloconthisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtarregloconthisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4142,7 +4132,7 @@
                                     <select class="selectpicker form-control setAlg" id="cmb_tiporeparacionhisfug">
                                         <option>Selecciona...</option>
                                     </select>
-                                    <button type="button" onclick="espTiporeparacionhisfug()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotrotiporeparacionhistfugasOp()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
@@ -4156,45 +4146,45 @@
                                     </div>
                                     <input type="text" class="form-control" placeholder="" aria-label="" id="newDescreparacionhisfug" aria-describedby="basic-addon1">
                                     <div>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroRegulacion()">Cancelar</button>
-                                        <button type="button" id="btn_saveOtroRegulacion" onclick="saveotroRegulacion()" class="btn btn-success">Guardar</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTiporeparacionHisFugOp()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtrotiporeparacionfugaop" onclick="saveotroTiporeparacionHisFugaOp()" class="btn btn-success">Guardar</button>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Observaciones</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtobservacioneshisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtobservacioneshisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">No. Oficio ASEA</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtoficioaseahisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtoficioaseahisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Reporte siniestro entregado</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtreportesiniestrohisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtreportesiniestrohisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">No. Siniestro</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtnosiniestrohisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtnosiniestrohisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">No.</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtnohisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtnohisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Evento I II III</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="txtevento_hisfug" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtevento_hisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div>
                                     <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
@@ -4210,13 +4200,835 @@
                                     </table>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisIngenieria()">Cancelar</button>
-                                    <button type="button" id="btn_newIngenieria_analisis" onclick="nuevoAnalisisRiesgoIngenieria()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
-                                    <button type="button" id="btn_updateIngenieria_analisis" onclick="updateAnalisisIngenieria()" style="display:none" class="btn btn-info">Actualizar</button>
-                                    <button type="button" id="btn_saveIngenieria_analisis" onclick="validateForm('identi-form', saveAnalisisIngenieria)" class="btn btn-success">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelOperacionHisFugas()">Cancelar</button>
+                                    <button type="button" id="btn_newHisFug_operacion" onclick="nuevoOperacionHistFugas()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updateHisFug_operacion" onclick="updateOperacionHistFugOp()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_saveHisFug_operacion" onclick="validateForm('identi-form', savehistfugOp)" class="btn btn-success">Guardar</button>
                                 </div>
                             </form>
-                        </div><!-- #endregion  -->
+                        </div>
+                        <div id="monitoreocorrosionoperacionfrm" style="display:none;margin-top:15px;">
+                            <form role="form" id="identi-form" class="needs-validation">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductomonitoreoop" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramomonitoreoop" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareamonitoreoop" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_monitoreoop_x" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_monitoreoop_y" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_esp_monitoreoop" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Unidades de medida</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtunidadesmedidaop" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Cupones</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtcuponesop" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de instalación</span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fec_instalacionmonitoreoop" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de retiro</span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fec_retiroomonitoreoop" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de registro</span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fec_registromonitoreoop" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Nombre del cupón</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtnombrecuponmonitoreoop" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Peso</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtpesomonitoreoop" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Peso final</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtPesoFinalmonitoreoop" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Velocidad de corrosión</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtvalocidadcorrosionop" aria-describedby="basic-addon1">
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_inge_analisis">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelOperacioMonitoreo()">Cancelar</button>
+                                    <button type="button" id="btn_newMonitoreoCorrosion_operacion" onclick="nuevoOperacionMonitoreo()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updateMonitoreoCorrosion_operacion" onclick="updateOperacionMonitoreoCorrosion()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_saveMonitoreoCorrosion_operacion" onclick="validateForm('identi-form', saveMonitoreoCorrosionOp)" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="historialreparacionesoperacionfrm" style="display:none;margin-top:15px;">
+                            <form role="form" id="identi-form" class="needs-validation">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductohisrep" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramohisrep" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareahisrep" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_hisrep_x" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_hisrep_y" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_esp_hisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de instalación </span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fecinsta_hisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Cuenta con recubrimiento</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmbcuentarecubrimiento">
+                                        <option value="0">Selecciona...</option>
+                                        <option value="Sí">Sí</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">El manguito está presurizado</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmbmanguitopresurizado">
+                                        <option value="0">Selecciona...</option>
+                                        <option value="Sí">Sí</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Se encuentra soldado el manguito</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmbencuentramanguito">
+                                        <option value="0">Selecciona...</option>
+                                        <option value="Sí">Sí</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de fabricación</span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fecfab_hisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fabricante</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtfabricantehisrep" aria-describedby="basic-addon1">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Material</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtmaterialhisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Presión máxima de diseño</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtpresionmahisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de manguito</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tipomanguitohisrep">
+                                        <option>Selecciona...</option>
+                                    </select>
+                                    <button type="button" onclick="showotrotipoManguitoOp()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="espTipoManguitohisrep" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Otro Tipo de manguito</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipomanguitohisrep" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescmanguitohisrep" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoManguitoOp()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtroHisrepmanguitoOp" onclick="saveotroTipoManguitoOp()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">No. de Serie</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtnoseriehisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmbestadohisrep">
+                                        <option value="0">Selecciona...</option>
+                                        <option value="Actual">Actual</option>
+                                        <option value="Histórico">Histórico</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Especificación tubería</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtesptuberiahisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Espesor nominal</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtespnominalhisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Prueba hidrostática</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtpruebahidrohisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de prueba</span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fecprueba_hisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Equipo</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtequipohisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Longitud del envolvente</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtlongitudenvolhisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Observación</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtobservacionhisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de inspección con líquidos penetrantes </span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fecinspliquidos_hisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de recubrimiento aplicado </span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tiporecaplicadohisrep">
+                                        <option>Selecciona...</option>
+                                    </select>
+                                    <button type="button" onclick="showotrotipoRecubrimientoHistRepOp()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="esptiporecaplicadohisrep" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de recubrimiento aplicado</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTiporecaplicadohisrep" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescTiporecaplicadohisrep" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoRecubrimientoHistRepOp()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtroTipoRecubrimientoHistRepOp" onclick="saveotroTipoRecubrimientoHistRepOp()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Longitud de recubrimiento</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtlongitudrecbhisrec" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Indicadores</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtindicadoreshisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"> Defecto (ID)</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtdefectohisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de reparación </span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fecreparacion_hisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de falla</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tipofallahisrep">
+                                        <option>Selecciona...</option>
+                                    </select>
+                                    <button type="button" onclick="showotrotipoFallaHistRepOp()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="espTipofallahisrep" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de falla</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipofallahisrep" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDesctipofallahisrep" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoFallaHistRepOp()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtrotipofallahisrepop" onclick="saveotroTipoFallaHistRepOp()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Modo reparación</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtmodoreparacionhisrep" aria-describedby="basic-addon1">
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_inge_analisis">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelOperacionHisReparacion()">Cancelar</button>
+                                    <button type="button" id="btn_newHisRep_operacion" onclick="nuevoOperacionHistReparacion()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updateHisRep_operacion" onclick="updateOperacionHistorialReparaciones()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_saveHisRep_operacion" onclick="validateForm('identi-form', savehistReparacionOp)" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="vandalismooperacionfrm" style="display:none;margin-top:15px;">
+                            <form role="form" id="identi-form" class="needs-validation">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductovanda" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramovanda" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareavanda" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_vanda_x" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_vanda_y" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_esp_vanda" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Residencia</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtresidenciavanda" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Poblado</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtpobladovanda" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Municipio</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtmunicipiovanda" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtestadovanda" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de vandalismo</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tipovanda">
+                                        <option>Selecciona...</option>
+                                    </select>
+                                    <button type="button" onclick="showotrotipovandalismoOp()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="espTipovandalismo" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Otro Tipo de vandalismo</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipovan" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDesTipovan" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoVan()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtroHisFugOp" onclick="saveotroTipoVan()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de evento</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tipoeventovan">
+                                        <option>Selecciona...</option>
+                                    </select>
+                                    <button type="button" onclick="showotrotipoeventovanOp()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="esptipoeventovan" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de evento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoEventovan" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescTipoEventovan" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoeventovanOp()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtroTipoEventohisFuga" onclick="saveotroTipoeventovanOp()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha</span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fec_van" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Hora de ocurrencia del evento</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txthoraocurrenciavan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Horario final de reparación</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txthorariofinalvan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"> Hora de control del evento</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txthoractrlvan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Arreglo de contención </span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtarregloctrlvan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de reparación</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tiporeparacionvan">
+                                        <option>Selecciona...</option>
+                                    </select>
+                                    <button type="button" onclick="showotrotiporeparacionvanOp()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="espTiporeparacionvan" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de reparación</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTiporeparacionvan" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescreparacionvan" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTiporeparacionvanOp()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtrotiporeparacionfugaop" onclick="saveotroTiporeparacionvanOp()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Observaciones</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtobservacionesvan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">No. Oficio ASEA</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtoficioaseavan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Reporte siniestro entregado</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtreportesiniestrovan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">No. Siniestro</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtnosiniestrovan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">No.</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtnovan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Evento I II III</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtevento_van" aria-describedby="basic-addon1">
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_inge_analisis">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelOperacionVandalismo()">Cancelar</button>
+                                    <button type="button" id="btn_newVan_operacion" onclick="nuevoOperacionVandalismo()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updateVan_operacion" onclick="updateOperacioVandalismoOp()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_saveVang_operacion" onclick="validateForm('identi-form', savevandalismoOp)" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="instalacionesoperacionfrm" style="display:none;margin-top:15px;">
+                            <form role="form" id="identi-form" class="needs-validation">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductoinsta" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramoinsta" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareainsta" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_insta_x" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_insta_y" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_esp_insta" aria-describedby="basic-addon1">
+                                </div>
+                               
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de instalación</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tipoInstalacion">
+                                        <option value="0">Selecciona...</option>
+                                        <option value="Sí">Sí</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                    <button type="button" onclick="showotrotipovandalismoOp()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="espTipovandalismo" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Otro Tipo de vandalismo</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipovan" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDesTipovan" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoVan()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtroHisFugOp" onclick="saveotroTipoVan()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de evento</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tipoeventovan">
+                                        <option>Selecciona...</option>
+                                    </select>
+                                    <button type="button" onclick="showotrotipoeventovanOp()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="esptipoeventovan" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de evento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoEventovan" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescTipoEventovan" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoeventovanOp()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtroTipoEventohisFuga" onclick="saveotroTipoeventovanOp()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha</span>
+                                    </div>
+                                    <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" placeholder="" aria-label="" id="fec_van" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Hora de ocurrencia del evento</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txthoraocurrenciavan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Horario final de reparación</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txthorariofinalvan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"> Hora de control del evento</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txthoractrlvan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Arreglo de contención </span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtarregloctrlvan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de reparación</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tiporeparacionvan">
+                                        <option>Selecciona...</option>
+                                    </select>
+                                    <button type="button" onclick="showotrotiporeparacionvanOp()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="espTiporeparacionvan" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de reparación</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTiporeparacionvan" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescreparacionvan" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTiporeparacionvanOp()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtrotiporeparacionfugaop" onclick="saveotroTiporeparacionvanOp()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Observaciones</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtobservacionesvan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">No. Oficio ASEA</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtoficioaseavan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Reporte siniestro entregado</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtreportesiniestrovan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">No. Siniestro</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtnosiniestrovan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">No.</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtnovan" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Evento I II III</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtevento_van" aria-describedby="basic-addon1">
+                                </div>
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_inge_analisis">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelOperacionVandalismo()">Cancelar</button>
+                                    <button type="button" id="btn_newVan_operacion" onclick="nuevoOperacionVandalismo()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updateVan_operacion" onclick="updateOperacioVandalismoOp()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_saveVang_operacion" onclick="validateForm('identi-form', savevandalismoOp)" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- #endregion  -->
                         <!-- #region FORMULARIO DOCUMENTAL -->
                         <div id="documentalfrm" style="display:none;margin-top:15px;">
                             <form role="form">

@@ -10421,7 +10421,7 @@ function llenarTablasdocuments(obj, nameTabla) {
   $('#' + nameTabla).append(row);
 }
 //#endregion
-//#region
+//#region Historail de Fugas 
 function fnsshowOperacionforms() {
     $('#operacionforms').show();
     $('#forms').hide();
@@ -10434,10 +10434,10 @@ async function fnshowOperacionHistorialFugas(id_d = null) {
         await loadtipoeventohisfugasOp();
         await loadtiporecuperacionhisfugasOp();
         if (id_d) {
-            //await consultaDatosAnalisisPlanos(id_d = id_d);
+            await consultaDatosHistFugOperacion(id_d = id_d);
         }
         else {
-            //consultaDatosAnalisisPlanos();
+            consultaDatosHistFugOperacion();
         }
 
         //// If you want to do something after all functions have completed, you can do it here
@@ -10449,21 +10449,21 @@ async function fnshowOperacionHistorialFugas(id_d = null) {
 }
 function loadtipohisfugasOp() {
     return new Promise((resolve, reject) => {
-        var webMethod = "get_tiporiesgo";
+        var webMethod = "get_histfugtipoOperacion";
         $.ajax({
             type: "GET",
             url: apiUrl + webMethod,
             success: function (data) {
                 if (data.success) {
-                    $("#cmb_tiporiesgo_ri").empty();
-                    $('#cmb_tiporiesgo_ri').append($('<option>', {
+                    $("#cmb_tipohisfug").empty();
+                    $('#cmb_tipohisfug').append($('<option>', {
                         value: 0,
                         text: 'Selecciona...'
                     }));
                     for (var i = 0; i < data.data.length; i++) {
-                        $('#cmb_tiporiesgo_ri').append($('<option>', {
+                        $('#cmb_tipohisfug').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].nombre
+                            text: data.data[i].C_0406_218
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -10477,5 +10477,1628 @@ function loadtipohisfugasOp() {
         });
     });
 }
+function loadtipoeventohisfugasOp() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_histfugtipoeventoOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipoeventohisfug").empty();
+                    $('#cmb_tipoeventohisfug').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipoeventohisfug').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0406_219
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function loadtiporecuperacionhisfugasOp() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_histfugtiporeparacionOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tiporeparacionhisfug").empty();
+                    $('#cmb_tiporeparacionhisfug').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tiporeparacionhisfug').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0406_225
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function showotrotipohistfugasOp() {
+    $('#espTipohisfug').show();
+}
 
+function cancelotroTipoHisFugOp() {
+    $("#espTipohisfug").hide();
+}
+function saveotroTipoHisFugaOp() {
+    var webMethod = "savehistfugtipoOperacion";
+    var params = {
+        C_0406_218: $("#newTipohisfug").val(),
+        descripcion: $("#newDeschisfug").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipohisfugasOp();
+                $("#espTipohisfug").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipoeventohistfugasOp() {
+    $('#esptipoeventohisfug').show();
+}
+
+function cancelotroTipoeventoHisFugOp() {
+    $("#esptipoeventohisfug").hide();
+}
+function saveotroTipoeventoHisFugaOp() {
+    var webMethod = "savehistfugtipoeventoOperacion";
+    var params = {
+        C_0406_219: $("#newTipoEventohisfug").val(),
+        descripcion: $("#newDescTipoEventohisfug").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoeventohisfugasOp();
+                $("#esptipoeventohisfug").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotiporeparacionhistfugasOp() {
+    $('#espTiporeparacionhisfug').show();
+}
+
+function cancelotroTiporeparacionHisFugOp() {
+    $("#espTiporeparacionhisfug").hide();
+}
+function saveotroTiporeparacionHisFugaOp() {
+    var webMethod = "savehistfugtiporeparacionOperacion";
+    var params = {
+        C_0406_225: $("#newTiporeparacionhisfug").val(),
+        descripcion: $("#newDescreparacionhisfug").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtiporecuperacionhisfugasOp();
+                $("#espTiporeparacionhisfug").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function savehistfugOp() {
+    var webMethod = "saveHistorialFugas";
+
+    var params = {
+        C_0101_0001_id: area,
+        C_0406_214: $("#txtresidenciahisfug").val(),
+        C_0406_215: $('#txtpobladohisfug').val(),
+        C_0406_216: $('#txtmunicipiohisfug').val(),
+        C_0406_217: $("#txtestadohisfug").val(),
+        id_C_0406_218: $("#cmb_tipohisfug").val(),
+        id_C_0406_219: $("#cmb_tipoeventohisfug").val(),
+        C_0406_220: $("#fec_hisfug").val(),
+        C_0406_221: $("#txthoraocurrenciahisfug").val(),
+        C_0406_222: $("#txthorariofinalhisfug").val(),
+        C_0406_223: $("#txthoractrlhisfug").val(),
+        C_0406_224: $("#txtarregloconthisfug").val(),
+        id_C_0406_225: $("#cmb_tiporeparacionhisfug").val(),
+        C_0406_226: $("#txtobservacioneshisfug").val(),
+        C_0406_227: $("#txtoficioaseahisfug").val(),
+        C_0406_228: $("#txtreportesiniestrohisfug").val(),
+        C_0406_229: $("#txtnosiniestrohisfug").val(),
+        C_0406_230: $("#txtnohisfug").val(),
+        C_0406_231: $("#txtevento_hisfug").val(),
+        coordenada_especifica: $("#coord_esp_hisfug_x").val() + ' ' + $("#coord_esp_hisfug_y").val(),
+        kilometro_especifico: $("#km_esp_hisfug").val()
+    };
+    var formData = new FormData();
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                $('#operacionforms').show();
+                $('#historialfugasderramesoperacionfrm').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function updateOperacionHistFugOp() {
+
+
+    if ($("#btn_updateHisFug_operacion").text() === "Actualizar") {
+        inhabilitarform("#historialfugasderramesoperacionfrm", false)
+        $("#btn_updateHisFug_operacion").text('Guardar');
+        showDestroyIcons('historialfugasderramesoperacionfrm', true);
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateOperacionHistorialFugas";
+        params = {
+            id: idHistFugOp,
+            C_0101_0001_id: area,
+            C_0406_214: $("#txtresidenciahisfug").val(),
+            C_0406_215: $('#txtpobladohisfug').val(),
+            C_0406_216: $('#txtmunicipiohisfug').val(),
+            C_0406_217: $("#txtestadohisfug").val(),
+            id_C_0406_218: $("#cmb_tipohisfug").val(),
+            id_C_0406_219: $("#cmb_tipoeventohisfug").val(),
+            C_0406_220: $("#fec_hisfug").val(),
+            C_0406_221: $("#txthoraocurrenciahisfug").val(),
+            C_0406_222: $("#txthorariofinalhisfug").val(),
+            C_0406_223: $("#txthoractrlhisfug").val(),
+            C_0406_224: $("#txtarregloconthisfug").val(),
+            id_C_0406_225: $("#cmb_tiporeparacionhisfug").val(),
+            C_0406_226: $("#txtobservacioneshisfug").val(),
+            C_0406_227: $("#txtoficioaseahisfug").val(),
+            C_0406_228: $("#txtreportesiniestrohisfug").val(),
+            C_0406_229: $("#txtnosiniestrohisfug").val(),
+            C_0406_230: $("#txtnohisfug").val(),
+            C_0406_231: $("#txtevento_hisfug").val(),
+            coordenada_especifica: $("#coord_esp_hisfug_x").val() + ' ' + $("#coord_esp_hisfug_y").val(),
+            kilometro_especifico: $("#km_esp_hisfug").val()
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#operacionforms').show();
+                    $('#historialfugasderramesoperacionfrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+}
+function cancelOperacionHisFugas() {
+    $('#operacionforms').show();
+    $('#historialfugasderramesoperacionfrm').hide();
+}
+function cancelOperacioMonitoreo() {
+    $('#operacionforms').show();
+    $('#monitoreocorrosionoperacionfrm').hide();
+}
+function consultaDatosHistFugOperacion(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    //get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getOperacionHisFugaById";
+        params = {
+            id: id_d
+        };
+    }
+
+    else {
+
+        webMethod = "get_OperacionHistorialFugas";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            if (data.success) {
+                var infodata;
+                if (webMethod === "getOperacionHisFugaById")
+                    infodata = (data.data);
+                else if (webMethod === "get_OperacionHistorialFugas")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    if (webMethod === "getOperacionHisFugaById")
+                        llenarDatosHisFugOp(infodata);
+                    else if (webMethod === "get_OperacionHistorialFugas")
+                        llenarDatosHisFugOp(infodata);
+                    $("#btn_saveHisFug_operacion").hide();
+                    $("#btn_updateHisFug_operacion").show();
+                    $("#btn_newHisFug_operacion").show();
+                }
+                else {
+
+                    clearInputTextValues('historialfugasderramesoperacionfrm');
+                    inhabilitarform("#historialfugasderramesoperacionfrm", false)
+                    $("#btn_saveHisFug_operacion").show();
+                    $("#btn_updateHisFug_operacion").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductohisfug").val(ducto_nombre);
+                    $("#txttramohisfug").val(tramo_nombre);
+                    $("#txtareahisfug").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
+var idHistFugOp;
+function llenarDatosHisFugOp(data) {
+
+    $("#btn_updateHisFug_operacion").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_hisfug_x").val(coords[0]);
+        $("#coord_esp_hisfug_y").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_hisfug_x").val("");
+        $("#coord_esp_hisfug_y").val("");
+    }
+    $("#km_esp_hisfug").val(data[0].kilometro_especifico);
+    $("#txtresidenciahisfug").val(data[0].C_0406_214);
+    $("#txtpobladohisfug").val(data[0].C_0406_215);
+    $("#txtmunicipiohisfug").val(data[0].C_0406_216);
+    $("#txtestadohisfug").val(data[0].C_0406_217);
+    $("#cmb_tipohisfug option:contains(" + data[0].C_0406_218 + ")").attr('selected', 'selected');
+    $("#cmb_tipoeventohisfug option:contains(" + data[0].C_0406_219 + ")").attr('selected', 'selected');
+    $("#fec_hisfug").val(data[0].C_0406_220.split(' ')[0]);
+    $("#txthoraocurrenciahisfug").val(data[0].C_0406_221);
+    $("#txthorariofinalhisfug").val(data[0].C_0406_222);
+    $("#txthoractrlhisfug").val(data[0].C_0406_223);
+    $("#txtarregloconthisfug").val(data[0].C_0406_224);
+    $("#cmb_tiporeparacionhisfug option:contains(" + data[0].C_0406_225 + ")").attr('selected', 'selected');
+    $("#txtobservacioneshisfug").val(data[0].C_0406_226);
+    $("#txtoficioaseahisfug").val(data[0].C_0406_227);
+    $("#txtreportesiniestrohisfug").val(data[0].C_0406_228);
+    $("#txtnosiniestrohisfug").val(data[0].C_0406_229);
+    $("#txtnohisfug").val(data[0].C_0406_231);
+    $("#txtevento_hisfug").val(data[0].C_0210_0033);
+    idHistFugOp = data[0].id;
+    inhabilitarform("#historialfugasderramesoperacionfrm", true);
+}
+function nuevoOperacionHistFugas() {
+
+    $("#btn_saveHisFug_operacion").show();
+    $("#btn_newHisFug_operacion").hide();
+    $("#btn_updateHisFug_operacion").hide();
+    clearInputTextValuesNew('historialfugasderramesoperacionfrm');
+    inhabilitarform("#historialfugasderramesoperacionfrm", false);
+
+}
 //#endregion
+
+
+
+//#region Monitoreo de Corrosión
+function nuevoOperacionMonitoreo() {
+
+    $("#btn_saveMonitoreoCorrosion_operacion").show();
+    $("#btn_newMonitoreoCorrosion_operacion").hide();
+    $("#btn_updateMonitoreoCorrosion_operacion").hide();
+    clearInputTextValuesNew('monitoreocorrosionoperacionfrm');
+    inhabilitarform("#monitoreocorrosionoperacionfrm", false);
+
+}
+async function fnshowOperacionMonitoreoCorrosion(id_d = null) {
+    $('#monitoreocorrosionoperacionfrm').show();
+    $('#operacionforms').hide();
+    try {
+        if (id_d) {
+            await consultaDatosMonitoreoCorrosionOperacion(id_d = id_d);
+        }
+        else {
+            consultaDatosMonitoreoCorrosionOperacion();
+        }
+
+        //// If you want to do something after all functions have completed, you can do it here
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+    // resetValidationClasses('planosanalisisform');
+}
+function consultaDatosMonitoreoCorrosionOperacion(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    //get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getOperacionMonitoreoCorrosionById";
+        params = {
+            id: id_d
+        };
+    }
+
+    else {
+
+        webMethod = "get_OperacionMonitoreoCorrosion";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            if (data.success) {
+                var infodata;
+                if (webMethod === "getOperacionMonitoreoCorrosionById")
+                    infodata = (data.data);
+                else if (webMethod === "get_OperacionMonitoreoCorrosion")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    if (webMethod === "getOperacionMonitoreoCorrosionById")
+                        llenarDatosMonitoreoCorrosion(infodata);
+                    else if (webMethod === "get_OperacionMonitoreoCorrosion")
+                        llenarDatosMonitoreoCorrosion(infodata);
+                    $("#btn_saveMonitoreoCorrosion_operacion").hide();
+                    $("#btn_updateMonitoreoCorrosion_operacion").show();
+                    $("#btn_newMonitoreoCorrosion_operacion").show();
+                }
+                else {
+
+                    clearInputTextValues('monitoreocorrosionoperacionfrm');
+                    inhabilitarform("#monitoreocorrosionoperacionfrm", false)
+                    $("#btn_saveMonitoreoCorrosion_operacion").show();
+                    $("#btn_updateMonitoreoCorrosion_operacion").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductomonitoreoop").val(ducto_nombre);
+                    $("#txttramomonitoreoop").val(tramo_nombre);
+                    $("#txtareamonitoreoop").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
+var idMonitoreoCorrosiongOp;
+function llenarDatosMonitoreoCorrosion(data) {
+
+    $("#btn_updateMonitoreoCorrosion_operacion").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_monitoreoop_x").val(coords[0]);
+        $("#coord_esp_monitoreoop_y").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_monitoreoop_x").val("");
+        $("#coord_esp_monitoreoop_y").val("");
+    }
+    $("#km_esp_monitoreoop").val(data[0].kilometro_especifico);
+    $("#txtunidadesmedidaop").val(data[0].unidades_medida);
+    $("#txtcuponesop").val(data[0].cupones);
+    $("#fec_instalacionmonitoreoop").val(data[0].fecha_instalacion.split(' ')[0]);
+    $("#fec_retiroomonitoreoop").val(data[0].fecha_retiro.split(' ')[0]);
+    $("#fec_registromonitoreoop").val(data[0].fecha_registro.split(' ')[0]);
+    $("#txtnombrecuponmonitoreoop").val(data[0].nombre_cupon);
+    $("#txtpesomonitoreoop").val(data[0].peso);
+    $("#txtPesoFinalmonitoreoop").val(data[0].peso_final);
+    $("#txtvalocidadcorrosionop").val(data[0].valocidad_corrosion);
+    idMonitoreoCorrosiongOp = data[0].id;
+    inhabilitarform("#monitoreocorrosionoperacionfrm", true);
+}
+function saveMonitoreoCorrosionOp() {
+    var webMethod = "saveMonitoreoCorrosionOp";
+
+    var params = {
+        C_0101_0001_id: area,
+        unidades_medida: $("#txtunidadesmedidaop").val(),
+        cupones: $('#txtcuponesop').val(),
+        fecha_instalacion: $('#fec_instalacionmonitoreoop').val(),
+        fecha_retiro: $("#fec_retiroomonitoreoop").val(),
+        fecha_registro: $("#fec_registromonitoreoop").val(),
+        nombre_cupon: $("#txtnombrecuponmonitoreoop").val(),
+        peso: $("#txtpesomonitoreoop").val(),
+        peso_final: $("#txtPesoFinalmonitoreoop").val(),
+        valocidad_corrosion: $("#txtvalocidadcorrosionop").val(),
+        coordenada_especifica: $("#coord_esp_monitoreoop_x").val() + ' ' + $("#coord_esp_monitoreoop_y").val(),
+        kilometro_especifico: $("#km_esp_monitoreoop").val()
+    };
+    var formData = new FormData();
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                $('#operacionforms').show();
+                $('#monitoreocorrosionoperacionfrm').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function updateOperacionMonitoreoCorrosion() {
+
+
+    if ($("#btn_updateMonitoreoCorrosion_operacion").text() === "Actualizar") {
+        inhabilitarform("#monitoreocorrosionoperacionfrm", false)
+        $("#btn_updateMonitoreoCorrosion_operacion").text('Guardar');
+        showDestroyIcons('monitoreocorrosionoperacionfrm', true);
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateMonitoreoCorrosionOp";
+        params = {
+            id: idMonitoreoCorrosiongOp,
+            C_0101_0001_id: area,
+            unidades_medida: $("#txtunidadesmedidaop").val(),
+            cupones: $('#txtcuponesop').val(),
+            fecha_instalacion: $('#fec_instalacionmonitoreoop').val(),
+            fecha_retiro: $("#fec_retiroomonitoreoop").val(),
+            fecha_registro: $("#fec_registromonitoreoop").val(),
+            nombre_cupon: $("#txtnombrecuponmonitoreoop").val(),
+            peso: $("#txtpesomonitoreoop").val(),
+            peso_final: $("#txtPesoFinalmonitoreoop").val(),
+            valocidad_corrosion: $("#txtvalocidadcorrosionop").val(),
+            coordenada_especifica: $("#coord_esp_monitoreoop_x").val() + ' ' + $("#coord_esp_monitoreoop_y").val(),
+            kilometro_especifico: $("#km_esp_monitoreoop").val()
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#operacionforms').show();
+                    $('#monitoreocorrosionoperacionfrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+}
+//#endregion
+
+//#region Historial Reparaciones
+async function fnshowOperacionHistorialReparaciones(id_d = null) {
+    $('#historialreparacionesoperacionfrm').show();
+    $('#operacionforms').hide();
+    try {
+        await loadtipomanguitoOp();
+        await loadtiporecubrimientoHistRepOp();
+        await loadtipofallaHistRepOp();
+        if (id_d) {
+            await consultaDatosHistRepOperacion(id_d = id_d);
+        }
+        else {
+            consultaDatosHistRepOperacion();
+        }
+
+        //// If you want to do something after all functions have completed, you can do it here
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+    // resetValidationClasses('planosanalisisform');
+}
+function loadtipomanguitoOp() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_histReptipoManguitoOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipomanguitohisrep").empty();
+                    $('#cmb_tipomanguitohisrep').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipomanguitohisrep').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0415_262
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function loadtiporecubrimientoHistRepOp() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_histReptipoRecubrimientoOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tiporecaplicadohisrep").empty();
+                    $('#cmb_tiporecaplicadohisrep').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tiporecaplicadohisrep').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0415_274
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function loadtipofallaHistRepOp() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_histReptipofallaOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipofallahisrep").empty();
+                    $('#cmb_tipofallahisrep').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipofallahisrep').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0415_279   
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function cancelotroTipoManguitoOp() {
+    $("#espTipoManguitohisrep").hide();
+}
+
+function showotrotipoManguitoOp() {
+    $('#espTipoManguitohisrep').show();
+}
+function saveotroTipoManguitoOp() {
+    var webMethod = "savehistReptipoeManguitoOperacion";
+    var params = {
+        C_0415_262: $("#newTipomanguitohisrep").val(),
+        descripcion: $("#newDescmanguitohisrep").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipomanguitoOp();
+                $("#espTipoManguitohisrep").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function cancelotroTipoRecubrimientoHistRepOp() {
+    $("#esptiporecaplicadohisrep").hide();
+}
+
+function showotrotipoRecubrimientoHistRepOp() {
+    $('#esptiporecaplicadohisrep').show();
+}
+function saveotroTipoRecubrimientoHistRepOp() {
+    var webMethod = "savehistReptipoeRecubrimientoOperacion";
+    var params = {
+        C_0415_274: $("#newTiporecaplicadohisrep").val(),
+        descripcion: $("#newDescTiporecaplicadohisrep").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtiporecubrimientoHistRepOp();
+                $("#esptiporecaplicadohisrep").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function cancelotroTipoFallaHistRepOp() {
+    $("#espTipofallahisrep").hide();
+}
+
+function showotrotipoFallaHistRepOp() {
+    $('#espTipofallahisrep').show();
+}
+function saveotroTipoFallaHistRepOp() {
+    var webMethod = "savehistReptipoFallaOperacion";
+    var params = {
+        C_0415_279: $("#newTipofallahisrep").val(),
+        descripcion: $("#newDesctipofallahisrep").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipofallaHistRepOp();
+                $("#espTipofallahisrep").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function consultaDatosHistRepOperacion(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    //get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getOperacionHisReparacionById";
+        params = {
+            id: id_d
+        };
+    }
+
+    else {
+
+        webMethod = "get_OperacionHistorialReparaciones";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            if (data.success) {
+                var infodata;
+                if (webMethod === "getOperacionHisReparacionById")
+                    infodata = (data.data);
+                else if (webMethod === "get_OperacionHistorialReparaciones")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    if (webMethod === "getOperacionHisReparacionById")
+                        llenarDatosHisRepOp(infodata);
+                    else if (webMethod === "get_OperacionHistorialReparaciones")
+                        llenarDatosHisRepOp(infodata);
+                    $("#btn_saveHisRep_operacion").hide();
+                    $("#btn_updateHisRep_operacion").show();
+                    $("#btn_newHisRep_operacion").show();
+                }
+                else {
+
+                    clearInputTextValues('historialreparacionesoperacionfrm');
+                    inhabilitarform("#historialreparacionesoperacionfrm", false)
+                    $("#btn_saveHisRep_operacion").show();
+                    $("#btn_updateHisRep_operacion").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductohisrep").val(ducto_nombre);
+                    $("#txttramohisrep").val(tramo_nombre);
+                    $("#txtareahisrep").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
+var idHistRepOp;
+function llenarDatosHisRepOp(data) {
+
+    $("#btn_updateHisRep_operacion").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_hisrep_x").val(coords[0]);
+        $("#coord_esp_hisrep_y").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_hisrep_x").val("");
+        $("#coord_esp_hisrep_y").val("");
+    }
+    $("#km_esp_hisrep").val(data[0].kilometro_especifico);
+    $("#fecinsta_hisrep").val(data[0].C_0415_254.split(' ')[0]);
+    $("#cmbcuentarecubrimiento option:contains(" + data[0].C_0415_255 + ")").attr('selected', 'selected');
+    $("#cmbmanguitopresurizado option:contains(" + data[0].C_0415_256 + ")").attr('selected', 'selected');
+    $("#cmbencuentramanguito option:contains(" + data[0].C_0415_257 + ")").attr('selected', 'selected');
+    $("#fecfab_hisrep").val(data[0].C_0415_258.split(' ')[0]);
+    $("#txtfabricantehisrep").val(data[0].C_0415_259);
+    $("#txtmaterialhisrep").val(data[0].C_0415_260);
+    $("#txtpresionmahisrep").val(data[0].C_0415_261);
+    $("#cmb_tipomanguitohisrep option:contains(" + data[0].C_0415_262 + ")").attr('selected', 'selected');
+    $("#txtnoseriehisrep").val(data[0].C_0415_263);
+    $("#cmbestadohisrep option:contains(" + data[0].C_0415_264 + ")").attr('selected', 'selected');
+    $("#txtesptuberiahisrep").val(data[0].C_0415_265);
+    $("#txtespnominalhisrep").val(data[0].C_0415_266);
+    $("#txtpruebahidrohisrep").val(data[0].C_0415_267);
+    $("#fecprueba_hisrep").val(data[0].C_0415_268.split(' ')[0]);
+    $("#txtequipohisrep").val(data[0].C_0415_269);
+    $("#txtlongitudenvolhisrep").val(data[0].C_0415_271);
+    $("#txtobservacionhisrep").val(data[0].C_0415_272);
+    $("#fecinspliquidos_hisrep").val(data[0].C_0415_273.split(' ')[0]);
+    $("#cmb_tiporecaplicadohisrep option:contains(" + data[0].C_0415_274 + ")").attr('selected', 'selected');
+    $("#txtlongitudrecbhisrec").val(data[0].C_0415_275);
+    $("#txtindicadoreshisrep").val(data[0].C_0415_276);
+    $("#txtdefectohisrep").val(data[0].C_0415_277);
+    $("#fecreparacion_hisrep").val(data[0].C_0415_278.split(' ')[0]);
+    $("#cmb_tipofallahisrep option:contains(" + data[0].C_0415_279 + ")").attr('selected', 'selected');
+    $("#txtmodoreparacionhisrep").val(data[0].C_0415_280);
+    idHistRepOp = data[0].id;
+    inhabilitarform("#historialreparacionesoperacionfrm", true);
+}
+function nuevoOperacionHistReparacion() {
+
+    $("#btn_saveHisRep_operacion").show();
+    $("#btn_newHisRep_operacion").hide();
+    $("#btn_updateHisRep_operacion").hide();
+    clearInputTextValuesNew('historialreparacionesoperacionfrm');
+    inhabilitarform("#historialreparacionesoperacionfrm", false);
+
+}
+function savehistReparacionOp() {
+    var webMethod = "saveHistorialReparacionesOp";
+
+    var params = {
+        C_0101_0001_id: area,
+        C_0415_254: $("#fecinsta_hisrep").val(),
+        C_0415_255: $('#cmbcuentarecubrimiento').val(),
+        C_0415_256: $('#cmbencuentramanguito').val(),
+        C_0415_257: $("#cmbencuentramanguito").val(),
+        C_0415_258: $("#fecfab_hisrep").val(),
+        C_0415_259: $("#txtfabricantehisrep").val(),
+        C_0415_260: $("#txtmaterialhisrep").val(),
+        C_0415_261: $("#txtpresionmahisrep").val(),
+        id_C_0415_262: $("#cmb_tipomanguitohisrep").val(),
+        C_0415_263: $("#txtnoseriehisrep").val(),
+        C_0415_264: $("#cmbestadohisrep").val(),
+        C_0415_265: $("#txtesptuberiahisrep").val(),
+        C_0415_266: $("#txtespnominalhisrep").val(),
+        C_0415_267: $("#txtpruebahidrohisrep").val(),
+        C_0415_268: $("#fecprueba_hisrep").val(),
+        C_0415_269: $("#txtequipohisrep").val(),
+        C_0415_271: $("#txtlongitudenvolhisrep").val(),
+        C_0415_272: $("#txtobservacionhisrep").val(),
+        C_0415_273: $("#fecinspliquidos_hisrep").val(),
+        id_C_0415_274: $("#cmb_tiporecaplicadohisrep").val(),
+        C_0415_275: $("#txtlongitudrecbhisrec").val(),
+        C_0415_276: $("#txtindicadoreshisrep").val(),
+        C_0415_277: $("#txtdefectohisrep").val(),
+        C_0415_278: $("#fecreparacion_hisrep").val(),
+        id_C_0415_279: $("#cmb_tipofallahisrep").val(),
+        C_0415_280: $("#txtmodoreparacionhisrep").val(),
+        coordenada_especifica: $("#coord_esp_hisrep_x").val() + ' ' + $("#coord_esp_hisrep_y").val(),
+        kilometro_especifico: $("#km_esp_hisrep").val()
+    };
+    var formData = new FormData();
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                $('#operacionforms').show();
+                $('#historialreparacionesoperacionfrm').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function updateOperacionHistorialReparaciones() {
+
+
+    if ($("#btn_updateHisRep_operacion").text() === "Actualizar") {
+        inhabilitarform("#historialreparacionesoperacionfrm", false)
+        $("#btn_updateHisRep_operacion").text('Guardar');
+        showDestroyIcons('historialreparacionesoperacionfrm', true);
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateHistorialReparacionesOp";
+        params = {
+            id: idHistRepOp,
+            C_0101_0001_id: area,
+            C_0415_254: $("#fecinsta_hisrep").val(),
+            C_0415_255: $('#cmbcuentarecubrimiento').val(),
+            C_0415_256: $('#cmbencuentramanguito').val(),
+            C_0415_257: $("#cmbencuentramanguito").val(),
+            C_0415_258: $("#fecfab_hisrep").val(),
+            C_0415_259: $("#txtfabricantehisrep").val(),
+            C_0415_260: $("#txtmaterialhisrep").val(),
+            C_0415_261: $("#txtpresionmahisrep").val(),
+            id_C_0415_262: $("#cmb_tipomanguitohisrep").val(),
+            C_0415_263: $("#txtnoseriehisrep").val(),
+            C_0415_264: $("#cmbestadohisrep").val(),
+            C_0415_265: $("#txtesptuberiahisrep").val(),
+            C_0415_266: $("#txtespnominalhisrep").val(),
+            C_0415_267: $("#txtpruebahidrohisrep").val(),
+            C_0415_268: $("#fecprueba_hisrep").val(),
+            C_0415_269: $("#txtequipohisrep").val(),
+            C_0415_271: $("#txtlongitudenvolhisrep").val(),
+            C_0415_272: $("#txtobservacionhisrep").val(),
+            C_0415_273: $("#fecinspliquidos_hisrep").val(),
+            id_C_0415_274: $("#cmb_tiporecaplicadohisrep").val(),
+            C_0415_275: $("#txtlongitudrecbhisrec").val(),
+            C_0415_276: $("#txtindicadoreshisrep").val(),
+            C_0415_277: $("#txtdefectohisrep").val(),
+            C_0415_278: $("#fecreparacion_hisrep").val(),
+            id_C_0415_279: $("#cmb_tipofallahisrep").val(),
+            C_0415_280: $("#txtmodoreparacionhisrep").val(),
+            coordenada_especifica: $("#coord_esp_hisrep_x").val() + ' ' + $("#coord_esp_hisrep_y").val(),
+            kilometro_especifico: $("#km_esp_hisrep").val()
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#operacionforms').show();
+                    $('#historialreparacionesoperacionfrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+}
+function cancelOperacionHisReparacion() {
+    $('#operacionforms').show();
+    $('#historialreparacionesoperacionfrm').hide();
+}
+//#endregion
+//#region Vandalismo
+async function fnshowOperacionVandalismo(id_d = null) {
+    $('#vandalismooperacionfrm').show();
+    $('#operacionforms').hide();
+    try {
+        await loadtipovandalismoOp();
+        await loadtipoeventovandalismoOp();
+        await loadtiporecuperacionhisvandalismoOp();
+        if (id_d) {
+            await consultaDatosVandalismogOperacion(id_d = id_d);
+        }
+        else {
+            consultaDatosVandalismogOperacion();
+        }
+
+        //// If you want to do something after all functions have completed, you can do it here
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+    // resetValidationClasses('planosanalisisform');
+}
+function loadtipovandalismoOp() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_VanTipoOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipovanda").empty();
+                    $('#cmb_tipovanda').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipovanda').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0416_285
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function loadtipoeventovandalismoOp() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_VanTipoEventoOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipoeventovan").empty();
+                    $('#cmb_tipoeventovan').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipoeventovan').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0416_286
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function loadtiporecuperacionhisvandalismoOp() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_VanTipoReparacionOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tiporeparacionvan").empty();
+                    $('#cmb_tiporeparacionvan').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tiporeparacionvan').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0416_292
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function showotrotipovandalismoOp() {
+    $('#espTipovandalismo').show();
+}
+
+function cancelotroTipoVan() {
+    $("#espTipovandalismo").hide();
+}
+function saveotroTipoVan() {
+    var webMethod = "saveVanTipoOperacion";
+    var params = {
+        C_0416_285: $("#newTipovan").val(),
+        descripcion: $("#newDesTipovan").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipovandalismoOp();
+                $("#espTipovandalismo").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipoeventovanOp() {
+    $('#esptipoeventovan').show();
+}
+
+function cancelotroTipoeventovanOp() {
+    $("#esptipoeventovan").hide();
+}
+function saveotroTipoeventovanOp() {
+    var webMethod = "saveVanTipoEventoOperacion";
+    var params = {
+        C_0416_286: $("#newTipoEventovan").val(),
+        descripcion: $("#newDescTipoEventovan").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoeventovandalismoOp();
+                $("#esptipoeventovan").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotiporeparacionvanOp() {
+    $('#espTiporeparacionvan').show();
+}
+
+function cancelotroTiporeparacionvanOp() {
+    $("#espTiporeparacionvan").hide();
+}
+function saveotroTiporeparacionvanOp() {
+    var webMethod = "saveVanTipoReparacionOperacion";
+    var params = {
+        C_0416_292: $("#newTiporeparacionvan").val(),
+        descripcion: $("#newDescreparacionvan").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtiporecuperacionhisvandalismoOp();
+                $("#espTiporeparacionvan").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function savevandalismoOp() {
+    var webMethod = "saveVandalismoOperacion";
+
+    var params = {
+        C_0101_0001_id: area,
+        C_0416_281: $("#txtresidenciavanda").val(),
+        C_0416_282: $('#txtpobladovanda').val(),
+        C_0416_283: $('#txtmunicipiovanda').val(),
+        C_0416_284: $("#txtestadovanda").val(),
+        id_C_0416_285: $("#cmb_tipovanda").val(),
+        id_C_0416_286: $("#cmb_tipoeventovan").val(),
+        C_0416_287: $("#fec_van").val(),
+        C_0416_288: $("#txthoraocurrenciavan").val(),
+        C_0416_289: $("#txthorariofinalvan").val(),
+        C_0416_290: $("#txthoractrlvan").val(),
+        C_0416_291: $("#txtarregloctrlvan").val(),
+        id_C_0416_292: $("#cmb_tiporeparacionvan").val(),
+        C_0416_293: $("#txtobservacionesvan").val(),
+        C_0416_294: $("#txtoficioaseavan").val(),
+        C_0416_295: $("#txtreportesiniestrovan").val(),
+        C_0416_296: $("#txtnosiniestrovan").val(),
+        C_0416_297: $("#txtnovan").val(),
+        C_0416_298: $("#txtevento_van").val(),
+        coordenada_especifica: $("#coord_esp_vanda_x").val() + ' ' + $("#coord_esp_vanda_y").val(),
+        kilometro_especifico: $("#km_esp_vanda").val()
+    };
+    var formData = new FormData();
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                $('#operacionforms').show();
+                $('#vandalismooperacionfrm').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function updateOperacioVandalismoOp() {
+
+
+    if ($("#btn_updateVan_operacion").text() === "Actualizar") {
+        inhabilitarform("#vandalismooperacionfrm", false)
+        $("#btn_updateVan_operacion").text('Guardar');
+        showDestroyIcons('vandalismooperacionfrm', true);
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateVandalismoOp";
+        params = {
+            id: idvandalismoOp,
+            C_0101_0001_id: area,
+            C_0416_281: $("#txtresidenciavanda").val(),
+            C_0416_282: $('#txtpobladovanda').val(),
+            C_0416_283: $('#txtmunicipiovanda').val(),
+            C_0416_284: $("#txtestadovanda").val(),
+            id_C_0416_285: $("#cmb_tipovanda").val(),
+            id_C_0416_286: $("#cmb_tipoeventovan").val(),
+            C_0416_287: $("#fec_van").val(),
+            C_0416_288: $("#txthoraocurrenciavan").val(),
+            C_0416_289: $("#txthorariofinalvan").val(),
+            C_0416_290: $("#txthoractrlvan").val(),
+            C_0416_291: $("#txtarregloctrlvan").val(),
+            id_C_0416_292: $("#cmb_tiporeparacionvan").val(),
+            C_0416_293: $("#txtobservacionesvan").val(),
+            C_0416_294: $("#txtoficioaseavan").val(),
+            C_0416_295: $("#txtreportesiniestrovan").val(),
+            C_0416_296: $("#txtnosiniestrovan").val(),
+            C_0416_297: $("#txtnovan").val(),
+            C_0416_298: $("#txtevento_van").val(),
+            coordenada_especifica: $("#coord_esp_vanda_x").val() + ' ' + $("#coord_esp_vanda_y").val(),
+            kilometro_especifico: $("#km_esp_vanda").val()
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#operacionforms').show();
+                    $('#vandalismooperacionfrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+}
+function cancelOperacionVandalismo() {
+    $('#operacionforms').show();
+    $('#vandalismooperacionfrm').hide();
+}
+function consultaDatosVandalismogOperacion(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    //get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getOperacionHisReparacionById";
+        params = {
+            id: id_d
+        };
+    }
+
+    else {
+
+        webMethod = "get_OperacionVandalismo";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            if (data.success) {
+                var infodata;
+                if (webMethod === "getOperacionHisReparacionById")
+                    infodata = (data.data);
+                else if (webMethod === "get_OperacionVandalismo")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    if (webMethod === "getOperacionHisReparacionById")
+                        llenarDatosVandalismoOp(infodata);
+                    else if (webMethod === "get_OperacionVandalismo")
+                        llenarDatosVandalismoOp(infodata);
+                    $("#btn_saveVang_operacion").hide();
+                    $("#btn_updateVan_operacion").show();
+                    $("#btn_newVan_operacion").show();
+                }
+                else {
+
+                    clearInputTextValues('vandalismooperacionfrm');
+                    inhabilitarform("#vandalismooperacionfrm", false)
+                    $("#btn_saveVang_operacion").show();
+                    $("#btn_updateVan_operacion").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductovanda").val(ducto_nombre);
+                    $("#txttramovanda").val(tramo_nombre);
+                    $("#txtareavanda").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
+var idvandalismoOp;
+function llenarDatosVandalismoOp(data) {
+    $("#btn_updateVan_operacion").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_vanda_x").val(coords[0]);
+        $("#coord_esp_vanda_y").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_vanda_x").val("");
+        $("#coord_esp_vanda_y").val("");
+    }
+    $("#km_esp_vanda").val(data[0].kilometro_especifico);
+    $("#txtresidenciavanda").val(data[0].C_0416_281);
+    $("#txtpobladovanda").val(data[0].C_0416_282);
+    $("#txtmunicipiovanda").val(data[0].C_0416_283);
+    $("#txtestadovanda").val(data[0].C_0416_284);
+    $("#cmb_tipovanda option:contains(" + data[0].id_C_0416_285 + ")").attr('selected', 'selected');
+    $("#cmb_tipoeventovan option:contains(" + data[0].id_C_0416_286 + ")").attr('selected', 'selected');
+    $("#fec_van").val(data[0].C_0416_287.split(' ')[0]);
+    $("#txthoraocurrenciavan").val(data[0].C_0416_288);
+    $("#txthorariofinalvan").val(data[0].C_0416_289);
+    $("#txthoractrlvan").val(data[0].C_0416_290);
+    $("#txtarregloctrlvan").val(data[0].C_0416_291);
+    $("#cmb_tiporeparacionvan option:contains(" + data[0].id_C_0416_292 + ")").attr('selected', 'selected');
+    $("#txtobservacionesvan").val(data[0].C_0416_293);
+    $("#txtoficioaseavan").val(data[0].C_0416_294);
+    $("#txtreportesiniestrovan").val(data[0].C_0416_295);
+    $("#txtnosiniestrovan").val(data[0].C_0416_296);
+    $("#txtnovan").val(data[0].C_0416_297);
+    $("#txtevento_van").val(data[0].C_0416_298);
+    idvandalismoOp = data[0].id;
+    inhabilitarform("#vandalismooperacionfrm", true);
+}
+function nuevoOperacionVandalismo() {
+
+    $("#btn_saveVang_operacion").show();
+    $("#btn_newVan_operacion").hide();
+    $("#btn_updateVan_operacion").hide();
+    clearInputTextValuesNew('vandalismooperacionfrm');
+    inhabilitarform("#vandalismooperacionfrm", false);
+
+}
+//#endregion
+
