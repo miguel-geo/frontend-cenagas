@@ -413,7 +413,7 @@ function inicializarEventos() {
                             webMethod = "analisisriesgo/destroy";
                             break;
                         case "Op7":
-                            webMethod = "analisisdocumental/destroy";
+                            webMethod = "operaciondocumental/destroy";
                             break;
                             
                         default:}
@@ -574,36 +574,58 @@ function inicializarEventos() {
                 }
                 break;
 
-                case "T3":
-                    switch (temaconsultaoperacion) {
-                        case "Op1":
+            case "T3":
+                console.log(row_id)
+                switch (temaconsultaoperacion) {
+                    case "Op1":
 
-                        case "Op2":
-                            
+                    case "Op2":
+                        
 
-                        case "Op3":
+                    case "Op3":
 
-                        case "Op4":
+                    case "Op4":
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByOperacionMonitoreoCorrosionId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            console.log(area,'area')
+                            fnshowOperacionMonitoreoCorrosion(id_d = row_id);
+                        });
+                        break;
 
-                        case "Op5"://getAreaIdByHermeticidadId
+                    case "Op5":
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByOperacionHistReparacionesId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowOperacionHistorialReparaciones(id_d = row_id);
+                        });
+                        break;
 
-                        case "Op6":
+                    case "Op6":
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByOperacionHistReparacionesId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowOperacionVandalismo(id_d = row_id);
+                        });
+                        break;
+                    case "Op7":
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByOpDocumentalId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowOperacionDocumental(id_d = row_id);
+                        });
+                        break;
 
-                        case "Op7":
-                            consultatoform(e);
-                            getAreaIdById("getAreaIdByDocumentalId", row_id).then(data => {
-                                setDropdownValue('#cmbAreas', data.area_unitaria_id);
-                                area = data.area_unitaria_id;
-                                fnshowAnalisisDocumental(id_d = row_id);
-                            });
-                            break;
 
 
-    
-    
-                        default:
-                    }
-                    break;
+
+                    default:
+                }
+                break;
             case "T4":
                 switch (temaconsultaanalisis) {
                     case "Ana1":
@@ -7142,7 +7164,7 @@ function consulta() {
                                             data.data[i].rehabilitacion_anticorrosiva + ',' + 'rehabilitacion_anticorrosiva'];
                                            
 
-                                            llenarTablasFileDocumental(persona, "tablaOperacionDocumental", data.data[i].id);
+                                            llenarTablasFileDocumentalOperacion(persona, "tablaOperacionDocumental", data.data[i].id);
                                         }
 
                                     }
@@ -7556,6 +7578,30 @@ function llenarTablasFileDocumental(obj, nameTabla,id) {
         if (obj[j].split(',')[0] !== null && obj[j].split(',')[0] !== "" && obj[j].split(',')[0] !== undefined && obj[j].split(',')[0] !== "null") {
             if (obj[j].split(',')[1] !== undefined) {
                 row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  target="_blank"  href=' + apiUrl + 'analisis-documental/' + id + '/download/' + obj[j].split(',')[1] + ' title="Descargar" data-toggle="tooltip" id="' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-download"></i></a></td>';
+            }
+            else {
+                row = row + '<td>' + obj[j] + '</td>';
+            }
+         }
+        else {
+                row = row + '<td style="text-align: center;color:gray;"><a class="download-icon" disabled title="No existe archivo" data-toggle="tooltip"id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i  class="fa fa-download"></i></a></td>';
+            
+         }
+    }
+    row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip"id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] + '"><i class="fa fa-trash"></i></a></td>';
+    row = row + '</tr>';
+
+    $('#' + nameTabla + ' tbody').append(row);
+}
+
+
+function llenarTablasFileDocumentalOperacion(obj, nameTabla,id) {
+    // $('#tablaPersonas tbody')[0].innerHTML = "";
+    var row = '<tr>';
+    for (j = 1; j < obj.length; j++) {
+        if (obj[j].split(',')[0] !== null && obj[j].split(',')[0] !== "" && obj[j].split(',')[0] !== undefined && obj[j].split(',')[0] !== "null") {
+            if (obj[j].split(',')[1] !== undefined) {
+                row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  target="_blank"  href=' + apiUrl + 'operacion-documental/' + id + '/download/' + obj[j].split(',')[1] + ' title="Descargar" data-toggle="tooltip" id="' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-download"></i></a></td>';
             }
             else {
                 row = row + '<td>' + obj[j] + '</td>';
@@ -8012,7 +8058,15 @@ function consultatoform(e){
     $("#generalanalisisform").hide();
     $("#infogeoespacialanalisisform").hide();
     $("#planosanalisisform").hide();
-    $("#documentallisisform").hide();
+    
+    
+    $("#documentalopfrm").hide();
+    $("#instalacionesoperacionfrm").hide();
+    $("#vandalismooperacionfrm").hide();
+    $("#historialreparacionesoperacionfrm").hide();
+    $("#monitoreocorrosionoperacionfrm").hide();
+    $("#historialfugasderramesoperacionfrm").hide();
+    $("#generaloperacionfrm").hide();
 
 }
 
@@ -12435,7 +12489,7 @@ function consultaDatosVandalismogOperacion(id_d = null) {
     var webMethod;
     var params;
     if (id_d) {
-        webMethod = "getOperacionHisReparacionById";
+        webMethod = "getOperacionVandalismoById";
         params = {
             id: id_d
         };
@@ -12459,12 +12513,12 @@ function consultaDatosVandalismogOperacion(id_d = null) {
         success: function (data) {
             if (data.success) {
                 var infodata;
-                if (webMethod === "getOperacionHisReparacionById")
+                if (webMethod === "getOperacionVandalismoById")
                     infodata = (data.data);
                 else if (webMethod === "get_OperacionVandalismo")
                     infodata = (data.data.datagrid);
                 if (infodata.length > 0) {
-                    if (webMethod === "getOperacionHisReparacionById")
+                    if (webMethod === "getOperacionVandalismoById")
                         llenarDatosVandalismoOp(infodata);
                     else if (webMethod === "get_OperacionVandalismo")
                         llenarDatosVandalismoOp(infodata);
