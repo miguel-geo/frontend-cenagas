@@ -7510,6 +7510,57 @@ document.addEventListener("DOMContentLoaded", function() {
                 break;
         }
     });
+    // Get the dropdown element
+    const tipoInstalacionDropdown = document.getElementById("cmb_tipoInstalacion");
+
+    // Add event listener for change event
+    tipoInstalacionDropdown.addEventListener("change", function () {
+        // Hide all the classes first
+        hideAllClassesinstalaciones();
+
+        // Get the selected value
+        const selectedValue = this.value;
+
+        // Show the respective class based on the selected value
+        switch (selectedValue) {
+            case "1":
+                showClass("uno");
+                break;
+            case "2":
+                showClass("dos");
+                break;
+            case "3":
+                showClass("tres");
+                break;
+            case "4":
+                showClass("cuatro");
+                break;
+            case "5":
+                showClass("cinco");
+                break;
+            case "6":
+                showClass("seis");
+                break;
+            case "7":
+                showClass("siete");
+                break;
+            case "8":
+                showClass("ocho");
+                break;
+            case "9":
+                showClass("nueve");
+                break;
+            case "10":
+                showClass("diez");
+                break;
+            case "11":
+                showClass("once");
+                break;
+            case "12":
+                showClass("doce");
+                break;
+        }
+    });
 });
 
 function hideAllClasses() {
@@ -7531,6 +7582,20 @@ function hideAllClasses1() {
     hideClass("vientos");
     hideClass("tornados");
     hideClass("inundacion");
+}
+function hideAllClassesinstalaciones() {
+    hideClass("uno");
+    hideClass("dos");
+    hideClass("tres");
+    hideClass("cuatro");
+    hideClass("cinco");
+    hideClass("seis");
+    hideClass("siete");
+    hideClass("ocho");
+    hideClass("nueve");
+    hideClass("diez");
+    hideClass("once");
+    hideClass("doce");
 }
 
 
@@ -12100,5 +12165,33 @@ function nuevoOperacionVandalismo() {
     inhabilitarform("#vandalismooperacionfrm", false);
 
 }
+//#endregion
+
+//#region Instalaciones
+async function fnshowOperacionInstalacion(id_d = null) {
+    $('#instalacionesoperacionfrm').show();
+    $('#operacionforms').hide();
+    try {
+        //await loadtipovandalismoOp();
+        //await loadtipoeventovandalismoOp();
+        //await loadtiporecuperacionhisvandalismoOp();
+        if (id_d) {
+          //  await consultaDatosVandalismogOperacion(id_d = id_d);
+        }
+        else {
+           // consultaDatosVandalismogOperacion();
+        }
+
+        //// If you want to do something after all functions have completed, you can do it here
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+    // resetValidationClasses('planosanalisisform');
+}
+
+
+
+
 //#endregion
 
