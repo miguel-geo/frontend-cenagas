@@ -2125,7 +2125,7 @@ function nuevoDisenioServicio(){
 
 
 function consultaDatosServicio(id_d = null) {
-    
+    get_relateddocuments(tramo,area,26,'tbl_serv_disenio')
     clearAllFileInputsInDiv('serviciofrm')
     var webMethod;
     var params;
@@ -2250,7 +2250,10 @@ function updateDisenioServicio() {
         if($("#inputGroupFile05")[0].files[0]) {
             formData.append("C_0205_0016", $("#inputGroupFile05")[0].files[0]);
         }
-        formData.append('file', $("#inputGroupFile06")[0].files[0]);
+        if($("#inputGroupFile06")[0].files[0]) {
+            formData.append('file', $("#inputGroupFile06")[0].files[0]);
+        }
+        
         // Log formData to console for debugging (this will not display the content of the files)
         for (var pair of formData.entries()) {
             console.log(pair[0] + ', ' + pair[1]);
