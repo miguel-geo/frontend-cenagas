@@ -12168,18 +12168,34 @@ function nuevoOperacionVandalismo() {
 //#endregion
 
 //#region Instalaciones
+//#region Show, Save and Update
 async function fnshowOperacionInstalacion(id_d = null) {
     $('#instalacionesoperacionfrm').show();
     $('#operacionforms').hide();
     try {
-        //await loadtipovandalismoOp();
-        //await loadtipoeventovandalismoOp();
-        //await loadtiporecuperacionhisvandalismoOp();
+        await loadtipoLanzadorOp();
+        await loadtipoDispositivo();
+        await loadtipoValvula();
+        await loadtipoOperador();
+        await loadtipoConexionOp();
+        await loadtipoMarcador();
+        await loadtipoTee();
+        await loadtipoCierre();
+        await loadtipoBriada();
+        await loadtipoEspecificacionBriada();
+        await loadtipoMedidor();
+        await loadtipoConexionRama();
+        await loadtipoGradosCodo();
+        await loadtipoEspecificacionDisenioCodo();
+        await loadGradoReductor();
+        await loadTipoReductor();
+        await loadEspecificacionesDisenioReductor();
+        await loadTipoTuberia();
         if (id_d) {
-          //  await consultaDatosVandalismogOperacion(id_d = id_d);
+            await consultaDatosInstalacionesOperacion(id_d = id_d);
         }
         else {
-           // consultaDatosVandalismogOperacion();
+            consultaDatosInstalacionesOperacion();
         }
 
         //// If you want to do something after all functions have completed, you can do it here
@@ -12189,9 +12205,1722 @@ async function fnshowOperacionInstalacion(id_d = null) {
     }
     // resetValidationClasses('planosanalisisform');
 }
+function consultaDatosInstalacionesOperacion(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    //get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getOperacionInstalacionesById";
+        params = {
+            id: id_d
+        };
+    }
+
+    else {
+
+        webMethod = "get_OperacionInstalaciones";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            if (data.success) {
+                var infodata;
+                if (webMethod === "getOperacionInstalacionesById")
+                    infodata = (data.data);
+                else if (webMethod === "get_OperacionInstalaciones")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    if (webMethod === "getOperacionInstalacionesById")
+                        llenarDatosInstalacionesOp(infodata);
+                    else if (webMethod === "get_OperacionInstalaciones")
+                        llenarDatosInstalacionesOp(infodata);
+                    $("#btn_saveInstalacion_operacion").hide();
+                    $("#btn_updateInstalacion_operacion").show();
+                    $("#btn_newInstalacion_operacion").show();
+                }
+                else {
+
+                    clearInputTextValues('instalacionesoperacionfrm');
+                    inhabilitarform("#instalacionesoperacionfrm", false)
+                    $("#btn_saveInstalacion_operacion").show();
+                    $("#btn_updateInstalacion_operacion").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductoinsta").val(ducto_nombre);
+                    $("#txttramoinsta").val(tramo_nombre);
+                    $("#txtareainsta").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
 
 
+}
+var idInstalacionesOp;
+function llenarDatosInstalacionesOp(data) {
+
+    
+    $("#btn_updateInstalacion_operacion").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+    //#region Generales
+    const coords = data[0].coordenada_especifica.split(' ');
+    $("#coord_esp_insta_x").val(coords[0]);
+    $("#coord_esp_insta_y").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_insta_x").val("");
+        $("#coord_esp_insta_y").val("");
+    }
+    $("#km_esp_insta").val(data[0].kilometro_especifico);
+    $("#cmb_tipoInstalacion").val(data[0].C_0401_130);
+    $("#txtidentificadorinsta").val(data[0].C_0401_131);
+    $("#fec_inicio_insta").val(data[0].C_0401_132.split(' ')[0]);
+    $("#fec_instalacion_insta").val(data[0].C_0401_133.split(' ')[0]);
+    $("#fec_Fab_insta").val(data[0].C_0401_134.split(' ')[0]);
+    $("#cmb_matfabinsta option:contains(" + data[0].C_0401_135 + ")").attr('selected', 'selected');
+    $("#txtfabricanteinsta").val(data[0].C_0401_136);
+    $("#txtedoactualinsta").val(data[0].C_0401_137);
+    $("#txtedohistoinsta").val(data[0].C_0401_138);
+     //#endregion
+    //#region Tipo Trampa
+    $("#txtdiamcanoninsta").val(data[0].C_0401_139);
+    $("#cmb_orientacanioninsta option:contains(" + data[0].C_0401_140 + ")").attr('selected', 'selected');
+    $("#txtespdisenioinsta").val(data[0].C_0401_141);
+    $("#txtespesornominalcanioninsta").val(data[0].C_0401_142);
+    $("#txtmaxperdidaespesorinsta").val(data[0].C_0401_143);
+    $("#cmb_tipolanzadorinsta option:contains(" + data[0].C_0401_145 + ")").attr('selected', 'selected');
+    $("#cmb_tipodispositivonsta option:contains(" + data[0].C_0401_146 + ")").attr('selected', 'selected');
+    $("#txtlongmaxpermdisprascadorinsta").val(data[0].C_0401_148);
+    $("#txtdiametromaxdispotivoinsta").val(data[0].C_0401_149);
+    $("#txtpresmaxdisenioinsta").val(data[0].C_0401_150);
+    $("#txtlongmedidacanioninsta").val(data[0].C_0401_151);
+    $("#txtmecanismocierreinsta").val(data[0].C_0401_152);
+    //#endregion
+    //#region Válvula
+    $("#cmb_tipovalvulainstainsta option:contains(" + data[0].C_0401_153 + ")").attr('selected', 'selected');
+    $("#cmb_edofuncionalinsta option:contains(" + data[0].C_0401_154 + ")").attr('selected', 'selected');
+    $("#cmb_Operacionformremotainsta option:contains(" + data[0].C_0401_155 + ")").attr('selected', 'selected');
+    $("#cmb_valvsegucrinsta option:contains(" + data[0].C_0401_156 + ")").attr('selected', 'selected');
+    $("#txtmarcamodvalinsta").val(data[0].C_0401_157);
+    $("#txtoperadovalinsta").val(data[0].C_0401_158);
+    $("#cmb_tipooperadorinsta option:contains(" + data[0].C_0401_159 + ")").attr('selected', 'selected');
+    $("#txtdiamextvalvinsta").val(data[0].C_0401_160);
+    $("#txtespediseniovalvinsta").val(data[0].C_0401_161);
+    $("#txtpresionmaxdiseniovalvinsta").val(data[0].C_0401_162);
+    $("#txtptiempotardallegarvalvulaemerinsta").val(data[0].C_0401_163);
+    $("#cmb_poscvalvdisinsta option:contains(" + data[0].C_0401_164 + ")").attr('selected', 'selected');
+    $("#cmb_posfuncvalvinsta option:contains(" + data[0].C_0401_165 + ")").attr('selected', 'selected');
+    $("#cmb_prinfuninsta option:contains(" + data[0].C_0401_166 + ")").attr('selected', 'selected');
+    $("#cmb_tipoconexinsta option:contains(" + data[0].C_0401_167 + ")").attr('selected', 'selected');
+    $("#txtpresionpruebavalvinsta").val(data[0].C_0401_168);
+    //#endregion
+    //#region Marcador
+    $("#cmb_tipomarcadorinsta option:contains(" + data[0].C_0401_169 + ")").attr('selected', 'selected');
+    //#endrefion
+    //#region Tee
+    $("#cmb_tipoteeinsta option:contains(" + data[0].C_0401_170 + ")").attr('selected', 'selected');
+    $("#fec_presuinicial_insta").val(data[0].C_0401_171.split(' ')[0]);
+    $("#txtdiamextramaTinsta").val(data[0].C_0401_172);
+    $("#txtdiamextentradaactvnsta").val(data[0].C_0401_173);
+    $("#txtespesorparednominsta").val(data[0].C_0401_174);
+    $("#txtespdisenioinsta").val(data[0].C_0401_175);
+    $("#txtdiamextsalidainnsta").val(data[0].C_0401_176);
+    //#endregion
+    //#region Tapas
+    $("#cmb_tipocierratapasinsta option:contains(" + data[0].C_0401_177 + ")").attr('selected', 'selected');
+    $("#txtdiamextdelactivoinsta").val(data[0].C_0401_178);
+    //#endregion
+    //#region Briadas
+    $("#cmb_tipobridainsta option:contains(" + data[0].C_0401_179 + ")").attr('selected', 'selected');
+    $("#txtpresmaxopbridainsta").val(data[0].C_0401_180);
+    $("#cmb_tipoespdiseniobriadainsta option:contains(" + data[0].C_0401_181 + ")").attr('selected', 'selected');
+    //#endregion
+    //#region Medidor
+    $("#cmb_tipomedidorinsta option:contains(" + data[0].C_0401_182 + ")").attr('selected', 'selected');
+    $("#txtnoserieemedidorinsta").val(data[0].C_0401_183);
+    //#endregion
+    //#region Conexión Rama
+    $("#cmb_tipoconexramainsta option:contains(" + data[0].C_0401_184 + ")").attr('selected', 'selected');
+    $("#txtgrosornomconexramainsta").val(data[0].C_0401_185);
+    $("#txtdiamextconexraminsta").val(data[0].C_0401_186);
+    $("#txtespdisenioconexramainsta").val(data[0].C_0401_187);
+    //#endregion
+    //#region Codos
+    $("#txtAngulocurvhoriCodosinsta").val(data[0].C_0401_188);
+    $("#txtradiocodoinsta").val(data[0].C_0401_189);
+    $("#cmb_tipogradocodo option:contains(" + data[0].C_0401_190 + ")").attr('selected', 'selected');
+    $("#txtdiamcodoextinsta").val(data[0].C_0401_191);
+    $("#txtespesorcodonominsta").val(data[0].C_0401_192);
+    $("#txtdiamextsalidacodosinsta").val(data[0].C_0401_193);
+    $("#cmb_tipoespdiseniocodo option:contains(" + data[0].C_0401_194 + ")").attr('selected', 'selected');
+    $("#txtangulocurvverticodoinsta").val(data[0].C_0401_195);
+    //#endregion
+    //#region Reductor
+    $("#cmb_tipogradoreductor option:contains(" + data[0].C_0401_196 + ")").attr('selected', 'selected');
+    $("#txtdiametroextreductorentradaactivoinsta").val(data[0].C_0401_197);
+    $("#txtdiametroextreductorsalidaactivoinsta").val(data[0].C_0401_198);
+    $("#cmb_tiporeductor option:contains(" + data[0].C_0401_199 + ")").attr('selected', 'selected');
+    $("#cmb_tipoespdisreductor option:contains(" + data[0].C_0401_200 + ")").attr('selected', 'selected');
+    $("#cmb_tipoventilacion option:contains(" + data[0].C_0401_201 + ")").attr('selected', 'selected');
+    $("#txtlogcarcasainsta").val(data[0].C_0401_202);
+    $("#cmb_aislamientotubinsta option:contains(" + data[0].C_0401_203 + ")").attr('selected', 'selected');
+    $("#cmb_cuentaventilacioninsta option:contains(" + data[0].C_0401_204 + ")").attr('selected', 'selected');
+    $("#txtespparednomventiinsta").val(data[0].C_0401_205);
+    $("#txtnomventiiinsta").val(data[0].C_0401_206);
+    $("#txtdiamextventiinsta").val(data[0].C_0401_207);
+    //#endregion
+    idInstalacionesOp = data[0].id;
+    inhabilitarform("#instalacionesoperacionfrm", true);
+    //show class
+    showfields_instalacion($("#cmb_tipoInstalacion").val());
+}
+function showfields_instalacion(selectedValue) {
+    switch (selectedValue) {
+        case "1":
+            showClass("uno");
+            break;
+        case "2":
+            showClass("dos");
+            break;
+        case "3":
+            showClass("tres");
+            break;
+        case "4":
+            showClass("cuatro");
+            break;
+        case "5":
+            showClass("cinco");
+            break;
+        case "6":
+            showClass("seis");
+            break;
+        case "7":
+            showClass("siete");
+            break;
+        case "8":
+            showClass("ocho");
+            break;
+        case "9":
+            showClass("nueve");
+            break;
+        case "10":
+            showClass("diez");
+            break;
+        case "11":
+            showClass("once");
+            break;
+        case "12":
+            showClass("doce");
+            break;
+    }
+}
+function nuevoInstalacionesOperacion() {
+
+    $("#btn_saveInstalacion_operacion").show();
+    $("#btn_newInstalacion_operacion").hide();
+    $("#btn_updateInstalacion_operacion").hide();
+    clearInputTextValuesNew('instalacionesoperacionfrm');
+    inhabilitarform("#instalacionesoperacionfrm", false);
+
+}
+function saveInstalacionesOp() {
+    var webMethod = "saveInstalacionesOperacion";
+
+    var params = {
+        C_0101_0001_id: area,
+        C_0401_130: $("#cmb_tipoInstalacion").val(),
+        C_0401_131: $("#fec_inicio_insta").val(),
+        C_0401_132: $("#fec_instalacion_insta").val(),
+        C_0401_133: $("#fec_instalacion_insta").val(),
+        C_0401_134: $("#fec_Fab_insta").val(),
+        C_0401_135: $("#cmb_matfabinsta").val(),
+        C_0401_136: $("#txtfabricanteinsta").val(),
+        C_0401_137: $("#txtedoactualinsta").val(),
+        C_0401_138: $("#txtedohistoinsta").val(),
+        C_0401_139: $("#txtdiamcanoninsta").val(),
+        C_0401_140: $("#cmb_orientacanioninsta").val(),
+        C_0401_141: $("#txtespdisenioinsta").val(),
+        C_0401_142: $("#txtespesornominalcanioninsta").val(),
+        C_0401_143: $("#txtmaxperdidaespesorinsta").val(),
+        C_0401_145: $("#cmb_tipolanzadorinsta ").val(),
+        C_0401_146: $("#cmb_tipodispositivonsta").val(),
+        C_0401_148: $("#txtlongmaxpermdisprascadorinsta").val(),
+        C_0401_149: $("#txtdiametromaxdispotivoinsta").val(),
+        C_0401_150: $("#txtpresmaxdisenioinsta").val(),
+        C_0401_151: $("#txtlongmedidacanioninsta").val(),
+        C_0401_152: $("#txtmecanismocierreinsta").val(),
+        C_0401_153:$("#cmb_tipovalvulainstainsta").val(),
+        C_0401_154:$("#cmb_edofuncionalinsta").val(),
+        C_0401_155:$("#cmb_Operacionformremotainsta").val(),
+        C_0401_156:$("#cmb_valvsegucrinsta").val(),
+        C_0401_157:$("#txtmarcamodvalinsta").val(),
+        C_0401_158:$("#txtoperadovalinsta").val(),
+        C_0401_159:$("#cmb_tipooperadorinsta").val(),
+        C_0401_160:$("#txtdiamextvalvinsta").val(),
+        C_0401_161:$("#txtespediseniovalvinsta").val(),
+        C_0401_162:$("#txtpresionmaxdiseniovalvinsta").val(),
+        C_0401_163:$("#txtptiempotardallegarvalvulaemerinsta").val(),
+        C_0401_164:$("#cmb_poscvalvdisinsta").val(),
+        C_0401_165:$("#cmb_posfuncvalvinsta").val(),
+        C_0401_166:$("#cmb_prinfuninsta").val(),
+        C_0401_167:$("#cmb_tipoconexinsta").val(),
+        C_0401_168:$("#txtpresionpruebavalvinsta").val(),
+        C_0401_169:$("#cmb_tipomarcadorinsta").val(),
+        C_0401_170:$("#cmb_tipoteeinsta").val(),
+        C_0401_171:$("#fec_presuinicial_insta").val(),
+        C_0401_172:$("#txtdiamextramaTinsta").val(),
+        C_0401_173:$("#txtdiamextentradaactvnsta").val(),
+        C_0401_174:$("#txtespesorparednominsta").val(),
+        C_0401_175:$("#txtespdisenioinsta").val(),
+        C_0401_176:$("#txtdiamextsalidainnsta").val(),
+        C_0401_177:$("#cmb_tipocierratapasinsta").val(),
+        C_0401_178:$("#txtdiamextdelactivoinsta").val(),
+        C_0401_179:$("#cmb_tipobridainsta").val(),
+        C_0401_180:$("#txtpresmaxopbridainsta").val(),
+        C_0401_181: $("#cmb_tipoespdiseniobriadainsta").val(),
+        C_0401_182:$("#cmb_tipomedidorinsta").val(),
+        C_0401_183:$("#txtnoserieemedidorinsta").val(),
+        C_0401_184:$("#cmb_tipoconexramainsta").val(),
+        C_0401_185:$("#txtgrosornomconexramainsta").val(),
+        C_0401_186:$("#txtdiamextconexraminsta").val(),
+        C_0401_187:$("#txtespdisenioconexramainsta").val(),
+        C_0401_188:$("#txtAngulocurvhoriCodosinsta").val(),
+        C_0401_189:$("#txtradiocodoinsta").val(),
+        C_0401_190:$("#cmb_tipogradocodo").val(),
+        C_0401_191:$("#txtdiamcodoextinsta").val(),
+        C_0401_192:$("#txtespesorcodonominsta").val(),
+        C_0401_193:$("#txtdiamextsalidacodosinsta").val(),
+        C_0401_194:$("#cmb_tipoespdiseniocodo").val(),
+        C_0401_195:$("#txtangulocurvverticodoinsta").val(),
+        C_0401_196:$("#cmb_tipogradoreductor").val(),
+        C_0401_197:$("#txtdiametroextreductorentradaactivoinsta").val(),
+        C_0401_198:$("#txtdiametroextreductorsalidaactivoinsta").val(),
+        C_0401_199:$("#cmb_tiporeductor").val(),
+        C_0401_200:$("#cmb_tipoespdisreductor").val(),
+        C_0401_201:$("#cmb_tipoventilacion").val(),
+        C_0401_202:$("#txtlogcarcasainsta").val(),
+        C_0401_203:$("#cmb_aislamientotubinsta").val(),
+        C_0401_204:$("#cmb_cuentaventilacioninsta").val(),
+        C_0401_205:$("#txtespparednomventiinsta").val(),
+        C_0401_206:$("#txtnomventiiinsta").val(),
+        C_0401_207:$("#txtdiamextventiinsta").val(),
+        coordenada_especifica: $("#coord_esp_insta_x").val() + ' ' + $("#coord_esp_insta_y").val(),
+        kilometro_especifico: $("#km_esp_insta").val()
+    };
+    var formData = new FormData();
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
 
 
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                $('#operacionforms').show();
+                $('#instalacionesoperacionfrm').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function updateOperacioInstalacionesOp() {
+
+
+    if ($("#btn_updateInstalacion_operacion").text() === "Actualizar") {
+        inhabilitarform("#instalacionesoperacionfrm", false)
+        $("#btn_updateInstalacion_operacion").text('Guardar');
+        showDestroyIcons('instalacionesoperacionfrm', true);
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateInstalacionesOperacion";
+        params = {
+            id: idInstalacionesOp,
+            C_0101_0001_id: area,
+            C_0401_130: $("#cmb_tipoInstalacion").val(),
+            C_0401_131: $("#fec_inicio_insta").val(),
+            C_0401_132: $("#fec_instalacion_insta").val(),
+            C_0401_133: $("#fec_instalacion_insta").val(),
+            C_0401_134: $("#fec_Fab_insta").val(),
+            C_0401_135: $("#cmb_matfabinsta").val(),
+            C_0401_136: $("#txtfabricanteinsta").val(),
+            C_0401_137: $("#txtedoactualinsta").val(),
+            C_0401_138: $("#txtedohistoinsta").val(),
+            C_0401_139: $("#txtdiamcanoninsta").val(),
+            C_0401_140: $("#cmb_orientacanioninsta").val(),
+            C_0401_141: $("#txtespdisenioinsta").val(),
+            C_0401_142: $("#txtespesornominalcanioninsta").val(),
+            C_0401_143: $("#txtmaxperdidaespesorinsta").val(),
+            C_0401_145: $("#cmb_tipolanzadorinsta ").val(),
+            C_0401_146: $("#cmb_tipodispositivonsta").val(),
+            C_0401_148: $("#txtlongmaxpermdisprascadorinsta").val(),
+            C_0401_149: $("#txtdiametromaxdispotivoinsta").val(),
+            C_0401_150: $("#txtpresmaxdisenioinsta").val(),
+            C_0401_151: $("#txtlongmedidacanioninsta").val(),
+            C_0401_152: $("#txtmecanismocierreinsta").val(),
+            C_0401_153: $("#cmb_tipovalvulainstainsta").val(),
+            C_0401_154: $("#cmb_edofuncionalinsta").val(),
+            C_0401_155: $("#cmb_Operacionformremotainsta").val(),
+            C_0401_156: $("#cmb_valvsegucrinsta").val(),
+            C_0401_157: $("#txtmarcamodvalinsta").val(),
+            C_0401_158: $("#txtoperadovalinsta").val(),
+            C_0401_159: $("#cmb_tipooperadorinsta").val(),
+            C_0401_160: $("#txtdiamextvalvinsta").val(),
+            C_0401_161: $("#txtespediseniovalvinsta").val(),
+            C_0401_162: $("#txtpresionmaxdiseniovalvinsta").val(),
+            C_0401_163: $("#txtptiempotardallegarvalvulaemerinsta").val(),
+            C_0401_164: $("#cmb_poscvalvdisinsta").val(),
+            C_0401_165: $("#cmb_posfuncvalvinsta").val(),
+            C_0401_166: $("#cmb_prinfuninsta").val(),
+            C_0401_167: $("#cmb_tipoconexinsta").val(),
+            C_0401_168: $("#txtpresionpruebavalvinsta").val(),
+            C_0401_169: $("#cmb_tipomarcadorinsta").val(),
+            C_0401_170: $("#cmb_tipoteeinsta").val(),
+            C_0401_171: $("#fec_presuinicial_insta").val(),
+            C_0401_172: $("#txtdiamextramaTinsta").val(),
+            C_0401_173: $("#txtdiamextentradaactvnsta").val(),
+            C_0401_174: $("#txtespesorparednominsta").val(),
+            C_0401_175: $("#txtespdisenioinsta").val(),
+            C_0401_176: $("#txtdiamextsalidainnsta").val(),
+            C_0401_177: $("#cmb_tipocierratapasinsta").val(),
+            C_0401_178: $("#txtdiamextdelactivoinsta").val(),
+            C_0401_179: $("#cmb_tipobridainsta").val(),
+            C_0401_180: $("#txtpresmaxopbridainsta").val(),
+            C_0401_181: $("#cmb_tipoespdiseniobriadainsta").val(),
+            C_0401_182: $("#cmb_tipomedidorinsta").val(),
+            C_0401_183: $("#txtnoserieemedidorinsta").val(),
+            C_0401_184: $("#cmb_tipoconexramainsta").val(),
+            C_0401_185: $("#txtgrosornomconexramainsta").val(),
+            C_0401_186: $("#txtdiamextconexraminsta").val(),
+            C_0401_187: $("#txtespdisenioconexramainsta").val(),
+            C_0401_188: $("#txtAngulocurvhoriCodosinsta").val(),
+            C_0401_189: $("#txtradiocodoinsta").val(),
+            C_0401_190: $("#cmb_tipogradocodo").val(),
+            C_0401_191: $("#txtdiamcodoextinsta").val(),
+            C_0401_192: $("#txtespesorcodonominsta").val(),
+            C_0401_193: $("#txtdiamextsalidacodosinsta").val(),
+            C_0401_194: $("#cmb_tipoespdiseniocodo").val(),
+            C_0401_195: $("#txtangulocurvverticodoinsta").val(),
+            C_0401_196: $("#cmb_tipogradoreductor").val(),
+            C_0401_197: $("#txtdiametroextreductorentradaactivoinsta").val(),
+            C_0401_198: $("#txtdiametroextreductorsalidaactivoinsta").val(),
+            C_0401_199: $("#cmb_tiporeductor").val(),
+            C_0401_200: $("#cmb_tipoespdisreductor").val(),
+            C_0401_201: $("#cmb_tipoventilacion").val(),
+            C_0401_202: $("#txtlogcarcasainsta").val(),
+            C_0401_203: $("#cmb_aislamientotubinsta").val(),
+            C_0401_204: $("#cmb_cuentaventilacioninsta").val(),
+            C_0401_205: $("#txtespparednomventiinsta").val(),
+            C_0401_206: $("#txtnomventiiinsta").val(),
+            C_0401_207: $("#txtdiamextventiinsta").val(),
+            coordenada_especifica: $("#coord_esp_insta_x").val() + ' ' + $("#coord_esp_insta_y").val(),
+            kilometro_especifico: $("#km_esp_insta").val()
+        };
+        var formData = new FormData();
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#operacionforms').show();
+                    $('#instalacionesoperacionfrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+}
+//#endregion
+//#region catalogos
+//#region Tipo Lanzador
+function loadtipoLanzadorOp() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TipoLanzadorOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipolanzadorinsta").empty();
+                    $('#cmb_tipolanzadorinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipolanzadorinsta').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_145
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipoLanzadorOp() {
+    var webMethod = "saveTipoLanzadorOperacion";
+    var params = {
+        C_0401_145: $("#newTipolanzador").val(),
+        descripcion: $("#newDesTipoLanzador").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoLanzadorOp();
+                $("#espTipolanzadorinsta").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotroTipoLanzador() {
+    $('#espTipolanzadorinsta').show();
+}
+//#endregion Tipo Lanzador
+
+//#region Tipo dispositivo
+function loadtipoDispositivo() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TipoDispositivoOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipodispositivonsta").empty();
+                    $('#cmb_tipodispositivonsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipodispositivonsta').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_146
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipoDispositivoOp() {
+    var webMethod = "saveTipoDispositivoOperacion";
+    var params = {
+        C_0401_146: $("#newTipodispositivo").val(),
+        descripcion: $("#newDesTipoDispositivo").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoDispositivo();
+                $("#espTipoDispositivoinsta").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrodispostivoinstaOp() {
+    $('#espTipoDispositivoinsta').show();
+}
+//#endregion 
+
+//#region Tipo válvula
+function loadtipoValvula() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TipoValvulaOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipovalvulainstainsta").empty();
+                    $('#cmb_tipovalvulainstainsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipovalvulainstainsta').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_153
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipovalvulainstalacion() {
+    var webMethod = "saveTipoValvulaOperacion";
+    var params = {
+        C_0401_153: $("#newTipovalvulainsta").val(),
+        descripcion: $("#newDesTipovalvulainsta").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoValvula();
+                $("#espTipovalvulaisntalacion").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipovalvulainstalacion() {
+    $('#espTipovalvulaisntalacion').show();
+}
+//#endregion
+//#region Tipo operador
+function loadtipoOperador() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TipoOperadorOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipooperadorinsta").empty();
+                    $('#cmb_tipooperadorinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipooperadorinsta').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_159
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipoOperador() {
+    var webMethod = "saveTipoOperadorOperacion";
+    var params = {
+        C_0401_159: $("#newTipooperador").val(),
+        descripcion: $("#newDesTipooperador").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoOperador();
+                $("#espTipooperador").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipooperadorinstalacion() {
+    $('#espTipooperador').show();
+}
+//#endregion
+//#region Tipo conexión
+function loadtipoConexionOp() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TipoConexionOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipoconexinsta").empty();
+                    $('#cmb_tipoconexinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipoconexinsta').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_167
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipoConexion() {
+    var webMethod = "saveTipoConexionOperacion";
+    var params = {
+        C_0401_167: $("#newTipooconex").val(),
+        descripcion: $("#newDesTipoconex").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoConexionOp();
+                $("#espTipoconex").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipoconex() {
+    $('#espTipoconex').show();
+}
+//#endregion 
+
+//#region Tipo marcador
+function loadtipoMarcador() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TipoMarcadorOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipomarcadorinsta").empty();
+                    $('#cmb_tipomarcadorinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipomarcadorinsta').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_169
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipomarcador() {
+    var webMethod = "saveTipoMarcadorOperacion";
+    var params = {
+        C_0401_169: $("#newTipoomarcador").val(),
+        descripcion: $("#newDesTipomarcador").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoMarcador();
+                $("#espTipomarcador").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipomarcador() {
+    $('#espTipomarcador').show();
+}
+
+//#endregion
+//#region Tipo Tee
+function loadtipoTee() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TipoTeeOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipoteeinsta").empty();
+                    $('#cmb_tipoteeinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipoteeinsta').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_170
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipoTee() {
+    var webMethod = "saveTipoTeeOperacion";
+    var params = {
+        C_0401_170: $("#newTipotee").val(),
+        descripcion: $("#newDesTipotee").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoTee();
+                $("#espTipotee").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipotee() {
+    $('#espTipotee').show();
+}
+//#endregion
+
+//#region Tipo cierre
+function loadtipoCierre() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TipoCierreOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipocierratapasinsta").empty();
+                    $('#cmb_tipocierratapasinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipocierratapasinsta').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_177
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipocierretapas() {
+    var webMethod = "saveTipoCierreOperacion";
+    var params = {
+        C_0401_177: $("#newTipocierretapas").val(),
+        descripcion: $("#newDesTipocierretapas").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoCierre();
+                $("#espTipocierretapas").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipocierretapas() {
+    $('#espTipocierretapas').show();
+}
+//#endregion 
+//#region Tipo Brida
+function loadtipoBriada() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TipoBrigadaOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipobridainsta").empty();
+                    $('#cmb_tipobridainsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipobridainsta').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_179
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipobrida() {
+    var webMethod = "saveTipoBrigadaOperacion";
+    var params = {
+        C_0401_179: $("#newTipobrida").val(),
+        descripcion: $("#newDesTipobrida").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoBriada();
+                $("#espTipocbrida").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipobrida() {
+    $('#espTipocbrida').show();
+}
+//#endregion
+
+//#region Especificaciones de diseño briada
+function loadtipoEspecificacionBriada() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_EspDisenioBriadaInstaOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipoespdiseniobriadainsta").empty();
+                    $('#cmb_tipoespdiseniobriadainsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipoespdiseniobriadainsta').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_181
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipoespdisenioBriada() {
+    var webMethod = "saveEspDisenioBriadaOperacion";
+    var params = {
+        C_0401_181: $("#newTipoespdisenBriada").val(),
+        descripcion: $("#newDesTipespdisenBriada").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoEspecificacionBriada();
+                $("#espTipoespdisenioBriada").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipoespdisenioBriadainsta() {
+    $('#espTipoespdisenioBriada').show();
+}
+//#endregion
+//#region Tipo medidor
+function loadtipoMedidor() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TipoMedidorOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipomedidorinsta").empty();
+                    $('#cmb_tipomedidorinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipomedidorinsta').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_182
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipomedidor() {
+    var webMethod = "saveTipoMedidorOperacion";
+    var params = {
+        C_0401_182: $("#newTipomedidor").val(),
+        descripcion: $("#newDesTipmedidor").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoMedidor();
+                $("#espTipomedidor").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipomedidorinsta() {
+    $('#espTipomedidor').show();
+}
+//#endregion
+//#region Tipo conexión rama
+function loadtipoConexionRama() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TipoConexionRamaOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipoconexramainsta").empty();
+                    $('#cmb_tipoconexramainsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipoconexramainsta').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_184
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipoconexrama() {
+    var webMethod = "saveTipoConexionRamaOperacion";
+    var params = {
+        C_0401_184: $("#newTipoconexrama").val(),
+        descripcion: $("#newDesTipconexrama").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoConexionRama();
+                $("#espTipoconexrama").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipoconexramainsta() {
+    $('#espTipoconexrama').show();
+}
+//#endregion
+//#region Grado Codos
+function loadtipoGradosCodo() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_GradoCodosInstaOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipogradocodo").empty();
+                    $('#cmb_tipogradocodo').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipogradocodo').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_190
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipogradocodo() {
+    var webMethod = "saveGradoCodosOperacion";
+    var params = {
+        C_0401_190: $("#newTipogradocodo").val(),
+        descripcion: $("#newDesTipogradocodo").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoGradosCodo();
+                $("#espTipogradocodo").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipocodogrado() {
+    $('#espTipogradocodo').show();
+}
+//#endregion
+//#region Especificación Diseño Codos
+function loadtipoEspecificacionDisenioCodo() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_GradoCodosInstaOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipoespdiseniocodo").empty();
+                    $('#cmb_tipoespdiseniocodo').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipoespdiseniocodo').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_194
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipoespdiseniocodo() {
+    var webMethod = "saveGradoCodosOperacion";
+    var params = {
+        C_0401_194: $("#newTipogradocodo").val(),
+        descripcion: $("#newDesTipogradocodo").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoEspecificacionDisenioCodo();
+                $("#espTipoespecifidiseniocodo").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipoespecificacionesdiseniocodogrado() {
+    $('#espTipoespecifidiseniocodo').show();
+}
+//#endregion
+
+//#region Grado reductor
+function loadGradoReductor() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_GradoReductorInstaOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipogradoreductor").empty();
+                    $('#cmb_tipogradoreductor').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipogradoreductor').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_196
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipogradoreductor() {
+    var webMethod = "saveGradoReductorOperacion";
+    var params = {
+        C_0401_196: $("#newTipogradoreductor").val(),
+        descripcion: $("#newDesTipogradoreductor").val()
+    };
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadGradoReductor();
+                $("#espTipogradoreductor").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipogradoreductor() {
+    $('#espTipogradoreductor').show();
+}
+//#endregion
+//#region Tipo Reductor
+function loadTipoReductor() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TipoReductorOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tiporeductor").empty();
+                    $('#cmb_tiporeductor').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tiporeductor').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_199
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTiporeductor() {
+    var webMethod = "saveTipoReductorOperacion";
+    var params = {
+        C_0401_199: $("#newTiporeductor").val(),
+        descripcion: $("#newDesTiporeductor").val()
+    };
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadTipoReductor();
+                $("#espTiporeductor").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotiporeductor() {
+    $('#espTiporeductor').show();
+}
+//#endregion
+//#region  Especificacion Diseño Reducor
+function loadEspecificacionesDisenioReductor() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_EspReductorInstaOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipoespdisreductor").empty();
+                    $('#cmb_tipoespdisreductor').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipoespdisreductor').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_200
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipoespdisreductor() {
+    var webMethod = "saveEspReductorOperacion";
+    var params = {
+        C_0401_200: $("#newTipoespdisreductor").val(),
+        descripcion: $("#newDesTipoespdisreductor").val()
+    };
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadEspecificacionesDisenioReductor();
+                $("#espEspecificacionDisenioreductor").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipoespdisreductor() {
+    $('#espEspecificacionDisenioreductor').show();
+}
+//#endregion
+//#region  Tuberia
+function loadTipoTuberia() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_TuberiaRevestimientoOperacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipoventilacion").empty();
+                    $('#cmb_tipoventilacion').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipoventilacion').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_201
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
+function saveotroTipoventilacion() {
+    var webMethod = "saveTipoTuberiaRevestimientoOperacion";
+    var params = {
+        C_0401_201: $("#newTipoventilacion").val(),
+        descripcion: $("#newDesTipoventilacion").val()
+    };
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadTipoTuberia();
+                $("#espTipoventilacion").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function showotrotipoventilacion() {
+    $('#espTipoventilacion').show();
+}
+//#endregion
+//#endregion
+//#endregion
 //#endregion
 

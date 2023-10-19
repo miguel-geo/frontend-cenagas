@@ -4911,7 +4911,7 @@
 
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Materiald de fabricación</span>
+                                        <span class="input-group-text" id="basic-addon1">Material de fabricación</span>
                                     </div>
                                     <select class="selectpicker form-control setAlg" id="cmb_matfabinsta">
                                         <option value="0">Selecciona...</option>
@@ -4982,7 +4982,7 @@
                                     <select class="selectpicker form-control setAlg" id="cmb_tipolanzadorinsta">
                                         <option>Selecciona...</option>
                                     </select>
-                                    <button type="button" onclick="showotrotipolanzadorOp()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotroTipoLanzador()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
@@ -5011,7 +5011,7 @@
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
-                                <div class="input-group mb-3" id="espTipolanzadorinsta" style="display:none">
+                                <div class="input-group mb-3" id="espTipoDispositivoinsta" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de dispositivo</span>
                                     </div>
@@ -5022,20 +5022,14 @@
                                     <input type="text" class="form-control" placeholder="" aria-label="" id="newDesTipoDispositivo" aria-describedby="basic-addon1">
                                     <div>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipolDispositivo()">Cancelar</button>
-                                        <button type="button" id="btn_saveOtrotipoDispositivo" onclick="saveotroTipoDispositivo()" class="btn btn-success">Guardar</button>
+                                        <button type="button" id="btn_saveOtrotipoDispositivo" onclick="saveotroTipoDispositivoOp()" class="btn btn-success">Guardar</button>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3uno" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Longitud máxima permitida de un dispositivo rascador dentro del cañon</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtmaxpermdisprascadorinsta" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3 uno" style="display:none;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Longitud máxima permitida de un dispositivo rascador dentro del cañon</span>
-                                    </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtmaxpermdisprascadorinsta" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtlongmaxpermdisprascadorinsta" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3 uno" style="display:none;">
                                     <div class="input-group-prepend">
@@ -5063,34 +5057,34 @@
                                 </div>
                                 <div class="input-group mb-3 dos" style="display:none;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Tipo instalación</span>
+                                        <span class="input-group-text" id="basic-addon1">Tipo válvula</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="cmb_tipoinstainsta">
+                                    <select class="selectpicker form-control setAlg" id="cmb_tipovalvulainstainsta">
                                         <option>Selecciona...</option>
                                     </select>
-                                    <button type="button" onclick="showotrotipoinstalacion()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotrotipovalvulainstalacion()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
-                                <div class="input-group mb-3" id="espTipoisntalacion" style="display:none">
+                                <div class="input-group mb-3" id="espTipovalvulaisntalacion" style="display:none">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Tipo de instalación</span>
+                                        <span class="input-group-text" id="basic-addon1">Tipo de válvula</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoinsta" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipovalvulainsta" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Descripción</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDesTipoinsta" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDesTipovalvulainsta" aria-describedby="basic-addon1">
                                     <div>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoinstalacion()">Cancelar</button>
-                                        <button type="button" id="btn_saveOtrotipoinstalacion" onclick="saveotroTipoinstalacion()" class="btn btn-success">Guardar</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipovalvulainstalacion()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtrotipovalvulainstalacion" onclick="saveotroTipovalvulainstalacion()" class="btn btn-success">Guardar</button>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3  dos" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Estado funcional</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="cmb_orientacanioninsta">
+                                    <select class="selectpicker form-control setAlg" id="cmb_edofuncionalinsta">
                                         <option value="0">Selecciona...</option>
                                         <option value="Fallido">Fallido</option>
                                         <option value="Fugas">Fugas</option>
@@ -5104,7 +5098,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Operación de forma remota</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="cmb_formremotainsta">
+                                    <select class="selectpicker form-control setAlg" id="cmb_Operacionformremotainsta">
                                         <option value="0">Selecciona...</option>
                                         <option value="Sí">Sí</option>
                                         <option value="No">No</option>
@@ -5139,7 +5133,7 @@
                                     <select class="selectpicker form-control setAlg" id="cmb_tipooperadorinsta">
                                         <option>Selecciona...</option>
                                     </select>
-                                    <button type="button" onclick="showotrotipooperador()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotrotipooperadorinstalacion()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
@@ -5161,19 +5155,19 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Diametro exterior</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtdiamextinsta" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtdiamextvalvinsta" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3 dos" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Especificación de diseño</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtespedisenioinsta" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtespediseniovalvinsta" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3 dos" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Presión máxima de diseño</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtpresionmaxdisenioinsta" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtpresionmaxdiseniovalvinsta" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3 dos" style="display:none;">
                                     <div class="input-group-prepend">
@@ -5237,14 +5231,14 @@
                                     <input type="text" class="form-control" placeholder="" aria-label="" id="newDesTipoconex" aria-describedby="basic-addon1">
                                     <div>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoconex()">Cancelar</button>
-                                        <button type="button" id="btn_saveOtrotipoconex" onclick="saveotroTipoconex()" class="btn btn-success">Guardar</button>
+                                        <button type="button" id="btn_saveOtrotipoconex" onclick="saveotroTipoConexion()" class="btn btn-success">Guardar</button>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3 dos" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Presión de prueba</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtpresionpruebainsta" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtpresionpruebavalvinsta" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3 tres" style="display:none;">
                                     <div class="input-group-prepend">
@@ -5282,7 +5276,7 @@
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
-                                <div class="input-group mb-3" id="espTipotapas" style="display:none">
+                                <div class="input-group mb-3" id="espTipotee" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de tee</span>
                                     </div>
@@ -5293,7 +5287,7 @@
                                     <input type="text" class="form-control" placeholder="" aria-label="" id="newDesTipotee" aria-describedby="basic-addon1">
                                     <div>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipotee()">Cancelar</button>
-                                        <button type="button" id="btn_saveOtrotipotee" onclick="saveotroTipotee()" class="btn btn-success">Guardar</button>
+                                        <button type="button" id="btn_saveOtrotipotee" onclick="saveotroTipoTee()" class="btn btn-success">Guardar</button>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3 cuatro" style="display:none;">
@@ -5396,27 +5390,27 @@
                                 </div>
                                 <div class="input-group mb-3 seis" style="display:none;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Especificaciones de diseño</span>
+                                        <span class="input-group-text" id="basic-addon1">Especificaciones de diseño Briada</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="cmb_tipoespdisenioinsta">
+                                    <select class="selectpicker form-control setAlg" id="cmb_tipoespdiseniobriadainsta">
                                         <option>Selecciona...</option>
                                     </select>
-                                    <button type="button" onclick="showotrotipoespdisenioinsta()" class="btn btn-secondary">
+                                    <button type="button" onclick="showotrotipoespdisenioBriadainsta()" class="btn btn-secondary">
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
-                                <div class="input-group mb-3" id="espTipoespdisenio" style="display:none">
+                                <div class="input-group mb-3" id="espTipoespdisenioBriada" style="display:none">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Tipo de especificación de diseño</span>
+                                        <span class="input-group-text" id="basic-addon1">Tipo de especificación de diseño Briada</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoespdisen" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoespdisenBriada" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Descripción</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDesTipespdisen" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDesTipespdisenBriada" aria-describedby="basic-addon1">
                                     <div>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoespdisen()">Cancelar</button>
-                                        <button type="button" id="btn_saveOtrotipoespdisen" onclick="saveotroTipoespdisenio()" class="btn btn-success">Guardar</button>
+                                        <button type="button" id="btn_saveOtrotipoespdisen" onclick="saveotroTipoespdisenioBriada()" class="btn btn-success">Guardar</button>
                                     </div>
                                 </div>
                                 <div class="input-group mb-3 siete" style="display:none;">
@@ -5448,7 +5442,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">No.  de serie</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtnoserieeinsta" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtnoserieemedidorinsta" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3  ocho" style="display:none;">
                                     <div class="input-group-prepend">
@@ -5479,27 +5473,27 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Grosor nominal de la pared</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtgrosornomconexinsta" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtgrosornomconexramainsta" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3 ocho" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Diametro exterior</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtdiamextconexinsta" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtdiamextconexraminsta" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3 ocho" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Especificación de diseño</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtespdisenioconexinsta" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtespdisenioconexramainsta" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3 nueve" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Ángulo de curvatura(horizontal)</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtAngulocurvhoriinsta" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtAngulocurvhoriCodosinsta" aria-describedby="basic-addon1">
                                 </div>
-                                <div class="input-group mb-3 nueve" style="display:none;" >
+                                <div class="input-group mb-3 nueve" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Radio de codo</span>
                                     </div>
@@ -5530,12 +5524,62 @@
                                         <button type="button" id="btn_saveOtrotipogradocodo" onclick="saveotroTipogradocodo()" class="btn btn-success">Guardar</button>
                                     </div>
                                 </div>
+                                <div class="input-group mb-3 nueve" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Diametro exterior en la entrada del activo</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtdiamcodoextinsta" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3 nueve" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Espesor de pared nominal del activo</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtespesorcodonominsta" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3 nueve" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Diametro exterior de la salida del activo</span>
+                                    </div>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtdiamextsalidacodosinsta" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3 nueve" style="display:none;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Especifiaciones de diseño codo</span>
+                                    </div>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tipoespdiseniocodo">
+                                        <option>Selecciona...</option>
+                                    </select>
+                                    <button type="button" onclick="showotrotipoespecificacionesdiseniocodogrado()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group mb-3" id="espTipoespecifidiseniocodo" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Otro grado codo</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoespdiseniocodo" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDesTipoespdiseniocodo" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotrogradocodo()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtrotipogradocodo" onclick="saveotroTipoespdiseniocodo()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
                                 <div class="input-group mb-3  nueve" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Ángulo de curvatura (vertical)</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtangulocurvvertiinsta" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtangulocurvverticodoinsta" aria-describedby="basic-addon1">
                                 </div>
+
+
+
+
+
+
+
                                 <div class="input-group mb-3 diez" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Grado reductor</span>
@@ -5547,6 +5591,10 @@
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
+
+
+
+
                                 <div class="input-group mb-3" id="espTipogradoreductor" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Otro grado reductor</span>
@@ -5561,7 +5609,7 @@
                                         <button type="button" id="btn_saveOtrotipogradoreductor" onclick="saveotroTipogradoreductor()" class="btn btn-success">Guardar</button>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3"¿ diez" style="display:none;">
+                                <div class="input-group mb-3" ¿ diez" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Diametro exterior  (En la etrada del activo)</span>
                                     </div>
@@ -5609,7 +5657,7 @@
                                         <i class="fas fa-square-plus"></i>
                                     </button>
                                 </div>
-                                <div class="input-group mb-3" id="espTiporeductor" style="display:none">
+                                <div class="input-group mb-3" id="espEspecificacionDisenioreductor" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Otro grado reductor</span>
                                     </div>
@@ -5711,9 +5759,9 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelOperacionVandalismo()">Cancelar</button>
-                                    <button type="button" id="btn_newVan_operacion" onclick="nuevoOperacionVandalismo()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
-                                    <button type="button" id="btn_updateVan_operacion" onclick="updateOperacioVandalismoOp()" style="display:none" class="btn btn-info">Actualizar</button>
-                                    <button type="button" id="btn_saveVang_operacion" onclick="validateForm('identi-form', savevandalismoOp)" class="btn btn-success">Guardar</button>
+                                    <button type="button" id="btn_newInstalacion_operacion" onclick="nuevoInstalacionesOperacion()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updateInstalacion_operacion" onclick="updateOperacioInstalacionesOp()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_saveInstalacion_operacion" onclick="validateForm('identi-form', saveInstalacionesOp)" class="btn btn-success">Guardar</button>
                                 </div>
                             </form>
                         </div>
