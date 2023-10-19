@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -17,6 +17,7 @@ var docbasecons = "";
 var temaconsultaconstruccion = "";
 var temaconsultadisenio = "";
 var temaconsultaanalisis = "";
+var temaconsultaoperacion="";
 var area_unitaria_id;
 var contar_longitud=0;
 const headers = new Headers({
@@ -341,6 +342,7 @@ function inicializarEventos() {
         temaconsultadisenio=$("#cmbTemasDisenio_con").val() ;
         temaconsultaconstruccion=$("#cmbTemasConstruccion_con").val() ;
         temaconsultaanalisis = $("#cmbTemasAnalisis_con").val();
+        temaconsultaoperacion = $("#cmbTemasOperacion_con").val();
         if(confirm("¿Seguro quiere borrar ese registro?")) {
 
         console.log(temaconsulta,temaconsultadisenio,temaconsultaconstruccion)
@@ -390,6 +392,32 @@ function inicializarEventos() {
                         
                     default:}
                     break;
+                case "T3":
+                    switch(temaconsultaanalisis){
+                        case "Op1":
+                            webMethod = "analisisgeneral/destroy";
+                            break;
+                        case "Op2":
+                            webMethod = "analisisgeoespacial/destroy";
+                            break;
+                        case "Op3":
+                            webMethod = "analisisplanos/destroy";
+                            break;
+                        case "Op4":
+                            webMethod = "analisisriesgosincidentes/destroy";
+                            break;
+                        case "Op5":
+                            webMethod = "analisisingenieria/destroy";
+                            break;
+                        case "Op6":
+                            webMethod = "analisisriesgo/destroy";
+                            break;
+                        case "Op7":
+                            webMethod = "operaciondocumental/destroy";
+                            break;
+                            
+                        default:}
+                        break;
                 case "T4":
                     switch(temaconsultaanalisis){
                         case "Ana1":
@@ -540,6 +568,59 @@ function inicializarEventos() {
                             fnshowseguridadpre(id_d = row_id);
                         });
                         break;
+
+
+                    default:
+                }
+                break;
+
+            case "T3":
+                console.log(row_id)
+                switch (temaconsultaoperacion) {
+                    case "Op1":
+
+                    case "Op2":
+                        
+
+                    case "Op3":
+
+                    case "Op4":
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByOperacionMonitoreoCorrosionId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            console.log(area,'area')
+                            fnshowOperacionMonitoreoCorrosion(id_d = row_id);
+                        });
+                        break;
+
+                    case "Op5":
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByOperacionHistReparacionesId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowOperacionHistorialReparaciones(id_d = row_id);
+                        });
+                        break;
+
+                    case "Op6":
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByOperacionHistReparacionesId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowOperacionVandalismo(id_d = row_id);
+                        });
+                        break;
+                    case "Op7":
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByOpDocumentalId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowOperacionDocumental(id_d = row_id);
+                        });
+                        break;
+
+
 
 
                     default:
@@ -855,19 +936,25 @@ function inicializarEventos() {
                 $("#cmbTemasDisenio_con").show();
                 $("#cmbTemasConstruccion_con").hide();
                 $("#cmbTemasAnalisis_con").hide();
+                $("#cmbTemasOperacion_con").hide();
              break;
             case "T2":
                 $("#cmbTemasDisenio_con").hide();
                 $("#cmbTemasConstruccion_con").show()
                 $("#cmbTemasAnalisis_con").hide();
+                $("#cmbTemasOperacion_con").hide();
             break;
             case "T3":
-                //Aún no existe
+                $("#cmbTemasAnalisis_con").hide();
+                $("#cmbTemasOperacion_con").show();
+                $("#cmbTemasConstruccion_con").hide();
+                $("#cmbTemasDisenio_con").hide();
                 break;
             case "T4":
                 $("#cmbTemasAnalisis_con").show();
                 $("#cmbTemasConstruccion_con").hide();
                 $("#cmbTemasDisenio_con").hide();
+                $("#cmbTemasOperacion_con").hide();
                 break;
             default:
         }
@@ -884,6 +971,7 @@ function inicializarEventos() {
                 limpiarTabas();
                 OcultarConstruccionConsulta();
                 ocultartablasanalisis()
+                ocultartablasoperacion()
             $("#tablaPersonas > tbody").empty();
             $("#tablaPersonas").show();
             $("#tablapresion").hide();
@@ -895,6 +983,7 @@ function inicializarEventos() {
             case "Dis2":
                 limpiarTabas();
                 ocultartablasanalisis()
+                ocultartablasoperacion()
                 OcultarConstruccionConsulta();
             $("#tablaPersonas").hide();
             $("#tablapresion").show();
@@ -905,6 +994,7 @@ function inicializarEventos() {
             break;
             case "Dis3":
                 limpiarTabas();
+                ocultartablasoperacion()
                 OcultarConstruccionConsulta();
                 ocultartablasanalisis()
             $("#datapresioncons").hide();
@@ -928,6 +1018,7 @@ function inicializarEventos() {
         switch (event.target.value) {
             case "Cons1":
                 ocultartablasdisenio();
+                ocultartablasoperacion()
                 ocultartablasanalisis()
                 $("#dataconstruccionunion").hide();
                 $("#tablabasecons").show();
@@ -944,6 +1035,7 @@ function inicializarEventos() {
                 break;
             case "Cons2":
                 ocultartablasdisenio();
+                ocultartablasoperacion()
                 ocultartablasanalisis()
                 $("#tablaunionCons").show();
                 $("#dataconstruccionunion").show();
@@ -960,6 +1052,7 @@ function inicializarEventos() {
                 break;
             case "Cons3":
                 ocultartablasdisenio();
+                ocultartablasoperacion()
                 ocultartablasanalisis()
                 $("#dataconstruccionunion").hide();
                 $("#tablaProfundidad").show();
@@ -976,7 +1069,8 @@ function inicializarEventos() {
                 break;
             case "Cons4":
                 ocultartablasdisenio();
-                ocultartablasanalisis()
+                ocultartablasanalisis();
+                ocultartablasoperacion();
                 $("#dataconstruccionunion").hide();
                 $("#tablaConsCruces").show();
                 $("#tablaconsSeguridad").hide();
@@ -991,7 +1085,8 @@ function inicializarEventos() {
                 break;
             case "Cons5":
                 ocultartablasdisenio();
-                ocultartablasanalisis()
+                ocultartablasanalisis();
+                ocultartablasoperacion();
                 $("#dataconstruccionunion").hide();
                 $("#tablaconsSeguridad").hide();
                 $("#tablaHermeticidad").show();
@@ -1007,7 +1102,8 @@ function inicializarEventos() {
             case "Cons6":
                 //tablaconsInspeccion
                 ocultartablasdisenio();
-                ocultartablasanalisis()
+                ocultartablasanalisis();
+                ocultartablasoperacion();
                 $("#dataconstruccionunion").hide();
                 $("#tablaconsInspeccion").show();
                 $("#tablaconsSeguridad").hide();
@@ -1023,7 +1119,8 @@ function inicializarEventos() {
                 break;
             case "Cons7":
                 ocultartablasdisenio();
-                ocultartablasanalisis()
+                ocultartablasanalisis();
+                ocultartablasoperacion();
                 $("#dataconstruccionunion").hide();
                 $("#tablaconsSeguridad").hide();
                 $("#tablaConsCatodica").show();
@@ -1039,7 +1136,8 @@ function inicializarEventos() {
                 break;
             case "Cons8":
                 ocultartablasdisenio();
-                ocultartablasanalisis()
+                ocultartablasanalisis();
+                ocultartablasoperacion();
                 $("#dataconstruccionunion").hide();
                 $("#tablaconsSeguridad").show();
                 $("#datacatodica").hide();
@@ -1056,7 +1154,74 @@ function inicializarEventos() {
             default:
         }
     });
+    const selectTemasOperacion = document.getElementById('cmbTemasOperacion_con');
+    selectTemasOperacion.addEventListener('change', function handleChange(event) {
+        temaconsultaoperacion = event.target.value;
+        switch (event.target.value) {
+            case "Op1":
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                ocultartablasanalisis()
+                $("#tablaOperacionDocumental").hide();
 
+                break;
+            case "Op2":
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                ocultartablasanalisis()
+                $("#tablaOperacionDocumental").hide();
+
+                break;
+            case "Op3":
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                ocultartablasanalisis()
+                $("#tablaOperacionDocumental").hide();
+                break;
+            case "Op4":
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                ocultartablasanalisis()
+                $("#tablaOperacionVandalismo").hide()
+                $("#tablaOperacionCorrosion").show();
+                $("#tablaOperacionDocumental").hide();
+                $("#tablaOperacionHistorialReparaciones").hide();
+
+                
+            break;
+            case "Op5":
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                ocultartablasanalisis()
+                $("#tablaOperacionVandalismo").hide()
+                $("#tablaOperacionCorrosion").hide();
+                $("#tablaOperacionDocumental").hide();
+                $("#tablaOperacionHistorialReparaciones").show();
+                
+
+            break;
+            case "Op6":
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                ocultartablasanalisis()
+                $("#tablaOperacionVandalismo").show()
+                $("#tablaOperacionCorrosion").hide();
+                $("#tablaOperacionDocumental").hide();
+                $("#tablaOperacionHistorialReparaciones").hide();
+
+                break;
+            case "Op7":
+                OcultarConstruccionConsulta();
+                ocultartablasdisenio();
+                ocultartablasanalisis()
+                $("#tablaOperacionVandalismo").hide()
+                $("#tablaOperacionCorrosion").hide();
+                $("#tablaOperacionDocumental").show();
+                $("#tablaOperacionHistorialReparaciones").hide();
+                break;
+            default:
+        }
+    });
     //Combo Tema Analisis
     const selectTemasAnalisis = document.getElementById('cmbTemasAnalisis_con');
     selectTemasAnalisis.addEventListener('change', function handleChange(event) {
@@ -1065,6 +1230,7 @@ function inicializarEventos() {
             case "Ana1":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
+                ocultartablasoperacion();
                 $("#tablaAnalisisGral").show();
                 $("#tablaAnalisisGeoespacial").hide();
                 $("#tablaAnalisisRiesgoIncidentes").hide();
@@ -1076,6 +1242,7 @@ function inicializarEventos() {
             case "Ana2":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
+                ocultartablasoperacion();
                 $("#tablaAnalisisGral").hide();
                 $("#tablaAnalisisGeoespacial").show();
                 $("#tablaAnalisisRiesgoIncidentes").hide();
@@ -1087,6 +1254,7 @@ function inicializarEventos() {
             case "Ana3":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
+                ocultartablasoperacion();
                 $("#tablaAnalisisGral").hide();
                 $("#tablaAnalisisPlanos").show();
                 $("#tablaAnalisisGeoespacial").hide();
@@ -1098,6 +1266,7 @@ function inicializarEventos() {
             case "Ana6":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
+                ocultartablasoperacion();
                 $("#tablaAnalisisGral").hide();
                 $("#tablaAnalisisGeoespacial").hide();
                 $("#tablaAnalisisRiesgoIncidentes").hide();
@@ -1110,6 +1279,7 @@ function inicializarEventos() {
             case "Ana7":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
+                ocultartablasoperacion();
                 $("#tablaAnalisisGral").hide();
                 $("#tablaAnalisisGeoespacial").hide();
                 $("#tablaAnalisisRiesgoIncidentes").hide();
@@ -1121,6 +1291,7 @@ function inicializarEventos() {
             case "Ana4":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
+                ocultartablasoperacion();
                 $("#tablaAnalisisGral").hide();
                 $("#tablaAnalisisGeoespacial").hide();
                 $("#tablaAnalisisRiesgoIncidentes").hide();
@@ -1132,6 +1303,7 @@ function inicializarEventos() {
             case "Ana5":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
+                ocultartablasoperacion();
                 $("#tablaAnalisisGral").hide();
                 $("#tablaAnalisisGeoespacial").hide();
                 $("#tablaAnalisisRiesgoIncidentes").hide();
@@ -1294,6 +1466,15 @@ function ocultartablasanalisis() {
 
 }
 
+
+function ocultartablasoperacion() {
+    $("#tablaOperacionVandalismo").hide()
+                $("#tablaOperacionCorrosion").hide();
+                $("#tablaOperacionDocumental").hide();
+                $("#tablaOperacionHistorialReparaciones").hide();
+
+
+}
 function handleFileSelect(evt) {
     var f = evt.target.files[0]; // FileList object
     var reader = new FileReader();
@@ -6775,8 +6956,226 @@ function consulta() {
                 
                 break;
             case "T3":
-               
+                console.log(temaconsultaoperacion)
+                switch (temaconsultaoperacion) {
+                case "Op4":
+                    $('#tablaOperacionCorrosion tbody')[0].innerHTML = "";
+                    $('#tablaOperacionCorrosion tbody:not(:first)').remove();
+                    var webMethodCatodica = "get_OperacionMonitoreoCorrosion";
+                    $.ajax({
+                        type: "POST",
+                        url: apiUrl + webMethodCatodica,
+                        data: params,
+                        success: function (data) {
+                            if (data.success) {
+
+                                var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                                'unidades_medida', 
+                                'cupones', 
+                                'fecha_instalacion',
+                                'fecha_retiro',
+                                'fecha_registro', 
+                                'nombre_cupon',
+                                'peso',
+                                'peso_final',
+                                'valocidad_corrosion',   
+                            'tramo'];
+                                
+                                processTableDataAndHideNullColumns(data.data.datagrid, "tablaOperacionCorrosion", keysForPresion );
+                                    
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
                 break;
+                case "Op5":
+                $('#tablaOperacionHistorialReparaciones tbody')[0].innerHTML = "";
+                $('#tablaOperacionHistorialReparaciones tbody:not(:first)').remove();
+                var webMethodCatodica = "get_OperacionHistorialReparaciones";
+                $.ajax({
+                    type: "POST",
+                    url: apiUrl + webMethodCatodica,
+                    data: params,
+                    success: function (data) {
+                        if (data.success) {
+
+                            var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                            'C_0415_254',
+                            'C_0415_255',
+                            'C_0415_256',
+                            'C_0415_257',
+                            'C_0415_258', 
+                           'C_0415_259',
+                            'C_0415_260',
+                            'C_0415_261',
+                            'C_0415_262',
+                            'C_0415_263',
+                            'C_0415_264',
+                            'C_0415_265',
+                            'C_0415_266',
+                            'C_0415_267', 
+                           'C_0415_268', 
+                           'C_0415_269', 
+                           'C_0415_271',
+                            'C_0415_272',
+                            'C_0415_273',
+                            'C_0415_274',
+                            'C_0415_275', 
+                           'C_0415_276', 
+                           'C_0415_277', 
+                           'C_0415_278', 
+                           'C_0415_279', 
+                           'C_0415_280',
+                           
+                        'tramo'];
+                            
+                            processTableDataAndHideNullColumns(data.data.datagrid, "tablaOperacionHistorialReparaciones", keysForPresion );
+                                
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+
+                        }
+                    });
+                break;
+
+                case "Op5":
+                $('#tablaOperacionHistorialReparaciones tbody')[0].innerHTML = "";
+                $('#tablaOperacionHistorialReparaciones tbody:not(:first)').remove();
+                var webMethodCatodica = "get_OperacionHistorialReparaciones";
+                $.ajax({
+                    type: "POST",
+                    url: apiUrl + webMethodCatodica,
+                    data: params,
+                    success: function (data) {
+                        if (data.success) {
+
+                            var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                            'C_0415_254',
+                            'C_0415_255',
+                            'C_0415_256',
+                            'C_0415_257',
+                            'C_0415_258', 
+                           'C_0415_259',
+                            'C_0415_260',
+                            'C_0415_261',
+                            'C_0415_262',
+                            'C_0415_263',
+                            'C_0415_264',
+                            'C_0415_265',
+                            'C_0415_266',
+                            'C_0415_267', 
+                           'C_0415_268', 
+                           'C_0415_269', 
+                           'C_0415_271',
+                            'C_0415_272',
+                            'C_0415_273',
+                            'C_0415_274',
+                            'C_0415_275', 
+                           'C_0415_276', 
+                           'C_0415_277', 
+                           'C_0415_278', 
+                           'C_0415_279', 
+                           'C_0415_280',
+                           
+                        'tramo'];
+                            
+                            processTableDataAndHideNullColumns(data.data.datagrid, "tablaOperacionHistorialReparaciones", keysForPresion );
+                                
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+
+                        }
+                    });
+                break;
+
+            case "Op6":
+                $('#tablaOperacionVandalismo tbody')[0].innerHTML = "";
+                $('#tablaOperacionVandalismo tbody:not(:first)').remove();
+                var webMethodCatodica = "get_OperacionVandalismo";
+                $.ajax({
+                    type: "POST",
+                    url: apiUrl + webMethodCatodica,
+                    data: params,
+                    success: function (data) {
+                        if (data.success) {
+
+                            var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                            'C_0416_281',
+                        'C_0416_282',
+                        'C_0416_283',
+                        'C_0416_284',
+                        'id_C_0416_285',
+                        'id_C_0416_286',
+                        'C_0416_287',
+                        'C_0416_288',
+                        'C_0416_289',
+                        'C_0416_290',
+                        'C_0416_291',
+                        'id_C_0416_292',
+                        'C_0416_293',
+                        'C_0416_294',
+                        'C_0416_295',
+                        'C_0416_296',
+                        'C_0416_297',
+                        'C_0416_298',
+                        'tramo'];
+                            
+                            processTableDataAndHideNullColumns(data.data.datagrid, "tablaOperacionVandalismo", keysForPresion );
+                                
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+
+                        }
+                    });
+                break;
+                case "Op7":
+                            $('#tablaOperacionDocumental tbody')[0].innerHTML = "";
+                            var webMethodSeguridad = "get_operaciondocumental";
+                            $.ajax({
+                                type: "POST",
+                                url: apiUrl + webMethodSeguridad,
+                                data: params,
+                                success: function (data) {
+                                    if (data.success) {
+                                    
+                                        for (i = 0; i < data.data.length; i++) {
+                                            var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].historial_condiciones+ ',' + 'historial_condiciones', data.data[i].fase_producto + ',' + 'fase_producto', data.data[i].presencia_cloruros + ',' + 'presencia_cloruros', data.data[i].cis_documentalop + ',' + 'cis_documentalop', data.data[i].dcvgopdocumental + ',' + 'dcvgopdocumental', data.data[i].perfil_potenciales + ',' + 'perfil_potenciales', data.data[i].mfl_opdocumental + ',' + 'mfl_opdocumental', data.data[i].ultrasonido_haz + ',' + 'ultrasonido_haz', data.data[i].reporte_espesores + ',' + 'reporte_espesores', data.data[i].geometra_opdocumental + ',' + 'geometra_opdocumental',
+                                            data.data[i].calibracion_curvas + ',' + 'calibracion_curvas',
+                                            data.data[i].liquidos_penetrantes + ',' + 'liquidos_penetrantes',
+                                            data.data[i].ondas_guiadas + ',' + 'ondas_guiadas',
+                                            data.data[i].inspeccion_radiografica + ',' + 'inspeccion_radiografica',
+                                            data.data[i].inspeccion_muestral + ',' + 'inspeccion_muestral',
+                                            data.data[i].constancias_prueba_hermeticidad + ',' + 'constancias_prueba_hermeticidad',
+                                            data.data[i].auditorias_opdocumental + ',' + 'auditorias_opdocumental',
+                                            data.data[i].prueba_dielectrica + ',' + 'prueba_dielectrica',
+                                            data.data[i].reporte_insvisual + ',' + 'reporte_insvisual',
+                                            data.data[i].prueba_neumatica + ',' + 'prueba_neumatica',
+                                            data.data[i].perfil_resistividad + ',' + 'perfil_resistividad',
+                                            data.data[i].ph_bpa + ',' + 'ph_bpa',
+                                            data.data[i].ph_bsr + ',' + 'ph_bsr',
+                                            data.data[i].inspeccion_electromagnetica + ',' + 'inspeccion_electromagnetica',
+                                            data.data[i].determinación_resistencia + ',' + 'determinación_resistencia',
+                                            data.data[i].atenuacion_corriente + ',' + 'atenuacion_corriente',
+                                            data.data[i].rehabilitacion_anticorrosiva + ',' + 'rehabilitacion_anticorrosiva'];
+                                           
+
+                                            llenarTablasFileDocumentalOperacion(persona, "tablaOperacionDocumental", data.data[i].id);
+                                        }
+
+                                    }
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+
+                                }
+                            });
+                            break;
+                        }
+                        break;
             case "T4":
                 switch (temaconsultaanalisis) {
 
@@ -7179,6 +7578,30 @@ function llenarTablasFileDocumental(obj, nameTabla,id) {
         if (obj[j].split(',')[0] !== null && obj[j].split(',')[0] !== "" && obj[j].split(',')[0] !== undefined && obj[j].split(',')[0] !== "null") {
             if (obj[j].split(',')[1] !== undefined) {
                 row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  target="_blank"  href=' + apiUrl + 'analisis-documental/' + id + '/download/' + obj[j].split(',')[1] + ' title="Descargar" data-toggle="tooltip" id="' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-download"></i></a></td>';
+            }
+            else {
+                row = row + '<td>' + obj[j] + '</td>';
+            }
+         }
+        else {
+                row = row + '<td style="text-align: center;color:gray;"><a class="download-icon" disabled title="No existe archivo" data-toggle="tooltip"id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i  class="fa fa-download"></i></a></td>';
+            
+         }
+    }
+    row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip"id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] + '"><i class="fa fa-trash"></i></a></td>';
+    row = row + '</tr>';
+
+    $('#' + nameTabla + ' tbody').append(row);
+}
+
+
+function llenarTablasFileDocumentalOperacion(obj, nameTabla,id) {
+    // $('#tablaPersonas tbody')[0].innerHTML = "";
+    var row = '<tr>';
+    for (j = 1; j < obj.length; j++) {
+        if (obj[j].split(',')[0] !== null && obj[j].split(',')[0] !== "" && obj[j].split(',')[0] !== undefined && obj[j].split(',')[0] !== "null") {
+            if (obj[j].split(',')[1] !== undefined) {
+                row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  target="_blank"  href=' + apiUrl + 'operacion-documental/' + id + '/download/' + obj[j].split(',')[1] + ' title="Descargar" data-toggle="tooltip" id="' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-download"></i></a></td>';
             }
             else {
                 row = row + '<td>' + obj[j] + '</td>';
@@ -7635,7 +8058,15 @@ function consultatoform(e){
     $("#generalanalisisform").hide();
     $("#infogeoespacialanalisisform").hide();
     $("#planosanalisisform").hide();
-    $("#documentallisisform").hide();
+    
+    
+    $("#documentalopfrm").hide();
+    $("#instalacionesoperacionfrm").hide();
+    $("#vandalismooperacionfrm").hide();
+    $("#historialreparacionesoperacionfrm").hide();
+    $("#monitoreocorrosionoperacionfrm").hide();
+    $("#historialfugasderramesoperacionfrm").hide();
+    $("#generaloperacionfrm").hide();
 
 }
 
@@ -8723,7 +9154,7 @@ function consultaDatosAnaDocumental(id_d = null) {
         $("#txtductogeneral").val(ducto_nombre);
         $("#txttramogeneral").val(tramo_nombre);
         $("#txtareageneral").val(area_unitaria_nombre);
-        $("#txtductoanalisisdocumental").val(ducto_nombre);
+        $("#txtductooperaciondocumental").val(ducto_nombre);
         $("#txttramoanalisisdocumental").val(tramo_nombre);
         $("#txtareaanalisisdocumental").val(area_unitaria_nombre);
 
@@ -12058,7 +12489,7 @@ function consultaDatosVandalismogOperacion(id_d = null) {
     var webMethod;
     var params;
     if (id_d) {
-        webMethod = "getOperacionHisReparacionById";
+        webMethod = "getOperacionVandalismoById";
         params = {
             id: id_d
         };
@@ -12082,12 +12513,12 @@ function consultaDatosVandalismogOperacion(id_d = null) {
         success: function (data) {
             if (data.success) {
                 var infodata;
-                if (webMethod === "getOperacionHisReparacionById")
+                if (webMethod === "getOperacionVandalismoById")
                     infodata = (data.data);
                 else if (webMethod === "get_OperacionVandalismo")
                     infodata = (data.data.datagrid);
                 if (infodata.length > 0) {
-                    if (webMethod === "getOperacionHisReparacionById")
+                    if (webMethod === "getOperacionVandalismoById")
                         llenarDatosVandalismoOp(infodata);
                     else if (webMethod === "get_OperacionVandalismo")
                         llenarDatosVandalismoOp(infodata);
@@ -13924,3 +14355,381 @@ function showotrotipoventilacion() {
 //#endregion
 //#endregion
 
+//#region Instalaciones
+async function fnshowOperacionInstalacion(id_d = null) {
+    $('#instalacionesoperacionfrm').show();
+    $('#operacionforms').hide();
+    try {
+        //await loadtipovandalismoOp();
+        //await loadtipoeventovandalismoOp();
+        //await loadtiporecuperacionhisvandalismoOp();
+        if (id_d) {
+          //  await consultaDatosVandalismogOperacion(id_d = id_d);
+        }
+        else {
+           // consultaDatosVandalismogOperacion();
+        }
+
+        //// If you want to do something after all functions have completed, you can do it here
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+    // resetValidationClasses('planosanalisisform');
+}
+
+
+
+
+//#endregion
+
+//Operacion Documental
+
+
+
+function cancelOperacionDocumental() {
+    $('#operacionforms').show();
+    $('#documentalopfrm').hide();
+}
+
+
+var idOpDocumental;
+
+function fnshowOperacionDocumental(id_d=null) {
+    $('#documentalopfrm').show();
+    if (id_d){
+        consultaDatosOpDocumental(id_d=id_d);}
+       else { consultaDatosOpDocumental();}
+    
+    $('#operacionforms').hide();
+    resetValidationClasses('documentallisisform')
+   
+}
+
+
+function nuevoOperacionDocumental(){
+
+    $("#btn_savedocumentos_operacion").show();
+    //$("#btn_newseguridad").hide();
+    $("#btn_newdocumentoss_operacion").hide();
+    $("#btn_updatedocumentos_operacion").hide();
+    clearInputTextValuesNew('documentalopfrm');
+    clearAllFileInputsInDiv('documentalopfrm')
+    inhabilitarform("#documentalopfrm", false);
+
+}
+
+
+
+function consultaDatosOpDocumental(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    get_relateddocuments(tramo, area, 18, "tbl_doc_operacion");
+    clearAllFileInputsInDiv('documentalopfrm')
+    clearInputTextValues('documentalopfrm');
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getOperacionDocumentalById";
+        params = {
+            id: id_d
+        };
+    } else {
+        webMethod = "getOperacionDocumental";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+        };
+    }
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+    .then(response => response.json())
+    .then(data => {
+        
+        // 1. Remove all existing download icons before adding new ones.
+        
+        const { id: serviceId, success:success,coordenada_especifica:coordenada_especifica,kilometro_especifico:kilometro_especifico, ...columnsData } = data;
+        if (success){
+        idOpDocumental=serviceId
+        if (data.coordenada_especifica !== "" && data.coordenada_especifica !== null&& data.coordenada_especifica !== null) {
+            const coords = data.coordenada_especifica.split(' ');
+            $("#coord_esp_iden_x_operacion_documental").val(coords[0]);
+            $("#coord_esp_iden_y_operacion_documental").val(coords[1]);
+        }
+        else{$("#coord_esp_iden_y_operacion_documental").val("");
+        $("#coord_esp_iden_y_operacion_documental").val("");}    
+
+        $("#km_esp_iden_operacion_documental").val(data.kilometro_especifico)
+        Object.values(columnsData).forEach(item => {
+            if (item.hasFile) {
+                // Find the correct input group using the data-column attribute
+                const inputGroup = document.querySelector(`.input-group[data-column="${item.column}"]`);
+                const customFileDiv = inputGroup.querySelector('.custom-file');
+        
+                if (customFileDiv) {
+                    // Create the download icon
+                    const downloadIcon = document.createElement('a');
+                    downloadIcon.href = `${apiUrl}operacion-documental/${serviceId}/download/${item.column}`;
+                    downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+                    downloadIcon.target = "_blank";
+                    downloadIcon.className = "download-icon";
+                    downloadIcon.style.marginLeft = "10px";
+                    downloadIcon.setAttribute('data-columna', item.column);
+                    downloadIcon.setAttribute('data-id_otro', serviceId);
+                    
+                    // Insert the download icon after the custom-file div
+                    if (customFileDiv.nextSibling) {
+                        inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+                    } else {
+                        inputGroup.appendChild(downloadIcon);
+                    }
+
+                    const destroyIcon = document.createElement('a');
+                    destroyIcon.href = `${apiUrl}operacion-documental/${serviceId}/destroy/${item.column}`;
+                    destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+                    destroyIcon.target = "_blank";
+                    destroyIcon.className = "destroy-icon";
+                    destroyIcon.style.marginLeft = "10px";
+                    destroyIcon.style.display = "none"; 
+                    destroyIcon.setAttribute('data-columna', item.column);
+                    destroyIcon.setAttribute('data-id_otro', serviceId);
+                   
+                    
+                    // Insert the download icon after the custom-file div
+                    if (customFileDiv.nextSibling) {
+                        inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+                    } else {
+                        inputGroup.appendChild(destroyIcon);
+                    }
+
+
+                    
+                }
+            }
+            
+        });
+        $("#btn_updatedocumentos_operacion").text("Actualizar") 
+        $("#btn_updatedocumentos_operacion").show()
+        inhabilitarform("#documentalopfrm", true)
+        $("#btn_savedocumentos_operacion").hide();
+        //$("#btn_newseguridad").show();
+        $("#btn_newdocumentoss_operacion").show();
+        showDestroyIcons('documentalopfrm',false);
+    }
+
+    else {
+
+        inhabilitarform("#documentalopfrm", false)
+        $("#btn_savedocumentos_operacion").show();
+        $("#btn_newdocumentoss_operacion").hide();
+        $("#btn_updatedocumentos_operacion").hide();
+        showDestroyIcons('documentalopfrm',false);
+    }
+
+
+    getNamesByAreaUnitariaId(area).then(data => {
+        let area_unitaria_nombre = data.area_unitaria_nombre;
+        let tramo_nombre = data.tramo_nombre;
+        let ducto_nombre = data.ducto_nombre;
+    
+        $("#txtductogeneral").val(ducto_nombre);
+        $("#txttramogeneral").val(tramo_nombre);
+        $("#txtareageneral").val(area_unitaria_nombre);
+        $("#txtductooperaciondocumental").val(ducto_nombre);
+        $("#txttramooperaciondocumental").val(tramo_nombre);
+        $("#txtareaoperaciondocumental").val(area_unitaria_nombre);
+
+
+    })
+
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+function saveOperacionDocumental() {
+
+
+    var webMethod = "saveOpDocumental";
+
+    const formData = new FormData();
+
+    formData.append("kilometro_especifico",$("#km_esp_iden_operacion_documental").val() )
+    formData.append("coordenada_especifica",  $("#coord_esp_iden_x_operacion_documental").val()+' '+$("#coord_esp_iden_y_operacion_documental").val(),)
+    formData.append("C_0101_0001_id", area)
+    // Make sure files are being selected and appended properly
+    const itemsToSubstitute = [
+        "historial_condiciones",
+        "fase_producto",
+        "presencia_cloruros",
+        "cis_documentalop",
+        "dcvgopdocumental",
+        "perfil_potenciales",
+        "mfl_opdocumental",
+        "ultrasonido_haz",
+        "reporte_espesores",
+        "geometra_opdocumental",
+        "calibracion_curvas",
+        "liquidos_penetrantes",
+        "ondas_guiadas",
+        "inspeccion_radiografica",
+        "inspeccion_muestral",
+        "constancias_prueba_hermeticidad",
+        "auditorias_opdocumental",
+        "prueba_dielectrica",
+        "reporte_insvisual",
+        "prueba_neumatica",
+        "perfil_resistividad",
+        "ph_bpa",
+        "ph_bsr",
+        "inspeccion_electromagnetica",
+        "determinación_resistencia",
+        "atenuacion_corriente",
+        "rehabilitacion_anticorrosiva"
+      ];
+      
+      // Loop through the list and substitute "diagrama determinacion_resistencia"
+      for (const item of itemsToSubstitute) {
+        console.log($(`#${item}`)[0])
+        if ($(`#${item}`)[0].files[0]) {
+            
+          formData.append(`${item}`, $(`#${item}`)[0].files[0]);
+        }
+      }
+
+
+
+
+    // Log formData to console for debugging (this will not display the content of the files)
+    for (var pair of formData.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
+    }
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        
+    })
+    .then(data => {
+        console.log(typeof data)
+        console.log(data)
+        if (data.success) {
+            $("#diagramas_tuberia").val('');
+            $("#planos_actualizados_ducto").val('');
+            $("#certificados_materiales").val('');
+            $("#planos_reportes").val('');
+            $("#reportes_condiciones_seguidad").val('');
+            $("#especificaciones_estandares_regulados").val('');
+            $("#planes_respuesta_emergencia").val('');
+            $("#registro_cumplimiento").val('');
+            $("#evaluaciones_tecnicas").val('');
+            $("#manuales_fabricante").val('');
+            alert("Información almacenada correctamente");
+            $('#operacionforms').show();
+            $('#documentalopfrm').hide();
+        }
+    })
+    .catch(error => {
+        alert("Error: " + error);
+    });
+
+}
+
+function updateOperacionDocumental() {
+    if ($("#btn_updatedocumentos_operacion").text() === "Actualizar") {
+        inhabilitarform("#documentalopfrm", false);
+        showDestroyIcons('documentalopfrm',true);
+        $("#btn_updatedocumentos_operacion").text('Guardar');
+    }
+    else {
+        var webMethod = "updateOpDocumental";
+
+        const formData = new FormData();
+        formData.append("id", idOpDocumental)
+        formData.append("kilometro_especifico",$("#km_esp_iden_operacion_documental").val() )
+        formData.append("coordenada_especifica",  $("#coord_esp_iden_x_operacion_documental").val()+' '+$("#coord_esp_iden_y_operacion_documental").val(),)
+        formData.append("C_0101_0001_id", area)
+        // Make sure files are being selected and appended properly
+        const itemsToSubstitute = [
+            "historial_condiciones",
+            "fase_producto",
+            "presencia_cloruros",
+            "cis_documentalop",
+            "dcvgopdocumental",
+            "perfil_potenciales",
+            "mfl_opdocumental",
+            "ultrasonido_haz",
+            "reporte_espesores",
+            "geometra_opdocumental",
+            "calibracion_curvas",
+            "liquidos_penetrantes",
+            "ondas_guiadas",
+            "inspeccion_radiografica",
+            "inspeccion_muestral",
+            "constancias_prueba_hermeticidad",
+            "auditorias_opdocumental",
+            "prueba_dielectrica",
+            "reporte_insvisual",
+            "prueba_neumatica",
+            "perfil_resistividad",
+            "ph_bpa",
+            "ph_bsr",
+            "inspeccion_electromagnetica",
+            "determinación_resistencia",
+            "atenuacion_corriente",
+            "rehabilitacion_anticorrosiva"
+          ];
+          
+          // Loop through the list and substitute "diagrama determinacion_resistencia"
+          for (const item of itemsToSubstitute) {
+            if ($(`#${item}`)[0].files[0]) {
+              formData.append(`${item}`, $(`#${item}`)[0].files[0]);
+            }
+          }
+
+
+        
+        // Log formData to console for debugging (this will not display the content of the files)
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            
+        })
+        .then(data => {
+            if (data.success) {
+
+                alert("Información almacenada correctamente");
+                $('#operacionforms').show();
+                $('#documentalopfrm').hide();
+                $("#btn_updatedocumentos_operacion").text("Actualizar")
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+    }
+}

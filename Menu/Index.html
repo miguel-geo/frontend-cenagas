@@ -2835,163 +2835,7 @@
                             </form>
                         </div>
 
-                        <div id="documentallisisform" style="display:none;margin-top:15px;">
-                            <form role="form" id="identi-form" class="needs-validation">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
-                                    </div>
-                                    <input type="text" class="form-control" id="txtductoanalisisdocumental" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
-                                    </div>
-                                    <input type="text" class="form-control" id="txttramoanalisisdocumental" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
-                                    </div>
-                                    <input type="text" class="form-control" id="txtareaanalisisdocumental" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_iden_x_analisis_documental" aria-describedby="basic-addon1">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_iden_y_analisis_documental" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
-                                    </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_esp_iden_analisis_documental" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3" data-column="diagramas_tuberia">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupFileAddon01">Diagramas de tubería e instrumentación (DTI)</span>
-                                    </div>
-                                    <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="diagramas_tuberia"
-                                               aria-describedby="diagramas_tuberia" lang="es">
-                                        <label class="custom-file-label" for="diagramas_tuberia">Escoje el archivo</label>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3" data-column="planos_actualizados_ducto">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupFileAddon01">Planos actualizados del Ducto, Segmento o sección</span>
-                                    </div>
-                                    <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="planos_actualizados_ducto"
-                                               aria-describedby="planos_actualizados_ducto" lang="es">
-                                        <label class="custom-file-label" for="planos_actualizados_ducto">Escoje el archivo</label>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3" data-column="certificados_materiales">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupFileAddon01">Certificados de materiales</span>
-                                    </div>
-                                    <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="certificados_materiales"
-                                               aria-describedby="certificados_materiales" lang="es">
-                                        <label class="custom-file-label" for="certificados_materiales">Escoje el archivo</label>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3" data-column="planos_reportes">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupFileAddon01">Planos y reportes de reconocimiento de la franja de seguridad</span>
-                                    </div>
-                                    <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="planos_reportes"
-                                               aria-describedby="planos_reportes" lang="es">
-                                        <label class="custom-file-label" for="planos_reportes">Escoje el archivo</label>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3" data-column="reportes_condiciones_seguidad">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupFileAddon01">Reportes sobre las condiciones de seguridad</span>
-                                    </div>
-                                    <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="reportes_condiciones_seguidad"
-                                               aria-describedby="reportes_condiciones_seguidad" lang="es">
-                                        <label class="custom-file-label" for="reportes_condiciones_seguidad">Escoje el archivo</label>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3" data-column="especificaciones_estandares_regulados">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupFileAddon01">Especificaciones y estándares utilizados por los Regulados</span>
-                                    </div>
-                                    <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="especificaciones_estandares_regulados"
-                                               aria-describedby="especificaciones_estandares_regulados" lang="es">
-                                        <label class="custom-file-label" for="especificaciones_estandares_regulados">Escoje el archivo</label>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3" data-column="planes_respuesta_emergencia">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupFileAddon01">Planes de respuesta a emergencia</span>
-                                    </div>
-                                    <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="planes_respuesta_emergencia"
-                                               aria-describedby="planes_respuesta_emergencia" lang="es">
-                                        <label class="custom-file-label" for="planes_respuesta_emergencia">Escoje el archivo</label>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3" data-column="registro_cumplimiento">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupFileAddon01">Registro de Cumplimiento</span>
-                                    </div>
-                                    <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="registro_cumplimiento"
-                                               aria-describedby="registro_cumplimiento" lang="es">
-                                        <label class="custom-file-label" for="registro_cumplimiento">Escoje el archivo</label>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3" data-column="evaluaciones_tecnicas">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupFileAddon01">Evaluaciones Técnicas</span>
-                                    </div>
-                                    <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="evaluaciones_tecnicas"
-                                               aria-describedby="evaluaciones_tecnicas" lang="es">
-                                        <label class="custom-file-label" for="evaluaciones_tecnicas">Escoje el archivo</label>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3" data-column="manuales_fabricante">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupFileAddon01">Manuales del fabricante</span>
-                                    </div>
-                                    <div class="custom-file" id="fileconteinerplano">
-                                        <input type="file" class="custom-file-input setAlg" id="manuales_fabricante"
-                                               aria-describedby="manuales_fabricante" lang="es">
-                                        <label class="custom-file-label" for="manuales_fabricante">Escoje el archivo</label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
-                                    <table class="table" id="tbl_doc_analisis">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Documento</th>
-                                                <th scope="col">Clasificación</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAnalisisDocumental()">Cancelar</button>
-                                    <button type="button" id="btn_newdocumentoss_analisis" onclick="nuevoAnalisisDocumental()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
-                                    <button type="button" id="btn_updatedocumentos_analisis" onclick="updateAnalisisDocumental()" style="display:none" class="btn btn-info">Actualizar</button>
-                                    <button type="button" id="btn_savedocumentos_analisis" onclick="validateForm('documentallisisform', saveAnalisisDocumental)" class="btn btn-success">Guardar</button>
-                                </div>
-                            </form>
-                        </div>
+                       
 
                         <div id="riesdisanalisisform" style="display:none;margin-top:15px;">
                             <form role="form" id="identi-form" class="needs-validation">
@@ -3832,7 +3676,7 @@
                                     </div>
                                 </div>
                                 <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" onclick="fnshowAnalisisDocumental()" class="card-img-top" alt="..." style="cursor: pointer;" onclick="">                                    <div class="card-body">
+                                    <img src="images/formCENAGAS.jpg" onclick="fnshowOperacionDocumental()" class="card-img-top" alt="..." style="cursor: pointer;" onclick="">                                    <div class="card-body">
                                         <h6 class="card-title">Información documental</h6>
                                         <p class="card-text">En éste formulario contendrá información relacionada a...</p>
                                     </div>
@@ -5765,6 +5609,342 @@
                                 </div>
                             </form>
                         </div>
+                        <div id="documentalopfrm" style="display:none;margin-top:15px;">
+                            <form role="form" id="identi-form" class="needs-validation">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ducto</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtductooperaciondocumental" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tramo</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txttramooperaciondocumental" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Área unitaria</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txtareaoperaciondocumental" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_iden_x_operacion_documental" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_iden_y_operacion_documental" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_esp_iden_operacion_documental" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3" data-column="historial_condiciones">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Historial de Condiciones</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="historial_condiciones"
+                                               aria-describedby="historial_condiciones" lang="es">
+                                        <label class="custom-file-label" for="historial_condiciones">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="fase_producto">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Fase del Producto</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="fase_producto"
+                                               aria-describedby="fase_producto" lang="es">
+                                        <label class="custom-file-label" for="fase_producto">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="presencia_cloruros">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Presencia de Cloruros</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="presencia_cloruros"
+                                               aria-describedby="presencia_cloruros" lang="es">
+                                        <label class="custom-file-label" for="presencia_cloruros">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="cis_documentalop">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">CIS</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="cis_documentalop"
+                                               aria-describedby="cis_documentalop" lang="es">
+                                        <label class="custom-file-label" for="cis_documentalop">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="dcvgopdocumental">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">DCVG</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="dcvgopdocumental"
+                                               aria-describedby="dcvgopdocumental" lang="es">
+                                        <label class="custom-file-label" for="dcvgopdocumental">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="perfil_potenciales">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Perfil de Potenciales</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="perfil_potenciales"
+                                               aria-describedby="perfil_potenciales" lang="es">
+                                        <label class="custom-file-label" for="perfil_potenciales">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="mfl_opdocumental">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">MFL</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="mfl_opdocumental"
+                                               aria-describedby="mfl_opdocumental" lang="es">
+                                        <label class="custom-file-label" for="mfl_opdocumental">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="ultrasonido_haz">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Ultrasonido haz recto</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="ultrasonido_haz"
+                                               aria-describedby="ultrasonido_haz" lang="es">
+                                        <label class="custom-file-label" for="ultrasonido_haz">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="reporte_espesores">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Reporte de Espesores</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="reporte_espesores"
+                                               aria-describedby="reporte_espesores" lang="es">
+                                        <label class="custom-file-label" for="reporte_espesores">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="geometra_opdocumental">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Geometra</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="geometra_opdocumental"
+                                               aria-describedby="geometra_opdocumental" lang="es">
+                                        <label class="custom-file-label" for="geometra_opdocumental">Escoje el archivo</label>
+                                    </div>
+                                </div>
+
+                                <div class="input-group mb-3" data-column="calibracion_curvas">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Calibración y Detección de Curvas</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="calibracion_curvas"
+                                               aria-describedby="calibracion_curvas" lang="es">
+                                        <label class="custom-file-label" for="calibracion_curvas">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="liquidos_penetrantes">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Liquidos Penetrantes</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="liquidos_penetrantes"
+                                               aria-describedby="liquidos_penetrantes" lang="es">
+                                        <label class="custom-file-label" for="liquidos_penetrantes">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="ondas_guiadas">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Ondas Guiadas</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="ondas_guiadas"
+                                               aria-describedby="ondas_guiadas" lang="es">
+                                        <label class="custom-file-label" for="ondas_guiadas">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="inspeccion_radiografica">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Inspección Rafiográfica</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="inspeccion_radiografica"
+                                               aria-describedby="inspeccion_radiografica" lang="es">
+                                        <label class="custom-file-label" for="inspeccion_radiografica">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="inspeccion_muestral">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Inspección Muestral</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="inspeccion_muestral"
+                                               aria-describedby="inspeccion_muestral" lang="es">
+                                        <label class="custom-file-label" for="inspeccion_muestral">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="constancias_prueba_hermeticidad">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Constancias de pruebas de hermeticidad y de presión</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="constancias_prueba_hermeticidad"
+                                               aria-describedby="constancias_prueba_hermeticidad" lang="es">
+                                        <label class="custom-file-label" for="constancias_prueba_hermeticidad">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="auditorias_opdocumental">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Auditoria y Revisiones</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="auditorias_opdocumental"
+                                               aria-describedby="auditorias_opdocumental" lang="es">
+                                        <label class="custom-file-label" for="auditorias_opdocumental">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="prueba_dielectrica">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Prueba Dieléctrica de Recubrimiento</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="prueba_dielectrica"
+                                               aria-describedby="prueba_dielectrica" lang="es">
+                                        <label class="custom-file-label" for="prueba_dielectrica">Escoje el archivo</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="input-group mb-3" data-column="reporte_insvisual">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Reporte de Inspección Visual</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="reporte_insvisual"
+                                               aria-describedby="reporte_insvisual" lang="es">
+                                        <label class="custom-file-label" for="reporte_insvisual">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="prueba_neumatica">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Prueba Neumática</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="prueba_neumatica"
+                                               aria-describedby="prueba_neumatica" lang="es">
+                                        <label class="custom-file-label" for="prueba_neumatica">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="perfil_resistividad">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Perfil de Resistividad</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="perfil_resistividad"
+                                               aria-describedby="perfil_resistividad" lang="es">
+                                        <label class="custom-file-label" for="perfil_resistividad">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="ph_bpa">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Perfil PH (bacterias BPA)</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="ph_bpa"
+                                               aria-describedby="ph_bpa" lang="es">
+                                        <label class="custom-file-label" for="ph_bpa">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="ph_bsr">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Perfil PH (bacterias BSR)</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="ph_bsr"
+                                               aria-describedby="ph_bsr" lang="es">
+                                        <label class="custom-file-label" for="ph_bsr">Escoje el archivo</label>
+                                    </div>
+                                </div>
+
+                                <div class="input-group mb-3" data-column="inspeccion_electromagnetica">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Inspección Electromagnética Superficial</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="inspeccion_electromagnetica"
+                                               aria-describedby="inspeccion_electromagnetica" lang="es">
+                                        <label class="custom-file-label" for="inspeccion_electromagnetica">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="determinación_resistencia">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Determinación de Resistencia Remanente</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="determinación_resistencia"
+                                               aria-describedby="determinación_resistencia" lang="es">
+                                        <label class="custom-file-label" for="determinación_resistencia">Escoje el archivo</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="input-group mb-3" data-column="atenuacion_corriente">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Reporte de Inspección Visual</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="atenuacion_corriente"
+                                               aria-describedby="atenuacion_corriente" lang="es">
+                                        <label class="custom-file-label" for="atenuacion_corriente">Escoje el archivo</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3" data-column="rehabilitacion_anticorrosiva">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Rehabilitación Anticorrosiva</span>
+                                    </div>
+                                    <div class="custom-file" id="fileconteinerplano">
+                                        <input type="file" class="custom-file-input setAlg" id="rehabilitacion_anticorrosiva"
+                                               aria-describedby="rehabilitacion_anticorrosiva" lang="es">
+                                        <label class="custom-file-label" for="rehabilitacion_anticorrosiva">Escoje el archivo</label>
+                                    </div>
+                                </div>
+
+
+
+                                <div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
+                                    <table class="table" id="tbl_doc_operacion">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Clasificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelOperacionDocumental()">Cancelar</button>
+                                    <button type="button" id="btn_newdocumentoss_operacion" onclick="nuevoOperacionDocumental()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updatedocumentos_operacion" onclick="updateOperacionDocumental()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_savedocumentos_operacion" onclick="validateForm('documentalopfrm', saveOperacionDocumental)" class="btn btn-success">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
                         <!-- #endregion  -->
                         <!-- #region FORMULARIO DOCUMENTAL -->
                         <div id="documentalfrm" style="display:none;margin-top:15px;">
@@ -5941,6 +6121,17 @@
                                 <option value="Cons6">Inspección</option>
                                 <option value="Cons7">Catódica</option>
                                 <option value="Cons8">Seguridad</option>
+                            </select>
+
+                            <select class="selectpicker form-control" id="cmbTemasOperacion_con" style="display:none">
+                                <option value="0">Selecciona...</option>
+                                <option value="Op1">General</option>
+                                <option value="Op2">Servicio de Operación</option>
+                                <option value="Op3">Historial de Fugas y Derrames</option>
+                                <option value="Op4">Monitoreo de Corrosión externa e interna</option>
+                                <option value="Op5">Historial de reparaciones</option>
+                                <option value="Op6">Vandalismo y daños por terceros</option>
+                                <option value="Op7">Información Documental</option>
                             </select>
                             <select class="selectpicker form-control" id="cmbTemasAnalisis_con" style="display:none">
                                 <option value="0">Selecciona...</option>
@@ -6453,108 +6644,7 @@
                                         </tbody>
                                         <!--Table body-->
                                     </table>
-                                    <!--<table id="tablaAnalisisGral" class="table table-bordered" style="display:none;margin-top:15px;">-->
-                                    <!--Table head-->
-                                    <!--<thead>
-        <tr>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Área unitaria
-                </a>
-            </th>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Coordenada específica
-                </a>
-            </th>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Kilometro específico
-                </a>
-            </th>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Longitud
-                </a>
-            </th>-->
-                                    <!-- <th class="th-lg">
-        <a style="color: #265C4F;">
-            Diametro Nominal (mm)
-        </a>
-    </th> -->
-                                    <!--<th class="th-lg">
-        <a style="color: #265C4F;">
-            Diametro Nominal (in)
-        </a>
-    </th>-->
-                                    <!-- <th class="th-lg">
-        <a style="color: #265C4F;">
-            Espesor de Pared (mm)
-        </a>
-    </th> -->
-                                    <!--<th class="th-lg">
-                <a style="color: #265C4F;">
-                    Espesor de Pared (in)
-                </a>
-            </th>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Especificación de Material
-                </a>
-            </th>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Temperatura (C)
-                </a>
-            </th>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Temperatura (F)
-                </a>
-            </th>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Tipo Costura
-                </a>
-            </th>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Fecha de fabricación inicial
-                </a>
-            </th>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Fecha de fabricación final
-                </a>
-            </th>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Porcentajes(%) de Carbono
-                </a>
-            </th>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Resistencia a la tracción (PSI)
-                </a>
-            </th>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Límite Elástico
-                </a>
-            </th>
-            <th class="th-lg">
-                <a style="color: #265C4F;">
-                    Acciones
-                </a>
-            </th>
-        </tr>
-    </thead>-->
-                                    <!--Table head-->
-                                    <!--Table body-->
-                                    <!--<tbody>
-    </tbody>-->
-                                    <!--Table body-->
-                                    <!--</table>-->
+                                    
                                     <table id="tablaAnalisisGral" class="table table-bordered" style="display:none;margin-top:15px;">
 
                                         <!--Table head-->
@@ -7811,6 +7901,541 @@
                                                         Historial de condiciones
                                                     </a>
                                                 </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Acciones
+                                                    </a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <!--Table head-->
+                                        <!--Table body-->
+                                        <tbody>
+                                        </tbody>
+                                        <!--Table body-->
+                                    </table>
+
+
+                                    <table id="tablaOperacionDocumental" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                        <!--Table head-->
+                                        <thead>
+                                            <tr>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Área unitaria
+                                                    </a>
+                                                </th>
+
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Historial de Condiciones
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Fase de Producto
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Presencia de Cloruros
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        CIS
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        DCVG
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Perfil de Potenciales
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        MFL
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Ultrasonida de Haz Recto
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Reporte de Espesores
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Geometra
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Calibración y Detección de Curvas
+                                                    </a>
+                                                </th>
+
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Liquidos Penetrantes
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Ondas Guiadas
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Inspección Radiográfica
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Inspección Muestral
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Constancia de Prueba de Hermeticidad y de Presión
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Auditorias y Revisiones
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Prueba Dieléctrica del Recubrimiento
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Reporte de Inspección Visual
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Prueba Neumática
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Perfil de Resistividad
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Perfil PH (bacterias BPA)
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Perfil PH (bacterias BSR)
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Inspecc Electromagnética Superficial
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Determinación de resistencia remanente
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Atenuación de Corriente
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Rehabilitación Anticorrosiva
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Acciones
+                                                    </a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <!--Table head-->
+                                        <!--Table body-->
+                                        <tbody>
+                                        </tbody>
+                                        <!--Table body-->
+                                    </table>
+
+                                    <table id="tablaOperacionVandalismo" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                        <!--Table head-->
+                                        <thead>
+                                            <tr>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Área unitaria
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                       Coordenada Específica
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Kilometro Específico
+                                                    </a>
+                                                </th>
+
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Residencia
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Poblado
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Municipio
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Estado
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Tipo de vandalismo
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Tipo de evento
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Fecha
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Hora de ocurrencia del evento
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Horario final de reparación
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Hora de control del evento
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Arreglo de contención
+                                                    </a>
+                                                </th>
+
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Tipo de reparación
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Observaciones
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        No. Oficio ASEA
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Reporte siniestro entregado
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        No. Siniestro
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        No.
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Evento I II III
+                                                    </a>
+                                                </th>
+                                                
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Acciones
+                                                    </a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <!--Table head-->
+                                        <!--Table body-->
+                                        <tbody>
+                                        </tbody>
+                                        <!--Table body-->
+                                    </table>
+                                    <table id="tablaOperacionHistorialReparaciones" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                        <!--Table head-->
+                                        <thead>
+                                            <tr>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Área unitaria
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                       Coordenada Específica
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Kilometro Específico
+                                                    </a>
+                                                </th>
+
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Fecha de instalación 
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Cuenta con recubrimiento
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        El manguito está presurizado
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Se encuentra soldado el manguito
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Fecha de fabricación
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Fabricante
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Material
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Presión máxima de diseño
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Tipo de manguito
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        No. de Serie
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Estado
+                                                    </a>
+                                                </th>
+
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Especificación tubería
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Espesor nominal
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Prueba hidrostática
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Fecha de prueba
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Equipo
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Longitud del envolvente
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Observación
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Fecha de inspección con líquidos penetrantes 
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Tipo de recubrimiento aplicado
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Prueba hidrostáticaLongitud de recubrimiento
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Indicadores
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Defecto (ID)
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Fecha de reparación 
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Tipo de falla
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Modo reparación
+                                                    </a>
+                                                </th>
+                                                
+                                                
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Acciones
+                                                    </a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <!--Table head-->
+                                        <!--Table body-->
+                                        <tbody>
+                                        </tbody>
+                                        <!--Table body-->
+                                    </table>
+                                    <table id="tablaOperacionCorrosion" class="table table-bordered" style="display:none;margin-top:15px;">
+
+                                        <!--Table head-->
+                                        <thead>
+                                            <tr>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Área unitaria
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                       Coordenada Específica
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Kilometro Específico
+                                                    </a>
+                                                </th>
+
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Unidades de medida
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Cupones
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Fecha de instalación
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Fecha de retiro
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Fecha de registro
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Nombre del cupón
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Peso
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Peso final
+                                                    </a>
+                                                </th>
+                                                <th class="th-lg">
+                                                    <a style="color: #265C4F;">
+                                                        Velocidad de corrosión
+                                                    </a>
+                                                </th>
+                                                
                                                 <th class="th-lg">
                                                     <a style="color: #265C4F;">
                                                         Acciones
