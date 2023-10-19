@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -14355,33 +14355,7 @@ function showotrotipoventilacion() {
 //#endregion
 //#endregion
 
-//#region Instalaciones
-async function fnshowOperacionInstalacion(id_d = null) {
-    $('#instalacionesoperacionfrm').show();
-    $('#operacionforms').hide();
-    try {
-        //await loadtipovandalismoOp();
-        //await loadtipoeventovandalismoOp();
-        //await loadtiporecuperacionhisvandalismoOp();
-        if (id_d) {
-          //  await consultaDatosVandalismogOperacion(id_d = id_d);
-        }
-        else {
-           // consultaDatosVandalismogOperacion();
-        }
 
-        //// If you want to do something after all functions have completed, you can do it here
-
-    } catch (error) {
-        console.error("An error occurred:", error);
-    }
-    // resetValidationClasses('planosanalisisform');
-}
-
-
-
-
-//#endregion
 
 //Operacion Documental
 
