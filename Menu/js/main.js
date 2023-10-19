@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -148,6 +148,7 @@ $(document).ready(function () {
                 document.getElementById('txtkmfinal').value = data[0].km_final;
                 document.getElementById('txtkmOrigen').value = data[0].km_origen;
                 document.getElementById('txtkmDestino').value = data[0].km_destino;
+                tramo=data[0].tramo_id
 
               })
               .catch(error => console.error("Error fetching data: ", error));
@@ -466,7 +467,7 @@ function inicializarEventos() {
         
         let row_id = e.currentTarget.dataset["id"];
 
-        
+
     
         switch (temaconsulta) {
             case "T1":
@@ -2443,6 +2444,64 @@ function llenarDatosActualizacionPresion(data) {
 //#endregion
 //#region FORMULARIOS DISEÑO
 
+
+function saveDisenioPresion()  {
+    var webMethod = "savePresion";
+    var params = {
+        area_unitaria_id: area,
+        entidad: $("#txtEntidadEmpresa").val(),
+        fecha_calculo: $("#txtfechacalculo").val(),
+        metodo_calculo: $("#txtMetodoCalculo").val(),
+        presion_nom_psi: $("#txtPresNomPSI").val(),
+        presion_dis_psi: $("#txtPresDisenio").val(),
+        presion_red_psi: $("#txtPresRedPSI").val(), 
+        coordenada_especifica: $("#coord_esp_iden_pres_x").val()+' '+$("#coord_esp_iden_pres_y").val(),
+        kilometro_especifico: $("#km_esp_iden_pres").val(),
+        pres_nominal: $("#cmbunidadpresnominal").val(),
+        pres_disenio: $("#cmbunidadpresiondisenio").val(),
+        pres_max_ope: $("#cmbunidadpresionmaxope").val(),
+        pres_segmento: $("#cmbunidadpresionsegmento").val()
+    };
+    var formData = new FormData();
+    formData.append('file', $("#filediseniopresion")[0].files[0]);
+    Object.keys(params).forEach(key => formData.append(key, params[key]));
+
+    if ($("#txtPresDisenio").val() != "") {
+        var i = 0;
+        for (var value of formData.values()) {
+            console.log(value + " i: "+ i);
+        }
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        console.log(response)
+        return response.json();
+        
+    })
+    .then(data => {
+        if (data.success) {
+            console.log(data.data);
+            alert("Información almacenada correctamente");
+            $('#disenioforms').show();
+            $('#presionfrm').hide();
+        }
+    })
+    .catch(error => {
+        alert("Error: " + error);
+    });
+
+}
+
+else {
+    alert("Es necesario ingresar Presión de diseño (PSI)")
+}
+}
+
 function updateDiseniopresion() {
     if ($("#btn_updatepresion").text() === "Actualizar") {
         inhabilitarform("#presionfrm", false);
@@ -2452,18 +2511,14 @@ function updateDiseniopresion() {
     else {
         
         var params = {
-            id: idDiseniopresion,
-            C_0101_0001_id: area,
-            C_0206_0017: $("#txtEntidadEmpresa").val(),
-            C_0206_0018: $("#txtfechacalculo").val(),
-            C_0206_0019: $("#txtMetodoCalculo").val(),
-            C_0206_0020: $("#txtPresNomPSI").val(),
-            C_0206_0021: $("#txtPresNomKG").val(),
-            C_0206_0022: $("#txtPresDisenio").val(),
-            C_0206_0023: $("#txtPresMaxPSI").val(),
-            C_0206_0024: $("#txtPresMaxKG").val(),
-            C_0206_0025: $("#txtPresRedPSI").val(),
-            C_0206_0026: $("#txtPresRedKG").val(),
+            id:idDiseniopresion,
+            area_unitaria_id: area,
+            entidad: $("#txtEntidadEmpresa").val(),
+            fecha_calculo: $("#txtfechacalculo").val(),
+            metodo_calculo: $("#txtMetodoCalculo").val(),
+            presion_nom_psi: $("#txtPresNomPSI").val(),
+            presion_dis_psi: $("#txtPresDisenio").val(),
+            presion_red_psi: $("#txtPresRedPSI").val(), 
             coordenada_especifica: $("#coord_esp_iden_pres_x").val()+' '+$("#coord_esp_iden_pres_y").val(),
             kilometro_especifico: $("#km_esp_iden_pres").val(),
             pres_nominal: $("#cmbunidadpresnominal").val(),
@@ -2471,23 +2526,37 @@ function updateDiseniopresion() {
             pres_max_ope: $("#cmbunidadpresionmaxope").val(),
             pres_segmento: $("#cmbunidadpresionsegmento").val()
         };
-        var webMethod = "";
-        webMethod = "updatePresion";
-        $.ajax({
-            type: "POST",
-            url: apiUrl + webMethod,
+        var formData = new FormData();
+        formData.append('file', $("#filediseniopresion")[0].files[0]);
+        Object.keys(params).forEach(key => formData.append(key, params[key]));
+        var webMethod = "updatePresion";
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
             headers: {
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                // Other headers go here. For example:
+                // 'Authorization': 'Bearer YOUR_TOKEN'
             },
-            data: params,
-            success: function (data) {
-                alert("El registro fue actualizado correctamente");
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+            
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
                 $('#disenioforms').show();
                 $('#presionfrm').hide();
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-
             }
+        })
+        .catch(error => {
+            alert("Error: " + error);
         });
     }
 }
@@ -3541,8 +3610,8 @@ function updateConstruccionSeguridad() {
 
         const formData = new FormData();
         formData.append("id", idConsSeguridad)
-        formData.append("kilometro_especifico",$("#km_esp_idenprep").val() )
-        formData.append("coordenada_especifica",  $("#coord_esp_idenprep_x").val()+' '+$("#coord_esp_idenprep_y").val(),)
+        formData.append("kilometro_especifico",$("#km_esp_idenpseg").val() )
+        formData.append("coordenada_especifica",  $("#coord_esp_idenpseg_x").val()+' '+$("#coord_esp_idenpseg_x").val(),)
         formData.append("C_0101_0001_id", area)
         // Make sure files are being selected and appended properly
         if($("#C_0312_122")[0].files[0]) {
@@ -3648,6 +3717,7 @@ function fnshowdisenioforms() {
 function fnsshowconstruforms() {
     $('#construforms').show();
     $('#forms').hide();
+     
 
 }
 function fnsshowAnalisisforms() {
@@ -3660,6 +3730,7 @@ async function fnshowmetunion(id_d=null) {
 
     $('#metodounionfrm').show();
     $('#construforms').hide();
+
     try {
 
         await loadtipotecnica();
@@ -3682,6 +3753,7 @@ async function fnshowmetunion(id_d=null) {
 function fnshowprofenterrado(id_d=null) {
     $('#profenterradofrm').show();
     $('#construforms').hide();
+
     
 
     if (id_d){
@@ -3702,6 +3774,7 @@ async function fnshowprotipocruces(id_d=null) {
     //loadCmbC $('#identificacionfrm').show();  
     $('#tiposcrucesfrm').show();
     $('#construforms').hide();
+
     try {
         await loadCmbCruceServicio();
         await loadCmbCruceTuberia();
@@ -5980,62 +6053,7 @@ function cancelotroTipoRecubrimiento() {
 function cancelotroCostura() {
     $("#espCostura").hide();
 }
-function saveDisenioPresion()  {
-    var webMethod = "savePresion";
-    var params = {
-        area_unitaria_id: area,
-        entidad: $("#txtEntidadEmpresa").val(),
-        fecha_calculo: $("#txtfechacalculo").val(),
-        metodo_calculo: $("#txtMetodoCalculo").val(),
-        presion_nom_psi: $("#txtPresNomPSI").val(),
-        presion_dis_psi: $("#txtPresDisenio").val(),
-        presion_red_psi: $("#txtPresRedPSI").val(), 
-        coordenada_especifica: $("#coord_esp_iden_pres_x").val()+' '+$("#coord_esp_iden_pres_y").val(),
-        kilometro_especifico: $("#km_esp_iden_pres").val(),
-        pres_nominal: $("#cmbunidadpresnominal").val(),
-        pres_disenio: $("#cmbunidadpresiondisenio").val(),
-        pres_max_ope: $("#cmbunidadpresionmaxope").val(),
-        pres_segmento: $("#cmbunidadpresionsegmento").val()
-    };
-    var formData = new FormData();
-    formData.append('file', $("#filediseniopresion")[0].files[0]);
-    Object.keys(params).forEach(key => formData.append(key, params[key]));
 
-    if ($("#txtPresDisenio").val() != "") {
-        var i = 0;
-        for (var value of formData.values()) {
-            console.log(value + " i: "+ i);
-        }
-    fetch(apiUrl + webMethod, {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        console.log(response)
-        return response.json();
-        
-    })
-    .then(data => {
-        if (data.success) {
-            console.log(data.data);
-            alert("Información almacenada correctamente");
-            $('#disenioforms').show();
-            $('#presionfrm').hide();
-        }
-    })
-    .catch(error => {
-        alert("Error: " + error);
-    });
-
-}
-
-else {
-    alert("Es necesario ingresar Presión de diseño (PSI)")
-}
-}
 function saveDisenioProteccion() {
     var webMethod = "saveProteccion";
     var params = {
@@ -8232,7 +8250,7 @@ async function fnshowAnalisisGeneral(id_d = null) {
     } catch (error) {
         console.error("An error occurred:", error);
     }
-    resetValidationClasses('identificacionfrm');
+    resetValidationClasses('generalanalisisform');
 }
 function cancelAnalisisGeneral() {
     $('#analisisforms').show();
@@ -10094,7 +10112,7 @@ async function fnshowAnalisisIngenieria(id_d = null) {
     } catch (error) {
         console.error("An error occurred:", error);
     }
-    resetValidationClasses('riesgosincidentesanalisisform');
+    resetValidationClasses('ingenieriaanalisisform');
 }
 function loadtiporegulacion() {
     return new Promise((resolve, reject) => {
@@ -10917,6 +10935,12 @@ function llenarTablasdocuments(obj, nameTabla) {
   $('#' + nameTabla).append(row);
 }
 //#endregion
+
+
+
+
+
+
 //#region Historail de Fugas 
 function fnsshowOperacionforms() {
     $('#operacionforms').show();
@@ -11285,7 +11309,7 @@ function cancelOperacioMonitoreo() {
 function consultaDatosHistFugOperacion(id_d = null) {
     const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
     existingDownloadIcons.forEach(icon => icon.remove());
-    //get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
+    get_relateddocuments(tramo, area, 21, "tbl_histfug_operacion");
     var webMethod;
     var params;
     if (id_d) {
@@ -11432,7 +11456,7 @@ async function fnshowOperacionMonitoreoCorrosion(id_d = null) {
 function consultaDatosMonitoreoCorrosionOperacion(id_d = null) {
     const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
     existingDownloadIcons.forEach(icon => icon.remove());
-    //get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
+    get_relateddocuments(tramo, area, 22, "tbl_moncorr_operacion");
     var webMethod;
     var params;
     if (id_d) {
@@ -11866,7 +11890,7 @@ function saveotroTipoFallaHistRepOp() {
 function consultaDatosHistRepOperacion(id_d = null) {
     const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
     existingDownloadIcons.forEach(icon => icon.remove());
-    //get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
+    get_relateddocuments(tramo, area, 23, "tbl_hisrep_operacion");
     var webMethod;
     var params;
     if (id_d) {
@@ -12485,7 +12509,7 @@ function cancelOperacionVandalismo() {
 function consultaDatosVandalismogOperacion(id_d = null) {
     const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
     existingDownloadIcons.forEach(icon => icon.remove());
-    //get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
+    get_relateddocuments(tramo, area, 24, "tbl_vand_operacion");
     var webMethod;
     var params;
     if (id_d) {
@@ -12636,10 +12660,16 @@ async function fnshowOperacionInstalacion(id_d = null) {
     }
     // resetValidationClasses('planosanalisisform');
 }
+
+
+function cancelOperacionInstalaciones(){
+    $('#operacionforms').show();
+    $('#instalacionesoperacionfrm').hide();
+}
 function consultaDatosInstalacionesOperacion(id_d = null) {
     const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
     existingDownloadIcons.forEach(icon => icon.remove());
-    //get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
+   get_relateddocuments(tramo, area, 20, "tbl_instalaciones_operacion");
     var webMethod;
     var params;
     if (id_d) {
@@ -14357,7 +14387,7 @@ function showotrotipoventilacion() {
 
 
 
-//Operacion Documental
+//#Operacion Documental
 
 
 
@@ -14398,7 +14428,7 @@ function nuevoOperacionDocumental(){
 function consultaDatosOpDocumental(id_d = null) {
     const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
     existingDownloadIcons.forEach(icon => icon.remove());
-    get_relateddocuments(tramo, area, 18, "tbl_doc_operacion");
+    get_relateddocuments(tramo, area, 25, "tbl_doc_operacion1");
     clearAllFileInputsInDiv('documentalopfrm')
     clearInputTextValues('documentalopfrm');
     var webMethod;
