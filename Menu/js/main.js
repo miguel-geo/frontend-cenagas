@@ -2130,6 +2130,8 @@ function nuevoDisenioServicio(){
 
 
 function consultaDatosServicio(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
     get_relateddocuments(tramo,area,26,'tbl_serv_disenio')
     clearAllFileInputsInDiv('serviciofrm')
     var webMethod;
