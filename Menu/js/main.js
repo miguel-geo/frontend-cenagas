@@ -22,8 +22,18 @@ var contar_longitud=0;
 var headers;
 var headers1;
 var token;
+let redirectTimeout;  
+
+window.addEventListener("load", function() {
+    // Set the timeout for 10 seconds (or however long you want)
+    redirectTimeout = setTimeout(function() {
+        console.log('No message received within the timeout. Redirecting...');
+        window.top.location.href = "http://www.example.com/newpage.html";
+    }, 100);  // 10000 milliseconds = 10 seconds
+});
 
 window.addEventListener("message", function(event) {
+    clearTimeout(redirectTimeout);
     // In a real environment, you should verify that the message comes from the expected domain
     // if (event.origin !== "http://192.168.0.241:8080") return;
     console.log('Message received');  
@@ -31,49 +41,76 @@ window.addEventListener("message", function(event) {
 
     if (data.accion === "autenticar") {
         // Here you can add the logic to authenticate the user
-        if (data.username!==undefined&&data.token!==undefined){
-        console.log("Username: " + data.username);
-        console.log("Token: " + data.token);
-        var method = 'usergetorcreate';
-        console.log( JSON.stringify({
-            username: data.username,
-            // Include any other user data you want to send to the backend
-        }))
-        // Send data to backend
-        fetch(apiUrl+method, {
-            method: 'POST',
-            headers:{
-                'Accept': 'application/json',
-                
-    'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: data.username,
-                // Include any other user data you want to send to the backend
-            })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-            
-        })
-        .then(data => {
+        if (data.username !== undefined && data.token !== undefined) {
+            console.log("Username: " + data.username);
+            console.log("Token: " + data.token);
 
-            var token=data['token']
-            console.log('token',token)
-            localStorage.removeItem('token');
-            localStorage.setItem('token',token);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            localStorage.removeItem('token');
-        });
-    }else {window.top.location.href = "http://www.example.com/newpage.html";}
-}
+            // First verify the token
+            verifyToken(data.token)
+            .then(isTokenValid => {
+                if (isTokenValid) {
+                    // If token is valid, proceed with usergetorcreate request
+                    var method = 'usergetorcreate';
+                    return fetch(apiUrl + method, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: data.username,
+                            // Include any other user data you want to send to the backend
+                        })
+                    });
+                } else {
+                    throw new Error('Invalid token');
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                var token = data['token'];
+                console.log('token', token);
+                localStorage.removeItem('token');
+                localStorage.setItem('token', token);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                localStorage.removeItem('token');
+                window.top.location.href = "http://www.example.com/newpage.html";
+            });
+        }
+    }
 });
 
+function verifyToken(token) {
+    // Replace with your API endpoint to verify the token
+    const verifyTokenApiUrl = 'http://216.238.69.130:8080/api/auth/token';
+
+    return fetch(verifyTokenApiUrl, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "refreshToken": token
+        })
+    })
+    .then(response => {
+        // If the response is OK (status 200-299), consider the token as valid.
+        // Otherwise, consider it as invalid.
+        return response.ok;
+    })
+    .catch(error => {
+        console.error('Error verifying token:', error);
+        return false;
+    });
+}
 
 token = localStorage.getItem('token');
 
