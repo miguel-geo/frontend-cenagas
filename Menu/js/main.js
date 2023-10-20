@@ -7035,7 +7035,7 @@ function consulta() {
                     case "Op1":
                         $('#tablaOperacionGeneral tbody')[0].innerHTML = "";
                         $('#tablaOperacionGeneral tbody:not(:first)').remove();
-                        var webMethodFugas = "et_OperacionGral";
+                        var webMethodFugas = "get_OperacionGral";
                         $.ajax({
                             type: "POST",
                             url: apiUrl + webMethodFugas,
