@@ -584,7 +584,7 @@ function inicializarEventos() {
                 switch (temaconsultaoperacion) {
                     case "Op1"://Pendiente
                         consultatoform(e);
-                        getAreaIdById("getAreaIdByOperacionVandalismoId", row_id).then(data => {
+                        getAreaIdById("getAreaIdByOperacionGralId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
                             area = data.area_unitaria_id;
                             fnshowOperacionGeneral(id_d = row_id);
@@ -7005,6 +7005,33 @@ function consulta() {
             case "T3":
                 console.log(temaconsultaoperacion)
                 switch (temaconsultaoperacion) {
+                    case "Op1":
+                        $('#tablaOperacionGeneral tbody')[0].innerHTML = "";
+                        $('#tablaOperacionGeneral tbody:not(:first)').remove();
+                        var webMethodFugas = "get_OperacionGral";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodFugas,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+
+                                    var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
+                                        'C_0403_211',
+                                        'C_0414_253',
+                                        'dato_propiedad',
+                                        'tipo_propiedad',
+                                        'tramo'];
+
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablaOperacionGeneral", keysForPresion);
+
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
                     case "Op2":
                         $('#tablaOperacionInstalaciones tbody')[0].innerHTML = "";
                         $('#tablaOperacionInstalaciones tbody:not(:first)').remove();
