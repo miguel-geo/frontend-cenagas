@@ -14771,7 +14771,7 @@ async function fnshowOperacionGeneral(id_d = null) {
     } catch (error) {
         console.error("An error occurred:", error);
     }
-    // resetValidationClasses('planosanalisisform');
+    resetValidationClasses('generaloperacionfrm');
 }
 function addpropertytotable() {
     llenarTablasGraloperacion('tbl_gral_propiedades', $("#txtdatoprop").val(), $("#cmbtipoprop").val());
@@ -14791,7 +14791,7 @@ function llenarTablasGraloperacion(nameTabla, propiedad, tipo) {
 function consultaDatosGeneralperacion(id_d = null) {
     const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
     existingDownloadIcons.forEach(icon => icon.remove());
-    //get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
+    get_relateddocuments(tramo, area, 19, "tbl_gralOperacion");
     var webMethod;
     var params;
     if (id_d) {
