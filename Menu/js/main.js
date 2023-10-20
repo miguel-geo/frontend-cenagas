@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -1185,31 +1185,31 @@ function inicializarEventos() {
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 ocultartablasanalisis()
-                $("#tablaOperacionDocumental").hide();
+                ocultartablasoperacion();
                 $("#tablaOperacionGeneral").show();
                 break;
             case "Op2":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 ocultartablasanalisis()
-                $("#tablaOperacionDocumental").hide();
+                ocultartablasoperacion();
                 $("#tablaOperacionInstalaciones").show();
                 break;
             case "Op3":
+                ocultartablasoperacion();
                 $("#tablaOperacionFugas").show();
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 ocultartablasanalisis()
-                $("#tablaOperacionDocumental").hide();
                 break;
             case "Op4":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 ocultartablasanalisis()
-                $("#tablaOperacionVandalismo").hide()
+                ocultartablasoperacion();
+
                 $("#tablaOperacionCorrosion").show();
-                $("#tablaOperacionDocumental").hide();
-                $("#tablaOperacionHistorialReparaciones").hide();
+
 
                 
             break;
@@ -1217,9 +1217,7 @@ function inicializarEventos() {
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 ocultartablasanalisis()
-                $("#tablaOperacionVandalismo").hide()
-                $("#tablaOperacionCorrosion").hide();
-                $("#tablaOperacionDocumental").hide();
+                ocultartablasoperacion();
                 $("#tablaOperacionHistorialReparaciones").show();
                 
 
@@ -1228,20 +1226,18 @@ function inicializarEventos() {
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 ocultartablasanalisis()
+                ocultartablasoperacion();
                 $("#tablaOperacionVandalismo").show()
-                $("#tablaOperacionCorrosion").hide();
-                $("#tablaOperacionDocumental").hide();
-                $("#tablaOperacionHistorialReparaciones").hide();
+
 
                 break;
             case "Op7":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 ocultartablasanalisis()
-                $("#tablaOperacionVandalismo").hide()
-                $("#tablaOperacionCorrosion").hide();
+                ocultartablasoperacion();
                 $("#tablaOperacionDocumental").show();
-                $("#tablaOperacionHistorialReparaciones").hide();
+
                 break;
             default:
         }
@@ -1496,6 +1492,8 @@ function ocultartablasoperacion() {
                 $("#tablaOperacionCorrosion").hide();
                 $("#tablaOperacionDocumental").hide();
                 $("#tablaOperacionHistorialReparaciones").hide();
+                $("#tablaOperacionFugas").hide();
+                $("#tablaOperacionInstalaciones").hide();
 
 
 }
@@ -11129,7 +11127,7 @@ async function fnshowOperacionHistorialFugas(id_d = null) {
     } catch (error) {
         console.error("An error occurred:", error);
     }
-   // resetValidationClasses('planosanalisisform');
+   resetValidationClasses('historialfugasderramesoperacionfrm');
 }
 function loadtipohisfugasOp() {
     return new Promise((resolve, reject) => {
@@ -11571,8 +11569,8 @@ function llenarDatosHisFugOp(data) {
     $("#txtoficioaseahisfug").val(data[0].C_0406_227);
     $("#txtreportesiniestrohisfug").val(data[0].C_0406_228);
     $("#txtnosiniestrohisfug").val(data[0].C_0406_229);
-    $("#txtnohisfug").val(data[0].C_0406_231);
-    $("#txtevento_hisfug").val(data[0].C_0210_0033);
+    $("#txtnohisfug").val(data[0].C_0406_230);
+    $("#txtevento_hisfug").val(data[0].C_0406_230);
     idHistFugOp = data[0].id;
     inhabilitarform("#historialfugasderramesoperacionfrm", true);
 }
@@ -11615,7 +11613,7 @@ async function fnshowOperacionMonitoreoCorrosion(id_d = null) {
     } catch (error) {
         console.error("An error occurred:", error);
     }
-    // resetValidationClasses('planosanalisisform');
+   resetValidationClasses('monitoreocorrosionoperacionfrm');
 }
 function consultaDatosMonitoreoCorrosionOperacion(id_d = null) {
     const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
@@ -11836,7 +11834,7 @@ async function fnshowOperacionHistorialReparaciones(id_d = null) {
     } catch (error) {
         console.error("An error occurred:", error);
     }
-    // resetValidationClasses('planosanalisisform');
+    resetValidationClasses('historialreparacionesoperacionfrm');
 }
 function loadtipomanguitoOp() {
     return new Promise((resolve, reject) => {
