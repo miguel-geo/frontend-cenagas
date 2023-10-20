@@ -11100,7 +11100,7 @@ async function fnshowOperacionHistorialFugas(id_d = null) {
     } catch (error) {
         console.error("An error occurred:", error);
     }
-   // resetValidationClasses('planosanalisisform');
+   resetValidationClasses('historialfugasderramesoperacionfrm');
 }
 function loadtipohisfugasOp() {
     return new Promise((resolve, reject) => {
@@ -11542,8 +11542,8 @@ function llenarDatosHisFugOp(data) {
     $("#txtoficioaseahisfug").val(data[0].C_0406_227);
     $("#txtreportesiniestrohisfug").val(data[0].C_0406_228);
     $("#txtnosiniestrohisfug").val(data[0].C_0406_229);
-    $("#txtnohisfug").val(data[0].C_0406_231);
-    $("#txtevento_hisfug").val(data[0].C_0210_0033);
+    $("#txtnohisfug").val(data[0].C_0406_230);
+    $("#txtevento_hisfug").val(data[0].C_0406_230);
     idHistFugOp = data[0].id;
     inhabilitarform("#historialfugasderramesoperacionfrm", true);
 }
@@ -11586,7 +11586,7 @@ async function fnshowOperacionMonitoreoCorrosion(id_d = null) {
     } catch (error) {
         console.error("An error occurred:", error);
     }
-    // resetValidationClasses('planosanalisisform');
+   resetValidationClasses('monitoreocorrosionoperacionfrm');
 }
 function consultaDatosMonitoreoCorrosionOperacion(id_d = null) {
     const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
@@ -11807,7 +11807,7 @@ async function fnshowOperacionHistorialReparaciones(id_d = null) {
     } catch (error) {
         console.error("An error occurred:", error);
     }
-    // resetValidationClasses('planosanalisisform');
+    resetValidationClasses('historialreparacionesoperacionfrm');
 }
 function loadtipomanguitoOp() {
     return new Promise((resolve, reject) => {
