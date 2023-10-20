@@ -335,7 +335,11 @@ function loadTramosCon() {
 
 }
 function inicializarEventos() {
-
+    $(document).on("click", ".deleteprop", function (e) {       
+        if (confirm("¿Seguro quiere borrar ese registro?")) {
+            $(this).closest('tr').remove();
+        }
+    });
     document.getElementById('filepruebabasecons').addEventListener('change', handleFileSelect, false);
     $(document).on("click", ".delete", function (e) {
         temaconsulta=$("#cmbTemasPrincipal_con").val() ;
@@ -1643,6 +1647,7 @@ function fnFinalizar() {
 function inhabilitarform(divSelector, bandera) {
     $(divSelector + " input.setAlg").prop("disabled", bandera);
     $(divSelector + " select.setAlg").prop("disabled", bandera);
+    $(divSelector + " table.setAlg").prop("disabled", bandera);
 }
 //#region Actulizacion Diseño
 function nuevoIdentificacionDisenio(){
@@ -7523,9 +7528,6 @@ $('#tablas').on('click', 'table tbody tr.hideable-row', function() {
 
 
 function llenarTablas(obj, nameTabla) {
-    
-    
-    
     var category = obj.pop(); 
     // Assuming 4th column determines category
     var row = '<tr class="content-row">';
@@ -14707,3 +14709,304 @@ function updateOperacionDocumental() {
         });
     }
 }
+//#region Operación General
+function nuevoOperacionGral() {
+
+    $("#btn_saveMonitoreoCorrosion_operacion").show();
+    $("#btn_newMonitoreoCorrosion_operacion").hide();
+    $("#btn_updateMonitoreoCorrosion_operacion").hide();
+    clearInputTextValuesNew('monitoreocorrosionoperacionfrm');
+    inhabilitarform("#monitoreocorrosionoperacionfrm", false);
+
+}
+async function fnshowOperacionGeneral(id_d = null) {
+    $('#generaloperacionfrm').show();
+    $('#operacionforms').hide();
+ 
+    try {
+        if (id_d) {
+            await consultaDatosGeneralperacion(id_d = id_d);
+        }
+        else {
+            consultaDatosGeneralperacion();
+        }
+
+        //// If you want to do something after all functions have completed, you can do it here
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+    // resetValidationClasses('planosanalisisform');
+}
+function addpropertytotable() {
+    llenarTablasGraloperacion('tbl_gral_propiedades', $("#txtdatoprop").val(), $("#cmbtipoprop").val());
+    $("#txtdatoprop").val('');
+    $("#cmbtipoprop").val(0);
+}
+function llenarTablasGraloperacion(nameTabla, propiedad, tipo) {
+    // $('#tablaPersonas tbody')[0].innerHTML = "";
+    var row = '<tr>';
+    row = row + '<td>' + propiedad + '</td>';
+    row = row + '<td>' + tipo + '</td>';
+    row = row + '<td><a class="deleteprop" title="Eliminar" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>';
+    row = row + '</tr>';
+    $('#' + nameTabla + ' tbody').append(row);
+    
+}
+function consultaDatosGeneralperacion(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    //get_relateddocuments(tramo, area, 1, "tbl_iden_disenio");
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getGeneralOperacionById";
+        params = {
+            id: id_d
+        };
+    }
+
+    else {
+
+        webMethod = "get_OperacionGral";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+            op: 1
+        };
+    }
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        headers: {
+            'Accept': 'application/json'
+        },
+        success: function (data) {
+            if (data.success) {
+                var infodata;
+                if (webMethod === "getGeneralOperacionById")
+                    infodata = (data.data);
+                else if (webMethod === "get_OperacionGral")
+                    infodata = (data.data.datagrid);
+                if (infodata.length > 0) {
+                    if (webMethod === "getGeneralOperacionById")
+                        llenarDatosGeneralOperacion(infodata);
+                    else if (webMethod === "get_OperacionGral")
+                        llenarDatosGeneralOperacion(infodata);
+                    $("#btn_saveconsgeneralOp").hide();
+                    $("#btn_updateconsgeneralOp").show();
+                    $("#btn_newconsgeneralOp").show();
+                }
+                else {
+                    clearInputTextValues('generaloperacionfrm');
+                    inhabilitarform("#generaloperacionfrm", false)
+                    $("#btn_saveconsgeneralOp").show();
+                    $("#btn_updateconsgeneralOp").hide();
+
+                }
+
+                getNamesByAreaUnitariaId(area).then(data => {
+                    let area_unitaria_nombre = data.area_unitaria_nombre;
+                    let tramo_nombre = data.tramo_nombre;
+                    let ducto_nombre = data.ducto_nombre;
+
+                    $("#txtductogeneraloperacion").val(ducto_nombre);
+                    $("#txttramogeneraloperacion").val(tramo_nombre);
+                    $("#txtareageneraloperacion").val(area_unitaria_nombre);
+                });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+
+}
+var idGeneralOp;
+function llenarDatosGeneralOperacion(data) {
+
+    $("#btn_updateconsgeneralOp").text('Actualizar');
+    if (data[0].coordenada_especifica !== "" && data[0].coordenada_especifica !== null) {
+        const coords = data[0].coordenada_especifica.split(' ');
+        $("#coord_esp_gralop_x").val(coords[0]);
+        $("#coord_esp_gralopl_y").val(coords[1]);
+    }
+    else {
+        $("#coord_esp_gralop_x").val("");
+        $("#coord_esp_gralopl_y").val("");
+    }
+    $("#km_esp_gralop").val(data[0].kilometro_especifico);
+    $("#txtvolumentrans").val(data[0].C_0403_211);
+    $("#cmbcrucesotrosductos option:contains(" + data[0].C_0414_253 + ")").attr('selected', 'selected');
+    $('#tbl_gral_propiedades tbody')[0].innerHTML = "";
+    data.forEach(function (da) {
+        llenarTablasGraloperacion('tbl_gral_propiedades', da.dato_propiedad, da.tipo_propiedad);
+    });
+    idGeneralOp = data[0].id;
+    inhabilitarform("#generaloperacionfrm", true);
+}
+function saveGeneralOp() {
+    var webMethod = "createGeneralOp";
+    const formData = new FormData();
+    formData.append("C_0101_0001_id", area);
+    formData.append("C_0403_211", $("#txtvolumentrans").val());
+    formData.append("C_0414_253", $("#cmbcrucesotrosductos").val());
+    formData.append("kilometro_especifico", $("#km_esp_gralop").val());
+    formData.append("coordenada_especifica", $("#coord_esp_gralop_x").val() + ' ' + $("#coord_esp_gralopl_y").val());
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                saveGeneralDetalleOp(data.datos.id);
+                // alert("Información almacenada correctamente");
+
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function saveGeneralDetalleOp(idproperty) {
+    var webMethod = "saveDetailProperties";
+    const formData = new FormData();
+    var datainfo = [];
+    var tipoprop = [];
+    $('#tbl_gral_propiedades tr').each(function (indexFila) {
+        $(this).children('td').each(function (indexColumna) {
+            if (indexColumna === 0) {
+                campo1 = $(this).text();
+                datainfo.push(campo1);
+            };
+            if (indexColumna === 1) {
+                campo1 = $(this).text();
+                tipoprop.push(campo1);
+            };
+        });
+    });
+    datainfo.forEach((data) => {
+        formData.append("propertydata[]", data);
+    });
+    tipoprop.forEach((tipo) => {
+        formData.append("property[]", tipo);
+    });
+    formData.append("property_id", idproperty);
+    for (var pair of formData.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
+    }
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                //console.log(data.datos.id);
+                alert("Información almacenada correctamente");
+                $('#generaloperacionfrm').hide();
+                $('#operacionforms').show();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function updateOperacionGeneral() {
+
+
+    if ($("#btn_updateconsgeneralOp").text() === "Actualizar") {
+        inhabilitarform("#generaloperacionfrm", false)
+        $("#btn_updateconsgeneralOp").text('Guardar');
+        showDestroyIcons('generaloperacionfrm', true);
+    }
+    else {
+        var params = {
+        };
+        var webMethod = "";
+        webMethod = "updateGeneralOpProperties";
+        const formData = new FormData();
+        var datainfo = [];
+        var tipoprop = [];
+        $('#tbl_gral_propiedades tr').each(function (indexFila) {
+            $(this).children('td').each(function (indexColumna) {
+                if (indexColumna === 0) {
+                    campo1 = $(this).text();
+                    datainfo.push(campo1);
+                };
+                if (indexColumna === 1) {
+                    campo1 = $(this).text();
+                    tipoprop.push(campo1);
+                };
+            });
+        });
+        datainfo.forEach((data) => {
+            formData.append("propertydata[]", data);
+        });
+        tipoprop.forEach((tipo) => {
+            formData.append("property[]", tipo);
+        });
+        formData.append("id", idGeneralOp);
+        formData.append("property_id", idGeneralOp);
+        formData.append("C_0101_0001_id", area);
+        formData.append("C_0403_211", $("#txtvolumentrans").val());
+        formData.append("C_0414_253", $("#cmbcrucesotrosductos").val());
+        formData.append("kilometro_especifico", $("#km_esp_gralop").val());
+        formData.append("coordenada_especifica", $("#coord_esp_gralop_x").val() + ' ' + $("#coord_esp_gralopl_y").val());
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response)
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("El registro fue actualizado correctamente");
+                    $('#operacionforms').show();
+                    $('#generaloperacionfrm').hide();
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+}
+function cancelGeneralOp() {
+    $('#generaloperacionfrm').hide();
+    $('#operacionforms').show();
+}
+//#endregion

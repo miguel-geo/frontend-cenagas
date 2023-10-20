@@ -73,6 +73,9 @@ table.table td a.add {
 table.table td a.delete {
     color: #E34724;
 }
+table.table td a.deleteprop {
+    color: #E34724;
+}
 table.table td a.edit {
     color: #FFC107;
 }

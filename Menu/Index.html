@@ -3616,7 +3616,7 @@
                         <div id="operacionforms" style="display:none;margin-top:15px;">
                             <div class="card-group">
                                 <div class="card ">
-                                    <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowAnalisisGeneral()" class="card-img-top" alt="...">
+                                    <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowOperacionGeneral()" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h6 class="card-title">General</h6>
                                         <p class="card-text">En éste formulario contendrá información relacionada a...</p>
@@ -3714,103 +3714,66 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_idenbasecons_x" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_gralop_x" aria-describedby="basic-addon1">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_idenbasecons_y" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_gralopl_y" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Kilómetro Específico</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_esp_idenbasecons" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_esp_gralop" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Fecha de construcción </span>
+                                            <span class="input-group-text" id="basic-addon1">Dato Propiedad</span>
                                         </div>
-                                        <input type="date" class="form-control validate-pattern setAlg" pattern="^(?!0000)(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2\d|3[01])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)$" id="fechaconstbase" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" id="txtdatoprop" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Tipo de propiedad</span>
+                                        </div>
+                                        <select class="selectpicker form-control setAlg" id="cmbtipoprop">
+                                            <option value="0">Selecciona...</option>
+                                            <option value="Físicas">Físicas</option>
+                                            <option value="Químicas">Químicas</option>
+                                            <option value="Otras">Otras</option>
+                                        </select>
+                                        <button type="button" onclick="addpropertytotable()" title="Agregar Propiedad" class="btn btn-secondary">
+                                            <i class="fas fa-square-plus"></i>
+                                        </button>
+                                    </div>
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Listado de propiedades</span>
+                                    <table class="table" id="tbl_gral_propiedades">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Dato propiedad</th>
+                                                <th scope="col">Tipo propiedad</th>
+                                                <th scope="col">Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Volumen transportado</span>
+                                        </div>
+                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" id="txtvolumentrans" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Método de recubrimiento</span>
+                                            <span class="input-group-text" id="basic-addon1">Cruces o paralelismo con otros ductos</span>
                                         </div>
-                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" id="metrecubbase" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Tipo de suelo</span>
-                                        </div>
-                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" id="txttiposuelobaseconst" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Material de relleno</span>
-                                        </div>
-                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" id="txtmatrellenobaseconst" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Presión de prueba de hermeticidad (PSI)</span>
-                                        </div>
-                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="presionhermebasecons" aria-describedby="basic-addon1">
-                                        <select class="selectpicker form-control setAlg" id="cmbunidadpresionhermebasecons">
-                                            <option value=0>Selecciona unidad medida...</option>
-                                            <option value="PSI">PSI</option>
-                                            <option value="kg/cm2">kg/cm2</option>
+                                        <select class="selectpicker form-control setAlg" id="cmbcrucesotrosductos">
+                                            <option value="0">Selecciona...</option>
+                                            <option value="Sí">Sí</option>
+                                            <option value="No">No</option>
                                         </select>
                                     </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Archivo hermeticidad</span>
-                                        </div>
-                                        <input type="file" class="form-control" placeholder="" aria-label="" id="filepruebabasecons" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Tipo de recubrimiento</span>
-                                    </div>
-                                    <select class="selectpicker form-control setAlg" id="cmtiporecubrimientobase">
-                                        <option value=0>Selecciona...</option>
-                                        <option value="Esmalte de brea de alquitrán de hulla">Esmalte de brea de alquitrán de hulla</option>
-                                        <option value="Ceras microcristalinas de petróleo">Ceras microcristalinas de petróleo</option>
-                                        <option value="Cintas y mangas termo contraíble">Cintas y mangas termo contraíble</option>
-                                        <option value="Cintas de poliolefinas">Cintas de poliolefinas</option>
-                                        <option value="Epóxicos">Epóxicos</option>
-                                        <option value="Poliuretanos">Poliuretanos</option>
-                                        <option value="Sistema Tricapa">Sistema Tricapa</option>
-                                    </select>
-                                    <button type="button" onclick="showtiporecubrimiento()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
-                                </div>
-                                <div class="input-group mb-3" id="creartiporecubrimiento" style="display:none">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Tipo de Recubrimiento</span>
-                                    </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="newTipoRecubrimiento" aria-describedby="basic-addon1">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
-                                    </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="newDescRecubrimiento" aria-describedby="basic-addon1">
-                                    <div>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoRecubrimiento()">Cancelar</button>
-                                        <button type="button" id="btn_saveMaterial" onclick="saveotroTipoRecubrimiento()" class="btn btn-success">Guardar</button>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3" id="filefrmconsbase">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupFileAddon01">Archivo fuente</span>
-                                    </div>
-                                    <div class="custom-file" id="fileconteinerconsbase">
-                                        <input type="file" class="custom-file-input setAlg" id="fileconstruccionbase"
-                                               aria-describedby="fileconsbase" lang="es">
-                                        <label class="custom-file-label" for="fileconsbase">Escoje el archivo</label>
-                                    </div>
-                                </div>
-                                <div>
                                     <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
-                                    <table class="table" id="tbl_base_construccion">
+                                    <table class="table setAlg" id="tbl_gralOperacion">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Documento</th>
@@ -3822,10 +3785,10 @@
                                     </table>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelbasecons()" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" id="btn_newconsgeneral" onclick="nuevoconsgeneral()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
-                                    <button type="button" id="btn_updateconsgeneral" onclick="updateConsGeneral()" style="display:none" class="btn btn-info">Actualizar</button>
-                                    <button type="button" id="btn_saveconsgeneral" onclick="validateForm('constbasefrm', savebasecons)" class="btn btn-success">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" id="btnCancelarPresion" onclick="cancelGeneralOp()" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" id="btn_newconsgeneralOp" onclick="nuevoconsgeneral()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
+                                    <button type="button" id="btn_updateconsgeneralOp" onclick="updateOperacionGeneral()" style="display:none" class="btn btn-info">Actualizar</button>
+                                    <button type="button" id="btn_saveconsgeneralOp" onclick="validateForm('constbasefrm', saveGeneralOp)" class="btn btn-success">Guardar</button>
                                 </div>
                             </form>
                         </div>
