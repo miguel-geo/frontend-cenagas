@@ -584,19 +584,19 @@ function inicializarEventos() {
                 switch (temaconsultaoperacion) {
                     case "Op1"://Pendiente
                         consultatoform(e);
-                        getAreaIdById("getAreaIdByOperacionHistReparacionesId", row_id).then(data => {
+                        getAreaIdById("getAreaIdByOperacionVandalismoId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
                             area = data.area_unitaria_id;
-                            fnshowOperacionVandalismo(id_d = row_id);
+                            fnshowOperacionGeneral(id_d = row_id);
                         });
                         break;
-                    case "Op2"://Pendiente
+                    case "Op2":
                         
                         consultatoform(e);
-                        getAreaIdById("getAreaIdByOperacionHistReparacionesId", row_id).then(data => {
+                        getAreaIdById("getAreaIdByOperacionInstalacionesId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
                             area = data.area_unitaria_id;
-                            fnshowOperacionVandalismo(id_d = row_id);
+                            fnshowOperacionInstalacion(id_d = row_id);
                         });
                         break;
                     case "Op3":
@@ -1186,14 +1186,14 @@ function inicializarEventos() {
                 ocultartablasdisenio();
                 ocultartablasanalisis()
                 $("#tablaOperacionDocumental").hide();
-
+                $("#tablaOperacionGeneral").show();
                 break;
             case "Op2":
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 ocultartablasanalisis()
                 $("#tablaOperacionDocumental").hide();
-
+                $("#tablaOperacionInstalaciones").show();
                 break;
             case "Op3":
                 $("#tablaOperacionFugas").show();
@@ -7005,6 +7005,76 @@ function consulta() {
             case "T3":
                 console.log(temaconsultaoperacion)
                 switch (temaconsultaoperacion) {
+                    case "Op2":
+                        $('#tablaOperacionInstalaciones tbody')[0].innerHTML = "";
+                        $('#tablaOperacionInstalaciones tbody:not(:first)').remove();
+                        var webMethodFugas = "get_OperacionInstalaciones";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodFugas,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+                                    var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
+                                        'C_0401_130',
+                                        'C_0401_131',
+                                        'C_0401_132',
+                                        'C_0401_133',
+                                        'C_0401_134',
+                                        'C_0401_135',
+                                        'C_0401_136',
+                                        'C_0401_137',
+                                        'C_0401_138',
+                                        'tramo'];
+                                    for (var i = 0; i < data.data.datagrid.length; i++) {
+                                        switch (data.data.datagrid[i].C_0401_130) {
+                                            case "1":
+                                                data.data.datagrid[i].C_0401_130 = "Trampa de envío y/o recibo";
+                                            break;
+                                            case "2":
+                                                data.data.datagrid[i].C_0401_130 = "Válvula";
+                                                break;
+                                            case "3":
+                                                data.data.datagrid[i].C_0401_130 = "Marcador";
+                                                break;
+                                            case "4":
+                                                data.data.datagrid[i].C_0401_130 = "Tee";
+                                                break;
+                                            case "5":
+                                                data.data.datagrid[i].C_0401_130 = "Tapas";
+                                                break;
+                                            case "6":
+                                                data.data.datagrid[i].C_0401_130 = "Bridas";
+                                                break;
+                                            case "7":
+                                                data.data.datagrid[i].C_0401_130 = "Medidor";
+                                                break;
+                                            case "8":
+                                                data.data.datagrid[i].C_0401_130 = "Conexión de rama";
+                                                break;
+                                            case "9":
+                                                data.data.datagrid[i].C_0401_130 = "Codos";
+                                                break;
+                                            case "10":
+                                                data.data.datagrid[i].C_0401_130 = "Reductor";
+                                                break;
+                                            case "11":
+                                                data.data.datagrid[i].C_0401_130 = "Ventilación de escape o tubería de ventilación";
+                                                break;
+                                            case "12":
+                                                data.data.datagrid[i].C_0401_130 = "Tubería de revestimiento";
+                                                break;
+                                        }
+                                    }
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablaOperacionInstalaciones", keysForPresion);
+
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
                     case "Op3":
                         $('#tablaOperacionFugas tbody')[0].innerHTML = "";
                         $('#tablaOperacionFugas tbody:not(:first)').remove();
@@ -7078,56 +7148,56 @@ function consulta() {
                             }
                         });
                 break;
-                case "Op5":
-                $('#tablaOperacionHistorialReparaciones tbody')[0].innerHTML = "";
-                $('#tablaOperacionHistorialReparaciones tbody:not(:first)').remove();
-                var webMethodCatodica = "get_OperacionHistorialReparaciones";
-                $.ajax({
-                    type: "POST",
-                    url: apiUrl + webMethodCatodica,
-                    data: params,
-                    success: function (data) {
-                        if (data.success) {
+                //case "Op5":
+                //$('#tablaOperacionHistorialReparaciones tbody')[0].innerHTML = "";
+                //$('#tablaOperacionHistorialReparaciones tbody:not(:first)').remove();
+                //var webMethodCatodica = "get_OperacionHistorialReparaciones";
+                //$.ajax({
+                //    type: "POST",
+                //    url: apiUrl + webMethodCatodica,
+                //    data: params,
+                //    success: function (data) {
+                //        if (data.success) {
 
-                            var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
-                            'C_0415_254',
-                            'C_0415_255',
-                            'C_0415_256',
-                            'C_0415_257',
-                            'C_0415_258', 
-                           'C_0415_259',
-                            'C_0415_260',
-                            'C_0415_261',
-                            'C_0415_262',
-                            'C_0415_263',
-                            'C_0415_264',
-                            'C_0415_265',
-                            'C_0415_266',
-                            'C_0415_267', 
-                           'C_0415_268', 
-                           'C_0415_269', 
-                           'C_0415_271',
-                            'C_0415_272',
-                            'C_0415_273',
-                            'C_0415_274',
-                            'C_0415_275', 
-                           'C_0415_276', 
-                           'C_0415_277', 
-                           'C_0415_278', 
-                           'C_0415_279', 
-                           'C_0415_280',
+                //            var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                //            'C_0415_254',
+                //            'C_0415_255',
+                //            'C_0415_256',
+                //            'C_0415_257',
+                //            'C_0415_258', 
+                //           'C_0415_259',
+                //            'C_0415_260',
+                //            'C_0415_261',
+                //            'C_0415_262',
+                //            'C_0415_263',
+                //            'C_0415_264',
+                //            'C_0415_265',
+                //            'C_0415_266',
+                //            'C_0415_267', 
+                //           'C_0415_268', 
+                //           'C_0415_269', 
+                //           'C_0415_271',
+                //            'C_0415_272',
+                //            'C_0415_273',
+                //            'C_0415_274',
+                //            'C_0415_275', 
+                //           'C_0415_276', 
+                //           'C_0415_277', 
+                //           'C_0415_278', 
+                //           'C_0415_279', 
+                //           'C_0415_280',
                            
-                        'tramo'];
+                //        'tramo'];
                             
-                            processTableDataAndHideNullColumns(data.data.datagrid, "tablaOperacionHistorialReparaciones", keysForPresion );
+                //            processTableDataAndHideNullColumns(data.data.datagrid, "tablaOperacionHistorialReparaciones", keysForPresion );
                                 
-                            }
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
+                //            }
+                //        },
+                //        error: function (xhr, ajaxOptions, thrownError) {
 
-                        }
-                    });
-                break;
+                //        }
+                //    });
+                //break;
 
                 case "Op5":
                 $('#tablaOperacionHistorialReparaciones tbody')[0].innerHTML = "";
