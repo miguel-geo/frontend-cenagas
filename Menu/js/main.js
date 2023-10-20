@@ -127,33 +127,37 @@ $(document).ready(function () {
     
       //});
 
-
-      $('#cmbAreas').change(function() {
+      $('#cmbAreas').change(async function() { // <-- Note the async keyword here
         var property = $(this).val();
-
-
-        const webMethod='areas_unitarias/fetch_kms';
-        url=apiUrl+webMethod;
+    
+        const webMethod = 'areas_unitarias/fetch_kms';
+        const url = apiUrl + webMethod;
+    
         if (property) {
-          
-          fetch(url, {
-            method: 'POST', // or 'POST', 'PUT', etc.
-            headers: headers,
-            body: JSON.stringify({'property': property})
-          })
-              .then(response => response.json())
-              .then(data => {
+            try {
+                const response = await fetch(url, { // <-- Using await here
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({ 'property': property })
+                });
+                
+                const data = await response.json();
+    
                 console.log(data)
                 document.getElementById('txtkminicial').value = data[0].km_inicial;
                 document.getElementById('txtkmfinal').value = data[0].km_final;
                 document.getElementById('txtkmOrigen').value = data[0].km_origen;
                 document.getElementById('txtkmDestino').value = data[0].km_destino;
-                tramo=data[0].tramo_id
+                const tramo = data[0].tramo_id;
+    
 
-              })
-              .catch(error => console.error("Error fetching data: ", error));
+    
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+            }
         }
-      });
+    });
+    
 
 
 
@@ -480,6 +484,7 @@ function inicializarEventos() {
                         consultatoform(e)
                         getAreaIdById("getAreaIdByDisenioId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowIndentificacion(id_d=row_id);
                         });
@@ -489,6 +494,7 @@ function inicializarEventos() {
                         consultatoform(e)
                         getAreaIdById("getAreaIdByPresionId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowPresion(id_d=row_id);
                         });
@@ -497,6 +503,7 @@ function inicializarEventos() {
                         consultatoform(e)
                         getAreaIdById("getAreaIdByProteccionId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowProteccion(id_d=row_id);
                         });
@@ -511,6 +518,7 @@ function inicializarEventos() {
                         consultatoform(e)
                         getAreaIdById("getAreaIdByConsBaseId",row_id ).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area=data.area_unitaria_id;
                             fnshowbaseconst(id_d=row_id);
                         });
@@ -520,6 +528,7 @@ function inicializarEventos() {
                         consultatoform(e)
                         getAreaIdById("getAreaIdByConsUnionId",row_id ).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area=data.area_unitaria_id;
                             fnshowmetunion(id_d=row_id);
                         });
@@ -528,15 +537,16 @@ function inicializarEventos() {
                         consultatoform(e)
                         getAreaIdById("getAreaIdByConsProfundidadId",row_id ).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area=data.area_unitaria_id;
                             fnshowprofenterrado(id_d=row_id);
                         });
                         break;
                     case "Cons4":
-                        webMethod = "cruces/destroycruces";
                         consultatoform(e);
                         getAreaIdById("getAreaIdByCrucesId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowprotipocruces(id_d=row_id);
                         });
@@ -545,14 +555,16 @@ function inicializarEventos() {
                         consultatoform(e);
                         getAreaIdById("getAreaIdByHermeticidadId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowhermeti(id_d=row_id);
                         });
                         break;
                     case "Cons6":
                         consultatoform(e);
-                        getAreaIdById("getConstruccionInspeccionById", row_id).then(data => {
+                        getAreaIdById("getAreaIdByInspeccionId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowreporteinsp(id_d = row_id);
                         });
@@ -561,14 +573,16 @@ function inicializarEventos() {
                         consultatoform(e);
                         getAreaIdById("getAreaIdByCatodicaId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowprotecccato(id_d=row_id);
                         });
                         break;
                     case "Cons8":
                         consultatoform(e);
-                        getAreaIdById("getConstruccionSeguridadById", row_id).then(data => {
+                        getAreaIdById("getAreaIdBySeguridadId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowseguridadpre(id_d = row_id);
                         });
@@ -586,6 +600,7 @@ function inicializarEventos() {
                         consultatoform(e);
                         getAreaIdById("getAreaIdByOperacionGralId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowOperacionGeneral(id_d = row_id);
                         });
@@ -595,6 +610,7 @@ function inicializarEventos() {
                         consultatoform(e);
                         getAreaIdById("getAreaIdByOperacionInstalacionesId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowOperacionInstalacion(id_d = row_id);
                         });
@@ -603,6 +619,7 @@ function inicializarEventos() {
                         consultatoform(e);
                         getAreaIdById("getAreaIdByOperacionHistFugaId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowOperacionHistorialFugas(id_d = row_id);
                         });
@@ -611,6 +628,7 @@ function inicializarEventos() {
                         consultatoform(e);
                         getAreaIdById("getAreaIdByOperacionMonitoreoCorrosionId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             console.log(area,'area')
                             fnshowOperacionMonitoreoCorrosion(id_d = row_id);
@@ -621,6 +639,7 @@ function inicializarEventos() {
                         consultatoform(e);
                         getAreaIdById("getAreaIdByOperacionHistReparacionesId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowOperacionHistorialReparaciones(id_d = row_id);
                         });
@@ -630,6 +649,7 @@ function inicializarEventos() {
                         consultatoform(e);
                         getAreaIdById("getAreaIdByOperacionHistReparacionesId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowOperacionVandalismo(id_d = row_id);
                         });
@@ -638,6 +658,7 @@ function inicializarEventos() {
                         consultatoform(e);
                         getAreaIdById("getAreaIdByOpDocumentalId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowOperacionDocumental(id_d = row_id);
                         });
@@ -655,6 +676,7 @@ function inicializarEventos() {
                         consultatoform(e)
                         getAreaIdById("getAreaIdByAnalisisId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowAnalisisGeneral(id_d = row_id);
                         });
@@ -662,8 +684,9 @@ function inicializarEventos() {
                         break;
                     case "Ana2":
                         consultatoform(e)
-                        getAreaIdById("getAnalisisGeoespacialById", row_id).then(data => {
+                        getAreaIdById("getAreaIdByAnalisisGeoespacialId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowAnalisisGeoespacial(id_d = row_id);
                         });
@@ -673,6 +696,7 @@ function inicializarEventos() {
                         consultatoform(e);
                         getAreaIdById("getAreaIdByAnalisisRiesgoId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowAnalisisriesdis(id_d = row_id);
                         });
@@ -682,14 +706,16 @@ function inicializarEventos() {
                             consultatoform(e);
                             getAreaIdById("getAreaIdByDocumentalId", row_id).then(data => {
                                 setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                                tramo=data.tramo_id;
                                 area = data.area_unitaria_id;
                                 fnshowAnalisisDocumental(id_d = row_id);
                             });
                             break;
                     case "Ana4":
                         consultatoform(e)
-                        getAreaIdById("getAnalisisRiesgosIncidentesById", row_id).then(data => {
+                        getAreaIdById("getAreaIdByAnalisisRiesgosIncidentesId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowRiesgosIncidentes(id_d = row_id);
                         });
@@ -697,8 +723,9 @@ function inicializarEventos() {
                         break;
                     case "Ana5":
                         consultatoform(e)
-                        getAreaIdById("getAnalisisIngenieriaById", row_id).then(data => {
+                        getAreaIdById("getAreaIdByAnalisisIngenieriaId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowAnalisisIngenieria(id_d = row_id);
                         });
@@ -708,6 +735,7 @@ function inicializarEventos() {
                         consultatoform(e)
                         getAreaIdById("getAreaIdByAnalisisPlanosId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            tramo=data.tramo_id;
                             area = data.area_unitaria_id;
                             fnshowAnalisisPlanos(id_d = row_id);
                         });
@@ -1494,6 +1522,7 @@ function ocultartablasoperacion() {
                 $("#tablaOperacionHistorialReparaciones").hide();
                 $("#tablaOperacionFugas").hide();
                 $("#tablaOperacionInstalaciones").hide();
+                $("#tablaOperacionGeneral").hide();
 
 
 }
@@ -1898,7 +1927,7 @@ function nuevoDisenioproteccion(){
 function consultaDatosProteccionArea(id_d=null) {
     const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
     existingDownloadIcons.forEach(icon => icon.remove());
-    get_relateddocuments(tramo, area, 1, "tbl_prot_disenio");
+    get_relateddocuments(tramo, area, 3, "tbl_prot_disenio");
 
     var webMethod;
     var params;
@@ -2328,7 +2357,7 @@ function nuevoDiseniopresion(){
 function consultaDatosPresionArea(id_d=null) {
     const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
     existingDownloadIcons.forEach(icon => icon.remove());
-    get_relateddocuments(tramo, area, 1, "tbl_pres_disenio");
+    get_relateddocuments(tramo, area, 2, "tbl_pres_disenio");
 
     var webMethod;
     var params;
@@ -2609,7 +2638,7 @@ function nuevoconsgeneral(){
 function consultaDatosConsGeneral(id_d=null) {
     const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
     existingDownloadIcons.forEach(icon => icon.remove());
-    get_relateddocuments(tramo, area, 1, "tbl_base_construccion");
+    get_relateddocuments(tramo, area, 4, "tbl_base_construccion");
 
     var webMethod;
     var params;
@@ -2836,7 +2865,7 @@ function nuevoconsunion(){
 function consultaDatosConsUnion(id_d = null) {
     const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
     existingDownloadIcons.forEach(icon => icon.remove());
-    get_relateddocuments(tramo, area, 1, "tbl_union_construccion");
+    get_relateddocuments(tramo, area, 5, "tbl_union_construccion");
     var webMethod;
     var params;
     if (id_d)
@@ -7006,7 +7035,7 @@ function consulta() {
                     case "Op1":
                         $('#tablaOperacionGeneral tbody')[0].innerHTML = "";
                         $('#tablaOperacionGeneral tbody:not(:first)').remove();
-                        var webMethodFugas = "get_OperacionGral";
+                        var webMethodFugas = "et_OperacionGral";
                         $.ajax({
                             type: "POST",
                             url: apiUrl + webMethodFugas,
@@ -7944,7 +7973,8 @@ function getNamesByAreaUnitariaId(area_unitaria_id) {
     return fetch(url, {
         method: 'POST', // or 'POST', 'PUT', etc.
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({'id': area_unitaria_id})
       })
@@ -8238,6 +8268,10 @@ function consultatoform(e){
     $("#generalanalisisform").hide();
     $("#infogeoespacialanalisisform").hide();
     $("#planosanalisisform").hide();
+    $("#documentallisisform").hide();
+    $("#riesdisanalisisform").hide();
+    $("#riesgosincidentesanalisisform").hide();
+    $("#ingenieriaanalisisform").hide();
     
     
     $("#documentalopfrm").hide();
