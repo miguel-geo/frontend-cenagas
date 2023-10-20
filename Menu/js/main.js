@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -582,13 +582,31 @@ function inicializarEventos() {
             case "T3":
                 console.log(row_id)
                 switch (temaconsultaoperacion) {
-                    case "Op1":
-
-                    case "Op2":
+                    case "Op1"://Pendiente
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByOperacionHistReparacionesId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowOperacionVandalismo(id_d = row_id);
+                        });
+                        break;
+                    case "Op2"://Pendiente
                         
-
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByOperacionHistReparacionesId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowOperacionVandalismo(id_d = row_id);
+                        });
+                        break;
                     case "Op3":
-
+                        consultatoform(e);
+                        getAreaIdById("getAreaIdByOperacionHistFugaId", row_id).then(data => {
+                            setDropdownValue('#cmbAreas', data.area_unitaria_id);
+                            area = data.area_unitaria_id;
+                            fnshowOperacionHistorialFugas(id_d = row_id);
+                        });
+                        break;
                     case "Op4":
                         consultatoform(e);
                         getAreaIdById("getAreaIdByOperacionMonitoreoCorrosionId", row_id).then(data => {
@@ -1178,6 +1196,7 @@ function inicializarEventos() {
 
                 break;
             case "Op3":
+                $("#tablaOperacionFugas").show();
                 OcultarConstruccionConsulta();
                 ocultartablasdisenio();
                 ocultartablasanalisis()
@@ -6984,6 +7003,47 @@ function consulta() {
             case "T3":
                 console.log(temaconsultaoperacion)
                 switch (temaconsultaoperacion) {
+                    case "Op3":
+                        $('#tablaOperacionFugas tbody')[0].innerHTML = "";
+                        $('#tablaOperacionFugas tbody:not(:first)').remove();
+                        var webMethodFugas = "get_OperacionHistorialFugas";
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrl + webMethodFugas,
+                            data: params,
+                            success: function (data) {
+                                if (data.success) {
+
+                                    var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
+                                        'C_0406_214',
+                                        'C_0406_215',
+                                        'C_0406_216',
+                                        'C_0406_217',
+                                        'C_0406_218',
+                                        'C_0406_219',
+                                        'C_0406_220',
+                                        'C_0406_221',
+                                        'C_0406_222',
+                                        'C_0406_223',
+                                        'C_0406_224',
+                                        'C_0406_225',
+                                        'C_0406_226',
+                                        'C_0406_227',
+                                        'C_0406_228',
+                                        'C_0406_229',
+                                        'C_0406_230',
+                                        'C_0406_231',
+                                        'tramo'];
+
+                                    processTableDataAndHideNullColumns(data.data.datagrid, "tablaOperacionFugas", keysForPresion);
+
+                                }
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+
+                            }
+                        });
+                        break;
                 case "Op4":
                     $('#tablaOperacionCorrosion tbody')[0].innerHTML = "";
                     $('#tablaOperacionCorrosion tbody:not(:first)').remove();
