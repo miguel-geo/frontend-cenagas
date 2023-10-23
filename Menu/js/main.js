@@ -371,62 +371,62 @@ function inicializarEventos() {
                         break;
                     default:}
                 break;
-            case "T2":
-                switch(temaconsultaconstruccion){
-                    case "Cons1":
-                        webMethod = "general/destroyBase";
-                        break;
-                    case "Cons2":
-                        webMethod = "union/destroyUnion";
-                        break;
-                    case "Cons3":
-                        webMethod = "profundidad/destroyProfundidad";
-                        break;
-                    case "Cons4":
-                        webMethod = "cruces/destroycruces";
-                        break;
-                    case "Cons5":
-                        webMethod = "hermeticidad/destroyHermeticidad";
-                        break;
-                    case "Cons6":
-                        webMethod = "";
-                        break;
-                    case "Cons7":
-                        webMethod = "catodica/destroycatodica";
-                        break;
-                    case "Cons8":
-                        webMethod = "";
-                        break;
-
-                        
-                    default:}
-                    break;
-                case "T3":
-                    switch(temaconsultaanalisis){
-                        case "Op1":
-                            webMethod = "analisisgeneral/destroy";
+                case "T2":
+                    switch(temaconsultaconstruccion){
+                        case "Cons1":
+                            webMethod = "general/destroyBase";
                             break;
-                        case "Op2":
-                            webMethod = "analisisgeoespacial/destroy";
+                        case "Cons2":
+                            webMethod = "union/destroyUnion";
                             break;
-                        case "Op3":
-                            webMethod = "analisisplanos/destroy";
+                        case "Cons3":
+                            webMethod = "profundidad/destroyProfundidad";
                             break;
-                        case "Op4":
-                            webMethod = "analisisriesgosincidentes/destroy";
+                        case "Cons4":
+                            webMethod = "cruces/destroycruces";
                             break;
-                        case "Op5":
-                            webMethod = "analisisingenieria/destroy";
+                        case "Cons5":
+                            webMethod = "hermeticidad/destroyHermeticidad";
                             break;
-                        case "Op6":
-                            webMethod = "analisisriesgo/destroy";
+                        case "Cons6":
+                            webMethod = "construccioninspeccion/destroy";
                             break;
-                        case "Op7":
-                            webMethod = "operaciondocumental/destroy";
+                        case "Cons7":
+                            webMethod = "catodica/destroycatodica";
                             break;
+                        case "Cons8":
+                            webMethod = "construccionseguridad/destroy";
+                            break;
+    
                             
                         default:}
                         break;
+                    case "T3":
+                        switch(temaconsultaoperacion){
+                            case "Op1":
+                                webMethod = "operaciongeneral/destroy";
+                                break;
+                            case "Op2":
+                                webMethod = "instalaciones/destroy";
+                                break;
+                            case "Op3":
+                                webMethod = "histfugas/destroy";
+                                break;
+                            case "Op4":
+                                webMethod = "monitoreocorrosion/destroy";
+                                break;
+                            case "Op5":
+                                webMethod = "histrepaciones/destroy";
+                                break;
+                            case "Op6":
+                                webMethod = "vandalismo/destroy";
+                                break;
+                            case "Op7":
+                                webMethod = "operaciondocumental/destroy";
+                                break;
+                                
+                            default:}
+                            break;
                 case "T4":
                     switch(temaconsultaanalisis){
                         case "Ana1":
