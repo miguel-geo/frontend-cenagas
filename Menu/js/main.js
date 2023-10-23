@@ -1009,7 +1009,7 @@ function inicializarEventos() {
                 break;
             default:
         }
-        tramo = event.target.value;
+        //tramo = event.target.value;
         txttramo = event.target[event.target.selectedIndex].text;
         loadAreas(event.target.value);
     });
@@ -1057,7 +1057,7 @@ function inicializarEventos() {
             break;
         default:
     }
-        tramo = event.target.value;
+        //tramo = event.target.value;
         txttramo = event.target[event.target.selectedIndex].text;
         loadAreas(event.target.value);
     });
