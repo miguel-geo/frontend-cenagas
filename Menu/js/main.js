@@ -647,7 +647,7 @@ function inicializarEventos() {
 
                     case "Op6":
                         consultatoform(e);
-                        getAreaIdById("getAreaIdByOperacionHistReparacionesId", row_id).then(data => {
+                        getAreaIdById("getAreaIdByOperacionVandalismoId", row_id).then(data => {
                             setDropdownValue('#cmbAreas', data.area_unitaria_id);
                             tramo=data.tramo_id;
                             area = data.area_unitaria_id;
