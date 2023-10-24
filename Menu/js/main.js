@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -341,6 +341,9 @@ function inicializarEventos() {
             $(this).closest('tr').remove();
         }
     });
+   // $("#txthoraocurrenciavan").mask("00:00:00");
+    $('.time').mask('00:00:00');
+
     document.getElementById('filepruebabasecons').addEventListener('change', handleFileSelect, false);
     $(document).on("click", ".delete", function (e) {
         temaconsulta=$("#cmbTemasPrincipal_con").val() ;
