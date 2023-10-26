@@ -2393,77 +2393,107 @@
                         <!--#region FORMULARIOS ANÁLISIS  -->
 
                         <div id="analisisforms" style="display:none;margin-top:15px;">
-                            <div class="card-group">
-                                <div class="card ">
-                                    <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowAnalisisGeneral()" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title">General</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Análisis</small>
-                                    </div>
-                                </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowAnalisisGeoespacial()" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Información geoespacial</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Análisis</small>
+                            
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+        
+                                <!-- Card: General -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowAnalisisGeneral()" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">General</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Análisis</small>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowAnalisisPlanos()" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Planos, mapas y reportes del Sistema de Recolección, Transporte, y Distribución de Ductos</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Análisis</small>
-                                    </div>
-                                </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="fnshowRiesgosIncidentes()">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Datos del Riesgo e incidentes</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Análisis</small>
+                                
+                                <!-- Card: Información geoespacial -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowAnalisisGeoespacial()" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Información geoespacial</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Análisis</small>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card ml-1">
-
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="fnshowAnalisisIngenieria()">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Reportes de Diseño e ingeniería</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Análisis</small>
-                                    </div>
-                                </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" onclick="fnshowAnalisisDocumental()" class="card-img-top" alt="..." style="cursor: pointer;" onclick="">                                    <div class="card-body">
-                                        <h6 class="card-title">Información documental</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Análisis</small>
+                                
+                                <!-- Card: Planos, mapas y reportes -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowAnalisisPlanos()" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Planos, mapas y reportes del Sistema de Recolección, Transporte, y Distribución de Ductos</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Análisis</small>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" onclick="fnshowAnalisisriesdis()" class="card-img-top" alt="..." style="cursor: pointer;" onclick="">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Análisis de Riesgo en la fase de Diseño, sólo para Ductos nuevos</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Análisis</small>
+                                
+                                <!-- Card: Datos del Riesgo e incidentes -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowRiesgosIncidentes()" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Datos del Riesgo e incidentes</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Análisis</small>
+                                        </div>
                                     </div>
                                 </div>
+                                
+                                <!-- Card: Reportes de Diseño e ingeniería -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowAnalisisIngenieria()" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Reportes de Diseño e ingeniería</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Análisis</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Card: Información documental -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowAnalisisDocumental()" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Información documental</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Análisis</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Card: Análisis de Riesgo en la fase de Diseño, sólo para Ductos nuevos -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowAnalisisriesdis()" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Análisis de Riesgo en la fase de Diseño, sólo para Ductos nuevos</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Análisis</small>
+                                        </div>
+                                    </div>
+                                </div>
+                        
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" onclick="reg_newArea()"><i class="fa fa-arrow-left"></i> | Registrar nueva área unitaria</button>
@@ -3772,81 +3802,113 @@
                         <!--#endregion FORMULARIOS ANÁLISIS  -->
                         <!--#region FORMULARIO OPERACIÓN -->
                         <div id="operacionforms" style="display:none;margin-top:15px;">
-                            <div class="card-group">
-                                <div class="card ">
-                                    <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowOperacionGeneral()" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title">General</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Operación</small>
-                                    </div>
-                                </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowOperacionInstalacion()" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Servicio de operación (instalaciones)</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Operación</small>
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                        
+                                <!-- Card: General -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card">
+                                        <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowOperacionGeneral()" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">General</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Operación</small>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnshowOperacionHistorialFugas()" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Historial de fugas y derrames</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Operación</small>
-                                    </div>
-                                </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="fnshowOperacionMonitoreoCorrosion()">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Monitoreo de corrosión externa e interna</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Operación</small>
+                        
+                                <!-- Card: Servicio de operación (instalaciones) -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card">
+                                        <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowOperacionInstalacion()" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Servicio de operación (instalaciones)</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Operación</small>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card ml-1">
-
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" alt="..." style="cursor: pointer;" onclick="fnshowOperacionHistorialReparaciones()">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Historial de reparaciones</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Operación</small>
-                                    </div>
-                                </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" onclick="fnshowOperacionVandalismo()" class="card-img-top" alt="..." style="cursor: pointer;">                                    <div class="card-body">
-                                        <h6 class="card-title">Vandalismo y daños por terceros</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Operación</small>
+                        
+                                <!-- Card: Historial de fugas y derrames -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card">
+                                        <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowOperacionHistorialFugas()" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Historial de fugas y derrames</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Operación</small>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" onclick="fnshowOperacionDocumental()" class="card-img-top" alt="..." style="cursor: pointer;" onclick="">                                    <div class="card-body">
-                                        <h6 class="card-title">Información documental</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Operación</small>
+                        
+                                <!-- Card: Monitoreo de corrosión externa e interna -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card">
+                                        <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowOperacionMonitoreoCorrosion()" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Monitoreo de corrosión externa e interna</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Operación</small>
+                                        </div>
                                     </div>
                                 </div>
+                        
+                                <!-- Card: Historial de reparaciones -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card">
+                                        <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowOperacionHistorialReparaciones()" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Historial de reparaciones</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Operación</small>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                                <!-- Card: Vandalismo y daños por terceros -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card">
+                                        <img src="images/formCENAGAS.jpg" onclick="fnshowOperacionVandalismo()" class="card-img-top" alt="..." style="cursor: pointer;">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Vandalismo y daños por terceros</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Operación</small>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                                <!-- Card: Información documental -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card">
+                                        <img src="images/formCENAGAS.jpg" onclick="fnshowOperacionDocumental()" class="card-img-top" alt="..." style="cursor: pointer;">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Información documental</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">Operación</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                             </div>
+                            
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" onclick="reg_newArea()"><i class="fa fa-arrow-left"></i> | Registrar nueva área unitaria</button>
                             </div>
                         </div>
+                        
                         <div id="generaloperacionfrm" style="display:none;margin-top:15px;">
                             <form role="form">
                                 <div class="input-group mb-3">
