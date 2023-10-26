@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -14939,11 +14939,11 @@ function updateOperacionDocumental() {
 //#region Operación General
 function nuevoOperacionGral() {
 
-    $("#btn_saveMonitoreoCorrosion_operacion").show();
-    $("#btn_newMonitoreoCorrosion_operacion").hide();
-    $("#btn_updateMonitoreoCorrosion_operacion").hide();
-    clearInputTextValuesNew('monitoreocorrosionoperacionfrm');
-    inhabilitarform("#monitoreocorrosionoperacionfrm", false);
+    $("#btn_saveconsgeneralOp").show();
+    $("#btn_newconsgeneralOp").hide();
+    $("#btn_updateconsgeneralOp").hide();
+    clearInputTextValuesNew('generaloperacionfrm');
+    inhabilitarform("#generaloperacionfrm", false);
 
 }
 async function fnshowOperacionGeneral(id_d = null) {
