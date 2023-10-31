@@ -12827,24 +12827,25 @@ async function fnshowOperacionInstalacion(id_d = null) {
     $('#instalacionesoperacionfrm').show();
     $('#operacionforms').hide();
     try {
-        await loadtipoLanzadorOp();
-        await loadtipoDispositivo();
-        await loadtipoValvula();
-        await loadtipoOperador();
-        await loadtipoConexionOp();
-        await loadtipoMarcador();
-        await loadtipoTee();
-        await loadtipoCierre();
-        await loadtipoBriada();
-        await loadtipoEspecificacionBriada();
-        await loadtipoMedidor();
-        await loadtipoConexionRama();
-        await loadtipoGradosCodo();
-        await loadtipoEspecificacionDisenioCodo();
-        await loadGradoReductor();
-        await loadTipoReductor();
-        await loadEspecificacionesDisenioReductor();
-        await loadTipoTuberia();
+        //await loadtipoLanzadorOp();
+        //await loadtipoDispositivo();
+        //await loadtipoValvula();
+        //await loadtipoOperador();
+        //await loadtipoConexionOp();
+        //await loadtipoMarcador();
+        //await loadtipoTee();
+        //await loadtipoCierre();
+        //await loadtipoBriada();
+        //await loadtipoEspecificacionBriada();
+        //await loadtipoMedidor();
+        //await loadtipoConexionRama();
+        //await loadtipoGradosCodo();
+        //await loadtipoEspecificacionDisenioCodo();
+        //await loadGradoReductor();
+        //await loadTipoReductor();
+        //await loadEspecificacionesDisenioReductor();
+        //await loadTipoTuberia();
+        await load_catalogos_general();
         if (id_d) {
             await consultaDatosInstalacionesOperacion(id_d = id_d);
         }
@@ -12859,8 +12860,242 @@ async function fnshowOperacionInstalacion(id_d = null) {
     }
     // resetValidationClasses('planosanalisisform');
 }
+function load_catalogos_general() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_catalogos_instalacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    //Tipo lanzador
+                    $("#cmb_tipolanzadorinsta").empty();
+                    $('#cmb_tipolanzadorinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.tipo_lanzador.length; i++) {
+                        $('#cmb_tipolanzadorinsta').append($('<option>', {
+                            value: data.data.tipo_lanzador[i].id,
+                            text: data.data.tipo_lanzador[i].C_0401_145
+                        }));
+                    }
+                    //Tipo dispositivo
+                    $("#cmb_tipodispositivonsta").empty();
+                    $('#cmb_tipodispositivonsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.tipo_dispositivo.length; i++) {
+                        $('#cmb_tipodispositivonsta').append($('<option>', {
+                            value: data.data.tipo_dispositivo[i].id,
+                            text: data.data.tipo_dispositivo[i].C_0401_146
+                        }));
+                    }
+                    //Tipo válvula
+                    $("#cmb_tipovalvulainstainsta").empty();
+                    $('#cmb_tipovalvulainstainsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.tipo_valvula.length; i++) {
+                        $('#cmb_tipovalvulainstainsta').append($('<option>', {
+                            value: data.data.tipo_valvula[i].id,
+                            text: data.data.tipo_valvula[i].C_0401_153
+                        }));
+                    }
+                    //Tipo Operador
+                    $("#cmb_tipooperadorinsta").empty();
+                    $('#cmb_tipooperadorinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.tipo_operador.length; i++) {
+                        $('#cmb_tipooperadorinsta').append($('<option>', {
+                            value: data.data.tipo_operador[i].id,
+                            text: data.data.tipo_operador[i].C_0401_159
+                        }));
+                    }
+                    //Tipo Conexión
+                    $("#cmb_tipoconexinsta").empty();
+                    $('#cmb_tipoconexinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.tipo_conexion.length; i++) {
+                        $('#cmb_tipoconexinsta').append($('<option>', {
+                            value: data.data.tipo_conexion[i].id,
+                            text: data.data.tipo_conexion[i].C_0401_167
+                        }));
+                    }
+                    //Tipo  Marcador
+                    $("#cmb_tipomarcadorinsta").empty();
+                    $('#cmb_tipomarcadorinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.tipo_marcador.length; i++) {
+                        $('#cmb_tipomarcadorinsta').append($('<option>', {
+                            value: data.data.tipo_marcador[i].id,
+                            text: data.data.tipo_marcador[i].C_0401_169
+                        }));
+                    }
+                    //Tipo Tee
+                    $("#cmb_tipoteeinsta").empty();
+                    $('#cmb_tipoteeinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.tipo_tee.length; i++) {
+                        $('#cmb_tipoteeinsta').append($('<option>', {
+                            value: data.data.tipo_tee[i].id,
+                            text: data.data.tipo_tee[i].C_0401_170
+                        }));
+                    }
+                    //Tipo Cierre
+                    $("#cmb_tipocierratapasinsta").empty();
+                    $('#cmb_tipocierratapasinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.tipo_cierre.length; i++) {
+                        $('#cmb_tipocierratapasinsta').append($('<option>', {
+                            value: data.data.tipo_cierre[i].id,
+                            text: data.data.tipo_cierre[i].C_0401_177
+                        }));
+                    }
+                    //Tipo Briada
+                    $("#cmb_tipobridainsta").empty();
+                    $('#cmb_tipobridainsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.tipo_brigada.length; i++) {
+                        $('#cmb_tipobridainsta').append($('<option>', {
+                            value: data.data.tipo_brigada[i].id,
+                            text: data.data.tipo_brigada[i].C_0401_179
+                        }));
+                    }
+                    //Especificaciones de diseño Briada
+                    $("#cmb_tipoespdiseniobriadainsta").empty();
+                    $('#cmb_tipoespdiseniobriadainsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.esp_disenio_biada.length; i++) {
+                        $('#cmb_tipoespdiseniobriadainsta').append($('<option>', {
+                            value: data.data.esp_disenio_biada[i].id,
+                            text: data.data.esp_disenio_biada[i].C_0401_181
+                        }));
+                    }
+                    //Tipo medidor
+                    $("#cmb_tipomedidorinsta").empty();
+                    $('#cmb_tipomedidorinsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.tipo_medidor.length; i++) {
+                        $('#cmb_tipomedidorinsta').append($('<option>', {
+                            value: data.data.tipo_medidor[i].id,
+                            text: data.data.tipo_medidor[i].C_0401_182
+                        }));
+                    }
+                    //Tipo conexión rama
+                    $("#cmb_tipoconexramainsta").empty();
+                    $('#cmb_tipoconexramainsta').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.tipo_conexion_rama.length; i++) {
+                        $('#cmb_tipoconexramainsta').append($('<option>', {
+                            value: data.data.tipo_conexion_rama[i].id,
+                            text: data.data.tipo_conexion_rama[i].C_0401_184
+                        }));
+                    }
+                    // Tipo grado codo
+                    $("#cmb_tipogradocodo").empty();
+                    $('#cmb_tipogradocodo').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.grado_codos.length; i++) {
+                        $('#cmb_tipogradocodo').append($('<option>', {
+                            value: data.data.grado_codos[i].id,
+                            text: data.data.grado_codos[i].C_0401_190
+                        }));
+                    }
+                    //Especificaciones de diseño codo
+                    $("#cmb_tipoespdiseniocodo").empty();
+                    $('#cmb_tipoespdiseniocodo').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.esp_disenio_codos.length; i++) {
+                        $('#cmb_tipoespdiseniocodo').append($('<option>', {
+                            value: data.data.esp_disenio_codos[i].id,
+                            text: data.data.esp_disenio_codos[i].C_0401_194
+                        }));
+                    }
+                    //Grado reductor
+                    $("#cmb_tipogradoreductor").empty();
+                    $('#cmb_tipogradoreductor').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.grado_reductor.length; i++) {
+                        $('#cmb_tipogradoreductor').append($('<option>', {
+                            value: data.data.grado_reductor[i].id,
+                            text: data.data.grado_reductor[i].C_0401_196
+                        }));
+                    }
+                    //Tipo reductor
+                    $("#cmb_tiporeductor").empty();
+                    $('#cmb_tiporeductor').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.tipo_reductor.length; i++) {
+                        $('#cmb_tiporeductor').append($('<option>', {
+                            value: data.data.tipo_reductor[i].id,
+                            text: data.data.tipo_reductor[i].C_0401_199
+                        }));
+                    }
+                    //Especificaciones diseño reductor
+                    $("#cmb_tipoespdisreductor").empty();
+                    $('#cmb_tipoespdisreductor').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.esp_disenio_reductor.length; i++) {
+                        $('#cmb_tipoespdisreductor').append($('<option>', {
+                            value: data.data.esp_disenio_reductor[i].id,
+                            text: data.data.esp_disenio_reductor[i].C_0401_200
+                        }));
+                    }
+                    //Tipo tubería
+                    $("#cmb_tipoventilacion").empty();
+                    $('#cmb_tipoventilacion').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipoventilacion').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0401_201
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
 
-
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
 function cancelOperacionInstalaciones(){
     $('#operacionforms').show();
     $('#instalacionesoperacionfrm').hide();
