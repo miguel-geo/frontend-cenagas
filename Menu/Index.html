@@ -4836,13 +4836,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de vandalismo</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtestadovanda" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txttipo_vanda" aria-describedby="basic-addon1">
                                     <!--<select class="selectpicker form-control setAlg" id="cmb_tipovanda">
-        <option>Selecciona...</option>
-    </select>
-    <button type="button" onclick="showotrotipovandalismoOp()" class="btn btn-secondary">
-        <i class="fas fa-square-plus"></i>
-    </button>-->
+            <option>Selecciona...</option>
+        </select>
+        <button type="button" onclick="showotrotipovandalismoOp()" class="btn btn-secondary">
+            <i class="fas fa-square-plus"></i>
+        </button>-->
                                 </div>
                                 <div class="input-group mb-3" id="espTipovandalismo" style="display:none">
                                     <div class="input-group-prepend">
@@ -4917,13 +4917,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de reparación</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txttiporeparacionOp" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txttiporeparacion_VandaOp" aria-describedby="basic-addon1">
                                     <!--<select class="selectpicker form-control setAlg" id="cmb_tiporeparacionvan">
-        <option>Selecciona...</option>
-    </select>
-    <button type="button" onclick="showotrotiporeparacionvanOp()" class="btn btn-secondary">
-        <i class="fas fa-square-plus"></i>
-    </button>-->
+            <option>Selecciona...</option>
+        </select>
+        <button type="button" onclick="showotrotiporeparacionvanOp()" class="btn btn-secondary">
+            <i class="fas fa-square-plus"></i>
+        </button>-->
                                 </div>
                                 <div class="input-group mb-3" id="espTiporeparacionvan" style="display:none">
                                     <div class="input-group-prepend">
@@ -4973,13 +4973,27 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Evento I II III</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="cmb_tiporeparacionvan">
-        <option>Selecciona...</option>
-    </select>
-    <button type="button" onclick="showotrotiporeparacionvanOp()" class="btn btn-secondary">
-        <i class="fas fa-square-plus"></i>
-    </button>
+                                    <select class="selectpicker form-control setAlg" id="cmb_tipoevento_van">
+                                        <option>Selecciona...</option>
+                                    </select>
+                                    <button type="button" onclick="showotrotipoevento_vanOp()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
                                     <!--<input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtevento_van" aria-describedby="basic-addon1">-->
+                                </div>
+                                <div class="input-group mb-3" id="espTipoevento_vanda" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de evento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoevento_vanda" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDesctipoevento_vanda" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTiporeparacionvanOp()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtrotipoevento_vanda" onclick="saveotroTipoEevento_vanOp()" class="btn btn-success">Guardar</button>
+                                    </div>
                                 </div>
                                 <div>
                                     <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>

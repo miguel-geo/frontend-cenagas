@@ -12434,9 +12434,9 @@ async function fnshowOperacionVandalismo(id_d = null) {
     $('#vandalismooperacionfrm').show();
     $('#operacionforms').hide();
     try {
-        await loadtipovandalismoOp();
+       // await loadtipovandalismoOp();
         await loadtipoeventovandalismoOp();
-        await loadtiporecuperacionhisvandalismoOp();
+        await loadtipoevento_vandalismoOp();
         if (id_d) {
             await consultaDatosVandalismogOperacion(id_d = id_d);
         }
@@ -12541,6 +12541,36 @@ function loadtiporecuperacionhisvandalismoOp() {
         });
     });
 }
+function loadtipoevento_vandalismoOp() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_VanTipoEvento_Operacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipoevento_van").empty();
+                    $('#cmb_tipoevento_van').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipoevento_van').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0416_298
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
 function showotrotipovandalismoOp() {
     $('#espTipovandalismo').show();
 }
@@ -12626,7 +12656,9 @@ function saveotroTipoeventovanOp() {
 function showotrotiporeparacionvanOp() {
     $('#espTiporeparacionvan').show();
 }
-
+function showotrotipoevento_vanOp() {
+    $('#espTipoevento_vanda').show();
+}
 function cancelotroTiporeparacionvanOp() {
     $("#espTiporeparacionvan").hide();
 }
@@ -12664,6 +12696,40 @@ function saveotroTiporeparacionvanOp() {
             alert("Error: " + error);
         });
 }
+function saveotroTipoEevento_vanOp() {
+    var webMethod = "saveVanTipoEvento_Operacion";
+    var params = {
+        C_0416_298: $("#newTipoevento_vanda").val(),
+        descripcion: $("#newDesctipoevento_vanda").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoevento_vandalismoOp();
+                $("#espTipoevento_vanda").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
 function savevandalismoOp() {
     var webMethod = "saveVandalismoOperacion";
 
@@ -12673,20 +12739,20 @@ function savevandalismoOp() {
         C_0416_282: $('#txtpobladovanda').val(),
         C_0416_283: $('#txtmunicipiovanda').val(),
         C_0416_284: $("#txtestadovanda").val(),
-        id_C_0416_285: $("#cmb_tipovanda").val(),
+        C_0416_285: $("#txttipo_vanda").val(),
         id_C_0416_286: $("#cmb_tipoeventovan").val(),
         C_0416_287: $("#fec_van").val(),
         C_0416_288: $("#txthoraocurrenciavan").val(),
         C_0416_289: $("#txthorariofinalvan").val(),
         C_0416_290: $("#txthoractrlvan").val(),
         C_0416_291: $("#txtarregloctrlvan").val(),
-        id_C_0416_292: $("#cmb_tiporeparacionvan").val(),
+        C_0416_292: $("#txttiporeparacion_VandaOp").val(),
         C_0416_293: $("#txtobservacionesvan").val(),
         C_0416_294: $("#txtoficioaseavan").val(),
         C_0416_295: $("#txtreportesiniestrovan").val(),
         C_0416_296: $("#txtnosiniestrovan").val(),
         C_0416_297: $("#txtnovan").val(),
-        C_0416_298: $("#txtevento_van").val(),
+        C_0416_298: $("#cmb_tipoevento_van").val(),
         coordenada_especifica: $("#coord_esp_vanda_x").val() + ' ' + $("#coord_esp_vanda_y").val(),
         kilometro_especifico: $("#km_esp_vanda").val()
     };
@@ -12738,20 +12804,20 @@ function updateOperacioVandalismoOp() {
             C_0416_282: $('#txtpobladovanda').val(),
             C_0416_283: $('#txtmunicipiovanda').val(),
             C_0416_284: $("#txtestadovanda").val(),
-            id_C_0416_285: $("#cmb_tipovanda").val(),
+            C_0416_285: $("#txttipo_vanda").val(),
             id_C_0416_286: $("#cmb_tipoeventovan").val(),
             C_0416_287: $("#fec_van").val(),
             C_0416_288: $("#txthoraocurrenciavan").val(),
             C_0416_289: $("#txthorariofinalvan").val(),
             C_0416_290: $("#txthoractrlvan").val(),
             C_0416_291: $("#txtarregloctrlvan").val(),
-            id_C_0416_292: $("#cmb_tiporeparacionvan").val(),
+            C_0416_292: $("#txttiporeparacion_VandaOp").val(),
             C_0416_293: $("#txtobservacionesvan").val(),
             C_0416_294: $("#txtoficioaseavan").val(),
             C_0416_295: $("#txtreportesiniestrovan").val(),
             C_0416_296: $("#txtnosiniestrovan").val(),
             C_0416_297: $("#txtnovan").val(),
-            C_0416_298: $("#txtevento_van").val(),
+            C_0416_298: $("#cmb_tipoevento_van").val(),
             coordenada_especifica: $("#coord_esp_vanda_x").val() + ' ' + $("#coord_esp_vanda_y").val(),
             kilometro_especifico: $("#km_esp_vanda").val()
         };
@@ -12874,20 +12940,22 @@ function llenarDatosVandalismoOp(data) {
     $("#txtpobladovanda").val(data[0].C_0416_282);
     $("#txtmunicipiovanda").val(data[0].C_0416_283);
     $("#txtestadovanda").val(data[0].C_0416_284);
-    $("#cmb_tipovanda option:contains(" + data[0].id_C_0416_285 + ")").attr('selected', 'selected');
+    $("#txttipo_vanda").val(data[0].C_0416_285);
+    //$("#cmb_tipovanda option:contains(" + data[0].id_C_0416_285 + ")").attr('selected', 'selected');
     $("#cmb_tipoeventovan option:contains(" + data[0].id_C_0416_286 + ")").attr('selected', 'selected');
     $("#fec_van").val(data[0].C_0416_287.split(' ')[0]);
     $("#txthoraocurrenciavan").val(data[0].C_0416_288);
     $("#txthorariofinalvan").val(data[0].C_0416_289);
     $("#txthoractrlvan").val(data[0].C_0416_290);
     $("#txtarregloctrlvan").val(data[0].C_0416_291);
-    $("#cmb_tiporeparacionvan option:contains(" + data[0].id_C_0416_292 + ")").attr('selected', 'selected');
+    $("#txttiporeparacion_VandaOp").val(data[0].C_0416_292);
+    //$("#cmb_tiporeparacionvan option:contains(" + data[0].id_C_0416_292 + ")").attr('selected', 'selected');
     $("#txtobservacionesvan").val(data[0].C_0416_293);
     $("#txtoficioaseavan").val(data[0].C_0416_294);
     $("#txtreportesiniestrovan").val(data[0].C_0416_295);
     $("#txtnosiniestrovan").val(data[0].C_0416_296);
     $("#txtnovan").val(data[0].C_0416_297);
-    $("#txtevento_van").val(data[0].C_0416_298);
+    $("#cmb_tipoevento_van option:contains(" + data[0].C_0416_298 + ")").attr('selected', 'selected');
     idvandalismoOp = data[0].id;
     inhabilitarform("#vandalismooperacionfrm", true);
 }
