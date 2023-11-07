@@ -4028,10 +4028,6 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Dato Propiedad</span>
-                                        </div>
-                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" id="txtdatoprop" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                        <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Tipo de propiedad</span>
                                         </div>
                                         <select class="selectpicker form-control setAlg" id="cmbtipoprop">
@@ -4040,16 +4036,28 @@
                                             <option value="Químicas">Químicas</option>
                                             <option value="Otras">Otras</option>
                                         </select>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Dato Propiedad</span>
+                                        </div>
+                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" id="txtdatoprop" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">% de Propiedad</span>
+                                        </div>
+                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" id="txtporcprop" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                         <button type="button" onclick="addpropertytotable()" title="Agregar Propiedad" class="btn btn-secondary">
                                             <i class="fas fa-square-plus"></i>
+                                        </button>
+                                        <button type="button" onclick="deleteallpropertytotable()" title="Eliminar todas las Propiedad" class="btn btn-danger">
+                                            <i class="fas fa-minus"></i>
                                         </button>
                                     </div>
                                     <span class="input-group-text" id="inputGroupFileAddon01">Listado de propiedades</span>
                                     <table class="table" id="tbl_gral_propiedades">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Dato propiedad</th>
                                                 <th scope="col">Tipo propiedad</th>
+                                                <th scope="col">Dato propiedad</th>
+                                                <th scope="col">% propiedad</th>
                                                 <th scope="col">Acción</th>
                                             </tr>
                                         </thead>
@@ -4071,6 +4079,12 @@
                                             <option value="Sí">Sí</option>
                                             <option value="No">No</option>
                                         </select>
+                                    </div>
+                                    <div class="input-group mb-3" id="kmparalelismo" style="display:none">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Localización  (KM)</span>
+                                        </div>
+                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_locpara_gralop" aria-describedby="basic-addon1">
                                     </div>
                                     <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
                                     <table class="table setAlg" id="tbl_gralOperacion">
@@ -4158,14 +4172,17 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Tipo de historial de fuga</span>
+                                        <!-- Tipo de historial de fuga  -->
+                                        <span class="input-group-text" id="basic-addon1">Tipo</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="cmb_tipohisfug">
-                                        <option>Selecciona...</option>
-                                    </select>
-                                    <button type="button" onclick="showotrotipohistfugasOp()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
+                                    <!--<select class="selectpicker form-control setAlg" id="cmb_tipohisfug">
+            <option>Selecciona...</option>
+        </select>-->
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txttipo_hisfug" aria-describedby="basic-addon1">
+                                    <!--<button type="button" onclick="showotrotipohistfugasOp()" class="btn btn-secondary">
+            <i class="fas fa-square-plus"></i>
+        </button-->
+                                    >
                                 </div>
                                 <div class="input-group mb-3" id="espTipohisfug" style="display:none">
                                     <div class="input-group-prepend">
@@ -4240,14 +4257,15 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de reparación</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="cmb_tiporeparacionhisfug">
-                                        <option>Selecciona...</option>
-                                    </select>
-                                    <button type="button" onclick="showotrotiporeparacionhistfugasOp()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txttiporeparacionhisfug" aria-describedby="basic-addon1">
+                                    <!--<select class="selectpicker form-control setAlg" id="cmb_tiporeparacionhisfug">
+            <option>Selecciona...</option>
+        </select>
+        <button type="button" onclick="showotrotiporeparacionhistfugasOp()" class="btn btn-secondary">
+            <i class="fas fa-square-plus"></i>
+        </button>-->
                                 </div>
-                                <div class="input-group mb-3" id="espTiporeparacionhisfug" style="display:none">
+                                <!--<div class="input-group mb-3" id="espTiporeparacionhisfug" style="display:none">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de reparación</span>
                                     </div>
@@ -4260,7 +4278,7 @@
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTiporeparacionHisFugOp()">Cancelar</button>
                                         <button type="button" id="btn_saveOtrotiporeparacionfugaop" onclick="saveotroTiporeparacionHisFugaOp()" class="btn btn-success">Guardar</button>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Observaciones</span>
@@ -4295,7 +4313,27 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Evento I II III</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtevento_hisfug" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control setAlg" id="cmb_tipoevento_hisfug">
+                                        <option>Selecciona...</option>
+                                    </select>
+                                    <button type="button" onclick="showotrotipoevento_histfugasOp()" class="btn btn-secondary">
+                                        <i class="fas fa-square-plus"></i>
+                                    </button>
+                                    <!-- <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtevento_hisfug" aria-describedby="basic-addon1">-->
+                                </div>
+                                <div class="input-group mb-3" id="espTipoevento_hisfug" style="display:none">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de evento</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoevento_hisfug" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" id="newDescevento_hisfug" aria-describedby="basic-addon1">
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTiporeparacionHisFugOp()">Cancelar</button>
+                                        <button type="button" id="btn_saveOtrotipoevento_fugaop" onclick="saveotroTipoevento_HisFugaOp()" class="btn btn-success">Guardar</button>
+                                    </div>
                                 </div>
                                 <div>
                                     <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>
@@ -4366,7 +4404,7 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Cupones</span>
+                                        <span class="input-group-text" id="basic-addon1">Material del cupón</span>
                                     </div>
                                     <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtcuponesop" aria-describedby="basic-addon1">
                                 </div>
@@ -4656,10 +4694,16 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Indicadores</span>
+                                        <!-- Indicadores -->
+                                        <span class="input-group-text" id="basic-addon1">Indicaciones</span>
                                     </div>
                                     <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtindicadoreshisrep" aria-describedby="basic-addon1">
                                 </div>
+                                <hr class="hr" />
+                                <h2>
+                                    <small class="text-muted">Historial de reparaciones</small>
+                                </h2>
+                                <hr class="hr" />
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"> Defecto (ID)</span>
@@ -4792,12 +4836,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de vandalismo</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="cmb_tipovanda">
-                                        <option>Selecciona...</option>
-                                    </select>
-                                    <button type="button" onclick="showotrotipovandalismoOp()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtestadovanda" aria-describedby="basic-addon1">
+                                    <!--<select class="selectpicker form-control setAlg" id="cmb_tipovanda">
+        <option>Selecciona...</option>
+    </select>
+    <button type="button" onclick="showotrotipovandalismoOp()" class="btn btn-secondary">
+        <i class="fas fa-square-plus"></i>
+    </button>-->
                                 </div>
                                 <div class="input-group mb-3" id="espTipovandalismo" style="display:none">
                                     <div class="input-group-prepend">
@@ -4872,12 +4917,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de reparación</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="cmb_tiporeparacionvan">
-                                        <option>Selecciona...</option>
-                                    </select>
-                                    <button type="button" onclick="showotrotiporeparacionvanOp()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
+                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txttiporeparacionOp" aria-describedby="basic-addon1">
+                                    <!--<select class="selectpicker form-control setAlg" id="cmb_tiporeparacionvan">
+        <option>Selecciona...</option>
+    </select>
+    <button type="button" onclick="showotrotiporeparacionvanOp()" class="btn btn-secondary">
+        <i class="fas fa-square-plus"></i>
+    </button>-->
                                 </div>
                                 <div class="input-group mb-3" id="espTiporeparacionvan" style="display:none">
                                     <div class="input-group-prepend">
@@ -4927,7 +4973,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Evento I II III</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtevento_van" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control setAlg" id="cmb_tiporeparacionvan">
+        <option>Selecciona...</option>
+    </select>
+    <button type="button" onclick="showotrotiporeparacionvanOp()" class="btn btn-secondary">
+        <i class="fas fa-square-plus"></i>
+    </button>
+                                    <!--<input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtevento_van" aria-describedby="basic-addon1">-->
                                 </div>
                                 <div>
                                     <span class="input-group-text" id="inputGroupFileAddon01">Documentos relacionados</span>

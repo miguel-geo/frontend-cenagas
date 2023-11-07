@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -910,7 +910,18 @@ function inicializarEventos() {
        
        
     });   
-    
+
+    //Combo Paralelismo  
+    const selectDuctoparale = document.getElementById('cmbcrucesotrosductos');
+    selectDuctoparale.addEventListener('change', function handleChange(event) {
+        if (event.target.value == "Sí") {
+            $("#kmparalelismo").show()
+        }
+        else {
+            $("#kmparalelismo").hide()
+        }
+    });
+
     //Combo Ductos  
     const selectDucto = document.getElementById('cmbDucto');
     selectDucto.addEventListener('change', function handleChange(event) {
@@ -11152,6 +11163,7 @@ async function fnshowOperacionHistorialFugas(id_d = null) {
         await loadtipohisfugasOp();
         await loadtipoeventohisfugasOp();
         await loadtiporecuperacionhisfugasOp();
+        await loadtipoevento_hisfugasOp();
         if (id_d) {
             await consultaDatosHistFugOperacion(id_d = id_d);
         }
@@ -11256,6 +11268,36 @@ function loadtiporecuperacionhisfugasOp() {
         });
     });
 }
+function loadtipoevento_hisfugasOp() {
+    return new Promise((resolve, reject) => {
+        var webMethod = "get_histfugtipoevento_Operacion";
+        $.ajax({
+            type: "GET",
+            url: apiUrl + webMethod,
+            success: function (data) {
+                if (data.success) {
+                    $("#cmb_tipoevento_hisfug").empty();
+                    $('#cmb_tipoevento_hisfug').append($('<option>', {
+                        value: 0,
+                        text: 'Selecciona...'
+                    }));
+                    for (var i = 0; i < data.data.length; i++) {
+                        $('#cmb_tipoevento_hisfug').append($('<option>', {
+                            value: data.data[i].id,
+                            text: data.data[i].C_0406_231
+                        }));
+                    }
+                    resolve(data); // Resolve the promise with the data
+                } else {
+                    reject(new Error('Data not successful')); // Reject if data is not successful
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError); // Reject the promise with the error
+            }
+        });
+    });
+}
 function showotrotipohistfugasOp() {
     $('#espTipohisfug').show();
 }
@@ -11341,6 +11383,9 @@ function saveotroTipoeventoHisFugaOp() {
 function showotrotiporeparacionhistfugasOp() {
     $('#espTiporeparacionhisfug').show();
 }
+function showotrotipoevento_histfugasOp() {
+    $('#espTipoevento_hisfug').show();
+}
 
 function cancelotroTiporeparacionHisFugOp() {
     $("#espTiporeparacionhisfug").hide();
@@ -11379,6 +11424,40 @@ function saveotroTiporeparacionHisFugaOp() {
             alert("Error: " + error);
         });
 }
+function saveotroTipoevento_HisFugaOp() {
+    var webMethod = "savehistfugtipoevento_Operacion";
+    var params = {
+        C_0406_231: $("#newTipoevento_hisfug").val(),
+        descripcion: $("#newDescevento_hisfug").val()
+    };
+
+
+    console.log(JSON.stringify(params))
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                console.log(data.data);
+                alert("Información almacenada correctamente");
+                loadtipoevento_hisfugasOp();
+                $("#espTipoevento_hisfug").hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
 function savehistfugOp() {
     var webMethod = "saveHistorialFugas";
 
@@ -11388,20 +11467,20 @@ function savehistfugOp() {
         C_0406_215: $('#txtpobladohisfug').val(),
         C_0406_216: $('#txtmunicipiohisfug').val(),
         C_0406_217: $("#txtestadohisfug").val(),
-        id_C_0406_218: $("#cmb_tipohisfug").val(),
+        C_0406_218: $("#txttipo_hisfug").val(),
         id_C_0406_219: $("#cmb_tipoeventohisfug").val(),
         C_0406_220: $("#fec_hisfug").val(),
         C_0406_221: $("#txthoraocurrenciahisfug").val(),
         C_0406_222: $("#txthorariofinalhisfug").val(),
         C_0406_223: $("#txthoractrlhisfug").val(),
         C_0406_224: $("#txtarregloconthisfug").val(),
-        id_C_0406_225: $("#cmb_tiporeparacionhisfug").val(),
+        C_0406_225: $("#txttiporeparacionhisfug").val(),
         C_0406_226: $("#txtobservacioneshisfug").val(),
         C_0406_227: $("#txtoficioaseahisfug").val(),
         C_0406_228: $("#txtreportesiniestrohisfug").val(),
         C_0406_229: $("#txtnosiniestrohisfug").val(),
         C_0406_230: $("#txtnohisfug").val(),
-        C_0406_231: $("#txtevento_hisfug").val(),
+        C_0406_231: $("#cmb_tipoevento_hisfug").val(),
         coordenada_especifica: $("#coord_esp_hisfug_x").val() + ' ' + $("#coord_esp_hisfug_y").val(),
         kilometro_especifico: $("#km_esp_hisfug").val()
     };
@@ -11453,20 +11532,20 @@ function updateOperacionHistFugOp() {
             C_0406_215: $('#txtpobladohisfug').val(),
             C_0406_216: $('#txtmunicipiohisfug').val(),
             C_0406_217: $("#txtestadohisfug").val(),
-            id_C_0406_218: $("#cmb_tipohisfug").val(),
+            C_0406_218: $("#txttipo_hisfug").val(),
             id_C_0406_219: $("#cmb_tipoeventohisfug").val(),
             C_0406_220: $("#fec_hisfug").val(),
             C_0406_221: $("#txthoraocurrenciahisfug").val(),
             C_0406_222: $("#txthorariofinalhisfug").val(),
             C_0406_223: $("#txthoractrlhisfug").val(),
             C_0406_224: $("#txtarregloconthisfug").val(),
-            id_C_0406_225: $("#cmb_tiporeparacionhisfug").val(),
+            C_0406_225: $("#txttiporeparacionhisfug").val(),
             C_0406_226: $("#txtobservacioneshisfug").val(),
             C_0406_227: $("#txtoficioaseahisfug").val(),
             C_0406_228: $("#txtreportesiniestrohisfug").val(),
             C_0406_229: $("#txtnosiniestrohisfug").val(),
             C_0406_230: $("#txtnohisfug").val(),
-            C_0406_231: $("#txtevento_hisfug").val(),
+            C_0406_231: $("#cmb_tipoevento_hisfug").val(),
             coordenada_especifica: $("#coord_esp_hisfug_x").val() + ' ' + $("#coord_esp_hisfug_y").val(),
             kilometro_especifico: $("#km_esp_hisfug").val()
         };
@@ -11593,21 +11672,23 @@ function llenarDatosHisFugOp(data) {
     $("#txtresidenciahisfug").val(data[0].C_0406_214);
     $("#txtpobladohisfug").val(data[0].C_0406_215);
     $("#txtmunicipiohisfug").val(data[0].C_0406_216);
-    $("#txtestadohisfug").val(data[0].C_0406_217);
-    $("#cmb_tipohisfug option:contains(" + data[0].C_0406_218 + ")").attr('selected', 'selected');
+    $("#txtestadohisfug").val(data[0].C_0406_217); 
+    $("#txttipo_hisfug").val(data[0].C_0406_218);
+    //$("#txttipo_hisfug option:contains(" + data[0].C_0406_218 + ")").attr('selected', 'selected');
     $("#cmb_tipoeventohisfug option:contains(" + data[0].C_0406_219 + ")").attr('selected', 'selected');
     $("#fec_hisfug").val(data[0].C_0406_220.split(' ')[0]);
     $("#txthoraocurrenciahisfug").val(data[0].C_0406_221);
     $("#txthorariofinalhisfug").val(data[0].C_0406_222);
     $("#txthoractrlhisfug").val(data[0].C_0406_223);
-    $("#txtarregloconthisfug").val(data[0].C_0406_224);
-    $("#cmb_tiporeparacionhisfug option:contains(" + data[0].C_0406_225 + ")").attr('selected', 'selected');
+    $("#txtarregloconthisfug").val(data[0].C_0406_224);//
+    $("#txttiporeparacionhisfug").val(data[0].C_0406_225);
+   // $("#cmb_tiporeparacionhisfug option:contains(" + data[0].C_0406_225 + ")").attr('selected', 'selected');
     $("#txtobservacioneshisfug").val(data[0].C_0406_226);
     $("#txtoficioaseahisfug").val(data[0].C_0406_227);
     $("#txtreportesiniestrohisfug").val(data[0].C_0406_228);
     $("#txtnosiniestrohisfug").val(data[0].C_0406_229);
     $("#txtnohisfug").val(data[0].C_0406_230);
-    $("#txtevento_hisfug").val(data[0].C_0406_230);
+    $("#cmb_tipoevento_hisfug option:contains(" + data[0].C_0406_231 + ")").attr('selected', 'selected');
     idHistFugOp = data[0].id;
     inhabilitarform("#historialfugasderramesoperacionfrm", true);
 }
@@ -15201,15 +15282,16 @@ async function fnshowOperacionGeneral(id_d = null) {
     resetValidationClasses('generaloperacionfrm');
 }
 function addpropertytotable() {
-    llenarTablasGraloperacion('tbl_gral_propiedades', $("#txtdatoprop").val(), $("#cmbtipoprop").val());
+    llenarTablasGraloperacion('tbl_gral_propiedades', $("#cmbtipoprop").val(), $("#txtdatoprop").val(), $("#txtporcprop").val());
     $("#txtdatoprop").val('');
     $("#cmbtipoprop").val(0);
 }
-function llenarTablasGraloperacion(nameTabla, propiedad, tipo) {
+function llenarTablasGraloperacion(nameTabla, tipo, propiedad,percent) {
     // $('#tablaPersonas tbody')[0].innerHTML = "";
     var row = '<tr>';
-    row = row + '<td>' + propiedad + '</td>';
     row = row + '<td>' + tipo + '</td>';
+    row = row + '<td>' + propiedad + '</td>';   
+    row = row + '<td>' + percent + '</td>';
     row = row + '<td><a class="deleteprop" title="Eliminar" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>';
     row = row + '</tr>';
     $('#' + nameTabla + ' tbody').append(row);
@@ -15301,12 +15383,23 @@ function llenarDatosGeneralOperacion(data) {
     $("#km_esp_gralop").val(data[0].kilometro_especifico);
     $("#txtvolumentrans").val(data[0].C_0403_211);
     $("#cmbcrucesotrosductos option:contains(" + data[0].C_0414_253 + ")").attr('selected', 'selected');
+    if ($("#cmbcrucesotrosductos").val() == "Sí") {
+        $("#kmparalelismo").show()
+    }
+    else {
+        $("#kmparalelismo").hide()
+    }
+    $("#km_locpara_gralop").val(data[0].LOCALIZACION_KM);
+    //formData.append("LOCALIZACION_KM", $("#km_locpara_gralop").val());
     $('#tbl_gral_propiedades tbody')[0].innerHTML = "";
     data.forEach(function (da) {
-        llenarTablasGraloperacion('tbl_gral_propiedades', da.dato_propiedad, da.tipo_propiedad);
+        llenarTablasGraloperacion('tbl_gral_propiedades', da.tipo_propiedad, da.dato_propiedad, da.porcentaje_propiedad);
     });
     idGeneralOp = data[0].id;
     inhabilitarform("#generaloperacionfrm", true);
+}
+function deleteallpropertytotable() {
+    $('#tbl_gral_propiedades tbody')[0].innerHTML = "";
 }
 function saveGeneralOp() {
     var webMethod = "createGeneralOp";
@@ -15314,6 +15407,7 @@ function saveGeneralOp() {
     formData.append("C_0101_0001_id", area);
     formData.append("C_0403_211", $("#txtvolumentrans").val());
     formData.append("C_0414_253", $("#cmbcrucesotrosductos").val());
+    formData.append("LOCALIZACION_KM", $("#km_locpara_gralop").val());
     formData.append("kilometro_especifico", $("#km_esp_gralop").val());
     formData.append("coordenada_especifica", $("#coord_esp_gralop_x").val() + ' ' + $("#coord_esp_gralopl_y").val());
     fetch(apiUrl + webMethod, {
@@ -15348,15 +15442,20 @@ function saveGeneralDetalleOp(idproperty) {
     const formData = new FormData();
     var datainfo = [];
     var tipoprop = [];
+    var percentprop = [];
     $('#tbl_gral_propiedades tr').each(function (indexFila) {
         $(this).children('td').each(function (indexColumna) {
-            if (indexColumna === 0) {
+            if (indexColumna === 1) {
                 campo1 = $(this).text();
                 datainfo.push(campo1);
             };
-            if (indexColumna === 1) {
+            if (indexColumna === 0) {
                 campo1 = $(this).text();
                 tipoprop.push(campo1);
+            };
+            if (indexColumna === 2) {
+                campo1 = $(this).text();
+                percentprop.push(campo1);
             };
         });
     });
@@ -15365,6 +15464,9 @@ function saveGeneralDetalleOp(idproperty) {
     });
     tipoprop.forEach((tipo) => {
         formData.append("property[]", tipo);
+    });
+    percentprop.forEach((perc) => {
+        formData.append("propertypercent[]", perc);
     });
     formData.append("property_id", idproperty);
     for (var pair of formData.entries()) {
@@ -15414,6 +15516,7 @@ function updateOperacionGeneral() {
         const formData = new FormData();
         var datainfo = [];
         var tipoprop = [];
+        var percentprop = [];
         $('#tbl_gral_propiedades tr').each(function (indexFila) {
             $(this).children('td').each(function (indexColumna) {
                 if (indexColumna === 0) {
@@ -15424,6 +15527,10 @@ function updateOperacionGeneral() {
                     campo1 = $(this).text();
                     tipoprop.push(campo1);
                 };
+                if (indexColumna === 2) {
+                    campo1 = $(this).text();
+                    percentprop.push(campo1);
+                };
             });
         });
         datainfo.forEach((data) => {
@@ -15432,11 +15539,15 @@ function updateOperacionGeneral() {
         tipoprop.forEach((tipo) => {
             formData.append("property[]", tipo);
         });
+        percentprop.forEach((perc) => {
+            formData.append("propertypercent[]", perc);
+        });
         formData.append("id", idGeneralOp);
         formData.append("property_id", idGeneralOp);
         formData.append("C_0101_0001_id", area);
         formData.append("C_0403_211", $("#txtvolumentrans").val());
         formData.append("C_0414_253", $("#cmbcrucesotrosductos").val());
+        formData.append("LOCALIZACION_KM", $("#km_locpara_gralop").val());
         formData.append("kilometro_especifico", $("#km_esp_gralop").val());
         formData.append("coordenada_especifica", $("#coord_esp_gralop_x").val() + ' ' + $("#coord_esp_gralopl_y").val());
         for (var pair of formData.entries()) {
