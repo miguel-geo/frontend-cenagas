@@ -11003,6 +11003,10 @@ function loadAreaDocument() {
             .catch(error => console.error("Error fetching data: ", error));
     }
 }
+var nombreArchivo;
+function fileSelect(e) {
+    nombreArchivo=(e.target.files[0].name);
+}
 function savedocumentoreferenciado() {    
     var webMethod = "createDocumento";
     const formData = new FormData();
@@ -11016,6 +11020,7 @@ function savedocumentoreferenciado() {
         formData.append("tramo_id", element.val());
     }
     formData.append('file', $("#inputfiledocument")[0].files[0]);
+    formData.append('nombre_doc', nombreArchivo);
     fetch(apiUrl + webMethod, {
         method: 'POST',
         headers: {
@@ -11133,11 +11138,15 @@ function llenarTablasdocuments(obj, nameTabla) {
     // Assuming 4th column determines category
     var row = '<tr class="content-row">';
     for (var j = 0; j < obj.length; j++) {
+        var idDoc;
         if (j === 0) {
-            row = row + '<td style="text-align: center;color:green;"><a class="download-icon" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' +' title="Descargar"><i  class="fa fa-download"></i></a> </td>';
+            idDoc = obj[j];
+            row = row + '<td style="text-align: center;color:green;"><a class="download-icon" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar"><i  class="fa fa-download"></i></a> </td>';
         }
        else{
-             row = row + '<td>' + obj[j] + '</td>';
+            row = row + '<td>' + obj[j] + '</td>';
+            row = row + '<td><a class="delete" title="Eliminar" target="_blank" href="' + apiUrl + 'documentos/' + idDoc + '/destroy/"' + 'data-toggle="tooltip" data-id="' + idDoc + '"><i class="fa fa-trash"></i></a></td>';
+
        }
     }
     //row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip" id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] + '"><i class="fa fa-trash"></i></a></td>';
