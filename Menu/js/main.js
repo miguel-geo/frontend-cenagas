@@ -35,6 +35,7 @@ $(document).ready(function () {
     //});
    
     llenar_ductos();
+    llenar_ductos_documental();
     //loadidentificacion();
     $('.custom-file-input').on('change', function(event) {
         var inputFile = event.currentTarget;
@@ -911,6 +912,43 @@ function inicializarEventos() {
        
     });   
 
+
+
+    //Checkbox Diseño Servicio
+    $('#doc_dis_serv').on('click', function () {
+        if (this.checked) {
+            $('#cmb_tipo_archivo_disenio').show();
+            $('#titletypedocument').show();
+            $('#cmb_tipo_archivo_analisis').hide();
+            $('#cmb_tipo_archivo_operacion').hide();
+        } else {
+            $('#cmb_tipo_archivo_disenio').hide();
+            $('#titletypedocument').hide();
+        }
+    });
+    $('#doc_analisis_doc').on('click', function () {
+        if (this.checked) {
+            $('#cmb_tipo_archivo_analisis').show();
+            $('#titletypedocument').show();
+            $('#cmb_tipo_archivo_disenio').hide();
+            $('#cmb_tipo_archivo_operacion').hide();
+        } else {
+            $('#cmb_tipo_archivo_analisis').hide();
+            $('#titletypedocument').hide();
+        }
+    });
+    $('#doc_operacion_doc').on('click', function () {
+        if (this.checked) {
+            $('#cmb_tipo_archivo_operacion').show();
+            $('#titletypedocument').show();
+            $('#cmb_tipo_archivo_disenio').hide();
+            $('#cmb_tipo_archivo_analisis').hide();
+        } else {
+            $('#cmb_tipo_archivo_operacion').hide();
+            $('#titletypedocument').hide();
+        }
+    });
+
     //Combo Paralelismo  
     const selectDuctoparale = document.getElementById('cmbcrucesotrosductos');
     selectDuctoparale.addEventListener('change', function handleChange(event) {
@@ -972,12 +1010,23 @@ function inicializarEventos() {
         ductocon = event.target.value;
         loadTramosCon(event.target.value);
     });
+    //Combo Tramos Ducto Documental
+    const selectDuctoConDoc = document.getElementById('cmbDucto_con_doc');
+    selectDuctoConDoc.addEventListener('change', function handleChange(event) {
+        loadTramosCon_doc(event.target.value);
+    });
     //Combo Tramos Consulta
     const selectTramosCon = document.getElementById('cmbTramo_con');
     selectTramosCon.addEventListener('change', function handleChange(event) {
         tramocon = event.target.value;
         //loadAreasCon(event.target.value);
         loadSegmentosCon(event.target.value);
+    });
+    //Combo Tramos Documentos
+    const selectTramosConDoc = document.getElementById('cmbTramo_con_doc');
+    selectTramosConDoc.addEventListener('change', function handleChange(event) {
+        loadSegmentosConDoc(event.target.value);
+        tramo_id_doc = event.target.value;
     });
 
     //Combo Segmento Consulta
@@ -986,11 +1035,22 @@ function inicializarEventos() {
         tramocon = event.target.value;
         loadAreasCon(event.target.value);
     });
+    //Combo Segmento Consulta Documental
+    const selectSegmentoConDoc = document.getElementById('cmbSegmento_con_doc');
+    selectSegmentoConDoc.addEventListener('change', function handleChange(event) {
+        tramocon = event.target.value;
+        loadAreasConDoc(event.target.value);
+    });
 
     //Combo Areas Consulta
     const selectAreasCon = document.getElementById('cmbAreas_con');
     selectAreasCon.addEventListener('change', function handleChange(event) {
         areaCon = event.target.value;
+    }); 
+    //Combo Areas Consulta Documental
+    const selectAreasConDoc = document.getElementById('cmbAreas_con_doc');
+    selectAreasConDoc.addEventListener('change', function handleChange(event) {
+        area_id_doc = event.target.value;
     });
     //Combo Temas
     const selectTemas = document.getElementById('cmbTemasPrincipal_con');
@@ -10932,6 +10992,7 @@ function fnshowdocument() {
     loadTramosDocuments();
 
 }
+
 function cancelDocumental_() {
     document.getElementById('registro').style.display = '';
     $("#documentalfrm").hide();
@@ -11007,6 +11068,7 @@ var nombreArchivo;
 function fileSelect(e) {
     nombreArchivo=(e.target.files[0].name);
 }
+var tipodocumental = "";
 function savedocumentoreferenciado() {    
     var webMethod = "createDocumento";
     const formData = new FormData();
@@ -11021,6 +11083,17 @@ function savedocumentoreferenciado() {
     }
     formData.append('file', $("#inputfiledocument")[0].files[0]);
     formData.append('nombre_doc', nombreArchivo);
+    if ($("#cmb_tipo_archivo_disenio").val()!=="0") {
+        tipodocumental = $("#cmb_tipo_archivo_disenio").val();
+    }
+    if ($("#cmb_tipo_archivo_analisis").val() !== "0") {
+        tipodocumental = $("#cmb_tipo_archivo_analisis").val();
+    }
+    if ($("#cmb_tipo_archivo_operacion").val() !== "0") {
+        tipodocumental = $("#cmb_tipo_archivo_operacion").val();
+    }
+    formData.append('tipo', tipodocumental);//new Intl.DateTimeFormat(['ban', 'id']).format(new Date())
+    formData.append('fecha', new Intl.DateTimeFormat(['ban', 'id']).format(new Date()));
     fetch(apiUrl + webMethod, {
         method: 'POST',
         headers: {
@@ -11094,6 +11167,7 @@ function saveDocumentAreasForms(idDoc) {
             alert("Error: " + error);
         });
 }
+
 function get_relateddocuments(tramo_id,area_id,form_id,table) {
     var webMethod = "getDocumento";
     const formData = new FormData();
@@ -11121,7 +11195,7 @@ function get_relateddocuments(tramo_id,area_id,form_id,table) {
                 $('#'+table+' tbody')[0].innerHTML = "";
                 $('#' + table +' tbody:not(:first)').remove();
                 for (i = 0; i < data.data.datagrid.length; i++) {
-                    var persona = [data.data.datagrid[i].id, data.data.datagrid[i].nombre];
+                    var persona = [data.data.datagrid[i].id, data.data.datagrid[i].nombre, data.data.datagrid[i].tipo, data.data.datagrid[i].fecha];
                     llenarTablasdocuments(persona, table);
               }
             }
@@ -11144,12 +11218,12 @@ function llenarTablasdocuments(obj, nameTabla) {
             row = row + '<td style="text-align: center;color:green;"><a class="download-icon" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar"><i  class="fa fa-download"></i></a> </td>';
         }
        else{
-            row = row + '<td>' + obj[j] + '</td>';
-            row = row + '<td><a class="delete" title="Eliminar" target="_blank" href="' + apiUrl + 'documentos/' + idDoc + '/destroy/"' + 'data-toggle="tooltip" data-id="' + idDoc + '"><i class="fa fa-trash"></i></a></td>';
+            row = row + '<td>' + obj[j] + '</td>';         
 
        }
     }
     //row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip" id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] + '"><i class="fa fa-trash"></i></a></td>';
+    row = row + '<td><a class="delete" title="Eliminar" target="_blank" href="' + apiUrl + 'documentos/' + idDoc + '/destroy/"' + 'data-toggle="tooltip" data-id="' + idDoc + '"><i class="fa fa-trash"></i></a></td>';
     row = row + '</tr>';
   $('#' + nameTabla).append(row);
 }
@@ -15658,5 +15732,179 @@ function updateOperacionGeneral() {
 function cancelGeneralOp() {
     $('#generaloperacionfrm').hide();
     $('#operacionforms').show();
+}
+//#endregion
+
+//#region  Consulta documental
+
+//#region Carga Documental
+
+function llenar_ductos_documental() {
+
+
+    const webMethod = 'ductos';
+    url = apiUrl + webMethod;
+    fetch(url, {
+        method: 'GET', // or 'POST', 'PUT', etc.
+        headers: headers
+    })
+        .then(response => response.json())
+        .then(data => {
+            var selectElement = document.getElementById("cmbDucto_con_doc");
+            var selectElementConsulta = document.getElementById("cmbDucto_con_doc");
+            data.ductos.forEach(item => {
+                var option = document.createElement("option");
+                option.value = item.id; // Using the 'id' property as value
+                option.text = item.nombre; // Using the 'nombre' property as display name
+                selectElement.add(option);
+                var option2 = document.createElement("option");
+                option2.value = item.id; // Using the 'id' property as value
+                option2.text = item.nombre; // Using the 'nombre' property as display name
+                selectElementConsulta.add(option);
+            });
+        })
+        .catch(error => console.error("Error fetching data: ", error));
+}
+function loadTramosCon_doc() {
+    $("#cmbTramo_con_doc option:not(:first)").remove();
+    var property = $("#cmbDucto_con_doc").val();
+    const webMethod = 'tramos/fetch';
+    url = apiUrl + webMethod;
+    if (property) {
+
+        fetch(url, {
+            method: 'POST', // or 'POST', 'PUT', etc.
+            headers: headers,
+            body: JSON.stringify({ 'property': property })
+        })
+            .then(response => response.json())
+            .then(data => {
+                $("#cmbTramo_con_doc").empty();
+                $('#cmbTramo_con_doc').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.length; i++) {
+                    $('#cmbTramo_con_doc').append($('<option>', {
+                        value: data[i].id,
+                        text: data[i].nombre
+                    }));
+                }
+            })
+            .catch(error => console.error("Error fetching data: ", error));
+    }
+
+}
+function loadSegmentosConDoc() {
+    $("#cmbSegmento_con_doc option:not(:first)").remove();
+    var property = $("#cmbTramo_con_doc").val();
+    const webMethod = 'segmentos/fetch';
+    url = apiUrl + webMethod;
+    if (property) {
+
+        fetch(url, {
+            method: 'POST', // or 'POST', 'PUT', etc.
+            headers: headers,
+            body: JSON.stringify({ 'property': property })
+        })
+            .then(response => response.json())
+            .then(data => {
+
+                $("#cmbSegmento_con_doc").empty();
+                $('#cmbSegmento_con_doc').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.length; i++) {
+                    $('#cmbSegmento_con_doc').append($('<option>', {
+                        value: data[i].id,
+                        text: data[i].clave_segmento
+                    }));
+                }
+            })
+            .catch(error => console.error("Error fetching data: ", error));
+    }
+}
+function loadAreasConDoc() {
+    $("#cmbAreas_con_doc option:not(:first)").remove();
+    var property = $("#cmbSegmento_con_doc").val();
+    const webMethod = 'areas_unitarias/fetchCon';
+    url = apiUrl + webMethod;
+    if (property) {
+
+        fetch(url, {
+            method: 'POST', // or 'POST', 'PUT', etc.
+            headers: headers,
+            body: JSON.stringify({ 'property': property })
+        })
+            .then(response => response.json())
+            .then(data => {
+
+                $("#cmbAreas_con_doc").empty();
+                $('#cmbAreas_con_doc').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));
+                for (var i = 0; i < data.length; i++) {
+                    $('#cmbAreas_con_doc').append($('<option>', {
+                        value: data[i].id,
+                        text: data[i].nombre
+                    }));
+                }
+            })
+            .catch(error => console.error("Error fetching data: ", error));
+    }
+}
+var formsquery = "";
+var tramo_id_doc;
+var area_id_doc;
+function get_relateddocuments_doc() {
+    var webMethod = "get_documents";
+    const formData = new FormData();
+    formData.append("tramo_id", tramo_id_doc);
+    formData.append("area_id", area_id_doc);
+    $('#lstformsconsulta').find('input:checked').each(function () {
+         formsquery=formsquery+($(this)[0].value)+',';
+     });
+    formsquery = formsquery.substring(0, formsquery.length - 1);
+    formData.append("form_id", formsquery);
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            console.log(typeof data)
+            console.log(data)
+            if (data.success) {
+                $('#tbl_doc_consulta tbody')[0].innerHTML = "";
+                $('#tbl_doc_consulta tbody:not(:first)').remove();
+                for (i = 0; i < data.data.datagrid.length; i++) {
+                    var persona = [data.data.datagrid[i].id, data.data.datagrid[i].nombre, data.data.datagrid[i].tipo, data.data.datagrid[i].fecha];
+                    llenarTablasdocuments(persona, "tbl_doc_consulta");
+                }
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+}
+function consultadocumental() {
+    get_relateddocuments_doc();
+}
+function fnshowconsuldocument() {
+    document.getElementById('registro').style.display = 'none';
+    $("#documentalfrm").show();
+    loadTramosDocuments();
+
 }
 //#endregion
