@@ -4356,7 +4356,11 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Reporte siniestro entregado</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtreportesiniestrohisfug" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control setAlg" id="txtreportesiniestrohisfug">
+                                        <option>Selecciona...</option>
+                                        <option>Sí</option>
+                                        <option>No</option>
+                                    </select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4564,13 +4568,13 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_hisrep_x" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern=".*" title="Please enter a valid number" aria-label="" id="coord_esp_hisrep_x" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_hisrep_y" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern=".*" id="coord_esp_hisrep_y" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
