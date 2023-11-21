@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -11637,6 +11637,7 @@ function updateOperacionHistFugOp() {
 
         fetch(apiUrl + webMethod, {
             method: 'POST',
+            headers: {'Accept': 'application/json'},
             body: formData
         })
             .then(response => {
@@ -12358,6 +12359,7 @@ function llenarDatosHisRepOp(data) {
     $("#txtlongitudrecbhisrec").val(data[0].C_0415_275);
     $("#txtindicadoreshisrep").val(data[0].C_0415_276);
     $("#txtdefectohisrep").val(data[0].C_0415_277);
+    $("#km_anomalia_hisrep").val(data[0].km_anomalia)
     $("#fecreparacion_hisrep").val(data[0].C_0415_278.split(' ')[0]);
     $("#cmb_tipofallahisrep option:contains(" + data[0].C_0415_279 + ")").attr('selected', 'selected');
     $("#txtmodoreparacionhisrep").val(data[0].C_0415_280);
@@ -12404,6 +12406,7 @@ function savehistReparacionOp() {
         C_0415_278: $("#fecreparacion_hisrep").val(),
         id_C_0415_279: $("#cmb_tipofallahisrep").val(),
         C_0415_280: $("#txtmodoreparacionhisrep").val(),
+        km_anomalia: $("#km_anomalia_hisrep").val(),
         coordenada_especifica: $("#coord_esp_hisrep_x").val() + ' ' + $("#coord_esp_hisrep_y").val(),
         kilometro_especifico: $("#km_esp_hisrep").val()
     };
@@ -12477,6 +12480,7 @@ function updateOperacionHistorialReparaciones() {
             C_0415_278: $("#fecreparacion_hisrep").val(),
             id_C_0415_279: $("#cmb_tipofallahisrep").val(),
             C_0415_280: $("#txtmodoreparacionhisrep").val(),
+            km_anomalia: $("#km_anomalia_hisrep").val(),
             coordenada_especifica: $("#coord_esp_hisrep_x").val() + ' ' + $("#coord_esp_hisrep_y").val(),
             kilometro_especifico: $("#km_esp_hisrep").val()
         };
@@ -15908,3 +15912,21 @@ function fnshowconsuldocument() {
 
 }
 //#endregion
+//#endregion
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    var timeInputs = document.querySelectorAll('.time-input');
+
+    timeInputs.forEach(function(input) {
+        input.addEventListener('input', function(e) {
+            var value = e.target.value;
+            var regex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/;
+            if (!regex.test(value)) {
+                e.target.setCustomValidity('Por favor, ingrese la hora en formato hh:mm:ss');
+            } else {
+                e.target.setCustomValidity('');
+            }
+        });
+    });
+});

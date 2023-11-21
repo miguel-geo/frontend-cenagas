@@ -184,7 +184,7 @@
                                                 </div>
                                                 <input type="text" id="txtkmDestino" class="form-control" placeholder="" aria-describedby="basic-addon1" readonly>
                                             </div>
-                                            <div class="btn btn-success btn-lg pull-right" id="btnfinalizar" onclick="fnFinalizar()">Finalizar</div>
+                                            <div class="btn btn-success btn-lg pull-right" id="btnfinalizar" onclick="fnFinalizar()">Consultar</div>
                                             <button class="btn btn-secondary prevBtn btn-lg pull-right" onclick="atras_pasotres()" style="margin-right:5px;" type="button">Atrás</button>
 
                                         </div>
@@ -1563,6 +1563,7 @@
                                         <option value=3>Infraestructura de comunicación</option>
                                         <option value=4>Ductos extranjeros</option>
                                         <option value=5>Servicios de comunicación</option>
+                                        <option value=6>Otro</option>
                                     </select>
                                 </div>
                                 <!-- Clase de localización -->
@@ -4293,19 +4294,19 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Hora de ocurrencia del evento</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txthoraocurrenciahisfug" aria-describedby="basic-addon1">
+                                    <input type="time" step="1" class="form-control setAlg time-input" placeholder="hh:mm:ss"   aria-label="" id="txthoraocurrenciahisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Horario final de reparación</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txthorariofinalhisfug" aria-describedby="basic-addon1">
+                                    <input type="time" step="1" class="form-control setAlg time-input" placeholder="hh:mm:ss"   aria-label="" id="txthorariofinalhisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"> Hora de control del evento</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txthoractrlhisfug" aria-describedby="basic-addon1">
+                                    <input type="time" step="1" class="form-control setAlg time-input" placeholder="hh:mm:ss"    aria-label="" id="txthoractrlhisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4415,7 +4416,7 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelOperacionHisFugas()">Cancelar</button>
                                     <button type="button" id="btn_newHisFug_operacion" onclick="nuevoOperacionHistFugas()" style="display:none" class="btn btn-info">Crear Nuevo Registro</button>
                                     <button type="button" id="btn_updateHisFug_operacion" onclick="updateOperacionHistFugOp()" style="display:none" class="btn btn-info">Actualizar</button>
-                                    <button type="button" id="btn_saveHisFug_operacion" onclick="validateForm('identi-form', savehistfugOp)" class="btn btn-success">Guardar</button>
+                                    <button type="button" id="btn_saveHisFug_operacion" onclick="validateForm('historialfugasderramesoperacionfrm', savehistfugOp)" class="btn btn-success">Guardar</button>
                                 </div>
                             </form>
                         </div>
@@ -4662,6 +4663,12 @@
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelotroTipoManguitoOp()">Cancelar</button>
                                         <button type="button" id="btn_saveOtroHisrepmanguitoOp" onclick="saveotroTipoManguitoOp()" class="btn btn-success">Guardar</button>
                                     </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Kilómetro de Anomalía</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="km_anomalia_hisrep" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -5472,6 +5479,8 @@
                                         <option value="Aislamiento">Aislamiento</option>
                                         <option value="Mantenimiento">Mantenimiento</option>
                                         <option value="Medición">Medición</option>
+                                        <option value="Purga">Purga</option>
+                                        <option value="Seccionamiento">Seccionamiento</option>
                                     </select>
                                 </div>
                                 <div class="input-group mb-3 dos" style="display:none;">
@@ -5655,7 +5664,7 @@
                                 </div>
                                 <div class="input-group mb-3 seis" style="display:none;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Especificaciones de diseño Briada</span>
+                                        <span class="input-group-text" id="basic-addon1">Especificaciones de diseño Brida</span>
                                     </div>
                                     <select class="selectpicker form-control setAlg" id="cmb_tipoespdiseniobriadainsta">
                                         <option>Selecciona...</option>
@@ -5666,7 +5675,7 @@
                                 </div>
                                 <div class="input-group mb-3" id="espTipoespdisenioBriada" style="display:none">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Tipo de especificación de diseño Briada</span>
+                                        <span class="input-group-text" id="basic-addon1">Tipo de especificación de diseño Brida</span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="" aria-label="" id="newTipoespdisenBriada" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
@@ -5967,7 +5976,7 @@
                                     </div>
                                     <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtlogcarcasainsta" aria-describedby="basic-addon1">
                                 </div>
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3 doce" style="display:none;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Aislamiento entre tubería y carcasa</span>
                                     </div>
