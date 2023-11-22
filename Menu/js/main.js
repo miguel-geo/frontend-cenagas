@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -24,6 +24,11 @@ const headers = new Headers({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
 });
+
+const headers1 = new Headers({
+    'Accept': 'application/json'
+});
+
 
 
 
@@ -11564,6 +11569,7 @@ function savehistfugOp() {
         C_0406_229: $("#txtnosiniestrohisfug").val(),
         C_0406_230: $("#txtnohisfug").val(),
         C_0406_231: $("#cmb_tipoevento_hisfug").val(),
+        fecha_control_evento: $("#txtfechactrlhisfug").val(),
         coordenada_especifica: $("#coord_esp_hisfug_x").val() + ' ' + $("#coord_esp_hisfug_y").val(),
         kilometro_especifico: $("#km_esp_hisfug").val()
     };
@@ -11629,6 +11635,7 @@ function updateOperacionHistFugOp() {
             C_0406_229: $("#txtnosiniestrohisfug").val(),
             C_0406_230: $("#txtnohisfug").val(),
             C_0406_231: $("#cmb_tipoevento_hisfug").val(),
+            fecha_control_evento: $("#txtfechactrlhisfug").val(),
             coordenada_especifica: $("#coord_esp_hisfug_x").val() + ' ' + $("#coord_esp_hisfug_y").val(),
             kilometro_especifico: $("#km_esp_hisfug").val()
         };
@@ -11764,6 +11771,7 @@ function llenarDatosHisFugOp(data) {
     $("#txthoraocurrenciahisfug").val(data[0].C_0406_221);
     $("#txthorariofinalhisfug").val(data[0].C_0406_222);
     $("#txthoractrlhisfug").val(data[0].C_0406_223);
+    $("#txtfechactrlhisfug").val(data[0].fecha_control_evento);
     $("#txtarregloconthisfug").val(data[0].C_0406_224);//
     $("#txttiporeparacionhisfug").val(data[0].C_0406_225);
    // $("#cmb_tiporeparacionhisfug option:contains(" + data[0].C_0406_225 + ")").attr('selected', 'selected');
@@ -11992,7 +12000,8 @@ function updateOperacionMonitoreoCorrosion() {
 
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -12350,11 +12359,14 @@ function llenarDatosHisRepOp(data) {
     $("#txtesptuberiahisrep").val(data[0].C_0415_265);
     $("#txtespnominalhisrep").val(data[0].C_0415_266);
     $("#txtpruebahidrohisrep").val(data[0].C_0415_267);
-    $("#fecprueba_hisrep").val(data[0].C_0415_268.split(' ')[0]);
+    if (data[0].C_0415_268) {
+        $("#fecprueba_hisrep").val(data[0].C_0415_268.split(' ')[0]);
+    }
     $("#txtequipohisrep").val(data[0].C_0415_269);
     $("#txtlongitudenvolhisrep").val(data[0].C_0415_271);
     $("#txtobservacionhisrep").val(data[0].C_0415_272);
-    $("#fecinspliquidos_hisrep").val(data[0].C_0415_273.split(' ')[0]);
+    if (data[0].C_0415_273) {
+        $("#fecinspliquidos_hisrep").val(data[0].C_0415_273.split(' ')[0]);}
     $("#cmb_tiporecaplicadohisrep option:contains(" + data[0].C_0415_274 + ")").attr('selected', 'selected');
     $("#txtlongitudrecbhisrec").val(data[0].C_0415_275);
     $("#txtindicadoreshisrep").val(data[0].C_0415_276);
