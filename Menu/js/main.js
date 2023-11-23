@@ -8468,8 +8468,12 @@ function processTableDataAndHideNullColumns(data, tableId, keys) {
             // Check if the value matches the datetime format
             var match = /^(\d{4}-\d{2}-\d{2}) \d{2}:\d{2}:\d{2}$/.exec(data[i][key]);
             if (match) {
+                if (match==='1970-01-01') {
+                    // If it matches, return only the date part
+                    return match[1];
+                } else{return 'null'}
                 // If it matches, return only the date part
-                return match[1];
+
             }
             return data[i][key];
         });
