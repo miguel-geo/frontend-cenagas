@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -1768,12 +1768,28 @@ function fnFinalizar() {
    
 }
 
+function checkAndUpdateDateInputs(selector) {
+    var container = document.querySelector(selector);
+    if (container) {
+        var dateInputs = container.querySelectorAll('input[type="date"]');
+
+        dateInputs.forEach(function(input) {
+            if (input.value === '1970-01-01') {
+                input.value = ''; // Set to empty
+            }
+        });
+    } else {
+        console.warn("No element found with the selector:", selector);
+    }
+}
+// Call the function with the ID of your div
 
 
 function inhabilitarform(divSelector, bandera) {
     $(divSelector + " input.setAlg").prop("disabled", bandera);
     $(divSelector + " select.setAlg").prop("disabled", bandera);
     $(divSelector + " table.setAlg").prop("disabled", bandera);
+    checkAndUpdateDateInputs(divSelector);
 }
 //#region Actulizacion Diseño
 function nuevoIdentificacionDisenio(){
@@ -13326,10 +13342,10 @@ function load_catalogos_general() {
                         value: 0,
                         text: 'Selecciona...'
                     }));
-                    for (var i = 0; i < data.data.length; i++) {
+                    for (var i = 0; i < data.data.tipo_tuberia_revestimiento.length; i++) {
                         $('#cmb_tipoventilacion').append($('<option>', {
-                            value: data.data[i].id,
-                            text: data.data[i].C_0401_201
+                            value: data.data.tipo_tuberia_revestimiento[i].id,
+                            text: data.data.tipo_tuberia_revestimiento[i].C_0401_201
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -15942,3 +15958,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var dateInputs = document.querySelectorAll('input[type=date]');
+
+    dateInputs.forEach(function(input) {
+        input.addEventListener('change', function() {
+            console.log('Date input changed:', this);
+        });
+    });
+});
+
