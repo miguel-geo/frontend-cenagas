@@ -29,6 +29,11 @@ const headers = new Headers({
     'Content-Type': 'application/json'
 });
 
+const headers1 = new Headers({
+    'Accept': 'application/json'
+});
+
+
 
 
 $(document).ready(function () {
@@ -1771,12 +1776,28 @@ function fnFinalizar() {
    
 }
 
+function checkAndUpdateDateInputs(selector) {
+    var container = document.querySelector(selector);
+    if (container) {
+        var dateInputs = container.querySelectorAll('input[type="date"]');
+
+        dateInputs.forEach(function(input) {
+            if (input.value === '1970-01-01') {
+                input.value = ''; // Set to empty
+            }
+        });
+    } else {
+        console.warn("No element found with the selector:", selector);
+    }
+}
+// Call the function with the ID of your div
 
 
 function inhabilitarform(divSelector, bandera) {
     $(divSelector + " input.setAlg").prop("disabled", bandera);
     $(divSelector + " select.setAlg").prop("disabled", bandera);
     $(divSelector + " table.setAlg").prop("disabled", bandera);
+    checkAndUpdateDateInputs(divSelector);
 }
 //#region Actulizacion Diseño
 function nuevoIdentificacionDisenio(){
@@ -8455,8 +8476,12 @@ function processTableDataAndHideNullColumns(data, tableId, keys) {
             // Check if the value matches the datetime format
             var match = /^(\d{4}-\d{2}-\d{2}) \d{2}:\d{2}:\d{2}$/.exec(data[i][key]);
             if (match) {
+                if (match==='1970-01-01') {
+                    // If it matches, return only the date part
+                    return match[1];
+                } else{return 'null'}
                 // If it matches, return only the date part
-                return match[1];
+
             }
             return data[i][key];
         });
@@ -11572,6 +11597,7 @@ function savehistfugOp() {
         C_0406_229: $("#txtnosiniestrohisfug").val(),
         C_0406_230: $("#txtnohisfug").val(),
         C_0406_231: $("#cmb_tipoevento_hisfug").val(),
+        fecha_control_evento: $("#txtfechactrlhisfug").val(),
         coordenada_especifica: $("#coord_esp_hisfug_x").val() + ' ' + $("#coord_esp_hisfug_y").val(),
         kilometro_especifico: $("#km_esp_hisfug").val()
     };
@@ -11637,6 +11663,7 @@ function updateOperacionHistFugOp() {
             C_0406_229: $("#txtnosiniestrohisfug").val(),
             C_0406_230: $("#txtnohisfug").val(),
             C_0406_231: $("#cmb_tipoevento_hisfug").val(),
+            fecha_control_evento: $("#txtfechactrlhisfug").val(),
             coordenada_especifica: $("#coord_esp_hisfug_x").val() + ' ' + $("#coord_esp_hisfug_y").val(),
             kilometro_especifico: $("#km_esp_hisfug").val()
         };
@@ -11772,6 +11799,7 @@ function llenarDatosHisFugOp(data) {
     $("#txthoraocurrenciahisfug").val(data[0].C_0406_221);
     $("#txthorariofinalhisfug").val(data[0].C_0406_222);
     $("#txthoractrlhisfug").val(data[0].C_0406_223);
+    $("#txtfechactrlhisfug").val(data[0].fecha_control_evento);
     $("#txtarregloconthisfug").val(data[0].C_0406_224);//
     $("#txttiporeparacionhisfug").val(data[0].C_0406_225);
    // $("#cmb_tiporeparacionhisfug option:contains(" + data[0].C_0406_225 + ")").attr('selected', 'selected');
@@ -12000,7 +12028,8 @@ function updateOperacionMonitoreoCorrosion() {
 
         fetch(apiUrl + webMethod, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: headers1
         })
             .then(response => {
                 if (!response.ok) {
@@ -12358,11 +12387,14 @@ function llenarDatosHisRepOp(data) {
     $("#txtesptuberiahisrep").val(data[0].C_0415_265);
     $("#txtespnominalhisrep").val(data[0].C_0415_266);
     $("#txtpruebahidrohisrep").val(data[0].C_0415_267);
-    $("#fecprueba_hisrep").val(data[0].C_0415_268.split(' ')[0]);
+    if (data[0].C_0415_268) {
+        $("#fecprueba_hisrep").val(data[0].C_0415_268.split(' ')[0]);
+    }
     $("#txtequipohisrep").val(data[0].C_0415_269);
     $("#txtlongitudenvolhisrep").val(data[0].C_0415_271);
     $("#txtobservacionhisrep").val(data[0].C_0415_272);
-    $("#fecinspliquidos_hisrep").val(data[0].C_0415_273.split(' ')[0]);
+    if (data[0].C_0415_273) {
+        $("#fecinspliquidos_hisrep").val(data[0].C_0415_273.split(' ')[0]);}
     $("#cmb_tiporecaplicadohisrep option:contains(" + data[0].C_0415_274 + ")").attr('selected', 'selected');
     $("#txtlongitudrecbhisrec").val(data[0].C_0415_275);
     $("#txtindicadoreshisrep").val(data[0].C_0415_276);
@@ -13322,10 +13354,10 @@ function load_catalogos_general() {
                         value: 0,
                         text: 'Selecciona...'
                     }));
-                    for (var i = 0; i < data.data.length; i++) {
+                    for (var i = 0; i < data.data.tipo_tuberia_revestimiento.length; i++) {
                         $('#cmb_tipoventilacion').append($('<option>', {
-                            value: data.data[i].id,
-                            text: data.data[i].C_0401_201
+                            value: data.data.tipo_tuberia_revestimiento[i].id,
+                            text: data.data.tipo_tuberia_revestimiento[i].C_0401_201
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -16243,3 +16275,15 @@ async function fetchDataKms() {
         console.error("Error fetching data: ", error);
     }
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var dateInputs = document.querySelectorAll('input[type=date]');
+
+    dateInputs.forEach(function(input) {
+        input.addEventListener('change', function() {
+            console.log('Date input changed:', this);
+        });
+    });
+});
+

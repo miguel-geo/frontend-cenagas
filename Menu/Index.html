@@ -4316,7 +4316,11 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"> Hora de control del evento</span>
                                     </div>
-                                    <input type="time" step="1" class="form-control setAlg time-input" placeholder="hh:mm:ss"    aria-label="" id="txthoractrlhisfug" aria-describedby="basic-addon1">
+                                    <input type="time" name="timestamp" step="1" class="form-control setAlg time-input" placeholder="hh:mm:ss"    aria-label="" id="txthoractrlhisfug" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"> Fecha de control del evento</span>
+                                    </div>
+                                    <input type="date" class="form-control setAlg"   aria-label="" id="txtfechactrlhisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4478,7 +4482,10 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Unidades de medida</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtunidadesmedidaop" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control setAlg" id="txtunidadesmedidaop">
+                                        <option value=0>Selecciona...</option>
+                                        <option value='MPY'>MPY</option>
+                                    </select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4649,9 +4656,9 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Presión máxima de diseño</span>
+                                        <span class="input-group-text" id="basic-addon1">Presión máxima de diseño(PSI)</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtpresionmahisrep" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^\-?\d+(\.\d+)?$" aria-label="" id="txtpresionmahisrep" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4732,9 +4739,9 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Longitud del envolvente</span>
+                                        <span class="input-group-text" id="basic-addon1">Longitud del envolvente (m)</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtlongitudenvolhisrep" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^\-?\d+(\.\d+)?$" placeholder="" aria-label="" id="txtlongitudenvolhisrep" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4775,9 +4782,9 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Longitud de recubrimiento</span>
+                                        <span class="input-group-text" id="basic-addon1">Longitud de recubrimiento (m)</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtlongitudrecbhisrec" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^\-?\d+(\.\d+)?$" placeholder="" aria-label="" id="txtlongitudrecbhisrec" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
