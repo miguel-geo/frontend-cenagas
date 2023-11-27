@@ -2,6 +2,7 @@
 var ducto;
 var tramo;
 var area;
+var selectedFeature = null;
 var txtducto;
 var txttramo;
 var txtarea;
@@ -19,6 +20,9 @@ var temaconsultadisenio = "";
 var temaconsultaanalisis = "";
 var temaconsultaoperacion="";
 var area_unitaria_id;
+var vectorLayer;
+var popup;
+var map;
 var contar_longitud=0;
 const headers = new Headers({
     'Accept': 'application/json',
@@ -195,6 +199,10 @@ function loadAreas() {
     var property = $("#cmbTramo").val();
     const webMethod = 'areas_unitarias/fetch';
     url = apiUrl + webMethod;
+    var geojsonLayerUrl = 'http://dtptec.ddns.net:8080/geoserver/cenagas/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=cenagas:areaxtramo&viewparams=tramo:'+property+'&outputFormat=application/json';
+
+    addVectorLayerFromGeoJSON(geojsonLayerUrl);
+
     if (property) {
 
         fetch(url, {
@@ -15930,3 +15938,308 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+function initMap() {
+    
+    map = new ol.Map({
+        target: 'map',
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM({
+                    url: 'http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png'
+                })
+            })
+        ],
+        view: new ol.View({
+            center: ol.proj.fromLonLat([-0.09, 51.505]),
+            zoom: 13
+        })
+    });
+    popup = new ol.Overlay({
+        element: document.getElementById('popup')
+    });
+    map.addOverlay(popup);
+
+
+
+    
+
+
+        
+    
+        // Popup click event
+        map.on('singleclick', function (evt) {
+            console.log('Map clicked at:', evt.coordinate);
+            var featureFound = false;
+            if (selectedFeature) {
+                // Reset the style of the previously selected feature
+                selectedFeature.setStyle(normalStyle);
+            }
+        
+            map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
+                
+                console.log('Feature found', layer && vectorLayer && layer.getSource() === vectorLayer.getSource());
+                // Additional logic here
+                if (!featureFound &&layer && vectorLayer && layer.getSource() === vectorLayer.getSource()) {
+                    featureFound = true;
+                    selectedFeature = feature;
+                    selectedFeature.setStyle(selectedStyle);
+                    
+                    var coordinates = feature.getGeometry().getCoordinates();
+                    var featureInfo = feature.getProperties();
+                    var featureInfotable= geojsonToTable(featureInfo) // Get properties of the feature
+                    
+                    // Create popup content
+                    var content = '<div class="p-3">'; // Add padding around the content
+                    content += '<h3 class="mb-3">Área Unitaria</h3>'; // Add margin-bottom to the heading
+
+                    // Retrieve the property value
+                    var cveAuValue = feature.get('cve_au') || 'No data available'; // Fallback if undefined
+
+                    // Use Bootstrap's text and card classes for better styling
+                    content += '<div class="card"><div class="card-body">';
+                    content += '<p class="card-text"> <strong>' + cveAuValue + '</strong></p>';
+                    content += '</div></div>'; // Close card-body and card
+
+                    content += '</div>'; // Close the main div
+
+    
+                    // Set popup content and position
+                    var popupElement = popup.getElement();
+
+                    popupElement.innerHTML = content;
+                    console.log(coordinates)
+                    popup.setPosition(evt.coordinate);
+                    area = selectedFeature.get('area_id');
+                    $("#cmbAreas").val(area)
+                    // Assuming 'area_id' is the property name
+                    console.log("Selected area ID: " + area);
+                    // Your button click logic here
+
+
+                    
+                        fetchDataKms()
+                    
+    
+                    // Additional function for button click
+                    window.yourButtonFunction = function() {
+                        
+                    }
+                }
+            });
+
+            if (!map.hasFeatureAtPixel(evt.pixel)) {
+                // If no feature is clicked, reset the selection
+                currentlySelectedFeature = null;
+            }
+
+            if (!selectedFeature) {
+                area = null; // No feature selected
+            }
+        
+            if (!featureFound) {
+                console.log('No feature found at this pixel');
+                popup.setPosition(undefined);
+            }
+        });
+    
+}
+
+
+var normalStyle = new ol.style.Style({
+    fill: new ol.style.Fill({
+        color: 'rgba(0, 0, 255, 0.3)' // Light semi-transparent blue
+    }),
+    stroke: new ol.style.Stroke({
+        color: '#0000ff', // Blue color
+        width: 4
+    }),
+    image: new ol.style.Circle({
+        radius: 10,
+        fill: new ol.style.Fill({
+            color: '#0000ff' // Same blue color
+        })
+    })
+    
+});
+
+
+var selectedStyle = new ol.style.Style({
+    fill: new ol.style.Fill({
+        color: 'rgba(255, 255, 255, 0.2)' // Light semi-transparent white
+    }),
+    stroke: new ol.style.Stroke({
+        color: '#ffcc33', // Orange color
+        width: 2
+    }),
+    image: new ol.style.Circle({
+        radius: 7,
+        fill: new ol.style.Fill({
+            color: '#ffcc33' // Same orange color
+        })
+    })
+
+});
+
+
+function geojsonToTable(geojsonData) {
+    if (typeof geojsonData !== 'object') return '';
+    var html = '<table border="1" class="table table-striped table-hover table-bordered">';
+    html += '<tr><th>Propiedad</th><th>Valor</th></tr>';
+    for (var key in geojsonData) {
+      var name = geojsonData[key];
+      html += '<tr><td>' + key + '</td><td>' + name + '</td></tr>';
+    }
+    html += '</table>';
+    return html;
+  }
+// Ensure the map is initialized only after the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', initMap)
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('cmbAreas').addEventListener('change', function(event) {
+        var selectedAreaId = event.target.value;
+        console.log("Selected Area ID: ", selectedAreaId);
+        selectFeatureById(selectedAreaId);
+    });
+});
+
+
+function selectFeatureById(areaId) {
+    if (selectedFeature) {
+        // Reset the style of the previously selected feature
+        selectedFeature.setStyle(normalStyle);
+    }
+
+    vectorLayer.getSource().getFeatures().forEach(function(feature) {
+        if (feature.get('area_id') === areaId) {
+            // Reset style of previously selected feature
+            if (selectedFeature&&areaId === "Selecciona...") {
+                selectedFeature.setStyle(normalStyle);
+            }
+
+            // Set the new selected feature and style
+            selectedFeature = feature;
+            selectedFeature.setStyle(selectedStyle);
+
+            // Create and show popup
+            var coordinates = feature.getGeometry().getCoordinates();
+            var geometry = feature.getGeometry();
+
+            // Calculate the midpoint of the line
+            var midpoint = calculateMidpoint(geometry);
+            console.log(feature.getGeometry().getType());
+            console.log(geometry)
+            var featureInfo = selectedFeature.getProperties();
+                    
+            // Create popup content
+            var content = '<div class="p-3">'; // Add padding around the content
+            content += '<h3 class="mb-3">Área Unitaria</h3>'; // Add margin-bottom to the heading
+            
+            // Retrieve the property value
+            var cveAuValue = feature.get('cve_au') || 'No data available'; // Fallback if undefined
+            
+            // Use Bootstrap's text and card classes for better styling
+            content += '<div class="card"><div class="card-body">';
+            content += '<p class="card-text"> <strong>' + cveAuValue + '</strong></p>';
+            content += '</div></div>'; // Close card-body and card
+            
+            content += '</div>'; // Close the main div
+            
+
+            var popupElement = popup.getElement();
+
+            popupElement.innerHTML = content;
+            popup.setPosition(midpoint);;
+        }
+    });
+}
+
+
+
+function calculateMidpoint(geometry) {
+    if (geometry instanceof ol.geom.MultiLineString) {
+        // Get the first LineString
+        var lineStrings = geometry.getLineStrings();
+        var firstLineString = lineStrings[0];
+
+        // Now calculate the midpoint of the first LineString
+        var coords = firstLineString.getCoordinates();
+        var midIndex = Math.floor(coords.length / 2);
+        
+        var midX = (coords[midIndex][0] + coords[midIndex - 1][0]) / 2;
+        var midY = (coords[midIndex][1] + coords[midIndex - 1][1]) / 2;
+
+        return [midX, midY];
+    } else {
+        console.error('Geometry is not a MultiLineString');
+        return null;
+    }
+}
+
+function addVectorLayerFromGeoJSON(geojsonLayerUrl) {
+    fetch(geojsonLayerUrl)
+        .then(response => response.json())
+        .then(data => {
+            // If there's an existing vectorLayer, remove it
+            if (vectorLayer) {
+                map.removeLayer(vectorLayer);
+            }
+
+            var vectorSource = new ol.source.Vector({
+                features: new ol.format.GeoJSON().readFeatures(data, {
+                    featureProjection: 'EPSG:3857'
+                })
+            });
+
+            vectorLayer = new ol.layer.Vector({
+                source: vectorSource,
+                style: normalStyle
+            });
+
+            
+            popup.setPosition(undefined);
+            // Zoom to the extent of the vector source
+            var layerExtent = vectorSource.getExtent();
+            map.getView().fit(layerExtent, {
+                duration: 1000,  // Duration of the animation in milliseconds
+                padding: [50, 50, 50, 50]  // Padding around the extent [top, right, bottom, left] in pixels
+            });
+            map.addLayer(vectorLayer);
+        })
+        .catch(error => console.error('Error fetching the GeoJSON data: ' + error));
+}
+
+async function fetchDataKms() {
+    try {
+        const webMethod = 'areas_unitarias/fetch_kms';
+                    const url = apiUrl + webMethod;
+                
+        if (area) {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({ 'property': area })
+        });
+
+        // Ensure the request was successful
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+
+        // Assuming data is an array and you are interested in the first item
+        if (data.length > 0) {
+            document.getElementById('txtkminicial').value = data[0].km_inicial || '';
+            document.getElementById('txtkmfinal').value = data[0].km_final || '';
+            document.getElementById('txtkmOrigen').value = data[0].km_origen || '';
+            document.getElementById('txtkmDestino').value = data[0].km_destino || '';
+        } else {
+            console.log("No data received.");
+        }}
+    } catch (error) {
+        console.error("Error fetching data: ", error);
+    }
+}
