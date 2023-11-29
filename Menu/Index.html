@@ -207,74 +207,105 @@
 
                         <!--#region FORMULARIOS GENERAL  -->
                         <div id="forms" style="display:none;margin-top:15px;">
-                            <div class="card-group">
-                                <div class="card ">
-                                    <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowdisenioforms()" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Diseño</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">CENAGAS</small>
-                                    </div>
-                                </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnsshowconstruforms()" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Construcción</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">CENAGAS</small>
+    
+                            <!-- Row for cards -->
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                        
+                                <!-- Card 1: Diseño -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" style="cursor: pointer;" onclick="fnshowdisenioforms()" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Diseño</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">CENAGAS</small>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnsshowAnalisisforms()" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Análisis</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">CENAGAS</small>
-                                    </div>
-                                </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnsshowOperacionforms()" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Operación</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">CENAGAS</small>
+                        
+                                <!-- Card 2: Construcción -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnsshowconstruforms()" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Construcción</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">CENAGAS</small>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnsshowformGeoEspacial()" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Información geoespacial</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">CENAGAS</small>
-                                    </div>
-                                </div>
-                                <div class="card ml-1">
-                                    <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnsshowformMapiing()" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title">Data mapiing</h6>
-                                        <p class="card-text">En éste formulario contendrá información relacionada a...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">CENAGAS</small>
+                        
+                                <!-- Card 3: Análisis -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnsshowAnalisisforms()" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Análisis</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">CENAGAS</small>
+                                        </div>
                                     </div>
                                 </div>
-
-                            </div>
+                        
+                                <!-- Card 4: Operación -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnsshowOperacionforms()" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Operación</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">CENAGAS</small>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                                <!-- Card 5: Información geoespacial -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnsshowformGeoEspacial()" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Información geoespacial</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">CENAGAS</small>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                                <!-- Card 6: Data Mapping -->
+                                <div class="col-lg-3 col-sm-6 mt-3">
+                                    <div class="card h-100">
+                                        <img src="images/formCENAGAS.jpg" class="card-img-top" style="cursor: pointer;" onclick="fnsshowformMapiing()" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Data mapiing</h6>
+                                            <p class="card-text">En éste formulario contendrá información relacionada a...</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-muted">CENAGAS</small>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                                <!-- Additional cards if needed -->
+                        
+                            </div> <!-- End of row for cards -->
+                        
+                            <!-- Modal footer -->
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" onclick="reg_newArea()"><i class="fa fa-arrow-left"></i> | Registrar nueva área unitaria</button>
                             </div>
-
+                        
                         </div>
+                        
                         <!--#endregion -->
                         <!--#region FORMULARIOS DISEÑO  -->
                         <div id="disenioforms" style="display:none;margin-top:15px;">

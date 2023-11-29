@@ -5994,11 +5994,11 @@ function loadDuctos() {
 
 function goToStep1() {
     // Simulating click on step-1
-    $('a[href="#step-3"]').click();
+    $('a[href="#step-1"]').click();
     
     // Resetting step buttons to initial state
     $('.stepwizard-step a').removeClass('btn-primary').addClass('btn-default').attr('disabled', 'disabled'); // Making all steps disabled
-    $('a[href="#step-3"]').addClass('btn-primary').removeClass('btn-default').removeAttr('disabled'); // Enabling only step-1
+    $('a[href="#step-1"]').addClass('btn-primary').removeClass('btn-default').removeAttr('disabled'); // Enabling only step-1
 }
 
 
@@ -16616,13 +16616,13 @@ var normalStyle = new ol.style.Style({
         color: 'rgba(0, 0, 255, 0.3)' // Light semi-transparent blue
     }),
     stroke: new ol.style.Stroke({
-        color: '#4df030', // Blue color
+        color: '#265C4F', // Blue color
         width: 4
     }),
     image: new ol.style.Circle({
         radius: 10,
         fill: new ol.style.Fill({
-            color: '#4df030' // Same blue color
+            color: '#265C4F' // Same blue color
         })
     })
     
