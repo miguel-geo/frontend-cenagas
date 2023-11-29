@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -16511,7 +16511,7 @@ function initMap() {
         layers: [
             new ol.layer.Tile({
                 source: new ol.source.OSM({
-                    url: 'http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png'
+                    url: 'http://tile.openstreetmap.org/{z}/{x}/{y}.png'
                 })
             })
         ],
