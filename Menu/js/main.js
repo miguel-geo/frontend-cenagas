@@ -4071,7 +4071,7 @@ function llenarDatosActualizacionCruces(data) {
     $("#cmbexisunioncabcruceytub option:contains(" + data[0].C_0304_0094 + ")").attr('selected', 'selected');
     $("#cmbtipcruceserv option:contains(" + data[0].C_0304_0095 + ")").attr('selected', 'selected');
     $("#txtvoltajecruce").val(data[0].C_0304_0096);
-    $("#txtnombrescruces").val(data[0].nombre);
+    $("#txtnombrecruces").val(data[0].nombre);
     idConsCruces = data[0].id;
     inhabilitarform("#tiposcrucesfrm", true);
     if (data[0].file !== "" && data[0].file !== null) {
@@ -6979,7 +6979,7 @@ function consulta() {
                             success: function (data) {
                                 if (data.success) {
                                     
-                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", "nombre",
                                     'C_0304_0070',
                                     'C_0304_0071',
                                     'C_0304_0072',
