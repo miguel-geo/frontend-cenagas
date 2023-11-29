@@ -16233,9 +16233,11 @@ function addVectorLayerFromGeoJSON(geojsonLayerUrl) {
             popup.setPosition(undefined);
             // Zoom to the extent of the vector source
             var layerExtent = vectorSource.getExtent();
+            console.log(layerExtent)
             map.getView().fit(layerExtent, {
-                duration: 1000,  // Duration of the animation in milliseconds
-                padding: [50, 50, 50, 50]  // Padding around the extent [top, right, bottom, left] in pixels
+                duration: 10,  // Duration of the animation in milliseconds
+                padding: [100, 100, 100, 100] , // Padding around the extent [top, right, bottom, left] in pixels
+                maxZoom: 10
             });
             map.addLayer(vectorLayer);
         })
