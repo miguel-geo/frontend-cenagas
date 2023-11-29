@@ -20,6 +20,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
     <script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
+
+
     <link href="css/Style.css" rel="stylesheet" />
     <script src="js/main.js"></script>
 </head>
@@ -156,7 +161,12 @@
                                             </div>
                                             <div class="card-group">
                                                 <div class="card ">
-                                                    <img src="" id="myImage" style="cursor: pointer;height:70%" class="card-img-top" alt="...">
+                                                    <!-- <img src="" id="myImage" style="cursor: pointer;height:70%" class="card-img-top" alt="..."> -->
+                                                    <div id="map" class="map" style="height: 600px;width: 600"></div>
+                                                    <div id="popup" class="ol-popup"> <!-- Popup container -->
+                                                        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                                                        <div id="popup-content"></div>
+                                                    </div>
 
                                                     <div class="card-footer">
                                                         <small class="text-muted">Esquema</small>
@@ -4326,7 +4336,11 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"> Hora de control del evento</span>
                                     </div>
-                                    <input type="time" step="1" class="form-control setAlg time-input" placeholder="hh:mm:ss" aria-label="" id="txthoractrlhisfug" aria-describedby="basic-addon1">
+                                    <input type="time" name="timestamp" step="1" class="form-control setAlg time-input" placeholder="hh:mm:ss"    aria-label="" id="txthoractrlhisfug" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"> Fecha de control del evento</span>
+                                    </div>
+                                    <input type="date" class="form-control setAlg"   aria-label="" id="txtfechactrlhisfug" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4376,7 +4390,11 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Reporte siniestro entregado</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtreportesiniestrohisfug" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control setAlg" id="txtreportesiniestrohisfug">
+                                        <option>Selecciona...</option>
+                                        <option>Sí</option>
+                                        <option>No</option>
+                                    </select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4484,7 +4502,10 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Unidades de medida</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtunidadesmedidaop" aria-describedby="basic-addon1">
+                                    <select class="selectpicker form-control setAlg" id="txtunidadesmedidaop">
+                                        <option value=0>Selecciona...</option>
+                                        <option value='MPY'>MPY</option>
+                                    </select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4584,13 +4605,13 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X (UTM)</span>
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica X</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^-?(\d*\.)?\d+$" title="Please enter a valid number" aria-label="" id="coord_esp_hisrep_x" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern=".*" title="Please enter a valid number" aria-label="" id="coord_esp_hisrep_x" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y (UTM)</span>
+                                        <span class="input-group-text" id="basic-addon1">Coordenada Específica Y</span>
                                     </div>
-                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern="^-?(\d*\.)?\d+$" id="coord_esp_hisrep_y" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" aria-label="" pattern=".*" id="coord_esp_hisrep_y" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4655,9 +4676,9 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Presión máxima de diseño</span>
+                                        <span class="input-group-text" id="basic-addon1">Presión máxima de diseño(PSI)</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtpresionmahisrep" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" placeholder="" pattern="^\-?\d+(\.\d+)?$" aria-label="" id="txtpresionmahisrep" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4738,9 +4759,9 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Longitud del envolvente</span>
+                                        <span class="input-group-text" id="basic-addon1">Longitud del envolvente (m)</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtlongitudenvolhisrep" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^\-?\d+(\.\d+)?$" placeholder="" aria-label="" id="txtlongitudenvolhisrep" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -4781,9 +4802,9 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Longitud de recubrimiento</span>
+                                        <span class="input-group-text" id="basic-addon1">Longitud de recubrimiento (m)</span>
                                     </div>
-                                    <input type="text" class="form-control setAlg" placeholder="" aria-label="" id="txtlongitudrecbhisrec" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^\-?\d+(\.\d+)?$" placeholder="" aria-label="" id="txtlongitudrecbhisrec" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -10969,6 +10990,11 @@
                                             <th class="th-lg">
                                                 <a style="color: #265C4F;">
                                                     Kilometro específico
+                                                </a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a style="color: #265C4F;">
+                                                    Nombre
                                                 </a>
                                             </th>
                                             <th class="th-lg">
