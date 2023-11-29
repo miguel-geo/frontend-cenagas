@@ -16083,13 +16083,13 @@ var normalStyle = new ol.style.Style({
         color: 'rgba(0, 0, 255, 0.3)' // Light semi-transparent blue
     }),
     stroke: new ol.style.Stroke({
-        color: '#0000ff', // Blue color
+        color: '#4df030', // Blue color
         width: 4
     }),
     image: new ol.style.Circle({
         radius: 10,
         fill: new ol.style.Fill({
-            color: '#0000ff' // Same blue color
+            color: '#4df030' // Same blue color
         })
     })
     
