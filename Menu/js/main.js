@@ -16556,15 +16556,15 @@ function initMap() {
                     
                     // Create popup content
                     var content = '<div class="p-3">'; // Add padding around the content
-                    content += '<h3 class="mb-3">Área Unitaria</h3>'; // Add margin-bottom to the heading
+ // Add margin-bottom to the heading
 
                     // Retrieve the property value
                     var cveAuValue = feature.get('cve_au') || 'No data available'; // Fallback if undefined
 
                     // Use Bootstrap's text and card classes for better styling
-                    content += '<div class="card"><div class="card-body">';
+
                     content += '<p class="card-text"> <strong>' + cveAuValue + '</strong></p>';
-                    content += '</div></div>'; // Close card-body and card
+
 
                     content += '</div>'; // Close the main div
 
@@ -16699,15 +16699,14 @@ function selectFeatureById(areaId) {
                     
             // Create popup content
             var content = '<div class="p-3">'; // Add padding around the content
-            content += '<h3 class="mb-3">Área Unitaria</h3>'; // Add margin-bottom to the heading
             
             // Retrieve the property value
             var cveAuValue = feature.get('cve_au') || 'No data available'; // Fallback if undefined
             
             // Use Bootstrap's text and card classes for better styling
-            content += '<div class="card"><div class="card-body">';
+
             content += '<p class="card-text"> <strong>' + cveAuValue + '</strong></p>';
-            content += '</div></div>'; // Close card-body and card
+
             
             content += '</div>'; // Close the main div
             
