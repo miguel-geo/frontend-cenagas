@@ -11355,7 +11355,7 @@ function llenarTablasdocuments(obj, nameTabla) {
         var idDoc;
         if (j === 0) {
             idDoc = obj[j];
-            row = row + '<td style="text-align: center;color:green;"><a class="download-icon" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar"><i  class="fa fa-download"></i></a> </td>';
+            row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar" data-toggle="modal" data-target="#myModal"><i  class="fa fa-download"></i></a> </td>';
         }
        else{
             row = row + '<td>' + obj[j] + '</td>';         
@@ -11363,19 +11363,33 @@ function llenarTablasdocuments(obj, nameTabla) {
        }
     }
     //row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip" id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] + '"><i class="fa fa-trash"></i></a></td>';
-    row = row + '<td><a class="delete" title="Eliminar" ' + 'data-toggle="tooltip" data-id="' + idDoc + '"><i class="fa fa-trash"></i></a></td>';
+    row = row + '<td><a class="delete title="Eliminar" ' + 'data-toggle="tooltip" data-id="' + idDoc + '"><i class="fa fa-trash"></i></a></td>';
     row = row + '</tr>';
   $('#' + nameTabla).append(row);
 }
 $("#myHref").on('click', function () {
-    alert("inside onclick");
-    window.location = "http://www.google.com";
+    window.location = "http://localhost:82/backend-cenagas/public/api/documentos/26/download";
 });
 //#endregion
 
 
-
-
+function clicDoc(url) {
+    var element = document.getElementById('framePDF');
+    changeSrcEmbed(element, url);
+   //    get_url_extension(url);
+}
+function get_url_extension(url) {
+    alert(url.split(/[#?]/)[0].split('.').pop().trim());
+}
+function changeSrcEmbed(element, src) {
+    var id = element.id;
+    element.src = src;
+    var embedOld = document.getElementById(id);
+    var parent = embedOld.parentElement;
+    var newElement = element;
+    document.getElementById(id).remove();
+    parent.append(newElement);
+}
 
 
 //#region Historail de Fugas 
@@ -16234,7 +16248,6 @@ function saveGeoespacialDocumental() {
     var webMethod = "saveGeoespacialDoc";
 
     const formData = new FormData();
-
     formData.append("kilometro_especifico", $("#km_esp_geodoc").val())
     formData.append("coordenada_especifica", $("#coord_esp_geodoc_x").val() + ' ' + $("#coord_esp_geodoc_y").val(),)
     formData.append("C_0101_0001_id", area)
@@ -16392,7 +16405,7 @@ function saveGeoespacialDocumental() {
             if (data.success) {
                 alert("Información almacenada correctamente");
                 $('#forms').show();
-                $('#documentalfrm').hide();
+                $('#infoGeoespacialforms').hide();
             }
         })
         .catch(error => {
@@ -16402,56 +16415,119 @@ function saveGeoespacialDocumental() {
 }
 
 function updateGeoespacialDocumental() {
-    if ($("#btn_updatedocumentos_operacion").text() === "Actualizar") {
-        inhabilitarform("#documentalopfrm", false);
-        showDestroyIcons('documentalopfrm', true);
-        $("#btn_updatedocumentos_operacion").text('Guardar');
+    if ($("#btn_updateGeoEsp").text() === "Actualizar") {
+        inhabilitarform("#infoGeoespacialforms", false);
+        showDestroyIcons('infoGeoespacialforms', true);
+        $("#btn_updateGeoEsp").text('Guardar');
     }
     else {
-        var webMethod = "updateOpDocumental";
+        var webMethod = "updateGeoespacialDoc";
 
-        const formData = new FormData();
-        formData.append("id", idOpDocumental)
-        formData.append("kilometro_especifico", $("#km_esp_geodoc").val())
-        formData.append("coordenada_especifica", $("#coord_esp_geodoc_x").val() + ' ' + $("#coord_esp_geodoc_y").val(),)
-        formData.append("C_0101_0001_id", area)
-        // Make sure files are being selected and appended properly
-        const itemsToSubstitute = [
-            "historial_condiciones",
-            "fase_producto",
-            "presencia_cloruros",
-            "cis_documentalop",
-            "dcvgopdocumental",
-            "perfil_potenciales",
-            "mfl_opdocumental",
-            "ultrasonido_haz",
-            "reporte_espesores",
-            "geometra_opdocumental",
-            "calibracion_curvas",
-            "liquidos_penetrantes",
-            "ondas_guiadas",
-            "inspeccion_radiografica",
-            "inspeccion_muestral",
-            "constancias_prueba_hermeticidad",
-            "auditorias_opdocumental",
-            "prueba_dielectrica",
-            "reporte_insvisual",
-            "prueba_neumatica",
-            "perfil_resistividad",
-            "ph_bpa",
-            "ph_bsr",
-            "inspeccion_electromagnetica",
-            "determinación_resistencia",
-            "atenuacion_corriente",
-            "rehabilitacion_anticorrosiva"
-        ];
 
-        // Loop through the list and substitute "diagrama determinacion_resistencia"
-        for (const item of itemsToSubstitute) {
-            if ($(`#${item}`)[0].files[0]) {
-                formData.append(`${item}`, $(`#${item}`)[0].files[0]);
-            }
-        }
+        
+    const formData = new FormData();
+    formData.append("id", idGeoDocumental)
+    formData.append("kilometro_especifico", $("#km_esp_geodoc").val())
+    formData.append("coordenada_especifica", $("#coord_esp_geodoc_x").val() + ' ' + $("#coord_esp_geodoc_y").val(),)
+    formData.append("C_0101_0001_id", area)
+    // Make sure files are being selected and appended properly
+    const itemsToSubstitute = [
+        "CONS_FOREST_AREA_400",
+        "CONS_ESA_AREA_400",
+        "G_NEARBY_AIRPORT_GETGEOMETRY",
+        "EC_SOIL_CONDUCT_SSURGO",
+        "EC_HVAC_SUSC_EST",
+        "G_LANDUSE_NLCD",
+        "G_LITHOLOGY_PRESENT",
+        "G_SINKHOLE_PRESENT",
+        "G_LOCATIONS_SENS",
+        "G_FLOODZONE",
+        "CONS_STRUCTCOUNT_400FT",
+        "IC_MEAS_MPY_COUPON",
+        "MD_DETON_MIN_DISTANCE",
+        "MD_BUILDING_FALLING_50FT",
+        "NOP",
+        "VELOCITY_CORROSION_INTERNAL",
+        "WOF_LANDSLIDE_SEVERITY",
+        "WOF_FIRECOUNT_EXP",
+        "WOF_COVERSTONE_PRES",
+        "WOF_LIGHT_SUM_EXP",
+        "WOF_TORNADO_COUNT",
+        "WOF_WIND_COUNT",
+        "WOF_SEISMIC_PGA_EXP"
+    ];
+
+
+    if ($("#CONS_FOREST_AREA_400")[0].files[0]) {
+        formData.append("CONS_FOREST_AREA_400", $("#CONS_FOREST_AREA_400")[0].files[0]);
+    }
+    if ($("#CONS_ESA_AREA_400")[0].files[0]) {
+        formData.append("CONS_ESA_AREA_400", $("#CONS_ESA_AREA_400")[0].files[0]);
+    }
+    if ($("#G_NEARBY_AIRPORT_GETGEOMETRY")[0].files[0]) {
+        formData.append("G_NEARBY_AIRPORT_GETGEOMETRY", $("#G_NEARBY_AIRPORT_GETGEOMETRY")[0].files[0]);
+    }
+    if ($("#EC_SOIL_CONDUCT_SSURGO")[0].files[0]) {
+        formData.append("EC_SOIL_CONDUCT_SSURGO", $("#EC_SOIL_CONDUCT_SSURGO")[0].files[0]);
+    }
+    if ($("#EC_HVAC_SUSC_EST")[0].files[0]) {
+        formData.append("EC_HVAC_SUSC_EST", $("#EC_HVAC_SUSC_EST")[0].files[0]);
+    }
+    if ($("#G_LANDUSE_NLCD")[0].files[0]) {
+        formData.append("G_LANDUSE_NLCD", $("#G_LANDUSE_NLCD")[0].files[0]);
+    }
+    if ($("#G_LITHOLOGY_PRESENT")[0].files[0]) {
+        formData.append("G_LITHOLOGY_PRESENT", $("#G_LITHOLOGY_PRESENT")[0].files[0]);
+    }
+    if ($("#G_SINKHOLE_PRESENT")[0].files[0]) {
+        formData.append("G_SINKHOLE_PRESENT", $("#G_SINKHOLE_PRESENT")[0].files[0]);
+    }
+    if ($("#G_LOCATIONS_SENS")[0].files[0]) {
+        formData.append("G_LOCATIONS_SENS", $("#G_LOCATIONS_SENS")[0].files[0]);
+    }
+    if ($("#G_FLOODZONE")[0].files[0]) {
+        formData.append("G_FLOODZONE", $("#G_FLOODZONE")[0].files[0]);
+    }
+    if ($("#CONS_STRUCTCOUNT_400FT")[0].files[0]) {
+        formData.append("CONS_STRUCTCOUNT_400FT", $("#CONS_STRUCTCOUNT_400FT")[0].files[0]);
+    }
+    if ($("#IC_MEAS_MPY_COUPON")[0].files[0]) {
+        formData.append("IC_MEAS_MPY_COUPON", $("#IC_MEAS_MPY_COUPON")[0].files[0]);
+    }
+    if ($("#MD_DETON_MIN_DISTANCE")[0].files[0]) {
+        formData.append("MD_DETON_MIN_DISTANCE", $("#MD_DETON_MIN_DISTANCE")[0].files[0]);
+    }
+    if ($("#MD_BUILDING_FALLING_50FT")[0].files[0]) {
+        formData.append("MD_BUILDING_FALLING_50FT", $("#MD_BUILDING_FALLING_50FT")[0].files[0]);
+    }
+    if ($("#NOP")[0].files[0]) {
+        formData.append("NOP", $("#NOP")[0].files[0]);
+    }
+    if ($("#VELOCITY_CORROSION_INTERNAL")[0].files[0]) {
+        formData.append("VELOCITY_CORROSION_INTERNAL", $("#VELOCITY_CORROSION_INTERNAL")[0].files[0]);
+    }
+    if ($("#WOF_LANDSLIDE_SEVERITY")[0].files[0]) {
+        formData.append("WOF_LANDSLIDE_SEVERITY", $("#WOF_LANDSLIDE_SEVERITY")[0].files[0]);
+    }
+    if ($("#WOF_FIRECOUNT_EXP")[0].files[0]) {
+        formData.append("WOF_FIRECOUNT_EXP", $("#WOF_FIRECOUNT_EXP")[0].files[0]);
+    }
+    if ($("#WOF_COVERSTONE_PRES")[0].files[0]) {
+        formData.append("WOF_COVERSTONE_PRES", $("#WOF_COVERSTONE_PRES")[0].files[0]);
+    }
+    if ($("#WOF_LIGHT_SUM_EXP")[0].files[0]) {
+        formData.append("WOF_LIGHT_SUM_EXP", $("#WOF_LIGHT_SUM_EXP")[0].files[0]);
+    }
+    if ($("#WOF_TORNADO_COUNT")[0].files[0]) {
+        formData.append("WOF_TORNADO_COUNT", $("#WOF_TORNADO_COUNT")[0].files[0]);
+    }
+    if ($("#WOF_WIND_COUNT")[0].files[0]) {
+        formData.append("WOF_WIND_COUNT", $("#WOF_WIND_COUNT")[0].files[0]);
+    }
+    if ($("#WOF_SEISMIC_PGA_EXP")[0].files[0]) {
+        formData.append("WOF_SEISMIC_PGA_EXP", $("#WOF_SEISMIC_PGA_EXP")[0].files[0]);
+    }
+
 
 
 
@@ -16477,15 +16553,28 @@ function updateGeoespacialDocumental() {
                 if (data.success) {
 
                     alert("Información almacenada correctamente");
-                    $('#operacionforms').show();
-                    $('#documentalopfrm').hide();
-                    $("#btn_updatedocumentos_operacion").text("Actualizar")
+                    $('#forms').show();
+                    $('#infoGeoespacialforms').hide();
+                    $("#btn_updateGeoEsp").text("Actualizar")
                 }
             })
             .catch(error => {
                 alert("Error: " + error);
             });
     }
+}
+function cancelInfoGeoespacial() {
+    $('#infoGeoespacialforms').hide();
+    $('#forms').show();
+}
+function nuevoInfoGeoespacialdoc() {
+
+    $("#btn_saveGeoEsp").show();
+    $("#btn_newGeoEsp").hide();
+    $("#btn_updateGeoEsp").hide();
+    clearInputTextValuesNew('infoGeoespacialforms');
+    inhabilitarform("#infoGeoespacialforms", false);
+
 }
 //#endregion
 
