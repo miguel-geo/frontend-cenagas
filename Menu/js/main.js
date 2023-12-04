@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -5994,11 +5994,11 @@ function loadDuctos() {
 
 function goToStep1() {
     // Simulating click on step-1
-    $('a[href="#step-3"]').click();
+    $('a[href="#step-1"]').click();
     
     // Resetting step buttons to initial state
     $('.stepwizard-step a').removeClass('btn-primary').addClass('btn-default').attr('disabled', 'disabled'); // Making all steps disabled
-    $('a[href="#step-3"]').addClass('btn-primary').removeClass('btn-default').removeAttr('disabled'); // Enabling only step-1
+    $('a[href="#step-1"]').addClass('btn-primary').removeClass('btn-default').removeAttr('disabled'); // Enabling only step-1
 }
 
 
@@ -16600,7 +16600,7 @@ function initMap() {
         layers: [
             new ol.layer.Tile({
                 source: new ol.source.OSM({
-                    url: 'http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png'
+                    url: 'http://tile.openstreetmap.org/{z}/{x}/{y}.png'
                 })
             })
         ],
@@ -16645,15 +16645,15 @@ function initMap() {
                     
                     // Create popup content
                     var content = '<div class="p-3">'; // Add padding around the content
-                    content += '<h3 class="mb-3">Área Unitaria</h3>'; // Add margin-bottom to the heading
+ // Add margin-bottom to the heading
 
                     // Retrieve the property value
                     var cveAuValue = feature.get('cve_au') || 'No data available'; // Fallback if undefined
 
                     // Use Bootstrap's text and card classes for better styling
-                    content += '<div class="card"><div class="card-body">';
+
                     content += '<p class="card-text"> <strong>' + cveAuValue + '</strong></p>';
-                    content += '</div></div>'; // Close card-body and card
+
 
                     content += '</div>'; // Close the main div
 
@@ -16705,13 +16705,13 @@ var normalStyle = new ol.style.Style({
         color: 'rgba(0, 0, 255, 0.3)' // Light semi-transparent blue
     }),
     stroke: new ol.style.Stroke({
-        color: '#4df030', // Blue color
+        color: '#265C4F', // Blue color
         width: 4
     }),
     image: new ol.style.Circle({
         radius: 10,
         fill: new ol.style.Fill({
-            color: '#4df030' // Same blue color
+            color: '#265C4F' // Same blue color
         })
     })
     
@@ -16788,15 +16788,14 @@ function selectFeatureById(areaId) {
                     
             // Create popup content
             var content = '<div class="p-3">'; // Add padding around the content
-            content += '<h3 class="mb-3">Área Unitaria</h3>'; // Add margin-bottom to the heading
             
             // Retrieve the property value
             var cveAuValue = feature.get('cve_au') || 'No data available'; // Fallback if undefined
             
             // Use Bootstrap's text and card classes for better styling
-            content += '<div class="card"><div class="card-body">';
+
             content += '<p class="card-text"> <strong>' + cveAuValue + '</strong></p>';
-            content += '</div></div>'; // Close card-body and card
+
             
             content += '</div>'; // Close the main div
             
