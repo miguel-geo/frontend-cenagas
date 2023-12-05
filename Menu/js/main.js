@@ -1952,6 +1952,9 @@ function llenarDatosActualizacion(data) {
         if (customFileDiv) {
             // Create the download icon
             const downloadIcon = document.createElement('a');
+            downloadIcon.setAttribute('data-toggle', 'modal');
+            downloadIcon.setAttribute('data-target', '#myModal');
+            downloadIcon.onclick = function () { clicDoc(this.href) };
             downloadIcon.href = `${apiUrl}disenio-general/${data[0].id}/download`;
             downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
             downloadIcon.target = "_blank";
@@ -2171,6 +2174,9 @@ function llenarDatosActualizacionProteccion(data) {
         if (customFileDiv) {
             // Create the download icon
             const downloadIcon = document.createElement('a');
+            downloadIcon.setAttribute('data-toggle', 'modal');
+            downloadIcon.setAttribute('data-target', '#myModal');
+            downloadIcon.onclick = function () { clicDoc(this.href) };
             downloadIcon.href = `${apiUrl}disenio-proteccion/${data[0].id}/download`;
             downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
             downloadIcon.target = "_blank";
@@ -2355,6 +2361,9 @@ function consultaDatosServicio(id_d = null) {
                 if (customFileDiv) {
                     // Create the download icon
                     const downloadIcon = document.createElement('a');
+                    downloadIcon.setAttribute('data-toggle', 'modal');
+                    downloadIcon.setAttribute('data-target', '#myModal');
+                    downloadIcon.onclick = function () { clicDoc(this.href) };
                     downloadIcon.href = `${apiUrl}disenio-servicio/${serviceId}/download/${item.column}`;
                     downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
                     downloadIcon.target = "_blank";
@@ -2600,6 +2609,9 @@ function llenarDatosActualizacionPresion(data) {
         if (customFileDiv) {
             // Create the download icon
             const downloadIcon = document.createElement('a');
+            downloadIcon.setAttribute('data-toggle', 'modal');
+            downloadIcon.setAttribute('data-target', '#myModal');
+            downloadIcon.onclick = function () { clicDoc(this.href) };
             downloadIcon.href = `${apiUrl}disenio-presion/${data[0].id}/download`;
             downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
             downloadIcon.target = "_blank";
@@ -2878,6 +2890,9 @@ function llenarDatosActualizacionConsGeneral(data) {
             const downloadIcon = document.createElement('a');
             downloadIcon.href = `${apiUrl}construccion-general/${data[0].id}/download`;
             downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+            downloadIcon.setAttribute('data-toggle', 'modal');
+            downloadIcon.setAttribute('data-target', '#myModal');
+            downloadIcon.onclick = function () { clicDoc(this.href) };
             downloadIcon.target = "_blank";
             downloadIcon.className = "download-icon";
             downloadIcon.style.marginLeft = "10px";
@@ -3101,6 +3116,9 @@ function llenarDatosActualizacionConsUnion(data) {
         if (customFileDiv) {
             // Create the download icon
             const downloadIcon = document.createElement('a');
+            downloadIcon.setAttribute('data-toggle', 'modal');
+            downloadIcon.setAttribute('data-target', '#myModal');
+            downloadIcon.onclick = function () { clicDoc(this.href) };
             downloadIcon.href = `${apiUrl}construccion-union/${data[0].id}/download`;
             downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
             downloadIcon.target = "_blank";
@@ -3331,6 +3349,9 @@ function llenarDatosActualizacionConsProfundidad(data) {
         if (customFileDiv) {
             // Create the download icon
             const downloadIcon = document.createElement('a');
+            downloadIcon.setAttribute('data-toggle', 'modal');
+            downloadIcon.setAttribute('data-target', '#myModal');
+            downloadIcon.onclick = function () { clicDoc(this.href) };
             downloadIcon.href = `${apiUrl}construccion-profundidad/${data[0].id}/download`;
             downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
             downloadIcon.target = "_blank";
@@ -3545,6 +3566,9 @@ function consultaDatosinspeccion(id_d = null) {
                 if (customFileDiv) {
                     // Create the download icon
                     const downloadIcon = document.createElement('a');
+                    downloadIcon.setAttribute('data-toggle', 'modal');
+                    downloadIcon.setAttribute('data-target', '#myModal');
+                    downloadIcon.onclick = function () { clicDoc(this.href) };
                     downloadIcon.href = `${apiUrl}disenio-inspeccion/${serviceId}/download/${item.column}`;
                     downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
                     downloadIcon.target = "_blank";
@@ -3734,6 +3758,9 @@ function consultaDatosseguridad(id_d = null) {
                 if (customFileDiv) {
                     // Create the download icon
                     const downloadIcon = document.createElement('a');
+                    downloadIcon.setAttribute('data-toggle', 'modal');
+                    downloadIcon.setAttribute('data-target', '#myModal');
+                    downloadIcon.onclick = function () { clicDoc(this.href) };
                     downloadIcon.href = `${apiUrl}construccion-seguridad/${serviceId}/download/${item.column}`;
                     downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
                     downloadIcon.target = "_blank";
@@ -4119,6 +4146,9 @@ function llenarDatosActualizacionCruces(data) {
         if (customFileDiv) {
             // Create the download icon
             const downloadIcon = document.createElement('a');
+            downloadIcon.setAttribute('data-toggle', 'modal');
+            downloadIcon.setAttribute('data-target', '#myModal');
+            downloadIcon.onclick = function () { clicDoc(this.href) };
             downloadIcon.href = `${apiUrl}construccion-cruces/${data[0].id}/download`;
             downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
             downloadIcon.target = "_blank";
@@ -4409,6 +4439,9 @@ function llenarDatosActualizacionHermeticidad(data) {
         if (customFileDiv) {
             // Create the download icon
             const downloadIcon = document.createElement('a');
+            downloadIcon.setAttribute('data-toggle', 'modal');
+            downloadIcon.setAttribute('data-target', '#myModal');
+            downloadIcon.onclick = function () { clicDoc(this.href) };
             downloadIcon.href = `${apiUrl}construccion-hermeticidad/${data[0].id}/download`;
             downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
             downloadIcon.target = "_blank";
@@ -4697,6 +4730,9 @@ function llenarDatosActualizacionCatodica(data) {
         if (customFileDiv) {
             // Create the download icon
             const downloadIcon = document.createElement('a');
+            downloadIcon.setAttribute('data-toggle', 'modal');
+            downloadIcon.setAttribute('data-target', '#myModal');
+            downloadIcon.onclick = function () { clicDoc(this.href) };
             downloadIcon.href = `${apiUrl}construccion-catodica/${data[0].id}/download`;
             downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
             downloadIcon.target = "_blank";
@@ -9217,6 +9253,9 @@ function llenarDatosActualizacionAnalisisPlanos(data) {
         if (customFileDiv) {
             // Create the download icon
             const downloadIcon = document.createElement('a');
+            downloadIcon.setAttribute('data-toggle', 'modal');
+            downloadIcon.setAttribute('data-target', '#myModal');
+            downloadIcon.onclick = function () { clicDoc(this.href) };
             downloadIcon.href = `${apiUrl}analisis-planos/${data[0].id}/download`;
             downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
             downloadIcon.target = "_blank";
@@ -9515,6 +9554,9 @@ function consultaDatosAnaDocumental(id_d = null) {
                 if (customFileDiv) {
                     // Create the download icon
                     const downloadIcon = document.createElement('a');
+                    downloadIcon.setAttribute('data-toggle', 'modal');
+                    downloadIcon.setAttribute('data-target', '#myModal');
+                    downloadIcon.onclick = function () { clicDoc(this.href) };
                     downloadIcon.href = `${apiUrl}analisis-documental/${serviceId}/download/${item.column}`;
                     downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
                     downloadIcon.target = "_blank";
@@ -15314,6 +15356,9 @@ function consultaDatosOpDocumental(id_d = null) {
                     // Create the download icon
                     const downloadIcon = document.createElement('a');
                     downloadIcon.href = `${apiUrl}operacion-documental/${serviceId}/download/${item.column}`;
+                    downloadIcon.setAttribute('data-toggle', 'modal');
+                    downloadIcon.setAttribute('data-target', '#myModal');
+                    downloadIcon.onclick = function () { clicDoc(this.href) };
                     downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
                     downloadIcon.target = "_blank";
                     downloadIcon.className = "download-icon";
@@ -16167,6 +16212,9 @@ function consultaDatosGeoespacialDocumental(id_d = null) {
                             // Create the download icon
                             const downloadIcon = document.createElement('a');
                             downloadIcon.href = `${apiUrl}geoespacial-documental/${serviceId}/download/${item.column}`;
+                            downloadIcon.setAttribute('data-toggle', 'modal');
+                            downloadIcon.setAttribute('data-target', '#myModal');
+                            downloadIcon.onclick = function () { clicDoc(this.href) };
                             downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
                             downloadIcon.target = "_blank";
                             downloadIcon.className = "download-icon";
