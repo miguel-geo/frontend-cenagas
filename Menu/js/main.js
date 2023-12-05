@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -11263,6 +11263,35 @@ function savedocumentoreferenciado() {
         element = $(selector);
         formData.append("tramo_id", element.val());
     }
+    var filePath = $("#inputfiledocument").val();
+    var file_ext = filePath.substr(filePath.lastIndexOf('.') + 1, filePath.length);
+    var extension="";
+    var content="";
+    switch (file_ext) {
+        case "pdf":
+            extension = ".pdf";
+            content = "application/pdf";
+            break;
+        case "xlsx":
+            extension = ".xlsx";
+            content = "application/vnd.ms-excel";
+            break;
+        case "xls":
+            extension = ".xlsx";
+            content = "application/vnd.ms-excel";
+            break;
+        case "kmz":
+            extension = ".kmz";
+            content = "application/vnd.google-earth.kmz";
+            break;
+        case "kml":
+            extension = ".kmz";
+            content = "application/vnd.google-earth.kmz";
+            break;
+        default:
+    }
+    formData.append('extension', extension);
+    formData.append('content', content);
     formData.append('file', $("#inputfiledocument")[0].files[0]);
     formData.append('nombre_doc', nombreArchivo);
     if ($("#cmb_tipo_archivo_disenio").val()!=="0") {
@@ -11378,7 +11407,7 @@ function get_relateddocuments(tramo_id,area_id,form_id,table) {
                 $('#' + table +' tbody:not(:first)').remove();
                 for (i = 0; i < data.data.datagrid.length; i++) {
                     var persona = [data.data.datagrid[i].id, data.data.datagrid[i].nombre, data.data.datagrid[i].tipo, data.data.datagrid[i].fecha];
-                    llenarTablasdocuments(persona, table);
+                    llenarTablasdocuments(persona, table, data.data.datagrid[i].extension);
               }
             }
         })
@@ -11386,7 +11415,7 @@ function get_relateddocuments(tramo_id,area_id,form_id,table) {
             alert("Error: " + error);
         });
 }
-function llenarTablasdocuments(obj, nameTabla) {
+function llenarTablasdocuments(obj, nameTabla,ext) {
 
 
 
@@ -11397,7 +11426,25 @@ function llenarTablasdocuments(obj, nameTabla) {
         var idDoc;
         if (j === 0) {
             idDoc = obj[j];
-            row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar" data-toggle="modal" data-target="#myModal"><i  class="fa fa-download"></i></a> </td>';
+            switch (ext) {
+                case ".pdf":
+                    row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar" data-toggle="modal" data-target="#myModal"><i  class="fa fa-file-pdf"></i></a> </td>';
+                    break;
+                case ".xlsx":
+                    row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar" ><i  class="fa fa-table"></i></a> </td>';
+                    break;
+                case ".xls":
+                    row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar" ><i  class="fa fa-table"></i></a> </td>';
+                    break;
+                case ".kmz":
+                    row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar"><i  class="fa fa-map-location-dot"></i></a> </td>';
+                    break;
+                case ".kml":
+                    row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar"><i  class="fa fa-map-location-dot"></i></a> </td>';
+                    break;
+                default:
+            }
+           // row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar" data-toggle="modal" data-target="#myModal"><i  class="fa fa-download"></i></a> </td>';
         }
        else{
             row = row + '<td>' + obj[j] + '</td>';         
@@ -16075,6 +16122,7 @@ var formsquery = "";
 var tramo_id_doc;
 var area_id_doc;
 function get_relateddocuments_doc() {
+    formsquery = ""
     var webMethod = "get_documents";
     const formData = new FormData();
     formData.append("tramo_id", tramo_id_doc);
@@ -16106,7 +16154,7 @@ function get_relateddocuments_doc() {
                 $('#tbl_doc_consulta tbody:not(:first)').remove();
                 for (i = 0; i < data.data.datagrid.length; i++) {
                     var persona = [data.data.datagrid[i].id, data.data.datagrid[i].nombre, data.data.datagrid[i].tipo, data.data.datagrid[i].fecha];
-                    llenarTablasdocuments(persona, "tbl_doc_consulta");
+                    llenarTablasdocuments(persona, "tbl_doc_consulta", data.data.datagrid[i].extension);
                 }
             }
         })
