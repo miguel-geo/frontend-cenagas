@@ -7549,7 +7549,11 @@ function consulta() {
                                             data.data[i].inspeccion_electromagnetica + ',' + 'inspeccion_electromagnetica',
                                             data.data[i].determinación_resistencia + ',' + 'determinación_resistencia',
                                             data.data[i].atenuacion_corriente + ',' + 'atenuacion_corriente',
-                                            data.data[i].rehabilitacion_anticorrosiva + ',' + 'rehabilitacion_anticorrosiva'];
+                                             data.data[i].rehabilitacion_anticorrosiva + ',' + 'rehabilitacion_anticorrosiva',
+                                                data.data[i].inspecciones_mediante_tecno + ',' + 'inspecciones_mediante_tecno',
+                                                data.data[i].memoria_calculo_eva_corrosion + ',' + 'memoria_calculo_eva_corrosion'
+
+                                            ];
                                            
 
                                             llenarTablasFileDocumentalOperacion(persona, "tablaOperacionDocumental", data.data[i].id);
@@ -15520,7 +15524,9 @@ function saveOperacionDocumental() {
         "inspeccion_electromagnetica",
         "determinación_resistencia",
         "atenuacion_corriente",
-        "rehabilitacion_anticorrosiva"
+        "rehabilitacion_anticorrosiva",
+        "inspecciones_mediante_tecno",
+        "memoria_calculo_eva_corrosion"
       ];
       
       // Loop through the list and substitute "diagrama determinacion_resistencia"
@@ -15622,7 +15628,9 @@ function updateOperacionDocumental() {
             "inspeccion_electromagnetica",
             "determinación_resistencia",
             "atenuacion_corriente",
-            "rehabilitacion_anticorrosiva"
+            "rehabilitacion_anticorrosiva",
+            "inspecciones_mediante_tecno",
+            "memoria_calculo_eva_corrosion"
           ];
           
           // Loop through the list and substitute "diagrama determinacion_resistencia"
