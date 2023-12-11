@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/"; // la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/";// la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -353,6 +353,8 @@ function loadTramosCon() {
     }
 
 }
+var bandconsdoc = false;
+var opdocselect = "ninguno";
 function inicializarEventos() {
     $(document).on("click", ".deleteprop", function (e) {       
         if (confirm("¿Seguro quiere borrar ese registro?")) {
@@ -971,6 +973,23 @@ function inicializarEventos() {
             $('#titletypedocument').hide();
         }
     });
+    $('#doc_dis_serv_cons').on('click', function () {
+        if (this.checked) {
+            bandconsdoc = true;
+            opdocselect = "disenio";
+            $('#cmb_tipo_archivo_disenio_cons').show();
+            typedocument = $('#cmb_tipo_archivo_disenio_cons').val();
+            $('#titletypedocument_cons').show();
+            $('#cmb_tipo_archivo_analisis_cons').hide();
+            $('#cmb_tipo_archivo_operacion_cons').hide();
+        } else {
+            bandconsdoc = false;
+            opdocselect = "ninguno";
+            typedocument = "Ninguno";
+            $('#cmb_tipo_archivo_disenio_cons').hide();
+            $('#titletypedocument_cons').hide();
+        }
+    });
     $('#doc_analisis_doc').on('click', function () {
         if (this.checked) {
             $('#cmb_tipo_archivo_analisis').show();
@@ -982,6 +1001,21 @@ function inicializarEventos() {
             $('#titletypedocument').hide();
         }
     });
+    $('#doc_analisis_doc_cons').on('click', function () {
+        if (this.checked) {
+            bandconsdoc = true;
+            opdocselect = "analisis";
+            $('#cmb_tipo_archivo_analisis_cons').show();
+            $('#titletypedocument_cons').show();
+            $('#cmb_tipo_archivo_disenio_cons').hide();
+            $('#cmb_tipo_archivo_operacion_cons').hide();
+        } else {
+            bandconsdoc = true;
+            opdocselect = "ninguno";
+            $('#cmb_tipo_archivo_analisis_cons').hide();
+            $('#titletypedocument_cons').hide();
+        }
+    });
     $('#doc_operacion_doc').on('click', function () {
         if (this.checked) {
             $('#cmb_tipo_archivo_operacion').show();
@@ -991,6 +1025,21 @@ function inicializarEventos() {
         } else {
             $('#cmb_tipo_archivo_operacion').hide();
             $('#titletypedocument').hide();
+        }
+    });
+    $('#doc_operacion_doc_cons').on('click', function () {
+        if (this.checked) {
+            bandconsdoc = true;
+            opdocselect = "operacion";
+            $('#cmb_tipo_archivo_operacion_cons').show();
+            $('#titletypedocument_cons').show();
+            $('#cmb_tipo_archivo_disenio_cons').hide();
+            $('#cmb_tipo_archivo_analisis_cons').hide();
+        } else {
+            bandconsdoc = true;
+            opdocselect = "ninguno";
+            $('#cmb_tipo_archivo_operacion_cons').hide();
+            $('#titletypedocument_cons').hide();
         }
     });
 
@@ -11280,6 +11329,10 @@ function savedocumentoreferenciado() {
             extension = ".xlsx";
             content = "application/vnd.ms-excel";
             break;
+        case "xlsm":
+            extension = ".xlsm";
+            content = "application/vnd.ms-excel";
+            break;
         case "xls":
             extension = ".xlsx";
             content = "application/vnd.ms-excel";
@@ -11435,6 +11488,9 @@ function llenarTablasdocuments(obj, nameTabla,ext) {
                     row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar" data-toggle="modal" data-target="#myModal"><i  class="fa fa-file-pdf"></i></a> </td>';
                     break;
                 case ".xlsx":
+                    row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar" ><i  class="fa fa-table"></i></a> </td>';
+                    break;
+                case ".xlsm":
                     row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar" ><i  class="fa fa-table"></i></a> </td>';
                     break;
                 case ".xls":
@@ -16127,13 +16183,43 @@ function loadAreasConDoc() {
     }
 }
 var formsquery = "";
-var tramo_id_doc;
-var area_id_doc;
+var tramo_id_doc="";
+var area_id_doc = "0";
+var typedocument = "Ninguno"
 function get_relateddocuments_doc() {
     formsquery = ""
     var webMethod = "get_documents";
     const formData = new FormData();
-    formData.append("tramo_id", tramo_id_doc);
+    var op = "0";
+    formData.append("tramo_id", tramo_id_doc);  
+    if (bandconsdoc && $('#cmb_tipo_archivo_disenio_cons').val() !== "0" && $('#cmb_tipo_archivo_analisis_cons').val() !== "0" && $('#cmb_tipo_archivo_operacion_cons').val() !== "0") {
+        if (area_id_doc === "0") {
+            formData.append("op", "3");
+        }
+        else {
+            formData.append("op", "4");
+        }
+        switch (opdocselect) {
+            case "disenio":
+                typedocument = "'" + $('#cmb_tipo_archivo_disenio_cons').val() + "'";
+                break;
+            case "analisis":
+                typedocument = "'" + $('#cmb_tipo_archivo_analisis_cons').val() + "'";
+                break;
+            case "operacion":
+                typedocument = "'" + $('#cmb_tipo_archivo_operacion_cons').val() + "'";
+                break;
+        }
+        formData.append("tipo", typedocument);
+    }
+    else {
+        if (area_id_doc === "0") {
+            formData.append("op", "1");
+        }
+        else {
+            formData.append("op", "2");
+        }
+    }
     formData.append("area_id", area_id_doc);
     $('#lstformsconsulta').find('input:checked').each(function () {
          formsquery=formsquery+($(this)[0].value)+',';
