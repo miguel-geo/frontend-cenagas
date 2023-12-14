@@ -736,36 +736,56 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Presión nominal</span>
+                                        <span class="input-group-text" id="basic-addon1">Presión nominal PSI</span>
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresNomPSI" aria-label="" aria-describedby="basic-addon1">
-                                    <select class="selectpicker form-control setAlg" id="cmbunidadpresnominal">
-                                        <option value=0>Selecciona unidad medida...</option>
-                                        <option value="PSI">PSI</option>
-                                        <option value="kg/cm2">kg/cm2</option>
-                                    </select>
+                                    <!--<select class="selectpicker form-control setAlg" id="cmbunidadpresnominal">
+            <option value=0>Selecciona unidad medida...</option>
+            <option value="PSI">PSI</option>
+            <option value="kg/cm2">kg/cm2</option>
+        </select>-->
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Presión de diseño*</span>
+                                        <span class="input-group-text" id="basic-addon1">Presión nominal kg/cm2</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresNomkgcm" aria-label="" aria-describedby="basic-addon1">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Presión de diseño PSI</span>
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresDisenio" aria-label="" aria-describedby="basic-addon1" required>
-                                    <select class="selectpicker form-control setAlg" id="cmbunidadpresiondisenio">
-                                        <option value=0>Selecciona unidad medida...</option>
-                                        <option value="PSI">PSI</option>
-                                        <option value="kg/cm2">kg/cm2</option>
-                                    </select>
+                                    <!--<select class="selectpicker form-control setAlg" id="cmbunidadpresiondisenio">
+            <option value=0>Selecciona unidad medida...</option>
+            <option value="PSI">PSI</option>
+            <option value="kg/cm2">kg/cm2</option>
+        </select>-->
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Presión Máxima de Operación Permitida</span>
+                                        <span class="input-group-text" id="basic-addon1">Presión de diseño kg/cm2 </span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresDiseniokmcm" aria-label="" aria-describedby="basic-addon1" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Presión Máxima de Operación Permitida PSI</span>
                                     </div>
                                     <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresMaxPSI" aria-label="" aria-describedby="basic-addon1">
-                                    <select class="selectpicker form-control setAlg" id="cmbunidadpresionmaxope">
-                                        <option value=0>Selecciona unidad medida...</option>
-                                        <option value="PSI">PSI</option>
-                                        <option value="kg/cm2">kg/cm2</option>
-                                    </select>
+                                    <!--<select class="selectpicker form-control setAlg" id="cmbunidadpresionmaxope">
+            <option value=0>Selecciona unidad medida...</option>
+            <option value="PSI">PSI</option>
+            <option value="kg/cm2">kg/cm2</option>
+        </select>-->
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Presión Máxima de Operación Permitida kg/cm2</span>
+                                    </div>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" id="txtPresMaxkgcm" aria-label="" aria-describedby="basic-addon1">
+                                   
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -1154,7 +1174,7 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Presión de prueba de hermeticidad (PSI)</span>
+                                            <span class="input-group-text" id="basic-addon1">Presión de prueba de hermeticidad</span>
                                         </div>
                                         <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="presionhermebasecons" aria-describedby="basic-addon1">
                                         <select class="selectpicker form-control setAlg" id="cmbunidadpresionhermebasecons">
@@ -2019,26 +2039,33 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Presión de prueba máxima</span>
+                                            <span class="input-group-text" id="basic-addon1">Presión de prueba máxima PSI</span>
                                         </div>
                                         <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="txtpresprueb" aria-describedby="basic-addon1">
-                                        <select class="selectpicker form-control setAlg" id="cmbunidadpresionmax">
-                                            <option value=0>Selecciona unidad medida...</option>
-                                            <option value="PSI">PSI</option>
-                                            <option value="kg/cm2">kg/cm2</option>
-                                        </select>
+                                        <!--<select class="selectpicker form-control setAlg" id="cmbunidadpresionmax">
+            <option value=0>Selecciona unidad medida...</option>
+            <option value="PSI">PSI</option>
+            <option value="kg/cm2">kg/cm2</option>
+        </select>-->
                                     </div>
-
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Presión de diseño  </span>
+                                            <span class="input-group-text" id="basic-addon1">Presión de prueba máxima kg/cm2</span>
+                                        </div>
+                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="txtprespruebkgcm" aria-describedby="basic-addon1">
+
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Presión de diseño PSI</span>
                                         </div>
                                         <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="txtpresdisger" aria-describedby="basic-addon1">
-                                        <select class="selectpicker form-control setAlg" id="cmbunidadpresiondisenio">
-                                            <option value=0>Selecciona unidad medida...</option>
-                                            <option value="PSI">PSI</option>
-                                            <option value="kg/cm2">kg/cm2</option>
-                                        </select>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Presión de diseño  kg/cm2</span>
+                                        </div>
+                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="txtpresdisgerkgcm" aria-describedby="basic-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -2048,25 +2075,29 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Presión de prueba mínima </span>
+                                            <span class="input-group-text" id="basic-addon1">Presión de prueba mínima PSI</span>
                                         </div>
                                         <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="txtvarher" aria-describedby="basic-addon1">
-                                        <select class="selectpicker form-control setAlg" id="cmbunidadpresionmin">
-                                            <option value=0>Selecciona unidad medida...</option>
-                                            <option value="PSI">PSI</option>
-                                            <option value="kg/cm2">kg/cm2</option>
-                                        </select>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Variaciones de presión</span>
+                                            <span class="input-group-text" id="basic-addon1">Presión de prueba mínima kg/cm2</span>
+                                        </div>
+                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="txtvarherkgcm" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Variaciones de presión PSI</span>
                                         </div>
                                         <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="txtvarpreher" aria-describedby="basic-addon1">
-                                        <select class="selectpicker form-control setAlg" id="cmbunidadvariacionespres">
-                                            <option value=0>Selecciona unidad medida...</option>
-                                            <option value="PSI">PSI</option>
-                                            <option value="kg/cm2">kg/cm2</option>
-                                        </select>
+    
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Variaciones de presión kg/cm2</span>
+                                        </div>
+                                        <input type="text" class="form-control validate-pattern setAlg" pattern="^-?(\d*\.)?\d+$" placeholder="" aria-label="" id="txtvarpreherkgcm" aria-describedby="basic-addon1">
+
                                     </div>
                                 </div>
                                 <div class="input-group mb-3" id="filefrmhermeticidad">
@@ -6287,7 +6318,7 @@
                                 </div>
                                 <div class="input-group mb-3" data-column="inspeccion_radiografica">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupFileAddon01">Inspección Rafiográfica</span>
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Inspección Radiográfica</span>
                                     </div>
                                     <div class="custom-file" id="fileconteinerplano">
                                         <input type="file" class="custom-file-input setAlg" id="inspeccion_radiografica"
@@ -6556,7 +6587,7 @@
                                         <option value="Calibración y Detección de Curvas">Calibración y Detección de Curvas</option>
                                         <option value="Liquidos Penetrantes">Liquidos Penetrantes</option>
                                         <option value="Ondas Guiadas">Ondas Guiadas</option>
-                                        <option value="Inspección Rafiográfica">Inspección Rafiográfica</option>
+                                        <option value="Inspección Radiográfica">Inspección Radiográfica</option>
                                         <option value="Inspección Muestral">Inspección Muestral</option>
                                         <option value="Constancias de pruebas de hermeticidad y de presión">Constancias de pruebas de hermeticidad y de presión</option>
                                         <option value="Auditoria y Revisiones">Auditoria y Revisiones</option>
@@ -6602,11 +6633,11 @@
                                     </label>
                                     <label class="list-group-item">
                                         <input class="form-check-input me-1" type="checkbox" value="5">
-                                        Construcción - Unión
+                                        Construcción - Método de unión o acoplamiento
                                     </label>
                                     <label class="list-group-item">
                                         <input class="form-check-input me-1" type="checkbox" value="6">
-                                        Construcción - Profundidad
+                                        Construcción - Profundidad de enterrado
                                     </label>
                                     <label class="list-group-item">
                                         <input class="form-check-input me-1" type="checkbox" value="7">
@@ -6614,19 +6645,19 @@
                                     </label>
                                     <label class="list-group-item">
                                         <input class="form-check-input me-1" type="checkbox" value="8">
-                                        Construcción - Hermeticidad
+                                        Construcción - Constancia de pruebas de hermeticidad
                                     </label>
                                     <label class="list-group-item">
                                         <input class="form-check-input me-1" type="checkbox" value="9">
-                                        Construcción - Inspección
+                                        Construcción - Reportes de inspección a cargo de los regulados
                                     </label>
                                     <label class="list-group-item">
                                         <input class="form-check-input me-1" type="checkbox" value="10">
-                                        Construcción - Catódica
+                                        Construcción - Protección catódica
                                     </label>
                                     <label class="list-group-item">
                                         <input class="form-check-input me-1" type="checkbox" value="11">
-                                        Construcción - Seguridad
+                                        Construcción - Datos de seguridad pre-arranque
                                     </label>
                                     <label class="list-group-item">
                                         <input class="form-check-input me-1" type="checkbox" value="12">
@@ -6662,7 +6693,7 @@
                                     </label>
                                     <label class="list-group-item">
                                         <input class="form-check-input me-1" type="checkbox" value="20">
-                                        Operación - Servicio de Operación
+                                        Operación - Servicio de operación (instalaciones)
                                     </label>
                                     <label class="list-group-item">
                                         <input class="form-check-input me-1" type="checkbox" value="21">
@@ -11201,7 +11232,7 @@
                                             </th>
                                             <th class="th-lg">
                                                 <a style="color: #265C4F;">
-                                                    Presión de prueba de hermeticidad (PSI)
+                                                    Presión de prueba de hermeticidad
                                                 </a>
                                             </th>
                                             <th class="th-lg">
@@ -12590,7 +12621,7 @@
                                 <option value="Calibración y Detección de Curvas">Calibración y Detección de Curvas</option>
                                 <option value="Liquidos Penetrantes">Liquidos Penetrantes</option>
                                 <option value="Ondas Guiadas">Ondas Guiadas</option>
-                                <option value="Inspección Rafiográfica">Inspección Rafiográfica</option>
+                                <option value="Inspección Radiográfica">Inspección Radiográfica</option>
                                 <option value="Inspección Muestral">Inspección Muestral</option>
                                 <option value="Constancias de pruebas de hermeticidad y de presión">Constancias de pruebas de hermeticidad y de presión</option>
                                 <option value="Auditoria y Revisiones">Auditoria y Revisiones</option>
@@ -12637,11 +12668,11 @@
                             </label>
                             <label class="list-group-item">
                                 <input class="form-check-input me-1" type="checkbox" value="5">
-                                Construcción - Unión
+                                Construcción - Método de unión o acoplamiento
                             </label>
                             <label class="list-group-item">
                                 <input class="form-check-input me-1" type="checkbox" value="6">
-                                Construcción - Profundidad
+                                Construcción - Profundidad de enterrado
                             </label>
                             <label class="list-group-item">
                                 <input class="form-check-input me-1" type="checkbox" value="7">
@@ -12649,19 +12680,19 @@
                             </label>
                             <label class="list-group-item">
                                 <input class="form-check-input me-1" type="checkbox" value="8">
-                                Construcción - Hermeticidad
+                                Construcción - Constancia de pruebas de hermeticidad
                             </label>
                             <label class="list-group-item">
                                 <input class="form-check-input me-1" type="checkbox" value="9">
-                                Construcción - Inspección
+                                Construcción - Reportes de inspección a cargo de los regulados
                             </label>
                             <label class="list-group-item">
                                 <input class="form-check-input me-1" type="checkbox" value="10">
-                                Construcción - Catódica
+                                Construcción - Protección catódica
                             </label>
                             <label class="list-group-item">
                                 <input class="form-check-input me-1" type="checkbox" value="11">
-                                Construcción - Seguridad
+                                Construcción - Datos de seguridad pre-arranque
                             </label>
                             <label class="list-group-item">
                                 <input class="form-check-input me-1" type="checkbox" value="12">

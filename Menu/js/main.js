@@ -444,7 +444,7 @@ function inicializarEventos() {
                                 webMethod = "vandalismo/destroy";
                                 break;
                             case "Op7":
-                                webMethod = "operacion|l/destroy";
+                                webMethod = "operaciondocumental/destroy";
                                 break;
 
                             default:
@@ -2636,15 +2636,16 @@ function llenarDatosActualizacionPresion(data) {
     $("#txtfechacalculo").val(data[0].C_0206_0018);
     $("#txtMetodoCalculo").val(data[0].C_0206_0019);
     $("#txtPresNomPSI").val(data[0].C_0206_0020);
-    $("#txtPresNomKG").val(data[0].C_0206_0021);
+    $("#txtPresNomkgcm").val(data[0].C_0206_0021);
     $("#txtPresDisenio").val(data[0].C_0206_0022);
+    $("#txtPresDiseniokmcm").val(data[0].pres_disenio);
     $("#txtPresMaxPSI").val(data[0].C_0206_0023);
-    $("#txtPresMaxKG").val(data[0].C_0206_0024);
+    $("#txtPresMaxkgcm").val(data[0].C_0206_0024);
     $("#txtPresRedPSI").val(data[0].C_0206_0025);
     $("#txtPresRedKG").val(data[0].C_0206_0026);
     $("#km_esp_iden_pres").val(data[0].kilometro_especifico);
-    $("#cmbunidadpresnominal").val(data[0].pres_nominal);
-    $("#cmbunidadpresiondisenio").val(data[0].pres_disenio);
+    //$("#cmbunidadpresnominal").val(data[0].pres_nominal);
+    //$("#cmbunidadpresiondisenio").val(data[0].pres_disenio);
     $("#cmbunidadpresionmaxope").val(data[0].pres_max_ope);
     $("#cmbunidadpresionsegmento").val(data[0].pres_segmento);
 
@@ -2668,7 +2669,6 @@ function llenarDatosActualizacionPresion(data) {
             downloadIcon.style.marginLeft = "10px";
             //downloadIcon.setAttribute('data-columna', item.column);
             downloadIcon.setAttribute('data-id_otro', data[0].id);
-
             // Insert the download icon after the custom-file div
             if (customFileDiv.nextSibling) {
                 inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
@@ -2710,12 +2710,16 @@ function saveDisenioPresion()  {
         fecha_calculo: $("#txtfechacalculo").val(),
         metodo_calculo: $("#txtMetodoCalculo").val(),
         presion_nom_psi: $("#txtPresNomPSI").val(),
+        presion_nom_kg: $("#txtPresNomkgcm").val(),
         presion_dis_psi: $("#txtPresDisenio").val(),
-        presion_red_psi: $("#txtPresRedPSI").val(), 
+        pres_disenio: $("#txtPresDiseniokmcm").val(),
+        presion_red_psi: $("#txtPresRedPSI").val(),
+        presion_max_psi: $("#txtPresMaxPSI").val(),
+        presion_max_kg: $("#txtPresMaxkgcm").val(),
         coordenada_especifica: $("#coord_esp_iden_pres_x").val()+' '+$("#coord_esp_iden_pres_y").val(),
         kilometro_especifico: $("#km_esp_iden_pres").val(),
-        pres_nominal: $("#cmbunidadpresnominal").val(),
-        pres_disenio: $("#cmbunidadpresiondisenio").val(),
+        //pres_nominal: $("#cmbunidadpresnominal").val(),
+        //pres_disenio: $("#cmbunidadpresiondisenio").val(),
         pres_max_ope: $("#cmbunidadpresionmaxope").val(),
         pres_segmento: $("#cmbunidadpresionsegmento").val()
     };
@@ -2774,12 +2778,16 @@ function updateDiseniopresion() {
             fecha_calculo: $("#txtfechacalculo").val(),
             metodo_calculo: $("#txtMetodoCalculo").val(),
             presion_nom_psi: $("#txtPresNomPSI").val(),
+            presion_nom_kg: $("#txtPresNomkgcm").val(),
             presion_dis_psi: $("#txtPresDisenio").val(),
-            presion_red_psi: $("#txtPresRedPSI").val(), 
-            coordenada_especifica: $("#coord_esp_iden_pres_x").val()+' '+$("#coord_esp_iden_pres_y").val(),
+            pres_disenio: $("#txtPresDiseniokmcm").val(),
+            presion_red_psi: $("#txtPresRedPSI").val(),
+            presion_max_psi: $("#txtPresMaxPSI").val(),
+            presion_max_kg: $("#txtPresMaxkgcm").val(),
+            coordenada_especifica: $("#coord_esp_iden_pres_x").val() + ' ' + $("#coord_esp_iden_pres_y").val(),
             kilometro_especifico: $("#km_esp_iden_pres").val(),
-            pres_nominal: $("#cmbunidadpresnominal").val(),
-            pres_disenio: $("#cmbunidadpresiondisenio").val(),
+            //pres_nominal: $("#cmbunidadpresnominal").val(),
+            //pres_disenio: $("#cmbunidadpresiondisenio").val(),
             pres_max_ope: $("#cmbunidadpresionmaxope").val(),
             pres_segmento: $("#cmbunidadpresionsegmento").val()
         };
@@ -4462,21 +4470,25 @@ function llenarDatosActualizacionHermeticidad(data) {
     $("#txtmedempher").val(data[0].C_0305_0100);
     $("#txtlongducprobados").val(data[0].C_0305_0101);
     $("#txtpresprueb").val(data[0].C_0305_0102);
-    $("#cmbunidadpresionmax option:contains(" + data[0].unidad_presion_max + ")").attr('selected', 'selected');
+    $("#txtprespruebkgcm").val(data[0].C_0305_0102_kgcm);
+    $("#txtpresdisgerkgcm").val(data[0].C_0305_0103_kgcm);
+    $("#txtvarherkgcm").val(data[0].C_0305_0105_kgcm);
+    $("#txtvarpreherkgcm").val(data[0].C_0305_0106_kgcm);
+    //$("#cmbunidadpresionmax option:contains(" + data[0].unidad_presion_max + ")").attr('selected', 'selected');
 
 
     $("#txtpresdisger").val(data[0].C_0305_0103);
-    $("#cmbunidadpresiondisenio option:contains(" + data[0].unidad_presion_disenio + ")").attr('selected', 'selected');
+    //$("#cmbunidadpresiondisenio option:contains(" + data[0].unidad_presion_disenio + ")").attr('selected', 'selected');
 
     $("#txtcalbher").val(data[0].C_0305_0104);
 
 
     $("#txtvarher").val(data[0].C_0305_0105);
-    $("#cmbunidadpresionmin option:contains(" + data[0].unidad_presion_min + ")").attr('selected', 'selected');
+    //$("#cmbunidadpresionmin option:contains(" + data[0].unidad_presion_min + ")").attr('selected', 'selected');
 
 
     $("#txtvarpreher").val(data[0].C_0305_0106);
-    $("#cmbunidadvariacionespres option:contains(" + data[0].unidad_variaciones_presion + ")").attr('selected', 'selected');
+    //$("#cmbunidadvariacionespres option:contains(" + data[0].unidad_variaciones_presion + ")").attr('selected', 'selected');
 
     idConsHerme = data[0].id;
     inhabilitarform("#hermetisidadfrm", true);
@@ -4546,17 +4558,21 @@ function updateHermeticidadConstruccion() {
             C_0305_0099: $("#txtdurpruebher").val(),//Duración de la prueba
             C_0305_0100: $("#txtmedempher").val(),//Medio de prueba de empleo
             C_0305_0101: $("#txtlongducprobados").val(),//Longitud de los ductos probados
-            C_0305_0102: $("#txtpresprueb").val(),//Presión de diseño
             C_0305_0103: $("#txtpresdisger").val(),//Calibración
+            C_0305_0102: $("#txtpresprueb").val(),//Presión de diseño          
             C_0305_0104: $("#txtcalbher").val(),//Variaciones de presión
             C_0305_0105: $("#txtvarher").val(),//Presión de prueba mínima
             C_0305_0106: $("#txtvarpreher").val(),//Variaciones de presión
             coordenada_especifica: $("#coord_esp_idenpherm_x").val() + ' ' + $("#coord_esp_idenpherm_y").val(),
             kilometro_especifico: $("#km_esp_idenpherm").val(),
-            unidad_presion_max: $("#cmbunidadpresionmax").val(),
-            unidad_presion_disenio: $("#cmbunidadpresiondisenio").val(),
-            unidad_presion_min: $("#cmbunidadpresionmin").val(),
-            unidad_variaciones_presion: $("#cmbunidadvariacionespres").val()
+            //unidad_presion_max: $("#cmbunidadpresionmax").val(),
+            //unidad_presion_disenio: $("#cmbunidadpresiondisenio").val(),
+            //unidad_presion_min: $("#cmbunidadpresionmin").val(),
+            //unidad_variaciones_presion: $("#cmbunidadvariacionespres").val(),
+            C_0305_0102_kgcm: $("#txtprespruebkgcm").val(),//Presión de diseño
+            C_0305_0103_kgcm: $("#txtpresdisgerkgcm").val(),//Variaciones de presión
+            C_0305_0105_kgcm: $("#txtvarherkgcm").val(),//Presión de prueba mínima
+            C_0305_0106_kgcm: $("#txtvarpreherkgcm").val()//Variaciones de presión
         };
         var formData = new FormData();
         formData.append('file', $("#fileconstruccionhermeticidad")[0].files[0]);
@@ -5310,17 +5326,21 @@ function saveConstruccionHermeticidad() {
         C_0305_0099: $("#txtdurpruebher").val(),//Duración de la prueba
         C_0305_0100: $("#txtmedempher").val(),//Medio de prueba de empleo
         C_0305_0101: $("#txtlongducprobados").val(),//Longitud de los ductos probados
-        C_0305_0102: $("#txtpresprueb").val(),//Presión de diseño
         C_0305_0103: $("#txtpresdisger").val(),//Calibración
+        C_0305_0102: $("#txtpresprueb").val(),//Presión de diseño
         C_0305_0104: $("#txtcalbher").val(),//Variaciones de presión
         C_0305_0105: $("#txtvarher").val(),//Presión de prueba mínima
         C_0305_0106: $("#txtvarpreher").val(),//Variaciones de presión
         coordenada_especifica: $("#coord_esp_idenpherm_x").val()+' '+$("#coord_esp_idenpherm_y").val(),
         kilometro_especifico: $("#km_esp_idenpherm").val(),
-        unidad_presion_max: $("#cmbunidadpresionmax").val(),
-        unidad_presion_disenio: $("#cmbunidadpresiondisenio").val(),
-        unidad_presion_min: $("#cmbunidadpresionmin").val(),
-        unidad_variaciones_presion: $("#cmbunidadvariacionespres").val()
+        //unidad_presion_max: $("#cmbunidadpresionmax").val(),
+        //unidad_presion_disenio: $("#cmbunidadpresiondisenio").val(),
+        //unidad_presion_min: $("#cmbunidadpresionmin").val(),
+        //unidad_variaciones_presion: $("#cmbunidadvariacionespres").val(),
+        C_0305_0102_kgcm: $("#txtprespruebkgcm").val(),//Presión de diseño
+        C_0305_0103_kgcm: $("#txtpresdisgerkgcm").val(),//Variaciones de presión
+        C_0305_0105_kgcm: $("#txtvarherkgcm").val(),//Presión de prueba mínima
+        C_0305_0106_kgcm: $("#txtvarpreherkgcm").val()//Variaciones de presión
     };
     var formData = new FormData();
     formData.append('file', $("#fileconstruccionhermeticidad")[0].files[0]);
@@ -11310,12 +11330,11 @@ function savedocumentoreferenciado() {
     var areas = [];
     $("#areasdocuments option:selected").each(function (i) {
         areas.push($(this).val());
-    });
-    if (areas.length <= 0) {
-        var selector = document.getElementsByName('cmbtramosdoc');
-        element = $(selector);
-        formData.append("tramo_id", element.val());
-    }
+    });  
+   var selector = document.getElementsByName('cmbtramosdoc');
+   element = $(selector);
+   formData.append("tramo_id", element.val());
+  
     var filePath = $("#inputfiledocument").val();
     var file_ext = filePath.substr(filePath.lastIndexOf('.') + 1, filePath.length);
     var extension="";
