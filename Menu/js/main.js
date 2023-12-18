@@ -1054,6 +1054,27 @@ function inicializarEventos() {
         }
     });
 
+    //Combo Ductos Documental
+    const selectDuctoDocuments = document.getElementById('ductosdocuments');
+    selectDuctoDocuments.addEventListener('change', function handleChange(event) {
+        var ductosquery = "";
+        $("#ductosdocuments option:selected").each(function (i) {
+            ductosquery = ductosquery + ($(this).val()) + ',';
+        });
+        ductosquery = ductosquery.substring(0, ductosquery.length - 1);
+        loadTramosDocuments(ductosquery);
+    });
+    //Combo tramos Documental
+    const selectTramosDocuments = document.getElementById('cmbtramosdoc');
+    selectTramosDocuments.addEventListener('change', function handleChange(event) {
+        var tramosquery = "";
+        $("#cmbtramosdoc option:selected").each(function (i) {
+            tramosquery = tramosquery + ($(this).val()) + ',';
+        });
+        tramosquery = tramosquery.substring(0, tramosquery.length - 1);
+        loadAreaDocument(tramosquery);
+    });
+
     //Combo Ductos  
     const selectDucto = document.getElementById('cmbDucto');
     selectDucto.addEventListener('change', function handleChange(event) {
@@ -6077,13 +6098,18 @@ function loadDuctos() {
             if (data.length > 0 && data !== undefined) {
                 console.log(data.data);
                 $("#cmbDucto").empty();
+                $("#ductosdocuments").empty();
                 $('#cmbDucto').append($('<option>', {
                     value: 0,
                     text: 'Selecciona...'
-                }));
+                }));              
                 for (var i = 0; i < data.length; i++) {    
                     console.log(data[i].nombre)              
                     $('#cmbDucto').append($('<option>', {
+                        value: data[i].id,
+                        text: data[i].nombre
+                    }));
+                    $('#ductosdocuments').append($('<option>', {
                         value: data[i].id,
                         text: data[i].nombre
                     }));
@@ -11244,7 +11270,7 @@ function fnshowdocument() {
     $("#txtductodocumental_doc").val($("#cmbDucto option:selected").text());
     document.getElementById('registro').style.display = 'none';
     $("#documentalfrm").show();
-    loadTramosDocuments();
+   //    loadTramosDocuments();
 
 }
 
@@ -11253,71 +11279,69 @@ function cancelDocumental_() {
     $("#documentalfrm").hide();
 
 }
-function loadTramosDocuments() {
+function loadTramosDocuments(ductos) {
+    var webMethod = "get_tramos_doc";
+    const formData = new FormData();
+    formData.append("ducto_id", ductos);
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
 
-  
-    //$("#cmbtramosdoc option:not(:first)").remove();
-    var property = $("#cmbDucto").val();
-    const webMethod = 'tramos/fetch';
-    url = apiUrl + webMethod;
-    if (property) {
-
-        fetch(url, {
-            method: 'POST', // or 'POST', 'PUT', etc.
-            headers: headers,
-            body: JSON.stringify({ 'property': property })
         })
-            .then(response => response.json())
-            .then(data => {
-                var selector = document.getElementsByName('cmbtramosdoc');
-                element = $(selector);
-                element.empty();
-                element.append($('<option>', {
-                    value: 0,
-                    text: 'Selecciona...'
+        .then(data => {
+            $("#cmbtramosdoc").empty();
+            for (var i = 0; i < data.data.datagrid.length; i++) {
+                $('#cmbtramosdoc').append($('<option>', {
+                    value: data.data.datagrid[i].id,
+                    text: data.data.datagrid[i].nombre
                 }));
-                for (var i = 0; i < data.length; i++) {
-                    element.append($('<option>', {
-                        value: data[i].id,
-                        text: data[i].nombre
-                    }));
-                }
-            })
-            .catch(error => console.error("Error fetching data: ", error));
-    }
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
 
 }
-function loadAreaDocument() {
+function loadAreaDocument(tramos) {
     $("#areasdocuments option:not(:first)").remove();
-    var selector = document.getElementsByName('cmbtramosdoc');
-    element = $(selector);
-    var property = element.val();
-    const webMethod = 'areas_unitarias/fetch';
-    url = apiUrl + webMethod;
-    if (property) {
+    var webMethod = "get_areas_doc";
+    const formData = new FormData();
+    formData.append("tramo_id", tramos);
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
 
-        fetch(url, {
-            method: 'POST', // or 'POST', 'PUT', etc.
-            headers: headers,
-            body: JSON.stringify({ 'property': property })
         })
-            .then(response => response.json())
-            .then(data => {
-
-                $("#areasdocuments").empty();
-                //$('#areasdocuments').append($('<option>', {
-                //    value: 0,
-                //    text: 'Selecciona...'
-                //}));
-                for (var i = 0; i < data.length; i++) {
-                    $('#areasdocuments').append($('<option>', {
-                        value: data[i].id,
-                        text: data[i].nombre
-                    }));
-                }
-            })
-            .catch(error => console.error("Error fetching data: ", error));
-    }
+        .then(data => {
+            $("#areasdocuments").empty();
+            for (var i = 0; i < data.data.datagrid.length; i++) {
+                $('#areasdocuments').append($('<option>', {
+                    value: data.data.datagrid[i].id,
+                    text: data.data.datagrid[i].ducto + " -> " + data.data.datagrid[i].tramo + " -> " +data.data.datagrid[i].nombre
+                }));
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
 }
 var nombreArchivo;
 function fileSelect(e) {
@@ -11341,6 +11365,10 @@ function savedocumentoreferenciado() {
     var content="";
     switch (file_ext) {
         case "pdf":
+            extension = ".pdf";
+            content = "application/pdf";
+            break
+        case "PDF":
             extension = ".pdf";
             content = "application/pdf";
             break;
@@ -11412,10 +11440,15 @@ function saveDocumentAreasForms(idDoc) {
 
     var webMethod = "GuardarDocumentoArea";
     const formData = new FormData();
+    //Formularios
     var forms = [];
     $('#lstforms').find('input:checked').each(function () {
         forms.push($(this)[0].value);
     });
+    forms.forEach((form) => {
+        formData.append("form_id[]", form);
+    });
+    //Áreas
     var areas = [];
     $("#areasdocuments option:selected").each(function (i) {
         areas.push($(this).val());
@@ -11423,8 +11456,21 @@ function saveDocumentAreasForms(idDoc) {
     areas.forEach((area) => {
         formData.append("area_id[]", area);
     });
-    forms.forEach((form) => {
-        formData.append("form_id[]", form);
+    //Ductos
+    var dutos = [];
+    $("#ductosdocuments option:selected").each(function (i) {
+        dutos.push($(this).val());
+    });
+    dutos.forEach((ducto) => {
+        formData.append("ducto_id[]", ducto);
+    });
+    //Tramos
+    var tramos = [];
+    $("#cmbtramosdoc option:selected").each(function (i) {
+        tramos.push($(this).val());
+    });
+    tramos.forEach((tramo) => {
+        formData.append("tramo_id[]", tramo);
     });
     formData.append("documentos_id", idDoc);
     fetch(apiUrl + webMethod, {
@@ -11482,7 +11528,7 @@ function get_relateddocuments(tramo_id,area_id,form_id,table) {
                 $('#'+table+' tbody')[0].innerHTML = "";
                 $('#' + table +' tbody:not(:first)').remove();
                 for (i = 0; i < data.data.datagrid.length; i++) {
-                    var persona = [data.data.datagrid[i].id, data.data.datagrid[i].nombre, data.data.datagrid[i].tipo, data.data.datagrid[i].fecha];
+                    var persona = [data.data.datagrid[i].id, data.data.datagrid[i].nombre, data.data.datagrid[i].tipo !== null ? data.data.datagrid[i].tipo : "Sin datos", data.data.datagrid[i].fecha];
                     llenarTablasdocuments(persona, table, data.data.datagrid[i].extension);
               }
             }
@@ -16218,6 +16264,14 @@ function get_relateddocuments_doc() {
         else {
             formData.append("op", "4");
         }
+    }
+    else {
+        if (area_id_doc === "0") {
+            formData.append("op", "1");
+        }
+        else {
+            formData.append("op", "2");
+        }
         switch (opdocselect) {
             case "disenio":
                 typedocument = "'" + $('#cmb_tipo_archivo_disenio_cons').val() + "'";
@@ -16230,14 +16284,7 @@ function get_relateddocuments_doc() {
                 break;
         }
         formData.append("tipo", typedocument);
-    }
-    else {
-        if (area_id_doc === "0") {
-            formData.append("op", "1");
-        }
-        else {
-            formData.append("op", "2");
-        }
+
     }
     formData.append("area_id", area_id_doc);
     $('#lstformsconsulta').find('input:checked').each(function () {

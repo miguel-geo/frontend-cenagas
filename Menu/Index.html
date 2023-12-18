@@ -6517,14 +6517,15 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Ducto</span>
                                     </div>
-                                    <input type="text" class="form-control" id="txtductodocumental_doc" value="" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">
-
+                                    <!-- <input type="text" class="form-control" multiple="multiple" id="txtductodocumental_doc" value="" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">-->
+                                    <select id="ductosdocuments" multiple="multiple" class="form-control">
+                                    </select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Selecciona tramo</span>
                                     </div>
-                                    <select class="selectpicker form-control  validate-pattern setAlg" pattern="^.*$" name="cmbtramosdoc">
+                                    <select class="selectpicker form-control  validate-pattern setAlg" multiple="multiple" pattern="^.*$" id="cmbtramosdoc">
                                     </select>
                                 </div>
                                 <!--<div class="input-group mb-3">
