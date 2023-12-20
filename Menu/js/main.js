@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/";// la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/";// la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -17072,8 +17072,11 @@ function selectFeatureById(areaId) {
         selectedFeature.setStyle(normalStyle);
     }
 
+    
+
     vectorLayer.getSource().getFeatures().forEach(function(feature) {
-        if (feature.get('area_id') === areaId) {
+
+        if (String(feature.get('area_id')) === String(areaId)) {
             // Reset style of previously selected feature
             if (selectedFeature&&areaId === "Selecciona...") {
                 selectedFeature.setStyle(normalStyle);
@@ -17089,9 +17092,7 @@ function selectFeatureById(areaId) {
 
             // Calculate the midpoint of the line
             var midpoint = calculateMidpoint(geometry);
-            console.log(feature.getGeometry().getType());
-            console.log(geometry)
-            var featureInfo = selectedFeature.getProperties();
+
                     
             // Create popup content
             var content = '<div class="p-3">'; // Add padding around the content
