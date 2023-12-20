@@ -11393,6 +11393,14 @@ function savedocumentoreferenciado() {
             extension = ".kmz";
             content = "application/vnd.google-earth.kmz";
             break;
+        case "doc":
+            extension = ".doc";
+            content = "application/msword";
+            break
+        case "docx":
+            extension = ".docx";
+            content = "application/vnd.openxmlformats";
+            break
         default:
     }
     formData.append('extension', extension);
@@ -11567,6 +11575,12 @@ function llenarTablasdocuments(obj, nameTabla,ext) {
                     break;
                 case ".kml":
                     row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar"><i  class="fa fa-map-location-dot"></i></a> </td>';
+                    break;
+                case ".doc":
+                    row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar"><i  class="fa fa-file"></i></a> </td>';
+                    break;
+                case ".docx":
+                    row = row + '<td style="text-align: center;color:green;"><a class="download-icon"  onclick="clicDoc(this.href)" target="_blank" href="' + apiUrl + 'documentos/' + obj[j] + '/download/"' + ' title="Descargar"><i  class="fa fa-file"></i></a> </td>';
                     break;
                 default:
             }
