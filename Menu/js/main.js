@@ -1010,7 +1010,7 @@ function inicializarEventos() {
             $('#cmb_tipo_archivo_disenio_cons').hide();
             $('#cmb_tipo_archivo_operacion_cons').hide();
         } else {
-            bandconsdoc = true;
+            bandconsdoc = false;
             opdocselect = "ninguno";
             $('#cmb_tipo_archivo_analisis_cons').hide();
             $('#titletypedocument_cons').hide();
@@ -1036,7 +1036,7 @@ function inicializarEventos() {
             $('#cmb_tipo_archivo_disenio_cons').hide();
             $('#cmb_tipo_archivo_analisis_cons').hide();
         } else {
-            bandconsdoc = true;
+            bandconsdoc = false;
             opdocselect = "ninguno";
             $('#cmb_tipo_archivo_operacion_cons').hide();
             $('#titletypedocument_cons').hide();
@@ -1129,6 +1129,7 @@ function inicializarEventos() {
     const selectDuctoConDoc = document.getElementById('cmbDucto_con_doc');
     selectDuctoConDoc.addEventListener('change', function handleChange(event) {
         loadTramosCon_doc(event.target.value);
+        ducto_id_doc = event.target.value;
     });
     //Combo Tramos Consulta
     const selectTramosCon = document.getElementById('cmbTramo_con');
@@ -16248,7 +16249,8 @@ function loadAreasConDoc() {
     }
 }
 var formsquery = "";
-var tramo_id_doc="";
+var tramo_id_doc = "";
+var ducto_id_doc = "";
 var area_id_doc = "0";
 var typedocument = "Ninguno"
 function get_relateddocuments_doc() {
@@ -16256,37 +16258,86 @@ function get_relateddocuments_doc() {
     var webMethod = "get_documents";
     const formData = new FormData();
     var op = "0";
-    formData.append("tramo_id", tramo_id_doc);  
-    if (bandconsdoc && $('#cmb_tipo_archivo_disenio_cons').val() !== "0" && $('#cmb_tipo_archivo_analisis_cons').val() !== "0" && $('#cmb_tipo_archivo_operacion_cons').val() !== "0") {
-        if (area_id_doc === "0") {
-            formData.append("op", "3");
-        }
-        else {
-            formData.append("op", "4");
-        }
-    }
-    else {
-        if (area_id_doc === "0") {
+ 
+    //Consulta por ducto
+    if (($("#cmbDucto_con_doc").val() !== "0") && ($("#cmbTramo_con_doc").val() === "0" && $("#cmbSegmento_con_doc").val() === "0" && $("#cmbAreas_con_doc").val() === "0")) {
+        if (bandconsdoc) {
+           // alert("Consulta por ducto y tipo de documento");
+            switch (opdocselect) {
+                case "disenio":
+                    typedocument = "'" + $('#cmb_tipo_archivo_disenio_cons').val() + "'";
+                    break;
+                case "analisis":
+                    typedocument = "'" + $('#cmb_tipo_archivo_analisis_cons').val() + "'";
+                    break;
+                case "operacion":
+                    typedocument = "'" + $('#cmb_tipo_archivo_operacion_cons').val() + "'";
+                    break;
+            }
             formData.append("op", "1");
+            formData.append("tipo", typedocument);
         }
         else {
             formData.append("op", "2");
+           // alert("Consulta por ducto");
         }
-        switch (opdocselect) {
-            case "disenio":
-                typedocument = "'" + $('#cmb_tipo_archivo_disenio_cons').val() + "'";
-                break;
-            case "analisis":
-                typedocument = "'" + $('#cmb_tipo_archivo_analisis_cons').val() + "'";
-                break;
-            case "operacion":
-                typedocument = "'" + $('#cmb_tipo_archivo_operacion_cons').val() + "'";
-                break;
-        }
-        formData.append("tipo", typedocument);
-
+        formData.append("ducto_id", ducto_id_doc);
     }
-    formData.append("area_id", area_id_doc);
+    //Consulta por tramo
+    else if (($("#cmbDucto_con_doc").val() !== "0" && $("#cmbTramo_con_doc").val() !== "0") && ($("#cmbSegmento_con_doc").val() === "0" && $("#cmbAreas_con_doc").val() === "0")) {
+
+        if (bandconsdoc) {
+           // alert("Consulta por tramo y tipo de documento");
+            switch (opdocselect) {
+                case "disenio":
+                    typedocument = "'" + $('#cmb_tipo_archivo_disenio_cons').val() + "'";
+                    break;
+                case "analisis":
+                    typedocument = "'" + $('#cmb_tipo_archivo_analisis_cons').val() + "'";
+                    break;
+                case "operacion":
+                    typedocument = "'" + $('#cmb_tipo_archivo_operacion_cons').val() + "'";
+                    break;
+            }
+            formData.append("op", "3");
+            formData.append("tipo", typedocument);
+        }
+        else {
+            formData.append("op", "4");
+            //alert("Consulta por tramo");
+        }
+        formData.append("ducto_id", ducto_id_doc);
+        formData.append("tramo_id", tramo_id_doc);
+    }
+    //Consulta por Área unitaria
+    else if ($("#cmbDucto_con_doc").val() !== "0" && $("#cmbTramo_con_doc").val() !== "0" && ($("#cmbSegmento_con_doc").val() !== "0" && $("#cmbAreas_con_doc").val() !== "0")) {
+        if (bandconsdoc) {
+           // alert("Consulta por área unitaria y tipo de documento");
+            switch (opdocselect) {
+                case "disenio":
+                    typedocument = "'" + $('#cmb_tipo_archivo_disenio_cons').val() + "'";
+                    break;
+                case "analisis":
+                    typedocument = "'" + $('#cmb_tipo_archivo_analisis_cons').val() + "'";
+                    break;
+                case "operacion":
+                    typedocument = "'" + $('#cmb_tipo_archivo_operacion_cons').val() + "'";
+                    break;
+            }
+            formData.append("op", "5");
+            formData.append("tipo", typedocument);
+        }
+        else {
+            formData.append("op", "6");
+            //alert("Consulta por area unitaria");
+        }
+        formData.append("tramo_id", tramo_id_doc);
+        formData.append("ducto_id", ducto_id_doc);
+        formData.append("area_id", area_id_doc);
+    }
+
+    //codigo comentado
+
     $('#lstformsconsulta').find('input:checked').each(function () {
          formsquery=formsquery+($(this)[0].value)+',';
      });
