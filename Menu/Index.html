@@ -6518,7 +6518,6 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Ducto</span>
                                     </div>
-                                    <!-- <input type="text" class="form-control" multiple="multiple" id="txtductodocumental_doc" value="" disabled placeholder="" aria-label="" aria-describedby="basic-addon1">-->
                                     <select id="ductosdocuments" multiple="multiple" class="form-control">
                                     </select>
                                 </div>
@@ -6529,18 +6528,8 @@
                                     <select class="selectpicker form-control  validate-pattern setAlg" multiple="multiple" pattern="^.*$" id="cmbtramosdoc">
                                     </select>
                                 </div>
-                                <!--<div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Selecciona la(s) áreas unitarias</span>
-                    </div>-->
-                                <!--<select class="selectpicker form-control  validate-pattern setAlg" pattern="^.*$" id="cmbTipoMaterial">
-                        <option value=0>Selecciona...</option>
-                        <option value=1>A001</option>
-                        <option value=2>A002</option>
-                    </select>-->
-                                <!--</div>-->
                                 <span class="input-group-text" id="inputGroupFileAddon01">Selecciona la(s) área(s) unitaria(s)</span>
-                                <select id="areasdocuments" multiple="multiple" class="form-control">
+                                <select id="areasdocuments" multiple="multiple" class="selectpicker form-control  validate-pattern setAlg">
                                 </select>
                                 <div class="input-group-text mb-3" data-column="file_doc">
                                     <div class="input-group-prepend">
@@ -6614,7 +6603,7 @@
                                 <span class="input-group-text" id="inputGroupFileAddon01">Selecciona la temática</span>
                                 <div class="list-group" id="lstforms">
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="1">
+                                        <input id="doc_dis_iden" class="form-check-input me-1" type="checkbox" value="1">
                                         Diseño - Identificación
                                     </label>
                                     <label class="list-group-item">
@@ -6622,67 +6611,67 @@
                                         Diseño - Servicio
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="2">
+                                        <input  id="doc_dis_pres" class="form-check-input me-1" type="checkbox" value="2">
                                         Diseño - Presión
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="3">
+                                        <input   id="doc_dis_prot"class="form-check-input me-1" type="checkbox" value="3">
                                         Diseño - Protección
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="4">
+                                        <input  id="doc_cons_gral" class="form-check-input me-1" type="checkbox" value="4">
                                         Construcción - General
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="5">
+                                        <input id="doc_cons_union" class="form-check-input me-1" type="checkbox" value="5">
                                         Construcción - Método de unión o acoplamiento
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="6">
+                                        <input id="doc_cons_prof" class="form-check-input me-1" type="checkbox" value="6">
                                         Construcción - Profundidad de enterrado
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="7">
+                                        <input id="doc_cons_cruc" class="form-check-input me-1" type="checkbox" value="7">
                                         Construcción - Tipo de cruces
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="8">
+                                        <input id="doc_cons_her" class="form-check-input me-1" type="checkbox" value="8">
                                         Construcción - Constancia de pruebas de hermeticidad
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="9">
+                                        <input id="doc_cons_rep_insp" class="form-check-input me-1" type="checkbox" value="9">
                                         Construcción - Reportes de inspección a cargo de los regulados
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="10">
+                                        <input id="doc_cons_prot_cat" class="form-check-input me-1" type="checkbox" value="10">
                                         Construcción - Protección catódica
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="11">
+                                        <input id="doc_cons_seg_pre" class="form-check-input me-1" type="checkbox" value="11">
                                         Construcción - Datos de seguridad pre-arranque
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="12">
+                                        <input id="doc_ana_gral" class="form-check-input me-1" type="checkbox" value="12">
                                         Anáisis - General
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="13">
+                                        <input id="doc_ana_inf_geo"  class="form-check-input me-1" type="checkbox" value="13">
                                         Análisis - Información geoespacial
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="14">
+                                        <input id="doc_ana_planos"  class="form-check-input me-1" type="checkbox" value="14">
                                         Análisis - Planos, mapas y reportes del Sistema de Recolección, Transporte, y Distribución de Ductos
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="15">
+                                        <input id="doc_ana_ries_inci"  class="form-check-input me-1" type="checkbox" value="15">
                                         Análisis - Datos del Riesgo e incidentes
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="16">
+                                        <input id="doc_ana_dis_ing"  class="form-check-input me-1" type="checkbox" value="16">
                                         Análisis - Reportes de Diseño e ingeniería
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="17">
+                                        <input id="doc_ana_fase_dis"  class="form-check-input me-1" type="checkbox" value="17">
                                         Análisis - Análisis de Riesgo en la fase de Diseño, sólo para Ductos nuevos
                                     </label>
                                     <label class="list-group-item">
@@ -6690,27 +6679,27 @@
                                         Análisis - Información documental
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="19">
+                                        <input id="doc_op_gral"  class="form-check-input me-1" type="checkbox" value="19">
                                         Operación - General
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="20">
+                                        <input id="doc_op_serv" class="form-check-input me-1" type="checkbox" value="20">
                                         Operación - Servicio de operación (instalaciones)
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="21">
+                                        <input  id="doc_op_hist_fug"class="form-check-input me-1" type="checkbox" value="21">
                                         Operación - Historial de fugas y Derrames
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="22">
+                                        <input id="doc_op_mon_corrosion" class="form-check-input me-1" type="checkbox" value="22">
                                         Operación - Monitoreo de Corrosión
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="23">
+                                        <input id="doc_op_hist_rep" class="form-check-input me-1" type="checkbox" value="23">
                                         Operación - Historial de Reparaciones
                                     </label>
                                     <label class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="24">
+                                        <input id="doc_op_vanda" class="form-check-input me-1" type="checkbox" value="24">
                                         Operación - Vandalismo y daños causados por terceros
                                     </label>
                                     <label class="list-group-item">
@@ -6719,13 +6708,13 @@
                                     </label>
                                 </div>
                                 <div class="modal-footer">
-
                                     <label id="inputGroupFileAddon01" style="margin-right:10px;">Nota: Seleccionar al menos un archivo para guardar correctamente</label>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelDocumental_()">Cancelar</button>
                                     <button type="button" id="btn_updatedocument" onclick="updateDisenioServicio()" style="display:none" class="btn btn-info">Actualizar</button>
                                     <button type="button" id="btn_savedocument" onclick="savedocumentoreferenciado()" class="btn btn-success">Guardar</button>
                                 </div>
                             </form>
+
                         </div>
                         <!-- #endregion -->
                         <!-- #region Formularios Geoespaciales -->

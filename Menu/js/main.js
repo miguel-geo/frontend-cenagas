@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/";// la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/";// la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -477,6 +477,7 @@ function inicializarEventos() {
                             default:
                         }
                         break;
+                   
                 }
             }
             else {
@@ -794,7 +795,11 @@ function inicializarEventos() {
                     area = data.area_unitaria_id;
                     fnsshowformGeoEspacial(id_d = row_id);
                 });
-            break;
+                break;
+            case "documental":
+                llenarinfoConsultaDocuments(row_id);
+              
+                break;
         }
     });
     $(document).on("click", ".add", function (e) {
@@ -5249,6 +5254,50 @@ function saveConstruccionProfundidad() {
 }
 function saveConstruccionCruces() {
 
+    var filePath = $("#fileconstruccioncruces").val();
+    var file_ext = filePath.substr(filePath.lastIndexOf('.') + 1, filePath.length);
+    var extension = "";
+    var content = "";
+    switch (file_ext) {
+        case "pdf":
+            extension = ".pdf";
+            content = "application/pdf";
+            break
+        case "PDF":
+            extension = ".pdf";
+            content = "application/pdf";
+            break;
+        case "xlsx":
+            extension = ".xlsx";
+            content = "application/vnd.ms-excel";
+            break;
+        case "xlsm":
+            extension = ".xlsm";
+            content = "application/vnd.ms-excel";
+            break;
+        case "xls":
+            extension = ".xlsx";
+            content = "application/vnd.ms-excel";
+            break;
+        case "kmz":
+            extension = ".kmz";
+            content = "application/vnd.google-earth.kmz";
+            break;
+        case "kml":
+            extension = ".kmz";
+            content = "application/vnd.google-earth.kmz";
+            break;
+        case "doc":
+            extension = ".doc";
+            content = "application/msword";
+            break
+        case "docx":
+            extension = ".docx";
+            content = "application/vnd.openxmlformats";
+            break
+        default:
+    }
+    
     var webMethod = "saveConstruccionCruces";
 
     var params = {
@@ -5302,11 +5351,13 @@ function saveConstruccionCruces() {
         C_0304_0096: $("#txtvoltajecruce").val(),// Voltaje transportado por el servicio
         coordenada_especifica: $("#coord_esp_idenptipocruce_x").val()+' '+$("#coord_esp_idenptipocruce_y").val(),
         kilometro_especifico: $("#km_esp_idenptipocruce").val(),
-        nombre: $("#txtnombrecruces").val()
+        nombre: $("#txtnombrecruces").val(),
+        extension: extension,
+        content: content
     };
+  
     var formData = new FormData();
     formData.append('file', $("#fileconstruccioncruces")[0].files[0]);
-
     Object.keys(params).forEach(key => formData.append(key, params[key]));
 
     for (var value of formData.values()) {
@@ -6099,7 +6150,7 @@ function loadDuctos() {
             if (data.length > 0 && data !== undefined) {
                 console.log(data.data);
                 $("#cmbDucto").empty();
-                $("#ductosdocuments").empty();
+               // $("#ductosdocuments").empty();
                 $('#cmbDucto').append($('<option>', {
                     value: 0,
                     text: 'Selecciona...'
@@ -6107,10 +6158,6 @@ function loadDuctos() {
                 for (var i = 0; i < data.length; i++) {    
                     console.log(data[i].nombre)              
                     $('#cmbDucto').append($('<option>', {
-                        value: data[i].id,
-                        text: data[i].nombre
-                    }));
-                    $('#ductosdocuments').append($('<option>', {
                         value: data[i].id,
                         text: data[i].nombre
                     }));
@@ -11268,11 +11315,11 @@ function cancelotrosegmento() {
 
 //#region Carga Documental
 function fnshowdocument() {
-    $("#txtductodocumental_doc").val($("#cmbDucto option:selected").text());
     document.getElementById('registro').style.display = 'none';
     $("#documentalfrm").show();
-   //    loadTramosDocuments();
-
+   // llenarinfoConsultaDocuments(35);
+    // loadTramosDocuments();
+    loadDuctosDocumental();
 }
 
 function cancelDocumental_() {
@@ -11349,7 +11396,19 @@ function fileSelect(e) {
     nombreArchivo=(e.target.files[0].name);
 }
 var tipodocumental = "";
-function savedocumentoreferenciado() {    
+async function savedocumentoreferenciado() {
+    if ($("#btn_savedocument").text() === "Actualizar") {
+        inhabilitarform("#documentalfrm", false);
+        $("#btn_savedocument").text("Guardar");
+    }
+    else {
+        if (banderaUpdateDoc) {
+            var datos;
+            await delete_documentos("documentos/destroy", doc_ids).then(data => {
+                datos = data;
+
+            });
+        }
     var webMethod = "createDocumento";
     const formData = new FormData();
     var areas = [];
@@ -11444,6 +11503,7 @@ function savedocumentoreferenciado() {
         .catch(error => {
             alert("Error: " + error);
         });
+    }
 }
 function saveDocumentAreasForms(idDoc) {
 
@@ -11592,7 +11652,7 @@ function llenarTablasdocuments(obj, nameTabla,ext) {
        }
     }
     //row = row + '<td><a class="add" title="Guardar" data-toggle="tooltip" id="ra' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-floppy-disk"></i></a> &nbsp;&nbsp;<a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-pen"></i></a>&nbsp;&nbsp;<a class="delete" title="Eliminar" data-toggle="tooltip" data-id="' + obj[0] + '"><i class="fa fa-trash"></i></a></td>';
-    row = row + '<td><a class="delete title="Eliminar" ' + 'data-toggle="tooltip" data-id="' + idDoc + '"><i class="fa fa-trash"></i></a></td>';
+    row = row + '<td><a class="edit" title="Editar" data-toggle="tooltip" id="re' + obj[0] + '" data-id="' + obj[0] + '"><i class="fa fa-pen"></i></a>&nbsp;&nbsp; <a class="delete title="Eliminar" ' + 'data-toggle="tooltip" data-id="' + idDoc + '"><i class="fa fa-trash"></i></a></td>';
     row = row + '</tr>';
   $('#' + nameTabla).append(row);
 }
@@ -12414,7 +12474,7 @@ async function fnshowOperacionHistorialReparaciones(id_d = null) {
     try {
         await loadtipomanguitoOp();
         await loadtiporecubrimientoHistRepOp();
-       // await loadtipofallaHistRepOp();
+        //await loadtipofallaHistRepOp();
         if (id_d) {
             await consultaDatosHistRepOperacion(id_d = id_d);
         }
@@ -12755,7 +12815,7 @@ function llenarDatosHisRepOp(data) {
     $("#txtdefectohisrep").val(data[0].C_0415_277);
     $("#km_anomalia_hisrep").val(data[0].km_anomalia)
     $("#fecreparacion_hisrep").val(data[0].C_0415_278.split(' ')[0]);
-    // $("#cmb_tipofallahisrep option:contains(" + data[0].C_0415_279 + ")").attr('selected', 'selected'); 
+   // $("#cmb_tipofallahisrep option:contains(" + data[0].C_0415_279 + ")").attr('selected', 'selected'); 
     $("#txt_tipofalla_hisrep").val(data[0].C_0415_279);
     $("#txtmodoreparacionhisrep").val(data[0].C_0415_280);
     idHistRepOp = data[0].id;
@@ -12799,8 +12859,8 @@ function savehistReparacionOp() {
         C_0415_276: $("#txtindicadoreshisrep").val(),
         C_0415_277: $("#txtdefectohisrep").val(),
         C_0415_278: $("#fecreparacion_hisrep").val(),
-         //id_C_0415_279: $("#cmb_tipofallahisrep").val(),
-         C_0415_279: $("#txt_tipofalla_hisrep").val(),
+        //id_C_0415_279: $("#cmb_tipofallahisrep").val(),
+        C_0415_279: $("#txt_tipofalla_hisrep").val(),
         C_0415_280: $("#txtmodoreparacionhisrep").val(),
         km_anomalia: $("#km_anomalia_hisrep").val(),
         coordenada_especifica: $("#coord_esp_hisrep_x").val() + ' ' + $("#coord_esp_hisrep_y").val(),
@@ -16392,6 +16452,7 @@ function get_relateddocuments_doc() {
 }
 var consultadoc = false;
 function consultadocumental() {
+    temaconsulta = "documental";
     get_relateddocuments_doc();
     consultadoc = true;
 }
@@ -17234,4 +17295,395 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+var banderaUpdateDoc = false;
+var doc_ids;
+async function llenarinfoConsultaDocuments(doc_id) {
+    inhabilitarform("#documentalfrm", true);
+    banderaUpdateDoc = true;
+    doc_ids = doc_id;
+    $("#btn_savedocument").text('Actualizar');
+   // fnshowformdocupdate(this);
+     var datos;
+     await getductos_document("get_data_byDoc", doc_id).then(data => {
+         datos = data;
+        
+     });
 
+    await getductos_documentos("ductos/fetch", doc_id).then(data => {
+        if (data.length > 0 && data !== undefined) {
+            console.log(data.data);
+            $("#ductosdocuments").empty();
+            for (var i = 0; i < data.length; i++) {
+                $('#ductosdocuments').append($('<option>', {
+                    value: data[i].id,
+                    text: data[i].nombre
+                }));
+            }
+        }
+
+    });
+    
+    //consultatoform(e);
+    //$("#ConsultaDocumental").hide();
+   // await loadDuctosDocumental();
+  
+    //alert(datos.data.ductos.toString());
+    //document.getElementById('registro').style.display = 'none';
+    var concaductos = "";
+  
+    var arrayductos=[];
+        datos.data.ductos.forEach(ducto => {
+            // $('#ductosdocuments option[value="' + ducto.ducto_id + '"]').attr('selected', 'selected').change();
+            //$("#ductosdocuments").val(ducto.ducto_id).attr("selected", "selected").change();
+            //if ($(this).val() === ducto.ducto_id.toString() ) {
+            //    $(this).prop("selected", true);
+            arrayductos.push(ducto.ducto_id.toString());
+            //}
+        });
+    
+    //onsole.log(arrayductos.join(','));
+    $("#ductosdocuments").val(arrayductos.join(','));
+    //alert(arrayductos.join(','));
+    //var arraytramos = [];
+    //await gettramos_documentos("get_tramos_doc",arrayductos.join(',')).then(data => {
+     
+    //    datos.data.tramos.forEach(tramo => {
+    //        // $('#ductosdocuments option[value="' + ducto.ducto_id + '"]').attr('selected', 'selected').change();
+    //        //$("#ductosdocuments").val(ducto.ducto_id).attr("selected", "selected").change();
+    //        //if ($(this).val() === ducto.ducto_id.toString() ) {
+    //        //    $(this).prop("selected", true);
+    //        arraytramos.push(tramo.tramo_id.toString());
+    //        //}
+    //    });
+
+    //});
+
+    await gettramos_documentos("get_tramos_doc", arrayductos.join(',')).then(data => {
+        if (data.data.datagrid.length > 0 && data.data.datagrid !== undefined) {
+            console.log(data.data);
+            $("#cmbtramosdoc").empty();
+            for (var i = 0; i < data.data.datagrid.length; i++) {
+                $('#cmbtramosdoc').append($('<option>', {
+                    value: data.data.datagrid[i].id,
+                    text: data.data.datagrid[i].nombre
+                }));
+            }
+        }
+
+    });
+    var arraytramos = [];
+    datos.data.tramos.forEach(tramo => {
+        // $('#ductosdocuments option[value="' + ducto.ducto_id + '"]').attr('selected', 'selected').change();
+        //$("#ductosdocuments").val(ducto.ducto_id).attr("selected", "selected").change();
+        //if ($(this).val() === ducto.ducto_id.toString() ) {
+        //    $(this).prop("selected", true);
+        arraytramos.push(tramo.tramo_id.toString());
+        //}
+    });
+   // alert(arraytramos.join(','));
+    console.log(arraytramos.join(','));
+    //$("#cmbtramosdoc").val(arraytramos.join(','));
+
+    var values = arraytramos.join(',');
+    var options = Array.from(document.querySelectorAll('#cmbtramosdoc option'));
+
+    values.split(',').forEach(function (v) {
+        options.find(c => c.value == v).selected = true;
+    });
+
+
+    //Cargar áreas unitarias Documentos
+
+    await getareas_documentos("get_areas_doc", arraytramos.join(',')).then(data => {
+        if (data.data.datagrid.length > 0 && data.data.datagrid !== undefined) {
+            console.log(data.data);
+            $("#areasdocuments").empty();
+            for (var i = 0; i < data.data.datagrid.length; i++) {
+                $('#areasdocuments').append($('<option>', {
+                    value: data.data.datagrid[i].id,
+                    text: data.data.datagrid[i].ducto + " -> " + data.data.datagrid[i].tramo + " -> " + data.data.datagrid[i].nombre
+                }));
+            }
+        }
+
+    });
+
+    var arrayareas = [];
+    datos.data.areas.forEach(area => {
+        // $('#ductosdocuments option[value="' + ducto.ducto_id + '"]').attr('selected', 'selected').change();
+        //$("#ductosdocuments").val(ducto.ducto_id).attr("selected", "selected").change();
+        //if ($(this).val() === ducto.ducto_id.toString() ) {
+        //    $(this).prop("selected", true);
+        arrayareas.push(area.area__unitaria_id.toString());
+        //}
+    });
+    // alert(arraytramos.join(','));
+    //alert(arrayareas.join(','));
+    //$("#cmbtramosdoc").val(arraytramos.join(','));
+
+    var values = arrayareas.join(',');
+    var options = Array.from(document.querySelectorAll('#areasdocuments option'));
+
+    values.split(',').forEach(function (v) {
+        options.find(c => c.value == v).selected = true;
+    });
+    
+    for (var i = 0; i < datos.data.forms.length; i++) {
+
+        switch (datos.data.forms[i].formularios_id) {
+            case 1:
+                $("#doc_dis_iden").attr("checked", "checked");
+                break;
+            case 26:
+                $("#doc_dis_serv").attr("checked", "checked");
+                break;
+            case 2:
+                $("#doc_dis_pres").attr("checked", "checked");
+                break;
+            case 3:
+                $("#doc_dis_prot").attr("checked", "checked");
+                break;
+            case 4:
+                $("#doc_cons_gral").attr("checked", "checked");
+                break;
+            case 5:
+                $("#doc_cons_union").attr("checked", "checked");
+                break;
+            case 6:
+                $("#doc_cons_prof").attr("checked", "checked");
+                break;
+            case 7:
+                $("#doc_cons_cruc").attr("checked", "checked");
+                break;
+            case 8:
+                $("#doc_cons_her").attr("checked", "checked");
+                break;
+            case 9:
+                $("#doc_cons_rep_insp").attr("checked", "checked");
+                break;
+            case 10:
+                $("#doc_cons_prot_cat").attr("checked", "checked");
+                break;
+            case 11:
+                $("#doc_cons_seg_pre").attr("checked", "checked");
+                break;
+            case 12:
+                $("#doc_ana_gral").attr("checked", "checked");
+                break;
+            case 13:
+                $("#doc_ana_inf_geo").attr("checked", "checked");
+                break;
+            case 14:
+                $("#doc_ana_planos").attr("checked", "checked");
+                break;
+            case 15:
+                $("#doc_ana_ries_inci").attr("checked", "checked");
+                break;
+            case 16:
+                $("#doc_ana_dis_ing").attr("checked", "checked");
+                break;
+            case 17:
+                $("#doc_ana_fase_dis").attr("checked", "checked");
+                break;
+            case 18:
+                $("#doc_analisis_doc").attr("checked", "checked");
+                break;
+            case 19:
+                $("#doc_op_gral").attr("checked", "checked");
+                break;
+            case 20:
+                $("#doc_op_serv").attr("checked", "checked");
+                break;
+            case 21:
+                $("#doc_op_hist_fug").attr("checked", "checked");
+                break;
+            case 22:
+                $("#doc_op_mon_corrosion").attr("checked", "checked");
+                break;
+            case 23:
+                $("#doc_op_hist_rep").attr("checked", "checked");
+                break;
+            case 24:
+                $("#doc_op_vanda").attr("checked", "checked");
+                break;
+            case 25:
+                $("#doc_operacion_doc").attr("checked", "checked");
+                break;
+            default:
+        }
+    }
+    $("#ConsultaDocumental").hide();
+    //selectTabupdate(e, 'Opcion1');
+    document.getElementById('registro').style.display = 'none';
+    $("#documentalfrm").show();
+    selectTabupdate(this, 'Opcion1');
+    $("#btn_savedocument").text('Actualizar');
+    //$('#ductosdocuments').val("1");
+    //concaductos = concaductos.substring(0, concaductos.length - 1);
+    // alert(concaductos.toString());
+  
+   
+    //consultatoform(datos);
+   // selectTabupdate(datos, 'Opcion1');
+   // document.getElementById('documentalfrm').style.display = '';
+   // $('#documentalfrm').css('display', 'block');
+    //$("#documentalfrm").show();
+}
+function delete_documentos(webMethod, id) {
+    url = apiUrl + webMethod;
+    return fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 'id':  id})
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error;
+        });
+}
+function gettramos_documentos(webMethod, id) {
+    url = apiUrl + webMethod;
+    return fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 'ducto_id': id })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error;
+        });
+}
+function getareas_documentos(webMethod, id) {
+    url = apiUrl + webMethod;
+    return fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 'tramo_id': id })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error;
+        });
+}
+function getductos_documentos(webMethod, id) {
+    url = apiUrl + webMethod;
+    return fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 'property': 2 })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error;
+        });
+}
+function loadTramosDocumentoos(ductos) {
+    var webMethod = "get_tramos_doc";
+    const formData = new FormData();
+    formData.append("ducto_id", ductos);
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            $("#cmbtramosdoc").empty();
+            for (var i = 0; i < data.data.datagrid.length; i++) {
+                $('#cmbtramosdoc').append($('<option>', {
+                    value: data.data.datagrid[i].id,
+                    text: data.data.datagrid[i].nombre
+                }));
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+
+}
+async  function loadDuctosDocumental() {
+    var webMethod = "ductos/fetch";
+    var params = {
+        property: 2,
+    };
+    $.ajax({
+        type: "POST",
+        url: apiUrl + webMethod,
+        data: params,
+        success: function (data) {
+            if (data.length > 0 && data !== undefined) {
+                console.log(data.data);
+                $("#ductosdocuments").empty();
+                for (var i = 0; i < data.length; i++) {
+                    $('#ductosdocuments').append($('<option>', {
+                        value: data[i].id,
+                        text: data[i].nombre
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
+function getductos_document(webMethod, id) {
+    url = apiUrl + webMethod;
+    return fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 'docto_id': id })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            throw error;
+        });
+}
