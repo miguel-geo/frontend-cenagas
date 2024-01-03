@@ -12414,7 +12414,7 @@ async function fnshowOperacionHistorialReparaciones(id_d = null) {
     try {
         await loadtipomanguitoOp();
         await loadtiporecubrimientoHistRepOp();
-        await loadtipofallaHistRepOp();
+       // await loadtipofallaHistRepOp();
         if (id_d) {
             await consultaDatosHistRepOperacion(id_d = id_d);
         }
@@ -12755,7 +12755,8 @@ function llenarDatosHisRepOp(data) {
     $("#txtdefectohisrep").val(data[0].C_0415_277);
     $("#km_anomalia_hisrep").val(data[0].km_anomalia)
     $("#fecreparacion_hisrep").val(data[0].C_0415_278.split(' ')[0]);
-    $("#cmb_tipofallahisrep option:contains(" + data[0].C_0415_279 + ")").attr('selected', 'selected');
+    // $("#cmb_tipofallahisrep option:contains(" + data[0].C_0415_279 + ")").attr('selected', 'selected'); 
+    $("#txt_tipofalla_hisrep").val(data[0].C_0415_279);
     $("#txtmodoreparacionhisrep").val(data[0].C_0415_280);
     idHistRepOp = data[0].id;
     inhabilitarform("#historialreparacionesoperacionfrm", true);
@@ -12798,7 +12799,8 @@ function savehistReparacionOp() {
         C_0415_276: $("#txtindicadoreshisrep").val(),
         C_0415_277: $("#txtdefectohisrep").val(),
         C_0415_278: $("#fecreparacion_hisrep").val(),
-        id_C_0415_279: $("#cmb_tipofallahisrep").val(),
+         //id_C_0415_279: $("#cmb_tipofallahisrep").val(),
+         C_0415_279: $("#txt_tipofalla_hisrep").val(),
         C_0415_280: $("#txtmodoreparacionhisrep").val(),
         km_anomalia: $("#km_anomalia_hisrep").val(),
         coordenada_especifica: $("#coord_esp_hisrep_x").val() + ' ' + $("#coord_esp_hisrep_y").val(),
@@ -12872,7 +12874,8 @@ function updateOperacionHistorialReparaciones() {
             C_0415_276: $("#txtindicadoreshisrep").val(),
             C_0415_277: $("#txtdefectohisrep").val(),
             C_0415_278: $("#fecreparacion_hisrep").val(),
-            id_C_0415_279: $("#cmb_tipofallahisrep").val(),
+            //id_C_0415_279: $("#cmb_tipofallahisrep").val(),
+            C_0415_279: $("#txt_tipofalla_hisrep").val(),
             C_0415_280: $("#txtmodoreparacionhisrep").val(),
             km_anomalia: $("#km_anomalia_hisrep").val(),
             coordenada_especifica: $("#coord_esp_hisrep_x").val() + ' ' + $("#coord_esp_hisrep_y").val(),

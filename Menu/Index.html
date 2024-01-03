@@ -4744,7 +4744,7 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Tipo de manguito</span>
+                                        <span class="input-group-text" id="basic-addon1">Tipo de reparación</span>
                                     </div>
                                     <select class="selectpicker form-control setAlg" id="cmb_tipomanguitohisrep">
                                         <option>Selecciona...</option>
@@ -4755,7 +4755,7 @@
                                 </div>
                                 <div class="input-group mb-3" id="espTipoManguitohisrep" style="display:none">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Otro Tipo de manguito</span>
+                                        <span class="input-group-text" id="basic-addon1">Otro Tipo de reparación</span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="" aria-label="" id="newTipomanguitohisrep" aria-describedby="basic-addon1">
                                     <div class="input-group-prepend">
@@ -4896,12 +4896,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de falla</span>
                                     </div>
-                                    <select class="selectpicker form-control setAlg" id="cmb_tipofallahisrep">
-                                        <option>Selecciona...</option>
-                                    </select>
-                                    <button type="button" onclick="showotrotipoFallaHistRepOp()" class="btn btn-secondary">
-                                        <i class="fas fa-square-plus"></i>
-                                    </button>
+                                    <input type="text" class="form-control validate-pattern setAlg" pattern="^.*$" placeholder="" aria-label="" id="txt_tipofalla_hisrep" aria-describedby="basic-addon1">
+                                    <!--<select class="selectpicker form-control setAlg" id="cmb_tipofallahisrep">
+        <option>Selecciona...</option>
+    </select>-->
+                                    <!--<button type="button" onclick="showotrotipoFallaHistRepOp()" class="btn btn-secondary">
+        <i class="fas fa-square-plus"></i>
+    </button>-->
                                 </div>
                                 <div class="input-group mb-3" id="espTipofallahisrep" style="display:none">
                                     <div class="input-group-prepend">
