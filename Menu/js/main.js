@@ -1,7 +1,8 @@
-﻿var apiUrl = "http://localhost:82/backend-cenagas/public/api/";// la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/";// la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
+var sistema;
 var selectedFeature = null;
 var txtducto;
 var txttramo;
@@ -42,9 +43,9 @@ $(document).ready(function () {
     //}).multipleSelect({
     //    width: '100%'
     //});
-   
-    llenar_ductos();
-    llenar_ductos_documental();
+    llenar_sistemas();
+    llenar_sistemas_documental();
+    
     //loadidentificacion();
     $('.custom-file-input').on('change', function(event) {
         var inputFile = event.currentTarget;
@@ -59,17 +60,7 @@ $(document).ready(function () {
     //$('#tablaPersonas').DataTable();
     //$('.dataTables_length').addClass('bs-select');
 
-    document.getElementById("cmbTramo").addEventListener("change", function() {
-        var imageElement = document.getElementById("myImage");
-        console.log(this.value)
-        if (this.value == "1") {
-            // Change to the first image
-            imageElement.src = "images/tramo1.jpg";
-        } else if (this.value == "2") {
-            // Change to the second image
-            imageElement.src = "images/tramo2.jpg";
-        }
-    });
+
 
 
 
@@ -93,6 +84,15 @@ $(document).ready(function () {
             $target.find('input:eq(0)').focus();
         }
     });
+
+    $('.prevBtn').click(function() {
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
+    
+        prevStepWizard.removeAttr('disabled').trigger('click');
+    });
+    
 
     allNextBtn.click(function(){
                  var curStep = $(this).closest(".setup-content"),
@@ -323,6 +323,11 @@ function loadTramos() {
     }
     
 }
+
+
+
+
+
 function loadTramosCon() {
     $("#cmbTramo_con option:not(:first)").remove();
     var property = $("#cmbDucto_con").val();
@@ -5005,7 +5010,7 @@ function reiniciarFormsConstruccion() {
     $('#forms').hide();
     goToStep1()
     $('#construforms').hide();
-    loadDuctos();
+    loadSistemas();
     $("#cmbTramo").empty();
     $('#cmbTramo').append($('<option>', {
         value: 0,
@@ -5884,7 +5889,8 @@ function selectTab(evt, tabName) {
     evt.currentTarget.className += " active";
     document.getElementById("Contenido").style.display = "block";
     if (tabName === 'Opcion1') {
-        loadDuctos();
+        // loadDuctos();
+        loadSistemas();
        
     }
 
@@ -6137,6 +6143,39 @@ function loadtipoubicacion() {
 }
 
 
+
+function loadSistemas() {
+    var webMethod = "sistemas";
+
+    
+
+    $.ajax({
+        type: "GET",
+        url: apiUrl + webMethod,
+        success: function (data) {
+            if (data.length > 0 && data !== undefined) {
+                console.log(data.data);
+                $("#cmbSistema").empty();
+               // $("#Sistemasdocuments").empty();
+                $('#cmbSistema').append($('<option>', {
+                    value: 0,
+                    text: 'Selecciona...'
+                }));              
+                for (var i = 0; i < data.length; i++) {    
+                    console.log(data[i].nombre)              
+                    $('#cmbSistema').append($('<option>', {
+                        value: data[i].id,
+                        text: data[i].nombre
+                    }));
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}
+
 function loadDuctos() {
     var webMethod = "ductos/fetch";
     var params = {
@@ -6192,7 +6231,7 @@ function reiniciarForms() {
     $('#analisisforms').hide();
     $('#operacionforms').hide();
     $('#disenioforms').hide();
-    loadDuctos();
+    loadSistemas();
     $("#cmbTramo").empty();
     $('#cmbTramo').append($('<option>', {
         value: 0,
@@ -8265,13 +8304,17 @@ function llenarTablasFileInspeccion(obj, nameTabla, id) {
     row = row + '</tr>';
 
     $('#' + nameTabla + ' tbody').append(row);
+
+
+    
 }
 
 
-function llenar_ductos(){
+
+function llenar_sistemas(){
 
 
-    const webMethod='ductos';
+    const webMethod='sistemas';
         url=apiUrl+webMethod;
       fetch(url, {
         method: 'GET', // or 'POST', 'PUT', etc.
@@ -8279,21 +8322,137 @@ function llenar_ductos(){
       })
           .then(response => response.json())
           .then(data => {
-              var selectElement = document.getElementById("cmbDucto");
-              var selectElementConsulta = document.getElementById("cmbDucto_con");
-              data.ductos.forEach(item => {
-                var option = document.createElement("option");
-                option.value = item.id; // Using the 'id' property as value
-                option.text = item.nombre; // Using the 'nombre' property as display name
-                  selectElement.add(option);
+              var selectElement = document.getElementById("cmbSistema_con_documental");
+              var selectElementConsulta = document.getElementById("cmbSistema_con");
+              data.forEach(item => {
+
                   var option2 = document.createElement("option");
                   option2.value = item.id; // Using the 'id' property as value
                   option2.text = item.nombre; // Using the 'nombre' property as display name
-                  selectElementConsulta.add(option);
+                  selectElementConsulta.add(option2);
             });
           })
           .catch(error => console.error("Error fetching data: ", error));
 }
+
+
+
+
+function llenar_ductos(property){
+
+    $("#cmbDucto_con option:not(:first)").remove();  
+    const webMethod='ductos/fetch';
+        url=apiUrl+webMethod;
+      fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: headers,
+        body: JSON.stringify({"property":property})
+      })
+          .then(response => response.json())
+          .then(data => {
+
+              var selectElementConsulta = document.getElementById("cmbDucto_con");
+              data.forEach(item => {
+                  var option2 = document.createElement("option");
+                  option2.value = item.id; // Using the 'id' property as value
+                  option2.text = item.nombre; // Using the 'nombre' property as display name
+                  selectElementConsulta.add(option2);
+            });
+          })
+          .catch(error => console.error("Error fetching data: ", error));
+}
+
+
+
+
+
+  $(document).on('change', '#cmbSistema', function() {
+    $("#cmbDucto option:not(:first)").remove();
+    var property = $(this).val();
+    sistema=property;
+    const webMethod='ductos/fetch';
+        url=apiUrl+webMethod;
+    if (property) {      
+      fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'property': property})
+      })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+              var selectElement = document.getElementById("cmbDucto");
+              console.log(data)
+              data.forEach(item => {
+                var option = document.createElement("option");
+                option.value = item.id; // Using the 'id' property as value
+                option.text = item.nombre; // Using the 'nombre' property as display name
+                selectElement.add(option);
+            });
+          })
+          .catch(error => console.error("Error fetching data: ", error));
+        //   llenar_ductos(property);
+        //   llenar_ductos_documental(property);
+          loadDuctosDocumental(property)
+    }
+
+
+
+   
+});
+
+
+$(document).on('change', '#cmbSistema_con', function() {
+    var property = $(this).val();
+    sistema=property;
+    llenar_ductos(property);
+});
+
+$(document).on('change', '#cmbSistema_con_doc', function() {
+
+    var property = $(this).val();
+    sistema=property;
+    llenar_ductos_documental(property);
+});
+
+$(document).on('change', '#cmbSistema', function() {
+    $("#cmbDucto option:not(:first)").remove();
+    var property = $(this).val();
+    sistema=property;
+    const webMethod='ductos/fetch';
+        url=apiUrl+webMethod;
+    if (property) {      
+      fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'property': property})
+      })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+              var selectElement = document.getElementById("cmbDucto");
+              console.log(data)
+              data.forEach(item => {
+                var option = document.createElement("option");
+                option.value = item.id; // Using the 'id' property as value
+                option.text = item.nombre; // Using the 'nombre' property as display name
+                selectElement.add(option);
+            });
+          })
+          .catch(error => console.error("Error fetching data: ", error));
+        //   llenar_ductos(property);
+        //   llenar_ductos_documental(property);
+          loadDuctosDocumental(property)
+    }
+
+
+
+   
+});
 
 $('#cmbDucto').change(function() {
     $("#cmbTramo option:not(:first)").remove();
@@ -11319,7 +11478,7 @@ function fnshowdocument() {
     $("#documentalfrm").show();
    // llenarinfoConsultaDocuments(35);
     // loadTramosDocuments();
-    loadDuctosDocumental();
+    loadDuctosDocumental(sistema);
 }
 
 function cancelDocumental_() {
@@ -16209,32 +16368,53 @@ function cancelGeneralOp() {
 
 //#region Carga Documental
 
-function llenar_ductos_documental() {
-
-
-    const webMethod = 'ductos';
-    url = apiUrl + webMethod;
+function llenar_sistemas_documental() {
+    var webMethod= 'sistemas'
+    var url=apiUrl+webMethod;
     fetch(url, {
         method: 'GET', // or 'POST', 'PUT', etc.
         headers: headers
     })
         .then(response => response.json())
         .then(data => {
-            var selectElement = document.getElementById("cmbDucto_con_doc");
-            var selectElementConsulta = document.getElementById("cmbDucto_con_doc");
-            data.ductos.forEach(item => {
+            var selectElement = document.getElementById("cmbSistema_con_doc");
+            console.log('data',data)
+            data.forEach(item => {
                 var option = document.createElement("option");
                 option.value = item.id; // Using the 'id' property as value
                 option.text = item.nombre; // Using the 'nombre' property as display name
                 selectElement.add(option);
-                var option2 = document.createElement("option");
-                option2.value = item.id; // Using the 'id' property as value
-                option2.text = item.nombre; // Using the 'nombre' property as display name
-                selectElementConsulta.add(option);
             });
         })
         .catch(error => console.error("Error fetching data: ", error));
 }
+
+function llenar_ductos_documental(property) {
+    $("#cmbDucto_con_doc option:not(:first)").remove();
+    var webMethod= 'ductos/fetch'
+    var url=apiUrl+webMethod;
+
+    fetch(url, {
+        method: 'POST', // or 'POST', 'PUT', etc.
+        headers: headers,
+        body: JSON.stringify({"property":property})
+    })
+        .then(response => response.json())
+        .then(data => {
+            var selectElement = document.getElementById("cmbDucto_con_doc");
+            data.forEach(item => {
+                var option = document.createElement("option");
+                option.value = item.id; // Using the 'id' property as value
+                option.text = item.nombre; // Using the 'nombre' property as display name
+                selectElement.add(option);
+
+            });
+        })
+        .catch(error => console.error("Error fetching data: ", error));
+}
+
+
+
 function loadTramosCon_doc() {
     $("#cmbTramo_con_doc option:not(:first)").remove();
     var property = $("#cmbDucto_con_doc").val();
@@ -17641,19 +17821,25 @@ function loadTramosDocumentoos(ductos) {
         });
 
 }
-async  function loadDuctosDocumental() {
+
+
+
+
+async  function loadDuctosDocumental(sistema) {
     var webMethod = "ductos/fetch";
     var params = {
-        property: 2,
+        property: sistema,
     };
+    console.log('ductosDocumental')
     $.ajax({
         type: "POST",
         url: apiUrl + webMethod,
         data: params,
         success: function (data) {
+            $("#ductosdocuments").empty();
             if (data.length > 0 && data !== undefined) {
                 console.log(data.data);
-                $("#ductosdocuments").empty();
+                
                 for (var i = 0; i < data.length; i++) {
                     $('#ductosdocuments').append($('<option>', {
                         value: data[i].id,

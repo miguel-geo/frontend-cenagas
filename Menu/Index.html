@@ -103,20 +103,39 @@
                                 <div class="stepwizard-row setup-panel">
                                     <div class="stepwizard-step">
                                         <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                                        <p>Selecciona el sistema</p>
+                                    </div>
+                                    <div class="stepwizard-step">
+                                        <a href="#step-2" type="button" class="btn btn-primary btn-circle">2</a>
                                         <p>Selecciona el ducto</p>
                                     </div>
                                     <div class="stepwizard-step">
-                                        <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                                        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
                                         <p>Selecciona el tramo</p>
                                     </div>
                                     <div class="stepwizard-step">
-                                        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                                        <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
                                         <p>Selecciona el área unitaria</p>
                                     </div>
                                 </div>
                             </div>
                             <form role="form">
                                 <div class="row setup-content" id="step-1">
+                                    <div class="col-xl-4">
+                                        <div>
+                                            <h3> Sistema</h3>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Sistema</label>
+                                                <select class="selectpicker form-control" id="cmbSistema">
+                                                    <option>Selecciona...</option>
+                                                </select>
+                                            </div>
+                                            <button class="btn btn-secondary nextBtn btn-lg pull-right" style="margin-right:5px;" type="button">Siguiente</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row setup-content" id="step-2">
                                     <div class="col-xl-4">
                                         <div>
                                             <h3> Ducto</h3>
@@ -126,13 +145,15 @@
                                                     <option>Selecciona...</option>
                                                 </select>
                                             </div>
+                                            
                                             <button class="btn btn-secondary  btn-lg pull-right" type="button" onclick="fnshowdocument()"><i class="fa fa-file"></i> | Documental</button>
                                             <button class="btn btn-secondary nextBtn btn-lg pull-right" style="margin-right:5px;" type="button">Siguiente</button>
+                                            <button class="btn btn-secondary prevBtn btn-lg pull-right"  style="margin-right:5px;" type="button">Atrás</button>
 
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row setup-content" id="step-2">
+                                <div class="row setup-content" id="step-3">
                                     <div class="col-xl-4">
                                         <div class="col-md-12">
                                             <h3> Tramo</h3>
@@ -148,7 +169,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row setup-content" id="step-3">
+                                <div class="row setup-content" id="step-4">
                                     <div class="col-xl-12">
                                         <div class="col-md-12">
                                             <h3> Área unitaria</h3>
@@ -9760,6 +9781,10 @@
                 <div id="Consulta" class="tabcontent">
                     <h3 style="align-content:center;">Consulta</h3>
                     <div class="form-group">
+                        <label for="exampleFormControlSelect1">Sistema</label>
+                        <select class="selectpicker form-control" id="cmbSistema_con">
+                            <option>Selecciona...</option>
+                        </select>
                         <label for="exampleFormControlSelect1">Ducto</label>
                         <select class="selectpicker form-control" id="cmbDucto_con">
                             <option>Selecciona...</option>
@@ -12555,6 +12580,10 @@
                 <div id="ConsultaDocumental" class="tabcontent">
                     <h3 style="align-content:center;">Consulta Documental</h3>
                     <div class="form-group">
+                        <label for="exampleFormControlSelect1">Sistema</label>
+                        <select class="selectpicker form-control" id="cmbSistema_con_doc">
+                            <option>Selecciona...</option>
+                        </select>
                         <label for="exampleFormControlSelect1">Ducto</label>
                         <select class="selectpicker form-control" id="cmbDucto_con_doc">
                             <option value="0">Selecciona...</option>
