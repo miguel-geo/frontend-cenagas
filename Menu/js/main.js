@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://dtptec.ddns.net/cenagas/backend/public/api/";// la url del api guardada en el config.json de la aplicacion
+﻿var apiUrl = "http://localhost/cenagas/backend/public/api/";// la url del api guardada en el config.json de la aplicacion
 var ducto;
 var tramo;
 var area;
@@ -848,10 +848,10 @@ function inicializarEventos() {
                             id: valores[0],
                             coordenada_especifica: valores[2],
                             kilometro_especifico: valores[3],
-                            C_0201_0006: valores[4],
-                            C_0202_0007: valores[5],
-                            C_0207_0027: valores[6],
-                            C_0210_0031: valores[7]
+                            c_0201_0006: valores[4],
+                            c_0202_0007: valores[5],
+                            c_0207_0027: valores[6],
+                            c_0210_0031: valores[7]
                     };
                         break;
                     case "Dis2":
@@ -860,10 +860,10 @@ function inicializarEventos() {
                             id: valores[0],
                             coordenada_especifica: valores[2],
                             kilometro_especifico: valores[3],
-                            C_0206_0017: valores[4],
-                            C_0206_0019: valores[5],
-                            C_0206_0023: valores[6],
-                            C_0206_0024: valores[7]
+                            c_0206_0017: valores[4],
+                            c_0206_0019: valores[5],
+                            c_0206_0023: valores[6],
+                            c_0206_0024: valores[7]
                         };
                         break;
                     case "Dis3":
@@ -872,10 +872,10 @@ function inicializarEventos() {
                             id: valores[0],
                             coordenada_especifica: valores[2],
                             kilometro_especifico: valores[3],
-                            C_0211_0043: valores[4],
-                            C_0211_0044: valores[5],
-                            C_0211_0045: valores[6],
-                            C_0211_0046: valores[7]
+                            c_0211_0043: valores[4],
+                            c_0211_0044: valores[5],
+                            c_0211_0045: valores[6],
+                            c_0211_0046: valores[7]
                         };
                         break;
                     default:}
@@ -888,10 +888,10 @@ function inicializarEventos() {
                             id: valores[0],
                             coordenada_especifica: valores[2],
                             kilometro_especifico: valores[3],
-                            C_0211_0043: valores[4],
-                            C_0211_0044: valores[5],
-                            C_0211_0045: valores[6],
-                            C_0211_0046: valores[7]
+                            c_0211_0043: valores[4],
+                            c_0211_0044: valores[5],
+                            c_0211_0045: valores[6],
+                            c_0211_0046: valores[7]
                         };
                         break;
                     case "Cons2":
@@ -2012,20 +2012,20 @@ function llenarDatosActualizacion(data) {
     else{$("#coord_esp_iden_x").val("");
     $("#coord_esp_iden_y").val("");}
     $("#km_esp_iden").val(data[0].kilometro_especifico);
-    $("#longitud").val(data[0].C_0201_0006);
-    $("#diam_mm").val(data[0].C_0202_0007);
+    $("#longitud").val(data[0].c_0201_0006);
+    $("#diam_mm").val(data[0].c_0202_0007);
     $("#cmbunidaddiametro").val(data[0].diametro_nominal);
-    $("#esp_mm").val(data[0].C_0203_0009);
+    $("#esp_mm").val(data[0].c_0203_0009);
     $("#cmbunidadespesor").val(data[0].espesor_pared);
-    $("#cmbTipoMaterial option:contains(" + data[0].C_0204_0011 + ")").attr('selected', 'selected');
-    $("#temp_c").val(data[0].C_0207_0027);
+    $("#cmbTipoMaterial option:contains(" + data[0].c_0204_0011 + ")").attr('selected', 'selected');
+    $("#temp_c").val(data[0].c_0207_0027);
     $("#cmbunidadtemperatura").val(data[0].temperatura);
-    $("#cmbTipoCostura option:contains(" + data[0].C_0208_0029 + ")").attr('selected', 'selected');
-    $("#fec_fab").val(data[0].C_0209_0030.split(' ')[0]);
-    $("#fec_fab_fin").val(data[0].C_0209_0030_2.split(' ')[0]);
-    $("#porc_carbono").val(data[0].C_0210_0031);
-    $("#res_trac").val(data[0].C_0210_0032);
-    $("#lim_elas").val(data[0].C_0210_0033);
+    $("#cmbTipoCostura option:contains(" + data[0].c_0208_0029 + ")").attr('selected', 'selected');
+    $("#fec_fab").val(data[0].c_0209_0030.split(' ')[0]);
+    $("#fec_fab_fin").val(data[0].c_0209_0030_2.split(' ')[0]);
+    $("#porc_carbono").val(data[0].c_0210_0031);
+    $("#res_trac").val(data[0].c_0210_0032);
+    $("#lim_elas").val(data[0].c_0210_0033);
     idDiseniogral = data[0].id;
     inhabilitarform("#identificacionfrm", true);
     if (data[0].file !== "" && data[0].file !== null) {
@@ -2091,18 +2091,18 @@ function updateIdentificacionDisenio() {
         webMethod = "updateIdentificacion";
         params = {
             id: idDiseniogral,
-            C_0101_0001_id: area,
-            C_0201_0006: $("#longitud").val(),
-            C_0202_0007: $("#diam_mm").val(),
-            C_0203_0009: $("#esp_mm").val(),
-            C_0203_0011_id: $("#cmbTipoMaterial").val(),
-            C_0207_0027: $("#temp_c").val(),
-            C_0208_0029_id: $("#cmbTipoCostura").val(),
-            C_0209_0030: $("#fec_fab").val(),
-            C_0209_0030_2: $("#fec_fab_fin").val(),
-            C_0210_0031: $("#porc_carbono").val(),
-            C_0210_0032: $("#res_trac").val(),
-            C_0210_0033: $("#lim_elas").val(),
+            c_0101_0001_id: area,
+            c_0201_0006: $("#longitud").val(),
+            c_0202_0007: $("#diam_mm").val(),
+            c_0203_0009: $("#esp_mm").val(),
+            c_0203_0011_id: $("#cmbTipoMaterial").val(),
+            c_0207_0027: $("#temp_c").val(),
+            c_0208_0029_id: $("#cmbTipoCostura").val(),
+            c_0209_0030: $("#fec_fab").val(),
+            c_0209_0030_2: $("#fec_fab_fin").val(),
+            c_0210_0031: $("#porc_carbono").val(),
+            c_0210_0032: $("#res_trac").val(),
+            c_0210_0033: $("#lim_elas").val(),
             coordenada_especifica: $("#coord_esp_iden_x").val() + ' ' + $("#coord_esp_iden_y").val(),
             kilometro_especifico: $("#km_esp_iden").val(),
             diametro_nominal: $("#cmbunidaddiametro").val(),
@@ -2230,24 +2230,24 @@ function llenarDatosActualizacionProteccion(data) {
         $("#coord_esp_iden_prot_y").val(coords[1]);
     }
     $("#km_esp_iden_prot").val(data[0].kilometro_especifico);
-    $("#txtiporecubrimiento").val(data[0].C_0211_0034);
-    $("#txtiporecubrimiento_2").val(data[0].C_0211_0034_2);
-    $("#txtkminicialrecubrimiento").val(data[0].C_0211_0035);
-    $("#txtkmfinalrecubrimiento").val(data[0].C_0211_0036);
-    $("#txtlongtotalrecubrimiento").val(data[0].C_0211_0037);
-    $("#txtempresaaplicoservicio").val(data[0].C_0211_0038);
-    $("#txtfecinicioservicio").val(data[0].C_0211_0039.split(' ')[0]);
-    $("#txtfecfabrico").val(data[0].C_0211_0040.split(' ')[0]);
-    $("#txtfecinstalacion").val(data[0].C_0211_0041);
-    $("#txtfecinstalacion_2").val(data[0].C_0211_0041_2);
-    $("#txtordenaplicacion").val(data[0].C_0211_0044);
-    $("#txtlocalizacion").val(data[0].C_0211_0045);
-    $("#txtTempMaxFuncionamiento").val(data[0].C_0211_0046);
-    $("#txtmotivoinstalacion").val(data[0].C_0211_0047);
-    $("#txtmaterialfabricacion").val(data[0].C_0211_0048);
-    $("#txtespesorrecubrimiento").val(data[0].C_0211_0049);
-    $("#cmbdecisionAislamiento").val(data[0].C_0211_0050);
-    $("#cmbdecisionCorrosion").val(data[0].C_0211_0051);
+    $("#txtiporecubrimiento").val(data[0].c_0211_0034);
+    $("#txtiporecubrimiento_2").val(data[0].c_0211_0034_2);
+    $("#txtkminicialrecubrimiento").val(data[0].c_0211_0035);
+    $("#txtkmfinalrecubrimiento").val(data[0].c_0211_0036);
+    $("#txtlongtotalrecubrimiento").val(data[0].c_0211_0037);
+    $("#txtempresaaplicoservicio").val(data[0].c_0211_0038);
+    $("#txtfecinicioservicio").val(data[0].c_0211_0039.split(' ')[0]);
+    $("#txtfecfabrico").val(data[0].c_0211_0040.split(' ')[0]);
+    $("#txtfecinstalacion").val(data[0].c_0211_0041);
+    $("#txtfecinstalacion_2").val(data[0].c_0211_0041_2);
+    $("#txtordenaplicacion").val(data[0].c_0211_0044);
+    $("#txtlocalizacion").val(data[0].c_0211_0045);
+    $("#txtTempMaxFuncionamiento").val(data[0].c_0211_0046);
+    $("#txtmotivoinstalacion").val(data[0].c_0211_0047);
+    $("#txtmaterialfabricacion").val(data[0].c_0211_0048);
+    $("#txtespesorrecubrimiento").val(data[0].c_0211_0049);
+    $("#cmbdecisionAislamiento").val(data[0].c_0211_0050);
+    $("#cmbdecisionCorrosion").val(data[0].c_0211_0051);
     idDisenioproteccion = data[0].id;
     inhabilitarform("#proteccionfrm", true);
     if (data[0].file !== "" && data[0].file !== null) {
@@ -2311,26 +2311,26 @@ function updateDisenioproteccion() {
         webMethod = "updateProteccion";
         params = {
             id: idDisenioproteccion,
-            C_0101_0001_id: area,
-            C_0211_0034: $("#txtiporecubrimiento").val(),
-            C_0211_0035: $("#txtkminicialrecubrimiento").val(),
-            C_0211_0036: $("#txtkmfinalrecubrimiento").val(),
-            C_0211_0037: $("#txtlongtotalrecubrimiento").val(),
-            C_0211_0038: $("#txtempresaaplicoservicio").val(),
-            C_0211_0039: $("#txtfecinicioservicio").val(),
-            C_0211_0040: $("#txtfecfabrico").val(),
-            C_0211_0041: $("#txtfecinstalacion").val(),
-            C_0211_0042: $("#txtfecaplicacion").val(),
-            C_0211_0044: $("#txtordenaplicacion").val(),
-            C_0211_0045: $("#txtlocalizacion").val(),
-            C_0211_0046: $("#txtTempMaxFuncionamiento").val(),
-            C_0211_0047: $("#txtmotivoinstalacion").val(),
-            C_0211_0048: $("#txtmaterialfabricacion").val(),
-            C_0211_0049: $("#txtespesorrecubrimiento").val(),
-            C_0211_0050: $("#cmbdecisionAislamiento").val(),
-            C_0211_0051: $("#cmbdecisionCorrosion").val(),
-            C_0211_0034_2: $("#txtiporecubrimiento_2").val(),
-            C_0211_0041_2: $("#txtfecinstalacion_2").val(),
+            c_0101_0001_id: area,
+            c_0211_0034: $("#txtiporecubrimiento").val(),
+            c_0211_0035: $("#txtkminicialrecubrimiento").val(),
+            c_0211_0036: $("#txtkmfinalrecubrimiento").val(),
+            c_0211_0037: $("#txtlongtotalrecubrimiento").val(),
+            c_0211_0038: $("#txtempresaaplicoservicio").val(),
+            c_0211_0039: $("#txtfecinicioservicio").val(),
+            c_0211_0040: $("#txtfecfabrico").val(),
+            c_0211_0041: $("#txtfecinstalacion").val(),
+            c_0211_0042: $("#txtfecaplicacion").val(),
+            c_0211_0044: $("#txtordenaplicacion").val(),
+            c_0211_0045: $("#txtlocalizacion").val(),
+            c_0211_0046: $("#txtTempMaxFuncionamiento").val(),
+            c_0211_0047: $("#txtmotivoinstalacion").val(),
+            c_0211_0048: $("#txtmaterialfabricacion").val(),
+            c_0211_0049: $("#txtespesorrecubrimiento").val(),
+            c_0211_0050: $("#cmbdecisionAislamiento").val(),
+            c_0211_0051: $("#cmbdecisionCorrosion").val(),
+            c_0211_0034_2: $("#txtiporecubrimiento_2").val(),
+            c_0211_0041_2: $("#txtfecinstalacion_2").val(),
             coordenada_especifica: $("#coord_esp_iden_prot_x").val() + ' ' + $("#coord_esp_iden_prot_y").val(),
             kilometro_especifico: $("#km_esp_iden_prot").val()
         };
@@ -2522,19 +2522,19 @@ function updateDisenioServicio() {
         formData.append("id", idDisenioservicio)
         // Make sure files are being selected and appended properly
         if($("#inputGroupFile01")[0].files[0]) {
-            formData.append("C_0205_0012", $("#inputGroupFile01")[0].files[0]);
+            formData.append("c_0205_0012", $("#inputGroupFile01")[0].files[0]);
         }
         if($("#inputGroupFile02")[0].files[0]) {
-            formData.append("C_0205_0013", $("#inputGroupFile02")[0].files[0]);
+            formData.append("c_0205_0013", $("#inputGroupFile02")[0].files[0]);
         }
         if($("#inputGroupFile03")[0].files[0]) {
-            formData.append("C_0205_0014", $("#inputGroupFile03")[0].files[0]);
+            formData.append("c_0205_0014", $("#inputGroupFile03")[0].files[0]);
         }
         if($("#inputGroupFile04")[0].files[0]) {
-            formData.append("C_0205_0015", $("#inputGroupFile04")[0].files[0]);
+            formData.append("c_0205_0015", $("#inputGroupFile04")[0].files[0]);
         }
         if($("#inputGroupFile05")[0].files[0]) {
-            formData.append("C_0205_0016", $("#inputGroupFile05")[0].files[0]);
+            formData.append("c_0205_0016", $("#inputGroupFile05")[0].files[0]);
         }
         if($("#inputGroupFile06")[0].files[0]) {
             formData.append('file', $("#inputGroupFile06")[0].files[0]);
@@ -2667,17 +2667,17 @@ function llenarDatosActualizacionPresion(data) {
         $("#coord_esp_iden_pres_x").val(coords[0]);
         $("#coord_esp_iden_pres_y").val(coords[1]);
     }
-    $("#txtEntidadEmpresa").val(data[0].C_0206_0017);
-    $("#txtfechacalculo").val(data[0].C_0206_0018);
-    $("#txtMetodoCalculo").val(data[0].C_0206_0019);
-    $("#txtPresNomPSI").val(data[0].C_0206_0020);
-    $("#txtPresNomkgcm").val(data[0].C_0206_0021);
-    $("#txtPresDisenio").val(data[0].C_0206_0022);
+    $("#txtEntidadEmpresa").val(data[0].c_0206_0017);
+    $("#txtfechacalculo").val(data[0].c_0206_0018);
+    $("#txtMetodoCalculo").val(data[0].c_0206_0019);
+    $("#txtPresNomPSI").val(data[0].c_0206_0020);
+    $("#txtPresNomkgcm").val(data[0].c_0206_0021);
+    $("#txtPresDisenio").val(data[0].c_0206_0022);
     $("#txtPresDiseniokmcm").val(data[0].pres_disenio);
-    $("#txtPresMaxPSI").val(data[0].C_0206_0023);
-    $("#txtPresMaxkgcm").val(data[0].C_0206_0024);
-    $("#txtPresRedPSI").val(data[0].C_0206_0025);
-    $("#txtPresRedKG").val(data[0].C_0206_0026);
+    $("#txtPresMaxPSI").val(data[0].c_0206_0023);
+    $("#txtPresMaxkgcm").val(data[0].c_0206_0024);
+    $("#txtPresRedPSI").val(data[0].c_0206_0025);
+    $("#txtPresRedKG").val(data[0].c_0206_0026);
     $("#km_esp_iden_pres").val(data[0].kilometro_especifico);
     //$("#cmbunidadpresnominal").val(data[0].pres_nominal);
     //$("#cmbunidadpresiondisenio").val(data[0].pres_disenio);
@@ -2962,13 +2962,13 @@ function llenarDatosActualizacionConsGeneral(data) {
     $("#coord_esp_idenbasecons_y").val("");}
 
     $("#km_esp_idenbasecons").val(data[0].kilometro_especifico ),
-    $("#fechaconstbase").val(data[0].C_0301_0048.split(" ")[0]);
-    $("#metrecubbase").val(data[0].C_0306_0108);
-    $("#txttiposuelobaseconst").val(data[0].C_0307_0109);
-    $("#txtmatrellenobaseconst").val(data[0].C_0307_0110);
-    $("#presionhermebasecons").val(data[0].C_0308_0110);
+    $("#fechaconstbase").val(data[0].c_0301_0048.split(" ")[0]);
+    $("#metrecubbase").val(data[0].c_0306_0108);
+    $("#txttiposuelobaseconst").val(data[0].c_0307_0109);
+    $("#txtmatrellenobaseconst").val(data[0].c_0307_0110);
+    $("#presionhermebasecons").val(data[0].c_0308_0110);
     $("#cmbunidadpresionhermebasecons").val(data[0].unidad_presion_prueba);
-    $("#cmtiporecubrimientobase").val( data[0].C_0311_121_id);
+    $("#cmtiporecubrimientobase").val( data[0].c_0311_121_id);
 
     idConsbase = data[0].id;
     inhabilitarform("#constbasefrm", true);
@@ -3035,14 +3035,14 @@ function updateConsGeneral() {
         webMethod = "general/updateConstruccionGeneral";
         params = {
             id: idConsbase,
-            C_0101_0001_id: area,
-            C_0301_0048: $("#fechaconstbase").val(),
-            C_0306_0108: $("#metrecubbase").val(),
-            C_0307_0109: $("#txttiposuelobaseconst").val(),
-            C_0307_0110: $("#txtmatrellenobaseconst").val(),
-            C_0308_0110: $("#presionhermebasecons").val(),
+            c_0101_0001_id: area,
+            c_0301_0048: $("#fechaconstbase").val(),
+            c_0306_0108: $("#metrecubbase").val(),
+            c_0307_0109: $("#txttiposuelobaseconst").val(),
+            c_0307_0110: $("#txtmatrellenobaseconst").val(),
+            c_0308_0110: $("#presionhermebasecons").val(),
             unidad_presion_prueba: $("#cmbunidadpresionhermebasecons").val(),
-            C_0311_121: $("#cmtiporecubrimientobase").val(),
+            c_0311_121: $("#cmtiporecubrimientobase").val(),
             coordenada_especifica: $("#coord_esp_idenbasecons_x").val()+' '+$("#coord_esp_idenbasecons_y").val(),
             kilometro_especifico: $("#km_esp_idenbasecons").val()
         };
@@ -3190,15 +3190,15 @@ function llenarDatosActualizacionConsUnion(data) {
     $("#coord_esp_idenunion_y").val("");}
 
 
-    $("#cmtipotecnicaunion option:contains(" + data[0].C_0302_0049_id  + ")").attr('selected', 'selected');
-    $("#txtidentificadorunion").val(data[0].C_0302_0050);
-    $("#txtrecaplsolunion").val(data[0].C_0302_0051);
-    $("#fechaserunion").val(data[0].C_0302_0052.split(" ")[0]);
-    $("#fecinstunion").val(data[0].C_0302_0053.split(" ")[0]);
-    $("#cmbmetubicsoldunion").val(data[0].C_0302_0054_id);
-    $("#fecfabunion").val(data[0].C_0302_0055.split(" ")[0]);
-    $("#txtedoactunion").val(data[0].C_0302_0056);
-    $("#txtedohisunion").val(data[0].C_0302_0057);
+    $("#cmtipotecnicaunion option:contains(" + data[0].c_0302_0049_id  + ")").attr('selected', 'selected');
+    $("#txtidentificadorunion").val(data[0].c_0302_0050);
+    $("#txtrecaplsolunion").val(data[0].c_0302_0051);
+    $("#fechaserunion").val(data[0].c_0302_0052.split(" ")[0]);
+    $("#fecinstunion").val(data[0].c_0302_0053.split(" ")[0]);
+    $("#cmbmetubicsoldunion").val(data[0].c_0302_0054_id);
+    $("#fecfabunion").val(data[0].c_0302_0055.split(" ")[0]);
+    $("#txtedoactunion").val(data[0].c_0302_0056);
+    $("#txtedohisunion").val(data[0].c_0302_0057);
     $("#km_esp_idenunion").val(data[0].kilometro_especifico);
     if (data[0].file !== "" && data[0].file !== null) {
         // Find the correct input group using the data-column attribute
@@ -3267,16 +3267,16 @@ function updateConsUnion() {
         webMethod = "union/updateConstruccionUnion";
         params = {
             id: idConsbase,
-            C_0101_0001_id: area,
-            C_0302_0049_id: $("#cmtipotecnicaunion").val(),
-            C_0302_0050: $("#txtidentificadorunion").val(),
-            C_0302_0051: $("#txtrecaplsolunion").val(),
-            C_0302_0052: $("#fechaserunion").val(),
-            C_0302_0053: $("#fecinstunion").val(),
-            C_0302_0054_id: $("#cmbmetubicsoldunion").val(),
-            C_0302_0055: $("#fecfabunion").val(),
-            C_0302_0056: $("#txtedoactunion").val(),
-            C_0302_0057: $("#txtedohisunion").val(),
+            c_0101_0001_id: area,
+            c_0302_0049_id: $("#cmtipotecnicaunion").val(),
+            c_0302_0050: $("#txtidentificadorunion").val(),
+            c_0302_0051: $("#txtrecaplsolunion").val(),
+            c_0302_0052: $("#fechaserunion").val(),
+            c_0302_0053: $("#fecinstunion").val(),
+            c_0302_0054_id: $("#cmbmetubicsoldunion").val(),
+            c_0302_0055: $("#fecfabunion").val(),
+            c_0302_0056: $("#txtedoactunion").val(),
+            c_0302_0057: $("#txtedohisunion").val(),
             coordenada_especifica: $("#coord_esp_idenunion_x").val()+' '+$("#coord_esp_idenunion_y").val(),
             kilometro_especifico: $("#km_esp_idenunion").val()
         };
@@ -3420,18 +3420,18 @@ function llenarDatosActualizacionConsProfundidad(data) {
     $("#coord_esp_idenpprofent_y").val("");}
 
 
-    $("#txtprofcob").val(data[0].C_0303_0058);
-    $("#txtmedprofagu").val(data[0].C_0303_0059);
-    $("#txtelefontub").val(data[0].C_0303_0060);
-    $("#txtelecentub").val(data[0].C_0303_0061);
-    $("#txteleterr").val(data[0].C_0303_0062);
-    $("#txteleparsuotub").val(data[0].C_0303_0063);
-    $("#txtdistinicioruta").val(data[0].C_0303_0064);
-    $("#fechamedidaprof").val(data[0].C_0303_0065.split(" ")[0]);
-    $("#txtperdirhor").val(data[0].C_0303_0066);
-    $("#txtmetmedprof").val(data[0].C_0303_0067);
-    $("#txtedoactprof").val(data[0].C_0303_0068);
-    $("#txtedohisprof").val(data[0].C_0303_0069);
+    $("#txtprofcob").val(data[0].c_0303_0058);
+    $("#txtmedprofagu").val(data[0].c_0303_0059);
+    $("#txtelefontub").val(data[0].c_0303_0060);
+    $("#txtelecentub").val(data[0].c_0303_0061);
+    $("#txteleterr").val(data[0].c_0303_0062);
+    $("#txteleparsuotub").val(data[0].c_0303_0063);
+    $("#txtdistinicioruta").val(data[0].c_0303_0064);
+    $("#fechamedidaprof").val(data[0].c_0303_0065.split(" ")[0]);
+    $("#txtperdirhor").val(data[0].c_0303_0066);
+    $("#txtmetmedprof").val(data[0].c_0303_0067);
+    $("#txtedoactprof").val(data[0].c_0303_0068);
+    $("#txtedohisprof").val(data[0].c_0303_0069);
     $("#km_esp_idenpprofent").val(data[0].kilometro_especifico)
     if (data[0].file !== "" && data[0].file !== null) {
         // Find the correct input group using the data-column attribute
@@ -3502,19 +3502,19 @@ function updateConsProfundidad() {
         webMethod = "profundidad/updateConstruccionProfundidad";
         params = {
             id: idConsprofundidad,
-            C_0101_0001_id: area,
-            C_0303_0058: $("#txtprofcob").val(),
-            C_0303_0059: $("#txtmedprofagu").val(),
-            C_0303_0060: $("#txtelefontub").val(),
-            C_0303_0061: $("#txtelecentub").val(),
-            C_0303_0062: $("#txteleterr").val(),
-            C_0303_0063: $("#txteleparsuotub").val(),
-            C_0303_0064: $("#txtdistinicioruta").val(),
-            C_0303_0065: $("#fechamedidaprof").val(),
-            C_0303_0066: $("#txtperdirhor").val(),
-            C_0303_0067: $("#txtmetmedprof").val(),
-            C_0303_0068: $("#txtedoactprof").val(),
-            C_0303_0069: $("#txtedohisprof").val(),
+            c_0101_0001_id: area,
+            c_0303_0058: $("#txtprofcob").val(),
+            c_0303_0059: $("#txtmedprofagu").val(),
+            c_0303_0060: $("#txtelefontub").val(),
+            c_0303_0061: $("#txtelecentub").val(),
+            c_0303_0062: $("#txteleterr").val(),
+            c_0303_0063: $("#txteleparsuotub").val(),
+            c_0303_0064: $("#txtdistinicioruta").val(),
+            c_0303_0065: $("#fechamedidaprof").val(),
+            c_0303_0066: $("#txtperdirhor").val(),
+            c_0303_0067: $("#txtmetmedprof").val(),
+            c_0303_0068: $("#txtedoactprof").val(),
+            c_0303_0069: $("#txtedohisprof").val(),
             coordenada_especifica: $("#coord_esp_idenpprofent_x").val()+' '+$("#coord_esp_idenpprofent_y").val(),
             kilometro_especifico: $("#km_esp_idenpprofent").val()
         };
@@ -3735,19 +3735,19 @@ function updateConstruccionInspeccion() {
         formData.append("id", idDisenioinspeccion)
         formData.append("kilometro_especifico",$("#km_esp_idenprep").val() )
         formData.append("coordenada_especifica",  $("#coord_esp_idenprep_x").val()+' '+$("#coord_esp_idenprep_y").val(),)
-        formData.append("C_0101_0001_id", area)
+        formData.append("c_0101_0001_id", area)
         // Make sure files are being selected and appended properly
-        if($("#C_0309_112")[0].files[0]) {
-            formData.append("C_0309_112", $("#C_0309_112")[0].files[0]);
+        if($("#c_0309_112")[0].files[0]) {
+            formData.append("c_0309_112", $("#c_0309_112")[0].files[0]);
         }
-        if($("#C_0309_113")[0].files[0]) {
-            formData.append("C_0309_113", $("#C_0309_113")[0].files[0]);
+        if($("#c_0309_113")[0].files[0]) {
+            formData.append("c_0309_113", $("#c_0309_113")[0].files[0]);
         }
-        if($("#C_0309_114")[0].files[0]) {
-            formData.append("C_0309_114", $("#C_0309_114")[0].files[0]);
+        if($("#c_0309_114")[0].files[0]) {
+            formData.append("c_0309_114", $("#c_0309_114")[0].files[0]);
         }
-        if($("#C_0309_115")[0].files[0]) {
-            formData.append("C_0309_115", $("#C_0309_115")[0].files[0]);
+        if($("#c_0309_115")[0].files[0]) {
+            formData.append("c_0309_115", $("#c_0309_115")[0].files[0]);
         }
         
         // Log formData to console for debugging (this will not display the content of the files)
@@ -3927,31 +3927,31 @@ function updateConstruccionSeguridad() {
         formData.append("id", idConsSeguridad)
         formData.append("kilometro_especifico",$("#km_esp_idenpseg").val() )
         formData.append("coordenada_especifica",  $("#coord_esp_idenpseg_x").val()+' '+$("#coord_esp_idenpseg_x").val(),)
-        formData.append("C_0101_0001_id", area)
+        formData.append("c_0101_0001_id", area)
         // Make sure files are being selected and appended properly
-        if($("#C_0312_122")[0].files[0]) {
-            formData.append("C_0312_122", $("#C_0312_122")[0].files[0]);
+        if($("#c_0312_122")[0].files[0]) {
+            formData.append("c_0312_122", $("#c_0312_122")[0].files[0]);
         }
-        if($("#C_0312_123")[0].files[0]) {
-            formData.append("C_0312_123", $("#C_0312_123")[0].files[0]);
+        if($("#c_0312_123")[0].files[0]) {
+            formData.append("c_0312_123", $("#c_0312_123")[0].files[0]);
         }
-        if($("#C_0312_124")[0].files[0]) {
-            formData.append("C_0312_124", $("#C_0312_124")[0].files[0]);
+        if($("#c_0312_124")[0].files[0]) {
+            formData.append("c_0312_124", $("#c_0312_124")[0].files[0]);
         }
-        if($("#C_0312_125")[0].files[0]) {
-            formData.append("C_0312_125", $("#C_0312_125")[0].files[0]);
+        if($("#c_0312_125")[0].files[0]) {
+            formData.append("c_0312_125", $("#c_0312_125")[0].files[0]);
         }
-        if($("#C_0312_126")[0].files[0]) {
-            formData.append("C_0312_126", $("#C_0312_126")[0].files[0]);
+        if($("#c_0312_126")[0].files[0]) {
+            formData.append("c_0312_126", $("#c_0312_126")[0].files[0]);
         }
-        if($("#C_0312_127")[0].files[0]) {
-            formData.append("C_0312_127", $("#C_0312_127")[0].files[0]);
+        if($("#c_0312_127")[0].files[0]) {
+            formData.append("c_0312_127", $("#c_0312_127")[0].files[0]);
         }
-        if($("#C_0312_128")[0].files[0]) {
-            formData.append("C_0312_128", $("#C_0312_128")[0].files[0]);
+        if($("#c_0312_128")[0].files[0]) {
+            formData.append("c_0312_128", $("#c_0312_128")[0].files[0]);
         }
-        if($("#C_0312_129")[0].files[0]) {
-            formData.append("C_0312_129", $("#C_0312_129")[0].files[0]);
+        if($("#c_0312_129")[0].files[0]) {
+            formData.append("c_0312_129", $("#c_0312_129")[0].files[0]);
         }
 
 
@@ -4200,33 +4200,33 @@ function llenarDatosActualizacionCruces(data) {
         $("#coord_esp_idenptipocruce_y").val("");
     }
     $("#km_esp_idenptipocruce").val(data[0].kilometro_especifico);
-    $("#cmbTipcruce option:contains(" + data[0].C_0304_0070 + ")").attr('selected', 'selected');
-    $("#txtclaseloca").val(data[0].C_0304_0071);
-    $("#txtpropietario").val(data[0].C_0304_0072);
-    $("#txtdictacruce").val(data[0].C_0304_0073);
-    $("#txtdistinf").val(data[0].C_0304_0074);
-    $("#txtdistptocruce").val(data[0].C_0304_0075);
-    $("#txtloccruresptub").val(data[0].C_0304_0076);
-    $("#txtedoactualcruce").val(data[0].C_0304_0077);
-    $("#txtedohistcruce").val(data[0].C_0304_0078);
-    $("#txttipllanurainun").val(data[0].C_0304_0079);
-    $("#txttipcrucehidro").val(data[0].C_0304_0080);
-    $("#cmbtipcamtrans option:contains(" + data[0].C_0304_0081 + ")").attr('selected', 'selected');
-    $("#cmbgasnecpat option:contains(" + data[0].C_0304_0082 + ")").attr('selected', 'selected');
-    $("#txtvialidadabierta").val(data[0].C_0304_0083);
-    $("#txtNumCarrillesVialidad").val(data[0].C_0304_0084);
-    $("#txtEdohistoricoCrucedos").val(data[0].C_0304_0085);
-    $("#txtEdoActualCrucedos").val(data[0].C_0304_0086);
-    $("#cmbetipocrucetrans option:contains(" + data[0].C_0304_0087 + ")").attr('selected', 'selected');
-    $("#cmbexiunicab option:contains(" + data[0].C_0304_0088 + ")").attr('selected', 'selected');
-    $("#txtultpottubapago").val(data[0].C_0304_0089);
-    $("#txtultpotencen").val(data[0].C_0304_0090);
-    $("#txtrectubext").val(data[0].C_0304_0091);//
-    $("#txtdiamnomtub").val(data[0].C_0304_0092);
-    $("#cmntiptub option:contains(" + data[0].C_0304_0093 + ")").attr('selected', 'selected');
-    $("#cmbexisunioncabcruceytub option:contains(" + data[0].C_0304_0094 + ")").attr('selected', 'selected');
-    $("#cmbtipcruceserv option:contains(" + data[0].C_0304_0095 + ")").attr('selected', 'selected');
-    $("#txtvoltajecruce").val(data[0].C_0304_0096);
+    $("#cmbTipcruce option:contains(" + data[0].c_0304_0070 + ")").attr('selected', 'selected');
+    $("#txtclaseloca").val(data[0].c_0304_0071);
+    $("#txtpropietario").val(data[0].c_0304_0072);
+    $("#txtdictacruce").val(data[0].c_0304_0073);
+    $("#txtdistinf").val(data[0].c_0304_0074);
+    $("#txtdistptocruce").val(data[0].c_0304_0075);
+    $("#txtloccruresptub").val(data[0].c_0304_0076);
+    $("#txtedoactualcruce").val(data[0].c_0304_0077);
+    $("#txtedohistcruce").val(data[0].c_0304_0078);
+    $("#txttipllanurainun").val(data[0].c_0304_0079);
+    $("#txttipcrucehidro").val(data[0].c_0304_0080);
+    $("#cmbtipcamtrans option:contains(" + data[0].c_0304_0081 + ")").attr('selected', 'selected');
+    $("#cmbgasnecpat option:contains(" + data[0].c_0304_0082 + ")").attr('selected', 'selected');
+    $("#txtvialidadabierta").val(data[0].c_0304_0083);
+    $("#txtNumCarrillesVialidad").val(data[0].c_0304_0084);
+    $("#txtEdohistoricoCrucedos").val(data[0].c_0304_0085);
+    $("#txtEdoActualCrucedos").val(data[0].c_0304_0086);
+    $("#cmbetipocrucetrans option:contains(" + data[0].c_0304_0087 + ")").attr('selected', 'selected');
+    $("#cmbexiunicab option:contains(" + data[0].c_0304_0088 + ")").attr('selected', 'selected');
+    $("#txtultpottubapago").val(data[0].c_0304_0089);
+    $("#txtultpotencen").val(data[0].c_0304_0090);
+    $("#txtrectubext").val(data[0].c_0304_0091);//
+    $("#txtdiamnomtub").val(data[0].c_0304_0092);
+    $("#cmntiptub option:contains(" + data[0].c_0304_0093 + ")").attr('selected', 'selected');
+    $("#cmbexisunioncabcruceytub option:contains(" + data[0].c_0304_0094 + ")").attr('selected', 'selected');
+    $("#cmbtipcruceserv option:contains(" + data[0].c_0304_0095 + ")").attr('selected', 'selected');
+    $("#txtvoltajecruce").val(data[0].c_0304_0096);
     $("#txtnombrecruces").val(data[0].nombre);
     idConsCruces = data[0].id;
     inhabilitarform("#tiposcrucesfrm", true);
@@ -4290,54 +4290,54 @@ function updateCrucesConstruccion() {
         webMethod = "cruces/updateConstruccionCruces";
         params = {
             id: idConsCruces,
-            C_0101_0001_id: area,
-            C_0304_0070_id: $("#cmbTipcruce").val(),//Tipod de cruce
-            C_0304_0071: $("#txtclaseloca").val(),//Clase de Localización
+            c_0101_0001_id: area,
+            c_0304_0070_id: $("#cmbTipcruce").val(),//Tipod de cruce
+            c_0304_0071: $("#txtclaseloca").val(),//Clase de Localización
 
-            C_0304_0072: $("#txtpropietario").val(),//Propietario
+            c_0304_0072: $("#txtpropietario").val(),//Propietario
 
-            C_0304_0073: $("#txtdictacruce").val(), //Distancia del cruce encima o debajo de la tubería
+            c_0304_0073: $("#txtdictacruce").val(), //Distancia del cruce encima o debajo de la tubería
 
-            C_0304_0074: $("#txtdistinf").val(),// Distancia desde el punto de cruce influye en la dirección aguas abajo
+            c_0304_0074: $("#txtdistinf").val(),// Distancia desde el punto de cruce influye en la dirección aguas abajo
 
-            C_0304_0075: $("#txtdistptocruce").val(),//Distancia desde el punto de cruce influye en la dirección aguas arriba
+            c_0304_0075: $("#txtdistptocruce").val(),//Distancia desde el punto de cruce influye en la dirección aguas arriba
 
-            C_0304_0076: $("#txtloccruresptub").val(),//Localización del cruce respecto la tubería (arriba/abajo)
+            c_0304_0076: $("#txtloccruresptub").val(),//Localización del cruce respecto la tubería (arriba/abajo)
 
-            C_0304_0077: $("#txtedoactualcruce").val(),//Estado Actual
+            c_0304_0077: $("#txtedoactualcruce").val(),//Estado Actual
 
-            C_0304_0078: $("#txtedohistcruce").val(),//Estado histórico
+            c_0304_0078: $("#txtedohistcruce").val(),//Estado histórico
 
-            C_0304_0079: $("#txttipllanurainun").val(),//Tipo de llanura de inundación
-            C_0304_0080: $("#txttipcrucehidro").val(),//Tipo de cruce hidrológico
-            C_0304_0081: $("#cmbtipcamtrans").val(),//Indica si el camino es de transporte pesado
+            c_0304_0079: $("#txttipllanurainun").val(),//Tipo de llanura de inundación
+            c_0304_0080: $("#txttipcrucehidro").val(),//Tipo de cruce hidrológico
+            c_0304_0081: $("#cmbtipcamtrans").val(),//Indica si el camino es de transporte pesado
 
-            C_0304_0082: $("#cmbgasnecpat").val(),// El gasoducto necesita ser patrullado
+            c_0304_0082: $("#cmbgasnecpat").val(),// El gasoducto necesita ser patrullado
 
-            C_0304_0083: $("#txtvialidadabierta").val(),//No. de Carrilles de la vialidad-
+            c_0304_0083: $("#txtvialidadabierta").val(),//No. de Carrilles de la vialidad-
 
-            C_0304_0084: $("#txtNumCarrillesVialidad").val(), //Estado histórico
+            c_0304_0084: $("#txtNumCarrillesVialidad").val(), //Estado histórico
 
-            C_0304_0085: $("#txtEdohistoricoCrucedos").val(),//Estado actual
+            c_0304_0085: $("#txtEdohistoricoCrucedos").val(),//Estado actual
 
-            C_0304_0086: $("#txtEdoActualCrucedos").val(),//Tipo de cruce de transporte
+            c_0304_0086: $("#txtEdoActualCrucedos").val(),//Tipo de cruce de transporte
 
-            C_0304_0087_id: $("#cmbetipocrucetrans").val(), //¿Existe unión de cables?
+            c_0304_0087_id: $("#cmbetipocrucetrans").val(), //¿Existe unión de cables?
 
-            C_0304_0088: $("#cmbexiunicab").val(),//¿Existe unión de cables? (si, no, desconocido)
+            c_0304_0088: $("#cmbexiunicab").val(),//¿Existe unión de cables? (si, no, desconocido)
 
 
-            C_0304_0089: $("#txtultpottubapago").val(),//Último potencial de tubería a tierra medido (expresado en voltios) se apag+o
+            c_0304_0089: $("#txtultpottubapago").val(),//Último potencial de tubería a tierra medido (expresado en voltios) se apag+o
 
-            C_0304_0090: $("#txtultpotencen").val(),//Último potencial de tubería a tierra medido (expresado en voltios) se encendió
+            c_0304_0090: $("#txtultpotencen").val(),//Último potencial de tubería a tierra medido (expresado en voltios) se encendió
 
-            C_0304_0091: $("#txtrectubext").val(),// Recubrimiento de tubería extranjera
-            C_0304_0092: $("#txtdiamnomtub").val(),//Diámetro nominal tubería extranjera
+            c_0304_0091: $("#txtrectubext").val(),// Recubrimiento de tubería extranjera
+            c_0304_0092: $("#txtdiamnomtub").val(),//Diámetro nominal tubería extranjera
 
-            C_0304_0093_id: $("#cmntiptub").val(),//Tipo de tuberia
-            C_0304_0094: $("#cmbexisunioncabcruceytub").val(),//¿Existe unión de cables entre el servicio de cruce y la tubería?
-            C_0304_0095_id: $("#cmbtipcruceserv").val(),//Tipo de cruce de servicio
-            C_0304_0096: $("#txtvoltajecruce").val(),// Voltaje transportado por el servicio
+            c_0304_0093_id: $("#cmntiptub").val(),//Tipo de tuberia
+            c_0304_0094: $("#cmbexisunioncabcruceytub").val(),//¿Existe unión de cables entre el servicio de cruce y la tubería?
+            c_0304_0095_id: $("#cmbtipcruceserv").val(),//Tipo de cruce de servicio
+            c_0304_0096: $("#txtvoltajecruce").val(),// Voltaje transportado por el servicio
             coordenada_especifica: $("#coord_esp_idenptipocruce_x").val() + ' ' + $("#coord_esp_idenptipocruce_y").val(),
             kilometro_especifico: $("#km_esp_idenptipocruce").val(),
             nombre: $("#txtnombrecruces").val()
@@ -4499,30 +4499,30 @@ function llenarDatosActualizacionHermeticidad(data) {
         $("#coord_esp_idenpherm_y").val("");
     }
     $("#km_esp_idenpherm").val(data[0].kilometro_especifico);
-    $("#txtnombempher").val(data[0].C_0305_0097);
-    $("#fecpruebher").val(data[0].C_0305_0098.split(' ')[0]);
-    $("#txtdurpruebher").val(data[0].C_0305_0099);
-    $("#txtmedempher").val(data[0].C_0305_0100);
-    $("#txtlongducprobados").val(data[0].C_0305_0101);
-    $("#txtpresprueb").val(data[0].C_0305_0102);
-    $("#txtprespruebkgcm").val(data[0].C_0305_0102_kgcm);
-    $("#txtpresdisgerkgcm").val(data[0].C_0305_0103_kgcm);
-    $("#txtvarherkgcm").val(data[0].C_0305_0105_kgcm);
-    $("#txtvarpreherkgcm").val(data[0].C_0305_0106_kgcm);
+    $("#txtnombempher").val(data[0].c_0305_0097);
+    $("#fecpruebher").val(data[0].c_0305_0098.split(' ')[0]);
+    $("#txtdurpruebher").val(data[0].c_0305_0099);
+    $("#txtmedempher").val(data[0].c_0305_0100);
+    $("#txtlongducprobados").val(data[0].c_0305_0101);
+    $("#txtpresprueb").val(data[0].c_0305_0102);
+    $("#txtprespruebkgcm").val(data[0].c_0305_0102_kgcm);
+    $("#txtpresdisgerkgcm").val(data[0].c_0305_0103_kgcm);
+    $("#txtvarherkgcm").val(data[0].c_0305_0105_kgcm);
+    $("#txtvarpreherkgcm").val(data[0].c_0305_0106_kgcm);
     //$("#cmbunidadpresionmax option:contains(" + data[0].unidad_presion_max + ")").attr('selected', 'selected');
 
 
-    $("#txtpresdisger").val(data[0].C_0305_0103);
+    $("#txtpresdisger").val(data[0].c_0305_0103);
     //$("#cmbunidadpresiondisenio option:contains(" + data[0].unidad_presion_disenio + ")").attr('selected', 'selected');
 
-    $("#txtcalbher").val(data[0].C_0305_0104);
+    $("#txtcalbher").val(data[0].c_0305_0104);
 
 
-    $("#txtvarher").val(data[0].C_0305_0105);
+    $("#txtvarher").val(data[0].c_0305_0105);
     //$("#cmbunidadpresionmin option:contains(" + data[0].unidad_presion_min + ")").attr('selected', 'selected');
 
 
-    $("#txtvarpreher").val(data[0].C_0305_0106);
+    $("#txtvarpreher").val(data[0].c_0305_0106);
     //$("#cmbunidadvariacionespres option:contains(" + data[0].unidad_variaciones_presion + ")").attr('selected', 'selected');
 
     idConsHerme = data[0].id;
@@ -4587,27 +4587,27 @@ function updateHermeticidadConstruccion() {
         webMethod = "hermeticidad/updateConstruccionHermeticidad";
         params = {
             id: idConsHerme,
-            C_0101_0001_id: area,
-            C_0305_0097: $("#txtnombempher").val(),//Nombre de la empresa
-            C_0305_0098: $("#fecpruebher").val(),//Fecha de prueba
-            C_0305_0099: $("#txtdurpruebher").val(),//Duración de la prueba
-            C_0305_0100: $("#txtmedempher").val(),//Medio de prueba de empleo
-            C_0305_0101: $("#txtlongducprobados").val(),//Longitud de los ductos probados
-            C_0305_0103: $("#txtpresdisger").val(),//Calibración
-            C_0305_0102: $("#txtpresprueb").val(),//Presión de diseño          
-            C_0305_0104: $("#txtcalbher").val(),//Variaciones de presión
-            C_0305_0105: $("#txtvarher").val(),//Presión de prueba mínima
-            C_0305_0106: $("#txtvarpreher").val(),//Variaciones de presión
+            c_0101_0001_id: area,
+            c_0305_0097: $("#txtnombempher").val(),//Nombre de la empresa
+            c_0305_0098: $("#fecpruebher").val(),//Fecha de prueba
+            c_0305_0099: $("#txtdurpruebher").val(),//Duración de la prueba
+            c_0305_0100: $("#txtmedempher").val(),//Medio de prueba de empleo
+            c_0305_0101: $("#txtlongducprobados").val(),//Longitud de los ductos probados
+            c_0305_0103: $("#txtpresdisger").val(),//Calibración
+            c_0305_0102: $("#txtpresprueb").val(),//Presión de diseño          
+            c_0305_0104: $("#txtcalbher").val(),//Variaciones de presión
+            c_0305_0105: $("#txtvarher").val(),//Presión de prueba mínima
+            c_0305_0106: $("#txtvarpreher").val(),//Variaciones de presión
             coordenada_especifica: $("#coord_esp_idenpherm_x").val() + ' ' + $("#coord_esp_idenpherm_y").val(),
             kilometro_especifico: $("#km_esp_idenpherm").val(),
             //unidad_presion_max: $("#cmbunidadpresionmax").val(),
             //unidad_presion_disenio: $("#cmbunidadpresiondisenio").val(),
             //unidad_presion_min: $("#cmbunidadpresionmin").val(),
             //unidad_variaciones_presion: $("#cmbunidadvariacionespres").val(),
-            C_0305_0102_kgcm: $("#txtprespruebkgcm").val(),//Presión de diseño
-            C_0305_0103_kgcm: $("#txtpresdisgerkgcm").val(),//Variaciones de presión
-            C_0305_0105_kgcm: $("#txtvarherkgcm").val(),//Presión de prueba mínima
-            C_0305_0106_kgcm: $("#txtvarpreherkgcm").val()//Variaciones de presión
+            c_0305_0102_kgcm: $("#txtprespruebkgcm").val(),//Presión de diseño
+            c_0305_0103_kgcm: $("#txtpresdisgerkgcm").val(),//Variaciones de presión
+            c_0305_0105_kgcm: $("#txtvarherkgcm").val(),//Presión de prueba mínima
+            c_0305_0106_kgcm: $("#txtvarpreherkgcm").val()//Variaciones de presión
         };
         var formData = new FormData();
         formData.append('file', $("#fileconstruccionhermeticidad")[0].files[0]);
@@ -4811,14 +4811,14 @@ function llenarDatosActualizacionCatodica(data) {
         $("#coord_esp_idenpprot_y").val("");
     }
     $("#km_esp_idenpprot").val(data[0].kilometro_especifico);
-    $("#cmbTipocato option:contains(" + data[0].C_0310_116 + ")").attr('selected', 'selected');
-    $("#cmbtipinstprot option:contains(" + data[0].C_0310_117 + ")").attr('selected', 'selected');
+    $("#cmbTipocato option:contains(" + data[0].c_0310_116 + ")").attr('selected', 'selected');
+    $("#cmbtipinstprot option:contains(" + data[0].c_0310_117 + ")").attr('selected', 'selected');
 
 
     $("#txtnombrecatodica").val(data[0].nombre);
-    $("#txtnoserie").val(data[0].C_0310_118);
-    $("#txtfabricante").val(data[0].C_0310_119);
-    $("#extedoprote").val(data[0].C_0310_120);
+    $("#txtnoserie").val(data[0].c_0310_118);
+    $("#txtfabricante").val(data[0].c_0310_119);
+    $("#extedoprote").val(data[0].c_0310_120);
 
     idConsCato = data[0].id;
     inhabilitarform("#proteccatodicafrm", true);
@@ -4883,13 +4883,13 @@ function updateConstruccionCatodica() {
         webMethod = "catodica/updateConstruccionCatodica";
         params = {
             id: idConsCato,
-            C_0101_0001_id: area,
-            C_0310_116_id: $("#cmbTipocato").val(),
-            C_0310_117_id: $("#cmbtipinstprot").val(),
+            c_0101_0001_id: area,
+            c_0310_116_id: $("#cmbTipocato").val(),
+            c_0310_117_id: $("#cmbtipinstprot").val(),
             nombre: $("#txtnombrecatodica").val(),
-            C_0310_118: $("#txtnoserie").val(),
-            C_0310_119: $("#txtfabricante").val(),
-            C_0310_120: $("#extedoprote").val(),
+            c_0310_118: $("#txtnoserie").val(),
+            c_0310_119: $("#txtfabricante").val(),
+            c_0310_120: $("#extedoprote").val(),
             coordenada_especifica: $("#coord_esp_idenpprot_x").val() + ' ' + $("#coord_esp_idenpprot_y").val(),
             kilometro_especifico: $("#km_esp_idenpprot").val()
         };
@@ -5033,24 +5033,24 @@ function reiniciarFormsConstruccion() {
 //    if ($("#coord_esp_idenbasecons").val() !== "") {
 //        const formData = new FormData();
 
-//        formData.append("C_0101_0001_id", area)
+//        formData.append("c_0101_0001_id", area)
 //        // Make sure files are being selected and appended properly
 //        if ($("#inputGroupFile01")[0].files[0]) {
-//            formData.append("C_0308_0111", $("#filepruebabasecons")[0].files[0]);
+//            formData.append("c_0308_0111", $("#filepruebabasecons")[0].files[0]);
 //        }
 //        // Log formData to console for debugging (this will not display the content of the files)
 //        for (var pair of formData.entries()) {
 //            console.log(pair[0] + ', ' + pair[1]);
 //        }
 //        var params = {
-//            C_0101_0001_id: area,
-//            C_0301_0048: $("#fechaconstbase").val(),
-//            C_0306_0108: $("#metrecubbase").val(),
-//            C_0307_0109: $("#txttiposuelobaseconst").val(),
-//            C_0307_0110: $("#txtmatrellenobaseconst").val(),
-//            C_0308_0110: $("#presionhermebasecons").val(),
+//            c_0101_0001_id: area,
+//            c_0301_0048: $("#fechaconstbase").val(),
+//            c_0306_0108: $("#metrecubbase").val(),
+//            c_0307_0109: $("#txttiposuelobaseconst").val(),
+//            c_0307_0110: $("#txtmatrellenobaseconst").val(),
+//            c_0308_0110: $("#presionhermebasecons").val(),
 //            file: formData,
-//            C_0308_0111: $("#cmtipotecnicaunion").val(),
+//            c_0308_0111: $("#cmtipotecnicaunion").val(),
 //            coordenada_especifica: $("#coord_esp_idenbasecons").val(),
 //            kilometro_especifico: $("#km_esp_idenbasecons").val()
 //        };
@@ -5089,22 +5089,22 @@ function saveConstruccionGeneral() {
     var webMethod = "disenio_servicio/store";
 
     const formData = new FormData();
-    formData.append("C_0101_0001_id", area)
+    formData.append("c_0101_0001_id", area)
     // Make sure files are being selected and appended properly
     if ($("#inputGroupFile01")[0].files[0]) {
-        formData.append("C_0205_0012", $("#inputGroupFile01")[0].files[0]);
+        formData.append("c_0205_0012", $("#inputGroupFile01")[0].files[0]);
     }
     if ($("#inputGroupFile02")[0].files[0]) {
-        formData.append("C_0205_0013", $("#inputGroupFile02")[0].files[0]);
+        formData.append("c_0205_0013", $("#inputGroupFile02")[0].files[0]);
     }
     if ($("#inputGroupFile03")[0].files[0]) {
-        formData.append("C_0205_0014", $("#inputGroupFile03")[0].files[0]);
+        formData.append("c_0205_0014", $("#inputGroupFile03")[0].files[0]);
     }
     if ($("#inputGroupFile04")[0].files[0]) {
-        formData.append("C_0205_0015", $("#inputGroupFile04")[0].files[0]);
+        formData.append("c_0205_0015", $("#inputGroupFile04")[0].files[0]);
     }
     if ($("#inputGroupFile05")[0].files[0]) {
-        formData.append("C_0205_0016", $("#inputGroupFile05")[0].files[0]);
+        formData.append("c_0205_0016", $("#inputGroupFile05")[0].files[0]);
     }
    
     formData.append('file', $("#inputGroupFile06")[0].files[0]);
@@ -5151,16 +5151,16 @@ function saveConstruccionUnion() {
     var webMethod = "saveConstruccionUnion";
 
     var params = {
-        C_0101_0001_id: area,
-        C_0302_0049_id: $("#cmtipotecnicaunion").val(),
-        C_0302_0050: $("#txtidentificadorunion").val(),
-        C_0302_0051: $("#txtrecaplsolunion").val(),
-        C_0302_0052: $("#fechaserunion").val(),
-        C_0302_0053: $("#fecinstunion").val(),
-        C_0302_0054_id: $("#cmbmetubicsoldunion").val(),
-        C_0302_0055: $("#fecfabunion").val(),
-        C_0302_0056: $("#txtedoactunion").val(),
-        C_0302_0057: $("#txtedohisunion").val(),
+        c_0101_0001_id: area,
+        c_0302_0049_id: $("#cmtipotecnicaunion").val(),
+        c_0302_0050: $("#txtidentificadorunion").val(),
+        c_0302_0051: $("#txtrecaplsolunion").val(),
+        c_0302_0052: $("#fechaserunion").val(),
+        c_0302_0053: $("#fecinstunion").val(),
+        c_0302_0054_id: $("#cmbmetubicsoldunion").val(),
+        c_0302_0055: $("#fecfabunion").val(),
+        c_0302_0056: $("#txtedoactunion").val(),
+        c_0302_0057: $("#txtedohisunion").val(),
         coordenada_especifica: $("#coord_esp_idenunion_x").val()+' '+$("#coord_esp_idenunion_y").val(),
         kilometro_especifico: $("#km_esp_idenunion").val()
     };
@@ -5210,19 +5210,19 @@ function saveConstruccionProfundidad() {
     var webMethod = "saveConstruccionProfundidad";
 
     var params = {
-        C_0101_0001_id: area,
-        C_0303_0058: $("#txtprofcob").val(),
-        C_0303_0059: $("#txtmedprofagu").val(),
-        C_0303_0060: $("#txtelefontub").val(),
-        C_0303_0061: $("#txtelecentub").val(),
-        C_0303_0062: $("#txteleterr").val(),
-        C_0303_0063: $("#txteleparsuotub").val(),
-        C_0303_0064: $("#txtdistinicioruta").val(),
-        C_0303_0065: $("#fechamedidaprof").val(),
-        C_0303_0066: $("#txtperdirhor").val(),
-        C_0303_0067: $("#txtmetmedprof").val(),
-        C_0303_0068: $("#txtedoactprof").val(),
-        C_0303_0069: $("#txtedohisprof").val(),
+        c_0101_0001_id: area,
+        c_0303_0058: $("#txtprofcob").val(),
+        c_0303_0059: $("#txtmedprofagu").val(),
+        c_0303_0060: $("#txtelefontub").val(),
+        c_0303_0061: $("#txtelecentub").val(),
+        c_0303_0062: $("#txteleterr").val(),
+        c_0303_0063: $("#txteleparsuotub").val(),
+        c_0303_0064: $("#txtdistinicioruta").val(),
+        c_0303_0065: $("#fechamedidaprof").val(),
+        c_0303_0066: $("#txtperdirhor").val(),
+        c_0303_0067: $("#txtmetmedprof").val(),
+        c_0303_0068: $("#txtedoactprof").val(),
+        c_0303_0069: $("#txtedohisprof").val(),
         coordenada_especifica: $("#coord_esp_idenpprofent_x").val()+' '+$("#coord_esp_idenpprofent_y").val(),
         kilometro_especifico: $("#km_esp_idenpprofent").val()
     };
@@ -5309,54 +5309,54 @@ function saveConstruccionCruces() {
     var webMethod = "saveConstruccionCruces";
 
     var params = {
-        C_0101_0001_id: area,
-        C_0304_0070_id: $("#cmbTipcruce").val(),//Tipod de cruce
-        C_0304_0071: $("#txtclaseloca").val(),//Clase de Localización
+        c_0101_0001_id: area,
+        c_0304_0070_id: $("#cmbTipcruce").val(),//Tipod de cruce
+        c_0304_0071: $("#txtclaseloca").val(),//Clase de Localización
 
-        C_0304_0072: $("#txtpropietario").val(),//Propietario
+        c_0304_0072: $("#txtpropietario").val(),//Propietario
 
-        C_0304_0073: $("#txtdictacruce").val(), //Distancia del cruce encima o debajo de la tubería
+        c_0304_0073: $("#txtdictacruce").val(), //Distancia del cruce encima o debajo de la tubería
 
-        C_0304_0074: $("#txtdistinf").val(),// Distancia desde el punto de cruce influye en la dirección aguas abajo
+        c_0304_0074: $("#txtdistinf").val(),// Distancia desde el punto de cruce influye en la dirección aguas abajo
 
-        C_0304_0075: $("#txtdistptocruce").val(),//Distancia desde el punto de cruce influye en la dirección aguas arriba
+        c_0304_0075: $("#txtdistptocruce").val(),//Distancia desde el punto de cruce influye en la dirección aguas arriba
 
-        C_0304_0076: $("#txtloccruresptub").val(),//Localización del cruce respecto la tubería (arriba/abajo)
+        c_0304_0076: $("#txtloccruresptub").val(),//Localización del cruce respecto la tubería (arriba/abajo)
 
-        C_0304_0077: $("#txtedoactualcruce").val(),//Estado Actual
+        c_0304_0077: $("#txtedoactualcruce").val(),//Estado Actual
 
-        C_0304_0078: $("#txtedohistcruce").val(),//Estado histórico
+        c_0304_0078: $("#txtedohistcruce").val(),//Estado histórico
 
-        C_0304_0079: $("#txttipllanurainun").val(),//Tipo de llanura de inundación
-        C_0304_0080: $("#txttipcrucehidro").val(),//Tipo de cruce hidrológico
-        C_0304_0081: $("#cmbtipcamtrans").val(),//Indica si el camino es de transporte pesado
+        c_0304_0079: $("#txttipllanurainun").val(),//Tipo de llanura de inundación
+        c_0304_0080: $("#txttipcrucehidro").val(),//Tipo de cruce hidrológico
+        c_0304_0081: $("#cmbtipcamtrans").val(),//Indica si el camino es de transporte pesado
 
-        C_0304_0082: $("#cmbgasnecpat").val(),// El gasoducto necesita ser patrullado
+        c_0304_0082: $("#cmbgasnecpat").val(),// El gasoducto necesita ser patrullado
 
-        C_0304_0083: $("#txtvialidadabierta").val(),//No. de Carrilles de la vialidad-
+        c_0304_0083: $("#txtvialidadabierta").val(),//No. de Carrilles de la vialidad-
 
-        C_0304_0084: $("#txtNumCarrillesVialidad").val(), //Estado histórico
+        c_0304_0084: $("#txtNumCarrillesVialidad").val(), //Estado histórico
 
-        C_0304_0085: $("#txtEdohistoricoCrucedos").val(),//Estado actual
+        c_0304_0085: $("#txtEdohistoricoCrucedos").val(),//Estado actual
 
-        C_0304_0086: $("#txtEdoActualCrucedos").val(),//Tipo de cruce de transporte
+        c_0304_0086: $("#txtEdoActualCrucedos").val(),//Tipo de cruce de transporte
 
-        C_0304_0087_id: $("#cmbetipocrucetrans").val(), //¿Existe unión de cables?
+        c_0304_0087_id: $("#cmbetipocrucetrans").val(), //¿Existe unión de cables?
 
-        C_0304_0088: $("#cmbexiunicab").val(),//¿Existe unión de cables? (si, no, desconocido)
+        c_0304_0088: $("#cmbexiunicab").val(),//¿Existe unión de cables? (si, no, desconocido)
 
 
-        C_0304_0089: $("#txtultpottubapago").val(),//Último potencial de tubería a tierra medido (expresado en voltios) se apag+o
+        c_0304_0089: $("#txtultpottubapago").val(),//Último potencial de tubería a tierra medido (expresado en voltios) se apag+o
 
-        C_0304_0090: $("#txtultpotencen").val(),//Último potencial de tubería a tierra medido (expresado en voltios) se encendió
+        c_0304_0090: $("#txtultpotencen").val(),//Último potencial de tubería a tierra medido (expresado en voltios) se encendió
 
-        C_0304_0091: $("#txtrectubext").val(),// Recubrimiento de tubería extranjera
-        C_0304_0092: $("#txtdiamnomtub").val(),//Diámetro nominal tubería extranjera
+        c_0304_0091: $("#txtrectubext").val(),// Recubrimiento de tubería extranjera
+        c_0304_0092: $("#txtdiamnomtub").val(),//Diámetro nominal tubería extranjera
 
-        C_0304_0093_id: $("#cmntiptub").val(),//Tipo de tuberia
-        C_0304_0094: $("#cmbexisunioncabcruceytub").val(),//¿Existe unión de cables entre el servicio de cruce y la tubería?
-        C_0304_0095_id: $("#cmbtipcruceserv").val(),//Tipo de cruce de servicio
-        C_0304_0096: $("#txtvoltajecruce").val(),// Voltaje transportado por el servicio
+        c_0304_0093_id: $("#cmntiptub").val(),//Tipo de tuberia
+        c_0304_0094: $("#cmbexisunioncabcruceytub").val(),//¿Existe unión de cables entre el servicio de cruce y la tubería?
+        c_0304_0095_id: $("#cmbtipcruceserv").val(),//Tipo de cruce de servicio
+        c_0304_0096: $("#txtvoltajecruce").val(),// Voltaje transportado por el servicio
         coordenada_especifica: $("#coord_esp_idenptipocruce_x").val()+' '+$("#coord_esp_idenptipocruce_y").val(),
         kilometro_especifico: $("#km_esp_idenptipocruce").val(),
         nombre: $("#txtnombrecruces").val(),
@@ -5401,27 +5401,27 @@ function saveConstruccionHermeticidad() {
     var webMethod = "saveConstruccionHermeticidad";
 
     var params = {
-        C_0101_0001_id: area,
-        C_0305_0097: $("#txtnombempher").val(),//Nombre de la empresa
-        C_0305_0098: $("#fecpruebher").val(),//Fecha de prueba
-        C_0305_0099: $("#txtdurpruebher").val(),//Duración de la prueba
-        C_0305_0100: $("#txtmedempher").val(),//Medio de prueba de empleo
-        C_0305_0101: $("#txtlongducprobados").val(),//Longitud de los ductos probados
-        C_0305_0103: $("#txtpresdisger").val(),//Calibración
-        C_0305_0102: $("#txtpresprueb").val(),//Presión de diseño
-        C_0305_0104: $("#txtcalbher").val(),//Variaciones de presión
-        C_0305_0105: $("#txtvarher").val(),//Presión de prueba mínima
-        C_0305_0106: $("#txtvarpreher").val(),//Variaciones de presión
+        c_0101_0001_id: area,
+        c_0305_0097: $("#txtnombempher").val(),//Nombre de la empresa
+        c_0305_0098: $("#fecpruebher").val(),//Fecha de prueba
+        c_0305_0099: $("#txtdurpruebher").val(),//Duración de la prueba
+        c_0305_0100: $("#txtmedempher").val(),//Medio de prueba de empleo
+        c_0305_0101: $("#txtlongducprobados").val(),//Longitud de los ductos probados
+        c_0305_0103: $("#txtpresdisger").val(),//Calibración
+        c_0305_0102: $("#txtpresprueb").val(),//Presión de diseño
+        c_0305_0104: $("#txtcalbher").val(),//Variaciones de presión
+        c_0305_0105: $("#txtvarher").val(),//Presión de prueba mínima
+        c_0305_0106: $("#txtvarpreher").val(),//Variaciones de presión
         coordenada_especifica: $("#coord_esp_idenpherm_x").val()+' '+$("#coord_esp_idenpherm_y").val(),
         kilometro_especifico: $("#km_esp_idenpherm").val(),
         //unidad_presion_max: $("#cmbunidadpresionmax").val(),
         //unidad_presion_disenio: $("#cmbunidadpresiondisenio").val(),
         //unidad_presion_min: $("#cmbunidadpresionmin").val(),
         //unidad_variaciones_presion: $("#cmbunidadvariacionespres").val(),
-        C_0305_0102_kgcm: $("#txtprespruebkgcm").val(),//Presión de diseño
-        C_0305_0103_kgcm: $("#txtpresdisgerkgcm").val(),//Variaciones de presión
-        C_0305_0105_kgcm: $("#txtvarherkgcm").val(),//Presión de prueba mínima
-        C_0305_0106_kgcm: $("#txtvarpreherkgcm").val()//Variaciones de presión
+        c_0305_0102_kgcm: $("#txtprespruebkgcm").val(),//Presión de diseño
+        c_0305_0103_kgcm: $("#txtpresdisgerkgcm").val(),//Variaciones de presión
+        c_0305_0105_kgcm: $("#txtvarherkgcm").val(),//Presión de prueba mínima
+        c_0305_0106_kgcm: $("#txtvarpreherkgcm").val()//Variaciones de presión
     };
     var formData = new FormData();
     formData.append('file', $("#fileconstruccionhermeticidad")[0].files[0]);
@@ -5464,19 +5464,19 @@ function saveConstruccioInspeccion() {
 
     formData.append("kilometro_especifico",$("#km_esp_idenprep").val() )
     formData.append("coordenada_especifica",  $("#coord_esp_idenprep_x").val()+' '+$("#coord_esp_idenprep_y").val(),)
-    formData.append("C_0101_0001_id", area)
+    formData.append("c_0101_0001_id", area)
     // Make sure files are being selected and appended properly
-    if($("#C_0309_112")[0].files[0]) {
-        formData.append("C_0309_112", $("#C_0309_112")[0].files[0]);
+    if($("#c_0309_112")[0].files[0]) {
+        formData.append("c_0309_112", $("#c_0309_112")[0].files[0]);
     }
-    if($("#C_0309_113")[0].files[0]) {
-        formData.append("C_0309_113", $("#C_0309_113")[0].files[0]);
+    if($("#c_0309_113")[0].files[0]) {
+        formData.append("c_0309_113", $("#c_0309_113")[0].files[0]);
     }
-    if($("#C_0309_114")[0].files[0]) {
-        formData.append("C_0309_114", $("#C_0309_114")[0].files[0]);
+    if($("#c_0309_114")[0].files[0]) {
+        formData.append("c_0309_114", $("#c_0309_114")[0].files[0]);
     }
-    if($("#C_0309_115")[0].files[0]) {
-        formData.append("C_0309_115", $("#C_0309_115")[0].files[0]);
+    if($("#c_0309_115")[0].files[0]) {
+        formData.append("c_0309_115", $("#c_0309_115")[0].files[0]);
     }
     if ($("#fileconstruccioninspeccion")[0].files[0]) {
         formData.append("file", $("#fileconstruccioninspeccion")[0].files[0]);
@@ -5501,10 +5501,10 @@ function saveConstruccioInspeccion() {
         console.log(typeof data)
         console.log(data)
         if (data.success) {
-            $("#C_0309_112").val('');
-            $("#C_0309_113").val('');
-            $("#C_0309_114").val('');
-            $("#C_0309_115").val('');
+            $("#c_0309_112").val('');
+            $("#c_0309_113").val('');
+            $("#c_0309_114").val('');
+            $("#c_0309_115").val('');
 
             alert("Información almacenada correctamente");
             $('#construforms').show();
@@ -5520,13 +5520,13 @@ function saveConstruccioCatodica() {
     var webMethod = "saveConstruccionCatodica";
 
     var params = {
-        C_0101_0001_id: area,
-        C_0310_116_id: $("#cmbTipocato").val(),
-        C_0310_117_id: $("#cmbtipinstprot").val(),
+        c_0101_0001_id: area,
+        c_0310_116_id: $("#cmbTipocato").val(),
+        c_0310_117_id: $("#cmbtipinstprot").val(),
         nombre: $("#txtnombrecatodica").val(),
-        C_0310_118: $("#txtnoserie").val(),
-        C_0310_119: $("#txtfabricante").val(),
-        C_0310_120: $("#extedoprote").val(),
+        c_0310_118: $("#txtnoserie").val(),
+        c_0310_119: $("#txtfabricante").val(),
+        c_0310_120: $("#extedoprote").val(),
         coordenada_especifica: $("#coord_esp_idenpprot_x").val()+' '+$("#coord_esp_idenpprot_y").val(),
         kilometro_especifico: $("#km_esp_idenpprot").val()
     };
@@ -5578,31 +5578,31 @@ function saveConstruccioSeguridad() {
 
     formData.append("kilometro_especifico",$("#km_esp_idenpseg").val() )
     formData.append("coordenada_especifica",  $("#coord_esp_idenpprot_x").val()+' '+$("#coord_esp_idenpprot_y").val(),)
-    formData.append("C_0101_0001_id", area)
+    formData.append("c_0101_0001_id", area)
     // Make sure files are being selected and appended properly
-    if($("#C_0312_122")[0].files[0]) {
-        formData.append("C_0312_122", $("#C_0312_122")[0].files[0]);
+    if($("#c_0312_122")[0].files[0]) {
+        formData.append("c_0312_122", $("#c_0312_122")[0].files[0]);
     }
-    if($("#C_0312_123")[0].files[0]) {
-        formData.append("C_0312_123", $("#C_0312_123")[0].files[0]);
+    if($("#c_0312_123")[0].files[0]) {
+        formData.append("c_0312_123", $("#c_0312_123")[0].files[0]);
     }
-    if($("#C_0312_124")[0].files[0]) {
-        formData.append("C_0312_124", $("#C_0312_124")[0].files[0]);
+    if($("#c_0312_124")[0].files[0]) {
+        formData.append("c_0312_124", $("#c_0312_124")[0].files[0]);
     }
-    if($("#C_0312_125")[0].files[0]) {
-        formData.append("C_0312_125", $("#C_0312_125")[0].files[0]);
+    if($("#c_0312_125")[0].files[0]) {
+        formData.append("c_0312_125", $("#c_0312_125")[0].files[0]);
     }
-    if($("#C_0312_126")[0].files[0]) {
-        formData.append("C_0312_126", $("#C_0312_126")[0].files[0]);
+    if($("#c_0312_126")[0].files[0]) {
+        formData.append("c_0312_126", $("#c_0312_126")[0].files[0]);
     }
-    if($("#C_0312_127")[0].files[0]) {
-        formData.append("C_0312_127", $("#C_0312_127")[0].files[0]);
+    if($("#c_0312_127")[0].files[0]) {
+        formData.append("c_0312_127", $("#c_0312_127")[0].files[0]);
     }
-    if($("#C_0312_128")[0].files[0]) {
-        formData.append("C_0312_128", $("#C_0312_128")[0].files[0]);
+    if($("#c_0312_128")[0].files[0]) {
+        formData.append("c_0312_128", $("#c_0312_128")[0].files[0]);
     }
-    if($("#C_0312_129")[0].files[0]) {
-        formData.append("C_0312_129", $("#C_0312_129")[0].files[0]);
+    if($("#c_0312_129")[0].files[0]) {
+        formData.append("c_0312_129", $("#c_0312_129")[0].files[0]);
     }
     if ($("#fileconstruccionseguridad")[0].files[0]) {
         formData.append("file", $("#fileconstruccionseguridad")[0].files[0]);
@@ -5634,14 +5634,14 @@ function saveConstruccioSeguridad() {
         console.log(typeof data)
         console.log(data)
         if (data.success) {
-            $("#C_0312_122").val('');
-            $("#C_0312_123").val('');
-            $("#C_0312_124").val('');
-            $("#C_0312_125").val('');
-            $("#C_0312_126").val('');
-            $("#C_0312_127").val('');
-            $("#C_0312_128").val('');
-            $("#C_0312_129").val('');
+            $("#c_0312_122").val('');
+            $("#c_0312_123").val('');
+            $("#c_0312_124").val('');
+            $("#c_0312_125").val('');
+            $("#c_0312_126").val('');
+            $("#c_0312_127").val('');
+            $("#c_0312_128").val('');
+            $("#c_0312_129").val('');
             alert("Información almacenada correctamente");
             $('#construforms').show();
             $('#seguridadprearranquefrm').hide();
@@ -5663,7 +5663,7 @@ function cancelotroCruceServicio() {
 function saveotroCruceServicio() {
     var webMethod = "saveCruceServicio";
     var params = {
-        C_0304_0095: $("#newCruceServicio").val(),
+        c_0304_0095: $("#newCruceServicio").val(),
         descripcion: $("#newDescTipoServicio").val()
     };
 
@@ -5713,7 +5713,7 @@ function loadCmbCruceServicio() {
                 for (var i = 0; i < data.data.length; i++) {
                     $('#cmbtipcruceserv').append($('<option>', {
                         value: data.data[i].id,
-                        text: data.data[i].C_0304_0095
+                        text: data.data[i].c_0304_0095
                     }));
                 }
             }
@@ -5734,7 +5734,7 @@ function showotroCruceTuberia() {
 function saveotroCruceTuberia() {
     var webMethod = "saveTuberiaCons";
     var params = {
-        C_0304_0093: $("#newCruceTuberia").val(),
+        c_0304_0093: $("#newCruceTuberia").val(),
         descripcion: $("#newDescCruceTuberia").val()
     };
 
@@ -5781,7 +5781,7 @@ function loadCmbCruceTuberia() {
                 for (var i = 0; i < data.data.length; i++) {
                     $('#cmntiptub').append($('<option>', {
                         value: data.data[i].id,
-                        text: data.data[i].C_0304_0093
+                        text: data.data[i].c_0304_0093
                     }));
                 }
             }
@@ -5809,7 +5809,7 @@ function showotroCruceTransporte() {
 function saveotroCruceTransporte() {
     var webMethod = "saveCruceTransporte";
     var params = {
-        C_0304_0087: $("#newCruceTransporte").val(),
+        c_0304_0087: $("#newCruceTransporte").val(),
         descripcion: $("#newDescTipoTransporte").val()
     };
 
@@ -5856,7 +5856,7 @@ function loadCmbCruceTransporte() {
                 for (var i = 0; i < data.data.length; i++) {
                     $('#cmbetipocrucetrans').append($('<option>', {
                         value: data.data[i].id,
-                        text: data.data[i].C_0304_0087
+                        text: data.data[i].c_0304_0087
                     }));
                 }
             }
@@ -5943,7 +5943,7 @@ function loadtipocostura() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmbTipoCostura').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0208_0029
+                            text: data.data[i].c_0208_0029
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -5975,7 +5975,7 @@ function loadtiporecubrimiento() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmtiporecubrimientobase').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0308_0111
+                            text: data.data[i].c_0308_0111
                         }));
                     }
                     resolve();  // Resolve the promise when the success condition is met.
@@ -6007,7 +6007,7 @@ function loadtipomaterialdisenio() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmbTipoMaterial').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0204_0011
+                            text: data.data[i].c_0204_0011
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -6038,7 +6038,7 @@ function loadtipoproteccioncatodica() {
                 for (var i = 0; i < data.data.length; i++) {
                     $('#cmbTipocato').append($('<option>', {
                         value: data.data[i].id,
-                        text: data.data[i].C_0310_116
+                        text: data.data[i].c_0310_116
                     }));
                 }
             }
@@ -6066,7 +6066,7 @@ function loadtipoinstalacion() {
                 for (var i = 0; i < data.data.length; i++) {
                     $('#cmbtipinstprot').append($('<option>', {
                         value: data.data[i].id,
-                        text: data.data[i].C_0310_117
+                        text: data.data[i].c_0310_117
                     }));
                 }
             }
@@ -6094,7 +6094,7 @@ function loadtipotecnica() {
 
                         $('#cmtiptecnicaunion').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0302_0049
+                            text: data.data[i].c_0302_0049
                         }));
                     }
                     
@@ -6128,7 +6128,7 @@ function loadtipoubicacion() {
                 for (var i = 0; i < data.data.length; i++) {
                     $('#cmbmetubicsoldunion').append($('<option>', {
                         value: data.data[i].id,
-                        text: data.data[i].C_0302_0054
+                        text: data.data[i].c_0302_0054
                     }));
                 }
                     
@@ -6330,14 +6330,14 @@ function savebasecons() {
     if ($("#fechaconstbase").val() !== "") {
         
         var params = {
-            C_0101_0001_id: area,
-            C_0301_0048: $("#fechaconstbase").val(),
-            C_0306_0108: $("#metrecubbase").val(),
-            C_0307_0109: $("#txttiposuelobaseconst").val(),
-            C_0307_0110: $("#txtmatrellenobaseconst").val(),
-            C_0308_0110: $("#presionhermebasecons").val(),
+            c_0101_0001_id: area,
+            c_0301_0048: $("#fechaconstbase").val(),
+            c_0306_0108: $("#metrecubbase").val(),
+            c_0307_0109: $("#txttiposuelobaseconst").val(),
+            c_0307_0110: $("#txtmatrellenobaseconst").val(),
+            c_0308_0110: $("#presionhermebasecons").val(),
             unidad_presion_prueba: $("#cmbunidadpresionhermebasecons").val(),
-            C_0311_121: $("#cmtiporecubrimientobase").val(),
+            c_0311_121: $("#cmtiporecubrimientobase").val(),
             coordenada_especifica: $("#coord_esp_idenbasecons_x").val()+' '+$("#coord_esp_idenbasecons_y").val(),
             kilometro_especifico: $("#km_esp_idenbasecons").val()
         };
@@ -6382,7 +6382,7 @@ function savebasecons() {
 function saveotroMaterialDisenio() {
     var webMethod = "saveTypeMaterial";
     var params = {
-        C_0204_0011: $("#newTipoMaterial").val(),
+        c_0204_0011: $("#newTipoMaterial").val(),
         descripcion: $("#newDescMaterial").val()
     };
 
@@ -6416,7 +6416,7 @@ function saveotroMaterialDisenio() {
 function saveotroCostura() {
     var webMethod = "saveTypeCostura";
     var params = {
-        C_0208_0029: $("#newTipocostura").val(),
+        c_0208_0029: $("#newTipocostura").val(),
         descripcion: $("#newDescCostura").val()
     };
 
@@ -6543,7 +6543,7 @@ function saveDisenioProteccion() {
 function saveotroProteccionCatodica() {
     var webMethod = "saveTypeProteccionCatodica";
     var params = {
-        C_0310_116: $("#newTipoProteccion").val(),
+        c_0310_116: $("#newTipoProteccion").val(),
         descripcion: $("#newDescProteccion").val()
     };
 
@@ -6580,7 +6580,7 @@ function saveotroProteccionCatodica() {
 function saveotroTipoInstalacion() {
     var webMethod = "saveTypeInstalacion";
     var params = {
-        C_0310_117: $("#newTipoInstalacion").val(),
+        c_0310_117: $("#newTipoInstalacion").val(),
         descripcion: $("#newDescInstalacion").val()
     };
 
@@ -6616,7 +6616,7 @@ function saveotroTipoInstalacion() {
 function saveotroTipoTecnica() {
     var webMethod = "saveTypeTecnica";
     var params = {
-        C_0302_0049: $("#newTipoTecnica").val(),
+        c_0302_0049: $("#newTipoTecnica").val(),
         descripcion: $("#newDescTecnica").val()
     };
 
@@ -6652,7 +6652,7 @@ function saveotroTipoTecnica() {
 function saveotroTipoRecubrimiento() {
     var webMethod = "saveTypeRecubrimiento";
     var params = {
-        C_0308_0111: $("#newTipoRecubrimiento").val(),
+        c_0308_0111: $("#newTipoRecubrimiento").val(),
         descripcion: $("#newDescRecubrimiento").val()
     };
 
@@ -6687,7 +6687,7 @@ function saveotroTipoRecubrimiento() {
 function saveotroTipoUbicacion() {
     var webMethod = "saveTypeUbicacion";
     var params = {
-        C_0302_0054: $("#newTipoUbicacion").val(),
+        c_0302_0054: $("#newTipoUbicacion").val(),
         descripcion: $("#newDescUbicacion").val()
     };
 
@@ -6728,22 +6728,22 @@ function saveDisenioServicio() {
     var webMethod = "disenio_servicio/store";
 
     const formData = new FormData();
-    formData.append("C_0101_0001_id", area)
+    formData.append("c_0101_0001_id", area)
     // Make sure files are being selected and appended properly
     if($("#inputGroupFile01")[0].files[0]) {
-        formData.append("C_0205_0012", $("#inputGroupFile01")[0].files[0]);
+        formData.append("c_0205_0012", $("#inputGroupFile01")[0].files[0]);
     }
     if($("#inputGroupFile02")[0].files[0]) {
-        formData.append("C_0205_0013", $("#inputGroupFile02")[0].files[0]);
+        formData.append("c_0205_0013", $("#inputGroupFile02")[0].files[0]);
     }
     if($("#inputGroupFile03")[0].files[0]) {
-        formData.append("C_0205_0014", $("#inputGroupFile03")[0].files[0]);
+        formData.append("c_0205_0014", $("#inputGroupFile03")[0].files[0]);
     }
     if($("#inputGroupFile04")[0].files[0]) {
-        formData.append("C_0205_0015", $("#inputGroupFile04")[0].files[0]);
+        formData.append("c_0205_0015", $("#inputGroupFile04")[0].files[0]);
     }
     if($("#inputGroupFile05")[0].files[0]) {
-        formData.append("C_0205_0016", $("#inputGroupFile05")[0].files[0]);
+        formData.append("c_0205_0016", $("#inputGroupFile05")[0].files[0]);
     }
     if ($("#inputGroupFile06")[0].files[0]) {
         formData.append("file", $("#inputGroupFile06")[0].files[0]);
@@ -6904,10 +6904,10 @@ function loadidentificacion() {
             
             if (data.success) {
                 for (i = 0; i < data.data.length; i++) {
-                    var persona = [data.data[i].nombre, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0204_0011,
-                    data.data[i].C_0208_0029,];
+                    var persona = [data.data[i].nombre, data.data[i].c_0201_0006, data.data[i].c_0202_0007, data.data[i].c_0204_0011,
+                    data.data[i].c_0208_0029,];
                     llenarTablas(persona, "tablaPersonas");
-                    contar_longitud=contar_longitud+data.data[i].C_0201_0006
+                    contar_longitud=contar_longitud+data.data[i].c_0201_0006
                 }
             }
         },
@@ -6999,46 +6999,46 @@ function consulta() {
                                    //Diametro mm
                                    
                                     //Diametro in
-                                    $('#diaincons').text(data.data.diametroin[0].C_0202_0008);
+                                    $('#diaincons').text(data.data.diametroin[0].c_0202_0008);
                                     //Espesor mm
-                                    $('#espmmcons').text(data.data.espesormm[0].C_0203_0009);
+                                    $('#espmmcons').text(data.data.espesormm[0].c_0203_0009);
                                     //Espesor in
-                                    $('#espincons').text(data.data.espesorin[0].C_0203_0010);
+                                    $('#espincons').text(data.data.espesorin[0].c_0203_0010);
                                     //Especificación material
-                                    $('#espmatcons').text(data.data.espmaterial[0].C_0204_0011);
+                                    $('#espmatcons').text(data.data.espmaterial[0].c_0204_0011);
                                     //Temperatura °C
-                                    $('#tempconsc').text(data.data.tempc[0].C_0207_0027);
+                                    $('#tempconsc').text(data.data.tempc[0].c_0207_0027);
                                     //Temperatura °F
-                                    $('#tempconsf').text(data.data.tempf[0].C_0207_0028);
+                                    $('#tempconsf').text(data.data.tempf[0].c_0207_0028);
                                     //Fecha fabricación
-                                    $('#fecfabcons').text(data.data.fechafab[0].C_0209_0030.split(" ")[0]);
+                                    $('#fecfabcons').text(data.data.fechafab[0].c_0209_0030.split(" ")[0]);
                                     //% carbono
-                                    $('#porcons').text(data.data.carbono[0].C_0210_0031);
+                                    $('#porcons').text(data.data.carbono[0].c_0210_0031);
                                     //% resistencia tracción
-                                    $('#restraccons').text(data.data.resistencia[0].C_0210_0032);
+                                    $('#restraccons').text(data.data.resistencia[0].c_0210_0032);
                                     //% Límite elástico
-                                    $('#limelacons').text(data.data.elastico[0].C_0210_0033);
+                                    $('#limelacons').text(data.data.elastico[0].c_0210_0033);
                                 }
 
                                 if (data.success) {
                                     for (i = 0; i < data.data.datagrid.length; i++) {
-                                        contar_longitud = contar_longitud + data.data.datagrid[i].C_0201_0006
+                                        contar_longitud = contar_longitud + data.data.datagrid[i].c_0201_0006
                                     }
                                     var keysForDisenio = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico",
-                                        'C_0201_0006',
-                                        //'C_0202_0007',
-                                        'C_0202_0008',
-                                        //'C_0203_0009',
-                                        'C_0203_0010',
-                                        'C_0204_0011',
-                                        'C_0207_0027',
-                                        'C_0207_0028',
-                                        'C_0208_0029',
-                                        'C_0209_0030',
-                                        'C_0209_0030_2',
-                                        'C_0210_0031',
-                                        'C_0210_0032',
-                                        'C_0210_0033','tramo'];
+                                        'c_0201_0006',
+                                        //'c_0202_0007',
+                                        'c_0202_0008',
+                                        //'c_0203_0009',
+                                        'c_0203_0010',
+                                        'c_0204_0011',
+                                        'c_0207_0027',
+                                        'c_0207_0028',
+                                        'c_0208_0029',
+                                        'c_0209_0030',
+                                        'c_0209_0030_2',
+                                        'c_0210_0031',
+                                        'c_0210_0032',
+                                        'c_0210_0033','tramo'];
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablaPersonas", keysForDisenio );
                                     contar_longitud=contar_longitud/1000
                                     $('#longitud_total').text(contar_longitud);
@@ -7062,13 +7062,13 @@ function consulta() {
                                 if (data.success) {
                                     if (data.data.datagrid.length > 0) {
                                         //Presión diseño
-                                        $('#presdiscons').text(data.data.presionpsi[0].C_0206_0022);
+                                        $('#presdiscons').text(data.data.presionpsi[0].c_0206_0022);
                                         //Presion Max PSI
-                                        $('#presmaxoppsicons').text(data.data.presionmaxpsi[0].C_0206_0023);
+                                        $('#presmaxoppsicons').text(data.data.presionmaxpsi[0].c_0206_0023);
                                         //Presion Max Kg
-                                        $('#presmaxopecons').text(data.data.presionmaxkg[0].C_0206_0024);
+                                        $('#presmaxopecons').text(data.data.presionmaxkg[0].c_0206_0024);
                                     }
-                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", "C_0206_0017","C_0206_0018", "C_0206_0019","C_0206_0020","C_0206_0021","C_0206_0022", "C_0206_0023", "C_0206_0024","C_0206_0025","C_0206_0026",'tramo'];
+                                    var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", "c_0206_0017","c_0206_0018", "c_0206_0019","c_0206_0020","c_0206_0021","c_0206_0022", "c_0206_0023", "c_0206_0024","c_0206_0025","c_0206_0026",'tramo'];
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablapresion", keysForPresion );
                                 }
                             },
@@ -7090,22 +7090,22 @@ function consulta() {
                                 if (data.success) {
                                     if (data.data.datagrid.length > 0) {
                                         //Tipo de recubrimiento
-                                        $('#prottiporecubrimiento').text(data.data.tiporecubrimiento[0].C_0211_0034);
+                                        $('#prottiporecubrimiento').text(data.data.tiporecubrimiento[0].c_0211_0034);
                                     }
                                     var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
-                                    'C_0211_0034',
-                                    'C_0211_0037',
-                                    'C_0211_0038',
-                                    'C_0211_0039',
-                                    'C_0211_0040',
-                                    'C_0211_0044',
-                                    'C_0211_0045',
-                                    'C_0211_0046',
-                                    'C_0211_0047',
-                                    'C_0211_0048',
-                                    'C_0211_0049',
-                                    'C_0211_0050',
-                                    'C_0211_0051',
+                                    'c_0211_0034',
+                                    'c_0211_0037',
+                                    'c_0211_0038',
+                                    'c_0211_0039',
+                                    'c_0211_0040',
+                                    'c_0211_0044',
+                                    'c_0211_0045',
+                                    'c_0211_0046',
+                                    'c_0211_0047',
+                                    'c_0211_0048',
+                                    'c_0211_0049',
+                                    'c_0211_0050',
+                                    'c_0211_0051',
                                     'tramo'];
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablaproteccion", keysForPresion );
                                 }
@@ -7132,24 +7132,24 @@ function consulta() {
                                 if (data.success) {
                                     if (data.data.datagrid.length > 0) {
                                         //Fecha construcción
-                                        $('#fechaconsbase').text(data.data.datagrid[0].C_0301_0048.split(" ")[0]);
+                                        $('#fechaconsbase').text(data.data.datagrid[0].c_0301_0048.split(" ")[0]);
                                         //Recubrimiento anticorrosivo
-                                        $('#recuanticorro').text(data.data.datagrid[0].C_0306_0108);
+                                        $('#recuanticorro').text(data.data.datagrid[0].c_0306_0108);
                                         //Tipo de suelo
-                                        $('#tiposueloconsbase').text(data.data.datagrid[0].C_0307_0109);
+                                        $('#tiposueloconsbase').text(data.data.datagrid[0].c_0307_0109);
                                         //Material de relleno
-                                        $('#matrellenobasecons').text(data.data.datagrid[0].C_0307_0110);
+                                        $('#matrellenobasecons').text(data.data.datagrid[0].c_0307_0110);
                                         //Tipo recubrimiento
-                                        $('#tiporecconsbase').text(data.data.datagrid[0].C_0311_121);
+                                        $('#tiporecconsbase').text(data.data.datagrid[0].c_0311_121);
                                     }
 
                                     var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
-                                    'C_0301_0048',//fecha
-                                    'C_0306_0108',//metodo recubrumiento
-                                    'C_0307_0109',//tipo suelo
-                                    'C_0307_0110',//Material de rellon
-                                    'C_0308_0110',//Presion de hermeticidad
-                                    'C_0308_0111',
+                                    'c_0301_0048',//fecha
+                                    'c_0306_0108',//metodo recubrumiento
+                                    'c_0307_0109',//tipo suelo
+                                    'c_0307_0110',//Material de rellon
+                                    'c_0308_0110',//Presion de hermeticidad
+                                    'c_0308_0111',
                                 'tramo'];//Tipo de recubrumiento
 
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablabasecons", keysForPresion );
@@ -7172,18 +7172,18 @@ function consulta() {
                                 if (data.success) {
                                     if (data.data.datagrid.length > 0) {
                                         //Tipo de técnica
-                                        $('#resumenconsuniontecnica').text(data.data.tipotecnica[0].C_0302_0049);
+                                        $('#resumenconsuniontecnica').text(data.data.tipotecnica[0].c_0302_0049);
                                     }
                                     var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
-                                    'C_0302_0049',
-                                    'C_0302_0050',
-                                    'C_0302_0051',
-                                    'C_0302_0052',
-                                    'C_0302_0053',
-                                    'C_0302_0054',
-                                    'C_0302_0055',
-                                    'C_0302_0056',
-                                    'C_0302_0057','tramo'];
+                                    'c_0302_0049',
+                                    'c_0302_0050',
+                                    'c_0302_0051',
+                                    'c_0302_0052',
+                                    'c_0302_0053',
+                                    'c_0302_0054',
+                                    'c_0302_0055',
+                                    'c_0302_0056',
+                                    'c_0302_0057','tramo'];
                                     
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablaunionCons", keysForPresion );
                                 }
@@ -7205,18 +7205,18 @@ function consulta() {
                                 if (data.success) {
                                     
                                     var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
-                                    'C_0303_0058',
-                                    'C_0303_0059',
-                                    'C_0303_0060',
-                                    'C_0303_0061',
-                                    'C_0303_0062',
-                                    'C_0303_0063',
-                                    'C_0303_0064',
-                                    'C_0303_0065',
-                                    'C_0303_0066',
-                                    'C_0303_0067',
-                                    'C_0303_0068',
-                                    'C_0303_0069','tramo'];
+                                    'c_0303_0058',
+                                    'c_0303_0059',
+                                    'c_0303_0060',
+                                    'c_0303_0061',
+                                    'c_0303_0062',
+                                    'c_0303_0063',
+                                    'c_0303_0064',
+                                    'c_0303_0065',
+                                    'c_0303_0066',
+                                    'c_0303_0067',
+                                    'c_0303_0068',
+                                    'c_0303_0069','tramo'];
                                     
                                     processTableDataAndHideNullColumns(data.data, "tablaProfundidad", keysForPresion );
                                 }
@@ -7238,11 +7238,11 @@ function consulta() {
                                 if (data.success) {
                                     
                                     var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", "nombre",
-                                    'C_0304_0070',
-                                    'C_0304_0071',
-                                    'C_0304_0072',
-                                    'C_0304_0073',
-                                    'C_0304_0074',
+                                    'c_0304_0070',
+                                    'c_0304_0071',
+                                    'c_0304_0072',
+                                    'c_0304_0073',
+                                    'c_0304_0074',
                                     'tramo'
                                 ];
                                     processTableDataAndHideNullColumns(data.data, "tablaConsCruces", keysForPresion );
@@ -7265,19 +7265,19 @@ function consulta() {
                                 if (data.success) {
                                     if (data.data.length > 0) {
                                         //Tipo catódica
-                                        $('#tipocatodicacons').text(data.data[0].C_0310_116);
+                                        $('#tipocatodicacons').text(data.data[0].c_0310_116);
                                     }
                                     var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
-                                    'C_0305_0097',
-                                    'C_0305_0098',
-                                    'C_0305_0099',
-                                    'C_0305_0100',
-                                    'C_0305_0101',
-                                    'C_0305_0102',
-                                    'C_0305_0103',
-                                    'C_0305_0104',
-                                    'C_0305_0105',
-                                    'C_0305_0106','tramo'];
+                                    'c_0305_0097',
+                                    'c_0305_0098',
+                                    'c_0305_0099',
+                                    'c_0305_0100',
+                                    'c_0305_0101',
+                                    'c_0305_0102',
+                                    'c_0305_0103',
+                                    'c_0305_0104',
+                                    'c_0305_0105',
+                                    'c_0305_0106','tramo'];
                                     
                                     processTableDataAndHideNullColumns(data.data, "tablaHermeticidad", keysForPresion );
                                 }
@@ -7299,7 +7299,7 @@ function consulta() {
                                 if (data.success) {
 
                                     for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].C_0309_112 + ',' + 'C_0309_112', data.data[i].C_0309_113 + ',' + 'C_0309_113', data.data[i].C_0309_114 + ',' + 'C_0309_114', data.data[i].C_0309_115 + ',' + 'C_0309_115'];
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].c_0309_112 + ',' + 'c_0309_112', data.data[i].c_0309_113 + ',' + 'c_0309_113', data.data[i].c_0309_114 + ',' + 'c_0309_114', data.data[i].c_0309_115 + ',' + 'c_0309_115'];
                                         llenarTablasFileInspeccion(persona, "tablaconsInspeccion", data.data[i].id);
                                     }
 
@@ -7321,7 +7321,7 @@ function consulta() {
                                 if (data.success) {
 
                                     for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].C_0309_112 + ',' + 'C_0309_112', data.data[i].C_0309_113 + ',' + 'C_0309_113', data.data[i].C_0309_114 + ',' + 'C_0309_114', data.data[i].C_0309_115 + ',' + 'C_0309_115'];
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].c_0309_112 + ',' + 'c_0309_112', data.data[i].c_0309_113 + ',' + 'c_0309_113', data.data[i].c_0309_114 + ',' + 'c_0309_114', data.data[i].c_0309_115 + ',' + 'c_0309_115'];
                                         llenarTablasFileInspeccion(persona, "tablaconsInspeccion", data.data[i].id);
                                     }
 
@@ -7344,15 +7344,15 @@ function consulta() {
                                 if (data.success) {
                                     if (data.data.datagrid.length > 0) {
                                         //Tipo catódica
-                                        $('#tipocatodicacons').text(data.data.conscato[0].C_0310_116);
+                                        $('#tipocatodicacons').text(data.data.conscato[0].c_0310_116);
                                     }
                                     var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
-                                    'C_0310_116',
-                                    'C_0310_117',
+                                    'c_0310_116',
+                                    'c_0310_117',
                                     'nombre',
-                                    'C_0310_118',
-                                    'C_0310_119',
-                                    'C_0310_120',
+                                    'c_0310_118',
+                                    'c_0310_119',
+                                    'c_0310_120',
                                 'tramo'];
                                     
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablaConsCatodica", keysForPresion );
@@ -7375,7 +7375,7 @@ function consulta() {
                                 if (data.success) {
                                   
                                     for (i = 0; i < data.data.length; i++) {
-                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].C_0312_122 + ',' + 'C_0312_122', data.data[i].C_0312_123 + ',' + 'C_0312_123', data.data[i].C_0312_124 + ',' + 'C_0312_124', data.data[i].C_0312_125 + ',' + 'C_0312_125', data.data[i].C_0312_126 + ',' + 'C_0312_126', data.data[i].C_0312_127 + ',' + 'C_0312_127', data.data[i].C_0312_128 + ',' + 'C_0312_128', data.data[i].C_0312_129 + ',' + 'C_0312_129'];
+                                        var persona = [data.data[i].id, data.data[i].areaunitaria, data.data[i].c_0312_122 + ',' + 'c_0312_122', data.data[i].c_0312_123 + ',' + 'c_0312_123', data.data[i].c_0312_124 + ',' + 'c_0312_124', data.data[i].c_0312_125 + ',' + 'c_0312_125', data.data[i].c_0312_126 + ',' + 'c_0312_126', data.data[i].c_0312_127 + ',' + 'c_0312_127', data.data[i].c_0312_128 + ',' + 'c_0312_128', data.data[i].c_0312_129 + ',' + 'c_0312_129'];
                                         llenarTablasFileSeguridad(persona, "tablaconsSeguridad", data.data[i].id);
                                     }
 
@@ -7405,8 +7405,8 @@ function consulta() {
                                 if (data.success) {
 
                                     var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
-                                        'C_0403_211',
-                                        'C_0414_253',
+                                        'c_0403_211',
+                                        'c_0414_253',
                                         'dato_propiedad',
                                         'tipo_propiedad',
                                         'tramo'];
@@ -7431,53 +7431,53 @@ function consulta() {
                             success: function (data) {
                                 if (data.success) {
                                     var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
-                                        'C_0401_130',
-                                        'C_0401_131',
-                                        'C_0401_132',
-                                        'C_0401_133',
-                                        'C_0401_134',
-                                        'C_0401_135',
-                                        'C_0401_136',
-                                        'C_0401_137',
-                                        'C_0401_138',
+                                        'c_0401_130',
+                                        'c_0401_131',
+                                        'c_0401_132',
+                                        'c_0401_133',
+                                        'c_0401_134',
+                                        'c_0401_135',
+                                        'c_0401_136',
+                                        'c_0401_137',
+                                        'c_0401_138',
                                         'tramo'];
                                     for (var i = 0; i < data.data.datagrid.length; i++) {
-                                        switch (data.data.datagrid[i].C_0401_130) {
+                                        switch (data.data.datagrid[i].c_0401_130) {
                                             case "1":
-                                                data.data.datagrid[i].C_0401_130 = "Trampa de envío y/o recibo";
+                                                data.data.datagrid[i].c_0401_130 = "Trampa de envío y/o recibo";
                                             break;
                                             case "2":
-                                                data.data.datagrid[i].C_0401_130 = "Válvula";
+                                                data.data.datagrid[i].c_0401_130 = "Válvula";
                                                 break;
                                             case "3":
-                                                data.data.datagrid[i].C_0401_130 = "Marcador";
+                                                data.data.datagrid[i].c_0401_130 = "Marcador";
                                                 break;
                                             case "4":
-                                                data.data.datagrid[i].C_0401_130 = "Tee";
+                                                data.data.datagrid[i].c_0401_130 = "Tee";
                                                 break;
                                             case "5":
-                                                data.data.datagrid[i].C_0401_130 = "Tapas";
+                                                data.data.datagrid[i].c_0401_130 = "Tapas";
                                                 break;
                                             case "6":
-                                                data.data.datagrid[i].C_0401_130 = "Bridas";
+                                                data.data.datagrid[i].c_0401_130 = "Bridas";
                                                 break;
                                             case "7":
-                                                data.data.datagrid[i].C_0401_130 = "Medidor";
+                                                data.data.datagrid[i].c_0401_130 = "Medidor";
                                                 break;
                                             case "8":
-                                                data.data.datagrid[i].C_0401_130 = "Conexión de rama";
+                                                data.data.datagrid[i].c_0401_130 = "Conexión de rama";
                                                 break;
                                             case "9":
-                                                data.data.datagrid[i].C_0401_130 = "Codos";
+                                                data.data.datagrid[i].c_0401_130 = "Codos";
                                                 break;
                                             case "10":
-                                                data.data.datagrid[i].C_0401_130 = "Reductor";
+                                                data.data.datagrid[i].c_0401_130 = "Reductor";
                                                 break;
                                             case "11":
-                                                data.data.datagrid[i].C_0401_130 = "Ventilación de escape o tubería de ventilación";
+                                                data.data.datagrid[i].c_0401_130 = "Ventilación de escape o tubería de ventilación";
                                                 break;
                                             case "12":
-                                                data.data.datagrid[i].C_0401_130 = "Tubería de revestimiento";
+                                                data.data.datagrid[i].c_0401_130 = "Tubería de revestimiento";
                                                 break;
                                         }
                                     }
@@ -7502,24 +7502,24 @@ function consulta() {
                                 if (data.success) {
 
                                     var keysForPresion = ["id", "areaunitaria", "coordenada_especifica", "kilometro_especifico",
-                                        'C_0406_214',
-                                        'C_0406_215',
-                                        'C_0406_216',
-                                        'C_0406_217',
-                                        'C_0406_218',
-                                        'C_0406_219',
-                                        'C_0406_220',
-                                        'C_0406_221',
-                                        'C_0406_222',
-                                        'C_0406_223',
-                                        'C_0406_224',
-                                        'C_0406_225',
-                                        'C_0406_226',
-                                        'C_0406_227',
-                                        'C_0406_228',
-                                        'C_0406_229',
-                                        'C_0406_230',
-                                        'C_0406_231',
+                                        'c_0406_214',
+                                        'c_0406_215',
+                                        'c_0406_216',
+                                        'c_0406_217',
+                                        'c_0406_218',
+                                        'c_0406_219',
+                                        'c_0406_220',
+                                        'c_0406_221',
+                                        'c_0406_222',
+                                        'c_0406_223',
+                                        'c_0406_224',
+                                        'c_0406_225',
+                                        'c_0406_226',
+                                        'c_0406_227',
+                                        'c_0406_228',
+                                        'c_0406_229',
+                                        'c_0406_230',
+                                        'c_0406_231',
                                         'tramo'];
 
                                     processTableDataAndHideNullColumns(data.data.datagrid, "tablaOperacionFugas", keysForPresion);
@@ -7575,32 +7575,32 @@ function consulta() {
                 //        if (data.success) {
 
                 //            var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
-                //            'C_0415_254',
-                //            'C_0415_255',
-                //            'C_0415_256',
-                //            'C_0415_257',
-                //            'C_0415_258', 
-                //           'C_0415_259',
-                //            'C_0415_260',
-                //            'C_0415_261',
-                //            'C_0415_262',
-                //            'C_0415_263',
-                //            'C_0415_264',
-                //            'C_0415_265',
-                //            'C_0415_266',
-                //            'C_0415_267', 
-                //           'C_0415_268', 
-                //           'C_0415_269', 
-                //           'C_0415_271',
-                //            'C_0415_272',
-                //            'C_0415_273',
-                //            'C_0415_274',
-                //            'C_0415_275', 
-                //           'C_0415_276', 
-                //           'C_0415_277', 
-                //           'C_0415_278', 
-                //           'C_0415_279', 
-                //           'C_0415_280',
+                //            'c_0415_254',
+                //            'c_0415_255',
+                //            'c_0415_256',
+                //            'c_0415_257',
+                //            'c_0415_258', 
+                //           'c_0415_259',
+                //            'c_0415_260',
+                //            'c_0415_261',
+                //            'c_0415_262',
+                //            'c_0415_263',
+                //            'c_0415_264',
+                //            'c_0415_265',
+                //            'c_0415_266',
+                //            'c_0415_267', 
+                //           'c_0415_268', 
+                //           'c_0415_269', 
+                //           'c_0415_271',
+                //            'c_0415_272',
+                //            'c_0415_273',
+                //            'c_0415_274',
+                //            'c_0415_275', 
+                //           'c_0415_276', 
+                //           'c_0415_277', 
+                //           'c_0415_278', 
+                //           'c_0415_279', 
+                //           'c_0415_280',
                            
                 //        'tramo'];
                             
@@ -7626,32 +7626,32 @@ function consulta() {
                         if (data.success) {
 
                             var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
-                            'C_0415_254',
-                            'C_0415_255',
-                            'C_0415_256',
-                            'C_0415_257',
-                            'C_0415_258', 
-                           'C_0415_259',
-                            'C_0415_260',
-                            'C_0415_261',
-                            'C_0415_262',
-                            'C_0415_263',
-                            'C_0415_264',
-                            'C_0415_265',
-                            'C_0415_266',
-                            'C_0415_267', 
-                           'C_0415_268', 
-                           'C_0415_269', 
-                           'C_0415_271',
-                            'C_0415_272',
-                            'C_0415_273',
-                            'C_0415_274',
-                            'C_0415_275', 
-                           'C_0415_276', 
-                           'C_0415_277', 
-                           'C_0415_278', 
-                           'C_0415_279', 
-                           'C_0415_280',
+                            'c_0415_254',
+                            'c_0415_255',
+                            'c_0415_256',
+                            'c_0415_257',
+                            'c_0415_258', 
+                           'c_0415_259',
+                            'c_0415_260',
+                            'c_0415_261',
+                            'c_0415_262',
+                            'c_0415_263',
+                            'c_0415_264',
+                            'c_0415_265',
+                            'c_0415_266',
+                            'c_0415_267', 
+                           'c_0415_268', 
+                           'c_0415_269', 
+                           'c_0415_271',
+                            'c_0415_272',
+                            'c_0415_273',
+                            'c_0415_274',
+                            'c_0415_275', 
+                           'c_0415_276', 
+                           'c_0415_277', 
+                           'c_0415_278', 
+                           'c_0415_279', 
+                           'c_0415_280',
                            
                         'tramo'];
                             
@@ -7677,24 +7677,24 @@ function consulta() {
                         if (data.success) {
 
                             var keysForPresion = ["id","areaunitaria",  "coordenada_especifica", "kilometro_especifico", 
-                            'C_0416_281',
-                        'C_0416_282',
-                        'C_0416_283',
-                        'C_0416_284',
-                        'id_C_0416_285',
-                        'id_C_0416_286',
-                        'C_0416_287',
-                        'C_0416_288',
-                        'C_0416_289',
-                        'C_0416_290',
-                        'C_0416_291',
-                        'id_C_0416_292',
-                        'C_0416_293',
-                        'C_0416_294',
-                        'C_0416_295',
-                        'C_0416_296',
-                        'C_0416_297',
-                        'C_0416_298',
+                            'c_0416_281',
+                        'c_0416_282',
+                        'c_0416_283',
+                        'c_0416_284',
+                        'id_c_0416_285',
+                        'id_c_0416_286',
+                        'c_0416_287',
+                        'c_0416_288',
+                        'c_0416_289',
+                        'c_0416_290',
+                        'c_0416_291',
+                        'id_c_0416_292',
+                        'c_0416_293',
+                        'c_0416_294',
+                        'c_0416_295',
+                        'c_0416_296',
+                        'c_0416_297',
+                        'c_0416_298',
                         'tramo'];
                             
                             processTableDataAndHideNullColumns(data.data.datagrid, "tablaOperacionVandalismo", keysForPresion );
@@ -8094,7 +8094,7 @@ function loadDisenioGral() {
         success: function (data) {
             if (data.success) {
                 for (i = 0; i < data.data.length; i++) {
-                    var persona = [data.data[i].id,data.data[i].nombre, data.data[i].C_0201_0006, data.data[i].C_0202_0007, data.data[i].C_0204_0011,data.data[i].C_0208_0029,];
+                    var persona = [data.data[i].id,data.data[i].nombre, data.data[i].c_0201_0006, data.data[i].c_0202_0007, data.data[i].c_0204_0011,data.data[i].c_0208_0029,];
                     llenarTablas(persona, "tablaPersonas");
                 }
             }
@@ -9014,7 +9014,7 @@ function saveAnalisisGral() {
     var webMethod = "saveAnalisisGeneral";
     if ($("#compania_analisis").val() != "") {
         var params = {
-            C_0101_0001_id: area,
+            c_0101_0001_id: area,
             compania: $("#compania_analisis").val(),
             porcentaje_posee: $('#porc_posee_analisis').val(),
             fabricante_producto: $('#fabricante_ducto_analisis').val(),
@@ -9167,7 +9167,7 @@ function updateAnalisisGeneral() {
         webMethod = "updateAnalisisGeneral";
         params = {
             id: idAnalisisgral,
-            C_0101_0001_id: area,
+            c_0101_0001_id: area,
             compania: $("#compania_analisis").val(),
             porcentaje_posee: $('#porc_posee_analisis').val(),
             fabricante_producto: $('#fabricante_ducto_analisis').val(),
@@ -9316,7 +9316,7 @@ function saveAnalisisGeoespacial() {
     var webMethod = "saveAnalisisGeoespecial";
   
         var params = {
-            C_0101_0001_id: area,
+            c_0101_0001_id: area,
             clase_localizacion: $("#cmb_claselocalizacion_geo").val(),
             fecha_determinacion: $('#fecha_determinacion_geo').val(),
             autoridad_determina: $('#autoridad_determina_geo').val(),
@@ -9395,7 +9395,7 @@ function updateAnalisisGeoespacial() {
         webMethod = "updateAnalisisGeoespacial";
         params = {
             id: idAnalisisGo,
-            C_0101_0001_id: area,
+            c_0101_0001_id: area,
             clase_localizacion: $("#cmb_claselocalizacion_geo").val(),
             fecha_determinacion: $('#fecha_determinacion_geo').val(),
             autoridad_determina: $('#autoridad_determina_geo').val(),
@@ -9660,7 +9660,7 @@ function saveAnalisisPlanos() {
 
     formData.append("kilometro_especifico", $("#km_esp_iden_planos").val())
     formData.append("coordenada_especifica", $("#coord_esp_iden_x_planos").val() + ' ' + $("#coord_esp_iden_y_planos").val(),)
-    formData.append("C_0101_0001_id", area)
+    formData.append("c_0101_0001_id", area)
     formData.append("fecha_indetificacion", $('#fecha_identificacion_planos').val())
     formData.append("fecha_registro", $('#fecha_registro_planos').val())
     formData.append("tuberia_sobre_suelo", $('#cmb_tuberisobresuelo_plano').val())
@@ -9712,7 +9712,7 @@ function updateAnalisisPlanos() {
         /*
         params = {
             id: idAnalisisGo,
-            C_0101_0001_id: area,
+            c_0101_0001_id: area,
             clase_localizacion: $("#cmb_claselocalizacion_geo").val(),
             fecha_determinacion: $('#fecha_determinacion_geo').val(),
             autoridad_determina: $('#autoridad_determina_geo').val(),
@@ -9730,7 +9730,7 @@ function updateAnalisisPlanos() {
         const formData = new FormData();
         formData.append("kilometro_especifico", $("#km_esp_iden_planos").val())
         formData.append("coordenada_especifica", $("#coord_esp_iden_x_planos").val() + ' ' + $("#coord_esp_iden_y_planos").val(),)
-        formData.append("C_0101_0001_id", area)
+        formData.append("c_0101_0001_id", area)
         formData.append("id", idAnalisisPlanos)
         formData.append("fecha_indetificacion", $('#fecha_identificacion_planos').val())
         formData.append("fecha_registro", $('#fecha_registro_planos').val())
@@ -9952,7 +9952,7 @@ function saveAnalisisDocumental() {
 
     formData.append("kilometro_especifico",$("#km_esp_iden_analisis_documental").val() )
     formData.append("coordenada_especifica",  $("#coord_esp_iden_x_analisis_documental").val()+' '+$("#coord_esp_iden_y_analisis_documental").val(),)
-    formData.append("C_0101_0001_id", area)
+    formData.append("c_0101_0001_id", area)
     // Make sure files are being selected and appended properly
     if($("#diagramas_tuberia")[0].files[0]) {
         formData.append("diagramas_tuberia", $("#diagramas_tuberia")[0].files[0]);
@@ -10045,7 +10045,7 @@ function updateAnalisisDocumental() {
         formData.append("id", idAnaDocumental)
         formData.append("kilometro_especifico",$("#km_esp_iden_analisis_documental").val() )
         formData.append("coordenada_especifica",  $("#coord_esp_iden_x_analisis_documental").val()+' '+$("#coord_esp_iden_y_analisis_documental").val(),)
-        formData.append("C_0101_0001_id", area)
+        formData.append("c_0101_0001_id", area)
         // Make sure files are being selected and appended properly
         if($("#diagramas_tuberia")[0].files[0]) {
             formData.append("diagramas_tuberia", $("#diagramas_tuberia")[0].files[0]);
@@ -10141,7 +10141,7 @@ function saveAnalisisRepDis() {
     var webMethod = "saveAnalisisRiesgoDisenio";
     if (area) {
         var params = {
-            C_0101_0001_id: area,
+            c_0101_0001_id: area,
             coordenada_especifica: $("#coord_esp_iden_x_ana_RiesDis").val()+' '+$("#coord_esp_iden_y_ana_RiesDis").val(),
             kilometro_especifico: $("#km_esp_iden_ana_RiesDis").val(),
             zona_riesgo: $("#riesdis_zona_riesgo").val(),
@@ -10325,7 +10325,7 @@ function updateAnalisisriesdis() {
         webMethod = "updateAnalisisRiesgoDisenio";
         var params = {
             id:idAnalisisRiesDis,
-            C_0101_0001_id: area,
+            c_0101_0001_id: area,
             coordenada_especifica: $("#coord_esp_iden_x_ana_RiesDis").val()+' '+$("#coord_esp_iden_y_ana_RiesDis").val(),
             kilometro_especifico: $("#km_esp_iden_ana_RiesDis").val(),
             zona_riesgo: $("#riesdis_zona_riesgo").val(),
@@ -10689,7 +10689,7 @@ function saveAnalisisRiesgosIncidentes() {
     var webMethod = "saveAnalisisRiesgosIncidentes";
 
     var params = {
-        C_0101_0001_id: area,
+        c_0101_0001_id: area,
         id_tipo_riesgo: $("#cmb_tiporiesgo_ri").val(),
         fecha: $('#fecha_ri').val(),
         hora_ocurrencia_evento: $('#horaocurrenciaevento_ri').val(),
@@ -10750,7 +10750,7 @@ function updateAnalisisRiesgosIncidentes() {
         webMethod = "updateAnalisisRiesgosIncidentes";
         params = {
             id: idAnalisisRiesgosIncidentes,
-            C_0101_0001_id: area,
+            c_0101_0001_id: area,
             id_tipo_riesgo: $("#cmb_tiporiesgo_ri").val(),
             fecha: $('#fecha_ri').val(),
             hora_ocurrencia_evento: $('#horaocurrenciaevento_ri').val(),
@@ -11139,7 +11139,7 @@ function saveAnalisisIngenieria() {
     var webMethod = "saveAnalisisIngenieria";
 
     var params = {
-        C_0101_0001_id: area,
+        c_0101_0001_id: area,
         id_tipo_regulacion: $("#cmb_tiporegulacion_di").val(),
         id_grado_acero: $("#cmb_gradoacero_di").val(),
         fecha_inicio_servicio: $('#fecha_inicio_servicio_di').val(),
@@ -11206,7 +11206,7 @@ function updateAnalisisIngenieria() {
         webMethod = "updateAnalisisIngenieria";
         params = {
             id: idAnalisisIngenieria,
-            C_0101_0001_id: area,
+            c_0101_0001_id: area,
             id_tipo_regulacion: $("#cmb_tiporegulacion_di").val(),
             id_grado_acero: $("#cmb_gradoacero_di").val(),
             fecha_inicio_servicio: $('#fecha_inicio_servicio_di').val(),
@@ -11886,7 +11886,7 @@ function loadtipohisfugasOp() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipohisfug').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0406_218
+                            text: data.data[i].c_0406_218
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -11916,7 +11916,7 @@ function loadtipoeventohisfugasOp() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipoeventohisfug').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0406_219
+                            text: data.data[i].c_0406_219
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -11946,7 +11946,7 @@ function loadtiporecuperacionhisfugasOp() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tiporeparacionhisfug').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0406_225
+                            text: data.data[i].c_0406_225
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -11976,7 +11976,7 @@ function loadtipoevento_hisfugasOp() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipoevento_hisfug').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0406_231
+                            text: data.data[i].c_0406_231
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -12000,7 +12000,7 @@ function cancelotroTipoHisFugOp() {
 function saveotroTipoHisFugaOp() {
     var webMethod = "savehistfugtipoOperacion";
     var params = {
-        C_0406_218: $("#newTipohisfug").val(),
+        c_0406_218: $("#newTipohisfug").val(),
         descripcion: $("#newDeschisfug").val()
     };
 
@@ -12041,7 +12041,7 @@ function cancelotroTipoeventoHisFugOp() {
 function saveotroTipoeventoHisFugaOp() {
     var webMethod = "savehistfugtipoeventoOperacion";
     var params = {
-        C_0406_219: $("#newTipoEventohisfug").val(),
+        c_0406_219: $("#newTipoEventohisfug").val(),
         descripcion: $("#newDescTipoEventohisfug").val()
     };
 
@@ -12085,7 +12085,7 @@ function cancelotroTiporeparacionHisFugOp() {
 function saveotroTiporeparacionHisFugaOp() {
     var webMethod = "savehistfugtiporeparacionOperacion";
     var params = {
-        C_0406_225: $("#newTiporeparacionhisfug").val(),
+        c_0406_225: $("#newTiporeparacionhisfug").val(),
         descripcion: $("#newDescreparacionhisfug").val()
     };
 
@@ -12119,7 +12119,7 @@ function saveotroTiporeparacionHisFugaOp() {
 function saveotroTipoevento_HisFugaOp() {
     var webMethod = "savehistfugtipoevento_Operacion";
     var params = {
-        C_0406_231: $("#newTipoevento_hisfug").val(),
+        c_0406_231: $("#newTipoevento_hisfug").val(),
         descripcion: $("#newDescevento_hisfug").val()
     };
 
@@ -12154,25 +12154,25 @@ function savehistfugOp() {
     var webMethod = "saveHistorialFugas";
 
     var params = {
-        C_0101_0001_id: area,
-        C_0406_214: $("#txtresidenciahisfug").val(),
-        C_0406_215: $('#txtpobladohisfug').val(),
-        C_0406_216: $('#txtmunicipiohisfug').val(),
-        C_0406_217: $("#txtestadohisfug").val(),
-        C_0406_218: $("#txttipo_hisfug").val(),
-        id_C_0406_219: $("#cmb_tipoeventohisfug").val(),
-        C_0406_220: $("#fec_hisfug").val(),
-        C_0406_221: $("#txthoraocurrenciahisfug").val(),
-        C_0406_222: $("#txthorariofinalhisfug").val(),
-        C_0406_223: $("#txthoractrlhisfug").val(),
-        C_0406_224: $("#txtarregloconthisfug").val(),
-        C_0406_225: $("#txttiporeparacionhisfug").val(),
-        C_0406_226: $("#txtobservacioneshisfug").val(),
-        C_0406_227: $("#txtoficioaseahisfug").val(),
-        C_0406_228: $("#txtreportesiniestrohisfug").val(),
-        C_0406_229: $("#txtnosiniestrohisfug").val(),
-        C_0406_230: $("#txtnohisfug").val(),
-        C_0406_231: $("#cmb_tipoevento_hisfug").val(),
+        c_0101_0001_id: area,
+        c_0406_214: $("#txtresidenciahisfug").val(),
+        c_0406_215: $('#txtpobladohisfug').val(),
+        c_0406_216: $('#txtmunicipiohisfug').val(),
+        c_0406_217: $("#txtestadohisfug").val(),
+        c_0406_218: $("#txttipo_hisfug").val(),
+        id_c_0406_219: $("#cmb_tipoeventohisfug").val(),
+        c_0406_220: $("#fec_hisfug").val(),
+        c_0406_221: $("#txthoraocurrenciahisfug").val(),
+        c_0406_222: $("#txthorariofinalhisfug").val(),
+        c_0406_223: $("#txthoractrlhisfug").val(),
+        c_0406_224: $("#txtarregloconthisfug").val(),
+        c_0406_225: $("#txttiporeparacionhisfug").val(),
+        c_0406_226: $("#txtobservacioneshisfug").val(),
+        c_0406_227: $("#txtoficioaseahisfug").val(),
+        c_0406_228: $("#txtreportesiniestrohisfug").val(),
+        c_0406_229: $("#txtnosiniestrohisfug").val(),
+        c_0406_230: $("#txtnohisfug").val(),
+        c_0406_231: $("#cmb_tipoevento_hisfug").val(),
         fecha_control_evento: $("#txtfechactrlhisfug").val(),
         coordenada_especifica: $("#coord_esp_hisfug_x").val() + ' ' + $("#coord_esp_hisfug_y").val(),
         kilometro_especifico: $("#km_esp_hisfug").val()
@@ -12220,25 +12220,25 @@ function updateOperacionHistFugOp() {
         webMethod = "updateOperacionHistorialFugas";
         params = {
             id: idHistFugOp,
-            C_0101_0001_id: area,
-            C_0406_214: $("#txtresidenciahisfug").val(),
-            C_0406_215: $('#txtpobladohisfug').val(),
-            C_0406_216: $('#txtmunicipiohisfug').val(),
-            C_0406_217: $("#txtestadohisfug").val(),
-            C_0406_218: $("#txttipo_hisfug").val(),
-            id_C_0406_219: $("#cmb_tipoeventohisfug").val(),
-            C_0406_220: $("#fec_hisfug").val(),
-            C_0406_221: $("#txthoraocurrenciahisfug").val(),
-            C_0406_222: $("#txthorariofinalhisfug").val(),
-            C_0406_223: $("#txthoractrlhisfug").val(),
-            C_0406_224: $("#txtarregloconthisfug").val(),
-            C_0406_225: $("#txttiporeparacionhisfug").val(),
-            C_0406_226: $("#txtobservacioneshisfug").val(),
-            C_0406_227: $("#txtoficioaseahisfug").val(),
-            C_0406_228: $("#txtreportesiniestrohisfug").val(),
-            C_0406_229: $("#txtnosiniestrohisfug").val(),
-            C_0406_230: $("#txtnohisfug").val(),
-            C_0406_231: $("#cmb_tipoevento_hisfug").val(),
+            c_0101_0001_id: area,
+            c_0406_214: $("#txtresidenciahisfug").val(),
+            c_0406_215: $('#txtpobladohisfug').val(),
+            c_0406_216: $('#txtmunicipiohisfug').val(),
+            c_0406_217: $("#txtestadohisfug").val(),
+            c_0406_218: $("#txttipo_hisfug").val(),
+            id_c_0406_219: $("#cmb_tipoeventohisfug").val(),
+            c_0406_220: $("#fec_hisfug").val(),
+            c_0406_221: $("#txthoraocurrenciahisfug").val(),
+            c_0406_222: $("#txthorariofinalhisfug").val(),
+            c_0406_223: $("#txthoractrlhisfug").val(),
+            c_0406_224: $("#txtarregloconthisfug").val(),
+            c_0406_225: $("#txttiporeparacionhisfug").val(),
+            c_0406_226: $("#txtobservacioneshisfug").val(),
+            c_0406_227: $("#txtoficioaseahisfug").val(),
+            c_0406_228: $("#txtreportesiniestrohisfug").val(),
+            c_0406_229: $("#txtnosiniestrohisfug").val(),
+            c_0406_230: $("#txtnohisfug").val(),
+            c_0406_231: $("#cmb_tipoevento_hisfug").val(),
             fecha_control_evento: $("#txtfechactrlhisfug").val(),
             coordenada_especifica: $("#coord_esp_hisfug_x").val() + ' ' + $("#coord_esp_hisfug_y").val(),
             kilometro_especifico: $("#km_esp_hisfug").val()
@@ -12364,27 +12364,27 @@ function llenarDatosHisFugOp(data) {
         $("#coord_esp_hisfug_y").val("");
     }
     $("#km_esp_hisfug").val(data[0].kilometro_especifico);
-    $("#txtresidenciahisfug").val(data[0].C_0406_214);
-    $("#txtpobladohisfug").val(data[0].C_0406_215);
-    $("#txtmunicipiohisfug").val(data[0].C_0406_216);
-    $("#txtestadohisfug").val(data[0].C_0406_217); 
-    $("#txttipo_hisfug").val(data[0].C_0406_218);
-    //$("#txttipo_hisfug option:contains(" + data[0].C_0406_218 + ")").attr('selected', 'selected');
-    $("#cmb_tipoeventohisfug option:contains(" + data[0].C_0406_219 + ")").attr('selected', 'selected');
-    $("#fec_hisfug").val(data[0].C_0406_220.split(' ')[0]);
-    $("#txthoraocurrenciahisfug").val(data[0].C_0406_221);
-    $("#txthorariofinalhisfug").val(data[0].C_0406_222);
-    $("#txthoractrlhisfug").val(data[0].C_0406_223);
+    $("#txtresidenciahisfug").val(data[0].c_0406_214);
+    $("#txtpobladohisfug").val(data[0].c_0406_215);
+    $("#txtmunicipiohisfug").val(data[0].c_0406_216);
+    $("#txtestadohisfug").val(data[0].c_0406_217); 
+    $("#txttipo_hisfug").val(data[0].c_0406_218);
+    //$("#txttipo_hisfug option:contains(" + data[0].c_0406_218 + ")").attr('selected', 'selected');
+    $("#cmb_tipoeventohisfug option:contains(" + data[0].c_0406_219 + ")").attr('selected', 'selected');
+    $("#fec_hisfug").val(data[0].c_0406_220.split(' ')[0]);
+    $("#txthoraocurrenciahisfug").val(data[0].c_0406_221);
+    $("#txthorariofinalhisfug").val(data[0].c_0406_222);
+    $("#txthoractrlhisfug").val(data[0].c_0406_223);
     $("#txtfechactrlhisfug").val(data[0].fecha_control_evento);
-    $("#txtarregloconthisfug").val(data[0].C_0406_224);//
-    $("#txttiporeparacionhisfug").val(data[0].C_0406_225);
-   // $("#cmb_tiporeparacionhisfug option:contains(" + data[0].C_0406_225 + ")").attr('selected', 'selected');
-    $("#txtobservacioneshisfug").val(data[0].C_0406_226);
-    $("#txtoficioaseahisfug").val(data[0].C_0406_227);
-    $("#txtreportesiniestrohisfug").val(data[0].C_0406_228);
-    $("#txtnosiniestrohisfug").val(data[0].C_0406_229);
-    $("#txtnohisfug").val(data[0].C_0406_230);
-    $("#cmb_tipoevento_hisfug option:contains(" + data[0].C_0406_231 + ")").attr('selected', 'selected');
+    $("#txtarregloconthisfug").val(data[0].c_0406_224);//
+    $("#txttiporeparacionhisfug").val(data[0].c_0406_225);
+   // $("#cmb_tiporeparacionhisfug option:contains(" + data[0].c_0406_225 + ")").attr('selected', 'selected');
+    $("#txtobservacioneshisfug").val(data[0].c_0406_226);
+    $("#txtoficioaseahisfug").val(data[0].c_0406_227);
+    $("#txtreportesiniestrohisfug").val(data[0].c_0406_228);
+    $("#txtnosiniestrohisfug").val(data[0].c_0406_229);
+    $("#txtnohisfug").val(data[0].c_0406_230);
+    $("#cmb_tipoevento_hisfug option:contains(" + data[0].c_0406_231 + ")").attr('selected', 'selected');
     idHistFugOp = data[0].id;
     inhabilitarform("#historialfugasderramesoperacionfrm", true);
 }
@@ -12530,7 +12530,7 @@ function saveMonitoreoCorrosionOp() {
     var webMethod = "saveMonitoreoCorrosionOp";
 
     var params = {
-        C_0101_0001_id: area,
+        c_0101_0001_id: area,
         unidades_medida: $("#txtunidadesmedidaop").val(),
         cupones: $('#txtcuponesop').val(),
         fecha_instalacion: $('#fec_instalacionmonitoreoop').val(),
@@ -12586,7 +12586,7 @@ function updateOperacionMonitoreoCorrosion() {
         webMethod = "updateMonitoreoCorrosionOp";
         params = {
             id: idMonitoreoCorrosiongOp,
-            C_0101_0001_id: area,
+            c_0101_0001_id: area,
             unidades_medida: $("#txtunidadesmedidaop").val(),
             cupones: $('#txtcuponesop').val(),
             fecha_instalacion: $('#fec_instalacionmonitoreoop').val(),
@@ -12667,7 +12667,7 @@ function loadtipomanguitoOp() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipomanguitohisrep').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0415_262
+                            text: data.data[i].c_0415_262
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -12697,7 +12697,7 @@ function loadtiporecubrimientoHistRepOp() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tiporecaplicadohisrep').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0415_274
+                            text: data.data[i].c_0415_274
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -12727,7 +12727,7 @@ function loadtipofallaHistRepOp() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipofallahisrep').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0415_279   
+                            text: data.data[i].c_0415_279   
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -12751,7 +12751,7 @@ function showotrotipoManguitoOp() {
 function saveotroTipoManguitoOp() {
     var webMethod = "savehistReptipoeManguitoOperacion";
     var params = {
-        C_0415_262: $("#newTipomanguitohisrep").val(),
+        c_0415_262: $("#newTipomanguitohisrep").val(),
         descripcion: $("#newDescmanguitohisrep").val()
     };
 
@@ -12792,7 +12792,7 @@ function showotrotipoRecubrimientoHistRepOp() {
 function saveotroTipoRecubrimientoHistRepOp() {
     var webMethod = "savehistReptipoeRecubrimientoOperacion";
     var params = {
-        C_0415_274: $("#newTiporecaplicadohisrep").val(),
+        c_0415_274: $("#newTiporecaplicadohisrep").val(),
         descripcion: $("#newDescTiporecaplicadohisrep").val()
     };
 
@@ -12833,7 +12833,7 @@ function showotrotipoFallaHistRepOp() {
 function saveotroTipoFallaHistRepOp() {
     var webMethod = "savehistReptipoFallaOperacion";
     var params = {
-        C_0415_279: $("#newTipofallahisrep").val(),
+        c_0415_279: $("#newTipofallahisrep").val(),
         descripcion: $("#newDesctipofallahisrep").val()
     };
 
@@ -12949,37 +12949,37 @@ function llenarDatosHisRepOp(data) {
         $("#coord_esp_hisrep_y").val("");
     }
     $("#km_esp_hisrep").val(data[0].kilometro_especifico);
-    $("#fecinsta_hisrep").val(data[0].C_0415_254.split(' ')[0]);
-    $("#cmbcuentarecubrimiento option:contains(" + data[0].C_0415_255 + ")").attr('selected', 'selected');
-    $("#cmbmanguitopresurizado option:contains(" + data[0].C_0415_256 + ")").attr('selected', 'selected');
-    $("#cmbencuentramanguito option:contains(" + data[0].C_0415_257 + ")").attr('selected', 'selected');
-    $("#fecfab_hisrep").val(data[0].C_0415_258.split(' ')[0]);
-    $("#txtfabricantehisrep").val(data[0].C_0415_259);
-    $("#txtmaterialhisrep").val(data[0].C_0415_260);
-    $("#txtpresionmahisrep").val(data[0].C_0415_261);
-    $("#cmb_tipomanguitohisrep option:contains(" + data[0].C_0415_262 + ")").attr('selected', 'selected');
-    $("#txtnoseriehisrep").val(data[0].C_0415_263);
-    $("#cmbestadohisrep option:contains(" + data[0].C_0415_264 + ")").attr('selected', 'selected');
-    $("#txtesptuberiahisrep").val(data[0].C_0415_265);
-    $("#txtespnominalhisrep").val(data[0].C_0415_266);
-    $("#txtpruebahidrohisrep").val(data[0].C_0415_267);
-    if (data[0].C_0415_268) {
-        $("#fecprueba_hisrep").val(data[0].C_0415_268.split(' ')[0]);
+    $("#fecinsta_hisrep").val(data[0].c_0415_254.split(' ')[0]);
+    $("#cmbcuentarecubrimiento option:contains(" + data[0].c_0415_255 + ")").attr('selected', 'selected');
+    $("#cmbmanguitopresurizado option:contains(" + data[0].c_0415_256 + ")").attr('selected', 'selected');
+    $("#cmbencuentramanguito option:contains(" + data[0].c_0415_257 + ")").attr('selected', 'selected');
+    $("#fecfab_hisrep").val(data[0].c_0415_258.split(' ')[0]);
+    $("#txtfabricantehisrep").val(data[0].c_0415_259);
+    $("#txtmaterialhisrep").val(data[0].c_0415_260);
+    $("#txtpresionmahisrep").val(data[0].c_0415_261);
+    $("#cmb_tipomanguitohisrep option:contains(" + data[0].c_0415_262 + ")").attr('selected', 'selected');
+    $("#txtnoseriehisrep").val(data[0].c_0415_263);
+    $("#cmbestadohisrep option:contains(" + data[0].c_0415_264 + ")").attr('selected', 'selected');
+    $("#txtesptuberiahisrep").val(data[0].c_0415_265);
+    $("#txtespnominalhisrep").val(data[0].c_0415_266);
+    $("#txtpruebahidrohisrep").val(data[0].c_0415_267);
+    if (data[0].c_0415_268) {
+        $("#fecprueba_hisrep").val(data[0].c_0415_268.split(' ')[0]);
     }
-    $("#txtequipohisrep").val(data[0].C_0415_269);
-    $("#txtlongitudenvolhisrep").val(data[0].C_0415_271);
-    $("#txtobservacionhisrep").val(data[0].C_0415_272);
-    if (data[0].C_0415_273) {
-        $("#fecinspliquidos_hisrep").val(data[0].C_0415_273.split(' ')[0]);}
-    $("#cmb_tiporecaplicadohisrep option:contains(" + data[0].C_0415_274 + ")").attr('selected', 'selected');
-    $("#txtlongitudrecbhisrec").val(data[0].C_0415_275);
-    $("#txtindicadoreshisrep").val(data[0].C_0415_276);
-    $("#txtdefectohisrep").val(data[0].C_0415_277);
+    $("#txtequipohisrep").val(data[0].c_0415_269);
+    $("#txtlongitudenvolhisrep").val(data[0].c_0415_271);
+    $("#txtobservacionhisrep").val(data[0].c_0415_272);
+    if (data[0].c_0415_273) {
+        $("#fecinspliquidos_hisrep").val(data[0].c_0415_273.split(' ')[0]);}
+    $("#cmb_tiporecaplicadohisrep option:contains(" + data[0].c_0415_274 + ")").attr('selected', 'selected');
+    $("#txtlongitudrecbhisrec").val(data[0].c_0415_275);
+    $("#txtindicadoreshisrep").val(data[0].c_0415_276);
+    $("#txtdefectohisrep").val(data[0].c_0415_277);
     $("#km_anomalia_hisrep").val(data[0].km_anomalia)
-    $("#fecreparacion_hisrep").val(data[0].C_0415_278.split(' ')[0]);
-   // $("#cmb_tipofallahisrep option:contains(" + data[0].C_0415_279 + ")").attr('selected', 'selected'); 
-    $("#txt_tipofalla_hisrep").val(data[0].C_0415_279);
-    $("#txtmodoreparacionhisrep").val(data[0].C_0415_280);
+    $("#fecreparacion_hisrep").val(data[0].c_0415_278.split(' ')[0]);
+   // $("#cmb_tipofallahisrep option:contains(" + data[0].c_0415_279 + ")").attr('selected', 'selected'); 
+    $("#txt_tipofalla_hisrep").val(data[0].c_0415_279);
+    $("#txtmodoreparacionhisrep").val(data[0].c_0415_280);
     idHistRepOp = data[0].id;
     inhabilitarform("#historialreparacionesoperacionfrm", true);
 }
@@ -12996,34 +12996,34 @@ function savehistReparacionOp() {
     var webMethod = "saveHistorialReparacionesOp";
 
     var params = {
-        C_0101_0001_id: area,
-        C_0415_254: $("#fecinsta_hisrep").val(),
-        C_0415_255: $('#cmbcuentarecubrimiento').val(),
-        C_0415_256: $('#cmbencuentramanguito').val(),
-        C_0415_257: $("#cmbencuentramanguito").val(),
-        C_0415_258: $("#fecfab_hisrep").val(),
-        C_0415_259: $("#txtfabricantehisrep").val(),
-        C_0415_260: $("#txtmaterialhisrep").val(),
-        C_0415_261: $("#txtpresionmahisrep").val(),
-        id_C_0415_262: $("#cmb_tipomanguitohisrep").val(),
-        C_0415_263: $("#txtnoseriehisrep").val(),
-        C_0415_264: $("#cmbestadohisrep").val(),
-        C_0415_265: $("#txtesptuberiahisrep").val(),
-        C_0415_266: $("#txtespnominalhisrep").val(),
-        C_0415_267: $("#txtpruebahidrohisrep").val(),
-        C_0415_268: $("#fecprueba_hisrep").val(),
-        C_0415_269: $("#txtequipohisrep").val(),
-        C_0415_271: $("#txtlongitudenvolhisrep").val(),
-        C_0415_272: $("#txtobservacionhisrep").val(),
-        C_0415_273: $("#fecinspliquidos_hisrep").val(),
-        id_C_0415_274: $("#cmb_tiporecaplicadohisrep").val(),
-        C_0415_275: $("#txtlongitudrecbhisrec").val(),
-        C_0415_276: $("#txtindicadoreshisrep").val(),
-        C_0415_277: $("#txtdefectohisrep").val(),
-        C_0415_278: $("#fecreparacion_hisrep").val(),
-        //id_C_0415_279: $("#cmb_tipofallahisrep").val(),
-        C_0415_279: $("#txt_tipofalla_hisrep").val(),
-        C_0415_280: $("#txtmodoreparacionhisrep").val(),
+        c_0101_0001_id: area,
+        c_0415_254: $("#fecinsta_hisrep").val(),
+        c_0415_255: $('#cmbcuentarecubrimiento').val(),
+        c_0415_256: $('#cmbencuentramanguito').val(),
+        c_0415_257: $("#cmbencuentramanguito").val(),
+        c_0415_258: $("#fecfab_hisrep").val(),
+        c_0415_259: $("#txtfabricantehisrep").val(),
+        c_0415_260: $("#txtmaterialhisrep").val(),
+        c_0415_261: $("#txtpresionmahisrep").val(),
+        id_c_0415_262: $("#cmb_tipomanguitohisrep").val(),
+        c_0415_263: $("#txtnoseriehisrep").val(),
+        c_0415_264: $("#cmbestadohisrep").val(),
+        c_0415_265: $("#txtesptuberiahisrep").val(),
+        c_0415_266: $("#txtespnominalhisrep").val(),
+        c_0415_267: $("#txtpruebahidrohisrep").val(),
+        c_0415_268: $("#fecprueba_hisrep").val(),
+        c_0415_269: $("#txtequipohisrep").val(),
+        c_0415_271: $("#txtlongitudenvolhisrep").val(),
+        c_0415_272: $("#txtobservacionhisrep").val(),
+        c_0415_273: $("#fecinspliquidos_hisrep").val(),
+        id_c_0415_274: $("#cmb_tiporecaplicadohisrep").val(),
+        c_0415_275: $("#txtlongitudrecbhisrec").val(),
+        c_0415_276: $("#txtindicadoreshisrep").val(),
+        c_0415_277: $("#txtdefectohisrep").val(),
+        c_0415_278: $("#fecreparacion_hisrep").val(),
+        //id_c_0415_279: $("#cmb_tipofallahisrep").val(),
+        c_0415_279: $("#txt_tipofalla_hisrep").val(),
+        c_0415_280: $("#txtmodoreparacionhisrep").val(),
         km_anomalia: $("#km_anomalia_hisrep").val(),
         coordenada_especifica: $("#coord_esp_hisrep_x").val() + ' ' + $("#coord_esp_hisrep_y").val(),
         kilometro_especifico: $("#km_esp_hisrep").val()
@@ -13071,34 +13071,34 @@ function updateOperacionHistorialReparaciones() {
         webMethod = "updateHistorialReparacionesOp";
         params = {
             id: idHistRepOp,
-            C_0101_0001_id: area,
-            C_0415_254: $("#fecinsta_hisrep").val(),
-            C_0415_255: $('#cmbcuentarecubrimiento').val(),
-            C_0415_256: $('#cmbencuentramanguito').val(),
-            C_0415_257: $("#cmbencuentramanguito").val(),
-            C_0415_258: $("#fecfab_hisrep").val(),
-            C_0415_259: $("#txtfabricantehisrep").val(),
-            C_0415_260: $("#txtmaterialhisrep").val(),
-            C_0415_261: $("#txtpresionmahisrep").val(),
-            id_C_0415_262: $("#cmb_tipomanguitohisrep").val(),
-            C_0415_263: $("#txtnoseriehisrep").val(),
-            C_0415_264: $("#cmbestadohisrep").val(),
-            C_0415_265: $("#txtesptuberiahisrep").val(),
-            C_0415_266: $("#txtespnominalhisrep").val(),
-            C_0415_267: $("#txtpruebahidrohisrep").val(),
-            C_0415_268: $("#fecprueba_hisrep").val(),
-            C_0415_269: $("#txtequipohisrep").val(),
-            C_0415_271: $("#txtlongitudenvolhisrep").val(),
-            C_0415_272: $("#txtobservacionhisrep").val(),
-            C_0415_273: $("#fecinspliquidos_hisrep").val(),
-            id_C_0415_274: $("#cmb_tiporecaplicadohisrep").val(),
-            C_0415_275: $("#txtlongitudrecbhisrec").val(),
-            C_0415_276: $("#txtindicadoreshisrep").val(),
-            C_0415_277: $("#txtdefectohisrep").val(),
-            C_0415_278: $("#fecreparacion_hisrep").val(),
-            //id_C_0415_279: $("#cmb_tipofallahisrep").val(),
-            C_0415_279: $("#txt_tipofalla_hisrep").val(),
-            C_0415_280: $("#txtmodoreparacionhisrep").val(),
+            c_0101_0001_id: area,
+            c_0415_254: $("#fecinsta_hisrep").val(),
+            c_0415_255: $('#cmbcuentarecubrimiento').val(),
+            c_0415_256: $('#cmbencuentramanguito').val(),
+            c_0415_257: $("#cmbencuentramanguito").val(),
+            c_0415_258: $("#fecfab_hisrep").val(),
+            c_0415_259: $("#txtfabricantehisrep").val(),
+            c_0415_260: $("#txtmaterialhisrep").val(),
+            c_0415_261: $("#txtpresionmahisrep").val(),
+            id_c_0415_262: $("#cmb_tipomanguitohisrep").val(),
+            c_0415_263: $("#txtnoseriehisrep").val(),
+            c_0415_264: $("#cmbestadohisrep").val(),
+            c_0415_265: $("#txtesptuberiahisrep").val(),
+            c_0415_266: $("#txtespnominalhisrep").val(),
+            c_0415_267: $("#txtpruebahidrohisrep").val(),
+            c_0415_268: $("#fecprueba_hisrep").val(),
+            c_0415_269: $("#txtequipohisrep").val(),
+            c_0415_271: $("#txtlongitudenvolhisrep").val(),
+            c_0415_272: $("#txtobservacionhisrep").val(),
+            c_0415_273: $("#fecinspliquidos_hisrep").val(),
+            id_c_0415_274: $("#cmb_tiporecaplicadohisrep").val(),
+            c_0415_275: $("#txtlongitudrecbhisrec").val(),
+            c_0415_276: $("#txtindicadoreshisrep").val(),
+            c_0415_277: $("#txtdefectohisrep").val(),
+            c_0415_278: $("#fecreparacion_hisrep").val(),
+            //id_c_0415_279: $("#cmb_tipofallahisrep").val(),
+            c_0415_279: $("#txt_tipofalla_hisrep").val(),
+            c_0415_280: $("#txtmodoreparacionhisrep").val(),
             km_anomalia: $("#km_anomalia_hisrep").val(),
             coordenada_especifica: $("#coord_esp_hisrep_x").val() + ' ' + $("#coord_esp_hisrep_y").val(),
             kilometro_especifico: $("#km_esp_hisrep").val()
@@ -13173,7 +13173,7 @@ function loadtipovandalismoOp() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipovanda').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0416_285
+                            text: data.data[i].c_0416_285
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -13203,7 +13203,7 @@ function loadtipoeventovandalismoOp() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipoeventovan').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0416_286
+                            text: data.data[i].c_0416_286
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -13233,7 +13233,7 @@ function loadtiporecuperacionhisvandalismoOp() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tiporeparacionvan').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0416_292
+                            text: data.data[i].c_0416_292
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -13263,7 +13263,7 @@ function loadtipoevento_vandalismoOp() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipoevento_van').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0416_298
+                            text: data.data[i].c_0416_298
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -13287,7 +13287,7 @@ function cancelotroTipoVan() {
 function saveotroTipoVan() {
     var webMethod = "saveVanTipoOperacion";
     var params = {
-        C_0416_285: $("#newTipovan").val(),
+        c_0416_285: $("#newTipovan").val(),
         descripcion: $("#newDesTipovan").val()
     };
 
@@ -13328,7 +13328,7 @@ function cancelotroTipoeventovanOp() {
 function saveotroTipoeventovanOp() {
     var webMethod = "saveVanTipoEventoOperacion";
     var params = {
-        C_0416_286: $("#newTipoEventovan").val(),
+        c_0416_286: $("#newTipoEventovan").val(),
         descripcion: $("#newDescTipoEventovan").val()
     };
 
@@ -13371,7 +13371,7 @@ function cancelotroTiporeparacionvanOp() {
 function saveotroTiporeparacionvanOp() {
     var webMethod = "saveVanTipoReparacionOperacion";
     var params = {
-        C_0416_292: $("#newTiporeparacionvan").val(),
+        c_0416_292: $("#newTiporeparacionvan").val(),
         descripcion: $("#newDescreparacionvan").val()
     };
 
@@ -13405,7 +13405,7 @@ function saveotroTiporeparacionvanOp() {
 function saveotroTipoEevento_vanOp() {
     var webMethod = "saveVanTipoEvento_Operacion";
     var params = {
-        C_0416_298: $("#newTipoevento_vanda").val(),
+        c_0416_298: $("#newTipoevento_vanda").val(),
         descripcion: $("#newDesctipoevento_vanda").val()
     };
 
@@ -13440,25 +13440,25 @@ function savevandalismoOp() {
     var webMethod = "saveVandalismoOperacion";
 
     var params = {
-        C_0101_0001_id: area,
-        C_0416_281: $("#txtresidenciavanda").val(),
-        C_0416_282: $('#txtpobladovanda').val(),
-        C_0416_283: $('#txtmunicipiovanda').val(),
-        C_0416_284: $("#txtestadovanda").val(),
-        C_0416_285: $("#txttipo_vanda").val(),
-        id_C_0416_286: $("#cmb_tipoeventovan").val(),
-        C_0416_287: $("#fec_van").val(),
-        C_0416_288: $("#txthoraocurrenciavan").val(),
-        C_0416_289: $("#txthorariofinalvan").val(),
-        C_0416_290: $("#txthoractrlvan").val(),
-        C_0416_291: $("#txtarregloctrlvan").val(),
-        C_0416_292: $("#txttiporeparacion_VandaOp").val(),
-        C_0416_293: $("#txtobservacionesvan").val(),
-        C_0416_294: $("#txtoficioaseavan").val(),
-        C_0416_295: $("#txtreportesiniestrovan").val(),
-        C_0416_296: $("#txtnosiniestrovan").val(),
-        C_0416_297: $("#txtnovan").val(),
-        C_0416_298: $("#cmb_tipoevento_van").val(),
+        c_0101_0001_id: area,
+        c_0416_281: $("#txtresidenciavanda").val(),
+        c_0416_282: $('#txtpobladovanda').val(),
+        c_0416_283: $('#txtmunicipiovanda').val(),
+        c_0416_284: $("#txtestadovanda").val(),
+        c_0416_285: $("#txttipo_vanda").val(),
+        id_c_0416_286: $("#cmb_tipoeventovan").val(),
+        c_0416_287: $("#fec_van").val(),
+        c_0416_288: $("#txthoraocurrenciavan").val(),
+        c_0416_289: $("#txthorariofinalvan").val(),
+        c_0416_290: $("#txthoractrlvan").val(),
+        c_0416_291: $("#txtarregloctrlvan").val(),
+        c_0416_292: $("#txttiporeparacion_VandaOp").val(),
+        c_0416_293: $("#txtobservacionesvan").val(),
+        c_0416_294: $("#txtoficioaseavan").val(),
+        c_0416_295: $("#txtreportesiniestrovan").val(),
+        c_0416_296: $("#txtnosiniestrovan").val(),
+        c_0416_297: $("#txtnovan").val(),
+        c_0416_298: $("#cmb_tipoevento_van").val(),
         coordenada_especifica: $("#coord_esp_vanda_x").val() + ' ' + $("#coord_esp_vanda_y").val(),
         kilometro_especifico: $("#km_esp_vanda").val()
     };
@@ -13505,25 +13505,25 @@ function updateOperacioVandalismoOp() {
         webMethod = "updateVandalismoOp";
         params = {
             id: idvandalismoOp,
-            C_0101_0001_id: area,
-            C_0416_281: $("#txtresidenciavanda").val(),
-            C_0416_282: $('#txtpobladovanda').val(),
-            C_0416_283: $('#txtmunicipiovanda').val(),
-            C_0416_284: $("#txtestadovanda").val(),
-            C_0416_285: $("#txttipo_vanda").val(),
-            id_C_0416_286: $("#cmb_tipoeventovan").val(),
-            C_0416_287: $("#fec_van").val(),
-            C_0416_288: $("#txthoraocurrenciavan").val(),
-            C_0416_289: $("#txthorariofinalvan").val(),
-            C_0416_290: $("#txthoractrlvan").val(),
-            C_0416_291: $("#txtarregloctrlvan").val(),
-            C_0416_292: $("#txttiporeparacion_VandaOp").val(),
-            C_0416_293: $("#txtobservacionesvan").val(),
-            C_0416_294: $("#txtoficioaseavan").val(),
-            C_0416_295: $("#txtreportesiniestrovan").val(),
-            C_0416_296: $("#txtnosiniestrovan").val(),
-            C_0416_297: $("#txtnovan").val(),
-            C_0416_298: $("#cmb_tipoevento_van").val(),
+            c_0101_0001_id: area,
+            c_0416_281: $("#txtresidenciavanda").val(),
+            c_0416_282: $('#txtpobladovanda').val(),
+            c_0416_283: $('#txtmunicipiovanda').val(),
+            c_0416_284: $("#txtestadovanda").val(),
+            c_0416_285: $("#txttipo_vanda").val(),
+            id_c_0416_286: $("#cmb_tipoeventovan").val(),
+            c_0416_287: $("#fec_van").val(),
+            c_0416_288: $("#txthoraocurrenciavan").val(),
+            c_0416_289: $("#txthorariofinalvan").val(),
+            c_0416_290: $("#txthoractrlvan").val(),
+            c_0416_291: $("#txtarregloctrlvan").val(),
+            c_0416_292: $("#txttiporeparacion_VandaOp").val(),
+            c_0416_293: $("#txtobservacionesvan").val(),
+            c_0416_294: $("#txtoficioaseavan").val(),
+            c_0416_295: $("#txtreportesiniestrovan").val(),
+            c_0416_296: $("#txtnosiniestrovan").val(),
+            c_0416_297: $("#txtnovan").val(),
+            c_0416_298: $("#cmb_tipoevento_van").val(),
             coordenada_especifica: $("#coord_esp_vanda_x").val() + ' ' + $("#coord_esp_vanda_y").val(),
             kilometro_especifico: $("#km_esp_vanda").val()
         };
@@ -13642,26 +13642,26 @@ function llenarDatosVandalismoOp(data) {
         $("#coord_esp_vanda_y").val("");
     }
     $("#km_esp_vanda").val(data[0].kilometro_especifico);
-    $("#txtresidenciavanda").val(data[0].C_0416_281);
-    $("#txtpobladovanda").val(data[0].C_0416_282);
-    $("#txtmunicipiovanda").val(data[0].C_0416_283);
-    $("#txtestadovanda").val(data[0].C_0416_284);
-    $("#txttipo_vanda").val(data[0].C_0416_285);
-    //$("#cmb_tipovanda option:contains(" + data[0].id_C_0416_285 + ")").attr('selected', 'selected');
-    $("#cmb_tipoeventovan option:contains(" + data[0].id_C_0416_286 + ")").attr('selected', 'selected');
-    $("#fec_van").val(data[0].C_0416_287.split(' ')[0]);
-    $("#txthoraocurrenciavan").val(data[0].C_0416_288);
-    $("#txthorariofinalvan").val(data[0].C_0416_289);
-    $("#txthoractrlvan").val(data[0].C_0416_290);
-    $("#txtarregloctrlvan").val(data[0].C_0416_291);
-    $("#txttiporeparacion_VandaOp").val(data[0].C_0416_292);
-    //$("#cmb_tiporeparacionvan option:contains(" + data[0].id_C_0416_292 + ")").attr('selected', 'selected');
-    $("#txtobservacionesvan").val(data[0].C_0416_293);
-    $("#txtoficioaseavan").val(data[0].C_0416_294);
-    $("#txtreportesiniestrovan").val(data[0].C_0416_295);
-    $("#txtnosiniestrovan").val(data[0].C_0416_296);
-    $("#txtnovan").val(data[0].C_0416_297);
-    $("#cmb_tipoevento_van option:contains(" + data[0].C_0416_298 + ")").attr('selected', 'selected');
+    $("#txtresidenciavanda").val(data[0].c_0416_281);
+    $("#txtpobladovanda").val(data[0].c_0416_282);
+    $("#txtmunicipiovanda").val(data[0].c_0416_283);
+    $("#txtestadovanda").val(data[0].c_0416_284);
+    $("#txttipo_vanda").val(data[0].c_0416_285);
+    //$("#cmb_tipovanda option:contains(" + data[0].id_c_0416_285 + ")").attr('selected', 'selected');
+    $("#cmb_tipoeventovan option:contains(" + data[0].id_c_0416_286 + ")").attr('selected', 'selected');
+    $("#fec_van").val(data[0].c_0416_287.split(' ')[0]);
+    $("#txthoraocurrenciavan").val(data[0].c_0416_288);
+    $("#txthorariofinalvan").val(data[0].c_0416_289);
+    $("#txthoractrlvan").val(data[0].c_0416_290);
+    $("#txtarregloctrlvan").val(data[0].c_0416_291);
+    $("#txttiporeparacion_VandaOp").val(data[0].c_0416_292);
+    //$("#cmb_tiporeparacionvan option:contains(" + data[0].id_c_0416_292 + ")").attr('selected', 'selected');
+    $("#txtobservacionesvan").val(data[0].c_0416_293);
+    $("#txtoficioaseavan").val(data[0].c_0416_294);
+    $("#txtreportesiniestrovan").val(data[0].c_0416_295);
+    $("#txtnosiniestrovan").val(data[0].c_0416_296);
+    $("#txtnovan").val(data[0].c_0416_297);
+    $("#cmb_tipoevento_van option:contains(" + data[0].c_0416_298 + ")").attr('selected', 'selected');
     idvandalismoOp = data[0].id;
     inhabilitarform("#vandalismooperacionfrm", true);
 }
@@ -13732,7 +13732,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.tipo_lanzador.length; i++) {
                         $('#cmb_tipolanzadorinsta').append($('<option>', {
                             value: data.data.tipo_lanzador[i].id,
-                            text: data.data.tipo_lanzador[i].C_0401_145
+                            text: data.data.tipo_lanzador[i].c_0401_145
                         }));
                     }
                     //Tipo dispositivo
@@ -13744,7 +13744,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.tipo_dispositivo.length; i++) {
                         $('#cmb_tipodispositivonsta').append($('<option>', {
                             value: data.data.tipo_dispositivo[i].id,
-                            text: data.data.tipo_dispositivo[i].C_0401_146
+                            text: data.data.tipo_dispositivo[i].c_0401_146
                         }));
                     }
                     //Tipo válvula
@@ -13756,7 +13756,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.tipo_valvula.length; i++) {
                         $('#cmb_tipovalvulainstainsta').append($('<option>', {
                             value: data.data.tipo_valvula[i].id,
-                            text: data.data.tipo_valvula[i].C_0401_153
+                            text: data.data.tipo_valvula[i].c_0401_153
                         }));
                     }
                     //Tipo Operador
@@ -13768,7 +13768,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.tipo_operador.length; i++) {
                         $('#cmb_tipooperadorinsta').append($('<option>', {
                             value: data.data.tipo_operador[i].id,
-                            text: data.data.tipo_operador[i].C_0401_159
+                            text: data.data.tipo_operador[i].c_0401_159
                         }));
                     }
                     //Tipo Conexión
@@ -13780,7 +13780,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.tipo_conexion.length; i++) {
                         $('#cmb_tipoconexinsta').append($('<option>', {
                             value: data.data.tipo_conexion[i].id,
-                            text: data.data.tipo_conexion[i].C_0401_167
+                            text: data.data.tipo_conexion[i].c_0401_167
                         }));
                     }
                     //Tipo  Marcador
@@ -13792,7 +13792,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.tipo_marcador.length; i++) {
                         $('#cmb_tipomarcadorinsta').append($('<option>', {
                             value: data.data.tipo_marcador[i].id,
-                            text: data.data.tipo_marcador[i].C_0401_169
+                            text: data.data.tipo_marcador[i].c_0401_169
                         }));
                     }
                     //Tipo Tee
@@ -13804,7 +13804,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.tipo_tee.length; i++) {
                         $('#cmb_tipoteeinsta').append($('<option>', {
                             value: data.data.tipo_tee[i].id,
-                            text: data.data.tipo_tee[i].C_0401_170
+                            text: data.data.tipo_tee[i].c_0401_170
                         }));
                     }
                     //Tipo Cierre
@@ -13816,7 +13816,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.tipo_cierre.length; i++) {
                         $('#cmb_tipocierratapasinsta').append($('<option>', {
                             value: data.data.tipo_cierre[i].id,
-                            text: data.data.tipo_cierre[i].C_0401_177
+                            text: data.data.tipo_cierre[i].c_0401_177
                         }));
                     }
                     //Tipo Briada
@@ -13828,7 +13828,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.tipo_brigada.length; i++) {
                         $('#cmb_tipobridainsta').append($('<option>', {
                             value: data.data.tipo_brigada[i].id,
-                            text: data.data.tipo_brigada[i].C_0401_179
+                            text: data.data.tipo_brigada[i].c_0401_179
                         }));
                     }
                     //Especificaciones de diseño Briada
@@ -13840,7 +13840,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.esp_disenio_biada.length; i++) {
                         $('#cmb_tipoespdiseniobriadainsta').append($('<option>', {
                             value: data.data.esp_disenio_biada[i].id,
-                            text: data.data.esp_disenio_biada[i].C_0401_181
+                            text: data.data.esp_disenio_biada[i].c_0401_181
                         }));
                     }
                     //Tipo medidor
@@ -13852,7 +13852,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.tipo_medidor.length; i++) {
                         $('#cmb_tipomedidorinsta').append($('<option>', {
                             value: data.data.tipo_medidor[i].id,
-                            text: data.data.tipo_medidor[i].C_0401_182
+                            text: data.data.tipo_medidor[i].c_0401_182
                         }));
                     }
                     //Tipo conexión rama
@@ -13864,7 +13864,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.tipo_conexion_rama.length; i++) {
                         $('#cmb_tipoconexramainsta').append($('<option>', {
                             value: data.data.tipo_conexion_rama[i].id,
-                            text: data.data.tipo_conexion_rama[i].C_0401_184
+                            text: data.data.tipo_conexion_rama[i].c_0401_184
                         }));
                     }
                     // Tipo grado codo
@@ -13876,7 +13876,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.grado_codos.length; i++) {
                         $('#cmb_tipogradocodo').append($('<option>', {
                             value: data.data.grado_codos[i].id,
-                            text: data.data.grado_codos[i].C_0401_190
+                            text: data.data.grado_codos[i].c_0401_190
                         }));
                     }
                     //Especificaciones de diseño codo
@@ -13888,7 +13888,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.esp_disenio_codos.length; i++) {
                         $('#cmb_tipoespdiseniocodo').append($('<option>', {
                             value: data.data.esp_disenio_codos[i].id,
-                            text: data.data.esp_disenio_codos[i].C_0401_194
+                            text: data.data.esp_disenio_codos[i].c_0401_194
                         }));
                     }
                     //Grado reductor
@@ -13900,7 +13900,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.grado_reductor.length; i++) {
                         $('#cmb_tipogradoreductor').append($('<option>', {
                             value: data.data.grado_reductor[i].id,
-                            text: data.data.grado_reductor[i].C_0401_196
+                            text: data.data.grado_reductor[i].c_0401_196
                         }));
                     }
                     //Tipo reductor
@@ -13912,7 +13912,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.tipo_reductor.length; i++) {
                         $('#cmb_tiporeductor').append($('<option>', {
                             value: data.data.tipo_reductor[i].id,
-                            text: data.data.tipo_reductor[i].C_0401_199
+                            text: data.data.tipo_reductor[i].c_0401_199
                         }));
                     }
                     //Especificaciones diseño reductor
@@ -13924,7 +13924,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.esp_disenio_reductor.length; i++) {
                         $('#cmb_tipoespdisreductor').append($('<option>', {
                             value: data.data.esp_disenio_reductor[i].id,
-                            text: data.data.esp_disenio_reductor[i].C_0401_200
+                            text: data.data.esp_disenio_reductor[i].c_0401_200
                         }));
                     }
                     //Tipo tubería
@@ -13936,7 +13936,7 @@ function load_catalogos_general() {
                     for (var i = 0; i < data.data.tipo_tuberia_revestimiento.length; i++) {
                         $('#cmb_tipoventilacion').append($('<option>', {
                             value: data.data.tipo_tuberia_revestimiento[i].id,
-                            text: data.data.tipo_tuberia_revestimiento[i].C_0401_201
+                            text: data.data.tipo_tuberia_revestimiento[i].c_0401_201
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -14042,102 +14042,102 @@ function llenarDatosInstalacionesOp(data) {
         $("#coord_esp_insta_y").val("");
     }
     $("#km_esp_insta").val(data[0].kilometro_especifico);
-    $("#cmb_tipoInstalacion").val(data[0].C_0401_130);
-    $("#txtidentificadorinsta").val(data[0].C_0401_131);
-    $("#fec_inicio_insta").val(data[0].C_0401_132.split(' ')[0]);
-    $("#fec_instalacion_insta").val(data[0].C_0401_133.split(' ')[0]);
-    $("#fec_Fab_insta").val(data[0].C_0401_134.split(' ')[0]);
-    $("#cmb_matfabinsta option:contains(" + data[0].C_0401_135 + ")").attr('selected', 'selected');
-    $("#txtfabricanteinsta").val(data[0].C_0401_136);
-    $("#txtedoactualinsta").val(data[0].C_0401_137);
-    $("#txtedohistoinsta").val(data[0].C_0401_138);
+    $("#cmb_tipoInstalacion").val(data[0].c_0401_130);
+    $("#txtidentificadorinsta").val(data[0].c_0401_131);
+    $("#fec_inicio_insta").val(data[0].c_0401_132.split(' ')[0]);
+    $("#fec_instalacion_insta").val(data[0].c_0401_133.split(' ')[0]);
+    $("#fec_Fab_insta").val(data[0].c_0401_134.split(' ')[0]);
+    $("#cmb_matfabinsta option:contains(" + data[0].c_0401_135 + ")").attr('selected', 'selected');
+    $("#txtfabricanteinsta").val(data[0].c_0401_136);
+    $("#txtedoactualinsta").val(data[0].c_0401_137);
+    $("#txtedohistoinsta").val(data[0].c_0401_138);
      //#endregion
     //#region Tipo Trampa
-    $("#txtdiamcanoninsta").val(data[0].C_0401_139);
-    $("#cmb_orientacanioninsta option:contains(" + data[0].C_0401_140 + ")").attr('selected', 'selected');
-    $("#txtespdisenioinsta").val(data[0].C_0401_141);
-    $("#txtespesornominalcanioninsta").val(data[0].C_0401_142);
-    $("#txtmaxperdidaespesorinsta").val(data[0].C_0401_143);
-    $("#cmb_tipolanzadorinsta option:contains(" + data[0].C_0401_145 + ")").attr('selected', 'selected');
-    $("#cmb_tipodispositivonsta option:contains(" + data[0].C_0401_146 + ")").attr('selected', 'selected');
-    $("#txtlongmaxpermdisprascadorinsta").val(data[0].C_0401_148);
-    $("#txtdiametromaxdispotivoinsta").val(data[0].C_0401_149);
-    $("#txtpresmaxdisenioinsta").val(data[0].C_0401_150);
-    $("#txtlongmedidacanioninsta").val(data[0].C_0401_151);
-    $("#txtmecanismocierreinsta").val(data[0].C_0401_152);
+    $("#txtdiamcanoninsta").val(data[0].c_0401_139);
+    $("#cmb_orientacanioninsta option:contains(" + data[0].c_0401_140 + ")").attr('selected', 'selected');
+    $("#txtespdisenioinsta").val(data[0].c_0401_141);
+    $("#txtespesornominalcanioninsta").val(data[0].c_0401_142);
+    $("#txtmaxperdidaespesorinsta").val(data[0].c_0401_143);
+    $("#cmb_tipolanzadorinsta option:contains(" + data[0].c_0401_145 + ")").attr('selected', 'selected');
+    $("#cmb_tipodispositivonsta option:contains(" + data[0].c_0401_146 + ")").attr('selected', 'selected');
+    $("#txtlongmaxpermdisprascadorinsta").val(data[0].c_0401_148);
+    $("#txtdiametromaxdispotivoinsta").val(data[0].c_0401_149);
+    $("#txtpresmaxdisenioinsta").val(data[0].c_0401_150);
+    $("#txtlongmedidacanioninsta").val(data[0].c_0401_151);
+    $("#txtmecanismocierreinsta").val(data[0].c_0401_152);
     //#endregion
     //#region Válvula
-    $("#cmb_tipovalvulainstainsta option:contains(" + data[0].C_0401_153 + ")").attr('selected', 'selected');
-    $("#cmb_edofuncionalinsta option:contains(" + data[0].C_0401_154 + ")").attr('selected', 'selected');
-    $("#cmb_Operacionformremotainsta option:contains(" + data[0].C_0401_155 + ")").attr('selected', 'selected');
-    $("#cmb_valvsegucrinsta option:contains(" + data[0].C_0401_156 + ")").attr('selected', 'selected');
-    $("#txtmarcamodvalinsta").val(data[0].C_0401_157);
-    $("#txtoperadovalinsta").val(data[0].C_0401_158);
-    $("#cmb_tipooperadorinsta option:contains(" + data[0].C_0401_159 + ")").attr('selected', 'selected');
-    $("#txtdiamextvalvinsta").val(data[0].C_0401_160);
-    $("#txtespediseniovalvinsta").val(data[0].C_0401_161);
-    $("#txtpresionmaxdiseniovalvinsta").val(data[0].C_0401_162);
-    $("#txtptiempotardallegarvalvulaemerinsta").val(data[0].C_0401_163);
-    $("#cmb_poscvalvdisinsta option:contains(" + data[0].C_0401_164 + ")").attr('selected', 'selected');
-    $("#cmb_posfuncvalvinsta option:contains(" + data[0].C_0401_165 + ")").attr('selected', 'selected');
-    $("#cmb_prinfuninsta option:contains(" + data[0].C_0401_166 + ")").attr('selected', 'selected');
-    $("#cmb_tipoconexinsta option:contains(" + data[0].C_0401_167 + ")").attr('selected', 'selected');
-    $("#txtpresionpruebavalvinsta").val(data[0].C_0401_168);
+    $("#cmb_tipovalvulainstainsta option:contains(" + data[0].c_0401_153 + ")").attr('selected', 'selected');
+    $("#cmb_edofuncionalinsta option:contains(" + data[0].c_0401_154 + ")").attr('selected', 'selected');
+    $("#cmb_Operacionformremotainsta option:contains(" + data[0].c_0401_155 + ")").attr('selected', 'selected');
+    $("#cmb_valvsegucrinsta option:contains(" + data[0].c_0401_156 + ")").attr('selected', 'selected');
+    $("#txtmarcamodvalinsta").val(data[0].c_0401_157);
+    $("#txtoperadovalinsta").val(data[0].c_0401_158);
+    $("#cmb_tipooperadorinsta option:contains(" + data[0].c_0401_159 + ")").attr('selected', 'selected');
+    $("#txtdiamextvalvinsta").val(data[0].c_0401_160);
+    $("#txtespediseniovalvinsta").val(data[0].c_0401_161);
+    $("#txtpresionmaxdiseniovalvinsta").val(data[0].c_0401_162);
+    $("#txtptiempotardallegarvalvulaemerinsta").val(data[0].c_0401_163);
+    $("#cmb_poscvalvdisinsta option:contains(" + data[0].c_0401_164 + ")").attr('selected', 'selected');
+    $("#cmb_posfuncvalvinsta option:contains(" + data[0].c_0401_165 + ")").attr('selected', 'selected');
+    $("#cmb_prinfuninsta option:contains(" + data[0].c_0401_166 + ")").attr('selected', 'selected');
+    $("#cmb_tipoconexinsta option:contains(" + data[0].c_0401_167 + ")").attr('selected', 'selected');
+    $("#txtpresionpruebavalvinsta").val(data[0].c_0401_168);
     //#endregion
     //#region Marcador
-    $("#cmb_tipomarcadorinsta option:contains(" + data[0].C_0401_169 + ")").attr('selected', 'selected');
+    $("#cmb_tipomarcadorinsta option:contains(" + data[0].c_0401_169 + ")").attr('selected', 'selected');
     //#endrefion
     //#region Tee
-    $("#cmb_tipoteeinsta option:contains(" + data[0].C_0401_170 + ")").attr('selected', 'selected');
-    $("#fec_presuinicial_insta").val(data[0].C_0401_171.split(' ')[0]);
-    $("#txtdiamextramaTinsta").val(data[0].C_0401_172);
-    $("#txtdiamextentradaactvnsta").val(data[0].C_0401_173);
-    $("#txtespesorparednominsta").val(data[0].C_0401_174);
-    $("#txtespdisenioinsta").val(data[0].C_0401_175);
-    $("#txtdiamextsalidainnsta").val(data[0].C_0401_176);
+    $("#cmb_tipoteeinsta option:contains(" + data[0].c_0401_170 + ")").attr('selected', 'selected');
+    $("#fec_presuinicial_insta").val(data[0].c_0401_171.split(' ')[0]);
+    $("#txtdiamextramaTinsta").val(data[0].c_0401_172);
+    $("#txtdiamextentradaactvnsta").val(data[0].c_0401_173);
+    $("#txtespesorparednominsta").val(data[0].c_0401_174);
+    $("#txtespdisenioinsta").val(data[0].c_0401_175);
+    $("#txtdiamextsalidainnsta").val(data[0].c_0401_176);
     //#endregion
     //#region Tapas
-    $("#cmb_tipocierratapasinsta option:contains(" + data[0].C_0401_177 + ")").attr('selected', 'selected');
-    $("#txtdiamextdelactivoinsta").val(data[0].C_0401_178);
+    $("#cmb_tipocierratapasinsta option:contains(" + data[0].c_0401_177 + ")").attr('selected', 'selected');
+    $("#txtdiamextdelactivoinsta").val(data[0].c_0401_178);
     //#endregion
     //#region Briadas
-    $("#cmb_tipobridainsta option:contains(" + data[0].C_0401_179 + ")").attr('selected', 'selected');
-    $("#txtpresmaxopbridainsta").val(data[0].C_0401_180);
-    $("#cmb_tipoespdiseniobriadainsta option:contains(" + data[0].C_0401_181 + ")").attr('selected', 'selected');
+    $("#cmb_tipobridainsta option:contains(" + data[0].c_0401_179 + ")").attr('selected', 'selected');
+    $("#txtpresmaxopbridainsta").val(data[0].c_0401_180);
+    $("#cmb_tipoespdiseniobriadainsta option:contains(" + data[0].c_0401_181 + ")").attr('selected', 'selected');
     //#endregion
     //#region Medidor
-    $("#cmb_tipomedidorinsta option:contains(" + data[0].C_0401_182 + ")").attr('selected', 'selected');
-    $("#txtnoserieemedidorinsta").val(data[0].C_0401_183);
+    $("#cmb_tipomedidorinsta option:contains(" + data[0].c_0401_182 + ")").attr('selected', 'selected');
+    $("#txtnoserieemedidorinsta").val(data[0].c_0401_183);
     //#endregion
     //#region Conexión Rama
-    $("#cmb_tipoconexramainsta option:contains(" + data[0].C_0401_184 + ")").attr('selected', 'selected');
-    $("#txtgrosornomconexramainsta").val(data[0].C_0401_185);
-    $("#txtdiamextconexraminsta").val(data[0].C_0401_186);
-    $("#txtespdisenioconexramainsta").val(data[0].C_0401_187);
+    $("#cmb_tipoconexramainsta option:contains(" + data[0].c_0401_184 + ")").attr('selected', 'selected');
+    $("#txtgrosornomconexramainsta").val(data[0].c_0401_185);
+    $("#txtdiamextconexraminsta").val(data[0].c_0401_186);
+    $("#txtespdisenioconexramainsta").val(data[0].c_0401_187);
     //#endregion
     //#region Codos
-    $("#txtAngulocurvhoriCodosinsta").val(data[0].C_0401_188);
-    $("#txtradiocodoinsta").val(data[0].C_0401_189);
-    $("#cmb_tipogradocodo option:contains(" + data[0].C_0401_190 + ")").attr('selected', 'selected');
-    $("#txtdiamcodoextinsta").val(data[0].C_0401_191);
-    $("#txtespesorcodonominsta").val(data[0].C_0401_192);
-    $("#txtdiamextsalidacodosinsta").val(data[0].C_0401_193);
-    $("#cmb_tipoespdiseniocodo option:contains(" + data[0].C_0401_194 + ")").attr('selected', 'selected');
-    $("#txtangulocurvverticodoinsta").val(data[0].C_0401_195);
+    $("#txtAngulocurvhoriCodosinsta").val(data[0].c_0401_188);
+    $("#txtradiocodoinsta").val(data[0].c_0401_189);
+    $("#cmb_tipogradocodo option:contains(" + data[0].c_0401_190 + ")").attr('selected', 'selected');
+    $("#txtdiamcodoextinsta").val(data[0].c_0401_191);
+    $("#txtespesorcodonominsta").val(data[0].c_0401_192);
+    $("#txtdiamextsalidacodosinsta").val(data[0].c_0401_193);
+    $("#cmb_tipoespdiseniocodo option:contains(" + data[0].c_0401_194 + ")").attr('selected', 'selected');
+    $("#txtangulocurvverticodoinsta").val(data[0].c_0401_195);
     //#endregion
     //#region Reductor
-    $("#cmb_tipogradoreductor option:contains(" + data[0].C_0401_196 + ")").attr('selected', 'selected');
-    $("#txtdiametroextreductorentradaactivoinsta").val(data[0].C_0401_197);
-    $("#txtdiametroextreductorsalidaactivoinsta").val(data[0].C_0401_198);
-    $("#cmb_tiporeductor option:contains(" + data[0].C_0401_199 + ")").attr('selected', 'selected');
-    $("#cmb_tipoespdisreductor option:contains(" + data[0].C_0401_200 + ")").attr('selected', 'selected');
-    $("#cmb_tipoventilacion option:contains(" + data[0].C_0401_201 + ")").attr('selected', 'selected');
-    $("#txtlogcarcasainsta").val(data[0].C_0401_202);
-    $("#cmb_aislamientotubinsta option:contains(" + data[0].C_0401_203 + ")").attr('selected', 'selected');
-    $("#cmb_cuentaventilacioninsta option:contains(" + data[0].C_0401_204 + ")").attr('selected', 'selected');
-    $("#txtespparednomventiinsta").val(data[0].C_0401_205);
-    $("#txtnomventiiinsta").val(data[0].C_0401_206);
-    $("#txtdiamextventiinsta").val(data[0].C_0401_207);
+    $("#cmb_tipogradoreductor option:contains(" + data[0].c_0401_196 + ")").attr('selected', 'selected');
+    $("#txtdiametroextreductorentradaactivoinsta").val(data[0].c_0401_197);
+    $("#txtdiametroextreductorsalidaactivoinsta").val(data[0].c_0401_198);
+    $("#cmb_tiporeductor option:contains(" + data[0].c_0401_199 + ")").attr('selected', 'selected');
+    $("#cmb_tipoespdisreductor option:contains(" + data[0].c_0401_200 + ")").attr('selected', 'selected');
+    $("#cmb_tipoventilacion option:contains(" + data[0].c_0401_201 + ")").attr('selected', 'selected');
+    $("#txtlogcarcasainsta").val(data[0].c_0401_202);
+    $("#cmb_aislamientotubinsta option:contains(" + data[0].c_0401_203 + ")").attr('selected', 'selected');
+    $("#cmb_cuentaventilacioninsta option:contains(" + data[0].c_0401_204 + ")").attr('selected', 'selected');
+    $("#txtespparednomventiinsta").val(data[0].c_0401_205);
+    $("#txtnomventiiinsta").val(data[0].c_0401_206);
+    $("#txtdiamextventiinsta").val(data[0].c_0401_207);
     //#endregion
     idInstalacionesOp = data[0].id;
     inhabilitarform("#instalacionesoperacionfrm", true);
@@ -14197,83 +14197,83 @@ function saveInstalacionesOp() {
     var webMethod = "saveInstalacionesOperacion";
 
     var params = {
-        C_0101_0001_id: area,
-        C_0401_130: $("#cmb_tipoInstalacion").val(),
-        C_0401_131: $("#fec_inicio_insta").val(),
-        C_0401_132: $("#fec_instalacion_insta").val(),
-        C_0401_133: $("#fec_instalacion_insta").val(),
-        C_0401_134: $("#fec_Fab_insta").val(),
-        C_0401_135: $("#cmb_matfabinsta").val(),
-        C_0401_136: $("#txtfabricanteinsta").val(),
-        C_0401_137: $("#txtedoactualinsta").val(),
-        C_0401_138: $("#txtedohistoinsta").val(),
-        C_0401_139: $("#txtdiamcanoninsta").val(),
-        C_0401_140: $("#cmb_orientacanioninsta").val(),
-        C_0401_141: $("#txtespdisenioinsta").val(),
-        C_0401_142: $("#txtespesornominalcanioninsta").val(),
-        C_0401_143: $("#txtmaxperdidaespesorinsta").val(),
-        C_0401_145: $("#cmb_tipolanzadorinsta ").val(),
-        C_0401_146: $("#cmb_tipodispositivonsta").val(),
-        C_0401_148: $("#txtlongmaxpermdisprascadorinsta").val(),
-        C_0401_149: $("#txtdiametromaxdispotivoinsta").val(),
-        C_0401_150: $("#txtpresmaxdisenioinsta").val(),
-        C_0401_151: $("#txtlongmedidacanioninsta").val(),
-        C_0401_152: $("#txtmecanismocierreinsta").val(),
-        C_0401_153:$("#cmb_tipovalvulainstainsta").val(),
-        C_0401_154:$("#cmb_edofuncionalinsta").val(),
-        C_0401_155:$("#cmb_Operacionformremotainsta").val(),
-        C_0401_156:$("#cmb_valvsegucrinsta").val(),
-        C_0401_157:$("#txtmarcamodvalinsta").val(),
-        C_0401_158:$("#txtoperadovalinsta").val(),
-        C_0401_159:$("#cmb_tipooperadorinsta").val(),
-        C_0401_160:$("#txtdiamextvalvinsta").val(),
-        C_0401_161:$("#txtespediseniovalvinsta").val(),
-        C_0401_162:$("#txtpresionmaxdiseniovalvinsta").val(),
-        C_0401_163:$("#txtptiempotardallegarvalvulaemerinsta").val(),
-        C_0401_164:$("#cmb_poscvalvdisinsta").val(),
-        C_0401_165:$("#cmb_posfuncvalvinsta").val(),
-        C_0401_166:$("#cmb_prinfuninsta").val(),
-        C_0401_167:$("#cmb_tipoconexinsta").val(),
-        C_0401_168:$("#txtpresionpruebavalvinsta").val(),
-        C_0401_169:$("#cmb_tipomarcadorinsta").val(),
-        C_0401_170:$("#cmb_tipoteeinsta").val(),
-        C_0401_171:$("#fec_presuinicial_insta").val(),
-        C_0401_172:$("#txtdiamextramaTinsta").val(),
-        C_0401_173:$("#txtdiamextentradaactvnsta").val(),
-        C_0401_174:$("#txtespesorparednominsta").val(),
-        C_0401_175:$("#txtespdisenioinsta").val(),
-        C_0401_176:$("#txtdiamextsalidainnsta").val(),
-        C_0401_177:$("#cmb_tipocierratapasinsta").val(),
-        C_0401_178:$("#txtdiamextdelactivoinsta").val(),
-        C_0401_179:$("#cmb_tipobridainsta").val(),
-        C_0401_180:$("#txtpresmaxopbridainsta").val(),
-        C_0401_181: $("#cmb_tipoespdiseniobriadainsta").val(),
-        C_0401_182:$("#cmb_tipomedidorinsta").val(),
-        C_0401_183:$("#txtnoserieemedidorinsta").val(),
-        C_0401_184:$("#cmb_tipoconexramainsta").val(),
-        C_0401_185:$("#txtgrosornomconexramainsta").val(),
-        C_0401_186:$("#txtdiamextconexraminsta").val(),
-        C_0401_187:$("#txtespdisenioconexramainsta").val(),
-        C_0401_188:$("#txtAngulocurvhoriCodosinsta").val(),
-        C_0401_189:$("#txtradiocodoinsta").val(),
-        C_0401_190:$("#cmb_tipogradocodo").val(),
-        C_0401_191:$("#txtdiamcodoextinsta").val(),
-        C_0401_192:$("#txtespesorcodonominsta").val(),
-        C_0401_193:$("#txtdiamextsalidacodosinsta").val(),
-        C_0401_194:$("#cmb_tipoespdiseniocodo").val(),
-        C_0401_195:$("#txtangulocurvverticodoinsta").val(),
-        C_0401_196:$("#cmb_tipogradoreductor").val(),
-        C_0401_197:$("#txtdiametroextreductorentradaactivoinsta").val(),
-        C_0401_198:$("#txtdiametroextreductorsalidaactivoinsta").val(),
-        C_0401_199:$("#cmb_tiporeductor").val(),
-        C_0401_200:$("#cmb_tipoespdisreductor").val(),
-        C_0401_201:$("#cmb_tipoventilacion").val(),
-        C_0401_202:$("#txtlogcarcasainsta").val(),
-        C_0401_203:$("#cmb_aislamientotubinsta").val(),
-        C_0401_204:$("#cmb_cuentaventilacioninsta").val(),
-        C_0401_205:$("#txtespparednomventiinsta").val(),
-        C_0401_206:$("#txtnomventiiinsta").val(),
-        C_0401_207:$("#txtdiamextventiinsta").val(),
+        c_0101_0001_id: area,
+        c_0401_130: $("#cmb_tipoInstalacion").val(),
+        c_0401_131: $("#fec_inicio_insta").val(),
+        c_0401_132: $("#fec_instalacion_insta").val(),
+        c_0401_133: $("#fec_instalacion_insta").val(),
+        c_0401_134: $("#fec_Fab_insta").val(),
+        c_0401_135: $("#cmb_matfabinsta").val(),
+        c_0401_136: $("#txtfabricanteinsta").val(),
+        c_0401_137: $("#txtedoactualinsta").val(),
+        c_0401_138: $("#txtedohistoinsta").val(),
+        c_0401_139: $("#txtdiamcanoninsta").val(),
+        c_0401_140: $("#cmb_orientacanioninsta").val(),
+        c_0401_141: $("#txtespdisenioinsta").val(),
+        c_0401_142: $("#txtespesornominalcanioninsta").val(),
+        c_0401_143: $("#txtmaxperdidaespesorinsta").val(),
+        c_0401_145: $("#cmb_tipolanzadorinsta ").val(),
+        c_0401_146: $("#cmb_tipodispositivonsta").val(),
+        c_0401_148: $("#txtlongmaxpermdisprascadorinsta").val(),
+        c_0401_149: $("#txtdiametromaxdispotivoinsta").val(),
+        c_0401_150: $("#txtpresmaxdisenioinsta").val(),
+        c_0401_151: $("#txtlongmedidacanioninsta").val(),
+        c_0401_152: $("#txtmecanismocierreinsta").val(),
+        c_0401_153:$("#cmb_tipovalvulainstainsta").val(),
+        c_0401_154:$("#cmb_edofuncionalinsta").val(),
+        c_0401_155:$("#cmb_Operacionformremotainsta").val(),
+        c_0401_156:$("#cmb_valvsegucrinsta").val(),
+        c_0401_157:$("#txtmarcamodvalinsta").val(),
+        c_0401_158:$("#txtoperadovalinsta").val(),
+        c_0401_159:$("#cmb_tipooperadorinsta").val(),
+        c_0401_160:$("#txtdiamextvalvinsta").val(),
+        c_0401_161:$("#txtespediseniovalvinsta").val(),
+        c_0401_162:$("#txtpresionmaxdiseniovalvinsta").val(),
+        c_0401_163:$("#txtptiempotardallegarvalvulaemerinsta").val(),
+        c_0401_164:$("#cmb_poscvalvdisinsta").val(),
+        c_0401_165:$("#cmb_posfuncvalvinsta").val(),
+        c_0401_166:$("#cmb_prinfuninsta").val(),
+        c_0401_167:$("#cmb_tipoconexinsta").val(),
+        c_0401_168:$("#txtpresionpruebavalvinsta").val(),
+        c_0401_169:$("#cmb_tipomarcadorinsta").val(),
+        c_0401_170:$("#cmb_tipoteeinsta").val(),
+        c_0401_171:$("#fec_presuinicial_insta").val(),
+        c_0401_172:$("#txtdiamextramaTinsta").val(),
+        c_0401_173:$("#txtdiamextentradaactvnsta").val(),
+        c_0401_174:$("#txtespesorparednominsta").val(),
+        c_0401_175:$("#txtespdisenioinsta").val(),
+        c_0401_176:$("#txtdiamextsalidainnsta").val(),
+        c_0401_177:$("#cmb_tipocierratapasinsta").val(),
+        c_0401_178:$("#txtdiamextdelactivoinsta").val(),
+        c_0401_179:$("#cmb_tipobridainsta").val(),
+        c_0401_180:$("#txtpresmaxopbridainsta").val(),
+        c_0401_181: $("#cmb_tipoespdiseniobriadainsta").val(),
+        c_0401_182:$("#cmb_tipomedidorinsta").val(),
+        c_0401_183:$("#txtnoserieemedidorinsta").val(),
+        c_0401_184:$("#cmb_tipoconexramainsta").val(),
+        c_0401_185:$("#txtgrosornomconexramainsta").val(),
+        c_0401_186:$("#txtdiamextconexraminsta").val(),
+        c_0401_187:$("#txtespdisenioconexramainsta").val(),
+        c_0401_188:$("#txtAngulocurvhoriCodosinsta").val(),
+        c_0401_189:$("#txtradiocodoinsta").val(),
+        c_0401_190:$("#cmb_tipogradocodo").val(),
+        c_0401_191:$("#txtdiamcodoextinsta").val(),
+        c_0401_192:$("#txtespesorcodonominsta").val(),
+        c_0401_193:$("#txtdiamextsalidacodosinsta").val(),
+        c_0401_194:$("#cmb_tipoespdiseniocodo").val(),
+        c_0401_195:$("#txtangulocurvverticodoinsta").val(),
+        c_0401_196:$("#cmb_tipogradoreductor").val(),
+        c_0401_197:$("#txtdiametroextreductorentradaactivoinsta").val(),
+        c_0401_198:$("#txtdiametroextreductorsalidaactivoinsta").val(),
+        c_0401_199:$("#cmb_tiporeductor").val(),
+        c_0401_200:$("#cmb_tipoespdisreductor").val(),
+        c_0401_201:$("#cmb_tipoventilacion").val(),
+        c_0401_202:$("#txtlogcarcasainsta").val(),
+        c_0401_203:$("#cmb_aislamientotubinsta").val(),
+        c_0401_204:$("#cmb_cuentaventilacioninsta").val(),
+        c_0401_205:$("#txtespparednomventiinsta").val(),
+        c_0401_206:$("#txtnomventiiinsta").val(),
+        c_0401_207:$("#txtdiamextventiinsta").val(),
         coordenada_especifica: $("#coord_esp_insta_x").val() + ' ' + $("#coord_esp_insta_y").val(),
         kilometro_especifico: $("#km_esp_insta").val()
     };
@@ -14320,83 +14320,83 @@ function updateOperacioInstalacionesOp() {
         webMethod = "updateInstalacionesOperacion";
         params = {
             id: idInstalacionesOp,
-            C_0101_0001_id: area,
-            C_0401_130: $("#cmb_tipoInstalacion").val(),
-            C_0401_131: $("#fec_inicio_insta").val(),
-            C_0401_132: $("#fec_instalacion_insta").val(),
-            C_0401_133: $("#fec_instalacion_insta").val(),
-            C_0401_134: $("#fec_Fab_insta").val(),
-            C_0401_135: $("#cmb_matfabinsta").val(),
-            C_0401_136: $("#txtfabricanteinsta").val(),
-            C_0401_137: $("#txtedoactualinsta").val(),
-            C_0401_138: $("#txtedohistoinsta").val(),
-            C_0401_139: $("#txtdiamcanoninsta").val(),
-            C_0401_140: $("#cmb_orientacanioninsta").val(),
-            C_0401_141: $("#txtespdisenioinsta").val(),
-            C_0401_142: $("#txtespesornominalcanioninsta").val(),
-            C_0401_143: $("#txtmaxperdidaespesorinsta").val(),
-            C_0401_145: $("#cmb_tipolanzadorinsta ").val(),
-            C_0401_146: $("#cmb_tipodispositivonsta").val(),
-            C_0401_148: $("#txtlongmaxpermdisprascadorinsta").val(),
-            C_0401_149: $("#txtdiametromaxdispotivoinsta").val(),
-            C_0401_150: $("#txtpresmaxdisenioinsta").val(),
-            C_0401_151: $("#txtlongmedidacanioninsta").val(),
-            C_0401_152: $("#txtmecanismocierreinsta").val(),
-            C_0401_153: $("#cmb_tipovalvulainstainsta").val(),
-            C_0401_154: $("#cmb_edofuncionalinsta").val(),
-            C_0401_155: $("#cmb_Operacionformremotainsta").val(),
-            C_0401_156: $("#cmb_valvsegucrinsta").val(),
-            C_0401_157: $("#txtmarcamodvalinsta").val(),
-            C_0401_158: $("#txtoperadovalinsta").val(),
-            C_0401_159: $("#cmb_tipooperadorinsta").val(),
-            C_0401_160: $("#txtdiamextvalvinsta").val(),
-            C_0401_161: $("#txtespediseniovalvinsta").val(),
-            C_0401_162: $("#txtpresionmaxdiseniovalvinsta").val(),
-            C_0401_163: $("#txtptiempotardallegarvalvulaemerinsta").val(),
-            C_0401_164: $("#cmb_poscvalvdisinsta").val(),
-            C_0401_165: $("#cmb_posfuncvalvinsta").val(),
-            C_0401_166: $("#cmb_prinfuninsta").val(),
-            C_0401_167: $("#cmb_tipoconexinsta").val(),
-            C_0401_168: $("#txtpresionpruebavalvinsta").val(),
-            C_0401_169: $("#cmb_tipomarcadorinsta").val(),
-            C_0401_170: $("#cmb_tipoteeinsta").val(),
-            C_0401_171: $("#fec_presuinicial_insta").val(),
-            C_0401_172: $("#txtdiamextramaTinsta").val(),
-            C_0401_173: $("#txtdiamextentradaactvnsta").val(),
-            C_0401_174: $("#txtespesorparednominsta").val(),
-            C_0401_175: $("#txtespdisenioinsta").val(),
-            C_0401_176: $("#txtdiamextsalidainnsta").val(),
-            C_0401_177: $("#cmb_tipocierratapasinsta").val(),
-            C_0401_178: $("#txtdiamextdelactivoinsta").val(),
-            C_0401_179: $("#cmb_tipobridainsta").val(),
-            C_0401_180: $("#txtpresmaxopbridainsta").val(),
-            C_0401_181: $("#cmb_tipoespdiseniobriadainsta").val(),
-            C_0401_182: $("#cmb_tipomedidorinsta").val(),
-            C_0401_183: $("#txtnoserieemedidorinsta").val(),
-            C_0401_184: $("#cmb_tipoconexramainsta").val(),
-            C_0401_185: $("#txtgrosornomconexramainsta").val(),
-            C_0401_186: $("#txtdiamextconexraminsta").val(),
-            C_0401_187: $("#txtespdisenioconexramainsta").val(),
-            C_0401_188: $("#txtAngulocurvhoriCodosinsta").val(),
-            C_0401_189: $("#txtradiocodoinsta").val(),
-            C_0401_190: $("#cmb_tipogradocodo").val(),
-            C_0401_191: $("#txtdiamcodoextinsta").val(),
-            C_0401_192: $("#txtespesorcodonominsta").val(),
-            C_0401_193: $("#txtdiamextsalidacodosinsta").val(),
-            C_0401_194: $("#cmb_tipoespdiseniocodo").val(),
-            C_0401_195: $("#txtangulocurvverticodoinsta").val(),
-            C_0401_196: $("#cmb_tipogradoreductor").val(),
-            C_0401_197: $("#txtdiametroextreductorentradaactivoinsta").val(),
-            C_0401_198: $("#txtdiametroextreductorsalidaactivoinsta").val(),
-            C_0401_199: $("#cmb_tiporeductor").val(),
-            C_0401_200: $("#cmb_tipoespdisreductor").val(),
-            C_0401_201: $("#cmb_tipoventilacion").val(),
-            C_0401_202: $("#txtlogcarcasainsta").val(),
-            C_0401_203: $("#cmb_aislamientotubinsta").val(),
-            C_0401_204: $("#cmb_cuentaventilacioninsta").val(),
-            C_0401_205: $("#txtespparednomventiinsta").val(),
-            C_0401_206: $("#txtnomventiiinsta").val(),
-            C_0401_207: $("#txtdiamextventiinsta").val(),
+            c_0101_0001_id: area,
+            c_0401_130: $("#cmb_tipoInstalacion").val(),
+            c_0401_131: $("#fec_inicio_insta").val(),
+            c_0401_132: $("#fec_instalacion_insta").val(),
+            c_0401_133: $("#fec_instalacion_insta").val(),
+            c_0401_134: $("#fec_Fab_insta").val(),
+            c_0401_135: $("#cmb_matfabinsta").val(),
+            c_0401_136: $("#txtfabricanteinsta").val(),
+            c_0401_137: $("#txtedoactualinsta").val(),
+            c_0401_138: $("#txtedohistoinsta").val(),
+            c_0401_139: $("#txtdiamcanoninsta").val(),
+            c_0401_140: $("#cmb_orientacanioninsta").val(),
+            c_0401_141: $("#txtespdisenioinsta").val(),
+            c_0401_142: $("#txtespesornominalcanioninsta").val(),
+            c_0401_143: $("#txtmaxperdidaespesorinsta").val(),
+            c_0401_145: $("#cmb_tipolanzadorinsta ").val(),
+            c_0401_146: $("#cmb_tipodispositivonsta").val(),
+            c_0401_148: $("#txtlongmaxpermdisprascadorinsta").val(),
+            c_0401_149: $("#txtdiametromaxdispotivoinsta").val(),
+            c_0401_150: $("#txtpresmaxdisenioinsta").val(),
+            c_0401_151: $("#txtlongmedidacanioninsta").val(),
+            c_0401_152: $("#txtmecanismocierreinsta").val(),
+            c_0401_153: $("#cmb_tipovalvulainstainsta").val(),
+            c_0401_154: $("#cmb_edofuncionalinsta").val(),
+            c_0401_155: $("#cmb_Operacionformremotainsta").val(),
+            c_0401_156: $("#cmb_valvsegucrinsta").val(),
+            c_0401_157: $("#txtmarcamodvalinsta").val(),
+            c_0401_158: $("#txtoperadovalinsta").val(),
+            c_0401_159: $("#cmb_tipooperadorinsta").val(),
+            c_0401_160: $("#txtdiamextvalvinsta").val(),
+            c_0401_161: $("#txtespediseniovalvinsta").val(),
+            c_0401_162: $("#txtpresionmaxdiseniovalvinsta").val(),
+            c_0401_163: $("#txtptiempotardallegarvalvulaemerinsta").val(),
+            c_0401_164: $("#cmb_poscvalvdisinsta").val(),
+            c_0401_165: $("#cmb_posfuncvalvinsta").val(),
+            c_0401_166: $("#cmb_prinfuninsta").val(),
+            c_0401_167: $("#cmb_tipoconexinsta").val(),
+            c_0401_168: $("#txtpresionpruebavalvinsta").val(),
+            c_0401_169: $("#cmb_tipomarcadorinsta").val(),
+            c_0401_170: $("#cmb_tipoteeinsta").val(),
+            c_0401_171: $("#fec_presuinicial_insta").val(),
+            c_0401_172: $("#txtdiamextramaTinsta").val(),
+            c_0401_173: $("#txtdiamextentradaactvnsta").val(),
+            c_0401_174: $("#txtespesorparednominsta").val(),
+            c_0401_175: $("#txtespdisenioinsta").val(),
+            c_0401_176: $("#txtdiamextsalidainnsta").val(),
+            c_0401_177: $("#cmb_tipocierratapasinsta").val(),
+            c_0401_178: $("#txtdiamextdelactivoinsta").val(),
+            c_0401_179: $("#cmb_tipobridainsta").val(),
+            c_0401_180: $("#txtpresmaxopbridainsta").val(),
+            c_0401_181: $("#cmb_tipoespdiseniobriadainsta").val(),
+            c_0401_182: $("#cmb_tipomedidorinsta").val(),
+            c_0401_183: $("#txtnoserieemedidorinsta").val(),
+            c_0401_184: $("#cmb_tipoconexramainsta").val(),
+            c_0401_185: $("#txtgrosornomconexramainsta").val(),
+            c_0401_186: $("#txtdiamextconexraminsta").val(),
+            c_0401_187: $("#txtespdisenioconexramainsta").val(),
+            c_0401_188: $("#txtAngulocurvhoriCodosinsta").val(),
+            c_0401_189: $("#txtradiocodoinsta").val(),
+            c_0401_190: $("#cmb_tipogradocodo").val(),
+            c_0401_191: $("#txtdiamcodoextinsta").val(),
+            c_0401_192: $("#txtespesorcodonominsta").val(),
+            c_0401_193: $("#txtdiamextsalidacodosinsta").val(),
+            c_0401_194: $("#cmb_tipoespdiseniocodo").val(),
+            c_0401_195: $("#txtangulocurvverticodoinsta").val(),
+            c_0401_196: $("#cmb_tipogradoreductor").val(),
+            c_0401_197: $("#txtdiametroextreductorentradaactivoinsta").val(),
+            c_0401_198: $("#txtdiametroextreductorsalidaactivoinsta").val(),
+            c_0401_199: $("#cmb_tiporeductor").val(),
+            c_0401_200: $("#cmb_tipoespdisreductor").val(),
+            c_0401_201: $("#cmb_tipoventilacion").val(),
+            c_0401_202: $("#txtlogcarcasainsta").val(),
+            c_0401_203: $("#cmb_aislamientotubinsta").val(),
+            c_0401_204: $("#cmb_cuentaventilacioninsta").val(),
+            c_0401_205: $("#txtespparednomventiinsta").val(),
+            c_0401_206: $("#txtnomventiiinsta").val(),
+            c_0401_207: $("#txtdiamextventiinsta").val(),
             coordenada_especifica: $("#coord_esp_insta_x").val() + ' ' + $("#coord_esp_insta_y").val(),
             kilometro_especifico: $("#km_esp_insta").val()
         };
@@ -14446,7 +14446,7 @@ function loadtipoLanzadorOp() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipolanzadorinsta').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_145
+                            text: data.data[i].c_0401_145
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -14463,7 +14463,7 @@ function loadtipoLanzadorOp() {
 function saveotroTipoLanzadorOp() {
     var webMethod = "saveTipoLanzadorOperacion";
     var params = {
-        C_0401_145: $("#newTipolanzador").val(),
+        c_0401_145: $("#newTipolanzador").val(),
         descripcion: $("#newDesTipoLanzador").val()
     };
 
@@ -14516,7 +14516,7 @@ function loadtipoDispositivo() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipodispositivonsta').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_146
+                            text: data.data[i].c_0401_146
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -14533,7 +14533,7 @@ function loadtipoDispositivo() {
 function saveotroTipoDispositivoOp() {
     var webMethod = "saveTipoDispositivoOperacion";
     var params = {
-        C_0401_146: $("#newTipodispositivo").val(),
+        c_0401_146: $("#newTipodispositivo").val(),
         descripcion: $("#newDesTipoDispositivo").val()
     };
 
@@ -14586,7 +14586,7 @@ function loadtipoValvula() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipovalvulainstainsta').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_153
+                            text: data.data[i].c_0401_153
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -14603,7 +14603,7 @@ function loadtipoValvula() {
 function saveotroTipovalvulainstalacion() {
     var webMethod = "saveTipoValvulaOperacion";
     var params = {
-        C_0401_153: $("#newTipovalvulainsta").val(),
+        c_0401_153: $("#newTipovalvulainsta").val(),
         descripcion: $("#newDesTipovalvulainsta").val()
     };
 
@@ -14655,7 +14655,7 @@ function loadtipoOperador() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipooperadorinsta').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_159
+                            text: data.data[i].c_0401_159
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -14672,7 +14672,7 @@ function loadtipoOperador() {
 function saveotroTipoOperador() {
     var webMethod = "saveTipoOperadorOperacion";
     var params = {
-        C_0401_159: $("#newTipooperador").val(),
+        c_0401_159: $("#newTipooperador").val(),
         descripcion: $("#newDesTipooperador").val()
     };
 
@@ -14724,7 +14724,7 @@ function loadtipoConexionOp() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipoconexinsta').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_167
+                            text: data.data[i].c_0401_167
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -14741,7 +14741,7 @@ function loadtipoConexionOp() {
 function saveotroTipoConexion() {
     var webMethod = "saveTipoConexionOperacion";
     var params = {
-        C_0401_167: $("#newTipooconex").val(),
+        c_0401_167: $("#newTipooconex").val(),
         descripcion: $("#newDesTipoconex").val()
     };
 
@@ -14794,7 +14794,7 @@ function loadtipoMarcador() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipomarcadorinsta').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_169
+                            text: data.data[i].c_0401_169
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -14811,7 +14811,7 @@ function loadtipoMarcador() {
 function saveotroTipomarcador() {
     var webMethod = "saveTipoMarcadorOperacion";
     var params = {
-        C_0401_169: $("#newTipoomarcador").val(),
+        c_0401_169: $("#newTipoomarcador").val(),
         descripcion: $("#newDesTipomarcador").val()
     };
 
@@ -14864,7 +14864,7 @@ function loadtipoTee() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipoteeinsta').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_170
+                            text: data.data[i].c_0401_170
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -14881,7 +14881,7 @@ function loadtipoTee() {
 function saveotroTipoTee() {
     var webMethod = "saveTipoTeeOperacion";
     var params = {
-        C_0401_170: $("#newTipotee").val(),
+        c_0401_170: $("#newTipotee").val(),
         descripcion: $("#newDesTipotee").val()
     };
 
@@ -14934,7 +14934,7 @@ function loadtipoCierre() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipocierratapasinsta').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_177
+                            text: data.data[i].c_0401_177
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -14951,7 +14951,7 @@ function loadtipoCierre() {
 function saveotroTipocierretapas() {
     var webMethod = "saveTipoCierreOperacion";
     var params = {
-        C_0401_177: $("#newTipocierretapas").val(),
+        c_0401_177: $("#newTipocierretapas").val(),
         descripcion: $("#newDesTipocierretapas").val()
     };
 
@@ -15003,7 +15003,7 @@ function loadtipoBriada() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipobridainsta').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_179
+                            text: data.data[i].c_0401_179
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -15020,7 +15020,7 @@ function loadtipoBriada() {
 function saveotroTipobrida() {
     var webMethod = "saveTipoBrigadaOperacion";
     var params = {
-        C_0401_179: $("#newTipobrida").val(),
+        c_0401_179: $("#newTipobrida").val(),
         descripcion: $("#newDesTipobrida").val()
     };
 
@@ -15073,7 +15073,7 @@ function loadtipoEspecificacionBriada() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipoespdiseniobriadainsta').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_181
+                            text: data.data[i].c_0401_181
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -15090,7 +15090,7 @@ function loadtipoEspecificacionBriada() {
 function saveotroTipoespdisenioBriada() {
     var webMethod = "saveEspDisenioBriadaOperacion";
     var params = {
-        C_0401_181: $("#newTipoespdisenBriada").val(),
+        c_0401_181: $("#newTipoespdisenBriada").val(),
         descripcion: $("#newDesTipespdisenBriada").val()
     };
 
@@ -15142,7 +15142,7 @@ function loadtipoMedidor() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipomedidorinsta').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_182
+                            text: data.data[i].c_0401_182
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -15159,7 +15159,7 @@ function loadtipoMedidor() {
 function saveotroTipomedidor() {
     var webMethod = "saveTipoMedidorOperacion";
     var params = {
-        C_0401_182: $("#newTipomedidor").val(),
+        c_0401_182: $("#newTipomedidor").val(),
         descripcion: $("#newDesTipmedidor").val()
     };
 
@@ -15211,7 +15211,7 @@ function loadtipoConexionRama() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipoconexramainsta').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_184
+                            text: data.data[i].c_0401_184
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -15228,7 +15228,7 @@ function loadtipoConexionRama() {
 function saveotroTipoconexrama() {
     var webMethod = "saveTipoConexionRamaOperacion";
     var params = {
-        C_0401_184: $("#newTipoconexrama").val(),
+        c_0401_184: $("#newTipoconexrama").val(),
         descripcion: $("#newDesTipconexrama").val()
     };
 
@@ -15280,7 +15280,7 @@ function loadtipoGradosCodo() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipogradocodo').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_190
+                            text: data.data[i].c_0401_190
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -15297,7 +15297,7 @@ function loadtipoGradosCodo() {
 function saveotroTipogradocodo() {
     var webMethod = "saveGradoCodosOperacion";
     var params = {
-        C_0401_190: $("#newTipogradocodo").val(),
+        c_0401_190: $("#newTipogradocodo").val(),
         descripcion: $("#newDesTipogradocodo").val()
     };
 
@@ -15349,7 +15349,7 @@ function loadtipoEspecificacionDisenioCodo() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipoespdiseniocodo').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_194
+                            text: data.data[i].c_0401_194
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -15366,7 +15366,7 @@ function loadtipoEspecificacionDisenioCodo() {
 function saveotroTipoespdiseniocodo() {
     var webMethod = "saveGradoCodosOperacion";
     var params = {
-        C_0401_194: $("#newTipogradocodo").val(),
+        c_0401_194: $("#newTipogradocodo").val(),
         descripcion: $("#newDesTipogradocodo").val()
     };
 
@@ -15419,7 +15419,7 @@ function loadGradoReductor() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipogradoreductor').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_196
+                            text: data.data[i].c_0401_196
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -15436,7 +15436,7 @@ function loadGradoReductor() {
 function saveotroTipogradoreductor() {
     var webMethod = "saveGradoReductorOperacion";
     var params = {
-        C_0401_196: $("#newTipogradoreductor").val(),
+        c_0401_196: $("#newTipogradoreductor").val(),
         descripcion: $("#newDesTipogradoreductor").val()
     };
     console.log(JSON.stringify(params))
@@ -15486,7 +15486,7 @@ function loadTipoReductor() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tiporeductor').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_199
+                            text: data.data[i].c_0401_199
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -15503,7 +15503,7 @@ function loadTipoReductor() {
 function saveotroTiporeductor() {
     var webMethod = "saveTipoReductorOperacion";
     var params = {
-        C_0401_199: $("#newTiporeductor").val(),
+        c_0401_199: $("#newTiporeductor").val(),
         descripcion: $("#newDesTiporeductor").val()
     };
     console.log(JSON.stringify(params))
@@ -15553,7 +15553,7 @@ function loadEspecificacionesDisenioReductor() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipoespdisreductor').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_200
+                            text: data.data[i].c_0401_200
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -15570,7 +15570,7 @@ function loadEspecificacionesDisenioReductor() {
 function saveotroTipoespdisreductor() {
     var webMethod = "saveEspReductorOperacion";
     var params = {
-        C_0401_200: $("#newTipoespdisreductor").val(),
+        c_0401_200: $("#newTipoespdisreductor").val(),
         descripcion: $("#newDesTipoespdisreductor").val()
     };
     console.log(JSON.stringify(params))
@@ -15620,7 +15620,7 @@ function loadTipoTuberia() {
                     for (var i = 0; i < data.data.length; i++) {
                         $('#cmb_tipoventilacion').append($('<option>', {
                             value: data.data[i].id,
-                            text: data.data[i].C_0401_201
+                            text: data.data[i].c_0401_201
                         }));
                     }
                     resolve(data); // Resolve the promise with the data
@@ -15637,7 +15637,7 @@ function loadTipoTuberia() {
 function saveotroTipoventilacion() {
     var webMethod = "saveTipoTuberiaRevestimientoOperacion";
     var params = {
-        C_0401_201: $("#newTipoventilacion").val(),
+        c_0401_201: $("#newTipoventilacion").val(),
         descripcion: $("#newDesTipoventilacion").val()
     };
     console.log(JSON.stringify(params))
@@ -15856,7 +15856,7 @@ function saveOperacionDocumental() {
 
     formData.append("kilometro_especifico",$("#km_esp_iden_operacion_documental").val() )
     formData.append("coordenada_especifica",  $("#coord_esp_iden_x_operacion_documental").val()+' '+$("#coord_esp_iden_y_operacion_documental").val(),)
-    formData.append("C_0101_0001_id", area)
+    formData.append("c_0101_0001_id", area)
     // Make sure files are being selected and appended properly
     const itemsToSubstitute = [
         "historial_condiciones",
@@ -15960,7 +15960,7 @@ function updateOperacionDocumental() {
         formData.append("id", idOpDocumental)
         formData.append("kilometro_especifico",$("#km_esp_iden_operacion_documental").val() )
         formData.append("coordenada_especifica",  $("#coord_esp_iden_x_operacion_documental").val()+' '+$("#coord_esp_iden_y_operacion_documental").val(),)
-        formData.append("C_0101_0001_id", area)
+        formData.append("c_0101_0001_id", area)
         // Make sure files are being selected and appended properly
         const itemsToSubstitute = [
             "historial_condiciones",
@@ -16164,8 +16164,8 @@ function llenarDatosGeneralOperacion(data) {
         $("#coord_esp_gralopl_y").val("");
     }
     $("#km_esp_gralop").val(data[0].kilometro_especifico);
-    $("#txtvolumentrans").val(data[0].C_0403_211);
-    $("#cmbcrucesotrosductos option:contains(" + data[0].C_0414_253 + ")").attr('selected', 'selected');
+    $("#txtvolumentrans").val(data[0].c_0403_211);
+    $("#cmbcrucesotrosductos option:contains(" + data[0].c_0414_253 + ")").attr('selected', 'selected');
     if ($("#cmbcrucesotrosductos").val() == "Sí") {
         $("#kmparalelismo").show()
     }
@@ -16187,9 +16187,9 @@ function deleteallpropertytotable() {
 function saveGeneralOp() {
     var webMethod = "createGeneralOp";
     const formData = new FormData();
-    formData.append("C_0101_0001_id", area);
-    formData.append("C_0403_211", $("#txtvolumentrans").val());
-    formData.append("C_0414_253", $("#cmbcrucesotrosductos").val());
+    formData.append("c_0101_0001_id", area);
+    formData.append("c_0403_211", $("#txtvolumentrans").val());
+    formData.append("c_0414_253", $("#cmbcrucesotrosductos").val());
     formData.append("LOCALIZACION_KM", $("#km_locpara_gralop").val());
     formData.append("kilometro_especifico", $("#km_esp_gralop").val());
     formData.append("coordenada_especifica", $("#coord_esp_gralop_x").val() + ' ' + $("#coord_esp_gralopl_y").val());
@@ -16327,9 +16327,9 @@ function updateOperacionGeneral() {
         });
         formData.append("id", idGeneralOp);
         formData.append("property_id", idGeneralOp);
-        formData.append("C_0101_0001_id", area);
-        formData.append("C_0403_211", $("#txtvolumentrans").val());
-        formData.append("C_0414_253", $("#cmbcrucesotrosductos").val());
+        formData.append("c_0101_0001_id", area);
+        formData.append("c_0403_211", $("#txtvolumentrans").val());
+        formData.append("c_0414_253", $("#cmbcrucesotrosductos").val());
         formData.append("LOCALIZACION_KM", $("#km_locpara_gralop").val());
         formData.append("kilometro_especifico", $("#km_esp_gralop").val());
         formData.append("coordenada_especifica", $("#coord_esp_gralop_x").val() + ' ' + $("#coord_esp_gralopl_y").val());
@@ -16818,7 +16818,7 @@ function saveGeoespacialDocumental() {
     const formData = new FormData();
     formData.append("kilometro_especifico", $("#km_esp_geodoc").val())
     formData.append("coordenada_especifica", $("#coord_esp_geodoc_x").val() + ' ' + $("#coord_esp_geodoc_y").val(),)
-    formData.append("C_0101_0001_id", area)
+    formData.append("c_0101_0001_id", area)
     // Make sure files are being selected and appended properly
     const itemsToSubstitute = [
         "CONS_FOREST_AREA_400",
@@ -16997,7 +16997,7 @@ function updateGeoespacialDocumental() {
     formData.append("id", idGeoDocumental)
     formData.append("kilometro_especifico", $("#km_esp_geodoc").val())
     formData.append("coordenada_especifica", $("#coord_esp_geodoc_x").val() + ' ' + $("#coord_esp_geodoc_y").val(),)
-    formData.append("C_0101_0001_id", area)
+    formData.append("c_0101_0001_id", area)
     // Make sure files are being selected and appended properly
     const itemsToSubstitute = [
         "CONS_FOREST_AREA_400",
