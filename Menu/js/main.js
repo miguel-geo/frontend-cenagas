@@ -8001,29 +8001,29 @@ function consulta() {
 
                             for (i = 0; i < data.data.length; i++) {
                                 var persona = [data.data[i].id, data.data[i].areaunitaria,
-                                    data.data[i].CONS_FOREST_AREA_400 + ',' + 'CONS_FOREST_AREA_400',
-                                    data.data[i].CONS_ESA_AREA_400 + ',' + 'CONS_ESA_AREA_400',
-                                    data.data[i].G_NEARBY_AIRPORT_GETGEOMETRY + ',' + 'G_NEARBY_AIRPORT_GETGEOMETRY',
-                                    data.data[i].EC_SOIL_CONDUCT_SSURGO + ',' + 'EC_SOIL_CONDUCT_SSURGO',
-                                    data.data[i].EC_HVAC_SUSC_EST + ',' + 'EC_HVAC_SUSC_EST',
-                                    data.data[i].G_LANDUSE_NLCD + ',' + 'G_LANDUSE_NLCD',
-                                    data.data[i].G_LITHOLOGY_PRESENT + ',' + 'G_LITHOLOGY_PRESENT',
-                                    data.data[i].G_SINKHOLE_PRESENT + ',' + 'G_SINKHOLE_PRESENT',
-                                    data.data[i].G_LOCATIONS_SENS + ',' + 'G_LOCATIONS_SENS',
-                                    data.data[i].G_FLOODZONE + ',' + 'G_FLOODZONE',
-                                    data.data[i].CONS_STRUCTCOUNT_400FT + ',' + 'CONS_STRUCTCOUNT_400FT',
-                                    data.data[i].IC_MEAS_MPY_COUPON + ',' + 'IC_MEAS_MPY_COUPON',
-                                    data.data[i].MD_DETON_MIN_DISTANCE + ',' + 'MD_DETON_MIN_DISTANCE',
-                                    data.data[i].MD_BUILDING_FALLING_50FT + ',' + 'MD_BUILDING_FALLING_50FT',
-                                    data.data[i].NOP + ',' + 'NOP',
-                                    data.data[i].VELOCITY_CORROSION_INTERNAL + ',' + 'VELOCITY_CORROSION_INTERNAL',
-                                    data.data[i].WOF_LANDSLIDE_SEVERITY + ',' + 'WOF_LANDSLIDE_SEVERITY',
-                                    data.data[i].WOF_FIRECOUNT_EXP + ',' + 'WOF_FIRECOUNT_EXP',
-                                    data.data[i].WOF_COVERSTONE_PRES + ',' + 'WOF_COVERSTONE_PRES',
-                                    data.data[i].WOF_LIGHT_SUM_EXP + ',' + 'WOF_LIGHT_SUM_EXP',
-                                    data.data[i].WOF_TORNADO_COUNT + ',' + 'WOF_TORNADO_COUNT',
-                                    data.data[i].WOF_WIND_COUNT + ',' + 'WOF_WIND_COUNT',
-                                    data.data[i].WOF_SEISMIC_PGA_EXP + ',' + 'WOF_SEISMIC_PGA_EXP'];
+                                    data.data[i].cons_forest_area_400 + ',' + 'cons_forest_area_400',
+                                    data.data[i].cons_esa_area_400 + ',' + 'cons_esa_area_400',
+                                    data.data[i].g_nearby_airport_getgeometry + ',' + 'g_nearby_airport_getgeometry',
+                                    data.data[i].ec_soil_conduct_ssurgo + ',' + 'ec_soil_conduct_ssurgo',
+                                    data.data[i].ec_hvac_susc_est + ',' + 'ec_hvac_susc_est',
+                                    data.data[i].g_landuse_nlcd + ',' + 'g_landuse_nlcd',
+                                    data.data[i].g_lithology_present + ',' + 'g_lithology_present',
+                                    data.data[i].g_sinkhole_present + ',' + 'g_sinkhole_present',
+                                    data.data[i].g_locations_sens + ',' + 'g_locations_sens',
+                                    data.data[i].g_floodzone + ',' + 'g_floodzone',
+                                    data.data[i].cons_structcount_400ft + ',' + 'cons_structcount_400ft',
+                                    data.data[i].ic_meas_mpy_coupon + ',' + 'ic_meas_mpy_coupon',
+                                    data.data[i].md_deton_min_distance + ',' + 'md_deton_min_distance',
+                                    data.data[i].md_building_falling_50ft + ',' + 'md_building_falling_50ft',
+                                    data.data[i].nop + ',' + 'nop',
+                                    data.data[i].velocity_corrosion_internal + ',' + 'velocity_corrosion_internal',
+                                    data.data[i].wof_landslide_severity + ',' + 'wof_landslide_severity',
+                                    data.data[i].wof_firecount_exp + ',' + 'wof_firecount_exp',
+                                    data.data[i].wof_coverstone_pres + ',' + 'wof_coverstone_pres',
+                                    data.data[i].wof_light_sum_exp + ',' + 'wof_light_sum_exp',
+                                    data.data[i].wof_tornado_count + ',' + 'wof_tornado_count',
+                                    data.data[i].wof_wind_count + ',' + 'wof_wind_count',
+                                    data.data[i].wof_seismic_pga_exp + ',' + 'wof_seismic_pga_exp'];
 
 
                                 llenarTablasFileDocumentalGeoespacial(persona, "tablaGeoespacialDocumental", data.data[i].id);
@@ -10152,15 +10152,15 @@ function saveAnalisisRepDis() {
             estado_historico: $("#riesdis_estado_historico").val(),
             estado_actual: $("#riesdis_estado_actual").val(),
             id_riesgo: $("#riesdis_id_riesgo").val(),
-            A1: $("#riesdis_a1").val(),
-            A2: $("#riesdis_a2").val(),
-            A3: $("#riesdis_a3").val(),
-            A4: $("#riesdis_a4").val(),
-            A5: $("#riesdis_a5").val(),
-            A6: $("#riesdis_a6").val(),
-            A7: $("#riesdis_a7").val(),
-            A8: $("#riesdis_a8").val(),
-            A9: $("#riesdis_a9").val(),
+            a1: $("#riesdis_a1").val(),
+            a2: $("#riesdis_a2").val(),
+            a3: $("#riesdis_a3").val(),
+            a4: $("#riesdis_a4").val(),
+            a5: $("#riesdis_a5").val(),
+            a6: $("#riesdis_a6").val(),
+            a7: $("#riesdis_a7").val(),
+            a8: $("#riesdis_a8").val(),
+            a9: $("#riesdis_a9").val(),
             A10: $("#riesdis_a10").val(),
             A11: $("#riesdis_a11").val(),
             A12: $("#riesdis_a12").val()
@@ -10296,15 +10296,15 @@ function llenarDatosActualizacionAnalisisriesdis(data) {
     $("#riesdis_estado_historico").val(data[0].estado_historico);
     $("#riesdis_estado_actual").val(data[0].estado_actual);
     $("#riesdis_id_riesgo").val(data[0].id_riesgo);
-    $("#riesdis_a1").val(data[0].A1);
-    $("#riesdis_a2").val(data[0].A2);
-    $("#riesdis_a3").val(data[0].A3);
-    $("#riesdis_a4").val(data[0].A4);
-    $("#riesdis_a5").val(data[0].A5);
-    $("#riesdis_a6").val(data[0].A6);
-    $("#riesdis_a7").val(data[0].A7);
-    $("#riesdis_a8").val(data[0].A8);
-    $("#riesdis_a9").val(data[0].A9);
+    $("#riesdis_a1").val(data[0].a1);
+    $("#riesdis_a2").val(data[0].a2);
+    $("#riesdis_a3").val(data[0].a3);
+    $("#riesdis_a4").val(data[0].a4);
+    $("#riesdis_a5").val(data[0].a5);
+    $("#riesdis_a6").val(data[0].a6);
+    $("#riesdis_a7").val(data[0].a7);
+    $("#riesdis_a8").val(data[0].a8);
+    $("#riesdis_a9").val(data[0].a9);
     $("#riesdis_a10").val(data[0].A10);
     $("#riesdis_a11").val(data[0].A11);
     $("#riesdis_a12").val(data[0].A12);
@@ -10336,15 +10336,15 @@ function updateAnalisisriesdis() {
             estado_historico: $("#riesdis_estado_historico").val(),
             estado_actual: $("#riesdis_estado_actual").val(),
             id_riesgo: $("#riesdis_id_riesgo").val(),
-            A1: $("#riesdis_a1").val(),
-            A2: $("#riesdis_a2").val(),
-            A3: $("#riesdis_a3").val(),
-            A4: $("#riesdis_a4").val(),
-            A5: $("#riesdis_a5").val(),
-            A6: $("#riesdis_a6").val(),
-            A7: $("#riesdis_a7").val(),
-            A8: $("#riesdis_a8").val(),
-            A9: $("#riesdis_a9").val(),
+            a1: $("#riesdis_a1").val(),
+            a2: $("#riesdis_a2").val(),
+            a3: $("#riesdis_a3").val(),
+            a4: $("#riesdis_a4").val(),
+            a5: $("#riesdis_a5").val(),
+            a6: $("#riesdis_a6").val(),
+            a7: $("#riesdis_a7").val(),
+            a8: $("#riesdis_a8").val(),
+            a9: $("#riesdis_a9").val(),
             A10: $("#riesdis_a10").val(),
             A11: $("#riesdis_a11").val(),
             A12: $("#riesdis_a12").val()
@@ -16172,8 +16172,8 @@ function llenarDatosGeneralOperacion(data) {
     else {
         $("#kmparalelismo").hide()
     }
-    $("#km_locpara_gralop").val(data[0].LOCALIZACION_KM);
-    //formData.append("LOCALIZACION_KM", $("#km_locpara_gralop").val());
+    $("#km_locpara_gralop").val(data[0].localizacion_km);
+    //formData.append("localizacion_km", $("#km_locpara_gralop").val());
     $('#tbl_gral_propiedades tbody')[0].innerHTML = "";
     data.forEach(function (da) {
         llenarTablasGraloperacion('tbl_gral_propiedades', da.tipo_propiedad, da.dato_propiedad, da.porcentaje_propiedad);
@@ -16190,7 +16190,7 @@ function saveGeneralOp() {
     formData.append("c_0101_0001_id", area);
     formData.append("c_0403_211", $("#txtvolumentrans").val());
     formData.append("c_0414_253", $("#cmbcrucesotrosductos").val());
-    formData.append("LOCALIZACION_KM", $("#km_locpara_gralop").val());
+    formData.append("localizacion_km", $("#km_locpara_gralop").val());
     formData.append("kilometro_especifico", $("#km_esp_gralop").val());
     formData.append("coordenada_especifica", $("#coord_esp_gralop_x").val() + ' ' + $("#coord_esp_gralopl_y").val());
     fetch(apiUrl + webMethod, {
@@ -16330,7 +16330,7 @@ function updateOperacionGeneral() {
         formData.append("c_0101_0001_id", area);
         formData.append("c_0403_211", $("#txtvolumentrans").val());
         formData.append("c_0414_253", $("#cmbcrucesotrosductos").val());
-        formData.append("LOCALIZACION_KM", $("#km_locpara_gralop").val());
+        formData.append("localizacion_km", $("#km_locpara_gralop").val());
         formData.append("kilometro_especifico", $("#km_esp_gralop").val());
         formData.append("coordenada_especifica", $("#coord_esp_gralop_x").val() + ' ' + $("#coord_esp_gralopl_y").val());
         for (var pair of formData.entries()) {
@@ -16821,100 +16821,100 @@ function saveGeoespacialDocumental() {
     formData.append("c_0101_0001_id", area)
     // Make sure files are being selected and appended properly
     const itemsToSubstitute = [
-        "CONS_FOREST_AREA_400",
-        "CONS_ESA_AREA_400",
-        "G_NEARBY_AIRPORT_GETGEOMETRY",
-        "EC_SOIL_CONDUCT_SSURGO",
-        "EC_HVAC_SUSC_EST",
-        "G_LANDUSE_NLCD",
-        "G_LITHOLOGY_PRESENT",
-        "G_SINKHOLE_PRESENT",
-        "G_LOCATIONS_SENS",
-        "G_FLOODZONE",
-        "CONS_STRUCTCOUNT_400FT",
-        "IC_MEAS_MPY_COUPON",
-        "MD_DETON_MIN_DISTANCE",
-        "MD_BUILDING_FALLING_50FT",
-        "NOP",
-        "VELOCITY_CORROSION_INTERNAL",
-        "WOF_LANDSLIDE_SEVERITY",
-        "WOF_FIRECOUNT_EXP",
-        "WOF_COVERSTONE_PRES",
-        "WOF_LIGHT_SUM_EXP",
-        "WOF_TORNADO_COUNT",
-        "WOF_WIND_COUNT",
-        "WOF_SEISMIC_PGA_EXP"
+        "cons_forest_area_400",
+        "cons_esa_area_400",
+        "g_nearby_airport_getgeometry",
+        "ec_soil_conduct_ssurgo",
+        "ec_hvac_susc_est",
+        "g_landuse_nlcd",
+        "g_lithology_present",
+        "g_sinkhole_present",
+        "g_locations_sens",
+        "g_floodzone",
+        "cons_structcount_400ft",
+        "ic_meas_mpy_coupon",
+        "md_deton_min_distance",
+        "md_building_falling_50ft",
+        "nop",
+        "velocity_corrosion_internal",
+        "wof_landslide_severity",
+        "wof_firecount_exp",
+        "wof_coverstone_pres",
+        "wof_light_sum_exp",
+        "wof_tornado_count",
+        "wof_wind_count",
+        "wof_seismic_pga_exp"
     ];
 
 
-    if ($("#CONS_FOREST_AREA_400")[0].files[0]) {
-        formData.append("CONS_FOREST_AREA_400", $("#CONS_FOREST_AREA_400")[0].files[0]);
+    if ($("#cons_forest_area_400")[0].files[0]) {
+        formData.append("cons_forest_area_400", $("#cons_forest_area_400")[0].files[0]);
     }
-    if ($("#CONS_ESA_AREA_400")[0].files[0]) {
-        formData.append("CONS_ESA_AREA_400", $("#CONS_ESA_AREA_400")[0].files[0]);
+    if ($("#cons_esa_area_400")[0].files[0]) {
+        formData.append("cons_esa_area_400", $("#cons_esa_area_400")[0].files[0]);
     }
-    if ($("#G_NEARBY_AIRPORT_GETGEOMETRY")[0].files[0]) {
-        formData.append("G_NEARBY_AIRPORT_GETGEOMETRY", $("#G_NEARBY_AIRPORT_GETGEOMETRY")[0].files[0]);
+    if ($("#g_nearby_airport_getgeometry")[0].files[0]) {
+        formData.append("g_nearby_airport_getgeometry", $("#g_nearby_airport_getgeometry")[0].files[0]);
     }
-    if ($("#EC_SOIL_CONDUCT_SSURGO")[0].files[0]) {
-        formData.append("EC_SOIL_CONDUCT_SSURGO", $("#EC_SOIL_CONDUCT_SSURGO")[0].files[0]);
+    if ($("#ec_soil_conduct_ssurgo")[0].files[0]) {
+        formData.append("ec_soil_conduct_ssurgo", $("#ec_soil_conduct_ssurgo")[0].files[0]);
     }
-    if ($("#EC_HVAC_SUSC_EST")[0].files[0]) {
-        formData.append("EC_HVAC_SUSC_EST", $("#EC_HVAC_SUSC_EST")[0].files[0]);
+    if ($("#ec_hvac_susc_est")[0].files[0]) {
+        formData.append("ec_hvac_susc_est", $("#ec_hvac_susc_est")[0].files[0]);
     }
-    if ($("#G_LANDUSE_NLCD")[0].files[0]) {
-        formData.append("G_LANDUSE_NLCD", $("#G_LANDUSE_NLCD")[0].files[0]);
+    if ($("#g_landuse_nlcd")[0].files[0]) {
+        formData.append("g_landuse_nlcd", $("#g_landuse_nlcd")[0].files[0]);
     }
-    if ($("#G_LITHOLOGY_PRESENT")[0].files[0]) {
-        formData.append("G_LITHOLOGY_PRESENT", $("#G_LITHOLOGY_PRESENT")[0].files[0]);
+    if ($("#g_lithology_present")[0].files[0]) {
+        formData.append("g_lithology_present", $("#g_lithology_present")[0].files[0]);
     }
-    if ($("#G_SINKHOLE_PRESENT")[0].files[0]) {
-        formData.append("G_SINKHOLE_PRESENT", $("#G_SINKHOLE_PRESENT")[0].files[0]);
+    if ($("#g_sinkhole_present")[0].files[0]) {
+        formData.append("g_sinkhole_present", $("#g_sinkhole_present")[0].files[0]);
     }
-    if ($("#G_LOCATIONS_SENS")[0].files[0]) {
-        formData.append("G_LOCATIONS_SENS", $("#G_LOCATIONS_SENS")[0].files[0]);
+    if ($("#g_locations_sens")[0].files[0]) {
+        formData.append("g_locations_sens", $("#g_locations_sens")[0].files[0]);
     }
-    if ($("#G_FLOODZONE")[0].files[0]) {
-        formData.append("G_FLOODZONE", $("#G_FLOODZONE")[0].files[0]);
+    if ($("#g_floodzone")[0].files[0]) {
+        formData.append("g_floodzone", $("#g_floodzone")[0].files[0]);
     }
-    if ($("#CONS_STRUCTCOUNT_400FT")[0].files[0]) {
-        formData.append("CONS_STRUCTCOUNT_400FT", $("#CONS_STRUCTCOUNT_400FT")[0].files[0]);
+    if ($("#cons_structcount_400ft")[0].files[0]) {
+        formData.append("cons_structcount_400ft", $("#cons_structcount_400ft")[0].files[0]);
     }
-    if ($("#IC_MEAS_MPY_COUPON")[0].files[0]) {
-        formData.append("IC_MEAS_MPY_COUPON", $("#IC_MEAS_MPY_COUPON")[0].files[0]);
+    if ($("#ic_meas_mpy_coupon")[0].files[0]) {
+        formData.append("ic_meas_mpy_coupon", $("#ic_meas_mpy_coupon")[0].files[0]);
     }
-    if ($("#MD_DETON_MIN_DISTANCE")[0].files[0]) {
-        formData.append("MD_DETON_MIN_DISTANCE", $("#MD_DETON_MIN_DISTANCE")[0].files[0]);
+    if ($("#md_deton_min_distance")[0].files[0]) {
+        formData.append("md_deton_min_distance", $("#md_deton_min_distance")[0].files[0]);
     }
-    if ($("#MD_BUILDING_FALLING_50FT")[0].files[0]) {
-        formData.append("MD_BUILDING_FALLING_50FT", $("#MD_BUILDING_FALLING_50FT")[0].files[0]);
+    if ($("#md_building_falling_50ft")[0].files[0]) {
+        formData.append("md_building_falling_50ft", $("#md_building_falling_50ft")[0].files[0]);
     }
-    if ($("#NOP")[0].files[0]) {
-        formData.append("NOP", $("#NOP")[0].files[0]);
+    if ($("#nop")[0].files[0]) {
+        formData.append("nop", $("#nop")[0].files[0]);
     }
-    if ($("#VELOCITY_CORROSION_INTERNAL")[0].files[0]) {
-        formData.append("VELOCITY_CORROSION_INTERNAL", $("#VELOCITY_CORROSION_INTERNAL")[0].files[0]);
+    if ($("#velocity_corrosion_internal")[0].files[0]) {
+        formData.append("velocity_corrosion_internal", $("#velocity_corrosion_internal")[0].files[0]);
     }
-    if ($("#WOF_LANDSLIDE_SEVERITY")[0].files[0]) {
-        formData.append("WOF_LANDSLIDE_SEVERITY", $("#WOF_LANDSLIDE_SEVERITY")[0].files[0]);
+    if ($("#wof_landslide_severity")[0].files[0]) {
+        formData.append("wof_landslide_severity", $("#wof_landslide_severity")[0].files[0]);
     }
-    if ($("#WOF_FIRECOUNT_EXP")[0].files[0]) {
-        formData.append("WOF_FIRECOUNT_EXP", $("#WOF_FIRECOUNT_EXP")[0].files[0]);
+    if ($("#wof_firecount_exp")[0].files[0]) {
+        formData.append("wof_firecount_exp", $("#wof_firecount_exp")[0].files[0]);
     }
-    if ($("#WOF_COVERSTONE_PRES")[0].files[0]) {
-        formData.append("WOF_COVERSTONE_PRES", $("#WOF_COVERSTONE_PRES")[0].files[0]);
+    if ($("#wof_coverstone_pres")[0].files[0]) {
+        formData.append("wof_coverstone_pres", $("#wof_coverstone_pres")[0].files[0]);
     }
-    if ($("#WOF_LIGHT_SUM_EXP")[0].files[0]) {
-        formData.append("WOF_LIGHT_SUM_EXP", $("#WOF_LIGHT_SUM_EXP")[0].files[0]);
+    if ($("#wof_light_sum_exp")[0].files[0]) {
+        formData.append("wof_light_sum_exp", $("#wof_light_sum_exp")[0].files[0]);
     }
-    if ($("#WOF_TORNADO_COUNT")[0].files[0]) {
-        formData.append("WOF_TORNADO_COUNT", $("#WOF_TORNADO_COUNT")[0].files[0]);
+    if ($("#wof_tornado_count")[0].files[0]) {
+        formData.append("wof_tornado_count", $("#wof_tornado_count")[0].files[0]);
     }
-    if ($("#WOF_WIND_COUNT")[0].files[0]) {
-        formData.append("WOF_WIND_COUNT", $("#WOF_WIND_COUNT")[0].files[0]);
+    if ($("#wof_wind_count")[0].files[0]) {
+        formData.append("wof_wind_count", $("#wof_wind_count")[0].files[0]);
     }
-    if ($("#WOF_SEISMIC_PGA_EXP")[0].files[0]) {
-        formData.append("WOF_SEISMIC_PGA_EXP", $("#WOF_SEISMIC_PGA_EXP")[0].files[0]);
+    if ($("#wof_seismic_pga_exp")[0].files[0]) {
+        formData.append("wof_seismic_pga_exp", $("#wof_seismic_pga_exp")[0].files[0]);
     }
 
 
@@ -17000,100 +17000,100 @@ function updateGeoespacialDocumental() {
     formData.append("c_0101_0001_id", area)
     // Make sure files are being selected and appended properly
     const itemsToSubstitute = [
-        "CONS_FOREST_AREA_400",
-        "CONS_ESA_AREA_400",
-        "G_NEARBY_AIRPORT_GETGEOMETRY",
-        "EC_SOIL_CONDUCT_SSURGO",
-        "EC_HVAC_SUSC_EST",
-        "G_LANDUSE_NLCD",
-        "G_LITHOLOGY_PRESENT",
-        "G_SINKHOLE_PRESENT",
-        "G_LOCATIONS_SENS",
-        "G_FLOODZONE",
-        "CONS_STRUCTCOUNT_400FT",
-        "IC_MEAS_MPY_COUPON",
-        "MD_DETON_MIN_DISTANCE",
-        "MD_BUILDING_FALLING_50FT",
-        "NOP",
-        "VELOCITY_CORROSION_INTERNAL",
-        "WOF_LANDSLIDE_SEVERITY",
-        "WOF_FIRECOUNT_EXP",
-        "WOF_COVERSTONE_PRES",
-        "WOF_LIGHT_SUM_EXP",
-        "WOF_TORNADO_COUNT",
-        "WOF_WIND_COUNT",
-        "WOF_SEISMIC_PGA_EXP"
+        "cons_forest_area_400",
+        "cons_esa_area_400",
+        "g_nearby_airport_getgeometry",
+        "ec_soil_conduct_ssurgo",
+        "ec_hvac_susc_est",
+        "g_landuse_nlcd",
+        "g_lithology_present",
+        "g_sinkhole_present",
+        "g_locations_sens",
+        "g_floodzone",
+        "cons_structcount_400ft",
+        "ic_meas_mpy_coupon",
+        "md_deton_min_distance",
+        "md_building_falling_50ft",
+        "nop",
+        "velocity_corrosion_internal",
+        "wof_landslide_severity",
+        "wof_firecount_exp",
+        "wof_coverstone_pres",
+        "wof_light_sum_exp",
+        "wof_tornado_count",
+        "wof_wind_count",
+        "wof_seismic_pga_exp"
     ];
 
 
-    if ($("#CONS_FOREST_AREA_400")[0].files[0]) {
-        formData.append("CONS_FOREST_AREA_400", $("#CONS_FOREST_AREA_400")[0].files[0]);
+    if ($("#cons_forest_area_400")[0].files[0]) {
+        formData.append("cons_forest_area_400", $("#cons_forest_area_400")[0].files[0]);
     }
-    if ($("#CONS_ESA_AREA_400")[0].files[0]) {
-        formData.append("CONS_ESA_AREA_400", $("#CONS_ESA_AREA_400")[0].files[0]);
+    if ($("#cons_esa_area_400")[0].files[0]) {
+        formData.append("cons_esa_area_400", $("#cons_esa_area_400")[0].files[0]);
     }
-    if ($("#G_NEARBY_AIRPORT_GETGEOMETRY")[0].files[0]) {
-        formData.append("G_NEARBY_AIRPORT_GETGEOMETRY", $("#G_NEARBY_AIRPORT_GETGEOMETRY")[0].files[0]);
+    if ($("#g_nearby_airport_getgeometry")[0].files[0]) {
+        formData.append("g_nearby_airport_getgeometry", $("#g_nearby_airport_getgeometry")[0].files[0]);
     }
-    if ($("#EC_SOIL_CONDUCT_SSURGO")[0].files[0]) {
-        formData.append("EC_SOIL_CONDUCT_SSURGO", $("#EC_SOIL_CONDUCT_SSURGO")[0].files[0]);
+    if ($("#ec_soil_conduct_ssurgo")[0].files[0]) {
+        formData.append("ec_soil_conduct_ssurgo", $("#ec_soil_conduct_ssurgo")[0].files[0]);
     }
-    if ($("#EC_HVAC_SUSC_EST")[0].files[0]) {
-        formData.append("EC_HVAC_SUSC_EST", $("#EC_HVAC_SUSC_EST")[0].files[0]);
+    if ($("#ec_hvac_susc_est")[0].files[0]) {
+        formData.append("ec_hvac_susc_est", $("#ec_hvac_susc_est")[0].files[0]);
     }
-    if ($("#G_LANDUSE_NLCD")[0].files[0]) {
-        formData.append("G_LANDUSE_NLCD", $("#G_LANDUSE_NLCD")[0].files[0]);
+    if ($("#g_landuse_nlcd")[0].files[0]) {
+        formData.append("g_landuse_nlcd", $("#g_landuse_nlcd")[0].files[0]);
     }
-    if ($("#G_LITHOLOGY_PRESENT")[0].files[0]) {
-        formData.append("G_LITHOLOGY_PRESENT", $("#G_LITHOLOGY_PRESENT")[0].files[0]);
+    if ($("#g_lithology_present")[0].files[0]) {
+        formData.append("g_lithology_present", $("#g_lithology_present")[0].files[0]);
     }
-    if ($("#G_SINKHOLE_PRESENT")[0].files[0]) {
-        formData.append("G_SINKHOLE_PRESENT", $("#G_SINKHOLE_PRESENT")[0].files[0]);
+    if ($("#g_sinkhole_present")[0].files[0]) {
+        formData.append("g_sinkhole_present", $("#g_sinkhole_present")[0].files[0]);
     }
-    if ($("#G_LOCATIONS_SENS")[0].files[0]) {
-        formData.append("G_LOCATIONS_SENS", $("#G_LOCATIONS_SENS")[0].files[0]);
+    if ($("#g_locations_sens")[0].files[0]) {
+        formData.append("g_locations_sens", $("#g_locations_sens")[0].files[0]);
     }
-    if ($("#G_FLOODZONE")[0].files[0]) {
-        formData.append("G_FLOODZONE", $("#G_FLOODZONE")[0].files[0]);
+    if ($("#g_floodzone")[0].files[0]) {
+        formData.append("g_floodzone", $("#g_floodzone")[0].files[0]);
     }
-    if ($("#CONS_STRUCTCOUNT_400FT")[0].files[0]) {
-        formData.append("CONS_STRUCTCOUNT_400FT", $("#CONS_STRUCTCOUNT_400FT")[0].files[0]);
+    if ($("#cons_structcount_400ft")[0].files[0]) {
+        formData.append("cons_structcount_400ft", $("#cons_structcount_400ft")[0].files[0]);
     }
-    if ($("#IC_MEAS_MPY_COUPON")[0].files[0]) {
-        formData.append("IC_MEAS_MPY_COUPON", $("#IC_MEAS_MPY_COUPON")[0].files[0]);
+    if ($("#ic_meas_mpy_coupon")[0].files[0]) {
+        formData.append("ic_meas_mpy_coupon", $("#ic_meas_mpy_coupon")[0].files[0]);
     }
-    if ($("#MD_DETON_MIN_DISTANCE")[0].files[0]) {
-        formData.append("MD_DETON_MIN_DISTANCE", $("#MD_DETON_MIN_DISTANCE")[0].files[0]);
+    if ($("#md_deton_min_distance")[0].files[0]) {
+        formData.append("md_deton_min_distance", $("#md_deton_min_distance")[0].files[0]);
     }
-    if ($("#MD_BUILDING_FALLING_50FT")[0].files[0]) {
-        formData.append("MD_BUILDING_FALLING_50FT", $("#MD_BUILDING_FALLING_50FT")[0].files[0]);
+    if ($("#md_building_falling_50ft")[0].files[0]) {
+        formData.append("md_building_falling_50ft", $("#md_building_falling_50ft")[0].files[0]);
     }
-    if ($("#NOP")[0].files[0]) {
-        formData.append("NOP", $("#NOP")[0].files[0]);
+    if ($("#nop")[0].files[0]) {
+        formData.append("nop", $("#nop")[0].files[0]);
     }
-    if ($("#VELOCITY_CORROSION_INTERNAL")[0].files[0]) {
-        formData.append("VELOCITY_CORROSION_INTERNAL", $("#VELOCITY_CORROSION_INTERNAL")[0].files[0]);
+    if ($("#velocity_corrosion_internal")[0].files[0]) {
+        formData.append("velocity_corrosion_internal", $("#velocity_corrosion_internal")[0].files[0]);
     }
-    if ($("#WOF_LANDSLIDE_SEVERITY")[0].files[0]) {
-        formData.append("WOF_LANDSLIDE_SEVERITY", $("#WOF_LANDSLIDE_SEVERITY")[0].files[0]);
+    if ($("#wof_landslide_severity")[0].files[0]) {
+        formData.append("wof_landslide_severity", $("#wof_landslide_severity")[0].files[0]);
     }
-    if ($("#WOF_FIRECOUNT_EXP")[0].files[0]) {
-        formData.append("WOF_FIRECOUNT_EXP", $("#WOF_FIRECOUNT_EXP")[0].files[0]);
+    if ($("#wof_firecount_exp")[0].files[0]) {
+        formData.append("wof_firecount_exp", $("#wof_firecount_exp")[0].files[0]);
     }
-    if ($("#WOF_COVERSTONE_PRES")[0].files[0]) {
-        formData.append("WOF_COVERSTONE_PRES", $("#WOF_COVERSTONE_PRES")[0].files[0]);
+    if ($("#wof_coverstone_pres")[0].files[0]) {
+        formData.append("wof_coverstone_pres", $("#wof_coverstone_pres")[0].files[0]);
     }
-    if ($("#WOF_LIGHT_SUM_EXP")[0].files[0]) {
-        formData.append("WOF_LIGHT_SUM_EXP", $("#WOF_LIGHT_SUM_EXP")[0].files[0]);
+    if ($("#wof_light_sum_exp")[0].files[0]) {
+        formData.append("wof_light_sum_exp", $("#wof_light_sum_exp")[0].files[0]);
     }
-    if ($("#WOF_TORNADO_COUNT")[0].files[0]) {
-        formData.append("WOF_TORNADO_COUNT", $("#WOF_TORNADO_COUNT")[0].files[0]);
+    if ($("#wof_tornado_count")[0].files[0]) {
+        formData.append("wof_tornado_count", $("#wof_tornado_count")[0].files[0]);
     }
-    if ($("#WOF_WIND_COUNT")[0].files[0]) {
-        formData.append("WOF_WIND_COUNT", $("#WOF_WIND_COUNT")[0].files[0]);
+    if ($("#wof_wind_count")[0].files[0]) {
+        formData.append("wof_wind_count", $("#wof_wind_count")[0].files[0]);
     }
-    if ($("#WOF_SEISMIC_PGA_EXP")[0].files[0]) {
-        formData.append("WOF_SEISMIC_PGA_EXP", $("#WOF_SEISMIC_PGA_EXP")[0].files[0]);
+    if ($("#wof_seismic_pga_exp")[0].files[0]) {
+        formData.append("wof_seismic_pga_exp", $("#wof_seismic_pga_exp")[0].files[0]);
     }
 
 
