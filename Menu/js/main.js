@@ -16846,75 +16846,74 @@ function saveGeoespacialDocumental() {
         "wof_seismic_pga_exp"
     ];
 
-
-    if ($("#cons_forest_area_400")[0].files[0]) {
-        formData.append("cons_forest_area_400", $("#cons_forest_area_400")[0].files[0]);
+    if ($("#CONS_FOREST_AREA_400")[0].files[0]) {
+        formData.append("cons_forest_area_400", $("#CONS_FOREST_AREA_400")[0].files[0]);
     }
-    if ($("#cons_esa_area_400")[0].files[0]) {
-        formData.append("cons_esa_area_400", $("#cons_esa_area_400")[0].files[0]);
+    if ($("#CONS_ESA_AREA_400")[0].files[0]) {
+        formData.append("cons_esa_area_400", $("#CONS_ESA_AREA_400")[0].files[0]);
     }
-    if ($("#g_nearby_airport_getgeometry")[0].files[0]) {
-        formData.append("g_nearby_airport_getgeometry", $("#g_nearby_airport_getgeometry")[0].files[0]);
+    if ($("#G_NEARBY_AIRPORT_GETGEOMETRY")[0].files[0]) {
+        formData.append("g_nearby_airport_getgeometry", $("#G_NEARBY_AIRPORT_GETGEOMETRY")[0].files[0]);
     }
-    if ($("#ec_soil_conduct_ssurgo")[0].files[0]) {
-        formData.append("ec_soil_conduct_ssurgo", $("#ec_soil_conduct_ssurgo")[0].files[0]);
+    if ($("#EC_SOIL_CONDUCT_SSURGO")[0].files[0]) {
+        formData.append("ec_soil_conduct_ssurgo", $("#EC_SOIL_CONDUCT_SSURGO")[0].files[0]);
     }
-    if ($("#ec_hvac_susc_est")[0].files[0]) {
-        formData.append("ec_hvac_susc_est", $("#ec_hvac_susc_est")[0].files[0]);
+    if ($("#EC_HVAC_SUSC_EST")[0].files[0]) {
+        formData.append("ec_hvac_susc_est", $("#EC_HVAC_SUSC_EST")[0].files[0]);
     }
-    if ($("#g_landuse_nlcd")[0].files[0]) {
-        formData.append("g_landuse_nlcd", $("#g_landuse_nlcd")[0].files[0]);
+    if ($("#G_LANDUSE_NLCD")[0].files[0]) {
+        formData.append("g_landuse_nlcd", $("#G_LANDUSE_NLCD")[0].files[0]);
     }
-    if ($("#g_lithology_present")[0].files[0]) {
-        formData.append("g_lithology_present", $("#g_lithology_present")[0].files[0]);
+    if ($("#G_LITHOLOGY_PRESENT")[0].files[0]) {
+        formData.append("g_lithology_present", $("#G_LITHOLOGY_PRESENT")[0].files[0]);
     }
-    if ($("#g_sinkhole_present")[0].files[0]) {
-        formData.append("g_sinkhole_present", $("#g_sinkhole_present")[0].files[0]);
+    if ($("#G_SINKHOLE_PRESENT")[0].files[0]) {
+        formData.append("g_sinkhole_present", $("#G_SINKHOLE_PRESENT")[0].files[0]);
     }
-    if ($("#g_locations_sens")[0].files[0]) {
-        formData.append("g_locations_sens", $("#g_locations_sens")[0].files[0]);
+    if ($("#G_LOCATIONS_SENS")[0].files[0]) {
+        formData.append("g_locations_sens", $("#G_LOCATIONS_SENS")[0].files[0]);
     }
-    if ($("#g_floodzone")[0].files[0]) {
-        formData.append("g_floodzone", $("#g_floodzone")[0].files[0]);
+    if ($("#G_FLOODZONE")[0].files[0]) {
+        formData.append("g_floodzone", $("#G_FLOODZONE")[0].files[0]);
     }
-    if ($("#cons_structcount_400ft")[0].files[0]) {
-        formData.append("cons_structcount_400ft", $("#cons_structcount_400ft")[0].files[0]);
+    if ($("#CONS_STRUCTCOUNT_400FT")[0].files[0]) {
+        formData.append("cons_structcount_400ft", $("#CONS_STRUCTCOUNT_400FT")[0].files[0]);
     }
-    if ($("#ic_meas_mpy_coupon")[0].files[0]) {
-        formData.append("ic_meas_mpy_coupon", $("#ic_meas_mpy_coupon")[0].files[0]);
+    if ($("#IC_MEAS_MPY_COUPON")[0].files[0]) {
+        formData.append("ic_meas_mpy_coupon", $("#IC_MEAS_MPY_COUPON")[0].files[0]);
     }
-    if ($("#md_deton_min_distance")[0].files[0]) {
-        formData.append("md_deton_min_distance", $("#md_deton_min_distance")[0].files[0]);
+    if ($("#MD_DETON_MIN_DISTANCE")[0].files[0]) {
+        formData.append("md_deton_min_distance", $("#MD_DETON_MIN_DISTANCE")[0].files[0]);
     }
-    if ($("#md_building_falling_50ft")[0].files[0]) {
-        formData.append("md_building_falling_50ft", $("#md_building_falling_50ft")[0].files[0]);
+    if ($("#MD_BUILDING_FALLING_50FT")[0].files[0]) {
+        formData.append("md_building_falling_50ft", $("#MD_BUILDING_FALLING_50FT")[0].files[0]);
     }
-    if ($("#nop")[0].files[0]) {
-        formData.append("nop", $("#nop")[0].files[0]);
+    if ($("#NOP")[0].files[0]) {
+        formData.append("nop", $("#NOP")[0].files[0]);
     }
-    if ($("#velocity_corrosion_internal")[0].files[0]) {
-        formData.append("velocity_corrosion_internal", $("#velocity_corrosion_internal")[0].files[0]);
+    if ($("#VELOCITY_CORROSION_INTERNAL")[0].files[0]) {
+        formData.append("velocity_corrosion_internal", $("#VELOCITY_CORROSION_INTERNAL")[0].files[0]);
     }
-    if ($("#wof_landslide_severity")[0].files[0]) {
-        formData.append("wof_landslide_severity", $("#wof_landslide_severity")[0].files[0]);
+    if ($("#WOF_LANDSLIDE_SEVERITY")[0].files[0]) {
+        formData.append("wof_landslide_severity", $("#WOF_LANDSLIDE_SEVERITY")[0].files[0]);
     }
-    if ($("#wof_firecount_exp")[0].files[0]) {
-        formData.append("wof_firecount_exp", $("#wof_firecount_exp")[0].files[0]);
+    if ($("#WOF_FIRECOUNT_EXP")[0].files[0]) {
+        formData.append("wof_firecount_exp", $("#WOF_FIRECOUNT_EXP")[0].files[0]);
     }
-    if ($("#wof_coverstone_pres")[0].files[0]) {
-        formData.append("wof_coverstone_pres", $("#wof_coverstone_pres")[0].files[0]);
+    if ($("#WOF_COVERSTONE_PRES")[0].files[0]) {
+        formData.append("wof_coverstone_pres", $("#WOF_COVERSTONE_PRES")[0].files[0]);
     }
-    if ($("#wof_light_sum_exp")[0].files[0]) {
-        formData.append("wof_light_sum_exp", $("#wof_light_sum_exp")[0].files[0]);
+    if ($("#WOF_LIGHT_SUM_EXP")[0].files[0]) {
+        formData.append("wof_light_sum_exp", $("#WOF_LIGHT_SUM_EXP")[0].files[0]);
     }
-    if ($("#wof_tornado_count")[0].files[0]) {
-        formData.append("wof_tornado_count", $("#wof_tornado_count")[0].files[0]);
+    if ($("#WOF_TORNADO_COUNT")[0].files[0]) {
+        formData.append("wof_tornado_count", $("#WOF_TORNADO_COUNT")[0].files[0]);
     }
-    if ($("#wof_wind_count")[0].files[0]) {
-        formData.append("wof_wind_count", $("#wof_wind_count")[0].files[0]);
+    if ($("#WOF_WIND_COUNT")[0].files[0]) {
+        formData.append("wof_wind_count", $("#WOF_WIND_COUNT")[0].files[0]);
     }
-    if ($("#wof_seismic_pga_exp")[0].files[0]) {
-        formData.append("wof_seismic_pga_exp", $("#wof_seismic_pga_exp")[0].files[0]);
+    if ($("#WOF_SEISMIC_PGA_EXP")[0].files[0]) {
+        formData.append("wof_seismic_pga_exp", $("#WOF_SEISMIC_PGA_EXP")[0].files[0]);
     }
 
 
@@ -16969,7 +16968,7 @@ function saveGeoespacialDocumental() {
             return response.json();
 
         })
-        .then(data => {           
+        .then(data => {
             if (data.success) {
                 alert("Información almacenada correctamente");
                 $('#forms').show();
@@ -16992,109 +16991,111 @@ function updateGeoespacialDocumental() {
         var webMethod = "updateGeoespacialDoc";
 
 
-        
-    const formData = new FormData();
-    formData.append("id", idGeoDocumental)
-    formData.append("kilometro_especifico", $("#km_esp_geodoc").val())
-    formData.append("coordenada_especifica", $("#coord_esp_geodoc_x").val() + ' ' + $("#coord_esp_geodoc_y").val(),)
-    formData.append("c_0101_0001_id", area)
-    // Make sure files are being selected and appended properly
-    const itemsToSubstitute = [
-        "cons_forest_area_400",
-        "cons_esa_area_400",
-        "g_nearby_airport_getgeometry",
-        "ec_soil_conduct_ssurgo",
-        "ec_hvac_susc_est",
-        "g_landuse_nlcd",
-        "g_lithology_present",
-        "g_sinkhole_present",
-        "g_locations_sens",
-        "g_floodzone",
-        "cons_structcount_400ft",
-        "ic_meas_mpy_coupon",
-        "md_deton_min_distance",
-        "md_building_falling_50ft",
-        "nop",
-        "velocity_corrosion_internal",
-        "wof_landslide_severity",
-        "wof_firecount_exp",
-        "wof_coverstone_pres",
-        "wof_light_sum_exp",
-        "wof_tornado_count",
-        "wof_wind_count",
-        "wof_seismic_pga_exp"
-    ];
+
+        const formData = new FormData();
+        formData.append("id", idGeoDocumental)
+        formData.append("kilometro_especifico", $("#km_esp_geodoc").val())
+        formData.append("coordenada_especifica", $("#coord_esp_geodoc_x").val() + ' ' + $("#coord_esp_geodoc_y").val(),)
+        formData.append("C_0101_0001_id", area)
+        // Make sure files are being selected and appended properly
+        const itemsToSubstitute = [
+            "cons_forest_area_400",
+            "cons_esa_area_400",
+            "g_nearby_airport_getgeometry",
+            "ec_soil_conduct_ssurgo",
+            "ec_hvac_susc_est",
+            "g_landuse_nlcd",
+            "g_lithology_present",
+            "g_sinkhole_present",
+            "g_locations_sens",
+            "g_floodzone",
+            "cons_structcount_400ft",
+            "ic_meas_mpy_coupon",
+            "md_deton_min_distance",
+            "md_building_falling_50ft",
+            "nop",
+            "velocity_corrosion_internal",
+            "wof_landslide_severity",
+            "wof_firecount_exp",
+            "wof_coverstone_pres",
+            "wof_light_sum_exp",
+            "wof_tornado_count",
+            "wof_wind_count",
+            "wof_seismic_pga_exp"
+        ];
+
+        if ($("#CONS_FOREST_AREA_400")[0].files[0]) {
+            formData.append("cons_forest_area_400", $("#CONS_FOREST_AREA_400")[0].files[0]);
+        }
+        if ($("#CONS_ESA_AREA_400")[0].files[0]) {
+            formData.append("cons_esa_area_400", $("#CONS_ESA_AREA_400")[0].files[0]);
+        }
+        if ($("#G_NEARBY_AIRPORT_GETGEOMETRY")[0].files[0]) {
+            formData.append("g_nearby_airport_getgeometry", $("#G_NEARBY_AIRPORT_GETGEOMETRY")[0].files[0]);
+        }
+        if ($("#EC_SOIL_CONDUCT_SSURGO")[0].files[0]) {
+            formData.append("ec_soil_conduct_ssurgo", $("#EC_SOIL_CONDUCT_SSURGO")[0].files[0]);
+        }
+        if ($("#EC_HVAC_SUSC_EST")[0].files[0]) {
+            formData.append("ec_hvac_susc_est", $("#EC_HVAC_SUSC_EST")[0].files[0]);
+        }
+        if ($("#G_LANDUSE_NLCD")[0].files[0]) {
+            formData.append("g_landuse_nlcd", $("#G_LANDUSE_NLCD")[0].files[0]);
+        }
+        if ($("#G_LITHOLOGY_PRESENT")[0].files[0]) {
+            formData.append("g_lithology_present", $("#G_LITHOLOGY_PRESENT")[0].files[0]);
+        }
+        if ($("#G_SINKHOLE_PRESENT")[0].files[0]) {
+            formData.append("g_sinkhole_present", $("#G_SINKHOLE_PRESENT")[0].files[0]);
+        }
+        if ($("#G_LOCATIONS_SENS")[0].files[0]) {
+            formData.append("g_locations_sens", $("#G_LOCATIONS_SENS")[0].files[0]);
+        }
+        if ($("#G_FLOODZONE")[0].files[0]) {
+            formData.append("g_floodzone", $("#G_FLOODZONE")[0].files[0]);
+        }
+        if ($("#CONS_STRUCTCOUNT_400FT")[0].files[0]) {
+            formData.append("cons_structcount_400ft", $("#CONS_STRUCTCOUNT_400FT")[0].files[0]);
+        }
+        if ($("#IC_MEAS_MPY_COUPON")[0].files[0]) {
+            formData.append("ic_meas_mpy_coupon", $("#IC_MEAS_MPY_COUPON")[0].files[0]);
+        }
+        if ($("#MD_DETON_MIN_DISTANCE")[0].files[0]) {
+            formData.append("md_deton_min_distance", $("#MD_DETON_MIN_DISTANCE")[0].files[0]);
+        }
+        if ($("#MD_BUILDING_FALLING_50FT")[0].files[0]) {
+            formData.append("md_building_falling_50ft", $("#MD_BUILDING_FALLING_50FT")[0].files[0]);
+        }
+        if ($("#NOP")[0].files[0]) {
+            formData.append("nop", $("#NOP")[0].files[0]);
+        }
+        if ($("#VELOCITY_CORROSION_INTERNAL")[0].files[0]) {
+            formData.append("velocity_corrosion_internal", $("#VELOCITY_CORROSION_INTERNAL")[0].files[0]);
+        }
+        if ($("#WOF_LANDSLIDE_SEVERITY")[0].files[0]) {
+            formData.append("wof_landslide_severity", $("#WOF_LANDSLIDE_SEVERITY")[0].files[0]);
+        }
+        if ($("#WOF_FIRECOUNT_EXP")[0].files[0]) {
+            formData.append("wof_firecount_exp", $("#WOF_FIRECOUNT_EXP")[0].files[0]);
+        }
+        if ($("#WOF_COVERSTONE_PRES")[0].files[0]) {
+            formData.append("wof_coverstone_pres", $("#WOF_COVERSTONE_PRES")[0].files[0]);
+        }
+        if ($("#WOF_LIGHT_SUM_EXP")[0].files[0]) {
+            formData.append("wof_light_sum_exp", $("#WOF_LIGHT_SUM_EXP")[0].files[0]);
+        }
+        if ($("#WOF_TORNADO_COUNT")[0].files[0]) {
+            formData.append("wof_tornado_count", $("#WOF_TORNADO_COUNT")[0].files[0]);
+        }
+        if ($("#WOF_WIND_COUNT")[0].files[0]) {
+            formData.append("wof_wind_count", $("#WOF_WIND_COUNT")[0].files[0]);
+        }
+        if ($("#WOF_SEISMIC_PGA_EXP")[0].files[0]) {
+            formData.append("wof_seismic_pga_exp", $("#WOF_SEISMIC_PGA_EXP")[0].files[0]);
+        }
 
 
-    if ($("#cons_forest_area_400")[0].files[0]) {
-        formData.append("cons_forest_area_400", $("#cons_forest_area_400")[0].files[0]);
-    }
-    if ($("#cons_esa_area_400")[0].files[0]) {
-        formData.append("cons_esa_area_400", $("#cons_esa_area_400")[0].files[0]);
-    }
-    if ($("#g_nearby_airport_getgeometry")[0].files[0]) {
-        formData.append("g_nearby_airport_getgeometry", $("#g_nearby_airport_getgeometry")[0].files[0]);
-    }
-    if ($("#ec_soil_conduct_ssurgo")[0].files[0]) {
-        formData.append("ec_soil_conduct_ssurgo", $("#ec_soil_conduct_ssurgo")[0].files[0]);
-    }
-    if ($("#ec_hvac_susc_est")[0].files[0]) {
-        formData.append("ec_hvac_susc_est", $("#ec_hvac_susc_est")[0].files[0]);
-    }
-    if ($("#g_landuse_nlcd")[0].files[0]) {
-        formData.append("g_landuse_nlcd", $("#g_landuse_nlcd")[0].files[0]);
-    }
-    if ($("#g_lithology_present")[0].files[0]) {
-        formData.append("g_lithology_present", $("#g_lithology_present")[0].files[0]);
-    }
-    if ($("#g_sinkhole_present")[0].files[0]) {
-        formData.append("g_sinkhole_present", $("#g_sinkhole_present")[0].files[0]);
-    }
-    if ($("#g_locations_sens")[0].files[0]) {
-        formData.append("g_locations_sens", $("#g_locations_sens")[0].files[0]);
-    }
-    if ($("#g_floodzone")[0].files[0]) {
-        formData.append("g_floodzone", $("#g_floodzone")[0].files[0]);
-    }
-    if ($("#cons_structcount_400ft")[0].files[0]) {
-        formData.append("cons_structcount_400ft", $("#cons_structcount_400ft")[0].files[0]);
-    }
-    if ($("#ic_meas_mpy_coupon")[0].files[0]) {
-        formData.append("ic_meas_mpy_coupon", $("#ic_meas_mpy_coupon")[0].files[0]);
-    }
-    if ($("#md_deton_min_distance")[0].files[0]) {
-        formData.append("md_deton_min_distance", $("#md_deton_min_distance")[0].files[0]);
-    }
-    if ($("#md_building_falling_50ft")[0].files[0]) {
-        formData.append("md_building_falling_50ft", $("#md_building_falling_50ft")[0].files[0]);
-    }
-    if ($("#nop")[0].files[0]) {
-        formData.append("nop", $("#nop")[0].files[0]);
-    }
-    if ($("#velocity_corrosion_internal")[0].files[0]) {
-        formData.append("velocity_corrosion_internal", $("#velocity_corrosion_internal")[0].files[0]);
-    }
-    if ($("#wof_landslide_severity")[0].files[0]) {
-        formData.append("wof_landslide_severity", $("#wof_landslide_severity")[0].files[0]);
-    }
-    if ($("#wof_firecount_exp")[0].files[0]) {
-        formData.append("wof_firecount_exp", $("#wof_firecount_exp")[0].files[0]);
-    }
-    if ($("#wof_coverstone_pres")[0].files[0]) {
-        formData.append("wof_coverstone_pres", $("#wof_coverstone_pres")[0].files[0]);
-    }
-    if ($("#wof_light_sum_exp")[0].files[0]) {
-        formData.append("wof_light_sum_exp", $("#wof_light_sum_exp")[0].files[0]);
-    }
-    if ($("#wof_tornado_count")[0].files[0]) {
-        formData.append("wof_tornado_count", $("#wof_tornado_count")[0].files[0]);
-    }
-    if ($("#wof_wind_count")[0].files[0]) {
-        formData.append("wof_wind_count", $("#wof_wind_count")[0].files[0]);
-    }
-    if ($("#wof_seismic_pga_exp")[0].files[0]) {
-        formData.append("wof_seismic_pga_exp", $("#wof_seismic_pga_exp")[0].files[0]);
-    }
+
 
 
 
@@ -17146,18 +17147,374 @@ function nuevoInfoGeoespacialdoc() {
 }
 //#endregion
 
-//#region Mapiin
+//#region Mapping
 function fnsshowformMapiing(id_d = null) {
     $('#mapiingforms').show();
-    //if (id_d) {
-    //    consultaDatosGeoespacialDocumental(id_d = id_d);
-    //}
-    //else { consultaDatosGeoespacialDocumental(); }
+    if (id_d) {
+        consultaDatosMappingDocumental(id_d = id_d);
+    }
+    else { consultaDatosMappingDocumental(); }
 
     $('#forms').hide();
-   // resetValidationClasses('infoGeoespacialforms')
+    // resetValidationClasses('infoGeoespacialforms')
 
 }
+var idMapiingDocumental;
+function consultaDatosMappingDocumental(id_d = null) {
+    const existingDownloadIcons = document.querySelectorAll('.download-icon, .destroy-icon');
+    existingDownloadIcons.forEach(icon => icon.remove());
+    //get_relateddocuments(tramo, area, 25, "tbl_doc_operacion1");
+    //clearAllFileInputsInDiv('infoGeoespacialforms')
+    //clearInputTextValues('infoGeoespacialforms');
+    var webMethod;
+    var params;
+    if (id_d) {
+        webMethod = "getData_MapiingDocumentalById";
+        params = {
+            id: id_d
+        };
+    } else {
+        webMethod = "getMappingDocumental";
+        params = {
+            id: $("#cmbAreas option:selected").val(),
+        };
+    }
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params)
+    })
+        .then(response => response.json())
+        .then(data => {
+
+            // 1. Remove all existing download icons before adding new ones.
+
+            const { id: serviceId, success: success, coordenada_especifica: coordenada_especifica, kilometro_especifico: kilometro_especifico, ...columnsData } = data;
+            if (success) {
+                idMapiingDocumental = serviceId
+                if (data.coordenada_especifica !== "" && data.coordenada_especifica !== null && data.coordenada_especifica !== null) {
+                    const coords = data.coordenada_especifica.split(' ');
+                    $("#coord_esp_mapping_x").val(coords[0]);
+                    $("#coord_esp_mapping_y").val(coords[1]);
+                }
+                else {
+                    $("#coord_esp_mapping_x").val("");
+                    $("#coord_esp_mapping_y").val("");
+                }
+
+                $("#km_esp_mappingdoc").val(data.kilometro_especifico)
+                var contatt = 0;
+                Object.values(columnsData).forEach(item => {
+                    contatt++;
+                    //console.log(item.column);
+                    if (contatt < 48) {
+                        if (item.hasFile) {
+
+                            // Find the correct input group using the data-column attribute
+                            const inputGroup = document.querySelector(`.input-group[data-column="${item.column}"]`);
+                            const customFileDiv = inputGroup.querySelector('.custom-file');
+
+                            if (customFileDiv) {
+                                // Create the download icon
+                                const downloadIcon = document.createElement('a');
+                                downloadIcon.href = `${apiUrl}mapiing-documental/${serviceId}/download/${item.column}`;
+                                downloadIcon.setAttribute('data-toggle', 'modal');
+                                downloadIcon.setAttribute('data-target', '#myModal');
+                                downloadIcon.onclick = function () { clicDoc(this.href) };
+                                downloadIcon.innerHTML = `<i class="fa fa-download"></i>`;
+                                downloadIcon.target = "_blank";
+                                downloadIcon.className = "download-icon";
+                                downloadIcon.style.marginLeft = "10px";
+                                downloadIcon.setAttribute('data-columna', item.column);
+                                downloadIcon.setAttribute('data-id_otro', serviceId);
+
+                                // Insert the download icon after the custom-file div
+                                if (customFileDiv.nextSibling) {
+                                    inputGroup.insertBefore(downloadIcon, customFileDiv.nextSibling);
+                                } else {
+                                    inputGroup.appendChild(downloadIcon);
+                                }
+
+                                const destroyIcon = document.createElement('a');
+                                destroyIcon.href = `${apiUrl}mapiing-documental/${serviceId}/destroy/${item.column}`;
+                                destroyIcon.innerHTML = `<i class="fa fa-trash"></i>`;
+                                destroyIcon.target = "_blank";
+                                destroyIcon.className = "destroy-icon";
+                                destroyIcon.style.marginLeft = "10px";
+                                destroyIcon.style.display = "none";
+                                destroyIcon.setAttribute('data-columna', item.column);
+                                destroyIcon.setAttribute('data-id_otro', serviceId);
+
+
+                                // Insert the download icon after the custom-file div
+                                if (customFileDiv.nextSibling) {
+                                    inputGroup.insertBefore(destroyIcon, customFileDiv.nextSibling);
+                                } else {
+                                    inputGroup.appendChild(destroyIcon);
+                                }
+
+
+
+                            }
+                        }
+                    }
+                });
+                $("#btn_updateMappingEsp").text("Actualizar")
+                $("#btn_updateMappingEsp").show()
+                inhabilitarform("#mapiingforms", true)
+                $("#btn_saveMappingEsp").hide();
+                //$("#btn_newseguridad").show();
+                $("#btn_newMappingEsp").show();
+                showDestroyIcons('mapiingforms', false);
+            }
+
+            else {
+
+                inhabilitarform("#mapiingforms", false)
+                $("#btn_saveMappingEsp").show();
+                $("#btn_newMappingEsp").hide();
+                $("#btn_updateMappingEsp").hide();
+                showDestroyIcons('mapiingforms', false);
+            }
+
+
+            getNamesByAreaUnitariaId(area).then(data => {
+                let area_unitaria_nombre = data.area_unitaria_nombre;
+                let tramo_nombre = data.tramo_nombre;
+                let ducto_nombre = data.ducto_nombre;
+
+                //$("#txtductogeneral").val(ducto_nombre);
+                //$("#txttramogeneral").val(tramo_nombre);
+                //$("#txtareageneral").val(area_unitaria_nombre);
+                $("#txtductomapdoc").val(ducto_nombre);
+                $("#txttramomapdoc").val(tramo_nombre);
+                $("#txtareamapdoc").val(area_unitaria_nombre);
+
+
+            })
+
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+function saveMappingDocumental() {
+    var webMethod = "saveData_MapiingDoc";
+    const formData = new FormData();
+    formData.append("kilometro_especifico", $("#km_esp_mappingdoc").val())
+    formData.append("coordenada_especifica", $("#coord_esp_mapping_x").val() + ' ' + $("#coord_esp_mapping_y").val(),)
+    formData.append("C_0101_0001_id", area)
+    // Make sure files are being selected and appended properly
+    const itemsToSubstitute = [
+        "crack_feature_count",
+        "md_onecall_select",
+        "ec_meas_fieldlength",
+        "ec_mpy_failure_date",
+        "ec_acvg_date",
+        "ec_ut_meas_depth",
+        "ec_mic_present",
+        "ec_ac_meas_mpy",
+        "ec_ac_read",
+        "ec_ac_read_1mile",
+        "ec_cis_date",
+        "ec_cis_instant_off_value",
+        "ec_cis_native_potential",
+        "ec_cis_100mv_shift_sme",
+        "ec_cp_test_count_0_bad",
+        "ec_acvg_reading",
+        "ec_dcvg_ir_reading",
+        "ec_acvg_buffer_count",
+        "ec_soil_resist_question",
+        "ec_shorted_casing_gis",
+        "g_washout_location",
+        "g_gas_factor",
+        "pwadj_wrinkle_bends",
+        "crack_meas_fieldlength",
+        "crack_meas_fielddepth",
+        "g_class_location_assess",
+        "pwadj_dent_field_ave",
+        "pwadj_dent_field_max",
+        "pwadj_dent_IlI_depthMax",
+        "pwadj_dent_IlI_depthave",
+        "cons_structure_occ_ave_400",
+        "ic_mpy_failure",
+        "ic_mpy_failure_date",
+        "ic_ut_meas_depth",
+        "ic_meas_mpy_coupon",
+        "ic_da_inspectiondate",
+        "md_onecall_points_present",
+        "md_onecall_points_maxyear",
+        "md_onecall_points_minyear",
+        "md_onecall_points_count",
+        "md_onecall_poly_maxdate",
+        "md_air_patrols",
+        "md_other_patrol",
+        "md_wrng_tape_location",
+        "md_building_falling_50ft",
+        "ec_inoperable_cp",
+        "cons_ave_mktval_400ft",
+        "wof_coverstone_pres"
+    ];
+
+
+    // Loop through the list and substitute "diagrama determinacion_resistencia"
+    for (const item of itemsToSubstitute) {
+        console.log($(`#${item}`)[0])
+        if ($(`#${item}`)[0].files[0]) {
+
+            formData.append(`${item}`, $(`#${item}`)[0].files[0]);
+        }
+    }
+
+
+    fetch(apiUrl + webMethod, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            if (data.success) {
+                alert("Información almacenada correctamente");
+                $('#forms').show();
+                $('#mapiingforms').hide();
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+
+}
+function cancelMapping() {
+    $('#mapiingforms').hide();
+    $('#forms').show();
+}
+function updateMapping() {
+    if ($("#btn_updateMappingEsp").text() === "Actualizar") {
+        inhabilitarform("#mapiingforms", false);
+        showDestroyIcons('mapiingforms', true);
+        $("#btn_updateMappingEsp").text('Guardar');
+    }
+    else {
+        var webMethod = "updateData_MapiingDoc";
+        const formData = new FormData();
+        formData.append("id", idMapiingDocumental)
+        formData.append("kilometro_especifico", $("#km_esp_mappingdoc").val())
+        formData.append("coordenada_especifica", $("#coord_esp_mapping_x").val() + ' ' + $("#coord_esp_mapping_y").val(),)
+        formData.append("C_0101_0001_id", area)
+        // Make sure files are being selected and appended properly
+        const itemsToSubstitute = [
+            "crack_feature_count",
+            "md_onecall_select",
+            "ec_meas_fieldlength",
+            "ec_mpy_failure_date",
+            "ec_acvg_date",
+            "ec_ut_meas_depth",
+            "ec_mic_present",
+            "ec_ac_meas_mpy",
+            "ec_ac_read",
+            "ec_ac_read_1mile",
+            "ec_cis_date",
+            "ec_cis_instant_off_value",
+            "ec_cis_native_potential",
+            "ec_cis_100mv_shift_sme",
+            "ec_cp_test_count_0_bad",
+            "ec_acvg_reading",
+            "ec_dcvg_ir_reading",
+            "ec_acvg_buffer_count",
+            "ec_soil_resist_question",
+            "ec_shorted_casing_gis",
+            "g_washout_location",
+            "g_gas_factor",
+            "pwadj_wrinkle_bends",
+            "crack_meas_fieldlength",
+            "crack_meas_fielddepth",
+            "g_class_location_assess",
+            "pwadj_dent_field_ave",
+            "pwadj_dent_field_max",
+            "pwadj_dent_IlI_depthMax",
+            "pwadj_dent_IlI_depthave",
+            "cons_structure_occ_ave_400",
+            "ic_mpy_failure",
+            "ic_mpy_failure_date",
+            "ic_ut_meas_depth",
+            "ic_meas_mpy_coupon",
+            "ic_da_inspectiondate",
+            "md_onecall_points_present",
+            "md_onecall_points_maxyear",
+            "md_onecall_points_minyear",
+            "md_onecall_points_count",
+            "md_onecall_poly_maxdate",
+            "md_air_patrols",
+            "md_other_patrol",
+            "md_wrng_tape_location",
+            "md_building_falling_50ft",
+            "ec_inoperable_cp",
+            "cons_ave_mktval_400ft",
+            "wof_coverstone_pres"
+        ];
+
+
+        // Loop through the list and substitute "diagrama determinacion_resistencia"
+        for (const item of itemsToSubstitute) {
+            console.log($(`#${item}`)[0])
+            if ($(`#${item}`)[0].files[0]) {
+
+                formData.append(`${item}`, $(`#${item}`)[0].files[0]);
+            }
+        }
+
+
+
+        // Log formData to console for debugging (this will not display the content of the files)
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+        fetch(apiUrl + webMethod, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+
+            })
+            .then(data => {
+                if (data.success) {
+
+                    alert("Información almacenada correctamente");
+                    $('#forms').show();
+                    $('#mapiingforms').hide();
+                    $("#btn_updateMappingEsp").text("Actualizar")
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    }
+}
+function nuevoMapping() {
+
+    $("#btn_saveMappingEsp").show();
+    $("#btn_newMappingEsp").hide();
+    $("#btn_updateMappingEsp").hide();
+    clearInputTextValuesNew('mapiingforms');
+    inhabilitarform("#mapiingforms", false);
+
+}
+
 //#endregion
        
 
